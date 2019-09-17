@@ -28,6 +28,12 @@
 	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/list.css">
+
+<!-- 폰트 -->
+<!-- font-family: 'Gothic A1', sans-serif; -->
+<link href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap" rel="stylesheet">
 
 <script type="text/javascript" src="/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
