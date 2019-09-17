@@ -1,0 +1,159 @@
+package com.kh.showticket.member.controller;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import com.kh.showticket.member.model.service.MemberService;
+import com.kh.showticket.member.model.vo.Member;
+
+@Controller
+@RequestMapping("/member")
+@SessionAttributes("memberLoggedIn")
+public class MemberController {
+	
+	@Autowired()
+	MemberService memberService;
+	
+	@Autowired
+	BCryptPasswordEncoder passwordEncoder;
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@RequestMapping("/memberEnroll.do")
+	public void memberEnroll() {
+		
+		// member/memberEnroll
+		// -> ViewNameTransLator객체가 view단을 자동으로 찾음.
+		System.out.println("서버 구동 후 자바 코드 수정!!");
+		
+	}
+	
+	@RequestMapping("/memberEnrollEnd.do")
+	public String memberEnrollEnd(Member member, Model model) {
+		
+		// 0. 비밀번호 암호화
+		String rawPassword = member.getPassword();
+		System.out.println("암호화 전:"+ rawPassword);
+		String encodedPassword = passwordEncoder.encode(rawPassword);
+		System.out.println("암호화 후:"+ encodedPassword);
+		// 암호화된 비밀번호를 member객체 대입
+		member.setPassword(encodedPassword);
+		
+		// 1. 비즈니스 로직
+		int result = memberService.insertMember(member);
+		
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 가입 성공!":"회원 가입 실패!");
+		model.addAttribute("loc", "/");
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
+	public String memberLogin(@RequestParam String memberId,
+							  @RequestParam String password,
+							  Model model) {
+		
+		// 1.업무로직 : 회원 정보 가져오기
+		Member member = memberService.selectOneMember(memberId);
+		
+		String msg = "";
+		
+		// 1. 아이디가 존재하지 않는 경우
+		if(member == null) {
+			msg = "아이디가 존재하지 않습니다.";
+		}
+		else {
+			// 2. 로그인 성공
+			if(passwordEncoder.matches(password, member.getPassword())) {
+				msg = "로그인 성공!";
+				
+				// memberLoggedIn 세션 속성에 지정
+				// model에 지정된 속성은 requestScope 속성에 담긴다.
+				model.addAttribute("memberLoggedIn", member);
+				
+			}
+			// 3. 비밀번호가 틀린 경우
+			else {
+				msg = "비밀번호가 일치하지 않습니다.";
+			}
+		}
+		
+		// 2. view단 처리
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", "/");
+		
+		return "common/msg";		
+	}
+	
+	/**
+	 * 세션 무효화하기
+	 * session.setAttribute("memberLoggedIn", member)
+	 * -> session.invalidate()
+	 * 
+	 * @SessionAttributes("memberLoggedIn")
+	 * model.addAttribute("memberLoggedIn",member)
+	 * -> SessionStatus.setComplete()
+	 */
+	@RequestMapping("/memberLogout.do")
+	public String memberLogout(SessionStatus sessionStatus) {
+		
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete();
+		
+		// 로그아웃시 메인 페이지로 보내기
+		return "redirect:/";
+	}
+	
+	/**
+	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
+	 * @param memberLoggedIn
+	 */
+	@RequestMapping("/memberView.do")
+	public void memberView(@SessionAttribute Member memberLoggedIn) {
+		logger.debug("회원정보 페이지 요청");
+		logger.debug("memberLoggedIn={}", memberLoggedIn);
+	}
+	
+	/**
+	 * 
+	 * 웹서비스(html문서)  + data(xml, json) 
+	 * 
+	 * REST API
+	 * Representational State Transfer API 
+	 * 
+	 * @ResponseBody: 자바객체를 xml/json타입으로 변환해서 전송
+	 * 		- 자바객체를 리턴
+	 * @RequestBody: 클라이언트가 전송한 xml/json타입을 자바객체로 변환해서 업무로직에 활용
+	 */
+	@ResponseBody
+	@RequestMapping("/checkIdDuplicate.do")
+	public Map<String,Object> checkIdDuplicate(@RequestParam String memberId) {
+		logger.debug("id중복체크: @ResponseBody 이용방식");
+		
+		boolean isUsable = memberService.selectOneMember(memberId)==null?
+							true:false;
+		Map<String, Object> map = new HashMap<>();
+		map.put("isUsable", isUsable);
+		
+		return map;
+		
+	}
+
+	
+}
