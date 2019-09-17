@@ -43,6 +43,27 @@ public class MemberController {
 		
 	}
 	
+	@RequestMapping("/memberView.do")
+	public void memberView() {
+	}
+	
+	@RequestMapping("/myCoupon.do")
+	public String myCoupon() {
+		
+		return "/member/myCoupon";
+	}
+	
+	@RequestMapping("/myPoint.do")
+	public String myPoint() {
+		
+		return "/member/myPoint";
+	}
+	
+	@RequestMapping("/myStandBy.do")
+	public String myStandBy() {
+		
+		return "/member/myStandBy";
+	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 		
@@ -124,11 +145,11 @@ public class MemberController {
 	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
 	 * @param memberLoggedIn
 	 */
-	@RequestMapping("/memberView.do")
-	public void memberView(@SessionAttribute Member memberLoggedIn) {
-		logger.debug("회원정보 페이지 요청");
-		logger.debug("memberLoggedIn={}", memberLoggedIn);
-	}
+	/*
+	 * @RequestMapping("/memberView.do") public void memberView(@SessionAttribute
+	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
+	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
+	 */
 	
 	/**
 	 * 
