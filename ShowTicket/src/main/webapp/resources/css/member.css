@@ -1,0 +1,172 @@
+@charset "UTF-8";
+#container{
+	position:relative;
+	font-family:"휴먼모음T";
+}
+
+#myPageNavBar{
+	position:absolute;
+	width: 100px;
+	text-align:center;
+	left:0;
+	margin-left : 20%;
+}
+#myPage{
+	text-align:center;
+	width:150px;
+	height:80%;
+	background-color : #8f01a3;
+	padding:10px 10px 10px 10px;
+	display:inline-block;
+}
+#myPage label{
+	color : white;
+	font-size:25px;
+	font-weight:bold;
+	text-align:center;
+}
+#navBar{
+	border : 0px;
+	margin-left : 10px;
+	font-size : 20px;
+}
+#navBar td{
+	border : 0px;
+	width : 200px;
+	height: 50px;
+	color: gray;
+	font-size:15px;
+}
+
+
+#memberFrm {
+	text-align: center;
+	border: 1px solid #9a3cf4;
+	padding: 20px;
+	width: 45%;
+	margin-left: 30%;
+	margin-top: -17px;
+}
+#memberFrm h3{
+	color:black;
+	float :left;
+	margin-top : 15px;
+	font-size:20px;
+	font-weight:bold;
+	color:#424242;
+}
+#memberFrm table {
+	border-top: 3px solid lightgray;
+	border-bottom: 3px solid lightgray;
+	border-collapse: collapse;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom:7%;
+}
+#memberFrm table th{
+	font-size:16px;
+}
+#memberFrm table th, td {
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+	text-align: center;
+	color: gray;
+}
+#memberFrm table td .btn{
+	margin-left:auto;
+	margin-right:auto;
+}
+#memberFrm table checkbox{
+	margin-top : 10px;
+}
+#memberFrm table #check{
+	margin-top: 10px;
+}
+#memberFrm input {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#memberFrm .form-control {
+	width: 300px;
+	text-align: center;
+}
+
+#memberFrm .btn{
+    background-color: #9a3cf4;
+    border: 1px solid #9a3cf4;
+    color: white;
+    font-weight:bold;
+    text-align:center;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5px;
+    margin-bottom:5px;
+}
+
+#coupon{
+	text-align: center;
+	border: 1px solid #9a3cf4;
+	padding: 20px;
+	width: 45%;
+	margin-left: 30%;
+	margin-top: -17px;
+	height:60%;
+}
+#coupon h5{
+	color:black;
+	float :left;
+	margin-top : 15px;
+	font-size:20px;
+	font-weight:bold;
+	color:#424242;
+}
+#coupon hr{
+	size: 4;
+	margin-bottom : 3px;
+}
+#coupon .btn{
+	background-color: #9a3cf4;
+    border: 1px solid #9a3cf4;
+    color: white;
+    font-weight:bold;
+    text-align:center;
+    float:right;
+}
+#coupon-top{
+	font-size : 13px;
+	text-align:left;
+	margin-top : 60px;
+
+}
+
+#button2 {
+	width:150%;
+	height : 50px;
+	background-color: white;
+	color : gray;	
+	border : 1px solid lightgray;
+}
+#couponTable{
+	border : 2px solid #BDBDBD;
+	text-align:center;
+	width : 100%;
+}
+#couponTable th{
+	background-color : #E6E6E6;	
+	border : 2px solid #BDBDBD;
+}
+#couponTable td{
+	border : 1px solid #BDBDBD;
+	text-align:left;
+}
+.pagination li{
+	width: 50px;
+	font-size : 20px;
+	color : gray;
+}
+#info li{
+	font-size:8px;
+	color:gray;
+}
