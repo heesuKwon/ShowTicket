@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+h2.title {
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 27px;
+	margin: 39px 0 17px;
+	color:black;
+}
+
+h2.small-title {
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 23px;
+	color:black;
+}
+
