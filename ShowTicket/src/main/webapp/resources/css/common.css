@@ -928,7 +928,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 
 .tbl_reserve_info td{letter-spacing:normal}
 
-.nav-pills .nav-link.select{
+/* .nav-pills .nav-link.select{
     color: #fff;
     background-color: #8f01a3;
 }
@@ -957,4 +957,4 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 	position: absolute;
     width: 200px;
     top: -3px;
-}
+} */

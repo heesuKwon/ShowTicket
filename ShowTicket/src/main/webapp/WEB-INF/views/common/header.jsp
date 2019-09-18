@@ -45,8 +45,7 @@
 	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/list.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/list.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css"/>
 
 <!-- 폰트 -->

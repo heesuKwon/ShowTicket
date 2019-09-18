@@ -8,9 +8,17 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coupon.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css">
 
-  <div id="container">
+  <div id="container" class="event_cont">
         <div class="inner">
+        	<ul class="nav nav-pills nav-justified">
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/eventList.do">진행중인 이벤트</a></li>
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
+				<li class="nav-item"><a class="nav-link nav-font select" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a></li>
+			</ul>
+			
             <h2 class="title">쿠폰</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
             <button class="btn btn-primary btn-sm" id="couponAdd">추가</button>
             <div class="coupon_main" style="clear:both;">
@@ -142,4 +150,5 @@
             </div>
         </div>
     </div>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" ></jsp:include>

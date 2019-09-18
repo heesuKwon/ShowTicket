@@ -158,7 +158,8 @@
 
 <!-- End NHN AD MORE Script -->
 
-<link rel="stylesheet" type="text/css" href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/contents.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style type="text/css">
     span.dummy_bg.on {
         display: none

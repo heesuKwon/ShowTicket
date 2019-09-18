@@ -2318,20 +2318,33 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .detail_box_top .coupon .coupon_down:first-child{margin-top:0}
 .detail_box_top .coupon .coupon_down img{width:100%}
 
-/* 페이코 쿠폰 웹 상세페이지 레이어 팝업 */
-.detail_box_top .detail_info .ly_pop_coupon.ly_payco_coupon{position:fixed;top:50%;left:50%;margin-top:-185px;margin-left:-250px;width:500px;height:370px;padding:0;box-sizing:border-box;z-index:250}
-.ly_payco_coupon .sp{background:url(../img/sp_theater.png) no-repeat;}
-.ly_payco_coupon .ly_payco_title{height:23px;margin-top:60px;text-align:center}
-.ly_payco_coupon .ly_payco_title .sp{width:337px;height:23px;background-position:0 -480px}
-.ly_payco_coupon .ly_close{position:absolute;overflow:hidden;top:16px;right:18px;width:23px;height:23px;background:url(../img/sp_theater.png) no-repeat;background-position:-611px -480px}
-.ly_payco_coupon .ly_coupon_down{position:relative;width:281px;height:115px;background:url(../img/payco_app_down.jpg) no-repeat;margin:30px auto 0}
-.ly_payco_coupon .btn_coupon_appdown{position:absolute;bottom:16px;left:77px;width:136px;height:28px}
-.ly_payco_coupon .coupon_guide_list{margin-top:29px;padding:29px 84px 32px 109px;background:#f7f7f7;text-align: center}
-.ly_payco_coupon .coupon_guide_item{height:22px;margin-top:8px;font-size:0}
-.ly_payco_coupon .coupon_guide_item:first-child{margin-top:0px}
-.ly_payco_coupon .coupon_guide_item span{display:inline-block}
-.ly_payco_coupon .guide_txt_box{width:242px;height:22px;background:#ffffff;border-radius:10px;vertical-align:top}
-.ly_payco_coupon .guide_tit_down{width:52px;height:15px;margin:3px 11px 0 0;background-position:-339px -480px;vertical-align:top}
-.ly_payco_coupon .guide_tit_use{width:52px;height:15px;margin:4px 11px 0 0;background-position:-340px -497px;vertical-align:top}
-.ly_payco_coupon .guide_txt_down{width:216px;height:12px;margin-top:5px;background-position:-393px -480px}
-.ly_payco_coupon .guide_txt_use{width:216px;height:12px;margin-top:5px;background-position:-393px -494px}
+.nav-pills .nav-link.select{
+    color: #fff;
+    background-color: #8f01a3;
+}
+.nav-pills .nav-font{
+	font: 15px bold;
+	padding: .7rem 1rem;
+	border-radius: 0;
+}
+
+.nav-pills .nav-link.default{
+	color: #8f01a3;
+    border-left: 1px solid #8f01a3;
+}
+
+.nav-pills .nav-item:first-child .nav-link.default{
+	color: #8f01a3;
+	border: none;
+}
+
+.nav-pills{
+	border: 1px solid #8f01a3;
+    border-radius: .25rem;
+}
+
+#center-image{
+	position: absolute;
+    width: 200px;
+    top: -3px;
+}
