@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 
-
+#container .inner { padding:0;}
 
 div.maintop_cont{margin-bottom: 15px;}
 
@@ -9,9 +9,9 @@ ul.best_list>li>a>p>img {width: 234px;height: 285px;}
 
 div.suggest_wrap>ul.best_list {height: 500px;}
 
-div.section_best>div.inner>ul.best_list{height: 600px;}
+div.section_best>div.inner>ul.best_list{height: 450px;}
 
-ul.best_list{margin-left: -18px;}
+ul.best_list{margin-left: -18px; }
 
 ul.best_list>li {width: 234px;height: 374px;margin-left: 18px;margin-bottom: 18px;}
 
@@ -19,28 +19,19 @@ div.section_week {height: 500px;}
 
 div.section_week>div.inner { margin: 0 auto; position: relative;}
 
-div.section_best{height: 600px;} 
-
+div.section_best{height: 600px;margin-bottom: 50px;} 
 /*슬릭 스타일 */
 *{margin:0;padding:0;}
+ul,li{list-style:none;}  
+.slide{height:150px;overflow:hidden;}  
+.slide ul{height:100%;}  
+.slide li{height:100%;}  
 
-  ul,li{list-style:none;}
-  
-  .slide{height:150px;overflow:hidden;}
-  
-  .slide ul{height:100%;}
-  
-  .slide li{height:100%;}
-  
-  .slide li:nth-child(1){background:#faa;}
-  .slide li:nth-child(2){background:#afa;}
-  .slide li:nth-child(3){background:#aaf;}
-.slide li:nth-child(4){background:#faf;}
-div.slide{margin-top: 20%;
-height: 314px; margin-left: 25%;}
+div.slide{margin-top: 189px; margin-left: 20%;margin-right: 20%;height: 314px; }
+
 /*슬릭 스타일 END*/
 
-
+div.maintop_left>div.maintop_cont{width: 800px; border-top: 1px solid #8f01a3; border-bottom: 1px solid #8f01a3;}
 
 
 
