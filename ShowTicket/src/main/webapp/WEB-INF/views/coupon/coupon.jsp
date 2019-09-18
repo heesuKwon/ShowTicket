@@ -128,7 +128,7 @@
                     </table>
                 </div>
 
-  <div class="notice_wrap">
+  <div class="notice_wrap" >
                     <strong class="tit" style="font-size:1.2em;">&nbsp;! 쿠폰 발급 주의 사항</strong>
                     <ul>
                         <li>1. 쿠폰은 사용 조건에 따라 사용이 제한될 수 있습니다. 쿠폰 사용 조건을 반드시 확인해주세요.</li>

@@ -66,7 +66,7 @@ height:217px;
 }
 
 .goods_list{margin-left:-18px;overflow:hidden; clear:both;}
-.goods_list li{float:left;position:relative;overflow:hidden;width:234px;height:374px;padding-bottom:3px;margin:0 0 15px 16px;color:#777;box-shadow:1px 1px 1px 1px #d3d3d3;border-radius:2px 2px 0 0}
+.goods_list li{float:left;position:relative;overflow:hidden;width:234px;height:374px;padding-bottom:3px;margin:0 0 15px 16px !important;color:#777;box-shadow:1px 1px 1px 1px #d3d3d3;border-radius:2px 2px 0 0}
 .goods_list li a{display:block}
 .goods_list li p{height:285px}
 .goods_list li img{width:234px;height:285px}
