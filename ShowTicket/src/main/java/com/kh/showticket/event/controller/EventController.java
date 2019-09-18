@@ -20,4 +20,12 @@ public class EventController {
 		return mav;
 	}
 	
+	@RequestMapping("/endEventList.do")
+	public ModelAndView endEvent(ModelAndView mav) {
+		logger.debug("endEvent페이지 요청");
+		
+		mav.setViewName("event/endEventList");
+		return mav;
+	}
+	
 }
