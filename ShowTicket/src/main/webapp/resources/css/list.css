@@ -2,9 +2,10 @@
 
 h2.title {
 	font-family: 'Gothic A1', sans-serif;
-	font-size: 27px;
+	font-size: 26px;
 	margin: 39px 0 17px;
 	color:black;
+	font-weight: bold;
 }
 
 h2.small-title {

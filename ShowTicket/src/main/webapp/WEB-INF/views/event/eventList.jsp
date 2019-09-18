@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 
@@ -19,12 +20,12 @@
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item"><a class="nav-link select nav-font" href="#">진행중인 이벤트</a>
 			</li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="#">종료된 이벤트</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default" href="#">당첨자 발표</a></li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="#">쿠폰</a>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a>
 			</li>
 		</ul>
-		<h3 class="evt_tit">특가 진행</h3>
+		<h2 class="title">특가 진행</h2>
 		<ul class="event_top_list">
 
 			<li><a href="/event/552"> <img
@@ -168,7 +169,6 @@
                 eventTypeCode: globalEventTypeCode
             },
             success: function (result) {
-                makeOnTap(eventTypeCode);
                 displayEvent(result.result.result);
                 displayPage(result.result.paging, $('#pagination'));
             },
@@ -176,17 +176,6 @@
                 alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
             }
         });
-    }
-
-    function makeOnTap (eventTypeCode) {
-        $('.tap').removeClass('on');
-        if (eventTypeCode == null) {
-            $("#li_all").addClass("on");
-        } else if (eventTypeCode == "INVITE") {
-            $("#li_invite").addClass("on");
-        } else if (eventTypeCode == "GIFT") {
-            $("#li_gift").addClass("on");
-        }
     }
 
     function displayEvent (eventList) {
