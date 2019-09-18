@@ -246,7 +246,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 #header .menu .inner:after{display:block;clear:both;content:''}
 #header .menu li{float:left;position:relative;padding:19px 45px;box-sizing:border-box}
 #header .menu li a{display:block;position:relative;z-index:10;box-sizing:border-box;font-size:0;text-align:center}
-#header .menu li.event_cate{padding:20px 0 18px;margin-left:38px}
+#header .menu li.event_cate{padding:20px 0 18px;margin-left:38px; float: right;}
 #header .menu li.event_cate.type2{margin-left:32px}
 #header .menu li.event_cate.type3{padding:21px 0 18px;margin-left:37px}
 #header .menu .menu_list{position:relative;padding:0}
@@ -254,7 +254,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 #header .menu li.over:before{display:none}
 #header .menu .menu_list4.over:before{display:block}
 #header .menu .menu_list:first-child:before{display:none}
-#header .menu .menu_list > a{width:131px;height:54px;padding-top:19px;box-sizing:border-box}
+#header .menu .menu_list > a{width:131px;height:54px;padding-top:19px;box-sizing:border-box;}
 #header .menu .menu_list:first-child > a{width:130px}
 /*#header .menu .menu_list4 > a{width:142px}*/
 /* #header .menu .menu_tit{display:inline-block;margin:0 auto;background-image:url(../img/sp_gnb_new.png);background-repeat:no-repeat;font-size:0;line-height:normal;vertical-align:middle} */

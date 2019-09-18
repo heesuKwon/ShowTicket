@@ -203,9 +203,8 @@
 				value="http://www.ticketlink.co.kr/sports">
 
 			<div class="search_area">
-				<a href="${pageContext.request.contextPath }/"> <img
-					src="${pageContext.request.contextPath }/resources/images/showticket_logo.png"
-					id="center-image" alt="스프링로고" />
+				<a href="${pageContext.request.contextPath }/"> 
+					<img src="${pageContext.request.contextPath }/resources/images/showticket_logo.png" id="center-image" alt="스프링로고" />
 				</a>
 
 				<div class="search">
@@ -230,44 +229,32 @@
 				<ul class="inner">
 					<!-- [D] 메뉴 활성일때 on 클래스 추가 입니다. -->
 					<!-- [D] 메뉴 오버일때 over 클래스 추가 입니다. -->
-					<li class="menu2 menu_list" id="menu2"><a
-						href="http://www.ticketlink.co.kr/sports">
-							<h2 class="menu_tit sports">스포츠</h2>
-					</a> <span class="overbg"></span>
-						<ul class="submenu" id="submenu2">
-
-
-							<li id="smenu68"><a
-								href="http://www.ticketlink.co.kr/sports/etc" class="smenu68"><span
-									class="smenu_tit etc">기타종목</span></a></li>
-						</ul></li>
-					<li class="menu3 menu_list menu_list2" id="menu3"><a
-						href="http://www.ticketlink.co.kr/concert/main"> <span
-							class="menu_tit performance">공연</span>
-					</a> <span class="overbg"></span>
-						<ul class="submenu sb_perfomance" id="submenu3">
-							<li id="smenu31"><a
-								href="http://www.ticketlink.co.kr/concert/musical"
-								class="smenu31"><span class="smenu_tit musical">뮤지컬</span></a></li>
-							<li id="smenu32"><a
-								href="http://www.ticketlink.co.kr/concert/theater"
-								class="smenu32"><span class="smenu_tit theater">연극</span></a></li>
-
-						</ul></li>
-
-					<li class="event_cate type2 menu7"><a
-						href="${pageContext.request.contextPath}/ranking/ranking.do">
-							<span class="menu_tit ranking">랭킹</span>
-					</a></li>
-					<li class="event_cate menu_list6 menu5" id="menu5">
-						<a href="${pageContext.request.contextPath }/area/area.do"> 
-							<span class="menu_tit region">지역</span>
-						</a>
+					<li class="menu2 menu_list" id="menu2">
+						<a href="${pageContext.request.contextPath}/musical/musical.do">
+							<span class="menu_tit">뮤지컬</span>
+						</a> 
+						<span class="overbg"></span>
+					</li>
+					<li class="menu3 menu_list menu_list2" id="menu3">
+						<a href="${pageContext.request.contextPath}/show/show.do"> 
+							<span class="menu_tit">연극</span>
+						</a> 
+						<span class="overbg"></span>
 					</li>
 
+					<li class="event_cate menu7">
+						<a href="${pageContext.request.contextPath}/ranking/ranking.do">
+							<span class="menu_tit menu_tit_sm">랭킹</span>
+						</a>
+					</li>
+					<li class="event_cate menu_list6 menu5" id="menu5">
+						<a href="${pageContext.request.contextPath }/area/area.do"> 
+							<span class="menu_tit menu_tit_sm">지역</span>
+						</a>
+					</li>
 					<li class="event_cate menu_list8 menu6" id="menu6">
-						<a href="http://www.ticketlink.co.kr/event/main"> 
-							<span class="menu_tit event">이벤트/쿠폰</span>
+						<a href="${pageContext.request.contextPath }/event/eventList.do"> 
+							<span class="menu_tit menu_tit_sm">이벤트/쿠폰</span>
 						</a> 
 					</li>
 
