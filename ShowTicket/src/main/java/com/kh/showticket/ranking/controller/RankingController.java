@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/ranking")
+@RequestMapping("/ranking")  
 public class RankingController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());

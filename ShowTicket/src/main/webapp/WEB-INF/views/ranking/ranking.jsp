@@ -10,15 +10,10 @@
 </jsp:include>
 
 <style>
-div.ranking_wrap{
-padding-bottom: 100px;
-}
-.basic_tbl table thead th{
-background: rgb(187, 24, 255);
-color: white;
-font-size: 15px;
-}
-
+div.ranking_wrap{padding-bottom: 100px;}
+.basic_tbl table thead th{background: rgb(187, 24, 255);color: white;font-size: 15px;}
+tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
+.ranknum{background-position: 0 -120px;width: 34px;height: 22px;}
 </style>
 
 <div id="container" class="ranking_wrap">
@@ -91,7 +86,6 @@ font-size: 15px;
                             </thead>
                             <tbody>
                             
-                                
                                     <tr>
                                         <td>
                                             <span style="position: relative; top: -8px"
