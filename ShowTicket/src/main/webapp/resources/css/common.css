@@ -926,3 +926,23 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 .tbl_type.thead_add td{padding-left:0;text-align:center}
 
 .tbl_reserve_info td{letter-spacing:normal}
+
+.nav-pills .nav-link.select{
+    color: #fff;
+    background-color: #8f01a3;
+}
+.nav-pills .nav-font{
+	font: 15px bold;
+	padding: .7rem 1rem;
+	border-radius: 0;
+}
+
+.nav-pills .nav-link.default{
+	color: #8f01a3;
+    border-left: 1px solid #8f01a3;
+}
+
+.nav-pills{
+	border: 1px solid #8f01a3;
+    border-radius: .25rem;
+}

@@ -426,7 +426,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 
 /* 이벤트 */
 .evt_tit,
-.event_tab li a{display:block;overflow:hidden;font-size:1px; margin-bottom:20px}
+.event_tab li a{display:block;font-size:20px; margin: 20px 0;}
 .evt_tit1{background-position:0 -104px;width:161px;height:25px}
 .evt_tit2{background-position:-165px -104px;width:90px;height:19px}
 .evt_tit3{background-position:-261px -104px;width:139px;height:25px}
