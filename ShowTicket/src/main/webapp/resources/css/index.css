@@ -2,6 +2,7 @@
 
 
 
+
 div.maintop_cont{margin-bottom: 15px;}
 
 ul.best_list>li>a>p>img {width: 234px;height: 285px;}
@@ -19,3 +20,33 @@ div.section_week {height: 500px;}
 div.section_week>div.inner { margin: 0 auto; position: relative;}
 
 div.section_best{height: 600px;} 
+
+/*슬릭 스타일 */
+*{margin:0;padding:0;}
+
+  ul,li{list-style:none;}
+  
+  .slide{height:150px;overflow:hidden;}
+  
+  .slide ul{height:100%;}
+  
+  .slide li{height:100%;}
+  
+  .slide li:nth-child(1){background:#faa;}
+  .slide li:nth-child(2){background:#afa;}
+  .slide li:nth-child(3){background:#aaf;}
+.slide li:nth-child(4){background:#faf;}
+div.slide{margin-top: 20%;
+height: 314px; margin-left: 25%;}
+/*슬릭 스타일 END*/
+
+
+
+
+
+
+
+
+
+
+
