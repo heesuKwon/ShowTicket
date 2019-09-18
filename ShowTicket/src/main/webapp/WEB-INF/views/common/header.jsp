@@ -45,10 +45,11 @@
 
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/list.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/header.css"/>
 
 <!-- 폰트 -->
 <!-- font-family: 'Gothic A1', sans-serif; -->
@@ -189,10 +190,10 @@
      
         <div class="search">
         <form name="searchForm" action="http://www.ticketlink.co.kr/search" method="GET">
-        <fieldset>
+        <fieldset id="fieldsetS">
         <legend>검색</legend>
         <input type="text" name="query" title="검색어 입력" value="">
-        <a href="javascript:document.searchForm.submit()" class="btn_search">검색</a>
+        	<p class="btn_search"><a href="javascript:document.searchForm.submit()" class="material-icons w3-xlarge">search</a><p>
         </fieldset>
         </form>
         </div>
@@ -239,7 +240,7 @@
         </a>
         </li>
         <li class="event_cate menu_list6 menu5" id="menu5">
-        <a href="http://www.ticketlink.co.kr/local/main">
+        	<a href="${pageContext.request.contextPath }/area/area.do">
         <span class="menu_tit region">지역</span>
         </a>
         </li>

@@ -228,20 +228,20 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 	::i-block-chrome,#header .gnb .login{margin-top:-4px}
 }
 
-#header .search_area{position:relative;width:990px;margin:32px auto;font-size:0}
+/* #header .search_area{position:relative;width:990px;margin:32px auto;font-size:0}
 #header .search_area .logo{width:137px;height:54px;position:absolute;top:-9px;left:0}
 #header .search_area .search{clear:both;width:334px;height:36px;margin-left:336px;border:1px solid #41b40a}
 #header .search fieldset{height:36px;position:relative;}
 #header .search input[type=text]{border:0;width:270px;height:34px;line-height:100%;padding:1px 10px;vertical-align:middle;*height:32px;*line-height:32px;}
-@media screen {#header .search input[type=text]{line-height:36px}}/* ie 8 */
+@media screen {#header .search input[type=text]{line-height:36px}}ie 8
 #header .search .btn_search{display:inline-block;background-color:#41b40a;background-position:-206px 8px;width:20px;height:20px;padding:8px 8px 8px 12px;vertical-align:top;position:absolute;top:0;right:0;}
 #header .search_area .promo_ban{position:absolute;top:0;right:0}
 #header .search_area .promo_ban.v2{width:200px;height:60px;top:-5px;right:50%;margin-right:-100px;}
 #header .search_area .promo_ban.v2 a{display:block;}
-#header .search_area .promo_ban .close_ban{position:absolute;top:0;right:0;background-position:-312px -17px;width:14px;height:14px;}
+#header .search_area .promo_ban .close_ban{position:absolute;top:0;right:0;background-position:-312px -17px;width:14px;height:14px;} */
 
 /* top menu */
-#header .menu{min-height:58px;background:url(../img/bg_head_menu.gif) repeat-x 0 0}
+/* #header .menu{min-height:58px;background:url(../img/bg_head_menu.gif) repeat-x 0 0} */
 #header .menu .inner:after{display:block;clear:both;content:''}
 #header .menu li{float:left;position:relative;padding:19px 45px;box-sizing:border-box}
 #header .menu li a{display:block;position:relative;z-index:10;box-sizing:border-box;font-size:0;text-align:center}
@@ -256,7 +256,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 #header .menu .menu_list > a{width:131px;height:54px;padding-top:19px;box-sizing:border-box}
 #header .menu .menu_list:first-child > a{width:130px}
 /*#header .menu .menu_list4 > a{width:142px}*/
-#header .menu .menu_tit{display:inline-block;margin:0 auto;background-image:url(../img/sp_gnb_new.png);background-repeat:no-repeat;font-size:0;line-height:normal;vertical-align:middle}
+/* #header .menu .menu_tit{display:inline-block;margin:0 auto;background-image:url(../img/sp_gnb_new.png);background-repeat:no-repeat;font-size:0;line-height:normal;vertical-align:middle} */
 #header .menu .menu_tit.sports{width:49px;height:17px;background-position:0 0}
 #header .menu .menu_tit.performance{width:31px;height:17px;background-position:-51px 0}
 #header .menu .menu_tit.exhibit{width:31px;height:17px;background-position:-84px 0}
