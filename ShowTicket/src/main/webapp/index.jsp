@@ -9,10 +9,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/index.css">
 
 
-<style>
 
- 
-</style>
 
 <script>
 const all = ele => document.querySelectorAll(ele)
@@ -43,18 +40,16 @@ window.onload = function () {
 
 	
     <div id="container"> 
-
-<div class="slide">
-  <ul>
-    <li><img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="" /></li>
-    <li></li>
-    <li></li>
-    <li></li>
-  </ul>
-</div>
-
-		   
-
+		<!-- 슬릭시작 -->
+		<div class="slide">
+		  <ul>
+		    <li><img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="" /></li>
+		    <li>예비</li>
+		    <li>예비</li>
+		    <li>예비</li>
+		  </ul>
+		</div>
+		<!-- 슬릭 END -->
   
 				<div class="inner">
 

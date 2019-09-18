@@ -204,7 +204,7 @@
         <!-- [D] 메뉴 오버일때 over 클래스 추가 입니다. -->
         <li class="menu2 menu_list" id="menu2">
         <a href="http://www.ticketlink.co.kr/sports">
-        <span class="menu_tit sports">스포츠</span>
+        <h2 class="menu_tit sports">스포츠</h2>
         </a>
         <span class="overbg"></span>
         <ul class="submenu" id="submenu2">

@@ -5,21 +5,23 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="랭킹페이지" name="pageTitle"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ranking.css">
+
+
+                               			
+                               		
 
 <style>
-div.ranking_wrap{padding-bottom: 100px;}
-.basic_tbl table thead th{background: rgb(187, 24, 255);color: white;font-size: 15px;}
-tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
-.ranknum{background-position: 0 -120px;width: 34px;height: 22px;}
+span.ranknum{font-size: 30px; font-weight:bold; color: black;}
+
 </style>
 
-<div id="container" class="ranking_wrap">
+<div id="container" class="ranking_wrap" style="margin-bottom:0;">
         <div class="inner">
             <h2 class="blind"><span> 랭킹 </span></h2>
-            <ul class="rank_bx">
+            <ul class="rank_bx" >
                 <li>
                     <strong>집계기간</strong>
                     <p>
@@ -37,12 +39,11 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
             <div class="rank_con">
                 <!-- [D] 활성상태일 때 .on 추가입니다. -->
                 <ul class="rank_tab">
-                    <li class="on"><a href="/ranking/reserve/daily?categoryId=10" class="n_category1">공연</a>
-                    </li>
                     <li ><a href="/ranking/reserve/daily?categoryId=16" class="n_category2">뮤지컬</a>
                     </li>
-                    <li ><a href="/ranking/reserve/daily?categoryId=15" class="n_category3">연극</a>
+                    <li class="on"><a href="/ranking/reserve/daily?categoryId=10" class="n_category1">공연</a>
                     </li>
+                  
                     
                 </ul>
 
@@ -106,10 +107,10 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.08.10 ~ 2019.10.06</td>
                                         <td class="tl desc_vt">고스트씨어터(구,다소니씨어터)</td>
                                         <td>
-                                            <a href="/product/28807" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="">예매하기</button>
                                         </td>
                                     </tr>
-                                
+                               
                             
                                 
                                     <tr>
@@ -134,7 +135,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.09.24 ~ 2019.09.24</td>
                                         <td class="tl desc_vt">대구문화예술회관 팔공홀</td>
                                         <td>
-                                            <a href="/product/30023" class="detail_link btn_reserve">예매하기</a>
+                                           <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -148,14 +149,10 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
                                                 
-                                                    
-                         
-                                            
+                                      
                                                 <span class="bx">- 0</span>
                                                 
-                                                
-                                                
-                                            
+                                    
                                         </td>
                                         <td class="img_box"><a class="detail_link" href="javascript:;"><img src="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg"
                                                                                                             width="100px" height="122px" alt="공연 포스터"></a>
@@ -165,7 +162,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.09.20 ~ 2019.10.27</td>
                                         <td class="tl desc_vt">성남아트센터 오페라하우스</td>
                                         <td>
-                                            <a href="/product/29652" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -177,12 +174,8 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                                   class="ranknum n4">4</span>
                                             <input type="hidden" name="productId" value="29717">
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
-                                            
-                                                
-                         
-                                            
-                                            
-                                                <span class="bx">- 0</span>
+                                      
+                                        <span class="bx">- 0</span>
                            
                                             
                                         </td>
@@ -194,7 +187,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.10.15 ~ 2019.10.27</td>
                                         <td class="tl desc_vt">예술의전당 CJ토월극장</td>
                                         <td>
-                                            <a href="/product/29717" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -206,15 +199,8 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                                   class="ranknum n5">5</span>
                                             <input type="hidden" name="productId" value="29474">
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
-                                            
-                                                
-                                                    
-                                                
-                                                
-                                                
-                                            
-                                            
-                                                <span class="bx">- 0</span>
+                           
+                              <span class="bx">- 0</span>
                                                 
                                                 
                                                 
@@ -228,7 +214,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.08.30 ~ 2019.10.20</td>
                                         <td class="tl desc_vt">드림아트센터 2관</td>
                                         <td>
-                                            <a href="/product/29474" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -241,12 +227,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="productId" value="29439">
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
-                                                
-                                                    
-                                                
-                                                
-                                                
-                                            
+                   
                                             
                                                 <span class="bx">- 0</span>
                                                 
@@ -262,7 +243,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.09.03 ~ 2019.10.03</td>
                                         <td class="tl desc_vt">콘텐츠그라운드</td>
                                         <td>
-                                            <a href="/product/29439" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -276,11 +257,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
                                                 
-                                                    
-                                                
-                                                
-                                                
-                                            
+                          
                                             
                                                 <span class="bx">- 0</span>
                                                 
@@ -296,7 +273,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.10.19 ~ 2019.10.19</td>
                                         <td class="tl desc_vt">안동실내체육관</td>
                                         <td>
-                                            <a href="/product/29263" class="detail_link btn_reserve">예매하기</a>
+                                            <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -310,14 +287,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
                                                 
-                                                    
-                                                
-                                                
-                                                
-                                            
-                                            
-                                                
-                                                
+                                  
                                                 
                                                 <em class="new">NEW</em>
                                             
@@ -330,7 +300,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.10.05 ~ 2019.10.05</td>
                                         <td class="tl desc_vt">목포시민문화체육센터 대공연장</td>
                                         <td>
-                                            <a href="/product/30104" class="detail_link btn_reserve">예매하기</a>
+                                           <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -343,14 +313,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="productId" value="30080">
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
-                                                
-                                                    
-                                                
-                                                
-                                                
-                                            
-                                            
-                                                
+                                  
                                                 
                                                 <span class="bx down"><span
                                                         class="sp"></span> 1</span>
@@ -365,7 +328,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.11.09 ~ 2019.11.09</td>
                                         <td class="tl desc_vt">포항실내체육관</td>
                                         <td>
-                                            <a href="/product/30080" class="detail_link btn_reserve">예매하기</a>
+                                           <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
@@ -379,13 +342,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                             <input type="hidden" name="saleStatus" value="ON_SALE">
                                             
                                                 
-                                                    
-                                                
-                                                
-                                                
-                                            
-                                            
-                                                
+                                  
                                                 
                                                 <span class="bx down"><span
                                                         class="sp"></span> 1</span>
@@ -400,7 +357,7 @@ tr>td>span.ranknum{font-family: '돋움',dotum,sans-serif;font-size: 12px;}
                                         <td class="tl ff_tahoma">2019.11.03 ~ 2019.11.03</td>
                                         <td class="tl desc_vt">창원 성산아트홀 대극장</td>
                                         <td>
-                                            <a href="/product/29689" class="detail_link btn_reserve">예매하기</a>
+                                           <button type="button" class="btn btn-secondary" style="background-color: #8f01a3">예매하기</button>
                                         </td>
                                     </tr>
                                 
