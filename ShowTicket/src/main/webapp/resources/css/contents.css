@@ -2343,8 +2343,3 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
     border-radius: .25rem;
 }
 
-#center-image{
-	position: absolute;
-    width: 200px;
-    top: -3px;
-}
