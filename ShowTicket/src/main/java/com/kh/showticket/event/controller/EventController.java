@@ -28,4 +28,12 @@ public class EventController {
 		return mav;
 	}
 	
+	@RequestMapping("/prizewinner.do")
+	public ModelAndView prizewinner(ModelAndView mav) {
+		logger.debug("prizewinner페이지 요청");
+		
+		mav.setViewName("event/prizewinner");
+		return mav;
+	}
+	
 }

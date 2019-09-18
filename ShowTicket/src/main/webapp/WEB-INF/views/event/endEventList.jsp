@@ -16,12 +16,10 @@
             <h2 class="blind">이벤트</h2>
             
             <ul class="nav nav-pills nav-justified">
-				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/eventList.do">진행중인 이벤트</a>
-				</li>
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/eventList.do">진행중인 이벤트</a></li>
 				<li class="nav-item"><a class="nav-link nav-font select" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
-				<li class="nav-item"><a class="nav-link nav-font default" href="#">당첨자 발표</a></li>
-				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a>
-				</li>
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
+				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a></li>
 			</ul>
 		
             <!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
