@@ -2343,3 +2343,13 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
     border-radius: .25rem;
 }
 
+.btn-color{
+	background-color: #8f01a3;
+	border: 1px solid #8f01a3;
+}
+
+.btn-color:hover{
+	background-color: white;
+	border: 1px solid #8f01a3;
+	color: #8f01a3;
+}

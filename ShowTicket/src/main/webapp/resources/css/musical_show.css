@@ -29,9 +29,7 @@ input[name="searchKeyword"]{
 
 
 button#searchBtn{
-	background-color:#8f01a3;
-	height:35px;
-	border:none;
+	height:33px;
 	display: inline;
 }
 
