@@ -13,7 +13,7 @@
 	width:220px;
 	border: 1px solid black;
 	border-collapse: collapse;
-	padding: 20px;
+	padding: 14px;
 	background-color: white;
 
 
@@ -49,7 +49,10 @@ width:300px;
 .couponTitle{
 	font-family: 'Gothic A1', sans-serif;
 	font-size: 1.5em;
-	
+}
+
+.couponTitle {
+	margin: 5px 0;
 }
 
 .couponMore{
@@ -70,9 +73,17 @@ width:300px;
 	margin: 20px;
 }
 
+.couponWrap p {
+	margin-bottom: 0px;
+}
+
 button#couponAdd{
 	float:right; margin:10px; width:50px; height:30px;
 	background-color:#8c008c;
 	color:white;
 	border:none;
+}
+
+.couponText{
+	margin-bottom:0px;
 }
