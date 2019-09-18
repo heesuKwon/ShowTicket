@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .ranking_wrap{ height: 2200px;}
-.basic_tbl table thead th{background: rgb(187, 24, 255);color: white;font-size: 15px; border-radius: 1px;}
+.basic_tbl table thead th{background: #8f01a3;color: white;font-size: 15px; border-radius: 1px;}
 div#container{font-weight: bold;}
 div.btn_lst{margin-left: 740px;}
 ul.rank_bx{border: 1px solid gray; box-shadow:0px 0px 4px 0px grey; border-radius:3px; background: white;margin-top: 28px; margin-left: 60px;
