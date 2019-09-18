@@ -471,7 +471,7 @@
                                 <span class="ribbon 
                                     ">HIDE
                                 </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg" alt="">
                                 <p><em>제목등 소개 들어갈곳</em></p>
                             </a>
                         </li>
@@ -484,7 +484,7 @@
                                     
                                     ">HIDE
                                 </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg" alt="">
                                 <p><em>크러쉬/우원재/그레이</em></p>
                             </a>
                         </li>
@@ -499,7 +499,7 @@
                                     
                                     ">SOLELY
                                 </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg"  alt="">
                                 <p><em>얼리버드 티켓 판매중</em></p>
                             </a>
                         </li>
@@ -512,7 +512,7 @@
                                     
                                     ">HIDE
                                 </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg" alt="">
                                 <p><em>트로트 여신</em></p>
                             </a>
                         </li>
@@ -527,7 +527,7 @@
                                     
                                     ">SOLELY
                                 </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg" alt="">
                                 <p><em>얼리버드 반값 티켓!</em></p>
                             </a>
                         </li>
@@ -540,7 +540,7 @@
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_9/leemija_0726.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_9/leemija_0726.jpg" alt="">
                                 <p><em>노래인생 60년 기념</em></p>
                             </a>
                         </li>
@@ -552,7 +552,7 @@
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_7/ori0806.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_7/ori0806.jpg"  alt="">
                                 <p><em>40주년 전국투어 콘서트</em></p>
                             </a>
                         </li>
@@ -564,7 +564,7 @@
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/loved0807.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/loved0807.jpg" alt="">
                                 <p><em>조기예매 할인</em></p>
                             </a>
                         </li>
@@ -576,7 +576,7 @@
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/201906141356a.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/201906141356a.jpg" alt="">
                                 <p><em>광주</br> 상무지구 기분좋은극장</em></p>
                             </a>
                         </li>
@@ -590,7 +590,7 @@
                                     
                                     
                                 ">SOLELY</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_5/hongdo_0412.jpg" width="178" height="217" alt="">
+                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_5/hongdo_0412.jpg" alt="">
                                 <p><em> 전북예술회관 대공연장</em></p>
                             </a>
                         </li>
