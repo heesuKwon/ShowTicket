@@ -24,6 +24,7 @@
 		
             <!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
             <h2 class="title">당첨자 발표</h2>
+            <button class="btn btn-primary btn-sm btn-color" style="float:right; margin:10px; width:50px; height:30px;">작성</button>
             <div class="event_cont_box">
                 <div class="basic_tbl mgt10">
                     <table>
@@ -42,9 +43,27 @@
                             <th scope="col">기간</th>
                         </tr>
                         </thead>
-                        <tbody id="winnerList">
-                        </tbody>
-                    </table>
+					<tbody id="winnerList">
+						<tr>
+							<td>3</td>
+							<td>[기대평 ] 맘마미아 당첨자 발표</td>
+							<td>2019.02.22</td>
+							<td>1</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>[관람후기 ] (2019 대구 대백프라자) 전래 인형극 “용궁이야기” 당첨자 발표</td>
+							<td>2019.02.27</td>
+							<td>20</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>[기대평] 가장무도 당첨자 발표</td>
+							<td>2019.03.04</td>
+							<td>10</td>
+						</tr>
+					</tbody>
+				</table>
                 </div>
                 <div class="paging" id="pagination">
                 </div>
