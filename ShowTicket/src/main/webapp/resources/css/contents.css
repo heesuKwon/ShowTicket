@@ -32,7 +32,7 @@
 .goods_list li a{display:block}
 .goods_list li p{height:285px}
 .goods_list li img{width:234px;height:285px}
-.goods_list li .list_info{padding:14px 14px 13px 13px;height:60px;background:#fff;border:1px solid white;border-radius:0 0 2px 2px;-webkit-border-radius:0 0 2px 2px;-moz-border-radius:0 0 2px 2px;-o-border-radius:0 0 2px 2px}
+.goods_list li .list_info{padding:0px 14px;height:60px;background:#fff;border:1px solid white;border-radius:0 0 2px 2px;-webkit-border-radius:0 0 2px 2px;-moz-border-radius:0 0 2px 2px;-o-border-radius:0 0 2px 2px}
 .goods_list li strong{color:#222;font-size:16px;letter-spacing:-1px;display:block;margin-bottom:6px}
 .goods_list li strong span{color:#319f00}
 .goods_list li .list_info dl{padding-left:1px}
