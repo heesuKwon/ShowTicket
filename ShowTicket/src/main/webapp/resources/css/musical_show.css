@@ -30,6 +30,7 @@ input[name="searchKeyword"]{
 
 button#searchBtn{
 	background-color:#8f01a3;
+	height:35px;
 	border:none;
 	display: inline;
 }
@@ -40,7 +41,7 @@ div.orderWrap{
 
 select[name="selectOrder"]{
 	width:70px;
-	height: 35px;
+	height: 30px;
 	float:right;
 	margin-bottom:5px;
 }
@@ -53,11 +54,13 @@ select[name="selectOrder"]{
 .SHOW_ISSUE_V1_FIRST{
 	border:1px solid #8f01a3;
 	background-color:white !important;
+	width:178px !important;
+	height: 263px !important;
 
 }
 .SHOW_ISSUE_V1_FIRST img{
 	width: 176px;
-
+height:217px;
 }
 
 .SHOW_ISSUE_V1_FIRST p em{
