@@ -187,7 +187,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 .maintop_cont li span.ico_dot{margin:-1px 8px 1px 0;vertical-align:middle}
 
 /* header */
-#header .gnb{position:relative;background:#fafafa;border-bottom:1px solid #f0f0f0;height:21px;padding-top:11px}
+#header .gnb{position:relative;background:#fafafa;border-bottom:1px solid #f0f0f0;height:21px;padding-top:3px}
 #header .gnb .notice{float:left;margin-top:-1px;width:500px;overflow:hidden;}
 #header .gnb .notice a{color:#666;display:inline-block;max-width:440px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 #header .gnb .notice a.more{background-position:-60px -130px;width:38px;height:10px;margin-left:10px;border:0}
@@ -946,4 +946,10 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 .nav-pills{
 	border: 1px solid #8f01a3;
     border-radius: .25rem;
+}
+
+#center-image{
+	position: absolute;
+    width: 200px;
+    top: -3px;
 }

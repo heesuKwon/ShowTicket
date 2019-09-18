@@ -27,7 +27,7 @@ ul,li{list-style:none;}
 .slide ul{height:100%;}  
 .slide li{height:100%;}  
 
-div.slide{margin-top: 189px; margin-left: 20%;margin-right: 20%;height: 314px; }
+div.slide{/* margin-top: 189px; margin-left: 20%;margin-right: 20%; */height: 314px; }
 
 /*슬릭 스타일 END*/
 
