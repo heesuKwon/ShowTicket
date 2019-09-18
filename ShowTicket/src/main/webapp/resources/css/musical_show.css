@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+div.bottom_area{
+	background-color: transparent !important;
+}
+
+div.bottom_area .inner{
+	padding-bottom: 0px;
+	background-color: transparent !important;
+	position: relative;
+}
+
+div.searchFrm{
+
+	display:inline-block;  position:relative; left:155px; top:0px;
+}
+
+select[name="searchCategory"]{
+	width: 100px;
+	height: 35px;
+	display: inline;
+}
+
+input[name="searchKeyword"]{
+	width: 300px;
+	height: 35px;
+	display: inline;
+}
+
+
+button#searchBtn{
+	height:33px;
+	display: inline;
+}
+
+div.orderWrap{
+	margin: 3px;
+}
+
+select[name="selectOrder"]{
+	width:70px;
+	height: 30px;
+	float:right;
+	margin-bottom:5px;
+}
+
+
+#genreNav{
+	margin-top:39px;
+}
+
+.SHOW_ISSUE_V1_FIRST{
+	border:1px solid #8f01a3;
+	background-color:white !important;
+	width:178px !important;
+	height: 263px !important;
+
+}
+.SHOW_ISSUE_V1_FIRST img{
+	width: 176px;
+height:217px;
+}
+
+.SHOW_ISSUE_V1_FIRST p em{
+ 	color:#8f01a3;
+}

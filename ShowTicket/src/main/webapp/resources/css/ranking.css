@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.basic_tbl table thead th{background: rgb(187, 24, 255);color: white;font-size: 15px; border-radius: 1px;}
+div#container{font-weight: bold;}
+div.btn_lst{margin-left: 840px;}
+ul.rank_bx{border: 1px solid #8f01a3; border-radius:3px; background: white;margin-top: 28px;}
+td>button.btn-secondary{background-color: #8f01a3; border-color: #8f01a3; font-family:'돋음';font-size: 15px;}
+td>button.btn-secondary:hover{background-color: #8f01a3; border-color: #8f01a3;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

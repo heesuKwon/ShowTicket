@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+/* 헤더 이미지*/
+#center-image{
+	position: absolute;
+    width: 200px;
+    top: -3px;
+}
+/*--------------- #cssH1 - 헤더 검색  부분--------------- */
+#header .search_area{position:relative;width:990px;margin:32px auto;font-size:0}
+#header .search_area .logo{width:137px;height:54px;position:absolute;top:-9px;left:0}
+#header .search_area .search{clear:both;width:334px;height:37px;margin-left:336px;border:1px solid #8f01a3}
+.material-icons {text-align:center;color: white;}
+#header .search #fieldsetS{height:35px;position:relative;margin: 0 0 0 0px; border: none;}
+#header .search input[type=text]{line-height:100%; position: absolute; top: 0px; left: 0px; width: 290px; height: 34px; border: none;}
+/* @media screen {#header .search input[type=text]{line-height:36px; position: absolute; top: 0px; left: 0px;}} *//* ie 8 */
+#header .search .btn_search{display:inline-block;background-color:#8f01a3;background-position:-206px 8px;width:40px;height:36px;padding:6px 6px 6px 10px;vertical-align:top;position:absolute;top:0;right:0;}
+
+/*---------------- #cssH2 메인헤더의 메뉴바 전체 부분 ----------------------*/
+#header .menu{min-height:58px;background:url(../img/bg_head_menu.gif) repeat-x 0 0; background-color: white; border-bottom: 5px solid #8f01a3; border-top: 1px solid #f4f4f4;}
+
+/*---------------------------#cssH3 헤더 메뉴바 내용 부분-------------------------*/
+#header .menu .menu_tit{display:inline-block;margin:0 auto;background-repeat:no-repeat;font-size:0;line-height:normal;vertical-align:middle}
+/*----------------------------------------------------------------------------*/
+
+
+
+

@@ -11,18 +11,34 @@
 
 <html lang="ko">
 <head>
+<meta charset="utf-8">
 <meta name="description"
 	content="티켓예매, 스포츠, 공연, 전시 등 티켓 예매서비스 제공 . 페이코(PAYCO)간편결제 지원" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="showticket" />
+<meta property="og:title" content="티켓링크" />
 <meta property="og:description"
 	content="티켓예매, 스포츠, 공연, 전시 등 티켓 예매서비스 제공 . 페이코(PAYCO)간편결제 지원" />
 <meta property="og:image"
 	content="https://tketlink.dn.toastoven.net/static/ticketlink.png" />
-<title>showticket</title>
+<title>ShowTicket</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="naver-site-verification"
 	content="86eedba5250abe392904d952feac4c2b02322e81" />
+
+<link rel="shortcut icon" type="image/x-icon"
+	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/common.css">
+
+<script async type="text/javascript"
+	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
+<!-- End NHN AD MORE Script -->
+<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="/resources/js/player.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
+</head>
 
 <!-- bootstrap -->
 <link rel="stylesheet"
@@ -33,11 +49,22 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-	
+
 <link rel="shortcut icon" type="image/x-icon"
 	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/common.css">
+	href="${pageContext.request.contextPath}/resources/css/list.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/header.css" />
+
+<!-- 폰트 -->
+<!-- font-family: 'Gothic A1', sans-serif; -->
+<link
+	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
+	rel="stylesheet">
 
 <script type="text/javascript" src="/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
@@ -120,91 +147,6 @@
 <!-- AceCounter Log Gathering Script End -->
 
 
-<!-- Facebook Pixel Code -->
-<script>
-	!function (f, b, e, v, n, t, s) {
-		if (f.fbq) return;
-		n = f.fbq = function () {
-			n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-		};
-		if (!f._fbq) f._fbq = n;
-		n.push = n;
-		n.loaded = !0;
-		n.version = '2.0';
-		n.queue = [];
-		t = b.createElement(e);
-		t.async = !0;
-		t.src = v;
-		s = b.getElementsByTagName(e)[0];
-		s.parentNode.insertBefore(t, s)
-	}(window,
-		document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '1028038810619064');
-	fbq('track', "PageView");
-</script>
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-<script>
-	var _croID = '5d148869e4b0adaa9beaa9d1';
-
-	function getMoreRecommend (e, n) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
-			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
-	}
-
-	function createMoreRCView (e) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
-			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
-	}
-
-	function mcroPushEvent (n) {
-		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
-			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
-	}
-
-	function _cro_initialize () {
-		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
-	}
-</script>
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- End NHN AD MORE Script -->
-
-<script type="text/javascript" src="/resources/js/jquery-1.11.1.min.js"></script>
-<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
-	charset="utf-8"></script>
-<script type="text/javascript" src="/resources/js/player.js"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/main.css">
-</head>
-
-<style type="text/css">
-[v-cloak] {
-	display: none;
-}
-
-span.dummy_bg.on {
-	display: none
-}
-
-ul.lst_thumb li.on::before {
-	position: absolute;
-	top: -1px;
-	left: -1px;
-	right: -1px;
-	bottom: -1px;
-	border: 2px solid #40b409;
-	content: ''
-}
-</style>
-
 <body>
 
 	<script>
@@ -215,26 +157,27 @@ ul.lst_thumb li.on::before {
 </script>
 
 	<div id="wrap">
+
+
 		<div id="header">
 			<div class="gnb">
 				<div class="inner">
+
 					<div class="user_menu">
 						<div id="login">
-							<a href="javascript:;" class="btn login" id="loginBtn">로그인</a>
-							<!-- [D] 로그인 후 주석 설정 입니다. -->
+							<c:if>
+								<!-- 로그인 처리 -->
+								<a href="" data-toggle="modal" data-target="#loginModal">로그인</a>
+								<span>|</span>
+								<!-- [D] 로그인 후 주석 설정 입니다. -->
+								<a href="javascript:;" id="joinBtn"
+									onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</a>
+								<span>|</span>
+							</c:if>
+
 							<a href="javascript:;" id="reserve">예매확인/취소</a><span>|</span> <a
-								href="javascript:;" id="joinBtn">회원가입</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a> <span>|</span>
-							<span class="hd_selt" name="localeHeader"> <a
-								href="javascript:openLanguageList();" class="selt"
-								name="localeHeaderButton">Language<span class="sp"></span></a>
-								<ul class="selt_lst" style="display: none"
-									name="localeHeaderList">
-									<li><a href="/global/en/main">- English</a></li>
-									<li><a href="/global/ja/main">- 日本語</a></li>
-									<li><a href="/global/zh/main">- 中國語</a></li>
-								</ul>
-							</span>
+								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
+
 
 						</div>
 						<div id="logout" style="display: none;">
@@ -244,19 +187,10 @@ ul.lst_thumb li.on::before {
 							<!-- [D] 로그인 후 주석 해제 입니다. -->
 							<a href="javascript:;" id="reserveLogin">예매확인/취소</a><span>|</span>
 							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a> <span>|</span>
-							<span class="hd_selt" name="localeHeader"> <a
-								href="javascript:openLanguageList();" class="selt"
-								name="localeHeaderButton">Language<span class="sp"></span></a>
-								<ul class="selt_lst" style="display: none"
-									name="localeHeaderList">
-									<li><a href="/global/en/main">- English</a></li>
-									<li><a href="/global/ja/main">- 日本語</a></li>
-									<li><a href="/global/zh/main">- 中國語</a></li>
-								</ul>
-							</span>
+								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
 
 						</div>
+
 
 					</div>
 				</div>
@@ -269,130 +203,75 @@ ul.lst_thumb li.on::before {
 				value="http://www.ticketlink.co.kr/sports">
 
 			<div class="search_area">
-				<h1>
-					<a href="http://www.ticketlink.co.kr" class="logo">티켓링크</a>
-				</h1>
+				<a href="${pageContext.request.contextPath }/"> <img
+					src="${pageContext.request.contextPath }/resources/images/showticket_logo.png"
+					id="center-image" alt="스프링로고" />
+				</a>
+
 				<div class="search">
 					<form name="searchForm" action="http://www.ticketlink.co.kr/search"
 						method="GET">
-						<fieldset>
+						<fieldset id="fieldsetS">
 							<legend>검색</legend>
 							<input type="text" name="query" title="검색어 입력" value="">
-							<a href="javascript:document.searchForm.submit()"
-								class="btn_search">검색</a>
+							<p class="btn_search">
+								<a href="javascript:document.searchForm.submit()"
+									class="material-icons w3-xlarge">search</a>
+							<p>
 						</fieldset>
 					</form>
 				</div>
+
+				<!-- // 검색창 덮는 배너 추가 -->
 			</div>
 
 			<div class="menu">
+				<!-- 메뉴바   -->
 				<ul class="inner">
 					<!-- [D] 메뉴 활성일때 on 클래스 추가 입니다. -->
 					<!-- [D] 메뉴 오버일때 over 클래스 추가 입니다. -->
-					<li class="menu2 menu_list" id="menu2">
-						<a
-							href="http://www.ticketlink.co.kr/sports"> 
-							<span class="menu_tit sports">뮤지컬</span>
+					<li class="menu2 menu_list" id="menu2"><a
+						href="http://www.ticketlink.co.kr/sports">
+							<h2 class="menu_tit sports">스포츠</h2>
+					</a> <span class="overbg"></span>
+						<ul class="submenu" id="submenu2">
+
+
+							<li id="smenu68"><a
+								href="http://www.ticketlink.co.kr/sports/etc" class="smenu68"><span
+									class="smenu_tit etc">기타종목</span></a></li>
+						</ul></li>
+					<li class="menu3 menu_list menu_list2" id="menu3"><a
+						href="http://www.ticketlink.co.kr/concert/main"> <span
+							class="menu_tit performance">공연</span>
+					</a> <span class="overbg"></span>
+						<ul class="submenu sb_perfomance" id="submenu3">
+							<li id="smenu31"><a
+								href="http://www.ticketlink.co.kr/concert/musical"
+								class="smenu31"><span class="smenu_tit musical">뮤지컬</span></a></li>
+							<li id="smenu32"><a
+								href="http://www.ticketlink.co.kr/concert/theater"
+								class="smenu32"><span class="smenu_tit theater">연극</span></a></li>
+
+						</ul></li>
+
+					<li class="event_cate type2 menu7"><a
+						href="${pageContext.request.contextPath}/ranking/ranking.do">
+							<span class="menu_tit ranking">랭킹</span>
+					</a></li>
+					<li class="event_cate menu_list6 menu5" id="menu5">
+						<a href="${pageContext.request.contextPath }/area/area.do"> 
+							<span class="menu_tit region">지역</span>
 						</a>
 					</li>
-					<li class="menu3 menu_list menu_list2" id="menu3">
-						<a href="http://www.ticketlink.co.kr/concert/main"> 
-							<span class="menu_tit performance">연극</span>
+
+					<li class="event_cate menu_list8 menu6" id="menu6">
+						<a href="http://www.ticketlink.co.kr/event/main"> 
+							<span class="menu_tit event">이벤트/쿠폰</span>
 						</a> 
 					</li>
-					<li class="menu4 menu_list menu_list3" id="menu4"><a
-						href="http://www.ticketlink.co.kr/exhibition/main"> <span
-							class="menu_tit exhibit">전시</span>
-					</a> <span class="overbg"></span>
-						<ul class="submenu sb_exhibit" id="submenu4">
-							<li id="smenu41"><a
-								href="http://www.ticketlink.co.kr/exhibition/exhibition"
-								class="smenu41"><span class="smenu_tit festival">전시/축제</span></a>
-							</li>
-							<li id="smenu42"><a
-								href="http://www.ticketlink.co.kr/exhibition/festival"
-								class="smenu42"><span class="smenu_tit leisure">레저/체험</span></a>
-							</li>
-							<li id="smenu36"><a
-								href="http://www.ticketlink.co.kr/exhibition/family"
-								class="smenu36"><span class="smenu_tit family">아동/가족</span></a>
-							</li>
-						</ul></li>
-					<li class=" menu_list menu_list4"><a
-						href="http://www.ticketlink.co.kr/esports/main"> <span
-							class="esports menu_tit">e스포츠</span>
-					</a></li>
-					<li class="event_cate type2 menu7"><a
-						href="http://www.ticketlink.co.kr/ranking/reserve/daily"> <span
-							class="menu_tit ranking">랭킹</span>
-					</a></li>
-					<li class="event_cate menu_list6 menu5" id="menu5"><a
-						href="http://www.ticketlink.co.kr/local/main"> <span
-							class="menu_tit region">지역</span>
-					</a>
-						<ul class="submenu" id="submenu5">
-							<li id="smenu599"><a
-								href="http://www.ticketlink.co.kr/local/main" class="smenu_all"><span
-									class="smenu_tit all">전체</span></a></li>
-							<li id="smenu51"><a
-								href="http://www.ticketlink.co.kr/local/seoul" class="smenu51"><span
-									class="smenu_tit seoul">서울</span></a></li>
-							<li id="smenu52"><a
-								href="http://www.ticketlink.co.kr/local/gyeonggi"
-								class="smenu52"><span class="smenu_tit gyeonggi">경기</span></a></li>
-							<li id="smenu53"><a
-								href="http://www.ticketlink.co.kr/local/gyeongbuk"
-								class="smenu53"><span class="smenu_tit daegu">대구/경북</span></a></li>
-							<li id="smenu54"><a
-								href="http://www.ticketlink.co.kr/local/gyeongnam"
-								class="smenu54"><span class="smenu_tit busan">부산/경남</span></a></li>
-							<li id="smenu55"><a
-								href="http://www.ticketlink.co.kr/local/jeonla" class="smenu55"><span
-									class="smenu_tit gwangju">광주/전라</span></a></li>
-							<li id="smenu56"><a
-								href="http://www.ticketlink.co.kr/local/choongchung"
-								class="smenu56"><span class="smenu_tit daejeon">대전/충청</span></a>
-							</li>
-							<li id="smenu57"><a
-								href="http://www.ticketlink.co.kr/local/gangwon" class="smenu57"><span
-									class="smenu_tit kangwon">강원</span></a></li>
-							<li id="smenu58"><a
-								href="http://www.ticketlink.co.kr/local/jeju" class="smenu58"><span
-									class="smenu_tit jeju">제주</span></a></li>
-						</ul></li>
-					<li class="event_cate menu_list7"><a
-						href="http://www.ticketlink.co.kr/venue/main"> <span
-							class="menu_tit venue">공연장</span>
-					</a></li>
-					<li class="event_cate menu_list8 menu6" id="menu6"><a
-						href="http://www.ticketlink.co.kr/event/main"> <span
-							class="menu_tit event">이벤트/쿠폰</span>
-					</a> <!-- [D] 이벤트 서브메뉴 : submenu에 event 클래스 추가 -->
-						<ul class="submenu event" id="submenu6">
-							<li id="smenu61"><a
-								href="http://www.ticketlink.co.kr/event/main" class="smenu61"><span
-									class="smenu_tit ongoing_event">진행중인 이벤트</span></a></li>
-							<li id="smenu62"><a
-								href="http://www.ticketlink.co.kr/event/end" class="smenu62"><span
-									class="smenu_tit finish_event">종료된 이벤트</span></a></li>
-							<li id="smenu63"><a
-								href="http://www.ticketlink.co.kr/event/winner" class="smenu63"><span
-									class="smenu_tit event_winner">당첨자 발표</span></a></li>
-							<li id="smenu64"><a href="javascript:;" class="smenu64"><span
-									onClick="memberCommonCheck('http://www.ticketlink.co.kr/my/activity/event');"
-									class="smenu_tit event_participation">참여 이벤트</span></a></li>
-							<li id="smenu65"><a
-								href="http://www.ticketlink.co.kr/coupon/main" class="smenu65"><span
-									class="smenu_tit coupon_zone">쿠폰존</span></a></li>
-						</ul></li>
-					<li class="event_cate type3"><a
-						href="http://www.ticketlink.co.kr/vip/main"> <span
-							class="menu_tit vip">PAYCO VIP</span>
-					</a></li>
+
 				</ul>
 			</div>
+			<!-- 메뉴바 END -->
 		</div>
-		<script type="text/javascript"
-			src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201606211000/js/login.js"></script>
-		<script type="text/javascript"
-			src="/resources/js/header-f81b5672707a96b1c497e15293ee07f3.js"></script>

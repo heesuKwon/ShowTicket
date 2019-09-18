@@ -7,6 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 
@@ -16,7 +17,15 @@
 		<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
 		<!-- 3월 스펙 아웃으로 인한 큰 이벤트 이미지 부분 삭제 -->
 
-		<h3 class="evt_tit evt_tit1">진행중인 이벤트</h3>
+		<ul class="nav nav-pills nav-justified">
+			<li class="nav-item"><a class="nav-link select nav-font" href="#">진행중인 이벤트</a>
+			</li>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a>
+			</li>
+		</ul>
+		<h2 class="title">특가 진행</h2>
 		<ul class="event_top_list">
 
 			<li><a href="/event/552"> <img
@@ -96,15 +105,7 @@
 
 		</ul>
 
-		<h4 class="evt_tit evt_tit2">전체 이벤트</h4>
-		<ul class="event_tab">
-			<li class="tap" id="li_all"><a href="javascript:;"
-				onclick="getEventList(1)" class="tab1">전체이벤트</a></li>
-			<li class="tap" id="li_invite"><a href="javascript:;"
-				onclick="getEventList(1,'INVITE')" class="tab2">초대 이벤트</a></li>
-			<li class="tap" id="li_gift"><a href="javascript:;"
-				onclick="getEventList(1,'GIFT')" class="tab3">경품 이벤트</a></li>
-		</ul>
+		<h4 class="evt_tit">전체 이벤트</h4>
 
 		<div class="event_cont_box">
 			<div class="event_list_inner">
@@ -168,7 +169,6 @@
                 eventTypeCode: globalEventTypeCode
             },
             success: function (result) {
-                makeOnTap(eventTypeCode);
                 displayEvent(result.result.result);
                 displayPage(result.result.paging, $('#pagination'));
             },
@@ -176,17 +176,6 @@
                 alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
             }
         });
-    }
-
-    function makeOnTap (eventTypeCode) {
-        $('.tap').removeClass('on');
-        if (eventTypeCode == null) {
-            $("#li_all").addClass("on");
-        } else if (eventTypeCode == "INVITE") {
-            $("#li_invite").addClass("on");
-        } else if (eventTypeCode == "GIFT") {
-            $("#li_gift").addClass("on");
-        }
     }
 
     function displayEvent (eventList) {
