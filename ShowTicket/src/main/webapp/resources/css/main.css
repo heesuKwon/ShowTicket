@@ -7,11 +7,11 @@ ul:after{display:block;clear:both;content:''}
 h3{margin-bottom:19px;}
 #container{background:none;margin:0;}
 #container .inner{padding:0}
-h3,.main_banner .controller span,.main_banner .controller a,.sport_ban li .sports,.sport_ban li .today,.big_movie .movie_close,.reserve_sports{overflow:hidden;font-size:0;/* text-indent:-9999px; */}
-h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.btn_open span,.big_movie .movie_close,.tab_venue button span,.venue_list li.on:after{background:url(../img/sp_main.png) no-repeat;}
+/* h3,.main_banner .controller span,.main_banner .controller a,.sport_ban li .sports,.sport_ban li .today,.big_movie .movie_close,.reserve_sports{overflow:hidden;font-size:0;text-indent:-9999px;}
+h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.btn_open span,.big_movie .movie_close,.tab_venue button span,.venue_list li.on:after{background:url(../img/sp_main.png) no-repeat;} */
 .main_banner .visual_ban a,.section_top a,.week_list li a,.section_best .best_list li a{display:block;}
 .section_top .band_ban img,.week_list li img{display:block;}
-.wingright .today_view button,.wingright strong,.open_spot .maintop_right .movie_tit button span{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat}
+/* .wingright .today_view button,.wingright strong,.open_spot .maintop_right .movie_tit button span{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat} */
 .main_banner{height:470px;position:relative;}
 .section_top{position:relative;padding:50px 0;}
 .section_week{position:relative;padding:60px 0 0;}
