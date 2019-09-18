@@ -943,6 +943,11 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
     border-left: 1px solid #8f01a3;
 }
 
+.nav-pills .nav-item:first-child .nav-link.default{
+	color: #8f01a3;
+	border: none;
+}
+
 .nav-pills{
 	border: 1px solid #8f01a3;
     border-radius: .25rem;
