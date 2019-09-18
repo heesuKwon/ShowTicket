@@ -155,9 +155,6 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping("/ranking.do")
-	public void ranking() {
-		logger.debug("랭킹페이지");
-	}
+	
 	
 }

@@ -144,7 +144,7 @@
         </li>
      
         <li class="event_cate type2 menu7">
-        <a href="${pageContext.request.contextPath}/member/ranking.do">
+        <a href="${pageContext.request.contextPath}/ranking/ranking.do">
         <span class="menu_tit ranking">랭킹</span>
         </a>
         </li>
