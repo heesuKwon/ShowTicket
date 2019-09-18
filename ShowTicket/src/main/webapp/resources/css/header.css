@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+/* 헤더 이미지*/
+#center-image{
+	position: absolute;
+    width: 200px;
+    top: -3px;
+}
 /*--------------- #cssH1 - 헤더 검색  부분--------------- */
 #header .search_area{position:relative;width:990px;margin:32px auto;font-size:0}
 #header .search_area .logo{width:137px;height:54px;position:absolute;top:-9px;left:0}
