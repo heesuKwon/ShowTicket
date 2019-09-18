@@ -18,24 +18,26 @@
 	</jsp:include>
 
 	<br>
-	<form id="standby">
-		<h5>대기공연</h5>
+	<form id="interest">
+		<h5>관심공연</h5>
 		<hr />
-		<br />
-<input type=button id="button1"value="뮤지컬"><input type=button id="button2"value="연극">
- <br /><br>
+		<br /> <input type=button id="button1" value="뮤지컬"><input
+			type=button id="button2" value="연극"> <br />
+		<br>
 
-			<table id="playList">
-				<tr>
-					<th>공연명</th>
-					<th>취소</th>
-				</tr>
-				<tr>
-					<td>뮤지컬<시티오브엔젤></td>
-					<td><button type="button" class="btn btn-secondary"
-				onclick="location.href='${pageContext.request.contextPath}'">취소</button></td>
-				</tr>
-			</table>
+		<table id="InterestList">
+			<tr>
+				<th>공연명</th>
+				<th>오픈일시</th>
+				<th>삭제</th>
+			</tr>
+			<tr>
+				<td>뮤지컬<시티오브엔젤></td>
+				<td>2019.09.12</td>
+				<td><button type="button" class="btn btn-secondary"
+						onclick="location.href='${pageContext.request.contextPath}'">삭제</button></td>
+			</tr>
+		</table>
 
 		<br />
 
@@ -59,4 +61,13 @@
 		</nav>
 	</form>
 </div>
+<script type="text/javascript">
+$(function() {
+	$("input[type=button] #button2").click( function() {
+		$(this).css("background-color","gray")
+			   .css("color","white");
+	});
+
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

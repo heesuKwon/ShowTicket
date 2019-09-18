@@ -3,14 +3,53 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
+<style>
+#myPageNavBar{
+	position:absolute;
+	width: 100px;
+	text-align:center;
+	left:0;
+	margin-left : 10%;
+	
+}
+#myPage{
+	text-align:center;
+	width:150px;
+	height:80%;
+	background-color : #8f01a3;
+	padding:10px 10px 10px 10px;
+	display:inline-block;
+}
+#myPage label{
+	color : white;
+	font-size:25px;
+	font-weight:bold;
+	text-align:center;
+}
+#navBar{
+	border : 0px;
+	margin-left : 10px;
+	font-size : 20px;
+	margin-top : 20px;
+}
+#navBar td{
+	border : 0px;
+	width : 200px;
+	height: 50px;
+	color: gray;
+	font-size:15px;
+}
+#navBar td:hover{
+	color:#8f01a3;
+	cursor:pointer;
+}
+</style>
 <nav id="myPageNavBar">
 	<span id="myPage"><label>마이페이지</label></span>
 	<table id="navBar">
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}'">예매확인/취소</td>
+				onclick="location.href='${pageContext.request.contextPath}/member/reservation.do'">예매확인/취소</td>
 		</tr>
 		<tr>
 			<td class="nav"
@@ -28,10 +67,10 @@
 				수정</td>
 		</tr>
 		<tr>
-			<td class="nav"></td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<td class="nav"></td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td class="nav"
@@ -40,15 +79,13 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}'">관심
+				onclick="location.href='${pageContext.request.contextPath}/member/myInterest.do'">관심
 				공연</td>
 		</tr>
 	</table>
 </nav>
 <script>
-	$('.nav').hover(function() {
-		$(this).css("color", "#9a3cf4");
-	}, function() {
-		$(this).css("color", "gray");
+$("nav").click(function() {
+	  $(this).css("color","#8f01a3");
 	});
 </script>

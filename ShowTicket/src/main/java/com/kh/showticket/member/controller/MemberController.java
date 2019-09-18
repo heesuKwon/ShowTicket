@@ -42,7 +42,11 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 		
 	}
-	
+	@RequestMapping("/reservation.do")
+	public String reservation() {
+		
+		return "/member/reservation";
+	}
 	@RequestMapping("/memberView.do")
 	public void memberView() {
 	}
@@ -63,6 +67,11 @@ public class MemberController {
 	public String myStandBy() {
 		
 		return "/member/myStandBy";
+	}
+	@RequestMapping("/myInterest.do")
+	public String myInterest() {
+		
+		return "/member/myInterest";
 	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
