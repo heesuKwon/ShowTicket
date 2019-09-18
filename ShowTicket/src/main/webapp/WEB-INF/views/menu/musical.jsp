@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/musical_show.css">
 
 
 <script type="text/javascript">lcs_do(); </script>
@@ -183,7 +184,7 @@
     <h2 class="blind">공연</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
     <div class="top_area" style="padding-bottom:0px; margin-bottom:39px;">
     <h2 class="title" style="margin-top:39px; display:inline-block">베스트 뮤지컬</h2>
-    <button style="width:35px; font-size:1.8em;">+</button>
+    <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
         <div class="submain_topban">
             <div class="submain_goods" style="width: 990px">
                 <ul>
@@ -444,7 +445,7 @@
         <div class="attention_wrap concert" style="margin-top:0px;">
             <div class="header">
                 <h2 class="small-title" style="margin-top:0px; display:inline-block">최신 뮤지컬</h2>
-                <button style="width:35px; font-size:1.8em;">+</button>
+                <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
             </div>
             <div class="attention">
                 <ul style="width:1880px"><!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
@@ -455,7 +456,7 @@
                                     ">HIDE
                                 </span>
                                 <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg" width="178" height="217" alt="">
-                                <p>제목등 소개 들어갈곳</p>
+                                <p><em>제목등 소개 들어갈곳</em></p>
                             </a>
                         </li>
                     
@@ -583,22 +584,22 @@
         </div>
 
 
-<div class="bottom_area" style="background-color:transparent">
-    <div class="inner" style="padding-bottom:0px !important; background-color:transparent; position:relative;">
-        <h2 class="title" style="display:inline-block">전체 뮤지컬</h2>
-        		<div style="display:inline-block;  position:relative; left:155px; top:0px;">
-		        	<select name="searchCategory" id="category-musical" style="width:100px; height:35px;">
+<div class="bottom_area">
+    <div class="inner">
+        <h2 class="title beforeSearch">전체 뮤지컬</h2>
+        		<div class="searchFrm">
+		        	<select name="searchCategory" id="category-musical">
 		        		<option value="searchAll">전체</option>
 		        		<option value="searchTitle">제목</option>
 		        		<option value="searchActor">배우</option>
 		        	</select>
-		        	<input type="text" class="form-control form-control-lg" id="searchKeyword" style="width:300px; height:35px;" >
-		        	<button type="button" style="width:50px; height:35px;">검색</button>
+		        	<input type="text" class="form-control form-control-lg" name="searchKeyword">
+		        	<button type="button" class="btn btn-primary btn-sm" id="searchBtn">검색</button>
         		</div>
 
         	
-        	<div style="margin:3px;">
-	        	<select name="searchCategory" id="category-musical" style="width:70px; height:35px; float:right; margin-bottom:5px;">
+        	<div class="orderWrap">
+	        	<select name="selectOrder" id="order-musical">
 		        	<option value="byRank">랭킹순</option>
 		        	<option value="byDate">최신순</option>
 		        	<option value="byStar">별점순</option>

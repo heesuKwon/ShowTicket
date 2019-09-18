@@ -14,3 +14,7 @@ h2.small-title {
 	color:black;
 }
 
+
+h2.beforeSearch {
+	display: inline-block;
+}
