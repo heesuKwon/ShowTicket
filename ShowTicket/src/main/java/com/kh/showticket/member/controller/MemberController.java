@@ -1,6 +1,6 @@
 package com.kh.showticket.member.controller;
 
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +21,8 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 
-@Controller
 @RequestMapping("/member")
+@Controller
 @SessionAttributes("memberLoggedIn")
 public class MemberController {
 	
@@ -154,6 +154,10 @@ public class MemberController {
 		return map;
 		
 	}
-
+	
+	@RequestMapping("/ranking.do")
+	public void ranking() {
+		logger.debug("랭킹페이지");
+	}
 	
 }

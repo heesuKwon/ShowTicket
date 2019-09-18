@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+
+div.maintop_cont{margin-bottom: 15px;}
+
+ul.best_list>li>a>p>img {width: 234px;height: 285px;}
+
+div.suggest_wrap>ul.best_list {height: 500px;}
+
+div.section_best>div.inner>ul.best_list{height: 600px;}
+
+ul.best_list{margin-left: -18px;}
+
+ul.best_list>li {width: 234px;height: 374px;margin-left: 18px;margin-bottom: 18px;}
+
+div.section_week {height: 500px;}
+
+div.section_week>div.inner { margin: 0 auto; position: relative;}
+
+div.section_best{height: 600px;} 
