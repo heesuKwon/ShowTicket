@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+
+span.color_purple{
+	color:#8f01a3;
+	
+}
+
+.addList li{
+ 	padding:10px 15px;
+	border:1px solid;
+	margin-right:5px;
+}
+
+.detailbox_bot_left{
+	width:100% !important;
+	margin-right:0px;
+}
+
+.seat li{
+	clear:both;
+}
+
+#watchTime{
+	width:194px;
+	padding:5px;
+}
+
+button.reserve{
+	background-color: 	#8f01a3;
+	width:194px !important;
+}
+
+.reserve span{
+	color:white;
+	font-weight:bold;
+	font-size:15px;
+	letter-spacing:3px;
+}
+
+.detail_box_top .detail_info_right dl{
+	margin-bottom:5px !important;
+ 	padding-bottom: 5px !important;
+}
+
+.detail_tab{
+	margin-bottom:0px;
+}
+
+.detail_tab li{
+	width:247.5px !important;
+	
+}
