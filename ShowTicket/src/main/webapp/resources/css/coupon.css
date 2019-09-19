@@ -71,6 +71,7 @@ width:300px;
 
 .couponWrap{
 	margin: 20px;
+
 }
 
 .couponWrap p {
@@ -79,9 +80,6 @@ width:300px;
 
 button#couponAdd{
 	float:right; margin:10px; width:50px; height:30px;
-	background-color:#8c008c;
-	color:white;
-	border:none;
 }
 
 .couponText{

@@ -8,7 +8,7 @@
 	<insert id="insertMember">
 		insert into member values
 		( #{memberId}, #{password}, #{memberName}, #{email},
-		  #{phone}, default, sysdate, default, 'A')
+		  #{phone}, default, sysdate, default, default)
 	</insert>
 
 	<select id="selectOneMember" resultType="member">

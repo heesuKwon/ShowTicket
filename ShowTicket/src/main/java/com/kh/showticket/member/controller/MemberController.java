@@ -42,7 +42,37 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 		
 	}
+	@RequestMapping("/reservation.do")
+	public String reservation() {
+		
+		return "/member/reservation";
+	}
+	@RequestMapping("/memberView.do")
+	public void memberView() {
+	}
 	
+	@RequestMapping("/myCoupon.do")
+	public String myCoupon() {
+		
+		return "/member/myCoupon";
+	}
+	
+	@RequestMapping("/myPoint.do")
+	public String myPoint() {
+		
+		return "/member/myPoint";
+	}
+	
+	@RequestMapping("/myStandBy.do")
+	public String myStandBy() {
+		
+		return "/member/myStandBy";
+	}
+	@RequestMapping("/myInterest.do")
+	public String myInterest() {
+		
+		return "/member/myInterest";
+	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 		
@@ -124,11 +154,11 @@ public class MemberController {
 	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
 	 * @param memberLoggedIn
 	 */
-	@RequestMapping("/memberView.do")
-	public void memberView(@SessionAttribute Member memberLoggedIn) {
-		logger.debug("회원정보 페이지 요청");
-		logger.debug("memberLoggedIn={}", memberLoggedIn);
-	}
+	/*
+	 * @RequestMapping("/memberView.do") public void memberView(@SessionAttribute
+	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
+	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
+	 */
 	
 	/**
 	 * 

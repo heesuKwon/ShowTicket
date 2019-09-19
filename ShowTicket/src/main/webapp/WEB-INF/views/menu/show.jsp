@@ -611,7 +611,7 @@
 		        		<option value="searchActor">배우</option>
 		        	</select>
 		        	<input type="text" class="form-control form-control-lg" name="searchKeyword" >
-		        	<button type="button" class="btn btn-primary btn-sm" id="searchBtn">검색</button>
+		        	<button type="button" class="btn btn-primary btn-color btn-sm" id="searchBtn">검색</button>
         		</div>
 
         	
