@@ -51,10 +51,10 @@
 					class="help_lmeu1">고객센터홈</a></li>
 				<li id="help_lmeu2"><a
 					href="${pageContext.request.contextPath}/help/notice.do"
-					class="help_lmeu2">공지사항</a></li>
+					class="help_lmeu2" >공지사항</a></li>
 				<li id="help_lmeu3"><a
 					href="${pageContext.request.contextPath}/help/faq.do"
-					class="help_lmeu3">FAQ</a></li>
+					class="help_lmeu3" style="color:#8f01a3">FAQ</a></li>
 			</ul>
 
 			<div class="help_rcont">
@@ -100,14 +100,12 @@
 						<colgroup>
 							<col style="width: 100px">
 							<col>
-							<col style="width: 190px">
-							<col style="width: 80px">
+							<col style="width: 270px">
 						</colgroup>
 						<thead>
 							<tr>
 								<th scope="col">카테고리</th>
-								<th colspan="2" scope="col">제목</th>
-								<th scope="col">조회수</th>
+								<th colspan="2" scope="col">질문</th>
 							</tr>
 						</thead>
 						<tbody id="nTableBody">
@@ -116,105 +114,90 @@
 								<td class="tl p_reative"><a href="/help/notice/50876">2019
 										장윤정 라이브 콘서트 – 용인 티켓오픈</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.19(목) 11:00</td>
-								<td class="ff_tahoma fs11">1</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50875">NEW
 										신비아파트 뮤지컬 시즌3 - 고양 ​티켓오픈 안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.19(목) 11:00</td>
-								<td class="ff_tahoma fs11">1</td>
 							</tr>
 							<tr>
 								<td>시스템</td>
 								<td class="tl p_reative"><a href="/help/notice/50874"><b>[공지]</b>
 										Microsoft Edge 브라우저 오류관련 안내</a></td>
 								<td>2019.09.18</td>
-								<td class="ff_tahoma fs11">8</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50873">뮤지컬
 										&lt;사랑했어요&gt; (사랑의 가객 故김현식 뮤지컬) 마지막 티켓 오픈​ 안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.24(화) 14:00</td>
-								<td class="ff_tahoma fs11">7</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50871">2019
 										유방암 캠페인 ＂핑크리본 FESTA＂ 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.18(수) 14:00</td>
-								<td class="ff_tahoma fs11">153</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50870">2019
 										최현우〈THE BRAIN〉 - 부산 티켓오픈 안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.18(수) 14:00</td>
-								<td class="ff_tahoma fs11">37</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50869"><b>[단독판매]</b>
 										퓨젼뮤지컬 “시집 가는 날” - 대구 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.23(월) 09:00</td>
-								<td class="ff_tahoma fs11">10</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50868">연극
 										&lt;수업&gt;​ 티켓오픈 안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 17:00</td>
-								<td class="ff_tahoma fs11">4</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50867">2019
 										만9,900원의 행복 유리상자 콘서트 시즌3 - 구미 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-								<td class="ff_tahoma fs11">8</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50866">뮤지컬〈친정엄마〉10주년
 										기념 - 창원 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 16:00</td>
-								<td class="ff_tahoma fs11">4</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50865">2019
 										만9,900원의 행복 유리상자 콘서트 시즌3 - 여수 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-								<td class="ff_tahoma fs11">3</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50864">[원주]
 										정태춘 박은옥 40주년 전국투어 콘서트〈날자, 오리배〉 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 15:00</td>
-								<td class="ff_tahoma fs11">8</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50863"><b>[단독판매]</b>
 										성진우&amp;홍실 “미스 미스터 트로트콘서트” 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-								<td class="ff_tahoma fs11">12</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50862"><b>[단독판매]</b>
 										연극 염쟁이 유씨 - 안동 티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-								<td class="ff_tahoma fs11">5</td>
 							</tr>
 							<tr>
 								<td>티켓오픈</td>
 								<td class="tl p_reative"><a href="/help/notice/50861">박현빈뭉클디너쇼
 										티켓오픈안내</a></td>
 								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-								<td class="ff_tahoma fs11">28</td>
 							</tr>
 						</tbody>
 					</table>

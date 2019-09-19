@@ -46,7 +46,7 @@
 				<!-- [D] 활성상태일 때 .on 추가입니다. -->
 				<li id="help_lmeu1"><a
 					href="${pageContext.request.contextPath}/help/main.do"
-					class="help_lmeu1">고객센터홈</a></li>
+					class="help_lmeu1" style="color:#8f01a3">고객센터홈</a></li>
 				<li id="help_lmeu2"><a
 					href="${pageContext.request.contextPath}/help/notice.do"
 					class="help_lmeu2">공지사항</a></li>
