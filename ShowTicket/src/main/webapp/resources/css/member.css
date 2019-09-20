@@ -4,6 +4,30 @@
 	font-family:"휴먼모음T";
 	padding:30px;
 }
+/* 회원가입페이지 */
+div#enroll-container{width:500px; margin:50px auto; text-align:center;}
+/* div#enroll-container input, div#enroll-container select {margin-bottom:10px;} */
+div#enroll-container table{margin: 0 auto;}
+div#enroll-container table th{text-align: right; padding-right:10px;font-size: 1rem;}
+div#enroll-container table td{text-align: left; border: none; padding: 10px;}
+/*중복 아이디 체크 관련*/
+div#memberId-container{position:relative; padding:0px;}
+div#memberId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
+div#memberId-container span.ok{color:green;}
+div#memberId-container span.error{color:red;}
+
+/*패스워드 일치 관련*/
+div#password-container{position:relative; padding:0px;}
+div#password-container span.pw {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
+div#password-container span.ok{color:green;}
+div#password-container span.error{color:red;}
+.star {
+    color: red;
+}
+#enroll-container input.btn{
+	margin: 30px 10px;
+}
+
 
 /* 회원정보수정페이지 */
 #memberFrm {
