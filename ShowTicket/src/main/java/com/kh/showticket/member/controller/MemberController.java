@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
@@ -209,6 +209,27 @@ public class MemberController {
 		
 	}
 	
+	
+	/*관리자페이지로 이동???*/
+    @ResponseBody
+    @RequestMapping("/adminpage.do")
+    public ModelAndView adminPage(ModelAndView mav) {
+        mav.setViewName("member/adminreport");
+        return mav;
+    }
+    
+    @ResponseBody
+    @RequestMapping("/adminmList.do")
+    public ModelAndView adminmemberList(ModelAndView mav) {
+        mav.setViewName("member/adminmList");
+        return mav;
+    }
+    @ResponseBody
+    @RequestMapping("/bookticket.do")
+    public ModelAndView bookticket(ModelAndView mav) {
+        mav.setViewName("member/bookticket");
+        return mav;
+    }
 	
 	
 }

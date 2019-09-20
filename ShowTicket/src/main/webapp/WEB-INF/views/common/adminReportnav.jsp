@@ -45,7 +45,7 @@
 }
 </style>
 <nav id="myPageNavBar">
-	<span id="myPage"><label>신고게시판</label></span>
+	<span id="myPage"><label>관리자 메뉴</label></span>
 	<table id="navBar">
 		<tr>
 			<td class="nav"
@@ -53,8 +53,12 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myPoint.do'">내
+				onclick="location.href='${pageContext.request.contextPath}/member/adminmList.do'">내
 				회원목록</td>
+		</tr>
+		<tr>
+			<td class="nav"
+				onclick="Popup();">내예매팝업</td>
 		</tr>
 		
 		
@@ -64,4 +68,10 @@
 $("nav").click(function() {
 	  $(this).css("color","#8f01a3");
 	});
+	
+function Popup() { 
+	window.open("bookticket.do",
+			"a", "width=900px, height=630px, left=100, top=0"); 
+	}	
+	
 </script>

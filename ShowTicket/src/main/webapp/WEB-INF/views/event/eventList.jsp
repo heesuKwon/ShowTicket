@@ -28,7 +28,7 @@
 		<h2 class="title">특가 진행</h2>
 		<ul class="event_top_list">
 
-			<li><a href="/event/552"> <img
+			<li><a href="${pageContext.request.contextPath }/event/eventView.do"> <img
 					src="//image.toast.com/aaaaab/ticketlink/TKL_9/이벤트썸네일_318x386_디오디언스.jpg"
 					alt="임시" width="318" height="386">
 					<div class="event_top_info">

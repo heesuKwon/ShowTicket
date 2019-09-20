@@ -16,6 +16,7 @@ div#report{border:1px solid #8f01a3; text-align:center; width:70%; height: 80%; 
 table#reporttbl{width: 80%;margin-left: 10%; margin-top: 25px; }
 table#reporttbl thead>tr>th{background: #f0f0f0; font-family: 'Gothic A1', sans-serif; font-size:15px;}
 div.rhr{ border: 1px solid #a6a6a6; margin-top: 14px; width: 100%;}
+.table td{padding-top: 5px; padding-bottom: 5px;}
 </style>
 
 
@@ -24,81 +25,103 @@ div.rhr{ border: 1px solid #a6a6a6; margin-top: 14px; width: 100%;}
    
 	<div id="report">
 		<div class="inner">
-		<h2>신고 리뷰 목록</h2>
+		<h2>회원 목록</h2>
 		<div class="rhr"></div>
 		</div>	
 			
 		<table class="table" id="reporttbl">
 			  <thead>
 			    <tr>
-			      <th scope="col">No</th>
-			      <th scope="col">신고사유</th>
-			      <th scope="col">신고한 회원</th>
-			      <th scope="col">신고 받은 회원</th>
+			      <th scope="col">번호</th>
+			      <th scope="col">아이디</th>
+			      <th scope="col">이름</th>
+			      <th scope="col">이메일</th>
+			      <th scope="col">연락처</th>
+			      <th scope="col">탈퇴</th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
 			    <tr>
 			      <th scope="row">1</th>
-			      <td>Mark</td>
-			      <td>Otto</td>
-			      <td>@mdo</td>
+			      <td>아이디</td>
+			      <td>이름</td>
+			      <td>이메일</td>
+			      <td>연락처</td>
+			      <td>  <button type="button" id="dropM" class="btn btn-secondary btn-sm">탈퇴</button>  </td>
 			    </tr>
-			 
+			   
 			    
 			  </tbody>
 			  
