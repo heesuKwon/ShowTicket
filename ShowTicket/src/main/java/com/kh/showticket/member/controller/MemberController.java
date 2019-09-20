@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
@@ -72,6 +72,30 @@ public class MemberController {
 	public String myInterest() {
 		
 		return "/member/myInterest";
+	}
+	@RequestMapping(value="/updateMember.do")
+	public String updateMember(Member member, Model model) {
+		
+		int result = memberService.updateMember(member);
+		
+		// 2. view단 처리
+				model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
+				model.addAttribute("loc", "/");
+				
+				return "common/msg";
+	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam String memberId, Model model) {
+		logger.info("디버그");
+//		int result = memberService.deleteMember(memberId);
+		int result = 1;
+		
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
+		model.addAttribute("loc", "/");
+		
+//		return "common/msg";
+		return "redirect:/";
 	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
@@ -185,6 +209,27 @@ public class MemberController {
 		
 	}
 	
+	
+	/*관리자페이지로 이동???*/
+    @ResponseBody
+    @RequestMapping("/adminpage.do")
+    public ModelAndView adminPage(ModelAndView mav) {
+        mav.setViewName("member/adminreport");
+        return mav;
+    }
+    
+    @ResponseBody
+    @RequestMapping("/adminmList.do")
+    public ModelAndView adminmemberList(ModelAndView mav) {
+        mav.setViewName("member/adminmList");
+        return mav;
+    }
+    @ResponseBody
+    @RequestMapping("/bookticket.do")
+    public ModelAndView bookticket(ModelAndView mav) {
+        mav.setViewName("member/bookticket");
+        return mav;
+    }
 	
 	
 }

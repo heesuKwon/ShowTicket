@@ -175,8 +175,8 @@
 								<span>|</span>
 							</c:if>
 
-							<a href="" id="reserve">예매확인/취소</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
+							<a href="" id="reserve">예매확인/취소</a><span>|</span> 
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 
 
 						</div>
@@ -186,8 +186,8 @@
 								href="javascript:;" class="user_name"></a><em>님</em></strong><span>|</span>
 							<!-- [D] 로그인 후 주석 해제 입니다. -->
 							<a href="${pageContext.request.contextPath}/member/reservation.do" id="reserveLogin">예매확인/취소</a><span>|</span>
-							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
+							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> 
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 
 						</div>
 

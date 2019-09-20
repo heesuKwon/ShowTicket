@@ -6,7 +6,7 @@
 <style>
 #footer img{
 	position: absolute;
-	left: 150px;
+	left: 20%;
     width: 200px;
 }
 </style>
