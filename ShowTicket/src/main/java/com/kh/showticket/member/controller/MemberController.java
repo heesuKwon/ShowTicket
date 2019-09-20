@@ -4,6 +4,8 @@ package com.kh.showticket.member.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,6 +119,12 @@ public class MemberController {
 		
 		return "common/msg";
 	}
+	
+//	@RequestMapping("/sendmail.do")
+//	public void sendMail(Member member, HttpServletRequest request) {
+//		// 인증 메일 보내기 메서드
+//		mailsender.mailSendWithUserKey(userVO.getUser_email(), userVO.getUser_id(), request);
+//	}
 	
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,

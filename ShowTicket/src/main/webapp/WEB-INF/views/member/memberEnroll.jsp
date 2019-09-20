@@ -58,6 +58,7 @@
 				<th>이메일</th>
 				<td>	
 					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
+					<button class="btn btn-gray btn-sm">이메일 인증</button>
 				</td>
 			</tr>
 			
@@ -65,6 +66,7 @@
 				<th>휴대폰<span class="star">*</span></th>
 				<td>	
 					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
+					<button class="btn btn-gray btn-sm">휴대폰 인증</button>
 				</td>
 			</tr>
 			
