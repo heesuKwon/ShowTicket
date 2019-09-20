@@ -6,10 +6,25 @@
 <fmt:requestEncoding value="utf-8" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
+	
 
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(()=>{
+
+
+$("#memberDelete").click(function() {
+	var bool = confirm("정말로 탈퇴하시겠습니까?");
+	if (bool) {
+		var id = $("#memberId").val();
+		location.href = "${pageContext.request.contextPath}/member/memberDelete.do?memberId="+id;
+	}
+});
+});
+</script>
 
 
 <div id="container">
@@ -24,7 +39,7 @@
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" class="form-control" required disabled></td>
+				<td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td>
 			</tr>
 
 			<tr>
@@ -68,6 +83,28 @@
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
 			onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보
 			수정</button>
+		<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="memberDelete"
+			    <%-- onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do?memberId=delete'" --%>>회원정보
+			탈퇴</button>
 	</form>
+		<%-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="memberDelete"
+			    onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do?memberId=delete'">회원정보
+			비밀번호찾기팝업</button> --%>
+			
 </div>
+<%-- <script>
+$(()=>{
+	//테이블의 열을 클릭시 해당 게시물로 이동
+	$("td").click((e)=>{		
+		var dmNo = $(e.target).parents("tr").children("td").children("input[name=dmNo]").val();
+		console.log("넘버"+dmNo);
+		var url = "<%=request.getContextPath()%>/board/dm/DMSendView?dmNo="+dmNo;
+	    var title = "DMWrite";
+	    var status =  "left=500px, top=200px, width=473px, height=442px";
+		var popup = window.open(url,title,status);
+	
+	});
+});
+
+</script> --%>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -15,4 +15,32 @@
 		select * from member where member_id = #{memberId}	
 	</select>
 	
+	<update id="updateMember">
+		update member
+		<trim prefix="set" suffixOverrides=",">
+			<if test="password != null and password !=''">
+			password= #{password},
+			</if>
+			<if test="memberName != null and memberName !=''">
+			member_name = #{memberName},
+			</if>
+			<if test="email != null and email !=''">
+			email = #{email},
+			</if>
+			<if test="phone != null and phone !=''">
+			phone= #{phone},
+			</if>
+			<if test="memberGrade != null and memberGrade !=''">
+			member_grade= #{memberGrade},
+			</if>
+		</trim>
+		
+		where member_id = #{memberId}
+	
+	</update>
+	
+	<delete id="deleteMember">
+		delete from member where member_id = #{memberId}
+	</delete>
+	
 </mapper>
