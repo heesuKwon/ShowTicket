@@ -35,5 +35,11 @@ public class EventController {
 		mav.setViewName("event/prizewinner");
 		return mav;
 	}
+	@RequestMapping("/eventForm.do")
+	public ModelAndView eventForm(ModelAndView mav) {
+		logger.debug("eventForm페이지 요청");
+		
+		return mav;
+	}
 	
 }

@@ -26,6 +26,8 @@
     top: 15px;
     left: 200px;
 }
+
+
 .help_rcont .search #fieldsetS{height:35px;position:relative;margin: 0 0 0 0px; border: none;}
 .help_rcont .search input[type=text]{line-height:100%; position: absolute; top: 0px; left: 0px; width: 290px; height: 34px; border: none;}
 /* @media screen {#header .search input[type=text]{line-height:36px; position: absolute; top: 0px; left: 0px;}} *//* ie 8 */

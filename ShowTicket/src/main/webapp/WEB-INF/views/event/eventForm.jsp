@@ -18,106 +18,93 @@
 		<!-- 3월 스펙 아웃으로 인한 큰 이벤트 이미지 부분 삭제 -->
 
 		<ul class="nav nav-pills nav-justified">
-			<li class="nav-item"><a class="nav-link select nav-font" href="#">진행중인 이벤트</a>
-			</li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a>
-			</li>
-		</ul>
-		<h2 class="title">특가 진행</h2>
-		<ul class="event_top_list">
-
-			<li><a href="/event/552"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_9/이벤트썸네일_318x386_디오디언스.jpg"
-					alt="임시" width="318" height="386">
-					<div class="event_top_info">
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[초대]</span>NT Live
-								<디 오디언스> 기대평 이벤트 
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								NT Live
-								<디 오디언스> 기대평 이벤트 
-							</dd>
-							<dt>기간</dt>
-							<dd class="event_date">2019.09.10 ~2019.09.18</dd>
-						</dl>
-					</div>
-			</a></li>
-
-
-
-
-
-
-			<li><a href="/event/550"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_2/이벤트썸네일_318x386_한뼘사이.jpg"
-					alt="임시" width="318" height="386">
-					<div class="event_top_info">
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[초대]</span>연극
-								<한뼘사이> 기대평 이벤트 
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								연극
-								<한뼘사이> 기대평 이벤트 
-							</dd>
-							<dt>기간</dt>
-							<dd class="event_date">2019.09.05 ~2019.09.19</dd>
-						</dl>
-					</div>
-			</a></li>
-
-
-
-
-
-
-			<li><a href="/event/547"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_9/배너(썸네일)_318x386.jpg"
-					alt="임시" width="318" height="386">
-					<div class="event_top_info">
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[응모]</span>9월 신한은행 예매수수료 면제 이벤트
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								9월 신한은행 예매수수료 면제 이벤트</dd>
-							<dt>기간</dt>
-							<dd class="event_date">2019.09.01 ~2019.09.30</dd>
-						</dl>
-					</div>
-			</a></li>
-
-
-
+			<li class="nav-item"><a class="nav-link select nav-font"
+				href="#">진행중인 이벤트</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default"
+				href="${pageContext.request.contextPath}/event/endEventList.do">종료된
+					이벤트</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default"
+				href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자
+					발표</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default"
+				href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a></li>
 		</ul>
 
-		<h4 class="evt_tit">전체 이벤트</h4>
-		<!-- 이벤트 글쓰기 페이지  -->
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onclick="location.href='${pageContext.request.contextPath}/event/eventForm.do'">글쓰기</button>
-		<div class="event_cont_box">
-			<div class="event_list_inner">
-				<ul id="eventList">
-				</ul>
-			</div>
-			<div id="pagination" class="paging"></div>
+		<h2>공연목록</h2>
+
+		<form action="" method="post">
+			<table class="table table-bordered">
+				<tbody>
+					<tr>
+						<th>제목:</th>
+						<td><input type="text" placeholder="제목을 입력하세요. "
+							name="subject" class="form-control" /></td>
+					</tr>
+					<tr>
+						<th>항목:</th>
+						<td><select>
+								<option value="invite">초대</option>
+								<option value="entry">응모</option>
+						</select>
+						</td>
+					</tr>
+					<tr>
+						<th>내용:</th>
+						<td><input type="text" placeholder="파일을 선택하세요. "
+							name="filename" class="form-control" /></td>
+					</tr>
+					<tr>
+						<th>이벤트 시작 날짜:</th>
+						<td><input type="date" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					<tr>
+						<th>이벤트 종료 날짜</th>
+						<td><input type="date" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					<tr>
+						<th>당첨자 발표날짜:</th>
+						<td><input type="text" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					
+					<tr>
+						<th>쿠폰 이벤트 이름:</th>
+						<td><input type="text" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					
+					<tr>
+						<th>상세 날짜:</th>
+						<td><input type="text" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					<tr>
+						<th>상세 시간 및 인원:</th>
+						<td><input type="text" placeholder="비밀번호를 입력하세요"
+							class="form-control" /></td>
+					</tr>
+					<tr>
+						<td colspan="2"><input type="button" value="등록"
+							onclick="sendData()" class="pull-right" /> <input type="button"
+							value="reset" class="pull-left" /> <input type="button"
+							value="글 목록으로... " class="pull-right"
+							onclick="javascript:location.href='list.jsp'" />
+					 <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                    <a class="btn btn-default" type="reset"> reset </a>
+                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 
 
-		</div>
+
+
+
+
 	</div>
 </div>
 

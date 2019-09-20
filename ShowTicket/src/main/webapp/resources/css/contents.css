@@ -554,6 +554,9 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .help_lmenu li{width:132px;padding:17px 0 15px 34px;border-bottom:1px solid #efefef}
 .help_lmenu li a {vertical-align: top;font-family: 'Gothic A1', sans-serif;font-size: 16px;font-weight: bold; text-decoration:none;}
 .help_lmenu li a:hover{color:#8f01a3;}
+#help_lmeu1 > a{color:#8f01a3}
+#help_lmeu2 > a{color:#8f01a3}
+#help_lmeu3 > a{color:#8f01a3}
 
 .help_lmenu li span.help_lmeu5{width:27px;height:16px;background-position:0 -196px}
 .help_lmenu li a.help_lmeu6{width:82px;height:16px;background-position:0 -470px}

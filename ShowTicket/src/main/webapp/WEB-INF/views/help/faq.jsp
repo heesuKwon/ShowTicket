@@ -46,15 +46,15 @@
 
 			<ul class="help_lmenu">
 				<!-- [D] 활성상태일 때 .on 추가입니다. -->
-				<li id="help_lmeu1"><a
+				<li id="help_lmeu"><a
 					href="${pageContext.request.contextPath}/help/main.do"
 					class="help_lmeu1">고객센터홈</a></li>
-				<li id="help_lmeu2"><a
+				<li id="help_lmeu"><a
 					href="${pageContext.request.contextPath}/help/notice.do"
-					class="help_lmeu2" >공지사항</a></li>
+					class="help_lmeu2">공지사항</a></li>
 				<li id="help_lmeu3"><a
 					href="${pageContext.request.contextPath}/help/faq.do"
-					class="help_lmeu3" style="color:#8f01a3">FAQ</a></li>
+					class="help_lmeu3">FAQ</a></li>
 			</ul>
 
 			<div class="help_rcont">
@@ -73,14 +73,16 @@
 								<input type="text" name="query" title="검색어 입력" value="">
 								<p class="btn_search">
 									<a href="javascript:document.searchForm.submit()"
-										class="material-icons w3-xlarge">search</a><p></fieldset>
+										class="material-icons w3-xlarge">search</a>
+								<p>
+							</fieldset>
 
-										        </form>
-			        </div>
-	       
-	        <!-- // 검색창 덮는 배너 추가 -->
-       		 </div>
-       		 
+						</form>
+					</div>
+
+					<!-- // 검색창 덮는 배너 추가 -->
+				</div>
+
 				<ul id="genreNav" class="nav nav-pills nav-justified">
 					<li class="nav-item"><a class="nav-link select nav-font"
 						href="#">예매/취소</a></li>
@@ -221,12 +223,14 @@
 				</div>
 
 			</div>
-		</div> <a
-										href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
+		</div>
+	</div>
+</div>
+<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
-									<script type="text/javascript"
-										src="/resources/js/jquery.placeholder.min.js"></script>
-									<script type="text/javascript">
+<script type="text/javascript"
+	src="/resources/js/jquery.placeholder.min.js"></script>
+<script type="text/javascript">
 	//<![CDATA[
 	$(document).ready(function () {
 		$("#help_lmeu1").addClass("on");
@@ -239,4 +243,4 @@
 	}
 	//]]>
 </script>
-									<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
