@@ -57,7 +57,7 @@ window.onload = function () {
                     <div class="maintop_left">
                         <div class="header">
                         <a href="${pageContext.request.contextPath }/">
-                            <h2>티켓오픈  <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/></h2>
+                            <h2 class="title">티켓오픈  <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 30px;"/></h2>
               			</a>
                         </div>
                         
@@ -112,7 +112,7 @@ window.onload = function () {
                     <div class="maintop_left">
                         <div class="header">
                         <a href="${pageContext.request.contextPath }/">
-                            <h2>일간 랭킹   <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/></h2>
+                            <h2 class="title">일간 랭킹   <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 30px;"/></h2>
                          </a>     
                         </div>
                         <div class="maintop_cont">
@@ -213,9 +213,9 @@ window.onload = function () {
             <div class="section_week">
                 <div class="inner">
 					<a href="${pageContext.request.contextPath }/">
-					<h2>
+					<h2 class="title">
                     	베스트뮤지컬 
-                    	<img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/>
+                    	<img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 30px;"/>
 					</h2>
            	</a>
                 
@@ -299,7 +299,7 @@ window.onload = function () {
             <div class="section_best">
                 <div class="inner">
                 <a href="${pageContext.request.contextPath }/">
-                    <h2>베스트 연극 <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/></h2>
+                    <h2 class="title">베스트 연극 <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 30px;"/></h2>
 				</a>	
                     <ul class="best_list">
                         

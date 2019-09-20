@@ -35,6 +35,15 @@ public class EventController {
 		mav.setViewName("event/prizewinner");
 		return mav;
 	}
+	
+	@RequestMapping("/eventWrite.do")
+	public ModelAndView eventWrite(ModelAndView mav) {
+		logger.debug("eventWrite페이지 요청");
+		
+		mav.setViewName("event/eventWrite");
+		return mav;
+	}
+	
 	@RequestMapping("/eventView.do")
 	public ModelAndView eventView(ModelAndView mav) {
 		logger.debug("prizewinner페이지 요청");

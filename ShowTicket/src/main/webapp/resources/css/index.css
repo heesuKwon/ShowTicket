@@ -5,7 +5,7 @@
 
 div.maintop_cont{margin-bottom: 15px;}
 
-ul.best_list>li>a>p>img {width: 232px;height: 285px;}
+ul.best_list>li>a>p>img {width: 234px;height: 285px;}
 
 div.suggest_wrap>ul.best_list {height: 500px;}
 
@@ -14,11 +14,11 @@ div.section_best>div.inner>ul.best_list{height: 450px;}
 ul.best_list{margin-left: -18px; }
 
 ul.best_list>li {width: 234px;height: 374px;margin-left: 18px;margin-bottom: 18px;}
-div.suggest_wrap ul.best_list>li { width: 234px;height: 402px;margin-left: 18px;margin-bottom: 18px;border: 1px solid #8f01a3;}
+div.suggest_wrap ul.best_list>li { width: 234px;height: 402px;margin-left: 18px;margin-bottom: 18px;box-shadow:1px 1px 2px 1px #d3d3d3;}
 div.section_week {height: 500px;}
 
 div.section_week>div.inner { margin: 0 auto; position: relative;}
-div.section_best ul.best_list li{height: 387px; width: 234px; border: 1px solid #8f01a3;}
+div.section_best ul.best_list li{height: 387px; width: 233px; box-shadow:1px 1px 2px 1px #d3d3d3;}
 div.section_best{height: 600px;margin-bottom: 50px;} 
 /*슬릭 스타일 */
 *{margin:0;padding:0;}
@@ -31,9 +31,8 @@ div.slide{/* margin-top: 189px; margin-left: 20%;margin-right: 20%; */height: 31
 
 /*슬릭 스타일 END*/
 
-div.maintop_left>div.maintop_cont{width: 800px; border-top: 1px solid #8f01a3; border-bottom: 1px solid #8f01a3;}
+div.maintop_left>div.maintop_cont{width: 990px; border-top: 1px solid #8f01a3; border-bottom: 1px solid #8f01a3;}
 
-h2{margin:0;}
 
 
 

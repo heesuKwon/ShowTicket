@@ -1,4 +1,4 @@
-package com.kh.showticket.show;
+package com.kh.showticket.main;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,18 +7,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/show")
-public class ShowController {
-
+@RequestMapping("/main")
+public class MainController {
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping("/show.do")
-	public ModelAndView show(ModelAndView mav) {
-		logger.debug("쇼리스트페이지");
+	@RequestMapping("/searchResult.do")
+	public ModelAndView searchResult(ModelAndView mav) {
+		logger.debug("통합검색결과");
 		
-		mav.setViewName("menu/show");
+		mav.setViewName("main/searchResult");
 		return mav;
 	}
-
+	
 	
 }

@@ -73,6 +73,30 @@ public class MemberController {
 		
 		return "/member/myInterest";
 	}
+	@RequestMapping(value="/updateMember.do")
+	public String updateMember(Member member, Model model) {
+		
+		int result = memberService.updateMember(member);
+		
+		// 2. view단 처리
+				model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
+				model.addAttribute("loc", "/");
+				
+				return "common/msg";
+	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam String memberId, Model model) {
+		logger.info("디버그");
+//		int result = memberService.deleteMember(memberId);
+		int result = 1;
+		
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
+		model.addAttribute("loc", "/");
+		
+//		return "common/msg";
+		return "redirect:/";
+	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 		

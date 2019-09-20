@@ -13,4 +13,5 @@ public class AreaController {
 		
 		return "area/area";
 	}
+
 }

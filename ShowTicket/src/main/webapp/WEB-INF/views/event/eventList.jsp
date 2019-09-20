@@ -105,11 +105,93 @@
 
 		</ul>
 
-		<h4 class="evt_tit">전체 이벤트</h4>
-
+		<h2 class="small-title">전체 이벤트</h2>
+		<!-- 이벤트 글쓰기 페이지  -->
+		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
+				onclick="location.href='${pageContext.request.contextPath}/event/eventForm.do'">글쓰기</button>
 		<div class="event_cont_box">
 			<div class="event_list_inner">
 				<ul id="eventList">
+					<li>
+						<a href="/event/553">
+							<dl>
+								<dt>대표이미지</dt>
+								<dd class="thumb">
+									<img
+										src="//image.toast.com/aaaaab/ticketlink/TKL_10/318_386_사랑했어요.jpg"
+										width="110" height="134">
+								</dd>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[응모]</span>뮤지컬 &lt;사랑했어요&gt; 관람평 이벤트
+								</dd>
+								<dt>이벤트내용</dt>
+								<dd>뮤지컬 &lt;사랑했어요&gt; 관람평 이벤트</dd>
+								<dt>기간</dt>
+								<dd class="event_date">2019.09.20~2019.10.04</dd>
+							</dl>
+						</a>
+					</li>
+					<li>
+						<a href="/event/547">
+							<dl>
+								<dt>대표이미지</dt>
+								<dd class="thumb">
+									<img
+										src="//image.toast.com/aaaaab/ticketlink/TKL_9/배너(썸네일)_318x386.jpg"
+										width="110" height="134">
+								</dd>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[응모]</span>9월 신한은행 예매수수료 면제 이벤트
+								</dd>
+								<dt>이벤트내용</dt>
+								<dd>9월 신한은행 예매수수료 면제 이벤트</dd>
+								<dt>기간</dt>
+								<dd class="event_date">2019.09.01~2019.09.30</dd>
+							</dl>
+						</a>
+					</li>
+					<li>
+						<a href="/event/497">
+							<dl>
+								<dt>대표이미지</dt>
+								<dd class="thumb">
+									<img
+										src="//image.toast.com/aaaaab/ticketlink/TKL_2/이벤트메인배너_318x386-페이코이벤트.jpg"
+										width="110" height="134">
+								</dd>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[응모]</span>페이코 VIP회원 대상 할인혜택
+								</dd>
+								<dt>이벤트내용</dt>
+								<dd>페이코 VIP회원 대상 할인혜택</dd>
+								<dt>기간</dt>
+								<dd class="event_date">2019.01.03~2019.12.31</dd>
+							</dl>
+						</a>
+					</li>
+					<li>
+						<a href="/event/471">
+							<dl>
+								<dt>대표이미지</dt>
+								<dd class="thumb">
+									<img
+										src="//image.toast.com/aaaaab/ticketlink/TKL_6/[티켓링크]이벤트썸네일.jpg"
+										width="110" height="134">
+								</dd>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[응모]</span>한코인 무료충전 이벤트
+								</dd>
+								<dt>이벤트내용</dt>
+								<dd>룰렛 참여하고 한코인 100% 충전하기</dd>
+								<dt>기간</dt>
+								<dd class="event_date">2018.09.06~2019.12.31</dd>
+							</dl>
+						</a>
+					</li>
 				</ul>
 			</div>
 			<div id="pagination" class="paging"></div>
@@ -159,57 +241,6 @@
         }
 
     });
-    function getEventList (page, eventTypeCode) {
-        globalEventTypeCode = eventTypeCode;
-        $.ajax({
-            dataType: "json",
-            url: "/event/getEventList",
-            data: {
-                page: page,
-                eventTypeCode: globalEventTypeCode
-            },
-            success: function (result) {
-                displayEvent(result.result.result);
-                displayPage(result.result.paging, $('#pagination'));
-            },
-            error: function (status) {
-                alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
-            }
-        });
-    }
-
-    function displayEvent (eventList) {
-        var eventListTable = $("#eventList");
-        eventListTable.html('');
-        for (var i = 0; i < eventList.length; i++) {
-            var startDate = new Date(eventList[i].startDatetime);
-            var endDate = new Date(eventList[i].endDatetime);
-            var imgTag = eventList[i].eventImagePath == null ? "" : "<img src='" + eventList[i].eventImagePath + "' width='110' height='134'>";
-
-            if (eventList[i].eventId === 134) {
-				var contents = "<li><a href='http://sports.ticketlink.co.kr/event/simplePayco'><dl><dt>대표이미지</dt><dd class='thumb'>" + imgTag + "</dd>";
-				contents += "<dt>제목</dt><dd class='event_title'><span>[" + eventList[i].eventTypeName + "]</span>" + eventList[i].eventName + "</dd>";
-				contents += "<dt>이벤트내용</dt><dd>" + eventList[i].eventConcertContent + "</dd><dt>기간</dt><dd class='event_date'>";
-				contents += $.formatDateTime('yy.mm.dd', startDate) + "~" + $.formatDateTime('yy.mm.dd', endDate) + "</dd></dl></a></li>";
-				eventListTable.append(contents);
-			} else {
-				var contents = "<li><a href='/event/" + eventList[i].eventId + "'><dl><dt>대표이미지</dt><dd class='thumb'>" + imgTag + "</dd>";
-				contents += "<dt>제목</dt><dd class='event_title'><span>[" + eventList[i].eventTypeName + "]</span>" + eventList[i].eventName + "</dd>";
-				contents += "<dt>이벤트내용</dt><dd>" + eventList[i].eventConcertContent + "</dd><dt>기간</dt><dd class='event_date'>";
-				contents += $.formatDateTime('yy.mm.dd', startDate) + "~" + $.formatDateTime('yy.mm.dd', endDate) + "</dd></dl></a></li>";
-				eventListTable.append(contents);
-			}
-        }
-
-        if (eventList.length == 0) {
-            $("#eventList").append("<li style='padding-left: 42%;'>등록된 이벤트가 없습니다.</li>");
-        }
-
-    }
-
-    function goPage (page) {
-        getEventList(page, globalEventTypeCode);
-    }
 
     //]]>
 </script>
