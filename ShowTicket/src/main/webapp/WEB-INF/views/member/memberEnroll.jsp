@@ -11,44 +11,14 @@
 	<jsp:param value="회원 등록" name="pageTitle"/>
 </jsp:include>
 
-<style>
-div#enroll-container{width:500px; margin:0 auto; text-align:center;}
-div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
-div#enroll-container table{margin: 0 auto;}
-div#enroll-container table th{text-align: right; padding-right:10px;}
-div#enroll-container table td{text-align: left;}
-/*중복 아이디 체크 관련*/
-div#memberId-container{position:relative; padding:0px;}
-div#memberId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
-div#memberId-container span.ok{color:green;}
-div#memberId-container span.error{color:red;}
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/member.css">
 
-/*패스워드 일치 관련*/
-div#password-container{position:relative; padding:0px;}
-div#password-container span.pw {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
-div#password-container span.ok{color:green;}
-div#password-container span.error{color:red;}
-
-</style>
-
-<!-- 
-	bootstrap form 태그 작성요령
-	* input[type=text, password, tel, number], select
-		-> .form-control
-	* input[type=checkbox, radio] 
-		-> .form-check-input
-	* label
-		-> .form-check-label
-	* radio, checkbox는 
-	  div.form-check.form-check-inline으로 감싸줄것.
-
-
- -->
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<table>
 			<tr>
-				<th>아이디</th>
+				<th>아이디<span class="star">*</span></th>
 				<td>
 					 <div id="memberId-container">
 						<input type="text" class="form-control" placeholder="4글자이상" name="memberId" id="memberId_" required>
@@ -60,14 +30,14 @@ div#password-container span.error{color:red;}
 			</tr>
 			
 			<tr>
-				<th>패스워드</th>
+				<th>비밀번호<span class="star">*</span></th>
 				<td>
 					<input type="password" class="form-control" name="password" id="password_" required>
 				</td>
 			</tr>
 			
 			<tr>
-				<th>패스워드확인</th>
+				<th>비밀번호확인</th>
 				<td>
 					<div id="password-container">
 						<input type="password" class="form-control" id="password2" required>
@@ -78,7 +48,7 @@ div#password-container span.error{color:red;}
 			</tr>  
 			
 			<tr>
-				<th>이름</th>
+				<th>이름<span class="star">*</span></th>
 				<td>	
 				<input type="text" class="form-control" name="memberName" id="memberName" required>
 				</td>
@@ -92,25 +62,15 @@ div#password-container span.error{color:red;}
 			</tr>
 			
 			<tr>
-				<th>휴대폰</th>
+				<th>휴대폰<span class="star">*</span></th>
 				<td>	
 					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
 				</td>
 			</tr>
 			
-	<!-- 		<tr>
-				<th>회원등급 </th>
-				<td>
-					<div class="form-check form-check-inline">
-						<input type="checkbox" class="form-check-input" name="grade" id="admin" value="관리자"><label class="form-check-label" for="admin">운동</label>&nbsp;
-						<input type="checkbox" class="form-check-input" name="grade" id="general" value="일반"><label class="form-check-label" for="general">등산</label>&nbsp;
-						<input type="checkbox" class="form-check-input" name="grade" id="supporter" value="서포터"><label class="form-check-label" for="supporter">등산</label>&nbsp;
-					 </div>
-				</td>
-			</tr> -->
 		</table>
-		<input type="submit" value="가입" >
-		<input type="reset" value="취소">
+		<input class="btn btn-color" type="submit" value="회원가입" >
+		<input class="btn btn-gray" type="reset" value="취소">
 	</form>
 </div>
 
@@ -123,6 +83,7 @@ $(function(){
  		
  		var password1 = $("#password_").val().trim();
  		var password2 = $("#password2").val().trim();
+ 		
  		
  		if(password1 != password2){
  			$(".pw.error").show();

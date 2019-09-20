@@ -928,33 +928,3 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 
 .tbl_reserve_info td{letter-spacing:normal}
 
-/* .nav-pills .nav-link.select{
-    color: #fff;
-    background-color: #8f01a3;
-}
-.nav-pills .nav-font{
-	font: 15px bold;
-	padding: .7rem 1rem;
-	border-radius: 0;
-}
-
-.nav-pills .nav-link.default{
-	color: #8f01a3;
-    border-left: 1px solid #8f01a3;
-}
-
-.nav-pills .nav-item:first-child .nav-link.default{
-	color: #8f01a3;
-	border: none;
-}
-
-.nav-pills{
-	border: 1px solid #8f01a3;
-    border-radius: .25rem;
-}
-
-#center-image{
-	position: absolute;
-    width: 200px;
-    top: -3px;
-} */
