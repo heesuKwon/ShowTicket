@@ -112,7 +112,7 @@ window.onload = function () {
                     <div class="maintop_left">
                         <div class="header">
                         <a href="${pageContext.request.contextPath }/">
-                            <h2>실시간 랭킹   <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/></h2>
+                            <h2>일간 랭킹   <img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;"/></h2>
                          </a>     
                         </div>
                         <div class="maintop_cont">
@@ -401,20 +401,7 @@ window.onload = function () {
                                 </div>
                             </a></li>
                         
-                            <li><a href="http://www.ticketlink.co.kr/product/29979">
-
-                                
-                                    
-								<span class="flag_vr level">
-								  <em class="flag_txt">              
-                                        
-                                            단독판매
-                      
-								  </em>
-								</span>
-       
-                           
-                         
+                       
                         
                     </ul>
                 </div>
