@@ -36,3 +36,29 @@
 	font-size: 15px;	
 }
 /*----------------------------------------------------------------------------*/
+
+/*공통버튼*/
+.btn-color{
+	font-family: 'Gothic A1', sans-serif;
+	background-color: #8f01a3;
+	border: 1px solid #8f01a3;
+	color: white;
+}
+.btn-color:hover{
+	font-family: 'Gothic A1', sans-serif;
+	background-color: white;
+	border: 1px solid #8f01a3;
+	color: #8f01a3;
+}
+
+.btn-gray{
+	font-family: 'Gothic A1', sans-serif;
+	color: white;
+	background: #aaa;
+}
+.btn-gray:hover{
+	font-family: 'Gothic A1', sans-serif;
+	border-color: #bbb;
+	background: white;
+    color: #bbb;
+}

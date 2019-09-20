@@ -3,10 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<style>
+#footer img{
+	position: absolute;
+	left: 150px;
+    width: 200px;
+}
+</style>
 <div id="footer">
+    <img src="${pageContext.request.contextPath}/resources/images/showticket_logo_gray.png" alt="로고">
     <div class="inner">
-        <strong class="footer_logo">showticket</strong>
         <div class="f_menu">
             <a href="javascript:;"
                onclick="window.open('http://www.ticketlink.co.kr/introduction/company','회사소개','width=1400, height=1000, scrollbars=yes')">회사소개</a><span>|</span>

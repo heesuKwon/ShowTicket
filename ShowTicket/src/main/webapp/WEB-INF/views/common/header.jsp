@@ -66,7 +66,7 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 
-<script type="text/javascript" src="/resources/js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
 <script type="text/javascript" src="/resources/js/login.js"></script>
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
