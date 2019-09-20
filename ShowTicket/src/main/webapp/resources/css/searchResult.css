@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+
+#searchNav{
+	width:700px;
+	margin:39px auto;
+}
+
+.color_purple{
+	color:#8f01a3 !important;
+}
+
+.bold{
+	font-weight:bold
+}
+
+.amount{
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 1.8em;
+	margin: 39px 10px 0;
+}
+
+.resultInfo{
+	margin: 0 auto;
+	border:1px solid;
+	width:600px !important;
+	height: 300px;
+	
+}
