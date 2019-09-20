@@ -9,31 +9,42 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/event")
 public class EventController {
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@RequestMapping("/eventList.do")
 	public ModelAndView event(ModelAndView mav) {
 		logger.debug("event페이지 요청");
-		
+
 		mav.setViewName("event/eventList");
 		return mav;
 	}
-	
+
 	@RequestMapping("/endEventList.do")
 	public ModelAndView endEvent(ModelAndView mav) {
 		logger.debug("endEvent페이지 요청");
-		
+
 		mav.setViewName("event/endEventList");
 		return mav;
 	}
-	
+
 	@RequestMapping("/prizewinner.do")
 	public ModelAndView prizewinner(ModelAndView mav) {
 		logger.debug("prizewinner페이지 요청");
-		
+
 		mav.setViewName("event/prizewinner");
 		return mav;
 	}
-	
+
+	@RequestMapping("/addSaleEvent.do")
+	public String addSaleEvent() {
+
+		return "/event/addSaleEvent";
+	}
+
+	@RequestMapping("/prizewinnerWrite.do")
+	public String writeprizewinner() {
+
+		return "/event/writeprizewinner";
+	}
 }

@@ -21,20 +21,28 @@ div.section_week>div.inner { margin: 0 auto; position: relative;}
 
 div.section_best{height: 600px;margin-bottom: 50px;} 
 /*슬릭 스타일 */
-*{margin:0;padding:0;}
-ul,li{list-style:none;}  
-.slide{height:150px;overflow:hidden;}  
-.slide ul{height:100%;}  
-.slide li{height:100%;}  
+#slide {
+	height: 300px;
+	border:1px solid black;	
+	/* background-color:black; */
+}
 
-div.slide{/* margin-top: 189px; margin-left: 20%;margin-right: 20%; */height: 314px; }
+#slide img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	-webkit-display: block;
+	margin:0px;
+	style:none;
+	height:400px;
 
+}
 /*슬릭 스타일 END*/
 
 div.maintop_left>div.maintop_cont{width: 800px; border-top: 1px solid #8f01a3; border-bottom: 1px solid #8f01a3;}
 
 h2{margin:0;}
-
 
 
 

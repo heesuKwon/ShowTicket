@@ -15,16 +15,17 @@
 #myPage{
 	text-align:center;
 	width:150px;
-	height:80%;
+	height:100px;
 	background-color : #8f01a3;
 	padding:10px 10px 10px 10px;
 	display:inline-block;
 }
 #myPage label{
 	color : white;
-	font-size:25px;
+	font-size:26px;
 	font-weight:bold;
 	text-align:center;
+	margin-top : 14px;
 }
 #navBar{
 	border : 0px;
@@ -67,10 +68,10 @@
 				수정</td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
+			<td></td>
 		</tr>
 		<tr>
-			<td>&nbsp;</td>
+			<td></td>
 		</tr>
 		<tr>
 			<td class="nav"
