@@ -206,6 +206,17 @@ public class MemberController {
         mav.setViewName("member/bookticket");
         return mav;
     }
+    
+    
+    
+    @ResponseBody
+    @RequestMapping("/updatePwd.do")
+    public ModelAndView updatePwd(ModelAndView mav) {
+    	mav.setViewName("member/updatePwd");
+    	return mav;
+    }
+    
+    
 	
 	
 }
