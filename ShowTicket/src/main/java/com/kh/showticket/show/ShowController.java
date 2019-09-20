@@ -13,8 +13,8 @@ public class ShowController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/show.do")
-	public ModelAndView ranking(ModelAndView mav) {
-		logger.debug("랭킹페이지");
+	public ModelAndView show(ModelAndView mav) {
+		logger.debug("쇼리스트페이지");
 		
 		mav.setViewName("menu/show");
 		return mav;

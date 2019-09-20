@@ -13,10 +13,18 @@ public class MusicalController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/musical.do")
-	public ModelAndView ranking(ModelAndView mav) {
-		logger.debug("랭킹페이지");
+	public ModelAndView musical(ModelAndView mav) {
+		logger.debug("뮤지컬리스트페이지");
 		
 		mav.setViewName("menu/musical");
+		return mav;
+	}
+	
+	@RequestMapping("/musicalDetail.do")
+	public ModelAndView musicalDetail(ModelAndView mav) {
+		logger.debug("뮤지컬상세페이지");
+		
+		mav.setViewName("musical/musicalDetail");
 		return mav;
 	}
 }
