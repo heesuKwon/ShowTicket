@@ -15,29 +15,26 @@ $(function(){
 });
  
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-     if($(window).scrollTop() >= $(document).height() - $(window).height()){
+     if($(window).scrollTop() > $(document).height() - $(window).height()-100){
           getList(cpage);
            cpage++;   
      } 
 });
  
 function getList(page){
-	console.log(cpage);
+	
 	
     $.ajax({
         url : '${pageContext.request.contextPath}/musical/musicalAjax.do',
         data : {"cpage" : cpage},
         success : function(data) {
 
-            console.log(data);
-            
             var html = "";
             
             if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
                   $("#musicalListAll").html(""); 
             }
-            console.log(data.length);
-            console.log(data[0]);
+            
             
                 if(data.length>0){
                 	for(var i=0; i<data.length; i++){
