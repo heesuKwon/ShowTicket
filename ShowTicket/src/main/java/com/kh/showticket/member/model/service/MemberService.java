@@ -4,6 +4,7 @@ import com.kh.showticket.member.model.vo.Member;
 
 public interface MemberService {
 
+	
 	int insertMember(Member member);
 
 	Member selectOneMember(String memberId);
@@ -11,5 +12,13 @@ public interface MemberService {
 	int deleteMember(String memberId);
 
 	int updateMember(Member member);
+
+
+	int updatePwd(Member member);
+
+
+	
+
+	
 
 }

@@ -517,3 +517,13 @@ div#password-container span.error{color:red;}
 	
 }
 
+
+
+
+/* 비밀번호변경팝업 */
+div#updatePassword-container{width: 400px;}
+div#updatePassword-container img{width: 150px;margin-top: 10px;margin-left: 5px; }
+#updatePFrm{ margin-top: 40px; margin-left: 50px;}
+input.btn.btn-outline-success{width: 126px;}
+
+

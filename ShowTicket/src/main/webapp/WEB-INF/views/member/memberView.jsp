@@ -29,9 +29,9 @@ $("#memberDelete").click(function() {
 <script>
 
 function updatePwd() {
-	var url ="${pageContext.request.contextPath}/member/updatePwd.do";/* ?memberId=아이디" */
+	var url ="${pageContext.request.contextPath}/member/updatePwd.do?memberId=honggd";/* ?memberId=아이디" */
 	var title = "비밀번호 변경";
-	var status="left=500px, top:200px;, width=440px height=350px";
+	var status="left=500px, top:200px;, width=450px height=450px";
 	
 	var popup=window.open(url, title, status); 	
 	}	
@@ -51,40 +51,16 @@ function updatePwd() {
 		<table>
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" id="memberId" name="memberId" class="form-control" required disabled></td>
+				<td><input type="text" id="memberId" name="memberId" value="honggd" class="form-control" required disabled ></td>
 				<!-- <td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td> -->
 			</tr>
 
 
-				<%-- <tr>
-					<th>비밀번호</th>
-					<td>
-						<button type="button" class="btn btn-secondary"
-							onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate.do'">
-							비밀번호변경</button>
-					</td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td><input type="text" class="form-control" name="memberName"
-						id="memberName" required></td>
-				</tr>
-				<tr>
-					<th>전화번호</th>
-					<td><input type="tel" class="form-control"
-						placeholder="(-없이)01012345678" name="phone" id="phone"
-						maxlength="11" required></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td><input type="email" class="form-control"
-						placeholder="abc@naver.com" name="email" id="email"> <input
-						type="checkbox" /><label id="check">정보수신동의</label></td>
-				</tr> --%>
+				
 			<tr>
 				<th>비밀번호</th>
 				<td>
-					<button type="button" id="password" name="password" class="btn btn-secondary"onclick="updatePwd();">
+					<button type="button" id="password" name="password" class="btn btn-secondary"onclick="updatePwd();" >
 					비밀번호변경</button>
 				</td>
 			</tr>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coupon.css">
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bookticket.css">
  <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -10,63 +9,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>   
- <style>
- #container{margin:0 auto;margin-left: 7px; width:900px; height: 600px;}
-.nav-pills .nav-link.select{
-    color: #fff;
-    background-color: #8f01a3;
-}
-.nav-pills .nav-font{
-	font-family: 'Gothic A1', sans-serif;
-	font: 15px ;
-	font-weight:bold;
-	padding: .7rem 1rem;
-	border-radius: 0;
-}
-
-.nav-pills .nav-link.default{
-	color: #8f01a3;
-    border-left: 1px solid #8f01a3;
-}
-
-.nav-pills .nav-item:first-child .nav-link.default{
-	color: #8f01a3;
-	border: none;
-}
-
-.nav-pills{
-	border: 1px solid #8f01a3;
-    border-radius: .25rem;
-}
-
-.btn-color{
-	background-color: #8f01a3;
-	border: 1px solid #8f01a3;
-}
-
-.btn-color:hover{
-	background-color: white;
-	border: 1px solid #8f01a3;
-	color: #8f01a3;
-}
-.inner{ width: 850px; margin-left: 15px;}
-#seatBimg{margin-top: 30px; width: 480px;}
-#seatSimg{width:120px;}
-#seatgdimg{top: 105px;left: 610;position: absolute;}
-#seatgd{ position: absolute; top: 235px;width: 352px; height: 300px;left: 515px;}
-#center-image{width: 170px; margin-left: 15px; margin-top: 5px;}
-#seatgd h5{font-weight: bold; position: absolute;}
-#seatinner{ top: 245px; margin-left: 115px; width: 236px; height: 300px;}
-#seatinner label#vip {font-size: 18;font-weight: bold;}
-#seatinner label#r {font-size: 18;font-weight: bold;}
-#seatinner label#s {font-size: 18;font-weight: bold;}
-#seatinner label#e {font-size: 18;font-weight: bold;}
-#r_seat{border: 1px solid; top: 140px; width: 300px; height: 160px; position: absolute;  margin-left: 0px;}
-div#btng button#dropM:first-child { background-color: #8f01a3;border: 1px solid #8f01a3;}
-div#btng button#dropM:hover:first-child {background-color: white;border: 1px solid #8f01a3;color: #8f01a3; font-weight: bold;}
-#container>span{font-weight: bold;    position: absolute; top: 10px;}  
+<style>
+.nav-pills .nav-link {border-radius: 0;}
 </style>
-    
     <body>
     	
     <div id="container">
@@ -116,11 +61,13 @@ div#btng button#dropM:hover:first-child {background-color: white;border: 1px sol
      	 	
      	 	</div>
   
-     	 	<div id="btng">
-     	 	<button type="button" id="dropM" class="btn btn-secondary btn-lg">이전</button>
-     	 	<button type="button" id="dropM" class="btn btn-secondary btn-lg">다음</button>
      	 	
-     	 	</div>
+     	 	<div class="t_btndiv">
+            <input type="button" value="이전단계" class="t_button1"/>
+            <input type="button" value="결제하기" class="t_button2"/>
+        </div>
+
+     
      	 	
      	 	
      	</div>
