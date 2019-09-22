@@ -1,3 +1,5 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,24 +9,75 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/musical_show.css">
 
-<script type="text/javascript">lcs_do(); </script>
-<script type="text/javascript">
-	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "s_765d50fa49a";
-	if (!_nasa) var _nasa = {};
-	wcs.inflow();
-	wcs_do(_nasa);
+<script>
+var cpage = 2;
+ 
+$(function(){
+     getList(cpage);
+     cpage++;
+});
+ 
+$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
+     if($(window).scrollTop() >= $(document).height() - $(window).height()){
+          getList(cpage);
+           cpage++;   
+     } 
+});
+ 
+function getList(page){
+	console.log(cpage);
+	
+    $.ajax({
+        url : '${pageContext.request.contextPath}/show/showAjax.do',
+        data : {"cpage" : cpage},
+        success : function(data) {
 
-	// ë¤ì´ë² ë¡ê·¸ (ê¸°ì¡´ë¶í° ì¡´ì¬)
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "3ce26ce585ae64";
-	wcs_do();
+            console.log(data);
+            
+            var html = "";
+            
+            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
+                  $("#showListAll").html(""); 
+            }
+            console.log(data.length);
+            console.log(data[0]);
+            
+                if(data.length>0){
+                	for(var i=0; i<data.length; i++){
+                		
+	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+	                	html+="<p><img src="+data[i].poster+" alt=''></p>";
+	                	html+="<div class='list_info'>";
+	                	html+="<strong class='elp'>"+data[i].prfnm+"</strong>";
+	                	html+="<dl>";
+	                	html+="<dt>기간</dt>";
+	                	html+="<dd>"+data[i].prfpdfrom+" ~ "+data[i].prfpdto+"</dd>";
+	                	html+="<dt>장소</dt>";
+	                	html+="<dd>"+data[i].fcltynm+"</dd>";
+	                	html+="</dl>";
+	                	html+="</div>";
+	                	html+="</a>";
+	                	html+="</li>";
+                	}
+                }
+            
+            html = html.replace(/%20/gi, " ");
+            
+            /*if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+                $("#showListAll").html(html); 
+            }else{*/
+            	$("#showListAll").append(html); 
+            /*}*/
+       },error:function(e){
+           if(e.status==300){
+               alert("데이터를 가져오는데 실패하였습니다.");
+           };
+       }
+    }); 
+}
+
+
 </script>
-
-<script type="text/javascript" src="/resources/js/lcslog.js"></script>
-<script type="text/javascript">lcs_do(); </script>
-<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
 <script language='javascript'>
 	var _AceGID = (function () {
 		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
@@ -79,36 +132,10 @@
 		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
 	}
 </script>
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
+
 <noscript><img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&' border='0' width='0' height='0' alt=''></noscript>
 
-<!-- AceCounter Log Gathering Script End -->
 
-
-<!-- Facebook Pixel Code -->
-<script>
-	!function (f, b, e, v, n, t, s) {
-		if (f.fbq) return;
-		n = f.fbq = function () {
-			n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-		};
-		if (!f._fbq) f._fbq = n;
-		n.push = n;
-		n.loaded = !0;
-		n.version = '2.0';
-		n.queue = [];
-		t = b.createElement(e);
-		t.async = !0;
-		t.src = v;
-		s = b.getElementsByTagName(e)[0];
-		s.parentNode.insertBefore(t, s)
-	}(window,
-		document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '1028038810619064');
-	fbq('track', "PageView");
-</script>
 <noscript>
 <img height="1" width="1" style="display:none"
                src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1"/>
@@ -139,24 +166,10 @@
 	}
 </script>
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
-
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<!-- AceCounter Log Gathering Script End -->
 
 
-<!-- Facebook Pixel Code -->
 
 
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
@@ -623,175 +636,24 @@
 		        </select>
         	</div>
         	
-        <ul class="goods_list" style="clear:both;">
+        <ul id="showListAll" class="goods_list" style="clear:both;">
             
-                <li><a href="http://www.ticketlink.co.kr/product/29767">
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/poster(314)_190910.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">스카페스티벌 시즌5</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.10.26 ~ 2019.10.26</dd>
-                            <dt>장소</dt>
-                            <dd>인천남동체육관</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29979">
-
-                    
-                        
-                            <span class="flag_vr level">
-                                <em class="flag_txt">
-                                    
-                                        
-                                        
-                                            단독판매
-                                        
-                                        
-                                        
-                                    
-                                </em>
-                            </span>
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_6/hl.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">효린 소극장 라이브</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.27 ~ 2019.09.28</dd>
-                            <dt>장소</dt>
-                            <dd>구름아래소극장</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/28831">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/blue_main06281331.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">뮤지컬 <블루레인></strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.08.09 ~ 2019.09.15</dd>
-                            <dt>장소</dt>
-                            <dd>세종문화회관 S씨어터</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29442">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_9/vibe_web_0724.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">2019 바이브X장혜진 THE CONCERT</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.08.24 ~ 2019.09.29</dd>
-                            <dt>장소</dt>
-                            <dd>전국투어</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29539">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_10/gunsan_main_0730.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">슈퍼트롯 콘서트 - 군산</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.27 ~ 2019.09.29</dd>
-                            <dt>장소</dt>
-                            <dd>월명종합경기장 축구장</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/28137">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_6/rapbeat_0820.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">KB RAPBEAT FESTIVAL 2019 </strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.28 ~ 2019.09.28</dd>
-                            <dt>장소</dt>
-                            <dd>서울랜드</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/bridge/445">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/vos_main07291247.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">V.O.S콘서트 </strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.20 ~ 2019.12.25</dd>
-                            <dt>장소</dt>
-                            <dd>전국투어</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/23802">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_7/bhc-post-0122.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">발칙한 로맨스</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2018.04.25 ~ 2019.09.30</dd>
-                            <dt>장소</dt>
-                            <dd>대학로 JTN 아트홀 2관</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
+            <c:forEach  items="${showList}" var="map">
+	                <li><a href="http://www.ticketlink.co.kr/product/29767">
+	                    <p><img src="${map.poster }" alt=""></p>
+	                    <div class="list_info">
+	                        <strong class="elp">${map.prfnm }</strong>
+	                        <dl>
+	                            <dt>기간</dt>
+	                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
+	                            <dt>장소</dt>
+	                            <dd>${map.fcltynm }</dd>
+	                        </dl>
+	                    </div>
+	                </a></li>
+	       
+            </c:forEach>
+                
                
             
         </ul>
@@ -933,7 +795,7 @@
 		}
 
 		if (!isEndOfItem) {
-			getConcertList(page++, categoryNum, true);
+			/*getConcertList(page++, categoryNum, true);
 			$(window).scroll(function () {
 				if (!isLoadingNow) {
 					var maxHeight = $(document).height();
@@ -945,13 +807,16 @@
 						}
 					}
 				}
-			});
+			});*/
 		}
 	});
 
 	function getConcertList (page, varCategoryNum, isCleanProductList) {
 		categoryNum = varCategoryNum;
-		$.ajax({
+		
+		
+		
+		/*$.ajax({
 			dataType: "json",
 			async: "false",
 			url: "/concert/getConcertList",
@@ -971,10 +836,10 @@
 				isLoadingNow = false;
 			},
 			error: function (status) {
-				/* alert("오류가 발생했습니다. 관리자에게 문의하세요."); */
+				/* alert("오류가 발생했습니다. 관리자에게 문의하세요."); 
 				isLoadingNow = false;
 			}
-		});
+		});*/
 	}
 
 	function toggleDiv (categoryNum) {

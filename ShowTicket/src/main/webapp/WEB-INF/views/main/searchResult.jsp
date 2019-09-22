@@ -7,26 +7,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/searchResult.css">
 
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<!-- AceCounter Log Gathering Script End -->
-
-
-<!-- Facebook Pixel Code -->
-
-
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
@@ -111,7 +91,7 @@
    						
    					</div>
    			
-   					<button type="button" class="btn btn-primary reserve">예매하기</button>
+   					<button type="button" class="btn btn-primary reserve">참여하기</button>
    					
    				</div>
    			

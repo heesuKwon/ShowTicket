@@ -6,7 +6,75 @@
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/musical_show.css">
+<script>
+var cpage = 2;
+ 
+$(function(){
+     getList(cpage);
+     cpage++;
+});
+ 
+$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
+     if($(window).scrollTop() >= $(document).height() - $(window).height()){
+          getList(cpage);
+           cpage++;   
+     } 
+});
+ 
+function getList(page){
+	console.log(cpage);
+	
+    $.ajax({
+        url : '${pageContext.request.contextPath}/musical/musicalAjax.do',
+        data : {"cpage" : cpage},
+        success : function(data) {
 
+            console.log(data);
+            
+            var html = "";
+            
+            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
+                  $("#musicalListAll").html(""); 
+            }
+            console.log(data.length);
+            console.log(data[0]);
+            
+                if(data.length>0){
+                	for(var i=0; i<data.length; i++){
+                		
+	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+	                	html+="<p><img src="+data[i].poster+" alt=''></p>";
+	                	html+="<div class='list_info'>";
+	                	html+="<strong class='elp'>"+data[i].prfnm+"</strong>";
+	                	html+="<dl>";
+	                	html+="<dt>기간</dt>";
+	                	html+="<dd>"+data[i].prfpdfrom+" ~ "+data[i].prfpdto+"</dd>";
+	                	html+="<dt>장소</dt>";
+	                	html+="<dd>"+data[i].fcltynm+"</dd>";
+	                	html+="</dl>";
+	                	html+="</div>";
+	                	html+="</a>";
+	                	html+="</li>";
+                	}
+                }
+            
+            html = html.replace(/%20/gi, " ");
+            
+            /*if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+                $("#showListAll").html(html); 
+            }else{*/
+            	$("#musicalListAll").append(html); 
+            /*}*/
+       },error:function(e){
+           if(e.status==300){
+               alert("데이터를 가져오는데 실패하였습니다.");
+           };
+       }
+    }); 
+}
+
+
+</script>
 
 <script type="text/javascript">lcs_do(); </script>
 <script type="text/javascript">
@@ -139,24 +207,7 @@
 	}
 </script>
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
 
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<!-- AceCounter Log Gathering Script End -->
-
-
-<!-- Facebook Pixel Code -->
-
-
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
@@ -178,9 +229,7 @@
 
 
 <div id="wrap" class="subwrap">
-        
     <div id="container" class="submain_front">
-
 <div class="inner">
     <h2 class="blind">공연</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
     <div class="top_area" style="padding-bottom:0px; margin-bottom:39px;">
@@ -275,15 +324,7 @@
                 </ul>
             </div>
             <div class="area_thumb">
-                
-                
-                    
-                        
-                            
-                            
-                            
-                            
-                                <ul class="lst_thumb" style="float: right">
+                      <ul class="lst_thumb" style="float: right">
                             
                             <li onclick="selectBanner(0)" id="bigBanPage_0" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
@@ -292,32 +333,12 @@
                                 <span class="dummy_bg" id="dummy_bg_0"></span>
                             </li>
                             
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
-                            
                             <li onclick="selectBanner(1)" id="bigBanPage_1" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
                                     <img src="//image.toast.com/aaaaab/ticketlink/TKL_2/66x66_y.jpg" width="66" height="66" alt="">
                                 </span>
                                 <span class="dummy_bg" id="dummy_bg_1"></span>
                             </li>
-                            
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
                             
                             <li onclick="selectBanner(2)" id="bigBanPage_2" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
@@ -328,16 +349,6 @@
                             
                                 </ul>
                             
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
-                            
                                 <ul class="lst_thumb" style="float: right">
                             
                             <li onclick="selectBanner(3)" id="bigBanPage_3" onmouseover="this.style.cursor='pointer'">
@@ -347,33 +358,13 @@
                                 <span class="dummy_bg" id="dummy_bg_3"></span>
                             </li>
                             
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
-                            
                             <li onclick="selectBanner(4)" id="bigBanPage_4" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
                                     <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/66x66_썸네일_흥부놀부전2.jpg" width="66" height="66" alt="">
                                 </span>
                                 <span class="dummy_bg" id="dummy_bg_4"></span>
                             </li>
-                            
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
-                            
+                       
                             <li onclick="selectBanner(5)" id="bigBanPage_5" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
                                     <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/_66_66_super.jpg" width="66" height="66" alt="">
@@ -382,16 +373,6 @@
                             </li>
                             
                                 </ul>
-                            
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
                             
                                 <ul class="lst_thumb" style="float: right">
                             
@@ -403,31 +384,12 @@
                             </li>
                             
                             
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
-                            
                             <li onclick="selectBanner(7)" id="bigBanPage_7" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
                                     <img src="//image.toast.com/aaaaab/ticketlink/TKL_1/66x66(10).jpg" width="66" height="66" alt="">
                                 </span>
                                 <span class="dummy_bg" id="dummy_bg_7"></span>
                             </li>
-                            
-                            
-                        
-                    
-                
-                    
-                        
-                            
-                            
-                            
                             
                             <li onclick="selectBanner(8)" id="bigBanPage_8" onmouseover="this.style.cursor='pointer'">
                                 <span class="bx_img">
@@ -606,176 +568,26 @@
 		        	<option value="byStar">별점순</option>
 		        </select>
         	</div>
+
+
+
         	
-        <ul class="goods_list" style="clear:both;">
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29767">
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/poster(314)_190910.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">스카페스티벌 시즌5</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.10.26 ~ 2019.10.26</dd>
-                            <dt>장소</dt>
-                            <dd>인천남동체육관</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29979">
-
-                    
-                        
-                            <span class="flag_vr level">
-                                <em class="flag_txt">
-                                    
-                                        
-                                        
-                                            단독판매
-                                        
-                                        
-                                        
-                                    
-                                </em>
-                            </span>
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_6/hl.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">효린 소극장 라이브</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.27 ~ 2019.09.28</dd>
-                            <dt>장소</dt>
-                            <dd>구름아래소극장</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/28831">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/blue_main06281331.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">뮤지컬 <블루레인></strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.08.09 ~ 2019.09.15</dd>
-                            <dt>장소</dt>
-                            <dd>세종문화회관 S씨어터</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29442">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_9/vibe_web_0724.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">2019 바이브X장혜진 THE CONCERT</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.08.24 ~ 2019.09.29</dd>
-                            <dt>장소</dt>
-                            <dd>전국투어</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/29539">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_10/gunsan_main_0730.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">슈퍼트롯 콘서트 - 군산</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.27 ~ 2019.09.29</dd>
-                            <dt>장소</dt>
-                            <dd>월명종합경기장 축구장</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/28137">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_6/rapbeat_0820.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">KB RAPBEAT FESTIVAL 2019 </strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.28 ~ 2019.09.28</dd>
-                            <dt>장소</dt>
-                            <dd>서울랜드</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/bridge/445">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_8/vos_main07291247.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">V.O.S콘서트 </strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2019.09.20 ~ 2019.12.25</dd>
-                            <dt>장소</dt>
-                            <dd>전국투어</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
-                <li><a href="http://www.ticketlink.co.kr/product/23802">
-
-                    
-                        
-                    
-
-                    
-
-                    <p><img src="//image.toast.com/aaaaab/ticketlink/TKL_7/bhc-post-0122.jpg" alt=""></p>
-                    <div class="list_info">
-                        <strong class="elp">발칙한 로맨스</strong>
-                        <dl>
-                            <dt>기간</dt>
-                            <dd>2018.04.25 ~ 2019.09.30</dd>
-                            <dt>장소</dt>
-                            <dd>대학로 JTN 아트홀 2관</dd>
-                        </dl>
-                    </div>
-                </a></li>
-            
+        <ul id="musicalListAll" class="goods_list" style="clear:both;">
+                  <c:forEach items="${musicalList}" var="map">
+	                <li><a href="http://www.ticketlink.co.kr/product/29767">
+	                    <p><img src="${map.poster }" alt=""></p>
+	                    <div class="list_info">
+	                        <strong class="elp">${map.prfnm }</strong>
+	                        <dl>
+	                            <dt>기간</dt>
+	                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
+	                            <dt>장소</dt>
+	                            <dd>${map.fcltynm }</dd>
+	                        </dl>
+	                    </div>
+	                </a></li>
+	       
+            </c:forEach>
                
             
         </ul>
