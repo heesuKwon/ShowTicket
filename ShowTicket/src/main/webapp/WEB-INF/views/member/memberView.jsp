@@ -1,116 +1,92 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<fmt:requestEncoding value="utf-8" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/member.css">
-	
-
+<fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
+	<jsp:param value="" name="pageTitle"/>
 </jsp:include>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-$(()=>{
 
 
-$("#memberDelete").click(function() {
-	var bool = confirm("정말로 탈퇴하시겠습니까?");
-	if (bool) {
-		var id = $("#memberId").val();
-		location.href = "${pageContext.request.contextPath}/member/memberDelete.do?memberId="+id;
-	}
-});
-});
-</script>
+<jsp:include page="/WEB-INF/views/common/memberViewnav.jsp">
+	<jsp:param value="마이 페이지" name="pageTitle"/>
+</jsp:include>
 
-<script>
+<style>
+#memberUpdateFrm{
+	text-align : center;
+	border : 1px solid #9a3cf4;
+	padding: 20px;
+	width : 70%;
+	margin-left : 25%;
+	margin-top:0;
+}
 
-function updatePwd() {
-	var url ="${pageContext.request.contextPath}/member/updatePwd.do";/* ?memberId=아이디" */
-	var title = "비밀번호 변경";
-	var status="left=500px, top:200px;, width=440px height=350px";
-	
-	var popup=window.open(url, title, status); 	
-	}	
-	
+table{
+	border-top : 3px solid lightgray;
+	border-bottom : 3px solid lightgray;
+	border-collapse:collapse;
+	width : 100%;
+	margin-left:auto;
+	margin-right : auto;
+}
+th, td{
+	border-bottom : 1px solid lightgray;
+	padding : 10px;
+	text-align : center;
+	color:gray;
+}
+input{
+margin-left : auto;
+margin-right : auto;
+}
 
-</script>
-<div id="container">
-	<jsp:include page="/WEB-INF/views/common/memberViewnav.jsp">
-		<jsp:param value="마이 페이지" name="pageTitle" />
-	</jsp:include>
-
+.form-control{
+	width : 300px;
+	text-align : center;
+}
+</style>
 	<br>
-
-	<form id="memberFrm"action="memberUpdate.do" method="post" onsubmit="return validate();">
-		<h3>회원정보 수정</h3>
-		<br />
-		<table>
+	<form name="memberUpdateFrm" id="memberUpdateFrm" action="memberUpdate.do" method="post" onsubmit="return validate();" >
+	<h3 style="text-align:left;">회원정보 수정</h3>
+	<br />
+		<table style="margin-left:auto; margin-right:auto;">
 			<tr>
-				<th>아이디</th>
-				<td><input type="text" id="memberId" name="memberId" class="form-control" required disabled></td>
-				<!-- <td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td> -->
+				<th >아이디</th>
+				<td>
+				<input type="text" class="form-control"  required disabled style="align:center">
+				</td>
 			</tr>
-
-
-				<%-- <tr>
-					<th>비밀번호</th>
-					<td>
-						<button type="button" class="btn btn-secondary"
-							onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate.do'">
-							비밀번호변경</button>
-					</td>
-				</tr>
-				<tr>
-					<th>이름</th>
-					<td><input type="text" class="form-control" name="memberName"
-						id="memberName" required></td>
-				</tr>
-				<tr>
-					<th>전화번호</th>
-					<td><input type="tel" class="form-control"
-						placeholder="(-없이)01012345678" name="phone" id="phone"
-						maxlength="11" required></td>
-				</tr>
-				<tr>
-					<th>이메일</th>
-					<td><input type="email" class="form-control"
-						placeholder="abc@naver.com" name="email" id="email"> <input
-						type="checkbox" /><label id="check">정보수신동의</label></td>
-				</tr> --%>
+			
 			<tr>
 				<th>비밀번호</th>
 				<td>
-					<button type="button" id="password" name="password" class="btn btn-secondary"onclick="updatePwd();">
-					비밀번호변경</button>
+				<button type="button" class="btn btn-secondary" style="width:140px;" onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate.do'">비밀번호 변경</button>
 				</td>
-			</tr>
+			</tr> 
 			<tr>
 				<th>이름</th>
-				<td><input type="text" id="memberName" class="form-control" name="memberName"
-					id="memberName" required></td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>
-					<input type="email" class="form-control"
-					placeholder="abc@naver.com" name="email" id="email"> 
-					<input type="checkbox"/>
-					<label id="check">정보수신동의</label>
+				<td>	
+				<input type="text" class="form-control" name="memberName" id="memberName"required>
 				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
-				<td><input type="tel" class="form-control"
-					placeholder="(-없이)01012345678" name="phone" id="phone"
-					maxlength="11" required></td>
+				<td>	
+					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
+				</td>
 			</tr>
-
-
-			<!-- 		<tr>
+			<tr>
+				<th>이메일</th>
+				<td>	
+					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
+					<input type="checkbox" style="margin-top:10px;" />정보수신동의
+				</td>
+			</tr>
+			
+			
+	<!-- 		<tr>
 				<th>회원등급 </th>
 				<td>
 					<div class="form-check form-check-inline">
@@ -121,32 +97,10 @@ function updatePwd() {
 				</td>
 			</tr> -->
 		</table>
-		<br /> <br />
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-			onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보
-			수정</button>
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="memberDelete"
-			    <%-- onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do?memberId=delete'" --%>>회원정보
-			탈퇴</button>
+		<br /><br />
+		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color:#9a3cf4;border:1px solid #9a3cf4; color:white" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보 수정</button>
 	</form>
-		<%-- <button class="btn btn-outline-success my-2 my-sm-0" type="button" id="memberDelete"
-			    onclick="location.href='${pageContext.request.contextPath}/member/memberDelete.do?memberId=delete'">회원정보
-			비밀번호찾기팝업</button> --%>
-			
-</div>
-<%-- <script>
-$(()=>{
-	//테이블의 열을 클릭시 해당 게시물로 이동
-	$("td").click((e)=>{		
-		var dmNo = $(e.target).parents("tr").children("td").children("input[name=dmNo]").val();
-		console.log("넘버"+dmNo);
-		var url = "<%=request.getContextPath()%>/board/dm/DMSendView?dmNo="+dmNo;
-	    var title = "DMWrite";
-	    var status =  "left=500px, top=200px, width=473px, height=442px";
-		var popup = window.open(url,title,status);
-	
-	});
-});
 
-</script> --%>
+	
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
