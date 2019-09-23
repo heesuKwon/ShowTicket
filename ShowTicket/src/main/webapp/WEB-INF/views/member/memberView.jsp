@@ -31,7 +31,7 @@ $("#memberDelete").click(function() {
 function updatePwd() {
 	var url ="${pageContext.request.contextPath}/member/updatePwd.do?memberId=honggd";/* ?memberId=아이디" */
 	var title = "비밀번호 변경";
-	var status="left=500px, top:200px;, width=450px height=450px";
+	var status="left=500px, top:200px;, width=420px height=450px";
 	
 	var popup=window.open(url, title, status); 	
 	}	
