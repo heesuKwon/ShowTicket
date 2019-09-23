@@ -33,9 +33,8 @@
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 <!-- End NHN AD MORE Script -->
-<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
-	charset="utf-8"></script>
-<script type="text/javascript" src="/resources/js/player.js"></script>
+
+
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
