@@ -25,81 +25,81 @@ import com.kh.showticket.member.model.vo.Member;
 @Controller
 @SessionAttributes("memberLoggedIn")
 public class MemberController {
-	
+
 	@Autowired()
 	MemberService memberService;
-	
+
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
+
 	private Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@RequestMapping("/memberEnroll.do")
 	public void memberEnroll() {
-		
+
 		// member/memberEnroll
 		// -> ViewNameTransLator객체가 view단을 자동으로 찾음.
 		System.out.println("서버 구동 후 자바 코드 수정!!");
-		
+
 	}
 	@RequestMapping("/reservation.do")
 	public String reservation() {
-		
+
 		return "/member/reservation";
 	}
 	@RequestMapping("/memberView.do")
 	public void memberView() {
 	}
-	
+
 	@RequestMapping("/myCoupon.do")
 	public String myCoupon() {
-		
+
 		return "/member/myCoupon";
 	}
-	
+
 	@RequestMapping("/myPoint.do")
 	public String myPoint() {
-		
+
 		return "/member/myPoint";
 	}
-	
+
 	@RequestMapping("/myStandBy.do")
 	public String myStandBy() {
-		
+
 		return "/member/myStandBy";
 	}
 	@RequestMapping("/myInterest.do")
 	public String myInterest() {
-		
+
 		return "/member/myInterest";
 	}
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member member, Model model) {
-		
+
 		int result = memberService.updateMember(member);
-		
+
 		// 2. view단 처리
-				model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
-				model.addAttribute("loc", "/");
-				
-				return "common/msg";
+		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
+		model.addAttribute("loc", "/");
+
+		return "common/msg";
 	}
 	@RequestMapping(value="/deleteMember.do")
 	public String deleteMember(@RequestParam String memberId, Model model) {
 		logger.info("디버그");
-//		int result = memberService.deleteMember(memberId);
+		//		int result = memberService.deleteMember(memberId);
 		int result = 1;
-		
+
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
 		model.addAttribute("loc", "/");
-		
-//		return "common/msg";
+
+		//		return "common/msg";
 		return "redirect:/";
 	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
-		
+
 		// 0. 비밀번호 암호화
 		String rawPassword = member.getPassword();
 		System.out.println("암호화 전:"+ rawPassword);
@@ -107,27 +107,27 @@ public class MemberController {
 		System.out.println("암호화 후:"+ encodedPassword);
 		// 암호화된 비밀번호를 member객체 대입
 		member.setPassword(encodedPassword);
-		
+
 		// 1. 비즈니스 로직
 		int result = memberService.insertMember(member);
-		
+
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 가입 성공!":"회원 가입 실패!");
 		model.addAttribute("loc", "/");
-		
+
 		return "common/msg";
 	}
-	
+
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,
-							  @RequestParam String password,
-							  Model model) {
-		
+			@RequestParam String password,
+			Model model) {
+
 		// 1.업무로직 : 회원 정보 가져오기
 		Member member = memberService.selectOneMember(memberId);
-		
+
 		String msg = "";
-		
+
 		// 1. 아이디가 존재하지 않는 경우
 		if(member == null) {
 			msg = "아이디가 존재하지 않습니다.";
@@ -136,25 +136,25 @@ public class MemberController {
 			// 2. 로그인 성공
 			if(passwordEncoder.matches(password, member.getPassword())) {
 				msg = "로그인 성공!";
-				
+
 				// memberLoggedIn 세션 속성에 지정
 				// model에 지정된 속성은 requestScope 속성에 담긴다.
 				model.addAttribute("memberLoggedIn", member);
-				
+
 			}
 			// 3. 비밀번호가 틀린 경우
 			else {
 				msg = "비밀번호가 일치하지 않습니다.";
 			}
 		}
-		
+
 		// 2. view단 처리
 		model.addAttribute("msg", msg);
 		model.addAttribute("loc", "/");
-		
+
 		return "common/msg";		
 	}
-	
+
 	/**
 	 * 세션 무효화하기
 	 * session.setAttribute("memberLoggedIn", member)
@@ -166,14 +166,14 @@ public class MemberController {
 	 */
 	@RequestMapping("/memberLogout.do")
 	public String memberLogout(SessionStatus sessionStatus) {
-		
+
 		if(!sessionStatus.isComplete())
 			sessionStatus.setComplete();
-		
+
 		// 로그아웃시 메인 페이지로 보내기
 		return "redirect:/";
 	}
-	
+
 	/**
 	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
 	 * @param memberLoggedIn
@@ -183,7 +183,7 @@ public class MemberController {
 	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
 	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
 	 */
-	
+
 	/**
 	 * 
 	 * 웹서비스(html문서)  + data(xml, json) 
@@ -199,17 +199,17 @@ public class MemberController {
 	@RequestMapping("/checkIdDuplicate.do")
 	public Map<String,Object> checkIdDuplicate(@RequestParam String memberId) {
 		logger.debug("id중복체크: @ResponseBody 이용방식");
-		
+
 		boolean isUsable = memberService.selectOneMember(memberId)==null?
-							true:false;
+				true:false;
 		Map<String, Object> map = new HashMap<>();
 		map.put("isUsable", isUsable);
-		
+
 		return map;
-		
+
 	}
-	
-	
+
+
 	/*관리자페이지로 이동???*/
     @ResponseBody
     @RequestMapping("/adminpage.do")
@@ -285,3 +285,5 @@ public class MemberController {
 			}
 	
 }
+
+	

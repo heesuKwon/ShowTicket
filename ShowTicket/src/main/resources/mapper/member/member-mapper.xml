@@ -8,7 +8,7 @@
 	<insert id="insertMember">
 		insert into member values
 		( #{memberId}, #{password}, #{memberName}, #{email},
-		  #{phone}, default, sysdate, default, default)
+		  #{phone}, default, sysdate, default, A)
 	</insert>
 
 	<select id="selectOneMember" resultType="member">
@@ -46,6 +46,9 @@
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
     </update>
 	
+<<<<<<< HEAD
 	
+=======
+>>>>>>> refs/remotes/origin/seulgi
 	
 </mapper>
