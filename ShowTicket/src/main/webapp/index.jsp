@@ -109,10 +109,10 @@ function slideShow(){
 			<div class="maintop_left">
 				<div class="header">
 					<a href="${pageContext.request.contextPath }/">
-						<h2>
-							티켓오픈 <img
-								src="${pageContext.request.contextPath }/resources/images/plus.png"
-								alt="더보기" style="width: 35px; height: 35px;" />
+						<h2 class="title">
+								티켓오픈 
+								<img src="${pageContext.request.contextPath }/resources/images/plus.png"
+									alt="더보기" style="width: 30px;" />
 						</h2>
 					</a>
 				</div>
@@ -160,10 +160,10 @@ function slideShow(){
 			<div class="maintop_left">
 				<div class="header">
 					<a href="${pageContext.request.contextPath }/">
-						<h2>
-							실시간 랭킹 <img
-								src="${pageContext.request.contextPath }/resources/images/plus.png"
-								alt="더보기" style="width: 35px; height: 35px;" />
+						<h2 class="title">
+							일간 랭킹 
+							<img src="${pageContext.request.contextPath }/resources/images/plus.png"
+									alt="더보기" style="width: 30px;" />
 						</h2>
 					</a>
 				</div>
@@ -256,10 +256,9 @@ function slideShow(){
 	<div class="section_week">
 		<div class="inner">
 			<a href="${pageContext.request.contextPath }/">
-				<h2>
-					베스트뮤지컬 <img
-						src="${pageContext.request.contextPath }/resources/images/plus.png"
-						alt="더보기" style="width: 35px; height: 35px;" />
+				<h2 class="title">
+					베스트뮤지컬 
+					<img src="${pageContext.request.contextPath }/resources/images/plus.png" alt="더보기" style="width: 30px;"/>
 				</h2>
 			</a>
 
@@ -341,7 +340,8 @@ function slideShow(){
 									<dd>충무아트센터 대극장</dd>
 								</dl>
 							</div>
-					</a></li>
+					</a>
+					</li>
 
 
 
@@ -435,12 +435,7 @@ function slideShow(){
 				<li><a href="http://www.ticketlink.co.kr/product/29861"> <span
 						class="flag_vr level"> <em class="flag_txt"> 단독판매 </em>
 					</span>
-
-
-
-
-
-						<p>
+<p>
 							<img src="//image.toast.com/aaaaab/ticketlink/TKL_4/qtb0822.jpg"
 								alt="QUEEN Real Tribute Band"
 								onerror="this.src='http://alpha-photo.toast.com/aaaaan/thumbx/이미지준비중 (1)(2).jpg';">
@@ -454,11 +449,8 @@ function slideShow(){
 								<dd>대구스타디움(대구월드컵경기장)</dd>
 							</dl>
 						</div>
-				</a></li>
-
-				<li><a href="http://www.ticketlink.co.kr/product/29979"> <span
-						class="flag_vr level"> <em class="flag_txt"> 단독판매 </em>
-					</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

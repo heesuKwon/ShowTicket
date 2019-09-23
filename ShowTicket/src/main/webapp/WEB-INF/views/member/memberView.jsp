@@ -22,7 +22,6 @@
 	margin-left : 25%;
 	margin-top:0;
 }
-
 table{
 	border-top : 3px solid lightgray;
 	border-bottom : 3px solid lightgray;
@@ -42,27 +41,48 @@ margin-left : auto;
 margin-right : auto;
 }
 
+function updatePwd() {
+	var url ="${pageContext.request.contextPath}/member/updatePwd.do?memberId=honggd";/* ?memberId=아이디" */
+	var title = "비밀번호 변경";
+	var status="left=500px, top:200px;, width=450px height=450px";
+	
+	var popup=window.open(url, title, status); 	
+	}	
+
+
 .form-control{
 	width : 300px;
 	text-align : center;
 }
 </style>
 	<br>
+
 	<form name="memberUpdateFrm" id="memberUpdateFrm" action="memberUpdate.do" method="post" onsubmit="return validate();" >
-	<h3 style="text-align:left;">회원정보 수정</h3>
+	<h2 class="small-title">회원정보 수정</h2>
 	<br />
 		<table style="margin-left:auto; margin-right:auto;">
+		<table>
+
 			<tr>
-				<th >아이디</th>
-				<td>
-				<input type="text" class="form-control"  required disabled style="align:center">
-				</td>
+
+				<th>아이디</th>
+				<td><input type="text" id="memberId" name="memberId" value="honggd" class="form-control" required disabled ></td>
+				<!-- <td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td> -->
+
+
 			</tr>
-			
+
+
+
 			<tr>
 				<th>비밀번호</th>
 				<td>
+
 				<button type="button" class="btn btn-secondary" style="width:140px;" onclick="location.href='${pageContext.request.contextPath}/member/passwordUpdate.do'">비밀번호 변경</button>
+
+					<button type="button" id="password" name="password" class="btn btn-secondary"onclick="updatePwd();" >
+					비밀번호변경</button>
+
 				</td>
 			</tr> 
 			<tr>
@@ -73,6 +93,7 @@ margin-right : auto;
 			</tr>
 			<tr>
 				<th>전화번호</th>
+
 				<td>	
 					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
 				</td>
@@ -87,6 +108,16 @@ margin-right : auto;
 			
 			
 	<!-- 		<tr>
+
+
+				<td><input type="tel" class="form-control"
+					placeholder="(-없이)01012345678" name="phone" id="phone"
+					maxlength="11" required></td>
+			</tr>
+
+
+			<!-- 		<tr>
+
 				<th>회원등급 </th>
 				<td>
 					<div class="form-check form-check-inline">
@@ -101,6 +132,8 @@ margin-right : auto;
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color:#9a3cf4;border:1px solid #9a3cf4; color:white" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보 수정</button>
 	</form>
 
+			
+</div>
 	
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
