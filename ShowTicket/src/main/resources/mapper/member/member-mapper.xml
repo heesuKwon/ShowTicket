@@ -44,8 +44,8 @@
 	</delete>
 	<update id="updatePwd" parameterType="Member">
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
+
     </update>
 	
-
 	
 </mapper>
