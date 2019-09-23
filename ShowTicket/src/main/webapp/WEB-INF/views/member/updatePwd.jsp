@@ -22,20 +22,18 @@
 	href="${pageContext.request.contextPath}/resources/css/member.css">	  
 </head>
 <script>
- function passwordValidate(){
+
+function passwordValidate(){
 	 var pwd_new = $("#password_new").val().trim(); 
 	 var pwd_chk =$("#password_chk").val().trim(); 
-	 
+
 	 if(pwd_new!=pwd_chk){
 			alert("입력하신 비밀번호가 일치하지 않습니다.");
 			$("#password_new").select();
 			return false;
 		}
-		
 		return true;	
  }
-
-
 </script>
 
 <body>

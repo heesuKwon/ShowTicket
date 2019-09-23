@@ -254,7 +254,6 @@ public class MemberController {
 			
 			String msg = "";
 			String loc="";
-			String script="";
 				if(passwordEncoder.matches(password,pwd)==true) {
 					//비밀번호가 맞으면 
 					member.setPassword(newpassword);
@@ -263,7 +262,8 @@ public class MemberController {
 
 					if(result>0) {
 						msg="비밀번호 변경성공";
-						script="self.close();"; 
+						String script="self.close()";
+						model.addAttribute("script",script);
 					}else {
 						msg="변경실패";
 					}
@@ -275,9 +275,9 @@ public class MemberController {
 				}
 			
 
-				model.addAttribute("script",script);
+				
 				model.addAttribute("msg", msg);
-				/* model.addAttribute("loc", loc); */
+				model.addAttribute("loc", loc); 
 		
 				return "common/msg";
 
