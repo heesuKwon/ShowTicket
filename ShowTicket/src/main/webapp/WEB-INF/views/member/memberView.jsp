@@ -50,25 +50,14 @@ function updatePwd() {
 		<br />
 		<table>
 			<tr>
-<<<<<<< HEAD
+
 				<th>아이디</th>
 				<td><input type="text" id="memberId" name="memberId" value="honggd" class="form-control" required disabled ></td>
 				<!-- <td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td> -->
-=======
-				<th>아이디</th>
-				<td><input type="text" id="memberId" name="memberId" value="honggd" class="form-control" required disabled ></td>
-				<!-- <td><input type="text" class="form-control" id="memberId" value="delete" required disabled></td> -->
->>>>>>> refs/remotes/origin/seulgi
+
 			</tr>
-<<<<<<< HEAD
 
 
-				
-=======
-
-
-				
->>>>>>> refs/remotes/origin/seulgi
 			<tr>
 				<th>비밀번호</th>
 				<td>
