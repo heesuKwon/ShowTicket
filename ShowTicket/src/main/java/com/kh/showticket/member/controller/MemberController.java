@@ -239,6 +239,7 @@ public class MemberController {
 		return "member/updatePwd";
 	}
 
+    
     @RequestMapping(value="/updatePasswordEnd.do",method=RequestMethod.POST)
 	public String changePassword(@RequestParam String memberId,
 								 @RequestParam String password,
@@ -250,8 +251,7 @@ public class MemberController {
 			System.out.println("암호화전 변경비번:"+password_new);
 			String newpassword = passwordEncoder.encode(password_new); //변경비번
 			int result =0;
-
-			System.out.println(passwordEncoder.encode(member.getPassword()));
+			
 			String msg = "";
 			String loc="";
 			String script="";
@@ -275,13 +275,13 @@ public class MemberController {
 				}
 			
 
-		model.addAttribute("script",script);
-		model.addAttribute("msg", msg);
-		/* model.addAttribute("loc", loc); */
+				model.addAttribute("script",script);
+				model.addAttribute("msg", msg);
+				/* model.addAttribute("loc", loc); */
+		
+				return "common/msg";
 
-		return "common/msg";
 
-
-		}
+			}
 	
 }
