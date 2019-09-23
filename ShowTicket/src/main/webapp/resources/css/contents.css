@@ -440,8 +440,8 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .event_cont{margin-top:-240px !important}
 .event_cont .inner{padding:280px 0 253px !important}
 
-.event_top_list{overflow:hidden;margin-bottom:37px}
-.event_top_list li{width:318px;float:left;background:url(../img/shadow318_2.png) no-repeat 0 100%;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
+.event_top_list{overflow:hidden;margin-bottom:37px;height: 528px;}
+.event_top_list li{width:317px;float:left;box-shadow:1px 1px 2px 1px #d3d3d3;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
 .event_top_list li:first-child{margin-left:0}
 .event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:522px;position:relative;}
 .event_top_list li .event_top_info{background:#fff;padding:19px 10px 24px 21px;position:absolute;top:386px;left:0;width:287px;height:93px;}
@@ -469,7 +469,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 
 .event_list_inner{overflow:hidden;border-bottom:1px solid #c7c7c7;*padding-bottom:30px}
 .event_list_inner ul{margin-left:-20px;overflow:hidden}
-.event_list_inner li{float:left;width:324px;margin:0 0 30px 20px;padding-left:130px;position:relative;min-height:134px}
+.event_list_inner li{float:left;width: 454px;margin:0 0 30px 20px;padding-left:130px;position:relative;min-height:134px}
 .event_list_inner li dd{color:#767676;line-height:18px;font-size:11px}
 .event_list_inner li .thumb{position:absolute;left:0;top:0}
 .event_list_inner li .event_title{width:100%;overflow:hidden;font-size:14px;font-weight:bold;letter-spacing:-1px;color:#000;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;margin:9px 0 5px -3px}

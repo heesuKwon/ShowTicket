@@ -29,22 +29,16 @@ div#password-container span.error{color:red;}
 }
 
 
-/* 회원정보수정페이지 */
-#memberFrm {
-	text-align: center;
+.div-memberFrm{
 	border: 1px solid #9a3cf4;
 	padding: 20px;
 	width: 70%;
 	margin-left: 30%;
 	margin-top: -17px;
 }
-#memberFrm h3{
-	color:black;
-	float :left;
-	margin-top : 15px;
-	font-size:20px;
-	font-weight:bold;
-	color:#424242;
+/* 회원정보수정페이지 */
+#memberFrm {
+	text-align: center;
 }
 #memberFrm table {
 	border-top: 3px solid lightgray;
@@ -105,12 +99,7 @@ div#password-container span.error{color:red;}
 
 /* 쿠폰 페이지 */
 #coupon{
-	text-align: center;
-	border: 1px solid #9a3cf4;
-	padding: 20px;
-	width: 70%;
-	margin-left: 30%;
-	margin-top: -17px;
+	
 }
 #coupon>h5{
 	font-weight:bold;
@@ -131,7 +120,7 @@ div#password-container span.error{color:red;}
 	float:right;
 	top : 60px;
 	width: 150px;
-	height : 40px;
+	height : 30px;
 	color : white;
 	border-radius: 5px;
 	border : 0px;
@@ -201,11 +190,6 @@ div#password-container span.error{color:red;}
 /* 포인트 페이지 */
 #point{
 
-	border: 1px solid #9a3cf4;
-	padding: 20px;
-	width: 70%;
-	margin-left: 30%;
-	margin-top: -17px;
 }
 #point h5{
 	font-weight:bold;
@@ -227,8 +211,8 @@ div#password-container span.error{color:red;}
 	font-weight: bold;  
 	margin-top: 7%; 
 	margin-left:25%;
-	
 }
+
 #memberp{
 	font-size: 30px; 
 	color: #bb18ff; 
@@ -267,15 +251,13 @@ div#password-container span.error{color:red;}
 	padding-bottom:5px;
 	color:#424242;
 }
+#pointTable #playName{
+	width:160px;
+}
 
 /* 대기 공연 페이지 */
 #standby{
-	text-align: center;
-	border: 1px solid #9a3cf4;
-	padding: 20px;
-	width: 70%;
-	margin-left: 30%;
-	margin-top: -17px;
+	text-align:center;
 }
 #standby h5{
 	font-weight:bold;
@@ -286,7 +268,7 @@ div#password-container span.error{color:red;}
 	 margin-bottom: 3px;
 }
 #standby #button1 {
-	width:50%;
+	width:45%;
 	height : 45px;
 	background-color: lightgray;
 	color : white;	
@@ -295,7 +277,7 @@ div#password-container span.error{color:red;}
 	font-weight:bold;
 }
 #standby #button2 {
-	width:50%;
+	width:45%;
 	height : 45px;
 	background-color: white;
 	color : gray;	
@@ -308,7 +290,7 @@ div#password-container span.error{color:red;}
 	border-top: 2px solid #BDBDBD;
 	border-bottom: 2px solid #BDBDBD;
 	text-align:center;
-	margin-left:5%;
+	margin:auto;
 	font-size:15px;
 }
 #playList th{
@@ -346,19 +328,14 @@ div#password-container span.error{color:red;}
 
 /* 관심공연 */
 #interest{
-	text-align: center;
-	border: 1px solid #9a3cf4;
-	padding: 20px;
-	width: 70%;
-	margin-left: 30%;
-	margin-top: -17px;
+	text-align:center;
 }
 #interest h5{
 	font-weight:bold;
 	color : #585858;
 }
 #interest #button1 {
-	width:50%;
+	width:45%;
 	height : 45px;
 	background-color: lightgray;
 	color : white;	
@@ -367,7 +344,7 @@ div#password-container span.error{color:red;}
 	font-weight:bold;
 }
 #interest #button2 {
-	width:50%;
+	width:45%;
 	height : 45px;
 	background-color: white;
 	color : gray;	
@@ -380,7 +357,7 @@ div#password-container span.error{color:red;}
 	border-top: 2px solid #BDBDBD;
 	border-bottom: 2px solid #BDBDBD;
 	text-align:center;
-	margin-left:5%;
+	margin:auto;
 	font-size:15px;
 }
 #InterestList th{
@@ -411,11 +388,7 @@ div#password-container span.error{color:red;}
 
 /* 예매 확인/취소 */
 #reservation{
-	border: 1px solid #9a3cf4;
-	padding: 20px;
-	width: 70%;
-	margin-left: 30%;
-	margin-top: -17px;
+
 }
 #reservation h5{
 	font-weight:bold;
@@ -449,7 +422,7 @@ div#password-container span.error{color:red;}
 	width : 80px;
 	height:30px;
 	padding-top:3px;
-	color:#2E2E2E;
+	color:#2E2E2E;	
 }
 #search #inputGroupSelect03{
 	width : 70px;
@@ -532,15 +505,23 @@ div#password-container span.error{color:red;}
 	width:50px;
 }
 #ListTable #state{
-	width:120px;
+	width:100px;
 }
 #ListTable td{
 	padding-top : 5px;
 	padding-bottom:5px;
 	color:#424242;
 	border:1px solid lightgray;
-	text-align:left;
+	text-align:center;
 	font-weight:400;
 	
 }
+
+
+/* 비밀번호변경팝업 */
+div#updatePassword-container{width: 400px;}
+div#updatePassword-container img{width: 150px;margin-top: 10px;margin-left: 5px; }
+#updatePFrm{margin-left: 40px;margin-top: 30px;}
+input.btn.btn-outline-success{width: 126px;}
+
 

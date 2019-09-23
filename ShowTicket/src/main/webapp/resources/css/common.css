@@ -815,7 +815,7 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 .maintop_new{width:990px;margin-top:50px;position:relative}
 .maintop_new .maintop_left{float:left;width:672px}
 .maintop_new .maintop_right{overflow:hidden;width:318px}
-.maintop_new .header{height:43px;overflow:hidden}
+.maintop_new .header{overflow:hidden}
 .maintop_new .header a.more{background-position:-341px -167px;width:20px;height:20px;margin-left:8px;*float:left}
 .maintop_new .maintop_cont li a:hover{text-decoration:underline}
 .maintop_left .maintop_cont{width:670px;height:218px;border:1px solid #e6e6e6;border-radius:2px 0 0 2px;overflow:hidden;background:#fff}
@@ -927,4 +927,3 @@ table .no_data td{height:365px;vertical-align:middle !important;color:#000 !impo
 .tbl_type.thead_add td{padding-left:0;text-align:center}
 
 .tbl_reserve_info td{letter-spacing:normal}
-

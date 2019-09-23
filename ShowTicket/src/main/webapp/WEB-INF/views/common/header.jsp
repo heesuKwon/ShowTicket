@@ -33,9 +33,8 @@
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 <!-- End NHN AD MORE Script -->
-<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
-	charset="utf-8"></script>
-<script type="text/javascript" src="/resources/js/player.js"></script>
+
+
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
@@ -175,8 +174,8 @@
 								<span>|</span>
 							</c:if>
 
-							<a href="" id="reserve">예매확인/취소</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
+							<a href="" id="reserve">예매확인/취소</a><span>|</span> 
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 
 
 						</div>
@@ -186,8 +185,8 @@
 								href="javascript:;" class="user_name"></a><em>님</em></strong><span>|</span>
 							<!-- [D] 로그인 후 주석 해제 입니다. -->
 							<a href="${pageContext.request.contextPath}/member/reservation.do" id="reserveLogin">예매확인/취소</a><span>|</span>
-							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> <a
-								href="http://www.ticketlink.co.kr/help/main">고객센터</a>
+							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> 
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 
 						</div>
 
