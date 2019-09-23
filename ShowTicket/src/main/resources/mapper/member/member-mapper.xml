@@ -46,9 +46,4 @@
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
     </update>
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> refs/remotes/origin/seulgi
-	
 </mapper>
