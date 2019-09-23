@@ -232,15 +232,56 @@ public class MemberController {
     }
     
     
-    
-    @ResponseBody
-    @RequestMapping("/updatePwd.do")
-    public ModelAndView updatePwd(ModelAndView mav) {
-    	mav.setViewName("member/updatePwd");
-    	return mav;
-    }
-    
-    
-	
+    @RequestMapping(value="/updatePwd.do",method=RequestMethod.GET)
+	public String changePasswd(@RequestParam String memberId, Model model) {
+
+		model.addAttribute("Member",memberService.selectOneMember(memberId));
+		return "member/updatePwd";
+	}
+
+    @RequestMapping(value="/updatePasswordEnd.do",method=RequestMethod.POST)
+	public String changePassword(@RequestParam String memberId,
+								 @RequestParam String password,
+								 @RequestParam String password_new, Model model) {
+			// 1.업무로직 : 회원 정보 가져오기
+			Member member = memberService.selectOneMember(memberId);
+			String pwd =passwordEncoder.encode(member.getPassword());
+			
+			System.out.println("암호화전 변경비번:"+password_new);
+			String newpassword = passwordEncoder.encode(password_new); //변경비번
+			int result =0;
+
+			System.out.println(passwordEncoder.encode(member.getPassword()));
+			String msg = "";
+			String loc="";
+			String script="";
+				if(passwordEncoder.matches(password,pwd)==true) {
+					//비밀번호가 맞으면 
+					member.setPassword(newpassword);
+					
+					result =memberService.updatePwd(member); 
+
+					if(result>0) {
+						msg="비밀번호 변경성공";
+						script="self.close();"; 
+					}else {
+						msg="변경실패";
+					}
+				}
+				// 3. 비밀번호가 틀린 경우
+				else {
+					msg = "비밀번호가 일치하지 않습니다.";
+					loc="/member/updatePwd.do?memberId="+memberId;
+				}
+			
+
+		model.addAttribute("script",script);
+		model.addAttribute("msg", msg);
+		/* model.addAttribute("loc", loc); */
+
+		return "common/msg";
+
+
+		}
 	
 }

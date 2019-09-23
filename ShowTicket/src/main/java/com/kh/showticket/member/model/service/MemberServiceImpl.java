@@ -32,4 +32,9 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return memberDAO.updateMember(member);
 	}
+
+	@Override
+	public int updatePwd(Member member) {
+		return memberDAO.updatePwd(member);
+	}
 }
