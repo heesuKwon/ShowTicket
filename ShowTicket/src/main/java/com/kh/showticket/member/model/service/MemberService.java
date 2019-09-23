@@ -15,6 +15,10 @@ public interface MemberService {
 
 	int updatePwd(Member member);
 
+	void createMail(String email) throws Exception;
+
+//	void updateMailAuthstatus(Member member);
+
 
 	
 

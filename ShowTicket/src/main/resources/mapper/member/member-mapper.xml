@@ -46,6 +46,10 @@
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
 
     </update>
+    
+    <update id="updateMailAuthstatus" parameterType="Member">
+        UPDATE member SET mailAuthstatus = #{emailAuthstatus} WHERE member_id = #{memberId}
+    </update>
 	
 	
 </mapper>

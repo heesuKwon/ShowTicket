@@ -120,11 +120,27 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-//	@RequestMapping("/sendmail.do")
-//	public void sendMail(Member member, HttpServletRequest request) {
-//		// 인증 메일 보내기 메서드
-//		mailsender.mailSendWithUserKey(userVO.getUser_email(), userVO.getUser_id(), request);
-//	}
+	/* 이메일 인증 관련 코드 */
+	@RequestMapping(value="joinPost", method=RequestMethod.POST)
+	public String joinPost(@RequestParam String email) throws Exception {
+		logger.info("member email: " + email);
+		memberService.createMail(email);
+		
+		return "/user/joinPost";
+	}
+	
+	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+	public String emailConfirm(Member member, Model model) throws Exception {
+		logger.info(member.getEmail() + ": auth confirmed");
+		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
+//		memberService.updateMailAuthstatus(member);
+		
+		model.addAttribute("email_auth_check", 1);
+		
+		return "/user/joinPost";
+	}
+	
+	/*이메일 인증 관련 코드 끝*/
 	
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,

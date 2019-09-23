@@ -65,5 +65,20 @@
 	<!-- #14.1. @Transactional이 붙은 메소드를 대상으로 Transaction Advice를 적용함. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
-		
+	
+	<!-- Mail 인증 관련 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="${email}" />
+		<property name="password" value="${emailPW} " />
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
 </beans>

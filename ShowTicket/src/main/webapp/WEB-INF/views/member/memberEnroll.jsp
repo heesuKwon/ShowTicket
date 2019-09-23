@@ -56,9 +56,11 @@
 	
 			<tr>
 				<th>이메일</th>
-				<td>	
-					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
-					<button class="btn btn-gray btn-sm">이메일 인증</button>
+				<td>
+				
+						<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
+						<button class="btn btn-gray btn-sm" id="emailAuthSubmit">이메일 인증</button>
+					<p id="emailAuthstatus" style="display:none;">이메일 인증이 완료되었습니다.</p>
 				</td>
 			</tr>
 			
@@ -133,6 +135,25 @@ $(function(){
 		
 		
 	});
+	
+	$("#emailAuthSubmit").on("click",function(){
+		var email = $("#email").val().trim();
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/joinPost",
+			data: {email: email},
+			success: data =>{
+				console.log(data);
+				if(data.emailAuthCheck==1){
+					$("#emailAuthstatus").show();
+				}
+			},
+			error: (jqxhr, textStatus, errorThrown)=>{
+				console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
+			}
+		});
+		
+	});
 		
 });
 
@@ -146,6 +167,10 @@ function validate(){
 	
 	return true;
 }
+/* 
+function emailAuthSubmit(){
+	$(form["memberEnrollFrm"]).submit();
+} */
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

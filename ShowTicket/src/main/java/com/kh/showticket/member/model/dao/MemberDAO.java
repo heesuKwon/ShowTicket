@@ -14,4 +14,6 @@ public interface MemberDAO {
 
 	int updatePwd(Member member);
 
+	void updateMailAuthstatus(Member member);
+
 }
