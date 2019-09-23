@@ -37,7 +37,7 @@ public class getApi {
 		
 	//공연목록조회
 	public static List<Map<String, String>> getList(String url){
-		List<Map<String,String>> musicalList = new ArrayList<>();	
+		List<Map<String,String>> list = new ArrayList<>();	
 			
 		try {
 			documentBuilder = factory.newDocumentBuilder();
@@ -87,12 +87,12 @@ public class getApi {
 			//공연장명
 			map.put("fcltynm", getTagValue("fcltynm", element));
 					
-			musicalList.add(map);
+			list.add(map);
 				
 			}
 		}
 			
-		return musicalList;
+		return list;
 		
 	}
 		
