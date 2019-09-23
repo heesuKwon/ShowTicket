@@ -25,7 +25,7 @@ div.event_cont_box{background:#e8e7e6; }
 div.container-t h2{ background-color:white; color:#393a3b; font-family: 'Gothic A1', sans-serif; font-weight: bold; font-size: 25px;  position: absolute;top: 142px; left: 200px;}
  div.container-t h2 span{color:#8f01a3;}
 dd.evt_cont div div.inner{padding-left: 10px; padding-top: 10px; padding-bottom: 10px; padding-right: 10px; width: 930px;}
-dd.evt_cont div div.inner h5{text-align: center;} 
+dd.evt_cont div div.inner h5{position: relative; text-align: center;} 
 </style>
 
 <body>
@@ -64,12 +64,12 @@ dd.evt_cont div div.inner h5{text-align: center;}
 	                        <div>
 	                        	<img src="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" alt="뮤지컬<사랑했어요>관람후기이벤트" border="0" usemap="#Map">
 				                <div class="inner">
-				                 		<h5>
-										연극&lt;택시안에서&gt;에 대한 기대평을 남겨주세요. <br />
+				                 		<h5><span>뮤지컬&lt;뮤지컬명&gt;</span>
+										에 대한 기대평을 남겨주세요. <br />
 										
 										기대평을 남겨주신 분 중, 추첨을 통해 총 10명의 회원님께 <br />
 										
-										연극&lt;택시안에서&gt;공연 관람권을 드립니다. <br />
+										뮤지컬&lt;뮤지컬명&gt;공연 관람권을 드립니다. <br />
 										
 										*본 이벤트는 당사의운영 정책에 따라 진행되며 내부 사정에 의해 <br /> 
 										
@@ -79,7 +79,7 @@ dd.evt_cont div div.inner h5{text-align: center;}
 				                </div>
 				                <div class="rhr"></div> <!-- 선 -->
 				  			</div>
-				  			<div id="btnbox" style="width:60%; margin-left: 20%;" >
+				  			<div id="btnbox" style="width:60%; margin-left: 20%; margin-top: 20px; padding-bottom: 20px;" >
 			                <button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button> 
 				  			</div>
 				  		

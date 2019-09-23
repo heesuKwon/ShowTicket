@@ -18,12 +18,12 @@
 	</jsp:include>
 
 	<br>
-	<form id="standby">
-		<h5>대기공연</h5>
-		<hr />
-		<br />
-<input type=button id="button1"value="뮤지컬"><input type=button id="button2"value="연극">
- <br /><br>
+	<div class="div-memberFrm">
+		<h2 class="small-title">대기공연</h2>
+		<form id="standby">
+			<hr />
+			<br /> <input type=button id="button1" value="뮤지컬"><input
+				type=button id="button2" value="연극"> <br /> <br>
 
 			<table id="playList">
 				<tr>
@@ -33,30 +33,31 @@
 				<tr>
 					<td>뮤지컬<시티오브엔젤></td>
 					<td><button type="button" class="btn btn-secondary"
-				onclick="location.href='${pageContext.request.contextPath}'">취소</button></td>
+							onclick="location.href='${pageContext.request.contextPath}'">취소</button></td>
 				</tr>
 			</table>
 
-		<br />
+			<br />
 
-		<nav aria-label="Page navigation example">
-			<ul class="pagination justify-content-center">
-				<li class="page-item disabled"><a class="page-link" href="#"
-					tabindex="-1" aria-disabled="true"
-					style="background-color: #F2F2F2; border: 0px;"><</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					style="color: gray; border: 0px;">1</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					style="color: gray; border: 0px;">2</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					style="color: gray; border: 0px;">3</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					style="color: gray; border: 0px;">4</a></li>
-				<li class="page-item disabled"><a class="page-link" href="#"
-					tabindex="1" aria-disabled="true"
-					style="background-color: #F2F2F2; border: 0px;">></a></li>
-			</ul>
-		</nav>
-	</form>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+					<li class="page-item disabled"><a class="page-link" href="#"
+						tabindex="-1" aria-disabled="true"
+						style="background-color: #F2F2F2; border: 0px;"><</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						style="color: gray; border: 0px;">1</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						style="color: gray; border: 0px;">2</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						style="color: gray; border: 0px;">3</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						style="color: gray; border: 0px;">4</a></li>
+					<li class="page-item disabled"><a class="page-link" href="#"
+						tabindex="1" aria-disabled="true"
+						style="background-color: #F2F2F2; border: 0px;">></a></li>
+				</ul>
+			</nav>
+		</form>
+	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
