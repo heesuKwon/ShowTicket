@@ -37,10 +37,10 @@ div#password-container span.error{color:red;}
 	margin-top: -17px;
 }
 /* 회원정보수정페이지 */
-#memberFrm {
+#memberUpdateFrm {
 	text-align: center;
 }
-#memberFrm table {
+#memberUpdateFrm table {
 	border-top: 3px solid lightgray;
 	border-bottom: 3px solid lightgray;
 	border-collapse: collapse;
@@ -49,42 +49,42 @@ div#password-container span.error{color:red;}
 	margin-right: auto;
 	margin-bottom:7%;
 }
-#memberFrm table th{
+#memberUpdateFrm table th{
 	font-size:16px;
 	padding-top : 7px;
 	padding-bottom:7px;
 }
-#memberFrm table td{
+#memberUpdateFrm table td{
 	font-size:16px;
 	padding-top : 7px;
 	padding-bottom:7px;
 }
-#memberFrm table th, td {
+#memberUpdateFrm table th, td {
 	border-bottom: 1px solid lightgray;
 	text-align: center;
 	color: gray;
 }
-#memberFrm table td .btn{
+#memberUpdateFrm table td .btn{
 	margin-left:auto;
 	margin-right:auto;
 }
-#memberFrm table checkbox{
+#memberUpdateFrm table checkbox{
 	margin-top : 10px;
 }
-#memberFrm table #check{
+#memberUpdateFrm table #check{
 	margin-top: 10px;
 }
-#memberFrm input {
+#memberUpdateFrm input {
 	margin-left: auto;
 	margin-right: auto;
 }
 
-#memberFrm .form-control {
+#memberUpdateFrm .form-control {
 	width: 300px;
 	text-align: center;
 }
 
-#memberFrm .btn{
+#memberUpdateFrm .btn{
     background-color: #9a3cf4;
     border: 1px solid #9a3cf4;
     color: white;
