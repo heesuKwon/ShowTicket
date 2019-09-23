@@ -53,9 +53,9 @@ function passwordValidate(){
 				<label for="password">비밀번호 확인</label>
 				<input type="password" id="password_chk" class="form-control" required><br>
 				
-			
-				<input type="submit" class="btn btn-outline-success my-2 my-lm-0"  value="변경" onclick="return passwordValidate();"/>&nbsp;
+				
 				<br />
+				<input type="submit" class="btn btn-outline-success my-2 my-lm-0" id="btn_pwd"  value="변경" onclick="return passwordValidate();"/>
 				<input type="button" class="btn btn-outline-success my-2 my-lm-0" onclick="self.close();" value="닫기" />						
 					
 				<input type="hidden" name="memberId" value="honggd" />
