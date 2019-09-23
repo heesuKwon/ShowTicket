@@ -33,7 +33,7 @@ function getList(page){
 
             var html = "";
             
-            if (page==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
+            if (cpage==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
                   $("#showListAll").html(""); 
             }
            

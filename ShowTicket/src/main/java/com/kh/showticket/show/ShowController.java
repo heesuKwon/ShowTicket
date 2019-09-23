@@ -40,7 +40,7 @@ public class ShowController {
 	
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage=1&rows=8&shcate=AAAA";
 
-		List<Map<String,String>> showList = getList(url);
+		List<Map<String,String>> showList = getOrderedListByDate(getList(url));
 		
 		mav.addObject("showList", showList);
 		mav.setViewName("menu/show");
@@ -55,7 +55,7 @@ public class ShowController {
 
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage="+cpage+"&rows=8&shcate=AAAA";
 		
-		return getList(url);
+		return getOrderedListByDate(getList(url));
 
 	}
 
