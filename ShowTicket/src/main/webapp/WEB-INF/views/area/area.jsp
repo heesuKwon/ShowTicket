@@ -88,18 +88,6 @@
     </div>
     <!-- container 끝 -->
 
-	<nav claria-label="Page navigation example">
-	  <ul class="pagination pagination-lg justify-content-center">
-	    <li class="page-item"><a class="page-link pagingbar" href="#">&lt;</a></li>
-	    <li class="page-item"><a class="page-link pagingbartext" href="#">1</a></li>
-	    <li class="page-item"><a class="page-link pagingbartext" href="#">2</a></li>
-	    <li class="page-item"><a class="page-link pagingbartext" href="#">3</a></li>
-	    <li class="page-item"><a class="page-link pagingbartext" href="#">4</a></li>
-	    <li class="page-item"><a class="page-link pagingbartext" href="#">5</a></li>
-	    <li class="page-item"><a class="page-link pagingbar" href="#">&gt;</a></li>
-	  </ul>
-	</nav>
-
 	<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
 <script type="text/javascript">

@@ -40,6 +40,7 @@
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
 
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -66,9 +67,8 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
-<script type="text/javascript" src="/resources/js/login.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/login.js"></script> -->
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
 	if (!wcs_add) var wcs_add = {};
@@ -146,9 +146,40 @@
 
 <!-- AceCounter Log Gathering Script End -->
 
+<!-- 로그인 관련 모달 부분 -->
+<!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <!--로그인폼 : https://getbootstrap.com/docs/4.1/components/forms/#overview -->
+          <form action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
+		      <div class="modal-body plusbody">
+		      	<div class="loginInfo">
+		      		<input type="text" class="form-control" name="memberId" placeholder="아이디" required>
+				    <br />
+				    <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+				</div>
+				<div class="loginbtn">
+				    <button type="submit" class="btn btn-color loginsubmit" >로그인</button>
+				    <button type="button" class="btn logincancel" data-dismiss="modal">취소</button>		    
+				</div>
+		      	<div class="find">
+					<a href="/findid.nhn?loginUrl=%2Foauth2.0%2Fauthorize%3FisBackButton%3Dfalse%26response_type%3Dcode%26client_id%3DZ9Ur2WLH9rB59Gy4_cJ3%26serviceOfferYn%3DY%26serviceClientId%3DZ9Ur2WLH9rB59Gy4_cJ3%26viewType%3D%26serviceProviderCode%3DTKLINK%26scope%3D%26state%3D1%26termsYN%3DN%26redirect_uri%3Dhttp%253A%252F%252Fwww.ticketlink.co.kr%252Fauth%252Fcallback%253FselfRedirect%253DN&serviceProviderCode=TKLINK" class="findcolor">아이디 찾기</a>
+					<span class="findcolor">|</span> <a href="/findpwd.nhn?loginUrl=%2Foauth2.0%2Fauthorize%3FisBackButton%3Dfalse%26response_type%3Dcode%26client_id%3DZ9Ur2WLH9rB59Gy4_cJ3%26serviceOfferYn%3DY%26serviceClientId%3DZ9Ur2WLH9rB59Gy4_cJ3%26viewType%3D%26serviceProviderCode%3DTKLINK%26scope%3D%26state%3D1%26termsYN%3DN%26redirect_uri%3Dhttp%253A%252F%252Fwww.ticketlink.co.kr%252Fauth%252Fcallback%253FselfRedirect%253DN&serviceProviderCode=TKLINK" class="findcolor">비밀번호 찾기</a>
+		  	  	</div>
+		      </div>
+		  </form>
+	    </div>
+	  </div>
+	</div> <!-- 로그인 모달 끝 -->
 
 <body>
-
 	<script>
 	var meta = document.createElement('meta');
 	meta.setAttribute('name', 'more_page_type');
@@ -157,8 +188,6 @@
 </script>
 
 	<div id="wrap">
-
-
 		<div id="header">
 			<div class="gnb">
 				<div class="inner">
@@ -167,7 +196,7 @@
 						<div id="login">
 							<c:if>
 								<!-- 로그인 처리 -->
-								<a href="" data-toggle="modal" data-target="#loginModal">로그인</a>
+								<button class="login" type="button" data-toggle="modal" data-target="#loginModal">로그인</button>
 								<span>|</span>
 								<!-- [D] 로그인 후 주석 설정 입니다. -->
 								<a href="javascript:;" id="joinBtn"
