@@ -13,20 +13,34 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
+	
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>   
+	crossorigin="anonymous"></script> 
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/member.css">	  
 </head>
+<script>
+
+function passwordValidate(){
+	 var pwd_new = $("#password_new").val().trim(); 
+	 var pwd_chk =$("#password_chk").val().trim(); 
+
+	 if(pwd_new!=pwd_chk){
+			alert("입력하신 비밀번호가 일치하지 않습니다.");
+			$("#password_new").select();
+			return false;
+		}
+		return true;	
+ }
+</script>
+
 <body>
-	<style>
-		div#updatePassword-container img{width: 150px;margin-top: 10px;margin-left: 5px; }
-		#updatePFrm{ margin-top: 40px; margin-left: 50px;}
-		input.btn.btn-outline-success{width: 126px;}
-	</style>
+	
 	<div id="updatePassword-container">
 		<img src="${pageContext.request.contextPath }/resources/images/showticket_logo.png" alt="" />
-		<form name="updatePwdFrm" id="updatePFrm" action="${pageContext.request.contextPath }/member/updatePasswordEnd" method="post" >
+		<form name="updatePwdFrm" id="updatePFrm" action="${pageContext.request.contextPath }/member/updatePasswordEnd.do" method="post" >
 		
 				
 				<label for="password">현재 비밀번호</label>
@@ -44,7 +58,7 @@
 				<br />
 				<input type="button" class="btn btn-outline-success my-2 my-lm-0" onclick="self.close();" value="닫기" />						
 					
-				<input type="hidden" name="memberId"  />
+				<input type="hidden" name="memberId" value="honggd" />
 		</form>
 		
 	</div>
