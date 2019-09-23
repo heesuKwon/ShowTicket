@@ -38,9 +38,9 @@ public class ShowController {
 	public ModelAndView show(ModelAndView mav) {
 		logger.debug("쇼리스트페이지");
 	
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage=1&rows=8&shcate=AAAA";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage=1&rows=8&shcate=AAAA";
 
-		List<Map<String,String>> showList = getOrderedListByDate(getList(url));
+		List<Map<String,String>> showList = getList(url);
 		
 		mav.addObject("showList", showList);
 		mav.setViewName("menu/show");
@@ -53,9 +53,9 @@ public class ShowController {
 		logger.debug("전체쇼 AJAX");
 		logger.debug("cpage={}", cpage);
 
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage="+cpage+"&rows=8&shcate=AAAA";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage="+cpage+"&rows=8&shcate=AAAA";
 		
-		return getOrderedListByDate(getList(url));
+		return getList(url);
 
 	}
 

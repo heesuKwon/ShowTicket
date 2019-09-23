@@ -13,27 +13,94 @@
 <script type="text/javascript" src="/resources/js/header-f81b5672707a96b1c497e15293ee07f3.js"></script>
 <script>
 var cpage = 2;
+var area = '';
+
+$(()=>{
+	$(".nav-item").on({
+		mouseover : function(){
+			$(this).on('mouseleave');
+			$(this).css("cursor", "pointer");
+			$(this).children().removeClass("default").addClass("select");
+		},
+		mouseleave : function(){
+			 $(this).children().removeClass("select").addClass("default");
+		},
+		click: function(){
+			$(this).off('mouseleave')
+			$(".nav-link").removeClass("select").addClass("default");
+			$(this).children().removeClass("default").addClass("select");
+			
+			cpage=1;
+			area = $(this).children().html();
+
+        	$(".title").html(area);
+
+			getList(cpage);
+			cpage++;
+		}
+	})
+	
+})
+
 
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-     if($(window).scrollTop() > $(document).height() - $(window).height()-100){
+     if($(window).scrollTop() > $(document).height() - $(window).height()-30){
           getList(cpage);
           cpage++;   
      } 
 });
  
-function getList(page){
+function getList(cpage){
+	
+	var url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191030&cpage="+cpage+"&rows=4&shcate=AAAA";
+	var url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191030&cpage="+cpage+"&rows=4&shcate=AAAB";
+
+	if(area=='서울'){
+		url1+="&signgucode=11";
+		url2+="&signgucode=11";
+	}
+	else if(area=='부산'){
+		url1+="&signgucode=26";
+		url2+="&signgucode=26";
+	}
+	else if(area=='대구'){
+		url1+="&signgucode=27";
+		url2+="&signgucode=27";
+	}
+	else if(area=='인천'){
+		url1+="&signgucode=28";
+		url2+="&signgucode=28";
+	}
+	else if(area=='광주'){
+		url1+="&signgucode=29";
+		url2+="&signgucode=29";
+	}
+	else if(area=='대전'){
+		url1+="&signgucode=30";
+		url2+="&signgucode=30";
+	}
+	else if(area=='울산'){
+		url1+="&signgucode=31";
+		url2+="&signgucode=31";
+	}
+	else if(area=='제주'){
+		url1+="&signgucode=50";
+		url2+="&signgucode=50";
+	}
+	
+	var param = {url1 : url1, url2 : url2}
+	
     $.ajax({
         url : '${pageContext.request.contextPath}/area/areaAjax.do',
-        data : {"cpage" : cpage},
+        data : param,
         success : function(data) {
 
-            var html = "";
+           var html = "";
             
-            if (cpage==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
+           if (cpage==1){
                   $("#goods_list").html(""); 
             }
-           
-            
+   
                 if(data.length>0){
                 	for(var i=0; i<data.length; i++){
 	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
@@ -54,11 +121,11 @@ function getList(page){
             
             html = html.replace(/%20/gi, " ");
             
-            /*if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
-                $("#showListAll").html(html); 
-            }else{*/
+            if (cpage==1){
+                $("#goods_list").html(html); 
+            }else{
             	$("#goods_list").append(html); 
-            /*}*/
+            }
        },error:function(e){
            if(e.status==300){
                alert("데이터를 가져오는데 실패하였습니다.");
@@ -67,38 +134,6 @@ function getList(page){
     }); 
 }
 
-
-$(()=>{
-	$(".nav-item").on({
-		mouseover : function(){
-			$(this).on('mouseleave');
-			$(this).css("cursor", "pointer");
-			$(this).children().removeClass("default").addClass("select");
-		},
-		mouseleave : function(){
-			 $(this).children().removeClass("select").addClass("default");
-		},
-		click: function(){
-			$(this).off('mouseleave')
-			$(".nav-link").removeClass("select").addClass("default");
-			$(this).children().removeClass("default").addClass("select");
-			
-			cpage=1;
-			
-			getAreaList(cpage);
-		    cpage++;
-			
-			$(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-			     if($(window).scrollTop() > $(document).height() - $(window).height()-100){
-			          getAreaList(cpage);
-			          cpage++;   
-			     } 
-			});			
-		}
-	})
-	
-
-})
 
 
 
@@ -118,12 +153,12 @@ $(()=>{
 <ul class="nav nav-pills nav-justified" style="margin-top: 30px; margin-bottom: 20px;">
 	<li class="nav-item"><div class="nav-link select nav-font">전체</div></li>
 	<li class="nav-item"><div class="nav-link default nav-font">서울</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">경기</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">대구/경북</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">부산/경남</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">광주/전라</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">대전/충청</div></li>
-	<li class="nav-item"><div class="nav-link default nav-font">강원</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">부산</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">대구</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">인천</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">광주</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">대전</div></li>
+	<li class="nav-item"><div class="nav-link default nav-font">울산</div></li>
 	<li class="nav-item"><div class="nav-link default nav-font">제주</div></li>
 </ul>
 			
