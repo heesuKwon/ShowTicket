@@ -1,31 +1,25 @@
 package com.kh.showticket.help.controller;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.showticket.member.model.service.MemberService;
-import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.help.model.service.NoticeService;
+import com.kh.showticket.help.model.vo.NoticeTicketOpen;
 
 @Controller
 @RequestMapping("/help")
 //@SessionAttributes("memberLoggedIn")
 public class HelpController {
+	
+	@Autowired
+	NoticeService noticeService;
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -38,9 +32,14 @@ public class HelpController {
 		return mav;
 	}
 	@RequestMapping("/notice.do")
-	public ModelAndView notice(ModelAndView mav) {
+	public ModelAndView notice(@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
 		logger.debug("help페이지 요청");
+		ModelAndView mav = new ModelAndView();
 		
+		List<NoticeTicketOpen> list = noticeService.selectNoticeTicketOpenList(cPage);
+	
+		mav.addObject("list",list);
+		mav.addObject("cPage",cPage);
 		mav.setViewName("help/notice");
 		return mav;
 	}
