@@ -745,7 +745,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 /* paging */
 .paging{text-align:center;margin-top:20px}
 .paging a,.paging strong{display:inline-block;position:relative;min-width:20px;margin-right:1px;padding:5px 3px 7px;border:1px solid #fff;font-family:Tahoma;font-size:13px;color:#767676;line-height:13px;text-decoration:none;vertical-align:top}
-.paging strong{border-color:#339e00;color:#339e00}
+.paging strong{border-color:#8f01a3;color:#8f01a3}
 .paging a:hover{border-color:#dedede}
 .paging a.first,
 .paging a.prev,

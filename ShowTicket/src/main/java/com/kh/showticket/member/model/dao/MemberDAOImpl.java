@@ -24,7 +24,7 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Override
 	public int deleteMember(String memberId) {
-		return sqlSession.delete("memeber.deleteMember", memberId);
+		return sqlSession.delete("member.deleteMember", memberId);
 	}
 
 	@Override

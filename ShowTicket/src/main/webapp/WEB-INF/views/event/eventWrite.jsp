@@ -10,10 +10,131 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
+<style>
+.table table-bordered tr, th {
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 15px;
+	line-height: 15px;
+	text-align: center;
+}
 
+#eventWriteTable th,td {
+	vertical-align: middle;
+	    line-height: 31px;
+}
+
+
+.table table-bordered {
+	float: left;
+}
+
+#eventWriteTable {
+	width: 800px;
+	margin-left: 90px;
+}
+
+.table-bordered td:last-child {
+	border: 1px solid #dee2e6;
+	text-align: center;
+	vertical-align: middle;
+}
+
+select {
+	float: left;
+	word-wrap: normal;
+	width: 100px;
+	height: 30px;
+}
+
+input.pull-right {
+	width: 80px;
+	height: 40px;
+	border: 1px solid #8f01a3;
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 15px;
+	background-color: #8f01a3;
+	color: #fff;
+	font-weight: bold;
+	margin-left: 467px;
+}
+
+input.pull-left {
+	width: 80px;
+	height: 40px;
+	border: 1px solid #BDBDBD;
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 15px;
+	background-color: #BDBDBD;
+	font-weight: bold;
+	color: #fff;
+	margin-left: 254px;
+}
+
+input.form-control {
+	border: 1px solid #BDBDBD;
+}
+
+#eventWrite {
+	vertical-align: middle;
+	margin-left: 10px;
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 15px;
+	margin-left: 90px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+#eventWrite th {
+	background-color: #E6E6E6;
+	border-bottom: 1px solid #BDBDBD;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	vertical-align: middle;
+}
+
+#eventWrite td {
+	border-bottom: 1px solid #BDBDBD;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	vertical-align: middle;
+}
+
+.selectBtn {
+	background-color: #8f01a3;
+	font-family: '돋음';
+	font-size: 15px;
+	color: white;
+	width: 75px;
+	height: 30px;
+}
+
+.eventDate {
+	float: left;
+	margin-right: 20px;
+	display: inline-flex;
+	width: 200px;
+	height: 30px;
+}
+.eventDate1 {
+	float: left;
+	margin-left: 20px;
+	display: inline-flex;
+	width: 200px;
+	height: 30px;
+}
+
+select.form-control {
+	border: 1px solid #BDBDBD;
+}
+
+#textLine {
+	border: 1px solid #BDBDBD;
+}
+</style>
 <div id="container" class="event_cont">
 	<div class="inner">
-		<h2 class="blind">이벤트</h2>
+		<h2 class="title">이벤트</h2>
 		<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
 		<!-- 3월 스펙 아웃으로 인한 큰 이벤트 이미지 부분 삭제 -->
 
@@ -32,72 +153,88 @@
 
 		<h2>공연목록</h2>
 
+		<table id="eventWrite">
+			<col width="100px;">
+			<col width="100px;">
+			<col width="140px;">
+			<col width="110px;">
+			<col width="110px;">
+			<col width="140px;">
+			<col width="100px;">
+			<tr>
+				<th>공연ID</th>
+				<th>종류</th>
+				<th>공연명</th>
+				<th>공연시작일</th>
+				<th>공연종료일</th>
+				<th>공연상세시간</th>
+				<th>선택하기
+				<th>
+			</tr>
+			<tr>
+				<td>10101010101</td>
+				<td>연극</td>
+				<td>착한엄마</td>
+				<td>2019.10.12</td>
+				<td>2019.10.15</td>
+				<td>화~일 14:00, 18:00</td>
+				<td><button class="selectBtn">선택하기</button></td>
+			</tr>
+		</table>
+
+
+
+
 		<form action="" method="post">
-			<table class="table table-bordered">
+			<table class="table table-bordered" id="eventWriteTable">
 				<tbody>
-					<tr>
-						<th>제목:</th>
-						<td><input type="text" placeholder="제목을 입력하세요. "
-							name="subject" class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>항목:</th>
-						<td><select>
-								<option value="invite">초대</option>
-								<option value="entry">응모</option>
-						</select>
+				<col width="200px" />
+				<col width="400px" />
+				<tr>
+					<th>제목:</th>
+					<td><input type="text" placeholder="제목을 입력하세요. "
+						name="subject" class="form-control" /></td>
+				</tr>
+				<tr>
+					<th>항목:</th>
+					<td><select class="form-control">
+							<option value="invite">초대</option>
+							<option value="entry">응모</option>
+					</select></td>
+				</tr>
+				<tr>
+					<th>내용:</th>
+					<td><textarea id="textLine" rows="5" cols="78"></textarea></td>
+				</tr>
+				<tr>
+					<th>이벤트 날짜:</th>
+					<td style="vertical-align: middle;"><input type="date" class="form-control eventDate" /><span style="float:left; font-size:15px;"> ~ </span>
+						<input type="date" class="form-control eventDate1" />
 						</td>
-					</tr>
-					<tr>
-						<th>내용:</th>
-						<td><input type="text" placeholder="파일을 선택하세요. "
-							name="filename" class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>이벤트 시작 날짜:</th>
-						<td><input type="date" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>이벤트 종료 날짜</th>
-						<td><input type="date" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>당첨자 발표날짜:</th>
-						<td><input type="text" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					
-					<tr>
-						<th>쿠폰 이벤트 이름:</th>
-						<td><input type="text" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					
-					<tr>
-						<th>상세 날짜:</th>
-						<td><input type="text" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					<tr>
-						<th>상세 시간 및 인원:</th>
-						<td><input type="text" placeholder="비밀번호를 입력하세요"
-							class="form-control" /></td>
-					</tr>
-					<tr>
-						<td colspan="2"><input type="button" value="등록"
-							onclick="sendData()" class="pull-right" /> <input type="button"
-							value="reset" class="pull-left" /> <input type="button"
-							value="글 목록으로... " class="pull-right"
-							onclick="javascript:location.href='list.jsp'" />
-					 <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
-                    <a class="btn btn-default" type="reset"> reset </a>
-                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
-						</td>
-					</tr>
+				</tr>
+				<tr>
+					<th>당첨자 발표날짜:</th>
+					<td><input type="date" class="form-control eventDate " /></td>
+				</tr>
+
+				<tr>
+					<th>이벤트 상세 날짜:</th>
+					<td><input type="date" class="form-control eventDate " /></td>
+				</tr>
+				<tr>
+					<th>상세 시간 및 인원:</th>
+					<td><input type="text" placeholder="상세 시간 및 인원을 입력하세요."
+						class="form-control" /></td>
+				</tr>
 				</tbody>
 			</table>
+					<input type="button" value="등록"
+						onclick="sendData()" class="pull-right" /> <input type="button"
+						value="목록으로" class="btn btn-primary btn-color btn-sm pull-left"
+						onclick="javascript:location.href='list.jsp'" /> <!-- <a class="btn btn-default" onclick="sendData()"> 등록 </a>
+                    <a class="btn btn-default" type="reset"> reset </a>
+                    <a class="btn btn-default" onclick="javascript:location.href='list.jsp'">글 목록으로...</a> -->
+					
 		</form>
 
 
@@ -107,6 +244,7 @@
 
 	</div>
 </div>
+
 
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 

@@ -35,6 +35,7 @@ public class EventController {
 		mav.setViewName("event/prizewinner");
 		return mav;
 	}
+
 	@RequestMapping("/addSaleEvent.do")
 	public String addSaleEvent() {
 
