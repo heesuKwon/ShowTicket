@@ -23,6 +23,7 @@ $(()=>{
 			$(this).children().removeClass("default").addClass("select");
 		},
 		mouseleave : function(){
+			 $(this).on('mouseleave');
 			 $(this).children().removeClass("select").addClass("default");
 		},
 		click: function(){

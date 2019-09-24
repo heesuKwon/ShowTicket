@@ -20,6 +20,7 @@
 		select *
 		from my_coupon m left join coupon c on m.coupon_no = c.coupon_no
 		where member_id = #{memberLoggedIn}
+		order by coupon_end_date
 	</select>
 	<resultMap type="map" id="myCoupon">
 		<result column="coupon_title" property="couponTitle" />

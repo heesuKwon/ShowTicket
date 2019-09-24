@@ -20,7 +20,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.coupon.model.service.CouponService;
-import com.kh.showticket.coupon.model.vo.MyCoupon;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 
@@ -64,7 +63,6 @@ public class MemberController {
 		String memberLoggedIn = "honggd";
 		
 		List<Map<String,String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
-		logger.debug("쿠폰리스트={}", myCouponList);
 		
 		mav.addObject("myCouponList", myCouponList);
 		mav.setViewName("member/myCoupon");
@@ -321,6 +319,18 @@ public class MemberController {
 
 
 			}
+    
+    @RequestMapping("/chkEmailUsable.do")
+    @ResponseBody
+    public boolean chkEmailUsable(@RequestParam String email){
+    	int cnt = memberService.chkEmailUsable(email);
+    	boolean bool = cnt == 0 ? true : false;
+    	
+    	return bool;
+    }
+    
+    
+    
 	
 }
 

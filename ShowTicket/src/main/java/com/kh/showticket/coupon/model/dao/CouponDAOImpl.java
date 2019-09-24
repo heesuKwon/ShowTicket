@@ -23,12 +23,12 @@ public class CouponDAOImpl implements CouponDAO {
 
 	@Override
 	public List<Coupon> selectCouponList() {
-		return session.selectList("selectCouponList");
+		return session.selectList("coupon.selectCouponList");
 	}
 	
 	@Override
 	public Coupon selectCoupon(int couponNo) {
-		return session.selectOne("selectCoupon", couponNo);
+		return session.selectOne("coupon.selectCoupon", couponNo);
 	}
 
 	@Override
@@ -36,12 +36,12 @@ public class CouponDAOImpl implements CouponDAO {
 		Map<String, Object> param = new HashMap<>();
 		param.put("coupon", coupon);
 		param.put("memberLoggedIn", memberLoggedIn);
-		session.insert("couponDonwlod", param);
+		session.insert("coupon.couponDonwlod", param);
 	}
 
 	@Override
 	public List<Map<String, String>> selectMyCouponList(String memberLoggedIn) {
-		return session.selectList("selectMyCouponList", memberLoggedIn);
+		return session.selectList("coupon.selectMyCouponList", memberLoggedIn);
 	}
 
 	

@@ -40,7 +40,7 @@ $(()=>{
                     <table id="couponlist" style="margin:0 auto;">
 	
                        	<tr>
-                       		<c:forEach items="${couponList }" var="coupon" varStatus="vs">
+                       		<c:forEach items="${couponList}" var="coupon" varStatus="vs">
                        			<c:if test="${vs.count%3 == 1}">
                        				<tr>
                        			</c:if>

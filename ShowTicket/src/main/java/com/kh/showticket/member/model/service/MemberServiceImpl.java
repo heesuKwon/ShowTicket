@@ -37,4 +37,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updatePwd(member);
 	}
 
+	@Override
+	public int chkEmailUsable(String email) {
+		return memberDAO.chkEmailUsable(email);
+	}
+
 }

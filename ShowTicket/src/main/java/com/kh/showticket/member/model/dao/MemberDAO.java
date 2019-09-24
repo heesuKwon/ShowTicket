@@ -14,4 +14,6 @@ public interface MemberDAO {
 
 	int updatePwd(Member member);
 
+	int chkEmailUsable(String email);
+
 }

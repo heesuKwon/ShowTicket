@@ -15,6 +15,8 @@ public interface MemberService {
 
 	int updatePwd(Member member);
 
+	int chkEmailUsable(String email);
+
 
 	
 

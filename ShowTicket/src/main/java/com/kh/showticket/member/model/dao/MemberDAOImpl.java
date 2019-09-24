@@ -1,5 +1,8 @@
 package com.kh.showticket.member.model.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,5 +38,10 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updatePwd(Member member) {
 		return sqlSession.update("member.updatePwd",member); 
+	}
+
+	@Override
+	public int chkEmailUsable(String email) {
+		return sqlSession.selectOne("member.chkEmailUsable", email);
 	}
 }
