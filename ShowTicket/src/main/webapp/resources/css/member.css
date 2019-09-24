@@ -526,7 +526,7 @@ input.btn.btn-outline-success{width: 80px;}
 input#btn_pwd{margin-right: 25px; margin-left: 25px;margin-right: 25px;}
 
 button#emailAuth{
-	border:1px solid;height: 35px; width: 55px; ;display: inline;
+	border:1px solid;height: 35px; width: 57px; ;display: inline;
 	background-color: #8c008c;
 	margin:0px 2px !important;
 }
@@ -535,7 +535,7 @@ input#email{
 }
 
 button#btn-emailAuth{
-	border:1px solid;height: 35px; width: 55px; ;display: inline;
+	border:1px solid;height: 35px; width: 57px; ;display: inline;
 	background-color: #8c008c;
 	margin:0px 2px !important;
 }

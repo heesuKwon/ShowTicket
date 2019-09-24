@@ -28,6 +28,7 @@ import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 @RequestMapping("/member")
 @Controller
@@ -68,6 +69,7 @@ public class MemberController {
 	@RequestMapping("/myCoupon.do")
 	public ModelAndView myCoupon(ModelAndView mav/*,String memberLoggedIn*/) {
 		//임시
+		//@SessionAttribute...
 		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
 		String memberLoggedIn = "honggd";
 		
@@ -80,9 +82,30 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myPoint.do")
-	public String myPoint() {
+	public ModelAndView myPoint(ModelAndView mav) {
+		
+		//임시
+		String memberLoggedIn = "honggd";
 
-		return "/member/myPoint";
+		int totalPoint = 0;
+		
+		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
+
+		for(MyPoint mp : myPointList) {
+			if(mp.getSaveUse().equals("s")) {
+				totalPoint += mp.getPointAccount();				
+			}
+			else if(mp.getSaveUse().equals("u")) {
+				totalPoint -= mp.getPointAccount();
+			}
+		}
+		
+
+		mav.addObject("myPointList", myPointList);
+		mav.addObject("totalPoint", totalPoint);
+		mav.setViewName("member/myPoint");
+
+		return mav;
 	}
 
 	@RequestMapping("/myStandBy.do")

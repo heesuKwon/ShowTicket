@@ -1,6 +1,7 @@
 package com.kh.showticket.coupon.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,16 +38,39 @@ public class CouponController {
 	public ModelAndView couponDownload(ModelAndView mav, @RequestParam int couponNo) {
 		logger.debug("coupon다운로드 요청");
 
+		boolean flag = true;
+		
 		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
 		//임시
 		String memberLoggedIn = "honggd";
+		String loc = "";
+		String msg = "";
+		List<Map<String, String>> couponList = couponService.selectMyCouponList(memberLoggedIn);
 		
-		couponService.couponDownload(couponNo, memberLoggedIn);
+		logger.debug("쿠폰리스트={}", couponList);
+		for(Map<String,String> coupon : couponList) {
+			logger.debug("쿠폰넘버={}", coupon.get("couponNo"));
+			logger.debug("쿠폰넘버={}", String.valueOf(coupon.get("couponNo")));
+			if(Integer.parseInt(String.valueOf(coupon.get("couponNo")))==couponNo) {
+				 flag = false;
+				 break;
+			}
+		}
 		
-		//String loc = "/member/myCoupon.do?memberId="+memberLoggedIn;
-		String loc = "/member/myCoupon.do";
-		String msg = "쿠폰 다운로드 성공!";
+		if(flag==true) {
+			couponService.couponDownload(couponNo, memberLoggedIn);
+			
+			//String loc = "/member/myCoupon.do?memberId="+memberLoggedIn;
+			loc = "/member/myCoupon.do";
+			msg = "쿠폰 다운로드 성공!";
+			
+		}
+		else if(flag==false) {
+			loc = "/coupon/coupon.do";
+			msg = "이미 다운로드한 쿠폰입니다.";
+		}
 		
+	
 		mav.addObject("loc", loc);
 		mav.addObject("msg", msg);
 		

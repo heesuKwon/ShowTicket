@@ -11,6 +11,9 @@
   <typeAliases>
   	<typeAlias type="com.kh.showticket.member.model.vo.Member"
   			   alias="member"/>
+  			   
+  	<typeAlias type="com.kh.showticket.member.model.vo.MyPoint"
+  			   alias="mypoint"/>
 
   	<typeAlias type="com.kh.showticket.coupon.model.vo.Coupon"
   			   alias="coupon"/>
