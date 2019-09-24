@@ -677,41 +677,19 @@ function kakaoPayCertResultAlert(code) {
 	<hr />
 	<div class="accordionMenu">
 		<ul class="nav nav-pills nav-justified">
-			<li class="nav-item"><a class="nav-link select nav-font"
-				href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디 찾기</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default"
+				href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디 찾기</a></li>
+			<li class="nav-item"><a class="nav-link select nav-font"
 				href="${pageContext.request.contextPath}/member/memberPwdFind.do">비밀번호 찾기</a></li>
 		</ul>
 		<hr />
-		<div id="html5" class="menuSection">
-			<h2><a href="#html5">생일로 찾기</a></h2>
-			<div id="move">
-				<div class="inputEnter" style="display: block;">
-											<div class="inputBox">
-												<div class="styleInput">
-													<input id="memNm1" name="memNm" type="text" class="iInput" placeholder="이름">
-													<span id="conClear" class="delBtn" style="display: none;"></span>
-												</div>
-												<div class="styleInput">
-													<input id="inputHp" name="inputHp" type="text" class="iInput" inputmode="numeric" placeholder="생년월일을 입력하세요(6자리만입력)">
-													<span id="conClear" class="delBtn" style="display: none;"></span>
-													<p class="error" style="display:none"></p>
-												</div>
-											</div>
-											<div class="btnArea">
-												<button type="submit" onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_hp'); javascript:chkMemInfo(); return false;" class="btn8f">확인</button>
-											</div>
-				</div>
-				
-			</div>
-		</div>
 		<div id="css3" class="menuSection">
 			<h2><a href="#css3">등록된 이메일로 찾기</a></h2>
 			<div id="move">
 				<div class="inputEnter" style="display: block;">
 									<div class="inputBox">
 										<div class="styleInput">
-											<input name="memNm" id="memNm2" type="text" class="iInput" placeholder="이름">
+											<input name="memNm" id="memId" type="text" class="iInput" placeholder="아이디 찾기">
 											<span id="conClear" class="delBtn" style="display: none;"></span>
 										</div>
 										<div class="emailInput">
@@ -756,7 +734,7 @@ function kakaoPayCertResultAlert(code) {
 				<div class="inputEnter" style="display: block;">
 										<div class="inputBox">
 											<div class="styleInput">
-												<input id="memNm1" name="memNm" type="text" class="iInput" placeholder="이름">
+												<input name="memNm" id="memId" type="text" class="iInput" placeholder="아이디 찾기">
 												<span id="conClear" class="delBtn" style="display: none;"></span>
 											</div>
 											<div class="styleInput">
@@ -772,7 +750,6 @@ function kakaoPayCertResultAlert(code) {
 				</div>
 			</div>
 		</div>
-	</div>
 
 
 </body>

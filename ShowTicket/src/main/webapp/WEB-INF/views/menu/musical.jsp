@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<fmt:requestEncoding value="utf-8"/>
+<fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/musical_show.css">
 <script>
@@ -145,7 +145,10 @@ function getList(page){
 	}
 </script>
 <!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<noscript><img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&' border='0' width='0' height='0' alt=''></noscript>
+<noscript>
+	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
+		border='0' width='0' height='0' alt=''>
+</noscript>
 
 <!-- AceCounter Log Gathering Script End -->
 
@@ -175,8 +178,8 @@ function getList(page){
 	fbq('track', "PageView");
 </script>
 <noscript>
-<img height="1" width="1" style="display:none"
-               src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1"/>
+	<img height="1" width="1" style="display: none"
+		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
 </noscript>
 <!-- End Facebook Pixel Code -->
 
@@ -205,357 +208,278 @@ function getList(page){
 </script>
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
+<script type="text/javascript">
+var index=0;
+window.onload = function(){
+	slideShow();
+	$(".submain_topban").hover($(".arrow").css("visibility","visible"))
+}
+function slideShow(){
+	var i;
+	var x = document.getElementsByClassName("mySlides");
+	for(i=0; i<x.length;i++){
+		x[i].style.display="none";
+	}
+	index++;
+	if($("#prev").click()){
+		index+1;
+	}
+	else if($("#next").click()){
+		index-2;
+	}
+		
+	if(index>x.length){
+		index=1;
+	}
+	x[index-1].style.display = "block";
+	setTimeout(slideShow,4000);
+	
+}
+</script>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style type="text/css">
-    span.dummy_bg.on {
-        display: none
-    }
+span.dummy_bg.on {
+	display: none
+}
 
-    ul.lst_thumb li.on::before {
-        position: absolute;
-        top: -1px;
-        left: -1px;
-        right: -1px;
-        bottom: -1px;
-        border: 2px solid #40b409;
-        content: ''
-    }
+ul.lst_thumb li.on::before {
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	right: -1px;
+	bottom: -1px;
+	border: 2px solid #40b409;
+	content: ''
+}
 </style>
 
 
 <div id="wrap" class="subwrap">
     <div id="container" class="submain_front">
-<div class="inner">
-    <h2 class="blind">공연</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-    <div class="top_area" style="padding-bottom:0px; margin-bottom:39px;">
-    <h2 class="title" style="margin-top:39px; display:inline-block">베스트 뮤지컬</h2>
-    <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
-        <div class="submain_topban">
-            <div class="submain_goods" style="width: 990px">
-                <ul>
-
-                        
-                            <li class="on" id="bigBanImage_0">
-                                <a href="http://www.ticketlink.co.kr/product/29717" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/공연전시_메인_990x280_다윈영의-악의기원.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_1">
-                                <a href="http://www.ticketlink.co.kr/bridge/495" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/990x280_y.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_2">
-                                <a href="http://www.ticketlink.co.kr/bridge/503" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/공연전시_메인_990x280_남진콘서트(1).jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_3">
-                                <a href="http://www.ticketlink.co.kr/product/28137" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/공연전시_메인_990x280_KB페스티벌_v2.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_4">
-                                <a href="http://www.ticketlink.co.kr/bridge/464" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_5/990x280_h.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_5">
-                                <a href="http://www.ticketlink.co.kr/product/29539" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/990x280_super.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_6">
-                                <a href="http://www.ticketlink.co.kr/product/28633" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/공연전시_메인_990x280_시티오브엔젤(1).jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_7">
-                                <a href="http://www.ticketlink.co.kr/bridge/417" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_1/[제작용]공연전시_메인_990x280_장윤정_v6.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                        
-                            <li id="bigBanImage_8">
-                                <a href="http://www.ticketlink.co.kr/product/29439" class="bx_banner">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/공연전시_메인_990x280_연극BEA.jpg" width="990" height="280">
-                                </a>
-                            </li>
-                            
-                        
-                    
-                    <input type="hidden" name="bigBannerCnt" id="bigBannerCnt" value="9">
-                </ul>
-            </div>
-            <div class="area_thumb">
-                      <ul class="lst_thumb" style="float: right">
-                            
-                            <li onclick="selectBanner(0)" id="bigBanPage_0" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/66x66_d.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_0"></span>
-                            </li>
-                            
-                            <li onclick="selectBanner(1)" id="bigBanPage_1" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_2/66x66_y.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_1"></span>
-                            </li>
-                            
-                            <li onclick="selectBanner(2)" id="bigBanPage_2" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/66x66_n.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_2"></span>
-                            </li>
-                            
-                                </ul>
-                            
-                                <ul class="lst_thumb" style="float: right">
-                            
-                            <li onclick="selectBanner(3)" id="bigBanPage_3" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_6/썸네일_66_66_KB페스티벌_v2.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_3"></span>
-                            </li>
-                            
-                            <li onclick="selectBanner(4)" id="bigBanPage_4" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/66x66_썸네일_흥부놀부전2.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_4"></span>
-                            </li>
-                       
-                            <li onclick="selectBanner(5)" id="bigBanPage_5" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/_66_66_super.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_5"></span>
-                            </li>
-                            
-                                </ul>
-                            
-                                <ul class="lst_thumb" style="float: right">
-                            
-                            <li onclick="selectBanner(6)" id="bigBanPage_6" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/썸네일_66_66_시티오브엔젤(1).jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_6"></span>
-                            </li>
-                            
-                            
-                            <li onclick="selectBanner(7)" id="bigBanPage_7" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_1/66x66(10).jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_7"></span>
-                            </li>
-                            
-                            <li onclick="selectBanner(8)" id="bigBanPage_8" onmouseover="this.style.cursor='pointer'">
-                                <span class="bx_img">
-                                    <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/썸네일_66x66_연극BEA.jpg" width="66" height="66" alt="">
-                                </span>
-                                <span class="dummy_bg" id="dummy_bg_8"></span>
-                            </li>
-                            
-                                </ul> 
-            </div>
-        </div>
-     </div>
+		<div class="inner">
+			<h2 class="blind">공연</h2>
+			<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
+			<div class="top_area"
+				style="padding-bottom: 0px; margin-bottom: 39px;">
+				<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
+					뮤지컬</h2>
+				<img src="/showticket/resources/images/plus.png" alt="더보기"
+					style="width: 35px; height: 35px;">
+				<div class="top_area">
+					<div class="submain_topban">
+						<div class="submain_goods" style="width: 990px; margin: auto;">
+							<img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_드라큘라.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_3/공연전시_메인_990x280_친정엄마_v3.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_사랑의가객_1.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_5/공연전시_메인_990x280_다윈영의-악의기원.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_에드거앨런포.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_3/공연전시_메인_990x280_정글라이프.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_NEW-달을품은슈퍼맨.jpg"
+								width="990" height="280"> <img class="mySlides"
+								src="//image.toast.com/aaaaab/ticketlink/TKL_3/공연전시_메인_990x280_시티오브엔젤.jpg"
+								width="990" height="280">
+						</div>
+								<button class="arrow" id="prev"><</button>
+								<button class="arrow" id="next">></button>
+					</div>
+				</div>
 
 
-        <!-- [D] 전시메인의 경우 .exhibition 추가입니다. -->
-        <div class="attention_wrap concert" style="margin-top:0px;">
-            <div class="header">
-                <h2 class="small-title" style="margin-top:0px; display:inline-block">최신 뮤지컬</h2>
-                <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
-            </div>
-            <div class="attention">
-                <ul style="width:1880px"><!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
-                    
-                        <li class="SHOW_ISSUE_V1_FIRST">
-                            <a href="http://www.ticketlink.co.kr/bridge/498">
-                                <span class="ribbon 
+
+				<!-- [D] 전시메인의 경우 .exhibition 추가입니다. -->
+				<div class="attention_wrap concert" style="margin-top: 0px;">
+					<div class="header">
+						<h2 class="small-title"
+							style="margin-top: 0px; display: inline-block">최신 뮤지컬</h2>
+						<img src="/showticket/resources/images/plus.png" alt="더보기"
+							style="width: 35px; height: 35px;">
+					</div>
+					<div class="attention">
+						<ul style="width: 1880px">
+							<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
+
+							<li class="SHOW_ISSUE_V1_FIRST"><a
+								href="http://www.ticketlink.co.kr/bridge/498"> <span
+									class="ribbon 
                                     ">HIDE
-                                </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg"  alt="">
-                                <p><em>제목등 소개 들어갈곳</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_FIRST">
-                            <a href="http://www.ticketlink.co.kr/bridge/496">
-                                <span class="ribbon 
+								</span> <img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg"
+									alt="">
+									<p>
+										<em>제목등 소개 들어갈곳</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_FIRST"><a
+								href="http://www.ticketlink.co.kr/bridge/496"> <span
+									class="ribbon 
                                     
                                     
                                     
                                     ">HIDE
-                                </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg" alt="">
-                                <p><em>크러쉬/우원재/그레이</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_FIRST">
-                            <a href="http://www.ticketlink.co.kr/product/29544">
-                                <span class="ribbon 
+								</span> <img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg"
+									alt="">
+									<p>
+										<em>크러쉬/우원재/그레이</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_FIRST"><a
+								href="http://www.ticketlink.co.kr/product/29544"> <span
+									class="ribbon 
                                     
                                     
                                         label level2
                                     
                                     
                                     ">SOLELY
-                                </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg" alt="">
-                                <p><em>얼리버드 티켓 판매중</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_FIRST">
-                            <a href="http://www.ticketlink.co.kr/product/29582">
-                                <span class="ribbon 
+								</span> <img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg"
+									alt="">
+									<p>
+										<em>얼리버드 티켓 판매중</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_FIRST"><a
+								href="http://www.ticketlink.co.kr/product/29582"> <span
+									class="ribbon 
                                     
                                     
                                     
                                     ">HIDE
-                                </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg" alt="">
-                                <p><em>트로트 여신</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_FIRST">
-                            <a href="http://www.ticketlink.co.kr/product/29703">
-                                <span class="ribbon 
+								</span> <img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg"
+									alt="">
+									<p>
+										<em>트로트 여신</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_FIRST"><a
+								href="http://www.ticketlink.co.kr/product/29703"> <span
+									class="ribbon 
                                     
                                     
                                         label level2
                                     
                                     
                                     ">SOLELY
-                                </span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg" alt="">
-                                <p><em>얼리버드 반값 티켓!</em></p>
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="SHOW_ISSUE_V1_SECOND">
-                            <a href="http://www.ticketlink.co.kr/bridge/402">
-                                <span class="ribbon 
+								</span> <img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg"
+									alt="">
+									<p>
+										<em>얼리버드 반값 티켓!</em>
+									</p>
+							</a></li>
+
+
+							<li class="SHOW_ISSUE_V1_SECOND"><a
+								href="http://www.ticketlink.co.kr/bridge/402"> <span
+									class="ribbon 
                                     
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_9/leemija_0726.jpg" alt="">
-                                <p><em>노래인생 60년 기념</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_SECOND">
-                            <a href="http://www.ticketlink.co.kr/product/29640">
-                                <span class="ribbon 
+									<img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_9/leemija_0726.jpg"
+									alt="">
+									<p>
+										<em>노래인생 60년 기념</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_SECOND"><a
+								href="http://www.ticketlink.co.kr/product/29640"> <span
+									class="ribbon 
                                     
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_7/ori0806.jpg" alt="">
-                                <p><em>40주년 전국투어 콘서트</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_SECOND">
-                            <a href="http://www.ticketlink.co.kr/product/29652">
-                                <span class="ribbon 
+									<img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_7/ori0806.jpg"
+									alt="">
+									<p>
+										<em>40주년 전국투어 콘서트</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_SECOND"><a
+								href="http://www.ticketlink.co.kr/product/29652"> <span
+									class="ribbon 
                                     
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_10/loved0807.jpg" alt="">
-                                <p><em>조기예매 할인</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_SECOND">
-                            <a href="http://www.ticketlink.co.kr/product/28714">
-                                <span class="ribbon 
+									<img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_10/loved0807.jpg"
+									alt="">
+									<p>
+										<em>조기예매 할인</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_SECOND"><a
+								href="http://www.ticketlink.co.kr/product/28714"> <span
+									class="ribbon 
                                     
                                     
                                     
                                 ">HIDE</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_8/201906141356a.jpg" alt="">
-                                <p><em>광주</br> 상무지구 기분좋은극장</em></p>
-                            </a>
-                        </li>
-                    
-                        <li class="SHOW_ISSUE_V1_SECOND">
-                            <a href="http://www.ticketlink.co.kr/product/27881">
-                                <span class="ribbon 
+									<img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_8/201906141356a.jpg"
+									alt="">
+									<p>
+										<em>광주</br> 상무지구 기분좋은극장
+										</em>
+									</p>
+							</a></li>
+
+							<li class="SHOW_ISSUE_V1_SECOND"><a
+								href="http://www.ticketlink.co.kr/product/27881"> <span
+									class="ribbon 
                                     
                                     
                                         label level2
                                     
                                     
                                 ">SOLELY</span>
-                                <img src="//image.toast.com/aaaaab/ticketlink/TKL_5/hongdo_0412.jpg" alt="">
-                                <p><em> 전북예술회관 대공연장</em></p>
-                            </a>
-                        </li>
+									<img
+									src="//image.toast.com/aaaaab/ticketlink/TKL_5/hongdo_0412.jpg"
+									alt="">
+									<p>
+										<em> 전북예술회관 대공연장</em>
+									</p>
+							</a></li>
 
-                </ul>
-            </div>
-        </div>
+						</ul>
+					</div>
+				</div>
 
 
-<div class="bottom_area">
-    <div class="inner">
-        <h2 class="title beforeSearch">전체 뮤지컬</h2>
-        		<div class="searchFrm">
-		        	<select name="searchCategory" id="category-musical">
-		        		<option value="searchAll">전체</option>
-		        		<option value="searchTitle">제목</option>
-		        		<option value="searchActor">배우</option>
-		        	</select>
-		        	<input type="text" class="form-control form-control-lg" name="searchKeyword">
-		        	<button type="button" class="btn btn-primary btn-color btn-sm" id="searchBtn">검색</button>
-        		</div>
+				<div class="bottom_area">
+					<div class="inner">
+						<h2 class="title beforeSearch">전체 뮤지컬</h2>
+						<div class="searchFrm">
+							<select name="searchCategory" id="category-musical">
+								<option value="searchAll">전체</option>
+								<option value="searchTitle">제목</option>
+								<option value="searchActor">배우</option>
+							</select> <input type="text" class="form-control form-control-lg"
+								name="searchKeyword">
+							<button type="button" class="btn btn-primary btn-color btn-sm"
+								id="searchBtn">검색</button>
+						</div>
 
         	
         	<div class="orderWrap">
@@ -584,10 +508,9 @@ function getList(page){
 	                    </div>
 	                </a></li>
 	       
-            </c:forEach>
-               
-            
+           		 </c:forEach>     
         </ul>
+        
     </div>
     <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
     <script type="text/javascript">
@@ -639,14 +562,14 @@ function getList(page){
 			$(".rangkingImgLink").attr("href", "/product/" + $(this).data("productid"));
 		});
     </script>
-</div>
-</div>
+				</div>
+			</div>
 
 
-</div>
-</body>
-<script type="text/javascript" src="/resources/js/date.js"></script>
-<script type="text/javascript">
+		</div>
+		</body>
+		<script type="text/javascript" src="/resources/js/date.js"></script>
+		<script type="text/javascript">
 	//<![CDATA[
 
 	var page = 1;
@@ -860,4 +783,4 @@ function getList(page){
 
 	//]]>
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+		<%@ include file="/WEB-INF/views/common/footer.jsp"%>

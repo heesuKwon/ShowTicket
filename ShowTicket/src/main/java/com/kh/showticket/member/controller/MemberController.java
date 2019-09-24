@@ -2,6 +2,7 @@ package com.kh.showticket.member.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.coupon.model.service.CouponService;
+import com.kh.showticket.coupon.model.vo.MyCoupon;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 
@@ -28,6 +31,9 @@ public class MemberController {
 
 	@Autowired()
 	MemberService memberService;
+	
+	@Autowired
+	CouponService couponService;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
@@ -52,9 +58,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myCoupon.do")
-	public String myCoupon() {
-
-		return "/member/myCoupon";
+	public ModelAndView myCoupon(ModelAndView mav/*,String memberLoggedIn*/) {
+		//임시
+		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
+		String memberLoggedIn = "honggd";
+		
+		List<Map<String,String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
+		logger.debug("쿠폰리스트={}", myCouponList);
+		
+		mav.addObject("myCouponList", myCouponList);
+		mav.setViewName("member/myCoupon");
+		
+		return mav;
 	}
 
 	@RequestMapping("/myPoint.do")
@@ -73,8 +88,10 @@ public class MemberController {
 
 		return "/member/myInterest";
 	}
-	@RequestMapping(value="/updateMember.do")
+	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
+		logger.debug("memberId="+member.getMemberId());
+		logger.debug("member="+member);
 
 		int result = memberService.updateMember(member);
 
@@ -85,17 +102,20 @@ public class MemberController {
 		return "common/msg";
 	}
 	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(@RequestParam String memberId, Model model) {
-		logger.info("디버그");
-		//		int result = memberService.deleteMember(memberId);
-		int result = 1;
-
+	public String deleteMember(@RequestParam String memberId,
+								Model model,
+								SessionStatus sessionStatus) {
+		logger.info("memeberId="+memberId);
+		logger.debug("memeberId="+memberId);
+		int result = memberService.deleteMember(memberId);
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete(); 
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
 		model.addAttribute("loc", "/");
+		
+		return "common/msg";
 
-		//		return "common/msg";
-		return "redirect:/";
 	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
@@ -208,6 +228,24 @@ public class MemberController {
 		return map;
 
 	}
+/*아이디 비번 찾기 팝업 이동 */
+	@RequestMapping("/memberIdFind.do")
+	public String memberIdFinder() {
+		
+		
+		
+		return "/member/memberIdFind";
+	}
+
+	@RequestMapping("/memberPwdFind.do")
+	public String memberPwdFinder() {
+		
+		
+		
+		return "/member/memberPwdFind";
+	}
+	
+/*-----------------*/	
 
 
 	/*관리자페이지로 이동???*/
