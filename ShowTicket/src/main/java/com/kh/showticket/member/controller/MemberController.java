@@ -28,6 +28,7 @@ import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
 
 @RequestMapping("/member")
@@ -59,12 +60,22 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/reservation.do")
-	public String reservation() {
+	public String reservation(Model model, @RequestParam String memberId) {
 
+		// 1.업무 로직
+		List<Ticket> list = memberService.selectReservationList(memberId);
+				
+		logger.debug("마이페이지 예매자 확인 :" + memberId);
+				
+		// 2.view단처리
+		model.addAttribute("list", list);
+				
 		return "/member/reservation";
 	}
+	
 	@RequestMapping("/memberView.do")
 	public void memberView() {
+		
 	}
 
 	@RequestMapping("/myCoupon.do")
@@ -87,11 +98,11 @@ public class MemberController {
 		
 		//임시
 		String memberLoggedIn = "honggd";
-
+		
 		int totalPoint = 0;
 		
 		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
-
+		
 		for(MyPoint mp : myPointList) {
 			if(mp.getSaveUse().equals("s")) {
 				totalPoint += mp.getPointAccount();				
@@ -101,11 +112,11 @@ public class MemberController {
 			}
 		}
 		
-
+		
 		mav.addObject("myPointList", myPointList);
 		mav.addObject("totalPoint", totalPoint);
 		mav.setViewName("member/myPoint");
-
+		
 		return mav;
 	}
 
@@ -168,7 +179,31 @@ public class MemberController {
 
 		return "common/msg";
 	}
-
+	
+	/* 이메일 인증 관련 코드 */
+	@RequestMapping("/sendMail.do")
+	@ResponseBody
+	public String joinPost(@RequestParam String email, Model model) throws Exception {
+		logger.info("member email: " + email);
+		String authKey = memberService.createMail(email);
+		
+		
+		return authKey;
+	}
+	
+//	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+//	public String emailConfirm(Member member, Model model) throws Exception {
+//		logger.info(member.getEmail() + ": auth confirmed");
+//		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
+////		memberService.updateMailAuthstatus(member);
+//		
+//		model.addAttribute("email_auth_check", 1);
+//		
+//		return "/user/joinPost";
+//	}
+	
+	/*이메일 인증 관련 코드 끝*/
+	
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,
 			@RequestParam String password,
@@ -205,7 +240,7 @@ public class MemberController {
 
 		return "common/msg";		
 	}
-
+	
 	/**
 	 * 세션 무효화하기
 	 * session.setAttribute("memberLoggedIn", member)
@@ -224,17 +259,7 @@ public class MemberController {
 		// 로그아웃시 메인 페이지로 보내기
 		return "redirect:/";
 	}
-
-	/**
-	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
-	 * @param memberLoggedIn
-	 */
-	/*
-	 * @RequestMapping("/memberView.do") public void memberView(@SessionAttribute
-	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
-	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
-	 */
-
+	
 	/**
 	 * 
 	 * 웹서비스(html문서)  + data(xml, json) 
@@ -259,6 +284,8 @@ public class MemberController {
 		return map;
 
 	}
+
+	
 /*아이디 비번 찾기 팝업 이동 */
 	@RequestMapping("/memberIdFind.do")
 	public String memberIdFinder() {

@@ -14,6 +14,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 
+
 <div id="enroll-container">
 	<form name="memberEnrollFrm" action="memberEnrollEnd.do" method="post" onsubmit="return validate();" >
 		<table>
@@ -56,8 +57,19 @@
 	
 			<tr>
 				<th>이메일</th>
-				<td>	
-					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
+				<td>
+				
+						<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">			
+						<span class="btn btn-gray btn-sm" id="emailAuthSubmit">이메일 인증</span>
+						<div style="clear:both; margin-top:5px;">
+							<input type="checkbox" id="chk-email"/><label for="chk-email">정보수신동의</label>
+						</div>
+						<div class="authContainer" id="emailAuthContainer">
+							<span>인증번호 : </span>
+							<input type="text" class="form-control" id="emailAuthCode" />
+							<button type="button" class="btn btn-primary" id="btn-emailAuth">확인</button>
+							<p class="ok" id="emailAuthstatus">이메일 인증이 완료되었습니다.</p>						
+						</div>
 				</td>
 			</tr>
 			
@@ -65,6 +77,7 @@
 				<th>휴대폰<span class="star">*</span></th>
 				<td>	
 					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
+					<button class="btn btn-gray btn-sm">휴대폰 인증</button>
 				</td>
 			</tr>
 			
@@ -75,9 +88,9 @@
 </div>
 
 <script>
+var emailAuthstatus = 0;
 $(function(){
-	
-	
+
  	// 비밀번호 검사
  	$("#password2").keyup(function(){
  		
@@ -94,6 +107,7 @@ $(function(){
 			$(".pw.ok").show();
  		}
  	});
+ 	
  	
 	//아이디 중복체크 ajax
  	$("#memberId_").on("keyup",(e)=>{
@@ -131,6 +145,58 @@ $(function(){
 		
 		
 	});
+	
+	var authKey;
+	<!-- 인증이메일 보내기 -->
+	$("#emailAuthSubmit").on("click",function(){
+		var email = $("#email").val().trim();
+		
+		if(email.length==0){
+			alert("이메일을 입력해주세요.");
+			return;
+		}
+		
+		if($("input:checkbox[id='chk-email']").is(":checked") == false){
+			alert("정보수신에 동의해주세요.");
+			return;
+		};
+		
+		alert("이메일이 발송되었습니다. 수신까지 몇분정도 소요됩니다.")
+		
+		$("#emailAuthContainer").show();
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/sendMail.do",
+			data: {email: email},
+			success: data =>{
+				console.log(data);
+				authKey = data;
+			},
+			error: (jqxhr, textStatus, errorThrown)=>{
+				console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
+			}
+		});
+	});
+	
+	$("#email").on("keyup",function(){
+		emailAuthstatus = 0;
+		authKey = "";
+		$("#emailAuthstatus").hide();
+	});
+	
+	<!-- 인증코드 확인 -->
+	$("#btn-emailAuth").on("click",()=>{
+		if(authKey == $("#emailAuthCode").val()){
+			alert("이메일 인증에 성공했습니다.");	
+			emailAuthstatus = 1;
+			$("#emailAuthstatus").show();
+		}
+		else{
+			alert("이메일 인증에 실패했습니다. 인증번호를 확인하세요.");
+		}		
+	});
+	
+	
 		
 });
 
@@ -139,6 +205,11 @@ function validate(){
 	if(memberId.val().trim().length<4){
 		alert("아이디는 최소 4자리이상이어야 합니다.");
 		memberId.focus();
+		return false;
+	}
+	var email = $("#email").val();
+	if(email.length!=0&&emailAuthstatus==0){
+		alert("이메일 인증을 하시거나 이메일 정보를 지워주세요.");
 		return false;
 	}
 	
