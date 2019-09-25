@@ -355,9 +355,13 @@ public class MemberController {
     @RequestMapping("/chkEmailUsable.do")
     @ResponseBody
     public String chkEmailUsable(@RequestParam String email){
-    	String authCode = null;
+    
     	
-    	int cnt = memberService.chkEmailUsable(email);
+    	int cnt = 0;
+    	String authCode = null;
+   
+    	cnt = memberService.chkEmailUsable(email);
+    	logger.debug("cnt={}", cnt);
     	
     	//이메일 중복확인
     	if(cnt==0) {
@@ -388,6 +392,9 @@ public class MemberController {
     		authCode = key;
            
     	}
+    	
+    	//result.put("cnt", Integer.toString(cnt));
+    	//result.put("authCode", authCode);
     	
     	
     	return authCode;

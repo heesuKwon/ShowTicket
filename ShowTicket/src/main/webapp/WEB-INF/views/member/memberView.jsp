@@ -34,7 +34,8 @@ $(()=>{
 	        url : '${pageContext.request.contextPath}/member/chkEmailUsable.do',
 	        data : {email : email},
 	        success : function(data) {
-				if(data!=null){
+	        	console.log(data)
+				if(data!=''){
 					$("#emailAuthContainer").css("display", "block");
 					alert("입력하신 이메일로 송신된 인증번호를 입력해주세요.");
 				}
@@ -45,13 +46,13 @@ $(()=>{
 	       },error:function(e){
 	         	alert(e);
 	       },complete:function(data){
-	    	   console.log(data.responseText);
 	    	   $("#btn-emailAuth").on("click", function(){
 	    		   if($("#emailAuthCode").val().trim()==data.responseText){
 	    			   alert("인증되셨습니다!");
 	    			   
 	    			   $("#emailAuthContainer").css("display", "none");
 	    			   $("#emailAuth").prop("disabled", "true");
+	    			   $("#email").attr("readonly", "true");
 	    			   
 	    			   emailAuthFlag = 1;
 	    		   }
