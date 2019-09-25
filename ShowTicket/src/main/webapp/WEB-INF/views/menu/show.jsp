@@ -12,34 +12,118 @@
 
 <script>
 var cpage = 2;
- 
+var srchFlag = false;
+var srchOFlag = false;
 $(function(){
      getList(cpage);
      cpage++;
+     
+     $("#searchBtn").on("click", function(){
+  		srchFlag = true;
+  		srchOFlag = false;
+  		cpage=2;
+ 		getSearchList(1);
+ 	});
+
 });
  
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
      if($(window).scrollTop() > $(document).height() - $(window).height()-100){
-          getList(cpage);
-           cpage++;   
+    	 
+    	 if(srchFlag==true){
+    		 getSearchList(cpage);
+	    	 cpage++;
+    	 }
+    	 else if(srchFlag==false){
+	          getList(cpage);
+	          cpage++;
+    	 }
      } 
 });
- 
-function getList(page){
+
+function getSearchList(cpage){
+
+	var cate = $("#category-show").val();
+	var srchKeyword = $("#searchKeyword").val();
+	var param= {
+			cpage : cpage,
+			cate : cate,
+			srchKeyword : srchKeyword
+	}
+	   $.ajax({
+	        url : '${pageContext.request.contextPath}/show/showSearch.do',
+	        data : param,
+	        success : function(data) {
+	            var html = "";
+	       
+	         	if(data.length==0 && srchOFlag == false){
+	         		$("#showListAll").css("display", "none");
+	         		$("#srchEmpty").css("display", "block");
+	        		return;
+	        	}
+	       
+	         	if(data.length>0){
+	         		$("#showListAll").css("display", "block");
+	         		$("#srchEmpty").css("display", "none");
+	         		srchOFlag = true;
+	         		
+	         		
+	            for(var i=0; i<data.length; i++){
+	                		
+		            html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+		            html+="<p><img src="+data[i].poster+" alt=''></p>";
+		            html+="<div class='list_info'>";
+		            html+="<strong class='elp'>"+data[i].prfnm+"</strong>";
+		            html+="<dl>";
+		            html+="<dt>기간</dt>";
+		            html+="<dd>"+data[i].prfpdfrom+" ~ "+data[i].prfpdto+"</dd>";
+		            html+="<dt>장소</dt>";
+		            html+="<dd>"+data[i].fcltynm+"</dd>";
+		            html+="</dl>";
+		            html+="</div>";
+		            html+="</a>";
+		            html+="</li>";
+	                	
+	              }
+	         	}
+	            html = html.replace(/%20/gi, " ");
+	            
+	            if (cpage==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+	                $("#showListAll").html(html); 
+	            }else{
+	            	$("#showListAll").append(html);
+	            }
+	            
+	       },error:function(e){
+	           if(e.status==300){
+	               alert("데이터를 가져오는데 실패하였습니다.");
+	         	};
+			}
+	   });
 	
+};
+ 
+function getList(cpage){
     $.ajax({
         url : '${pageContext.request.contextPath}/show/showAjax.do',
         data : {"cpage" : cpage},
         success : function(data) {
+        	
+        	if(srchOFlag=false){
+        		
+        	}
 
             var html = "";
             
             if (cpage==1){ //페이지가 1일경우에만 id가 list인 html을 비운다.
                   $("#showListAll").html(""); 
             }
-           
+            
             
                 if(data.length>0){
+                	
+                	srchOFlag = true;
+                	
                 	for(var i=0; i<data.length; i++){
                 		
 	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
@@ -60,19 +144,18 @@ function getList(page){
             
             html = html.replace(/%20/gi, " ");
             
-            /*if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+            if (cpage==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
                 $("#showListAll").html(html); 
-            }else{*/
+            }else{
             	$("#showListAll").append(html); 
-            /*}*/
+            }
        },error:function(e){
            if(e.status==300){
                alert("데이터를 가져오는데 실패하였습니다.");
            };
-       }
+       	}
     }); 
-}
-
+};
 
 </script>
 <script language='javascript'>
@@ -445,7 +528,7 @@ ul.lst_thumb li.on::before {
 								<option value="searchTitle">제목</option>
 								<option value="searchActor">배우</option>
 							</select> <input type="text" class="form-control form-control-lg"
-								name="searchKeyword">
+								id="searchKeyword">
 							<button type="button" class="btn btn-primary btn-color btn-sm"
 								id="searchBtn">검색</button>
 						</div>
@@ -460,6 +543,8 @@ ul.lst_thumb li.on::before {
 		        </select>
         	</div>
         	
+       <div class="searchContainer">
+      
         <ul id="showListAll" class="goods_list" style="clear:both;">
             
             <c:forEach  items="${showList}" var="map">
@@ -477,10 +562,11 @@ ul.lst_thumb li.on::before {
 	                </a></li>
 	       
             </c:forEach>
-                
-               
-            
+
         </ul>
+        
+          <div id="srchEmpty">검색결과가 없습니다.<div>
+        </div>
     </div>
     <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
     <script type="text/javascript">

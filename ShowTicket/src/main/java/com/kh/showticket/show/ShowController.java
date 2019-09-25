@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static com.kh.showticket.common.getApi.getApi.*;
 
+import javax.annotation.PostConstruct;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -29,9 +30,22 @@ import org.xml.sax.SAXException;
 public class ShowController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-	DocumentBuilder dBuilder;
-	Document doc;
+
+	static List<Map<String,String>> showDetailList;
+	
+	@PostConstruct
+	public void postConstruct() {
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows="+Integer.MAX_VALUE+"&shcate=AAAA";	
+		List<Map<String,String>> showAllList = getList(url);
+		
+		showDetailList = new ArrayList<>();
+
+		for(Map<String,String> map : showAllList) {
+			url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+map.get("mt20id")+"?service=3127d89913494563a0e9684779988063";
+			showDetailList.add(getDetailList(url));
+		}
+	
+	}
 	
 	
 	@RequestMapping("/show.do")
@@ -57,6 +71,58 @@ public class ShowController {
 		
 		return getList(url);
 
+	}
+	
+	@RequestMapping("/showSearch.do")
+	public List<Map<String,String>> musicalSearch(ModelAndView mav, @RequestParam String cate, @RequestParam String srchKeyword, @RequestParam int cpage) {
+			//cate : searchAll / searchTitle / searchActor
+			//srchKeyword : String
+			//cpage
+
+		final int numPerPage = 8;
+		
+		logger.debug("cate={}", cate);
+		logger.debug("srchKeyword={}", srchKeyword);
+		
+		List<Map<String, String>> result = new ArrayList<>();
+		List<Map<String, String>> resultPaged = new ArrayList<>(8);
+		
+		
+		if(cate.equals("searchAll")) {
+			for(Map<String, String> map : showDetailList) {
+				if(map.get("prfnm").contains(srchKeyword) || map.get("prfcast").contains(srchKeyword)) {
+					result.add(map);
+				}
+			}
+
+		}
+		else if(cate.equals("searchTitle")) {
+			for(Map<String, String> map : showDetailList) {
+				if(map.get("prfnm").contains(srchKeyword)) {
+					result.add(map);
+				}
+			}
+		}
+		else if(cate.equals("searchActor")) {
+			for(Map<String, String> map : showDetailList) {
+				if(map.get("prfcast").contains(srchKeyword)) {
+					result.add(map);
+				}
+			}
+		}
+		
+		int startPage = (cpage-1)*numPerPage;
+	
+		int endPage = startPage+numPerPage;
+		
+		if(endPage>=result.size()) endPage = result.size();
+		
+		for(int i=startPage; i<endPage; i++) {
+			resultPaged.add(result.get(i));
+		}
+		
+			
+		return resultPaged;
 	}
 
 	

@@ -21,7 +21,7 @@ select[name="searchCategory"]{
 	display: inline;
 }
 
-input[name="searchKeyword"]{
+#searchKeyword{
 	width: 300px;
 	height: 35px;
 	display: inline;
@@ -98,3 +98,6 @@ height:217px;
 	visibility:hidden;
 }
 
+div#srchEmpty{
+	 text-align:center; margin:100px auto; display:none;
+}
