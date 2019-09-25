@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.mail.MessagingException;
 
 import org.slf4j.Logger;
@@ -171,24 +170,26 @@ public class MemberController {
 	}
 	
 	/* 이메일 인증 관련 코드 */
-	@RequestMapping(value="joinPost", method=RequestMethod.POST)
-	public String joinPost(@RequestParam String email) throws Exception {
+	@RequestMapping("/sendMail.do")
+	@ResponseBody
+	public String joinPost(@RequestParam String email, Model model) throws Exception {
 		logger.info("member email: " + email);
-		memberService.createMail(email);
+		String authKey = memberService.createMail(email);
 		
-		return "/user/joinPost";
+		
+		return authKey;
 	}
 	
-	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
-	public String emailConfirm(Member member, Model model) throws Exception {
-		logger.info(member.getEmail() + ": auth confirmed");
-		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
-//		memberService.updateMailAuthstatus(member);
-		
-		model.addAttribute("email_auth_check", 1);
-		
-		return "/user/joinPost";
-	}
+//	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+//	public String emailConfirm(Member member, Model model) throws Exception {
+//		logger.info(member.getEmail() + ": auth confirmed");
+//		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
+////		memberService.updateMailAuthstatus(member);
+//		
+//		model.addAttribute("email_auth_check", 1);
+//		
+//		return "/user/joinPost";
+//	}
 	
 	/*이메일 인증 관련 코드 끝*/
 	

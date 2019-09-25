@@ -49,29 +49,26 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	@Transactional
-	public void createMail(String email) throws Exception {
+	public String createMail(String email) throws Exception {
 	
 		// 임의의 authkey 생성
-		String authkey = new TempKey().getKey(50, false);
-
-//		member.setAuthkey(authkey);
-//		memberDAO.updateAuthkey(member);
+		String authkey = new TempKey().getKey(6, false);
 
 		// mail 작성 관련 
 		MailUtils sendMail = new MailUtils(mailSender);
 
-		sendMail.setSubject("[Hoon's Board v2.0] 회원가입 이메일 인증");
+		sendMail.setSubject("[ShowTicket] 이메일 인증코드입니다.");
 		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
-				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
-				.append("<a href='http://localhost:8080/user/joinConfirm?email=")
-				.append(email)
-				.append("&authkey=")
+				.append("<p>아래 인증번호를 입력하면 이메일 인증이 완료됩니다.</p>")
+				.append("<h2>")
 				.append(authkey)
-				.append("' target='_blenk'>이메일 인증 확인</a>")
+				.append("</h2>")
 				.toString());
-		sendMail.setFrom("관리자 ", "관리자명");
+		sendMail.setFrom("showticket77@gmail.com", "(주)쇼티켓");
 		sendMail.setTo(email);
 		sendMail.send();
+		
+		return authkey;
 	}
 
 //	@Override
