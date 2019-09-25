@@ -274,14 +274,6 @@ ul.lst_thumb li.on::before {
 
 <div id="wrap" class="subwrap">
     <div id="container" class="submain_front">
-<div class="inner">
-    <h2 class="blind">공연</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-    <div class="top_area" style="padding-bottom:0px; margin-bottom:39px;">
-    <h2 class="title" style="margin-top:39px; display:inline-block">베스트 뮤지컬</h2>
-    <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
-        <div class="submain_topban">
-            <div class="submain_goods" style="width: 990px">
-                <ul>
 
 		<div class="inner">
 			<h2 class="blind">공연</h2>
