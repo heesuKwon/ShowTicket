@@ -43,13 +43,17 @@
 						<th>사용기간</th>
 						<th>쿠폰만료일</th>
 					</tr>
-					<tr>
-						<td>생일축하 쿠폰</td>
-						<td>5000원</td>
-						<td>전 공연</td>
-						<td>60일</td>
-						<td>2019.10.15</td>
-					</tr>
+					<c:forEach items="${myCouponList }" var="mycoupon">
+						<tr>
+							<td>${mycoupon.couponTitle }</td>
+							<td>${mycoupon.couponPrice }원</td>
+							<td>${empty mycoupon.showId ? "전 공연 대상" : "해당 공연 대상" }</td>
+							<td>${mycoupon.couponTime }일</td>
+							<td>
+								<fmt:formatDate value="${mycoupon.couponEndDate }" />
+								</td>
+						</tr>
+					</c:forEach>
 				</table>
 
 				<br /> <br />

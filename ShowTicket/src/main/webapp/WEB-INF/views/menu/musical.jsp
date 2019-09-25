@@ -208,22 +208,6 @@ function getList(page){
 </script>
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<!-- AceCounter Log Gathering Script End -->
-
-
-<!-- Facebook Pixel Code -->
-
-
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 <script type="text/javascript">
 var index=0;
 window.onload = function(){
@@ -273,6 +257,7 @@ ul.lst_thumb li.on::before {
 
 
 <div id="wrap" class="subwrap">
+
     <div id="container" class="submain_front">
 
 		<div class="inner">
@@ -525,10 +510,9 @@ ul.lst_thumb li.on::before {
 	                    </div>
 	                </a></li>
 	       
-            </c:forEach>
-               
-            
+           		 </c:forEach>     
         </ul>
+        
     </div>
     <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
     <script type="text/javascript">

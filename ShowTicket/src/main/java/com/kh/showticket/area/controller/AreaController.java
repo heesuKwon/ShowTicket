@@ -16,25 +16,25 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping("/area")
 public class AreaController {
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
-	
+
 	@RequestMapping("/area.do")
 	public ModelAndView areaList(ModelAndView mav) {
-		
-		String url1="http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20171218&catecode=AAAA&area=11";
-		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage=1&rows=6&shcate=AAAB";
-		
+
+		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191030&cpage=1&rows=6&shcate=AAAA";
+		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191030&cpage=1&rows=6&shcate=AAAB";
+
 		mav.setViewName("area/area");
 		mav.addObject("concatList", getConcatList(url1,url2));
 		return mav;
 	}
-	
+
 	@RequestMapping("/areaAjax.do")
 	public List<Map<String,String>> getAreaList(@RequestParam String url1, @RequestParam String url2) {
 		return getConcatList(url1,url2);
 	}
-	
+
 
 
 }

@@ -50,8 +50,6 @@ public class getApi {
 			documentBuilder = factory.newDocumentBuilder();
 			doc = documentBuilder.parse(url);
 
-
-
 			doc.getDocumentElement().normalize();
 			//logger.debug("Root element: {} ", doc.getDocumentElement().getNodeName()); // Root element: dbs
 
@@ -91,6 +89,7 @@ public class getApi {
 					list.add(map);
 
 				}
+
 			}
 		} catch (Exception e) {
 

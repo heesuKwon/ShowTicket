@@ -104,7 +104,7 @@
 						  <input type="hidden" name="boardCommentRef" value="0" /> 
 		
 						
-						<textarea name="boardCommentContent" id="boardCommentContent" cols="60" rows="3"></textarea>
+						<textarea name="boardCommentContent" id="boardCommentContent" cols="80" rows="3"></textarea>
 						<button type="submit" id="rebtn"class="btn btn-primary">댓글입력</button>
 						
 					</form>
