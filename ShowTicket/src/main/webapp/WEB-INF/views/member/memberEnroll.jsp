@@ -161,6 +161,8 @@ $(function(){
 			return;
 		};
 		
+		alert("이메일이 발송되었습니다. 수신까지 몇분정도 소요됩니다.")
+		
 		$("#emailAuthContainer").show();
 		
 		$.ajax({
