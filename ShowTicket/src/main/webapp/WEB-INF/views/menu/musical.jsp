@@ -495,18 +495,20 @@ ul.lst_thumb li.on::before {
         	
         <ul id="musicalListAll" class="goods_list" style="clear:both;">
                   <c:forEach items="${musicalList}" var="map">
-	                <li><a href="http://www.ticketlink.co.kr/product/29767">
-	                    <p><img src="${map.poster }" alt=""></p>
-	                    <div class="list_info">
-	                        <strong class="elp">${map.prfnm }</strong>
-	                        <dl>
-	                            <dt>기간</dt>
-	                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
-	                            <dt>장소</dt>
-	                            <dd>${map.fcltynm }</dd>
-	                        </dl>
-	                    </div>
-	                </a></li>
+	                <li>
+	                	<a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
+		                    <p><img src="${map.poster }" alt=""></p>
+		                    <div class="list_info">
+		                        <strong class="elp">${map.prfnm }</strong>
+		                        <dl>
+		                            <dt>기간</dt>
+		                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
+		                            <dt>장소</dt>
+		                            <dd>${map.fcltynm }</dd>
+		                        </dl>
+		                    </div>
+	                	</a>
+	               	</li>
 	       
            		 </c:forEach>     
         </ul>

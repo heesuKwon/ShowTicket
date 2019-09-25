@@ -1,16 +1,14 @@
 package com.kh.showticket.common.getApi;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +16,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 import com.kh.showticket.common.DescendingByPrfpdfrom;
+import com.kh.showticket.common.MusicalAndShow;
 
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
@@ -38,6 +36,7 @@ public class getApi {
 		
 		return value.getNodeValue();
 	}
+	
 	
 	//최신순 정렬
 	public static List<Map<String, String>> getOrderedListByDate(List<Map<String,String>> list){
@@ -114,6 +113,56 @@ public class getApi {
 		return concatList;
 		
 	}
+	
+	//공연 상세조회
+	public MusicalAndShow getMusicalAndShow(String id) {
+		MusicalAndShow mas = new MusicalAndShow();
+		
+		try {
+			
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+id+"?service=3127d89913494563a0e9684779988063";			
+			documentBuilder = factory.newDocumentBuilder();
+			doc = documentBuilder.parse(url);
+
+			System.out.println(url);
+			
+			doc.getDocumentElement().normalize();
+			NodeList nodeList = doc.getElementsByTagName("db");
+			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
+		
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+		
+			for(int i=0; i<nodeList.getLength(); i++){
+			Node node = nodeList.item(i);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				
+				Element element = (Element)node;
+				
+				mas.setId(getTagValue("mt20id", element));
+				mas.setName(getTagValue("prfnm", element));
+				mas.setStartDate(transFormat.parse(getTagValue("mt20id", element)));			
+				mas.setEndDate(transFormat.parse(getTagValue("mt20id", element)));			
+				mas.setHallId(getTagValue("prfnm", element));
+				mas.setHallName(getTagValue("prfnm", element));
+				mas.setCast(getTagValue("prfnm", element));
+				mas.setRuntime(getTagValue("prfnm", element));
+				mas.setAge(getTagValue("prfnm", element));
+				mas.setPrice(getTagValue("prfnm", element));
+				mas.setPoster(getTagValue("prfnm", element));
+				mas.setState(getTagValue("prfnm", element));
+				//mas.setUrls(getTagValue("styurls", element));
+				mas.setTime(getTagValue("prfnm", element));
+				
+			}
+			}
+		} catch (Exception e) {
+		
+		}
+		
+		
+		return mas;
+	}
+	
 	
 	
 		

@@ -1,0 +1,32 @@
+package com.kh.showticket.musical.model.service;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kh.showticket.common.MusicalAndShow;
+import com.kh.showticket.common.getApi.getApi;
+import com.kh.showticket.musical.model.dao.MusicalDAO;
+
+@Service
+public class MusicalServiceImpl implements MusicalService {
+	
+	@Autowired
+	MusicalDAO musicalDAO;
+	
+	getApi getApi;
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Override
+	public MusicalAndShow selectOne(String musicalId) {
+		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
+		musical.setReview_star(musicalDAO.selectReviewStar(musicalId));
+		
+		logger.debug(musical.toString());
+		
+		return musical;
+	}
+
+}
