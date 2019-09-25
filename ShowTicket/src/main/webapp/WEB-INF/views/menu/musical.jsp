@@ -208,22 +208,6 @@ function getList(page){
 </script>
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<!-- AceCounter Log Gathering Script End -->
-
-
-<!-- Facebook Pixel Code -->
-
-
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 <script type="text/javascript">
 var index=0;
 window.onload = function(){
@@ -274,15 +258,6 @@ ul.lst_thumb li.on::before {
 
 <div id="wrap" class="subwrap">
     <div id="container" class="submain_front">
-<div class="inner">
-    <h2 class="blind">공연</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-    <div class="top_area" style="padding-bottom:0px; margin-bottom:39px;">
-    <h2 class="title" style="margin-top:39px; display:inline-block">베스트 뮤지컬</h2>
-    <img src="/showticket/resources/images/plus.png" alt="더보기" style="width: 35px; height: 35px;">
-        <div class="submain_topban">
-            <div class="submain_goods" style="width: 990px">
-                <ul>
-
 		<div class="inner">
 			<h2 class="blind">공연</h2>
 			<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
@@ -533,10 +508,9 @@ ul.lst_thumb li.on::before {
 	                    </div>
 	                </a></li>
 	       
-            </c:forEach>
-               
-            
+           		 </c:forEach>     
         </ul>
+        
     </div>
     <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
     <script type="text/javascript">

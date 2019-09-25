@@ -25,7 +25,7 @@
 			<br>
 			<div id="myPoint">
 				<label class="memberPoint">내사용가능 포인트&nbsp;&nbsp;|&nbsp;</label> <label
-					id="memberp">100</label><label id="p">P</label>
+					id="memberp">${totalPoint }</label><label id="p">P</label>
 			</div>
 			<br /> <br /> <br />
 			<table id="pointTable" style="margin: auto;">
@@ -35,12 +35,14 @@
 					<th>적립/사용</th>
 					<th>적용 날짜</th>
 				</tr>
-				<tr>
-					<td>연극 <발칙한 로맨스></td>
-					<td>530원</td>
-					<td>적립</td>
-					<td>2019.09.19</td>
-				</tr>
+				<c:forEach items="${myPointList }" var="mypoint">
+					<tr>
+						<td>${mypoint.pointReason }</td>
+						<td>${mypoint.pointAccount }원</td>
+						<td>${mypoint.saveUse == 's' ? '적립' : '사용' }</td>
+						<td>${mypoint.saveUseDate }</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</form>
 	</div>

@@ -12,7 +12,7 @@
 </jsp:include>
 <script>
 $(()=>{
-
+	var emailAuthFlag = 0; //이메일 인증 버튼 누르지 않음.
 
 	$("#deleteMember").click(function() {
 		var bool = confirm("정말로 탈퇴하시겠습니까?");
@@ -21,9 +21,53 @@ $(()=>{
 			location.href = "${pageContext.request.contextPath}/member/deleteMember.do?memberId="+id;
 		}
 	});
+	
+	$("#emailAuth").on("click", function(){
+		var email = $("#email").val().trim();
+		
+		if(email.length==0){
+			alert("이메일을 입력해주세요.");
+			return;
+		}
+		
+		$.ajax({
+	        url : '${pageContext.request.contextPath}/member/chkEmailUsable.do',
+	        data : {email : email},
+	        success : function(data) {
+				if(data!=null){
+					$("#emailAuthContainer").css("display", "block");
+					alert("입력하신 이메일로 송신된 인증번호를 입력해주세요.");
+				}
+				else{
+					alert("이미 등록된 이메일입니다.");
+					return;
+				}
+	       },error:function(e){
+	         	alert(e);
+	       },complete:function(data){
+	    	   console.log(data.responseText);
+	    	   $("#btn-emailAuth").on("click", function(){
+	    		   if($("#emailAuthCode").val().trim()==data.responseText){
+	    			   alert("인증되셨습니다!");
+	    			   
+	    			   $("#emailAuthContainer").css("display", "none");
+	    			   $("#emailAuth").prop("disabled", "true");
+	    			   
+	    			   emailAuthFlag = 1;
+	    		   }
+	    	   })
+	       }
+	    });
+	})
 
 });
 function validate(){
+	
+	if($("#email").val().trim().length()>0 && emailAuthFlag == 0){
+		alert("이메일을 인증해주십시오.");
+		return false;
+	}
+	
 	var bool = confirm("정말로 수정하시겠습니까?");
 	if (bool) {
 		return true;
@@ -83,9 +127,19 @@ function updatePwd() {
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td>	
+				<td>
+					<div>
 					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
-					<input type="checkbox" style="margin-top:10px;" />정보수신동의
+					<button type="button" class="btn btn-primary" id="emailAuth">인증</button>
+					</div>
+					<div class="authContainer" id="emailAuthContainer">
+						<span>인증번호 : </span>
+						<input type="text" class="form-control" id="emailAuthCode" />
+						<button type="button" class="btn btn-primary" id="btn-emailAuth">확인</button>
+					</div>
+					<div style="clear:both; margin-top:5px;">
+						<input type="checkbox" id="chk-email"/><label for="chk-email">정보수신동의</label>
+					</div>
 				</td>
 			</tr>
 			

@@ -9,8 +9,20 @@
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coupon.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css">
+<script>
+$(()=>{
+	$(".couponDown").mouseover(function(){
+		$(this).css("cursor", "pointer");
+	})
+	
+	$(".couponDown").click(function(){
+		location.href="${pageContext.request.contextPath}/coupon/couponDownload.do?couponNo="+$(this).attr("id");
+	})
+})
+</script>
 
-  <div id="container" class="event_cont">
+
+<div id="container" class="event_cont">
         <div class="inner">
         	<ul class="nav nav-pills nav-justified">
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/eventList.do">진행중인 이벤트</a></li>
@@ -26,105 +38,34 @@
 <!--                     <table class="coupon_lst"> -->
                     <!-- n%3으로 조건을 줘서 채우면 될 것이다. -->
                     <table id="couponlist" style="margin:0 auto;">
-
-                       <tr>
-                       		<td>
-	             				<div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">생일축하5000원할인</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>      			
-	                       		</div>
-	                       		</div>
-                       		</td>
-                       	
+	
+                       	<tr>
+                       		<c:forEach items="${couponList}" var="coupon" varStatus="vs">
+                       			<c:if test="${vs.count%3 == 1}">
+                       				<tr>
+                       			</c:if>
                        			<td>
-	             <div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">긴쿠폰이름이문제가되지않았으면좋겠다.</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>      			
-	                       		</div>
-	                       		</div>
-                       		</td>
-                       	
-                      
-                       			<td>
-	             <div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">생일축하5000원할인</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>      			
-	                       		</div>
-	                       			</div>
-                       		</td>
-                       	
-                       			
-                       	
-         
+		             				<div class="couponWrap">
+		                       			<div class="coupon">
+										     <h2 class="couponTitle">${coupon.couponTitle }</h2>
+										     <div class="couponMore">
+										      <p class="couponExpire">기간 ${coupon.couponTime }일</p>
+										      <p class="couponDetail">
+										      		${coupon.showId==null? '전 공연 대상' : '해당 공연 대상'}</p>
+		 								      	</div>
+		 								      	<div class="couponDown" id="${coupon.couponNo }">
+										      		<p>쿠폰다운</p>     			
+		                       					</div>      			
+		                       			</div>
+		                       		</div>
+                       			</td>
+                       			<c:if test="${vs.count%3 == 0}">
+                       				<tr>
+                       			</c:if>
+                       		</c:forEach>
                        </tr>
                        
-                        <tr>
-       
-                       		<td>
-	             <div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">생일축하5000원할인</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>    	</div>  			
-	                       		</div>
-                       		</td>
-                       			<td>
-	             
-	                       			<div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">생일축하5000원할인</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>      			
-	                       		</div>	</div>
-                       		</td>
-                       	<td>
-	             <div class="couponWrap">
-	                       			<div class="coupon">
-									     <h2 class="couponTitle">생일축하5000원할인</h2>
-									     <div class="couponMore">
-									      <p class="couponExpire">기간 60일</p>
-									      <p class="couponDetail">전 공연 대상</p>
-	 								      	</div>
-	 								      	<div class="couponDown">
-									      		<p>쿠폰다운</p>     			
-	                       					</div>      			
-	                       		</div>	</div>
-                       		</td>
-                       	
-         
-                       </tr>
-           
+                      
                     </table>
                 </div>
 
