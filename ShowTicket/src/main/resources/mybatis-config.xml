@@ -11,10 +11,22 @@
   <typeAliases>
   	<typeAlias type="com.kh.showticket.member.model.vo.Member"
   			   alias="member"/>
+  			   
+  	<typeAlias type="com.kh.showticket.member.model.vo.MyPoint"
+  			   alias="mypoint"/>
+
+  	<typeAlias type="com.kh.showticket.coupon.model.vo.Coupon"
+  			   alias="coupon"/>
+
   	<typeAlias type="com.kh.showticket.help.model.vo.NoticeTicketOpen"
   		       alias="NoticeTicketOpen"/>
+
   	<typeAlias type="com.kh.showticket.member.model.vo.Ticket"
   			   alias="ticket"/>
+  		       
+  	<typeAlias type="com.kh.showticket.coupon.model.vo.MyCoupon"
+  			   alias="mycoupon"/>	       
+
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>
   	<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler"

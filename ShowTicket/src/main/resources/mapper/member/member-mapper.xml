@@ -53,5 +53,14 @@
     		   from ticket where ticket_buyer=#{memberId}
     </select>
 	
+	<select id="chkEmailUsable"
+			 resultType="_int">
+		select count(*) from member where email = #{email}
+	</select>
+	
+	<select id="selectMyPointList"
+			resultType="mypoint">
+		select * from point where member_id = #{memberLoggedIn}
+	</select>
 	
 </mapper>

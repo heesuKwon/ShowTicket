@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.kh.showticket.member.model.dao.MemberDAO;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
+import com.kh.showticket.member.model.vo.MyPoint;
+
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -41,8 +43,19 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	public List<Ticket> selectReservationList(String memberId) {
 		return memberDAO.selectReservationList(memberId);
+	}
+	
+	@Override
+	public int chkEmailUsable(String email) {
+		return memberDAO.chkEmailUsable(email);
+	}
+
+	@Override
+	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
+		return memberDAO.selectMyPointList(memberLoggedIn);
 	}
 
 }

@@ -53,8 +53,7 @@ public class getApi {
 		try {
 			documentBuilder = factory.newDocumentBuilder();
 			doc = documentBuilder.parse(url);
-		
-			
+
 			
 		doc.getDocumentElement().normalize();
 		//logger.debug("Root element: {} ", doc.getDocumentElement().getNodeName()); // Root element: dbs

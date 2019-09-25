@@ -1,13 +1,17 @@
 package com.kh.showticket.member.controller;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +23,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.common.mailhandler.MailHandler;
+import com.kh.showticket.common.mailhandler.TempKey;
+import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 @RequestMapping("/member")
 @Controller
@@ -30,13 +38,18 @@ public class MemberController {
 
 	@Autowired()
 	MemberService memberService;
+	
+	@Autowired
+	CouponService couponService;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	JavaMailSender mailSender;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	/*----------------회원가입 및 로그인, 로그아웃, 회원가입 id 중복 확인 부분---------------------*/
 	@RequestMapping("/memberEnroll.do")
 	public void memberEnroll() {
 
@@ -46,6 +59,106 @@ public class MemberController {
 
 	}
 	
+	@RequestMapping("/reservation.do")
+	public String reservation(Model model, @RequestParam String memberId) {
+
+		// 1.업무 로직
+		List<Ticket> list = memberService.selectReservationList(memberId);
+				
+		logger.debug("마이페이지 예매자 확인 :" + memberId);
+				
+		// 2.view단처리
+		model.addAttribute("list", list);
+				
+		return "/member/reservation";
+	}
+	
+	@RequestMapping("/memberView.do")
+	public void memberView() {
+		
+	}
+
+	@RequestMapping("/myCoupon.do")
+	public ModelAndView myCoupon(ModelAndView mav/*,String memberLoggedIn*/) {
+		//임시
+		//@SessionAttribute...
+		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
+		String memberLoggedIn = "honggd";
+		
+		List<Map<String,String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
+		
+		mav.addObject("myCouponList", myCouponList);
+		mav.setViewName("member/myCoupon");
+		
+		return mav;
+	}
+
+	@RequestMapping("/myPoint.do")
+	public ModelAndView myPoint(ModelAndView mav) {
+		
+		//임시
+		String memberLoggedIn = "honggd";
+		
+		int totalPoint = 0;
+		
+		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
+		
+		for(MyPoint mp : myPointList) {
+			if(mp.getSaveUse().equals("s")) {
+				totalPoint += mp.getPointAccount();				
+			}
+			else if(mp.getSaveUse().equals("u")) {
+				totalPoint -= mp.getPointAccount();
+			}
+		}
+		
+		
+		mav.addObject("myPointList", myPointList);
+		mav.addObject("totalPoint", totalPoint);
+		mav.setViewName("member/myPoint");
+		
+		return mav;
+	}
+
+	@RequestMapping("/myStandBy.do")
+	public String myStandBy() {
+
+		return "/member/myStandBy";
+	}
+	@RequestMapping("/myInterest.do")
+	public String myInterest() {
+
+		return "/member/myInterest";
+	}
+	@RequestMapping(value="/memberUpdate.do")
+	public String updateMember(Member member, Model model) {
+		logger.debug("memberId="+member.getMemberId());
+		logger.debug("member="+member);
+
+		int result = memberService.updateMember(member);
+
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
+		model.addAttribute("loc", "/");
+
+		return "common/msg";
+	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam String memberId,
+								Model model,
+								SessionStatus sessionStatus) {
+		logger.info("memeberId="+memberId);
+		logger.debug("memeberId="+memberId);
+		int result = memberService.deleteMember(memberId);
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete(); 
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
+		model.addAttribute("loc", "/");
+		
+		return "common/msg";
+
+	}
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 
@@ -146,80 +259,6 @@ public class MemberController {
 
 		return map;
 
-	}/*-------------------회원가입 및 로그인, 로그아웃, 회원가입 id 중복 확인 부분 끝--------------------------*/
-	
-	
-	/*---------------------------마이페이지 부분-------------------------*/
-	@RequestMapping("/reservation.do")
-	public String reservation(Model model, @RequestParam String memberId) {
-
-		// 1.업무 로직
-		List<Ticket> list = memberService.selectReservationList(memberId);
-		
-		logger.debug("마이페이지 예매자 확인 :" + memberId);
-		
-		// 2.view단처리
-		model.addAttribute("list", list);
-		
-		return "/member/reservation";
-	}
-		
-	@RequestMapping("/memberView.do")
-	public void memberView() {
-	}
-
-	@RequestMapping("/myCoupon.do")
-	public String myCoupon() {
-
-		return "/member/myCoupon";
-	}
-
-	@RequestMapping("/myPoint.do")
-	public String myPoint() {
-
-		return "/member/myPoint";
-	}
-
-	@RequestMapping("/myStandBy.do")
-	public String myStandBy() {
-
-		return "/member/myStandBy";
-	}
-	
-	@RequestMapping("/myInterest.do")
-	public String myInterest() {
-
-		return "/member/myInterest";
-	}
-	
-	@RequestMapping(value="/memberUpdate.do")
-	public String updateMember(Member member, Model model) {
-		logger.debug("memberId="+member.getMemberId());
-		logger.debug("member="+member);
-
-		int result = memberService.updateMember(member);
-
-		// 2. view단 처리
-		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
-		model.addAttribute("loc", "/");
-
-		return "common/msg";
-	}
-	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(@RequestParam String memberId,
-								Model model,
-								SessionStatus sessionStatus) {
-		logger.info("memeberId="+memberId);
-		logger.debug("memeberId="+memberId);
-		int result = memberService.deleteMember(memberId);
-		if(!sessionStatus.isComplete())
-			sessionStatus.setComplete(); 
-		// 2. view단 처리
-		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
-		model.addAttribute("loc", "/");
-		
-		return "common/msg";
-
 	}
 
 	
@@ -277,45 +316,92 @@ public class MemberController {
 	public String changePassword(@RequestParam String memberId,
 								 @RequestParam String password,
 								 @RequestParam String password_new, Model model) {
-			// 1.업무로직 : 회원 정보 가져오기
-			Member member = memberService.selectOneMember(memberId);
-			String pwd =passwordEncoder.encode(member.getPassword());
-			
-			System.out.println("암호화전 변경비번:"+password_new);
-			String newpassword = passwordEncoder.encode(password_new); //변경비번
-			int result =0;
-			
-			String msg = "";
-			String loc="";
-				if(passwordEncoder.matches(password,pwd)==true) {
-					//비밀번호가 맞으면 
-					member.setPassword(newpassword);
-					
-					result =memberService.updatePwd(member); 
+    				// 1.업무로직 : 회원 정보 가져오기
+    				Member member = memberService.selectOneMember(memberId);
+    				String pwd =member.getPassword();
 
-					if(result>0) {
-						msg="비밀번호 변경성공";
-						String script="self.close()";
-						model.addAttribute("script",script);
-					}else {
-						msg="변경실패";
-					}
+    				System.out.println("받아온 비번:"+password);
+    				
+    				String newpassword = passwordEncoder.encode(password_new); //변경비번
+    				int result =0;
+    				
+    				String msg = "";
+    				String loc="";
+	    			if(passwordEncoder.matches(password,pwd)==true) {
+	    				//비밀번호가 맞으면 
+	    				member.setPassword(newpassword);
+	    				
+	    				result =memberService.updatePwd(member); 
+	
+	    				if(result>0) {
+	    					msg="비밀번호 변경성공";
+	    					String script="self.close()";
+	    					model.addAttribute("script",script);
+	    				}else {
+	    					msg="변경실패";
+	    				}
+	    			}
+	    			// 3. 비밀번호가 틀린 경우
+	    			else {
+	    				msg = "비밀번호가 일치하지 않습니다.";
+	    				loc="/member/updatePwd.do?memberId="+memberId;
+	    			}
+	    				
+	
+	    			
+	    			model.addAttribute("msg", msg);
+	    			model.addAttribute("loc", loc); 
+	    			
+	    			return "common/msg";
+	
 				}
-				// 3. 비밀번호가 틀린 경우
-				else {
-					msg = "비밀번호가 일치하지 않습니다.";
-					loc="/member/updatePwd.do?memberId="+memberId;
-				}
+    @RequestMapping("/chkEmailUsable.do")
+    @ResponseBody
+    public String chkEmailUsable(@RequestParam String email){
+    
+    	
+    	int cnt = 0;
+    	String authCode = null;
+   
+    	cnt = memberService.chkEmailUsable(email);
+    	logger.debug("cnt={}", cnt);
+    	
+    	//이메일 중복확인
+    	if(cnt==0) {
+    		String key = new TempKey().getKey(6, false); //6자리 랜덤 코드
+    	
+    		MailHandler sendMail;
 			
-
+    		try {
+				sendMail = new MailHandler(mailSender);
 				
-				model.addAttribute("msg", msg);
-				model.addAttribute("loc", loc); 
-		
-				return "common/msg";
-
-
+				sendMail.setSubject("[ShowTicket] 이메일 인증코드입니다.");
+	            sendMail.setText(new StringBuffer().append("<h1>이메일인증</h1>")
+	            		.append("인증코드는 ")
+	                    .append("<strong>"+key+"</strong>")
+	                    .append("입니다.")
+	                    .toString());
+	            
+	            sendMail.setFrom("showticket77@gmail.com", "(주)쇼티켓");
+	            sendMail.setTo(email);
+	            sendMail.send();
+	           
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
 			}
+    		
+    		authCode = key;
+           
+    	}
+    	
+    	//result.put("cnt", Integer.toString(cnt));
+    	//result.put("authCode", authCode);
+    	
+    	
+    	return authCode;
+    }
 	
 }
 

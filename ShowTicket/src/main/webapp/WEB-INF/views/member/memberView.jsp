@@ -12,7 +12,7 @@
 </jsp:include>
 <script>
 $(()=>{
-
+	var emailAuthFlag = 0; //이메일 인증 버튼 누르지 않음.
 
 	$("#deleteMember").click(function() {
 		var bool = confirm("정말로 탈퇴하시겠습니까?");
@@ -21,9 +21,54 @@ $(()=>{
 			location.href = "${pageContext.request.contextPath}/member/deleteMember.do?memberId="+id;
 		}
 	});
+	
+	$("#emailAuth").on("click", function(){
+		var email = $("#email").val().trim();
+		
+		if(email.length==0){
+			alert("이메일을 입력해주세요.");
+			return;
+		}
+		
+		$.ajax({
+	        url : '${pageContext.request.contextPath}/member/chkEmailUsable.do',
+	        data : {email : email},
+	        success : function(data) {
+	        	console.log(data)
+				if(data!=''){
+					$("#emailAuthContainer").css("display", "block");
+					alert("입력하신 이메일로 송신된 인증번호를 입력해주세요.");
+				}
+				else{
+					alert("이미 등록된 이메일입니다.");
+					return;
+				}
+	       },error:function(e){
+	         	alert(e);
+	       },complete:function(data){
+	    	   $("#btn-emailAuth").on("click", function(){
+	    		   if($("#emailAuthCode").val().trim()==data.responseText){
+	    			   alert("인증되셨습니다!");
+	    			   
+	    			   $("#emailAuthContainer").css("display", "none");
+	    			   $("#emailAuth").prop("disabled", "true");
+	    			   $("#email").attr("readonly", "true");
+	    			   
+	    			   emailAuthFlag = 1;
+	    		   }
+	    	   })
+	       }
+	    });
+	});
 
 });
 function validate(){
+	
+	if($("#email").val().trim().length()>0 && emailAuthFlag == 0){
+		alert("이메일을 인증해주십시오.");
+		return false;
+	}
+	
 	var bool = confirm("정말로 수정하시겠습니까?");
 	if (bool) {
 		return true;
@@ -50,13 +95,6 @@ function updatePwd() {
 	</jsp:include>
 
 	<br>
-	<!--테스트 위해서 delete 멤버 추가하였습니다.  -->
-	<!--<form id="memberFrm"action="memberUpdate.do" method="post" onsubmit="return validate();">
-		<h3>회원정보 수정</h3>
-
-		<h2 class="small-title">회원정보 수정</h2>
-		<br />
-		<table> -->
 	<div class="div-memberFrm">
 		<form name="memberUpdateFrm" id="memberUpdateFrm" action="memberUpdate.do" method="post" onsubmit="return validate();" >
 	<h2 class="small-title"style="text-align:left;">회원정보 수정</h2>
@@ -90,9 +128,19 @@ function updatePwd() {
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td>	
+				<td>
+					<div>
 					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
-					<input type="checkbox" style="margin-top:10px;" />정보수신동의
+					<button type="button" class="btn btn-primary" id="emailAuth">인증</button>
+					</div>
+					<div class="authContainer" id="emailAuthContainer">
+						<span>인증번호 : </span>
+						<input type="text" class="form-control" id="emailAuthCode" />
+						<button type="button" class="btn btn-primary" id="btn-emailAuth">확인</button>
+					</div>
+					<div style="clear:both; margin-top:5px;">
+						<input type="checkbox" id="chk-email"/><label for="chk-email">정보수신동의</label>
+					</div>
 				</td>
 			</tr>
 			
@@ -109,15 +157,14 @@ function updatePwd() {
 			</tr> -->
 		</table>
 		<br /> <br />
-	<!-- 	<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="updateMember"
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="updateMember"
 			>회원정보
 			수정</button>
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="deleteMember">회원정보
-			탈퇴</button> -->
+			탈퇴</button>
 		<br /><br />
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color:#9a3cf4;border:1px solid #9a3cf4; color:white" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보 수정</button>
-
 	</form>
 
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
