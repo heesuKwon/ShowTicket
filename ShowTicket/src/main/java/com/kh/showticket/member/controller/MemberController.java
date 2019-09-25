@@ -2,6 +2,7 @@ package com.kh.showticket.member.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.Ticket;
 
 @RequestMapping("/member")
 @Controller
@@ -34,6 +36,7 @@ public class MemberController {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	/*----------------회원가입 및 로그인, 로그아웃, 회원가입 id 중복 확인 부분---------------------*/
 	@RequestMapping("/memberEnroll.do")
 	public void memberEnroll() {
 
@@ -42,66 +45,7 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 
 	}
-	@RequestMapping("/reservation.do")
-	public String reservation() {
-
-		return "/member/reservation";
-	}
-	@RequestMapping("/memberView.do")
-	public void memberView() {
-	}
-
-	@RequestMapping("/myCoupon.do")
-	public String myCoupon() {
-
-		return "/member/myCoupon";
-	}
-
-	@RequestMapping("/myPoint.do")
-	public String myPoint() {
-
-		return "/member/myPoint";
-	}
-
-	@RequestMapping("/myStandBy.do")
-	public String myStandBy() {
-
-		return "/member/myStandBy";
-	}
-	@RequestMapping("/myInterest.do")
-	public String myInterest() {
-
-		return "/member/myInterest";
-	}
-	@RequestMapping(value="/memberUpdate.do")
-	public String updateMember(Member member, Model model) {
-		logger.debug("memberId="+member.getMemberId());
-		logger.debug("member="+member);
-
-		int result = memberService.updateMember(member);
-
-		// 2. view단 처리
-		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
-		model.addAttribute("loc", "/");
-
-		return "common/msg";
-	}
-	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(@RequestParam String memberId,
-								Model model,
-								SessionStatus sessionStatus) {
-		logger.info("memeberId="+memberId);
-		logger.debug("memeberId="+memberId);
-		int result = memberService.deleteMember(memberId);
-		if(!sessionStatus.isComplete())
-			sessionStatus.setComplete(); 
-		// 2. view단 처리
-		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
-		model.addAttribute("loc", "/");
-		
-		return "common/msg";
-
-	}
+	
 	@RequestMapping("/memberEnrollEnd.do")
 	public String memberEnrollEnd(Member member, Model model) {
 
@@ -159,7 +103,7 @@ public class MemberController {
 
 		return "common/msg";		
 	}
-
+	
 	/**
 	 * 세션 무효화하기
 	 * session.setAttribute("memberLoggedIn", member)
@@ -178,17 +122,7 @@ public class MemberController {
 		// 로그아웃시 메인 페이지로 보내기
 		return "redirect:/";
 	}
-
-	/**
-	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
-	 * @param memberLoggedIn
-	 */
-	/*
-	 * @RequestMapping("/memberView.do") public void memberView(@SessionAttribute
-	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
-	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
-	 */
-
+	
 	/**
 	 * 
 	 * 웹서비스(html문서)  + data(xml, json) 
@@ -212,7 +146,83 @@ public class MemberController {
 
 		return map;
 
+	}/*-------------------회원가입 및 로그인, 로그아웃, 회원가입 id 중복 확인 부분 끝--------------------------*/
+	
+	
+	/*---------------------------마이페이지 부분-------------------------*/
+	@RequestMapping("/reservation.do")
+	public String reservation(Model model, @RequestParam String memberId) {
+
+		// 1.업무 로직
+		List<Ticket> list = memberService.selectReservationList(memberId);
+		
+		logger.debug("마이페이지 예매자 확인 :" + memberId);
+		
+		// 2.view단처리
+		model.addAttribute("list", list);
+		
+		return "/member/reservation";
 	}
+		
+	@RequestMapping("/memberView.do")
+	public void memberView() {
+	}
+
+	@RequestMapping("/myCoupon.do")
+	public String myCoupon() {
+
+		return "/member/myCoupon";
+	}
+
+	@RequestMapping("/myPoint.do")
+	public String myPoint() {
+
+		return "/member/myPoint";
+	}
+
+	@RequestMapping("/myStandBy.do")
+	public String myStandBy() {
+
+		return "/member/myStandBy";
+	}
+	
+	@RequestMapping("/myInterest.do")
+	public String myInterest() {
+
+		return "/member/myInterest";
+	}
+	
+	@RequestMapping(value="/memberUpdate.do")
+	public String updateMember(Member member, Model model) {
+		logger.debug("memberId="+member.getMemberId());
+		logger.debug("member="+member);
+
+		int result = memberService.updateMember(member);
+
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
+		model.addAttribute("loc", "/");
+
+		return "common/msg";
+	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam String memberId,
+								Model model,
+								SessionStatus sessionStatus) {
+		logger.info("memeberId="+memberId);
+		logger.debug("memeberId="+memberId);
+		int result = memberService.deleteMember(memberId);
+		if(!sessionStatus.isComplete())
+			sessionStatus.setComplete(); 
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
+		model.addAttribute("loc", "/");
+		
+		return "common/msg";
+
+	}
+
+	
 /*아이디 비번 찾기 팝업 이동 */
 	@RequestMapping("/memberIdFind.do")
 	public String memberIdFinder() {

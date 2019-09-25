@@ -6,6 +6,20 @@
     width: 200px;
     top: -3px;
 }
+
+/*------------로그인 모달 css 부분-------------*/
+#header .login{border: solid 1px #d3d3d3;color: #777;font-weight: bold;background-color: white;}
+#loginModal .plusbody{padding: 30px 30px 30px 30px;}
+#loginModal .loginbtn{margin: 12px 0px 20px 150px;}
+#loginModal .loginsubmit{margin-right: 5px;}
+#loginModal .logincancel{font-family: 'Gothic A1', sans-serif;color: #8f01a3;border-color: #8f01a3;}
+#loginModal .find{text-align: center;}
+#loginModal .findcolor{color: #777;}
+
+/*------------로그인한 경우에 해당하는 css 부분-------------*/
+#header .logout{border: solid 1px #d3d3d3;color: #777;font-weight: bold;background-color: white;}
+#header #login .black{color: black;}
+
 /*--------------- #cssH1 - 헤더 검색  부분--------------- */
 #header .search_area{position:relative;width:990px;margin:32px auto;font-size:0}
 #header .search_area .logo{width:137px;height:54px;position:absolute;top:-9px;left:0}
@@ -27,7 +41,8 @@
 	line-height: normal;	
 	vertical-align: middle;	
 	font-size: 16px;	
-	font-weight: bold;	
+	font-weight: bold;
+	color: black;	
 }
 #header .menu .menu_tit:hover {	
 	color: #8f01a3;	
