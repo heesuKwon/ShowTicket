@@ -1,5 +1,7 @@
 package com.kh.showticket.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.kh.showticket.common.email.MailUtils;
 import com.kh.showticket.common.email.TempKey;
 import com.kh.showticket.member.model.dao.MemberDAO;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -77,5 +80,15 @@ public class MemberServiceImpl implements MemberService {
 //	}
 	
 	
+
+	@Override
+	public int chkEmailUsable(String email) {
+		return memberDAO.chkEmailUsable(email);
+	}
+
+	@Override
+	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
+		return memberDAO.selectMyPointList(memberLoggedIn);
+	}
 
 }

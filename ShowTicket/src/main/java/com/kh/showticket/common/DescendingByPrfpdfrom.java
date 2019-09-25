@@ -18,6 +18,8 @@ public class DescendingByPrfpdfrom implements Comparator<Map<String, String>> {
 		String prfpdfrom1 = m1.get("prfpdfrom");
 		String prfpdfrom2 = m2.get("prfpdfrom");
 		
+		//logger.debug("prfpdfrom1={}",prfpdfrom1 );
+		
 		SimpleDateFormat stringToDate = new SimpleDateFormat("yyyy.MM.dd");
 
 		Date prfpdfrom1_ = null;
@@ -26,9 +28,11 @@ public class DescendingByPrfpdfrom implements Comparator<Map<String, String>> {
 		try {
 			prfpdfrom1_ = stringToDate.parse(prfpdfrom1);
 			prfpdfrom2_ = stringToDate.parse(prfpdfrom2);
+			
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+		//logger.debug("prfpdfrom1={}",prfpdfrom1 );
 
 		return prfpdfrom2_.compareTo(prfpdfrom1_);
 	}

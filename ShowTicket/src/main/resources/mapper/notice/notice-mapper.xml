@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+	<select id="selectNoticeTicketOpenList" resultType="NoticeTicketOpen">
+		select *
+		from notice
+		order by notice_enrolldate desc
+	</select>
+
+	<resultMap type="NoticeTicketOpen" id="noticeTicketOpenMap">
+		<id column="notice_no" property="noticeNo"/>
+		<result column="notice_title" property="noticeTitle"/>
+		<result column="notice_content" property="noticeContent"/>
+		<result column="notice_enrolldate" property="noticeEnrollDate"/>
+		<result column="notice_category" property="noticeCategory"/>
+		<result column="notice_count" property="noticeCount"/>
+		
+	</resultMap>
+</mapper>

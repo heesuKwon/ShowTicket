@@ -23,9 +23,9 @@ public class MusicalController {
 	public ModelAndView show(ModelAndView mav) {
 		logger.debug("뮤지컬리스트페이지");
 	
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage=1&rows=8&shcate=AAAB";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage=1&rows=8&shcate=AAAB";
 
-		List<Map<String,String>> musicalList = getOrderedListByDate(getList(url));
+		List<Map<String,String>> musicalList = getList(url);
 		
 		mav.addObject("musicalList", musicalList);
 		mav.setViewName("menu/musical");
@@ -38,9 +38,9 @@ public class MusicalController {
 		logger.debug("전체뮤지컬 AJAX");
 		logger.debug("cpage={}", cpage);
 
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190901&eddate=20191231&cpage="+cpage+"&rows=8&shcate=AAAB";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage="+cpage+"&rows=8&shcate=AAAB";
 		
-		return getOrderedListByDate(getList(url));
+		return getList(url);
 
 	}
 

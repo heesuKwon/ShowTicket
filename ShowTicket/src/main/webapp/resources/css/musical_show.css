@@ -77,3 +77,24 @@ height:217px;
 .goods_list li dt{display:block;visibility:hidden;overflow:hidden;position:absolute;top:-1000em;left:0}
 .goods_list li dd{height:18px;line-height:18px;color:#767676; margin: 0px;}
 .elp {margin-bottom:0px;}
+
+.arrow{
+	color:white;
+	width:50px;
+	font-size:30px;
+	font-weight:bold;
+	background:none;
+}
+#prev{
+	position:absolute;
+	top:140px;
+	left:0px;
+	visibility:hidden;
+}
+#next{
+	position:absolute;
+	top:140px;
+	right:0px;
+	visibility:hidden;
+}
+

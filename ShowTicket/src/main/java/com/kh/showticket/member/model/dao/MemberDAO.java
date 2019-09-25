@@ -1,6 +1,9 @@
 package com.kh.showticket.member.model.dao;
 
+import java.util.List;
+
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 public interface MemberDAO {
 
@@ -15,5 +18,9 @@ public interface MemberDAO {
 	int updatePwd(Member member);
 
 	void updateMailAuthstatus(Member member);
+
+	int chkEmailUsable(String email);
+
+	List<MyPoint> selectMyPointList(String memberLoggedIn);
 
 }

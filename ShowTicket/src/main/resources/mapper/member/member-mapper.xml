@@ -46,10 +46,15 @@
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
 
     </update>
-    
-    <update id="updateMailAuthstatus" parameterType="Member">
-        UPDATE member SET mailAuthstatus = #{emailAuthstatus} WHERE member_id = #{memberId}
-    </update>
+
+    <select id="chkEmailUsable"
+			 resultType="_int">
+		select count(*) from member where email = #{email}
+	</select>
 	
+	<select id="selectMyPointList"
+			resultType="mypoint">
+		select * from point where member_id = #{memberLoggedIn}
+	</select>
 	
 </mapper>

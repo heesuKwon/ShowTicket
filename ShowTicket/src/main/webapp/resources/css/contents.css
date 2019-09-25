@@ -444,9 +444,9 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .event_top_list li{width:317px;float:left;box-shadow:1px 1px 2px 1px #d3d3d3;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
 .event_top_list li:first-child{margin-left:0}
 .event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:522px;position:relative;}
-.event_top_list li .event_top_info{background:#fff;padding:19px 10px 24px 21px;position:absolute;top:386px;left:0;width:287px;height:93px;}
+.event_top_list li .event_top_info{background:#fff;padding:10px 10px 24px 10px;position:absolute;top:386px;left:0;width:305px;height:93px;}
 .event_top_list li .event_top_info dd{color:#767676;line-height:20px}
-.event_top_list li .event_top_info .event_title{width:100%;overflow:hidden;font-size:16px;font-weight:bold;letter-spacing:-1px;color:#000;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;margin:0 0 5px -3px}
+.event_top_list li .event_top_info .event_title{width:100%;overflow:hidden;font-size:14px;font-weight:bold;letter-spacing:-1px;color:#000;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;margin:0 0 5px -3px}
 .event_top_list li .event_top_info .event_title span{color:#339e00;margin-right:5px}
 .event_top_list li .event_top_info .event_date{font-family:Tahoma;font-weight:bold;font-size:11px;margin-top:8px}
 
@@ -561,7 +561,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .help_lmenu li span.help_lmeu5{width:27px;height:16px;background-position:0 -196px}
 .help_lmenu li a.help_lmeu6{width:82px;height:16px;background-position:0 -470px}
 .help_rcont .help_link li a img{width:240px; height:150px;}
-.help_rcont .help_link li span img{width:240px; height:156px;}
+.help_rcont .help_link li span img{width:240px; height:151px;}
 /*.help_lmenu li.has_sub{height:257px}*/
 .help_lmenu li.has_sub{padding-bottom:17px}
 .help_lmenu li.has_sub ul{margin-top:-4px}
@@ -653,7 +653,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .help_rcont .basic_tbl table tbody td.p_reative a{width:350px;*width:300px;display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;text-decoration:none;}
 .help_rcont .basic_tbl table tbody td a.wordbreak{width:auto;white-space:normal;text-overflow:clip;-o-text-overow:clip}
 .basic_tbl .open_info{font-size:11px;color:#999}
-.basic_tbl .open_info em{color:#339e00}
+.basic_tbl .open_info em{color:#8f01a3}
 
 
 .list_view{overflow:hidden;margin-top:36px;border-width:1px 0;border-style:solid;border-color:#c7c7c7;position:relative}

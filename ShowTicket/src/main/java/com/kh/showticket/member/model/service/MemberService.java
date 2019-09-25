@@ -1,6 +1,9 @@
 package com.kh.showticket.member.model.service;
 
+import java.util.List;
+
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 public interface MemberService {
 
@@ -18,6 +21,9 @@ public interface MemberService {
 	void createMail(String email) throws Exception;
 
 //	void updateMailAuthstatus(Member member);
+	int chkEmailUsable(String email);
+
+	List<MyPoint> selectMyPointList(String memberLoggedIn);
 
 
 	
