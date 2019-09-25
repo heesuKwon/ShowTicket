@@ -42,6 +42,7 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 
 	}
+	
 	@RequestMapping("/reservation.do")
 	public String reservation() {
 
