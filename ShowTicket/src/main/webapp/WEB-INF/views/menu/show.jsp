@@ -560,9 +560,7 @@ ul.lst_thumb li.on::before {
 	                        </dl>
 	                    </div>
 	                </a></li>
-	       
             </c:forEach>
-
         </ul>
         
           <div id="srchEmpty">검색결과가 없습니다.<div>
