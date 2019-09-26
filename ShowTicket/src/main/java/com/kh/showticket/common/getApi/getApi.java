@@ -1,5 +1,6 @@
 package com.kh.showticket.common.getApi;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.kh.showticket.common.DescendingByPrfpdfrom;
+import com.kh.showticket.common.MusicalAndShow;
 
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
@@ -244,4 +246,55 @@ public class getApi {
 		return totalBoxList;
 
 	}
+	
+	//공연 상세조회
+	public MusicalAndShow getMusicalAndShow(String id) {
+		MusicalAndShow mas = new MusicalAndShow();
+		
+		try {
+			
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+id+"?service=3127d89913494563a0e9684779988063";			
+			documentBuilder = factory.newDocumentBuilder();
+			doc = documentBuilder.parse(url);
+
+			System.out.println(url);
+			
+			doc.getDocumentElement().normalize();
+			NodeList nodeList = doc.getElementsByTagName("db");
+			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
+		
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+		
+//			for(int i=0; i<nodeList.getLength(); i++){
+			Node node = nodeList.item(0);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				
+				Element element = (Element)node;
+				
+				mas.setId(getTagValue("mt20id", element));
+				mas.setName(getTagValue("prfnm", element));
+				mas.setStartDate(transFormat.parse(getTagValue("prfpdfrom", element)));			
+				mas.setEndDate(transFormat.parse(getTagValue("prfpdto", element)));			
+				mas.setHallId(getTagValue("mt10id", element));
+				mas.setHallName(getTagValue("fcltynm", element));
+				mas.setCast(getTagValue("prfcast", element));
+				mas.setRuntime(getTagValue("prfruntime", element));
+				mas.setAge(getTagValue("prfage", element));
+				mas.setPrice(getTagValue("pcseguidance", element));
+				mas.setPoster(getTagValue("poster", element));
+				mas.setState(getTagValue("prfstate", element));
+				//mas.setUrls(getTagValue("styurls", element));
+				mas.setTime(getTagValue("dtguidance", element));
+				
+			}
+//			}
+		} catch (Exception e) {
+		
+		}
+		
+		
+		return mas;
+	}
+	
+	
 }

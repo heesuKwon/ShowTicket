@@ -181,36 +181,6 @@
 <!-- AceCounter Log Gathering Script End -->
 
 
-<!-- Facebook Pixel Code -->
-<script>
-	!function (f, b, e, v, n, t, s) {
-		if (f.fbq) return;
-		n = f.fbq = function () {
-			n.callMethod ?
-				n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-		};
-		if (!f._fbq) f._fbq = n;
-		n.push = n;
-		n.loaded = !0;
-		n.version = '2.0';
-		n.queue = [];
-		t = b.createElement(e);
-		t.async = !0;
-		t.src = v;
-		s = b.getElementsByTagName(e)[0];
-		s.parentNode.insertBefore(t, s)
-	}(window,
-		document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-
-	fbq('init', '1028038810619064');
-	fbq('track', "PageView");
-</script>
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Facebook Pixel Code -->
-
 <!-- NHN AD MORE Script -->
 <script>
 	var _croID = '5d148869e4b0adaa9beaa9d1';
@@ -237,39 +207,6 @@
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 <!-- End NHN AD MORE Script -->
-
-<!-- Facebook Pixel Code -->
-<script>
-    !function (f, b, e, v, n, t, s) {
-        if (f.fbq)return;
-        n = f.fbq = function () {
-            n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq)f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-    }(window,
-            document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-    fbq('init', '1028038810619064');
-    fbq('track', "PageView");
-    // ViewContent
-    // Track key page views (ex: product page, landing page or article)
-    fbq('track', 'ViewContent');
-</script>
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Facebook Pixel Code -->
 
 
 
@@ -658,13 +595,6 @@
 <meta property="og:image"
 	content="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" />
 
-
-
-
-
-
-
-
 </head>
 
 
@@ -694,29 +624,28 @@
 				<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
 				<div class="title">
 					뮤지컬
-					<사랑했어요> (사랑의 가객 故김현식 뮤지컬) 
+					&lt;${musical.getName()}&gt;
 				</div>
 			</div>
 			<div class="detail_info">
 				<div class="bx_thumb">
 					<span class="bx_img"> <!-- 뮤지컬포스터 --> <img
-						src="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg"
+						src="${musical.getPoster()}"
 						alt="대표이미지" width="314" height="382">
 					</span>
 				</div>
 				<div class="etc_info">
 
 					<div class="bx_dummy">
-						<em class="info_tit">별점</em> <span class="txt">별별별별별</span>
+						<em class="info_tit">별점</em> <span class="txt">${musical.getReviewStar()}</span>
 					</div>
 
 
 					<div class="bx_dummy">
-						<em class="info_tit">장소</em> <span class="txt">성남아트센터
-							오페라하우스</span>
+						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 					</div>
 					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">2019.09.20~2019.10.27</span>
+						<em class="info_tit">기간</em> <span class="txt">${musical.getStateDate()}~2019.10.27</span>
 					</div>
 
 
@@ -2178,18 +2107,6 @@
 		}
 	}
 
-	function shareItemToFacebook () {
-		var url = "http://www.facebook.com/sharer/sharer.php?u=" + document.URL;
-		var title = "티켓링크";
-		popupwindow(url, title, 600, 600, 'no');
-	}
-
-	function shareItemToTwitter () {
-		var text = "[티켓링크] " + $.trim($("#productName").text()) + "\n";
-		var url = "https://twitter.com/intent/tweet?url=" + encodeURIComponent(document.URL) + "&text=" + encodeURIComponent(text);
-		var title = "티켓링크";
-		popupwindow(url, title, 800, 441, 'no');
-	}
 
 	function checkTextLength (obj) {
 		var maxLength = 100;
