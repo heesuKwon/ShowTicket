@@ -22,7 +22,7 @@
   		       alias="NoticeTicketOpen"/>
   		       
   	<typeAlias type="com.kh.showticket.coupon.model.vo.MyCoupon"
-  			   alias="mycoupon"/>	       
+  			   alias="mycoupon"/>	 
 
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>

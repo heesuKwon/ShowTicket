@@ -658,7 +658,7 @@ ul.lst_thumb li.on::before {
 
 
 		</div>
-		</body>
+
 		<script type="text/javascript" src="/resources/js/date.js"></script>
 		<script type="text/javascript">
 	//<![CDATA[
