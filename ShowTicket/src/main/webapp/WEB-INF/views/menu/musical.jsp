@@ -8,26 +8,106 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/musical_show.css">
 <script>
 var cpage = 2;
- 
+var srchFlag = false;
+var srchOFlag = false;
 $(function(){
      getList(cpage);
      cpage++;
+     
+     $("#searchBtn").on("click", function(){
+  		srchFlag = true;
+  		srchOFlag = false;
+  		cpage=2;
+ 		getSearchList(1);
+ 	});
+
 });
  
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.
      if($(window).scrollTop() > $(document).height() - $(window).height()-100){
-          getList(cpage);
-           cpage++;   
+    	 
+    	 if(srchFlag==true){
+    		 getSearchList(cpage);
+	    	 cpage++;
+    	 }
+    	 else if(srchFlag==false){
+	          getList(cpage);
+	          cpage++;
+    	 }
      } 
 });
+
+function getSearchList(cpage){
+
+	var cate = $("#category-musical").val();
+	var srchKeyword = $("#searchKeyword").val();
+	var param= {
+			cpage : cpage,
+			cate : cate,
+			srchKeyword : srchKeyword
+	}
+	   $.ajax({
+	        url : '${pageContext.request.contextPath}/musical/musicalSearch.do',
+	        data : param,
+	        success : function(data) {
+	            var html = "";
+	       
+	         	if(data.length==0 && srchOFlag == false){
+	         		$("#musicalListAll").css("display", "none");
+	         		$("#srchEmpty").css("display", "block");
+	        		return;
+	        	}
+	       
+	         	if(data.length>0){
+	         		$("#musicalListAll").css("display", "block");
+	         		$("#srchEmpty").css("display", "none");
+	         		srchOFlag = true;
+	         		
+	         		
+	            for(var i=0; i<data.length; i++){
+	                		
+		            html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+		            html+="<p><img src="+data[i].poster+" alt=''></p>";
+		            html+="<div class='list_info'>";
+		            html+="<strong class='elp'>"+data[i].prfnm+"</strong>";
+		            html+="<dl>";
+		            html+="<dt>기간</dt>";
+		            html+="<dd>"+data[i].prfpdfrom+" ~ "+data[i].prfpdto+"</dd>";
+		            html+="<dt>장소</dt>";
+		            html+="<dd>"+data[i].fcltynm+"</dd>";
+		            html+="</dl>";
+		            html+="</div>";
+		            html+="</a>";
+		            html+="</li>";
+	                	
+	              }
+	         	}
+	            html = html.replace(/%20/gi, " ");
+	            
+	            if (cpage==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+	                $("#musicalListAll").html(html); 
+	            }else{
+	            	$("#musicalListAll").append(html);
+	            }
+	            
+	       },error:function(e){
+	           if(e.status==300){
+	               alert("데이터를 가져오는데 실패하였습니다.");
+	         	};
+			}
+	   });
+	
+};
  
-function getList(page){
-	
-	
+function getList(cpage){
     $.ajax({
         url : '${pageContext.request.contextPath}/musical/musicalAjax.do',
         data : {"cpage" : cpage},
         success : function(data) {
+        	
+        	if(srchOFlag=false){
+        		
+        	}
 
             var html = "";
             
@@ -37,6 +117,9 @@ function getList(page){
             
             
                 if(data.length>0){
+                	
+                	srchOFlag = true;
+                	
                 	for(var i=0; i<data.length; i++){
                 		
 	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
@@ -57,18 +140,22 @@ function getList(page){
             
             html = html.replace(/%20/gi, " ");
             
-            /*if (page==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
-                $("#showListAll").html(html); 
-            }else{*/
+            if (cpage==1){  //페이지가 1이 아닐경우 데이터를 붙힌다.
+                $("#musicalListAll").html(html); 
+            }else{
             	$("#musicalListAll").append(html); 
-            /*}*/
+            }
        },error:function(e){
            if(e.status==300){
                alert("데이터를 가져오는데 실패하였습니다.");
            };
-       }
+       	}
     }); 
-}
+};
+
+    
+
+
 
 
 </script>
@@ -100,7 +187,7 @@ function getList(page){
 			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
 			_CI.push(Inf);
 			_N = _CI.length;
-		}
+		} 
 		return {o: _N, val: _CI};
 	})();
 	var _AceCounter = (function () {
@@ -210,10 +297,10 @@ function getList(page){
 
 <script type="text/javascript">
 var index=0;
-window.onload = function(){
+/* window.onload = function(){
 	slideShow();
 	$(".submain_topban").hover($(".arrow").css("visibility","visible"))
-}
+} */
 function slideShow(){
 	var i;
 	var x = document.getElementsByClassName("mySlides");
@@ -257,7 +344,9 @@ ul.lst_thumb li.on::before {
 
 
 <div id="wrap" class="subwrap">
+
     <div id="container" class="submain_front">
+
 		<div class="inner">
 			<h2 class="blind">공연</h2>
 			<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
@@ -476,7 +565,7 @@ ul.lst_thumb li.on::before {
 								<option value="searchTitle">제목</option>
 								<option value="searchActor">배우</option>
 							</select> <input type="text" class="form-control form-control-lg"
-								name="searchKeyword">
+								id="searchKeyword">
 							<button type="button" class="btn btn-primary btn-color btn-sm"
 								id="searchBtn">검색</button>
 						</div>
@@ -492,7 +581,8 @@ ul.lst_thumb li.on::before {
 
 
 
-        	
+       	<div class="searchContainer">
+		
         <ul id="musicalListAll" class="goods_list" style="clear:both;">
                   <c:forEach items="${musicalList}" var="map">
 	                <li>
@@ -512,6 +602,9 @@ ul.lst_thumb li.on::before {
 	       
            		 </c:forEach>     
         </ul>
+        
+        <div id="srchEmpty">검색결과가 없습니다.<div>
+        </div>
         
     </div>
     <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
@@ -651,7 +744,7 @@ ul.lst_thumb li.on::before {
 		}
 
 		if (!isEndOfItem) {
-			getConcertList(page++, categoryNum, true);
+			/* getConcertList(page++, categoryNum, true);
 			$(window).scroll(function () {
 				if (!isLoadingNow) {
 					var maxHeight = $(document).height();
@@ -663,11 +756,11 @@ ul.lst_thumb li.on::before {
 						}
 					}
 				}
-			});
+			}); */
 		}
 	});
 
-	function getConcertList (page, varCategoryNum, isCleanProductList) {
+	/* function getConcertList (page, varCategoryNum, isCleanProductList) {
 		categoryNum = varCategoryNum;
 		$.ajax({
 			dataType: "json",
@@ -689,11 +782,11 @@ ul.lst_thumb li.on::before {
 				isLoadingNow = false;
 			},
 			error: function (status) {
-				/* alert("오류가 발생했습니다. 관리자에게 문의하세요."); */
+				/* alert("오류가 발생했습니다. 관리자에게 문의하세요."); 
 				isLoadingNow = false;
 			}
 		});
-	}
+	} */
 
 	function toggleDiv (categoryNum) {
 		if (categoryNum == 14 || categoryNum == 15 || categoryNum == 16 || categoryNum == 18 || categoryNum == 84 || categoryNum == 85) {
