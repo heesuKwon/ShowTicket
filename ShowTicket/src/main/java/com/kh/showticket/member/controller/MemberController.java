@@ -73,6 +73,14 @@ public class MemberController {
 		return "/member/reservation";
 	}
 	
+	/*
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping("/reservation15.do") public String reservation15(){
+	 * List<Ticket> list = }
+	 */
+	
+	
 	@RequestMapping("/memberView.do")
 	public void memberView() {
 		

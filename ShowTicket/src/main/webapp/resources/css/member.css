@@ -402,16 +402,16 @@ div#password-container span.error{color:red;}
 #search .btn-group button {
 	width:60px;
 	height:25px;
-	color : #424242;
-    background-color: white;
+	/* color : #424242;
+    background-color: white; */
     border: 1px solid #BDBDBD;
     font-size:12px;
     font-weight: normal;
 }
-#search button:hover {
+/* #search button:hover {
     background-color: #8f01a3;
     color:white;
-}
+} */
 #search #inputGroupSelect01{
 	width : 90px;
 	height:30px;
@@ -548,3 +548,7 @@ div.authContainer{
 	 margin-top:3px;
 	 display:none;
 }
+
+/*----기간별 조회 버튼 css 부분 */
+#search .r_btnSelect{background-color: #8f01a3;color:white;}
+#search .r_btnDefault{background-color: white;color : #424242;}

@@ -6,7 +6,7 @@
 <fmt:requestEncoding value="utf-8" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-
+	
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
@@ -20,16 +20,16 @@
 	<br>
 	<div class="div-memberFrm">
 		<h2 class="small-title">예매 확인/취소</h2>
-		<form id="reservation">
+	<!-- 	<form id="reservation"> -->
 			<hr />
 			<br />
 			<div id="search">
 				<label id="dateSearch">기간별</label>&nbsp;
 				<div class="btn-group">
-					<button>15일</button>
-					<button>1개월</button>
-					<button>2개월</button>
-					<button>3개월</button>
+					<button id="btn1" class="r_btnSelect">15일</button>
+					<button id="btn2" class="r_btnDefault">1개월</button>
+					<button id="btn3" class="r_btnDefault">2개월</button>
+					<button id="btn4" class="r_btnDefault">3개월</button>
 				</div>
 			</div>
 			<button type="button" id="find">조회</button>
@@ -90,7 +90,46 @@
 						이용해주세요.</li>
 				</ul>
 			</div>
-		</form>
+		<!-- </form> -->
 	</div>
 </div>
+
+<script>
+$(()=>{
+	$("#btn1").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		//getReservation();
+	});
+	$("#btn2").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation();
+	});
+	$("#btn3").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation();
+	});
+	$("#btn4").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation();
+	});
+	
+	/* function getReservation() {
+		$.ajax({
+			type: "get",
+			url: "${pageContext.request.contextPath}/member/reservation15.do",
+			success: function(data) {
+				alert("ajax 성공!");				
+			},
+			error: function() {
+				alert("ajax 실패ㅠㅠ");
+			}
+		});		
+	} */
+	
+});
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
