@@ -13,6 +13,8 @@
   			   alias="member"/>
   	<typeAlias type="com.kh.showticket.help.model.vo.NoticeTicketOpen"
   		       alias="NoticeTicketOpen"/>
+  	<typeAlias type="com.kh.showticket.help.model.vo.Faq"
+  		       alias="faq"/>
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>
   	<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler"
