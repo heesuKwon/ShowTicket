@@ -23,6 +23,7 @@ $(()=>{
 			$(this).children().removeClass("default").addClass("select");
 		},
 		mouseleave : function(){
+			 $(this).on('mouseleave');
 			 $(this).children().removeClass("select").addClass("default");
 		},
 		click: function(){
@@ -184,6 +185,7 @@ function getList(cpage){
         </div>
     </div>
     <!-- container 끝 -->
+
 	<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
 <script type="text/javascript">

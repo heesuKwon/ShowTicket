@@ -1,10 +1,14 @@
 package com.kh.showticket.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.Ticket;
+import com.kh.showticket.member.model.vo.MyPoint;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -35,5 +39,20 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int updatePwd(Member member) {
 		return sqlSession.update("member.updatePwd",member); 
+	}
+
+	@Override
+	public List<Ticket> selectReservationList(String memberId) {
+		return sqlSession.selectList("member.selectReservationList", memberId);
+	}
+	
+	@Override
+	public int chkEmailUsable(String email) {
+		return sqlSession.selectOne("member.chkEmailUsable", email);
+	}
+
+	@Override
+	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
+		return sqlSession.selectList("member.selectMyPointList", memberLoggedIn);
 	}
 }

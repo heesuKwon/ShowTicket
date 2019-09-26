@@ -10,7 +10,11 @@
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
+<script>
 
+
+
+</script>
 <div id="container" class="event_cont">
 	<div class="inner">
 		<h2 class="blind">이벤트</h2>
@@ -26,82 +30,36 @@
 			</li>
 		</ul>
 		<h2 class="title">특가 진행</h2>
+			<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
 		<ul class="event_top_list">
-
-			<li><a href="${pageContext.request.contextPath }/event/eventView.do"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_9/이벤트썸네일_318x386_디오디언스.jpg"
-					alt="임시" width="318" height="386">
+			<c:forEach items="${eventList }" var="evt">
+			<li>
+				<a href="${pageContext.request.contextPath }/event/eventView.do"> 
+					<img
+					src="${evt.poster}"
+					alt="poster" width="318" height="386">
 					<div class="event_top_info">
+						
 						<dl>
 							<dt>제목</dt>
 							<dd class="event_title">
-								<span>[초대]</span>NT Live
-								<디 오디언스> 기대평 이벤트 
+								<span>[초대]</span> <br />
+								
+								&lt; ${evt.prfnm} &gt;
 							</dd>
 							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								NT Live
-								<디 오디언스> 기대평 이벤트 
+							<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+								 기대평 이벤트  
 							</dd>
 							<dt>기간</dt>
-							<dd class="event_date">2019.09.10 ~2019.09.18</dd>
+							<dd class="event_date"> ${evt.prfpdfrom}~${evt.prfpdto}</dd>
+							<dt>장소</dt>
+							<dd class="event_date">${evt.fcltynm }</dd>
 						</dl>
 					</div>
-			</a></li>
-
-
-
-
-
-
-			<li><a href="/event/550"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_2/이벤트썸네일_318x386_한뼘사이.jpg"
-					alt="임시" width="318" height="386">
-					<div class="event_top_info">
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[초대]</span>연극
-								<한뼘사이> 기대평 이벤트 
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								연극
-								<한뼘사이> 기대평 이벤트 
-							</dd>
-							<dt>기간</dt>
-							<dd class="event_date">2019.09.05 ~2019.09.19</dd>
-						</dl>
-					</div>
-			</a></li>
-
-
-
-
-
-
-			<li><a href="/event/547"> <img
-					src="//image.toast.com/aaaaab/ticketlink/TKL_9/배너(썸네일)_318x386.jpg"
-					alt="임시" width="318" height="386">
-					<div class="event_top_info">
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[응모]</span>9월 신한은행 예매수수료 면제 이벤트
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd
-								style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								9월 신한은행 예매수수료 면제 이벤트</dd>
-							<dt>기간</dt>
-							<dd class="event_date">2019.09.01 ~2019.09.30</dd>
-						</dl>
-					</div>
-			</a></li>
-
-
+				</a>
+			</li>
+			</c:forEach>
 
 		</ul>
 
@@ -133,6 +91,7 @@
 								<dd>뮤지컬 &lt;사랑했어요&gt; 관람평 이벤트</dd>
 								<dt>기간</dt>
 								<dd class="event_date">2019.09.20~2019.10.04</dd>
+								
 							</dl>
 						</a>
 					</li>

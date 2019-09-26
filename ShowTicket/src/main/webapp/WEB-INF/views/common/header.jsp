@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -33,12 +36,14 @@
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 <!-- End NHN AD MORE Script -->
-
-
+<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="/resources/js/player.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
 
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -65,9 +70,8 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
-<script type="text/javascript" src="/resources/js/login.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/login.js"></script> -->
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
 	if (!wcs_add) var wcs_add = {};
@@ -145,52 +149,104 @@
 
 <!-- AceCounter Log Gathering Script End -->
 
+<!-- 로그인 관련 모달 부분 -->
+<!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">로그인</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <!--로그인폼 : https://getbootstrap.com/docs/4.1/components/forms/#overview -->
+          <form action="${pageContext.request.contextPath}/member/memberLogin.do" method="post">
+		      <div class="modal-body plusbody">
+		      	<div class="loginInfo">
+		      		<input type="text" class="form-control" name="memberId" placeholder="아이디" required>
+				    <br />
+				    <input type="password" class="form-control" name="password" placeholder="비밀번호" required>
+				</div>
+				<div class="loginbtn">
+				    <button type="submit" class="btn btn-color loginsubmit" >로그인</button>
+				    <button type="button" class="btn logincancel" data-dismiss="modal">취소</button>		    
+				</div>
+		      	<div class="find">
+					<a href="javascript:popId()" class="findcolor">아이디 찾기</a>
+					<span class="findcolor">|</span> <a href="javascript:popPwd()" class="findcolor">비밀번호 찾기</a>
+		  	  	</div>
+		      </div>
+		  </form>
+	    </div>
+	  </div>
+	</div> <!-- 로그인 모달 끝 -->
 
 <body>
 
-	<script>
+<script>
 	var meta = document.createElement('meta');
 	meta.setAttribute('name', 'more_page_type');
 	meta.setAttribute('content', 'main');
 	document.getElementsByTagName('head')[0].appendChild(meta);
+	
+	
+	function popId(){
+	    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
+	    var name = "popup test";
+	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    window.open(url, name, option);
+	}
+	function popPwd(){
+	    var url = "${pageContext.request.contextPath}/member/memberPwdFind.do";
+	    var name = "popup test";
+	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    window.open(url, name, option);
+	}
 </script>
 
 	<div id="wrap">
-
-
 		<div id="header">
 			<div class="gnb">
 				<div class="inner">
-
 					<div class="user_menu">
 						<div id="login">
-							<c:if>
-								<!-- 로그인 처리 -->
-								<a href="" data-toggle="modal" data-target="#loginModal">로그인</a>
-								<span>|</span>
-								<!-- [D] 로그인 후 주석 설정 입니다. -->
+							<!-- 로그인 안한 경우 -->
+							<c:if test="${memberLoggedIn == null }">
+								<button class="login" type="button" data-toggle="modal" data-target="#loginModal">로그인</button><span>|</span>
 								<a href="javascript:;" id="joinBtn"
-									onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</a>
-								<span>|</span>
+									onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</a><span>|</span>
+								<a href="" id="reserveLogin">예매확인/취소</a><span>|</span>
+								<script>
+									$("#reserveLogin").click(function() {
+										alert("로그인 후 이용하세요");
+									});
+								</script>
+								<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
+							</c:if>
+							<!-- 로그인한 경우 -->
+							<c:if test="${memberLoggedIn != null }">
+								<span class="black"><a href="${pageContext.request.contextPath }/member/reservation.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
+								&nbsp;
+								<button class="logout" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button><span>|</span> 
+								<a href="${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId}" id="reserveLogin">예매확인/취소</a><span>|</span>
+								<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 							</c:if>
 
-							<a href="" id="reserve">예매확인/취소</a><span>|</span> 
-							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
-
-
+							<%-- <a href="" id="reserve">예매확인/취소</a><span>|</span> 
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a> --%>
 						</div>
 						<div id="logout" style="display: none;">
-							<a id="paycoVipIcon" href="/vip/main" class="ico_vip"
+							<!-- 이부분 슬기씨한테 여쭤보기, 예매확인/취소, 로그아웃, 고객센터 중복  -->
+							<!-- <a id="paycoVipIcon" href="/vip/main" class="ico_vip"
 								style="display: none;"></a> <strong id="reserveLoginId"><a
-								href="javascript:;" class="user_name"></a><em>님</em></strong><span>|</span>
+								href="javascript:;" class="user_name"></a><em>님</em></strong><span>|</span> -->
 							<!-- [D] 로그인 후 주석 해제 입니다. -->
-							<a href="${pageContext.request.contextPath}/member/reservation.do" id="reserveLogin">예매확인/취소</a><span>|</span>
+							<%-- <a href="${pageContext.request.contextPath}/member/reservation.do" id="reserveLogin">예매확인/취소</a><span>|</span>
 							<a href="#" id="logoutBtn">로그아웃</a><span>|</span> 
-							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
+							<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a> --%>
 
 						</div>
-
-
 					</div>
 				</div>
 			</div>
@@ -203,7 +259,7 @@
 
 			<div class="search_area">
 				<a href="${pageContext.request.contextPath }/"> 
-					<img src="${pageContext.request.contextPath }/resources/images/showticket_logo.png" id="center-image" alt="스프링로고" />
+					<img src="${pageContext.request.contextPath }/resources/images/showticket_logo.png" id="center-image" alt="쇼티켓로고" />
 				</a>
 
 				<div class="search">

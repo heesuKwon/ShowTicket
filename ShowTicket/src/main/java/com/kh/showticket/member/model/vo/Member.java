@@ -13,13 +13,15 @@ public class Member {
 	private Date enrollDate;
 	private int point;
 	private String memberGrade;
+	private Date birth;
+	private int emailAuthstatus;
 	
 	public Member() {
 		super();
 	}
 
 	public Member(String memberId, String password, String memberName, String email, String phone, int member119Count,
-			Date enrollDate, int point, String memberGrade) {
+			Date enrollDate, int point, String memberGrade, Date birth, int emailAuthstatus) {
 		super();
 		this.memberId = memberId;
 		this.password = password;
@@ -30,6 +32,8 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.point = point;
 		this.memberGrade = memberGrade;
+		this.birth = birth;
+		this.emailAuthstatus = emailAuthstatus;
 	}
 
 	public String getMemberId() {
@@ -104,11 +108,28 @@ public class Member {
 		this.memberGrade = memberGrade;
 	}
 
+	public Date getBirth() {
+		return birth;
+	}
+
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
+
+	public int getEmailAuthstatus() {
+		return emailAuthstatus;
+	}
+
+	public void setEmailAuthstatus(int emailAuthstatus) {
+		this.emailAuthstatus = emailAuthstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", password=" + password + ", memberName=" + memberName + ", email="
 				+ email + ", phone=" + phone + ", member119Count=" + member119Count + ", enrollDate=" + enrollDate
-				+ ", point=" + point + ", memberGrade=" + memberGrade + "]";
+				+ ", point=" + point + ", memberGrade=" + memberGrade + ", birth=" + birth + ", emailAuthstatus="
+				+ emailAuthstatus + "]";
 	}
-	
+
 }

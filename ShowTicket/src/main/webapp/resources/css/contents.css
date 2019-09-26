@@ -444,9 +444,9 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .event_top_list li{width:317px;float:left;box-shadow:1px 1px 2px 1px #d3d3d3;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
 .event_top_list li:first-child{margin-left:0}
 .event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:522px;position:relative;}
-.event_top_list li .event_top_info{background:#fff;padding:19px 10px 24px 21px;position:absolute;top:386px;left:0;width:287px;height:93px;}
+.event_top_list li .event_top_info{background:#fff;padding:10px 10px 24px 10px;position:absolute;top:386px;left:0;width:305px;height:93px;}
 .event_top_list li .event_top_info dd{color:#767676;line-height:20px}
-.event_top_list li .event_top_info .event_title{width:100%;overflow:hidden;font-size:16px;font-weight:bold;letter-spacing:-1px;color:#000;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;margin:0 0 5px -3px}
+.event_top_list li .event_top_info .event_title{width:100%;overflow:hidden;font-size:14px;font-weight:bold;letter-spacing:-1px;color:#000;white-space:nowrap;text-overflow:ellipsis;-o-text-overow:ellipsis;margin:0 0 5px -3px}
 .event_top_list li .event_top_info .event_title span{color:#339e00;margin-right:5px}
 .event_top_list li .event_top_info .event_date{font-family:Tahoma;font-weight:bold;font-size:11px;margin-top:8px}
 

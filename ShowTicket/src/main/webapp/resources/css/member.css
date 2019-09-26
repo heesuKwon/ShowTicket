@@ -9,7 +9,8 @@ div#enroll-container{width:500px; margin:50px auto; text-align:center;}
 /* div#enroll-container input, div#enroll-container select {margin-bottom:10px;} */
 div#enroll-container table{margin: 0 auto;}
 div#enroll-container table th{text-align: right; padding-right:10px;font-size: 1rem;}
-div#enroll-container table td{text-align: left; border: none; padding: 10px;}
+div#enroll-container table td{text-align: left; border: none; padding: 10px; width: 360px;}
+.form-control {display: inline-block; width: 65%;}
 /*중복 아이디 체크 관련*/
 div#memberId-container{position:relative; padding:0px;}
 div#memberId-container span.guide {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
@@ -21,6 +22,10 @@ div#password-container{position:relative; padding:0px;}
 div#password-container span.pw {display:none;font-size: 12px;position:absolute; top:12px; left: 50%; }
 div#password-container span.ok{color:green;}
 div#password-container span.error{color:red;}
+
+/*이메일 인증 관련*/
+div#emailAuthContainer p.ok{display:none;font-size: 12px; color:green;}
+
 .star {
     color: red;
 }
@@ -525,4 +530,26 @@ form#updatePFrm{margin-right: 80px;margin-left: 80px;margin-top: 30px;}
 input.btn.btn-outline-success{width: 80px;}
 input#btn_pwd{margin-right: 25px; margin-left: 25px;margin-right: 25px;}
 
+button#emailAuth{
+	border:1px solid;height: 35px; width: 57px; ;display: inline;
+	background-color: #8c008c;
+	margin:0px 2px !important;
+}
+input#email{
+	 width:240px !important; display:inline;
+}
 
+button#btn-emailAuth{
+	border:1px solid;height: 35px; width: 57px; ;display: inline;
+	background-color: #8c008c;
+	margin:0px 2px !important;
+}
+input#emailAuthCode{
+	 width:100px !important;
+	 display:inline;
+}
+
+div.authContainer{
+	 margin-top:3px;
+	 display:none;
+}

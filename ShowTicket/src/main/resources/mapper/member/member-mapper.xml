@@ -8,7 +8,7 @@
 	<insert id="insertMember">
 		insert into member values
 		( #{memberId}, #{password}, #{memberName}, #{email},
-		  #{phone}, default, sysdate, default, A)
+		  #{phone}, default, sysdate, default, default, sysdate, default)
 	</insert>
 
 	<select id="selectOneMember" resultType="member">
@@ -46,6 +46,21 @@
         UPDATE member SET password = #{password} WHERE member_id = #{memberId}
 
     </update>
+    
+    <select id="selectReservationList" resultType="ticket">
+    	select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
+    		   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+    		   from ticket where ticket_buyer=#{memberId}
+    </select>
 	
+	<select id="chkEmailUsable"
+			 resultType="_int">
+		select count(*) from member where email = #{email}
+	</select>
+	
+	<select id="selectMyPointList"
+			resultType="mypoint">
+		select * from point where member_id = #{memberLoggedIn}
+	</select>
 	
 </mapper>
