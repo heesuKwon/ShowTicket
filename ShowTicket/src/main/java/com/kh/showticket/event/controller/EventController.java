@@ -2,16 +2,18 @@ package com.kh.showticket.event.controller;
 
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
 
-import java.util.List;
+import java.sql.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.event.model.service.DiscountService;
+import com.kh.showticket.event.model.vo.Discount;
 
 
 @Controller
@@ -97,4 +99,21 @@ public class EventController {
 		return mav;
 	}
 	
+	@RequestMapping("/insertAddSale.do")
+	public String insertAddSale(Discount discount, Model model) {
+		
+		logger.info("특가 할인 입력 기능 요청");
+		
+		System.out.println(discount.getShowId());
+		System.out.println(discount.getDisCountEndDate());
+		int result = discountService.insertAddSale(discount);
+		
+		// 2. view단 처리
+		model.addAttribute("msg", result>0?"할인 등록성공":"할인 등록 실패");
+		model.addAttribute("loc", "/event/addSaleEvent.do");
+
+		
+		/*.setViewName("redirect:/event/addSaleEvent.do");*/
+		return "common/msg";
+	}
 }

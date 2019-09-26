@@ -30,14 +30,14 @@
 			</li>
 		</ul>
 		<h2 class="title">특가 진행</h2>
-			<button type="button" class="btn btn-info" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
+			<button type="button" class="btn btn-info" id="saleWritebtn" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
 		<ul class="event_top_list">
 			<c:forEach items="${eventList }" var="evt">
 			<li>
 				<a href="${pageContext.request.contextPath }/event/eventView.do"> 
 					<img
 					src="${evt.poster}"
-					alt="poster" width="318" height="386">
+					alt="poster" width="285" height="386">
 					<div class="event_top_info">
 						
 						<dl>
@@ -165,7 +165,10 @@
 </div>
 
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
+<style>
 
+
+</style>
 <script type="text/javascript">
 		/* <![CDATA[ */
 		var google_conversion_id = 950223509;

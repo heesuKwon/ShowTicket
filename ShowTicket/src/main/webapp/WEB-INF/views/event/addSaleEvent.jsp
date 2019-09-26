@@ -20,17 +20,17 @@ div.search{    display: inline-block;  margin-bottom: 23px;}
 $(()=>{
 	$("#okbutton").click(function(){  //확인 버튼 클릭시 체크된 row의 값을 가져온다 
 		var Data =new Array(); //(0,1)
-		var rowData[][] = new Array(); 
+		var rowData= new Array(); 
 		var tdArr = new Array(); 
 		var chkbox = $("input[name=chk_yn]:checked");
-		console.log(chkbox);
+
 		chkbox.each(function(i){
 			var tr =  chkbox.parent().parent().eq(i); 
 			
 			var td = tr.children();  
 
-			Data.push(tr.text());
 		
+		 	Data.push(tr.eq(0));
 			var showId = td.eq(0).text(); 
 			var genre = td.eq(1).text(); 
 			var showName = td.eq(2).text(); 
@@ -46,22 +46,20 @@ $(()=>{
 			tdArr.push(endDate);
 			tdArr.push(status);
 			tdArr.push(dicaYN);
-			console.log(tdArr); 
 			
 			rowData.push(tdArr);
 			
-			/* for(var h=0; h<tdArr.length; h++){
-			console.log("tdArr"+tdArr[h]);  //showId
-			} */
 			
 		});
-		for(var i=0; i<rowData.length; i++){
+	
+		for(var i=0; i<Data.length; i++){
 		var html=""; 
 		
-	/* 	console.log("2차원배열이다"+rowData[i][j]); */
-		var contain= "<br><div class='search'><img id='photo' src='//image.toast.com/aaaaab/ticketlink/TKL_1/bea_0722.jpg'width='100px' height='122px'>"; 
+
+		var contain= "<br/><div class='search'><form action='${pageContext.request.contextPath}/event/insertAddSale.do'><img id='photo' src='//image.toast.com/aaaaab/ticketlink/TKL_1/bea_0722.jpg'width='100px' height='122px'>"; 
 		contain +="<table class='ListTable' id='detail' style='position:relative;'>";
-		contain+="<tr><th id='service'>종류</th>";
+		contain+="<tr><th id='service'>공연아이디</th>";
+		contain+="<th id='genre'>종류</th>"; 
 		contain+="<th id='title'>공연명</th>"; 
 		contain+="<th id='start'>공연 시작일</th>";
 		contain+="<th id='finish'>공연 종료일</th>";
@@ -69,14 +67,25 @@ $(()=>{
 		contain+="</tr>";
 
 		contain+="<tr>";
-		contain+="<td id='showId'>"+tdArr[0]+"</td>";
+		contain+="<td id='showId'><input  name='showId' value='"+tdArr[0]+"' readonly='readonly'></td>";
+		contain+="<td id='showGenre'><input  name='showGenre' value='"+tdArr[1]+"' readonly='readonly'></td>";
+		contain+="<td id='showName'><input  name='showName' value='"+tdArr[2]+"' readonly='readonly'></td>";
+		contain+="<td id='showStart'><input  name='start' value='"+tdArr[3]+"' readonly='readonly'></td>";
+		contain+="<td id='showEnd'><input  name='finish' value='"+tdArr[4]+"' readonly='readonly'></td>";
+		contain+="<td id='sale_yn'><input  name='sale_yn' value='"+tdArr[5]+"' readonly='readonly'></td>";
 		contain+="</tr>";
+		
+		contain+="</table><br/><br/><br/>";
+		contain+="<div id='enroll'><h2 class='small-title'>할인률</h2>"; 
+		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
+		contain+="<input type='Date' class='enrollText'name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='Date' name='disCountEndDate' class='enrollText'>";
+		contain+="</div><button type='submit' class='btn btn-secondary' id='changebutton'>작성완료</button>";
 		contain+="</div>";
-		contain+="</table>";
+		contain+="</form></div>";
 		
 		html+=contain;
 		$("div#searchC").append(html);
-			}
+		}
 		
 		
 		
@@ -85,7 +94,12 @@ $(()=>{
 
 </script>
 
-
+<style>
+input {border: none; }
+::-webkit-input-placeholder { text-align:right;pointer-events: none; }
+#inputText{width:100px;    display: contents;}
+.enrollText{width:180px;}
+</style>
 
 <div id="container" class="event_cont">
 	<div class="inner" style="width:970px;">
@@ -146,7 +160,7 @@ $(()=>{
 		<div id="searchC" style="width: 100%; height: 100%;">
 			
 		</div>
-		<button type="button" class="btn btn-secondary" id="changebutton">작성완료</button>
+		
 	</div>
 </div>
 
