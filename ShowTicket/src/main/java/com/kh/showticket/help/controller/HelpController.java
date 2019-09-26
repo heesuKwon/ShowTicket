@@ -138,10 +138,10 @@ public class HelpController {
 //		return mav;
 //	}
 	
-	@RequestMapping("/talk.do")
-	public ModelAndView talk(ModelAndView mav) {
-		mav.setViewName("help/talk");
-		return mav;
-	}
+//	@RequestMapping("/talk.do")
+//	public ModelAndView talk(ModelAndView mav) {
+//		mav.setViewName("help/talk");
+//		return mav;
+//	}
 	
 }

@@ -18,12 +18,10 @@ var area = '';
 $(()=>{
 	$(".nav-item").on({
 		mouseover : function(){
-			$(this).on('mouseleave');
 			$(this).css("cursor", "pointer");
 			$(this).children().removeClass("default").addClass("select");
 		},
 		mouseleave : function(){
-			 $(this).on('mouseleave');
 			 $(this).children().removeClass("select").addClass("default");
 		},
 		click: function(){
@@ -39,6 +37,7 @@ $(()=>{
 
 			getList(cpage);
 			cpage++;
+			$(this).on('mouseleave');
 		}
 	})
 	

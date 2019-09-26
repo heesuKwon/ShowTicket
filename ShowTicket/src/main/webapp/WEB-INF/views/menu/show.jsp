@@ -292,9 +292,7 @@ ul.lst_thumb li.on::before {
 }
 </style>
 
-</head>
 
-<body>
 	<div id="wrap" class="subwrap">
 
 		<div id="container" class="submain_front">
@@ -621,7 +619,7 @@ ul.lst_thumb li.on::before {
 
 
 		</div>
-</body>
+
 <script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
