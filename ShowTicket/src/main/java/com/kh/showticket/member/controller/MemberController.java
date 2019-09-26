@@ -102,16 +102,9 @@ public class MemberController {
 		int totalPoint = 0;
 		
 		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
-		
-		for(MyPoint mp : myPointList) {
-			if(mp.getSaveUse().equals("s")) {
-				totalPoint += mp.getPointAccount();				
-			}
-			else if(mp.getSaveUse().equals("u")) {
-				totalPoint -= mp.getPointAccount();
-			}
-		}
-		
+
+		//멤버에서끌어오기
+		totalPoint = memberService.selectOneMember(memberLoggedIn).getPoint();
 		
 		mav.addObject("myPointList", myPointList);
 		mav.addObject("totalPoint", totalPoint);

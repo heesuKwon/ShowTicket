@@ -1,7 +1,6 @@
 package com.kh.showticket.area.controller;
 
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
-import static com.kh.showticket.common.getApi.getApi.getOrderedListByDate;
 
 import java.util.List;
 import java.util.Map;
