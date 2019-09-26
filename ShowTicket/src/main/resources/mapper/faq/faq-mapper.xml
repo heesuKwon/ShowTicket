@@ -19,8 +19,16 @@
 			<if test="type != '' and type != null">
 				type = #{type}			
 			</if>
+			<if test="question != '' and question != null">
+				question LIKE '%'||#{question}||'%'
+
+			</if>
+			<if test="answer != '' and answer != null">
+				answer LIKE '%'||#{answer}||'%'		
+			</if>
 						
 		</where>
+		order by type
 	</select>
 	 <select id="faqBuyList" resultMap="faqMap">
 		select *

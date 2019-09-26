@@ -19,8 +19,8 @@ public class FaqDAOImpl implements FaqDAO {
 	}
 
 	@Override
-	public List<Faq> faqTicketList() {
-		return sqlSession.selectList("faq.faqTicketList");
+	public List<Faq> faqTicketList(Faq faq) {
+		return sqlSession.selectList("faq.faqTicketList", faq);
 	}
 
 	@Override

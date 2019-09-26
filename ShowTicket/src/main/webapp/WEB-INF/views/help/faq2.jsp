@@ -18,12 +18,81 @@
 <script>
 
 $(()=>{
+	alert("hi");
+	var param = {type : type,}
+	
+    $.ajax({
+        url : '${pageContext.request.contextPath}/help/faqTicketList.do',
+         /* data : param, */ 
+        success : function(data) {
+        	console.log(data);
 
-
+                /* 	var html = "<table><caption>faq 리스트</caption><colgroup><col style='width: 100px'><col><col style='width: 270px'></colgroup><thead>";
+            
+   
+                if(data.length>0){
+                    html+="<tr><th scope='col'>카테고리</th><th colspan='2' scope='col'>질문</th></tr></thead><tbody id='nTableBody'>";
+                    for(var i in data){
+                    	if(data[i].type)
+                        html += "<tr><td>"+data[i].type+"<input type='hidden' id='faqNo' value="+data[i].faqNo+"</td>";
+                        html += "<td colspan='2'>"+data[i].question+"</td></tr>"; */
+                    
+                       
+								
+							/* 	<c:if test="${not empty list }">
+								<c:forEach items="${list}" var="f">
+									<tr>
+										<td>
+											<c:if test="${f.type.equals('T') }">예매/취소</c:if>
+											<c:if test="${f.type.equals('M') }">회원</c:if>
+											<c:if test="${f.type.equals('B') }">결제</c:if>
+											<c:if test="${f.type.equals('C') }">쿠폰/이벤트</c:if>
+											<c:if test="${f.type.equals('E') }">기타</c:if>
+											
+											<input type="hidden" id="faqNo" value="${f.faqNo }">
+										</td>
+										<td colspan="2">${f.question}</td>
+									</tr>
+									</c:forEach>
+								</c:if>
+						</tbody>
+					</table> */
+                    
+                    
+                    
+                    
+                    
+                  /*   
+                    }
+                    else{
+                    	html+="<tr><td colspan='3'>faq가 존재하지 않습니다.</td></tr>";
+                    }
+                    html+="</tbody></table>";
+                    $("#basic_tbl").html(html);
+                }
+             */
+         
+       },error:function(e){
+           /* if(e.status==300){
+               alert("데이터를 가져오는데 실패하였습니다.");
+           }; */
+       }
+    }); 
+ 
 	$("#write").click(function() {
-			location.href = "${pageContext.request.contextPath}/help/faqWrite.do";
-		});
+		location.href = "${pageContext.request.contextPath}/help/faqWrite.do";
+	});
+	
+	//테이블의 열을 클릭시 해당 게시물로 이동
+<%-- 	$("td").click((e)=>{		
+		var faqNo = $(e.target).parents("tr").children("th").text();
+
+		location.href = "<%=request.getContextPath()%>/board/community/free/freeView?freeNo="+freeNo; 
+	});
+ --%>
 });
+
+
 
 </script>
 <div id="container">
@@ -95,7 +164,7 @@ $(()=>{
 				</div>
 				
 				<ul id="genreNav" class="nav nav-pills nav-justified">
-					<li class="nav-item"><a class="nav-link select nav-font"
+					<li class="nav-item" value="T"><a class="nav-link select nav-font"
 						href="#">예매/취소</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
 						href="#">결제</a></li>
@@ -107,8 +176,8 @@ $(()=>{
 						href="#">기타</a></li>
 				</ul>
 				
-				<div class="basic_tbl">
-					<table>
+				<div class="basic_tbl" id="basic_tbl">
+					<%-- <table>
 						<caption>공지사항 리스트</caption>
 						<colgroup>
 							<col style="width: 100px">
@@ -124,115 +193,27 @@ $(()=>{
 						<tbody id="nTableBody">
 								<c:if test="${empty list }">
 										<tr>
-											<td colspan="2">faq가 존재하지 않습니다.</td>
+											<td colspan="3">faq가 존재하지 않습니다.</td>
 										</tr>
 								</c:if>
 								<c:if test="${not empty list }">
 								<c:forEach items="${list}" var="f">
 									<tr>
 										<td>
-											${f.type }
+											<c:if test="${f.type.equals('T') }">예매/취소</c:if>
+											<c:if test="${f.type.equals('M') }">회원</c:if>
+											<c:if test="${f.type.equals('B') }">결제</c:if>
+											<c:if test="${f.type.equals('C') }">쿠폰/이벤트</c:if>
+											<c:if test="${f.type.equals('E') }">기타</c:if>
+											
 											<input type="hidden" id="faqNo" value="${f.faqNo }">
 										</td>
-										<td>${f.question}</td>
+										<td colspan="2">${f.question}</td>
 									</tr>
 									</c:forEach>
 								</c:if>
-							
-							
-							
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50876">2019
-										장윤정 라이브 콘서트 – 용인 티켓오픈</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.19(목) 11:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50875">NEW
-										신비아파트 뮤지컬 시즌3 - 고양 ​티켓오픈 안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.19(목) 11:00</td>
-							</tr>
-							<tr>
-								<td>시스템</td>
-								<td class="tl p_reative"><a href="/help/notice/50874"><b>[공지]</b>
-										Microsoft Edge 브라우저 오류관련 안내</a></td>
-								<td>2019.09.18</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50873">뮤지컬
-										&lt;사랑했어요&gt; (사랑의 가객 故김현식 뮤지컬) 마지막 티켓 오픈​ 안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.24(화) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50871">2019
-										유방암 캠페인 ＂핑크리본 FESTA＂ 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.18(수) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50870">2019
-										최현우〈THE BRAIN〉 - 부산 티켓오픈 안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.18(수) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50869"><b>[단독판매]</b>
-										퓨젼뮤지컬 “시집 가는 날” - 대구 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.23(월) 09:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50868">연극
-										&lt;수업&gt;​ 티켓오픈 안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 17:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50867">2019
-										만9,900원의 행복 유리상자 콘서트 시즌3 - 구미 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50866">뮤지컬〈친정엄마〉10주년
-										기념 - 창원 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 16:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50865">2019
-										만9,900원의 행복 유리상자 콘서트 시즌3 - 여수 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50864">[원주]
-										정태춘 박은옥 40주년 전국투어 콘서트〈날자, 오리배〉 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 15:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50863"><b>[단독판매]</b>
-										성진우&amp;홍실 “미스 미스터 트로트콘서트” 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50862"><b>[단독판매]</b>
-										연극 염쟁이 유씨 - 안동 티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-							</tr>
-							<tr>
-								<td>티켓오픈</td>
-								<td class="tl p_reative"><a href="/help/notice/50861">박현빈뭉클디너쇼
-										티켓오픈안내</a></td>
-								<td class="open_info"><em>오픈</em>: 2019.09.17(화) 14:00</td>
-							</tr>
 						</tbody>
-					</table>
+					</table> --%>
 				</div>
 
 

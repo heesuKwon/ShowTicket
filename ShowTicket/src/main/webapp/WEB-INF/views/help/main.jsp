@@ -13,6 +13,16 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 
+<script>
+function talkPopup(){
+
+	var url = "${pageContext.request.contextPath}/help/talk.do";
+    var name = "popup test";
+    var option = "width = 500, height = 650, top = 100, left = 400, location = no"
+    window.open(url, name, option);
+}
+
+</script>
 
 <div id="container">
 	<div class="inner">
@@ -85,7 +95,7 @@
 						class="hlink1"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/appoint.png" /></a>
 					</li>
-					<li><a href="javascript:;" class="hlink2" id="hlink2"> <img
+					<li><a href="javascript:talkPopup();" class="hlink2" id="hlink2"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/talk.PNG" /></a>
 					</li>
 					<li><a href="/help/faq" class="hlink3"> <img

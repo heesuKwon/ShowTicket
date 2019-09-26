@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,9 +58,11 @@ public class HelpController {
 	@RequestMapping("/faq.do")
 	public ModelAndView faq(ModelAndView mav) {
 		logger.debug("help페이지 요청");
-		List<Faq> faqTicketList = faqService.faqTicketList();
-		logger.debug("faqTicketList="+faqTicketList);
-		mav.addObject("list", faqTicketList);
+		/*
+		 * List<Faq> faqTicketList = faqService.faqTicketList();
+		 * logger.debug("faqTicketList="+faqTicketList); mav.addObject("list",
+		 * faqTicketList);
+		 */
 		mav.setViewName("help/faq");
 		return mav;
 	}
@@ -95,10 +98,10 @@ public class HelpController {
 	}
 	/*LIST 가지고옴*/
 	@ResponseBody
-	@RequestMapping("/faqTicketList.do")
-	public List<Faq> faqTicketList() {
-		logger.debug("list");
-		List<Faq> list = faqService.faqTicketList();
+	@RequestMapping(value="/faqTicketList.do", method=RequestMethod.POST)
+	public List<Faq> faqTicketList(@RequestBody Faq faq) {
+		logger.debug("post로 넘어온 help.faq:"+faq);
+		List<Faq> list = faqService.faqTicketList(faq);
 		logger.debug("faqTicketList="+list);
 		return list;
 	}
@@ -143,6 +146,11 @@ public class HelpController {
 		mav.setViewName("help/faq");
 		return mav;
 	}
-
+	
+	@RequestMapping("/talk.do")
+	public ModelAndView talk(ModelAndView mav) {
+		mav.setViewName("help/talk");
+		return mav;
+	}
 	
 }

@@ -8,7 +8,7 @@ public interface FaqService {
 
 	int faqWriteEnd(Faq faq);
 
-	List<Faq> faqTicketList();
+	List<Faq> faqTicketList(Faq faq);
 
 	List<Faq> faqBuyList();
 
