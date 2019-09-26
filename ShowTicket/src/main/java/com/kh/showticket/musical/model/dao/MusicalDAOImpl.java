@@ -14,7 +14,7 @@ public class MusicalDAOImpl implements MusicalDAO {
 
 	@Override
 	public double selectReviewStar(String musicalId) {
-		return sqlSession.selectOne("musical.selectReviewStar", musicalId);
+		return sqlSession.selectOne("musical.selectReviewStar", musicalId)==null?-1:sqlSession.selectOne("musical.selectReviewStar", musicalId);
 	}
 	
 	

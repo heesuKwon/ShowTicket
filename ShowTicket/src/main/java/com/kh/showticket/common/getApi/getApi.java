@@ -265,29 +265,29 @@ public class getApi {
 		
 			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 		
-			for(int i=0; i<nodeList.getLength(); i++){
-			Node node = nodeList.item(i);
+//			for(int i=0; i<nodeList.getLength(); i++){
+			Node node = nodeList.item(0);
 			if(node.getNodeType() == Node.ELEMENT_NODE){
 				
 				Element element = (Element)node;
 				
 				mas.setId(getTagValue("mt20id", element));
 				mas.setName(getTagValue("prfnm", element));
-				mas.setStartDate(transFormat.parse(getTagValue("mt20id", element)));			
-				mas.setEndDate(transFormat.parse(getTagValue("mt20id", element)));			
-				mas.setHallId(getTagValue("prfnm", element));
-				mas.setHallName(getTagValue("prfnm", element));
-				mas.setCast(getTagValue("prfnm", element));
-				mas.setRuntime(getTagValue("prfnm", element));
-				mas.setAge(getTagValue("prfnm", element));
-				mas.setPrice(getTagValue("prfnm", element));
-				mas.setPoster(getTagValue("prfnm", element));
-				mas.setState(getTagValue("prfnm", element));
+				mas.setStartDate(transFormat.parse(getTagValue("prfpdfrom", element)));			
+				mas.setEndDate(transFormat.parse(getTagValue("prfpdto", element)));			
+				mas.setHallId(getTagValue("mt10id", element));
+				mas.setHallName(getTagValue("fcltynm", element));
+				mas.setCast(getTagValue("prfcast", element));
+				mas.setRuntime(getTagValue("prfruntime", element));
+				mas.setAge(getTagValue("prfage", element));
+				mas.setPrice(getTagValue("pcseguidance", element));
+				mas.setPoster(getTagValue("poster", element));
+				mas.setState(getTagValue("prfstate", element));
 				//mas.setUrls(getTagValue("styurls", element));
-				mas.setTime(getTagValue("prfnm", element));
+				mas.setTime(getTagValue("dtguidance", element));
 				
 			}
-			}
+//			}
 		} catch (Exception e) {
 		
 		}

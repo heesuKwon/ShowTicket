@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class MusicalAndShow {
-	private double review_star; //별점
+	private double reviewStar; //별점
 	
 	private String id;	//공연ID
 	private String name; //공연명

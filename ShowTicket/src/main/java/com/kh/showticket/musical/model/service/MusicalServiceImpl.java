@@ -15,14 +15,14 @@ public class MusicalServiceImpl implements MusicalService {
 	@Autowired
 	MusicalDAO musicalDAO;
 	
-	getApi getApi;
+	getApi getApi = new getApi();
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public MusicalAndShow selectOne(String musicalId) {
 		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
-		musical.setReview_star(musicalDAO.selectReviewStar(musicalId));
+		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
 		
 		logger.debug(musical.toString());
 		

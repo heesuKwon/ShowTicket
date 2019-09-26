@@ -6,6 +6,6 @@
 	<select id="selectReviewStar" resultType="double">
 		select avg(review_star)
 		from review
-		where review_showId = #{musicalId}
+		where review_showId = #{musicalId} and review_star is not null
 	</select>
 </mapper>
