@@ -21,10 +21,11 @@ public interface MemberService {
 
 	List<Ticket> selectReservationList(String memberId);
 
+	String createMail(String email) throws Exception;
+
 	int chkEmailUsable(String email);
 
 	List<MyPoint> selectMyPointList(String memberLoggedIn);
-
 
 
 }

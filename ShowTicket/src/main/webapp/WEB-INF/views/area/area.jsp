@@ -32,6 +32,7 @@ $(()=>{
 			$(this).children().removeClass("default").addClass("select");
 			
 			cpage=1;
+			
 			area = $(this).children().html();
 
         	$(".title").html(area);

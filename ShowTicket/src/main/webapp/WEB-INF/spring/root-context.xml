@@ -65,5 +65,4 @@
 	<!-- #14.1. @Transactional이 붙은 메소드를 대상으로 Transaction Advice를 적용함. -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	
-		
 </beans>
