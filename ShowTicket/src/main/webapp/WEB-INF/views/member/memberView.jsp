@@ -59,7 +59,7 @@ $(()=>{
 	    	   })
 	       }
 	    });
-	})
+	});
 
 });
 function validate(){
@@ -95,13 +95,6 @@ function updatePwd() {
 	</jsp:include>
 
 	<br>
-	<!--테스트 위해서 delete 멤버 추가하였습니다.  -->
-	<!--<form id="memberFrm"action="memberUpdate.do" method="post" onsubmit="return validate();">
-		<h3>회원정보 수정</h3>
-
-		<h2 class="small-title">회원정보 수정</h2>
-		<br />
-		<table> -->
 	<div class="div-memberFrm">
 		<form name="memberUpdateFrm" id="memberUpdateFrm" action="memberUpdate.do" method="post" onsubmit="return validate();" >
 	<h2 class="small-title"style="text-align:left;">회원정보 수정</h2>
@@ -164,15 +157,14 @@ function updatePwd() {
 			</tr> -->
 		</table>
 		<br /> <br />
-	<!-- 	<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="updateMember"
+		<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="updateMember"
 			>회원정보
 			수정</button>
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="deleteMember">회원정보
-			탈퇴</button> -->
+			탈퇴</button>
 		<br /><br />
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color:#9a3cf4;border:1px solid #9a3cf4; color:white" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdateEnd.do'">회원정보 수정</button>
-
 	</form>
 
+</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

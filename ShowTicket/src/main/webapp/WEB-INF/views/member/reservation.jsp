@@ -44,14 +44,16 @@
 					<th id="Cancledate">취소가능일</th>
 					<th id="state">상태</th>
 				</tr>
-				<tr>
-					<td>123</td>
-					<td>뮤지컬<블루레인></td>
-					<td>2019.09.11</td>
-					<td>1</td>
-					<td>2019.09.10</td>
-					<td>예매완료</td>
-				</tr>
+				<c:forEach items="${list }" var="list">
+					<tr>
+						<td>${list.ticketNo }</td>
+						<td>${list.ticketShowId }</td>
+						<td>${list.ticketDate }</td>
+						<td>${list.ticketCount }</td>
+						<td>${list.ticketCancel }</td>
+						<td>${list.ticketStatus }</td>
+					</tr>
+				</c:forEach>
 			</table>
 			<br />
 			<nav aria-label="Page navigation example">

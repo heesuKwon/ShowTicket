@@ -344,7 +344,9 @@ ul.lst_thumb li.on::before {
 
 
 <div id="wrap" class="subwrap">
+
     <div id="container" class="submain_front">
+
 		<div class="inner">
 			<h2 class="blind">공연</h2>
 			<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->

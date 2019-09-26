@@ -28,6 +28,7 @@ import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
 
 @RequestMapping("/member")
@@ -57,13 +58,24 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 
 	}
+	
 	@RequestMapping("/reservation.do")
-	public String reservation() {
+	public String reservation(Model model, @RequestParam String memberId) {
 
+		// 1.업무 로직
+		List<Ticket> list = memberService.selectReservationList(memberId);
+				
+		logger.debug("마이페이지 예매자 확인 :" + memberId);
+				
+		// 2.view단처리
+		model.addAttribute("list", list);
+				
 		return "/member/reservation";
 	}
+	
 	@RequestMapping("/memberView.do")
 	public void memberView() {
+		
 	}
 
 	@RequestMapping("/myCoupon.do")
@@ -86,7 +98,7 @@ public class MemberController {
 		
 		//임시
 		String memberLoggedIn = "honggd";
-
+		
 		int totalPoint = 0;
 		
 		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
@@ -97,7 +109,7 @@ public class MemberController {
 		mav.addObject("myPointList", myPointList);
 		mav.addObject("totalPoint", totalPoint);
 		mav.setViewName("member/myPoint");
-
+		
 		return mav;
 	}
 
@@ -160,7 +172,31 @@ public class MemberController {
 
 		return "common/msg";
 	}
-
+	
+	/* 이메일 인증 관련 코드 */
+	@RequestMapping("/sendMail.do")
+	@ResponseBody
+	public String joinPost(@RequestParam String email, Model model) throws Exception {
+		logger.info("member email: " + email);
+		String authKey = memberService.createMail(email);
+		
+		
+		return authKey;
+	}
+	
+//	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
+//	public String emailConfirm(Member member, Model model) throws Exception {
+//		logger.info(member.getEmail() + ": auth confirmed");
+//		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
+////		memberService.updateMailAuthstatus(member);
+//		
+//		model.addAttribute("email_auth_check", 1);
+//		
+//		return "/user/joinPost";
+//	}
+	
+	/*이메일 인증 관련 코드 끝*/
+	
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,
 			@RequestParam String password,
@@ -197,7 +233,7 @@ public class MemberController {
 
 		return "common/msg";		
 	}
-
+	
 	/**
 	 * 세션 무효화하기
 	 * session.setAttribute("memberLoggedIn", member)
@@ -216,17 +252,7 @@ public class MemberController {
 		// 로그아웃시 메인 페이지로 보내기
 		return "redirect:/";
 	}
-
-	/**
-	 * 현재로그인한 사용정보 가져오기 @SessionAttribute
-	 * @param memberLoggedIn
-	 */
-	/*
-	 * @RequestMapping("/memberView.do") public void memberView(@SessionAttribute
-	 * Member memberLoggedIn) { logger.debug("회원정보 페이지 요청");
-	 * logger.debug("memberLoggedIn={}", memberLoggedIn); }
-	 */
-
+	
 	/**
 	 * 
 	 * 웹서비스(html문서)  + data(xml, json) 
@@ -251,6 +277,8 @@ public class MemberController {
 		return map;
 
 	}
+
+	
 /*아이디 비번 찾기 팝업 이동 */
 	@RequestMapping("/memberIdFind.do")
 	public String memberIdFinder() {
@@ -305,46 +333,45 @@ public class MemberController {
 	public String changePassword(@RequestParam String memberId,
 								 @RequestParam String password,
 								 @RequestParam String password_new, Model model) {
-			// 1.업무로직 : 회원 정보 가져오기
-			Member member = memberService.selectOneMember(memberId);
-			String pwd =passwordEncoder.encode(member.getPassword());
-			
-			System.out.println("암호화전 변경비번:"+password_new);
-			String newpassword = passwordEncoder.encode(password_new); //변경비번
-			int result =0;
-			
-			String msg = "";
-			String loc="";
-				if(passwordEncoder.matches(password,pwd)==true) {
-					//비밀번호가 맞으면 
-					member.setPassword(newpassword);
-					
-					result =memberService.updatePwd(member); 
+    				// 1.업무로직 : 회원 정보 가져오기
+    				Member member = memberService.selectOneMember(memberId);
+    				String pwd =member.getPassword();
 
-					if(result>0) {
-						msg="비밀번호 변경성공";
-						String script="self.close()";
-						model.addAttribute("script",script);
-					}else {
-						msg="변경실패";
-					}
+    				System.out.println("받아온 비번:"+password);
+    				
+    				String newpassword = passwordEncoder.encode(password_new); //변경비번
+    				int result =0;
+    				
+    				String msg = "";
+    				String loc="";
+	    			if(passwordEncoder.matches(password,pwd)==true) {
+	    				//비밀번호가 맞으면 
+	    				member.setPassword(newpassword);
+	    				
+	    				result =memberService.updatePwd(member); 
+	
+	    				if(result>0) {
+	    					msg="비밀번호 변경성공";
+	    					String script="self.close()";
+	    					model.addAttribute("script",script);
+	    				}else {
+	    					msg="변경실패";
+	    				}
+	    			}
+	    			// 3. 비밀번호가 틀린 경우
+	    			else {
+	    				msg = "비밀번호가 일치하지 않습니다.";
+	    				loc="/member/updatePwd.do?memberId="+memberId;
+	    			}
+	    				
+	
+	    			
+	    			model.addAttribute("msg", msg);
+	    			model.addAttribute("loc", loc); 
+	    			
+	    			return "common/msg";
+	
 				}
-				// 3. 비밀번호가 틀린 경우
-				else {
-					msg = "비밀번호가 일치하지 않습니다.";
-					loc="/member/updatePwd.do?memberId="+memberId;
-				}
-			
-
-				
-				model.addAttribute("msg", msg);
-				model.addAttribute("loc", loc); 
-		
-				return "common/msg";
-
-
-			}
-    
     @RequestMapping("/chkEmailUsable.do")
     @ResponseBody
     public String chkEmailUsable(@RequestParam String email){
@@ -392,9 +419,6 @@ public class MemberController {
     	
     	return authCode;
     }
-    
-    
-    
 	
 }
 

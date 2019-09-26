@@ -1,29 +1,48 @@
 package com.kh.showticket.event.controller;
 
+import static com.kh.showticket.common.getApi.getApi.getConcatList;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.event.model.service.DiscountService;
+
+
 @Controller
 @RequestMapping("/event")
 public class EventController {
-
+	
+	@Autowired 
+	DiscountService discountService;
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/eventList.do")
 	public ModelAndView event(ModelAndView mav) {
 		logger.debug("event페이지 요청");
 
+		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=2&shcate=AAAA";
+		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=1&shcate=AAAB";
+		
 		mav.setViewName("event/eventList");
+		mav.addObject("eventList",getConcatList(url1,url2));
+		
 		return mav;
 	}
 
 	@RequestMapping("/endEventList.do")
 	public ModelAndView endEvent(ModelAndView mav) {
 		logger.debug("endEvent페이지 요청");
-
+		
+		
+		
+		
 		mav.setViewName("event/endEventList");
 		return mav;
 	}
@@ -37,9 +56,23 @@ public class EventController {
 	}
 
 	@RequestMapping("/addSaleEvent.do")
-	public String addSaleEvent() {
+	public ModelAndView addSaleEvent(ModelAndView mav) {
 
-		return "/event/addSaleEvent";
+		mav.setViewName("/event/addSaleEvent");
+		
+		
+		/*
+		 * String
+		 * url1=" http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190901&eddate=20190923&rows=10&cpage=1"
+		 * ; String url2=
+		 * "http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=5&shcate=AAAB";
+		 */
+
+		//mav.addObject("S_event",getConcatList(url1,url2));
+		
+		
+		
+		return mav;
 	}
 
 	@RequestMapping("/prizewinnerWrite.do")
