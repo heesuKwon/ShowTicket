@@ -115,12 +115,12 @@ public class HelpController {
 		mav.setViewName("help/faqView");
 		return mav;
 	}
+//	@RequestMapping("/talk.do")
+//	public ModelAndView talk(ModelAndView mav) {
+//		mav.setViewName("help/talk");
+//		return mav;
+//	}
 	
-	@RequestMapping("/talk.do")
-	public ModelAndView talk(ModelAndView mav) {
-		mav.setViewName("help/talk");
-		return mav;
-	}
 	@RequestMapping("/faqUpdate.do")
 	public ModelAndView faqUpdate(@RequestParam int faqNo, ModelAndView mav) {
 		logger.debug("help페이지 요청");
@@ -129,6 +129,8 @@ public class HelpController {
 		mav.setViewName("help/faqUpdate");
 		return mav;
 	}
+	
+	
 	
 	@RequestMapping(value="/faqUpdateEnd.do", method=RequestMethod.POST)
 	public ModelAndView faqUpdateEnd(Faq faq, Model model, ModelAndView mav) {

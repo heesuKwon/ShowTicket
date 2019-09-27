@@ -213,7 +213,10 @@ function getList(cpage){
 	}
 </script>
 
-<noscript><img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&' border='0' width='0' height='0' alt=''></noscript>
+<noscript>
+	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
+		border='0' width='0' height='0' alt=''>
+</noscript>
 
 
 <noscript>
@@ -245,7 +248,8 @@ function getList(cpage){
 		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
 	}
 </script>
-<script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
+<script async type="text/javascript"
+	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
 
 
@@ -292,9 +296,7 @@ ul.lst_thumb li.on::before {
 }
 </style>
 
-</head>
 
-<body>
 	<div id="wrap" class="subwrap">
 
 		<div id="container" class="submain_front">
@@ -534,40 +536,47 @@ ul.lst_thumb li.on::before {
 						</div>
 
 
-        	
-        	<div class="orderWrap">
-	        	<select name="selectOrder" id="order-show">
-		        	<option value="byRank">랭킹순</option>
-		        	<option value="byDate">최신순</option>
-		        	<option value="byStar">별점순</option>
-		        </select>
-        	</div>
-        	
-       <div class="searchContainer">
-      
-        <ul id="showListAll" class="goods_list" style="clear:both;">
-            
-            <c:forEach  items="${showList}" var="map">
-	                <li><a href="http://www.ticketlink.co.kr/product/29767">
-	                    <p><img src="${map.poster }" alt=""></p>
-	                    <div class="list_info">
-	                        <strong class="elp">${map.prfnm }</strong>
-	                        <dl>
-	                            <dt>기간</dt>
-	                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
-	                            <dt>장소</dt>
-	                            <dd>${map.fcltynm }</dd>
-	                        </dl>
-	                    </div>
-	                </a></li>
-            </c:forEach>
-        </ul>
-        
-          <div id="srchEmpty">검색결과가 없습니다.<div>
-        </div>
-    </div>
-    <script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
-    <script type="text/javascript">
+
+						<div class="orderWrap">
+							<select name="selectOrder" id="order-show">
+								<option value="byRank">랭킹순</option>
+								<option value="byDate">최신순</option>
+								<option value="byStar">별점순</option>
+							</select>
+						</div>
+
+						<div class="searchContainer">
+
+							<ul id="showListAll" class="goods_list" style="clear: both;">
+
+								<c:forEach items="${showList}" var="map">
+									<li><a href="http://www.ticketlink.co.kr/product/29767">
+											<p>
+												<img src="${map.poster }" alt="">
+											</p>
+											<div class="list_info">
+												<strong class="elp">${map.prfnm }</strong>
+												<dl>
+													<dt>기간</dt>
+													<dd>${map.prfpdfrom }~${map.prfpdto }</dd>
+													<dt>장소</dt>
+													<dd>${map.fcltynm }</dd>
+												</dl>
+											</div>
+									</a></li>
+								</c:forEach>
+							</ul>
+
+							<div id="srchEmpty">검색결과가 없습니다.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
+	<script type="text/javascript">
 
 		if ($("#noticeList").find("ul> li").length > 4) {
 			$(function () {
@@ -615,17 +624,11 @@ ul.lst_thumb li.on::before {
 			$(".rangkingImg").attr("src", $(this).data("url"));
 			$(".rangkingImgLink").attr("href", "/product/" + $(this).data("productid"));
 		});
+
     </script>
-				</div>
-			</div>
 
-
-		</div>
-</body>
 <script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript">
-	//<![CDATA[
-
 	var page = 1;
 	var categoryNum = 10;
 	var itemPerPage = 30;
@@ -840,4 +843,4 @@ ul.lst_thumb li.on::before {
 
 	//]]>
 </script>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

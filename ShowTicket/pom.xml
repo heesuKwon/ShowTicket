@@ -251,12 +251,20 @@
 		</dependency>
 		<!-- 이메일 인증 끝 -->
 		
+		<!-- 웹소켓 의존 추가 -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
+
 		<!-- stomp관련 의존 추가 -->		
 		<dependency>
    			<groupId>org.springframework</groupId>
     		<artifactId>spring-messaging</artifactId>
     		<version>${org.springframework-version}</version>
-		</dependency>     
+		</dependency>   
+
 	</dependencies>
     <build>
         <plugins>

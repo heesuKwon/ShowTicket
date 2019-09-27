@@ -81,7 +81,7 @@ function validate(){
 <script>
 
 function updatePwd() {
-	var url ="${pageContext.request.contextPath}/member/updatePwd.do?memberId=honggd";/* ?memberId=아이디" */
+	var url ="${pageContext.request.contextPath}/member/updatePwd.do?memberId=${memberLoggedIn.memberId}";/* ?memberId=아이디" */
 	var title = "비밀번호 변경";
 	var status="left=500px, top:200px;, width=420px height=450px";
 	
@@ -103,7 +103,7 @@ function updatePwd() {
 				<tr>
 	
 				<th>아이디</th>
-				<td><input type="text" class="form-control" name="memberId" id="memberId" value="honggd" required readonly>
+				<td><input type="text" class="form-control" name="memberId" id="memberId" value="${memberLoggedIn.memberId }" required readonly>
 				</td>
 
 			</tr>
@@ -117,20 +117,20 @@ function updatePwd() {
 			<tr>
 				<th>이름</th>
 				<td>	
-				<input type="text" class="form-control" name="memberName" id="memberName"required>
+				<input type="text" class="form-control" name="memberName" id="memberName" value="${memberLoggedIn.memberName}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
 				<td>	
-					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
+					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" value="${memberLoggedIn.phone}" maxlength="11" required>
 				</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td>
 					<div>
-					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">
+					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email"value="${memberLoggedIn.email}">
 					<button type="button" class="btn btn-primary" id="emailAuth">인증</button>
 					</div>
 					<div class="authContainer" id="emailAuthContainer">

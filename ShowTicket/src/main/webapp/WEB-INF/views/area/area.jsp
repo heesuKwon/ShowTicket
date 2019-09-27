@@ -16,10 +16,12 @@ var cpage = 2;
 var area = '';
 
 $(()=>{
+
 	$("ul > li > div").click((e)=>{
 
 			$(".nav-pills .nav-link.select").attr('class', 'nav-link nav-font default');
 			$(e.target).attr('class','nav-link select nav-font')
+
 			
 			cpage=1;
 			
@@ -29,8 +31,10 @@ $(()=>{
 
 			getList(cpage);
 			cpage++;
+
 		
 	});
+
 	
 });
 
