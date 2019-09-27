@@ -36,7 +36,7 @@ import com.kh.showticket.member.model.vo.MyPoint;
 @SessionAttributes("memberLoggedIn")
 public class MemberController {
 
-	@Autowired()
+	@Autowired
 	MemberService memberService;
 	
 	@Autowired
