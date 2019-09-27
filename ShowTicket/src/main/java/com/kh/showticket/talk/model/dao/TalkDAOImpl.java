@@ -1,6 +1,7 @@
 package com.kh.showticket.talk.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -41,8 +42,13 @@ public class TalkDAOImpl implements TalkDAO {
 	}
 
 	@Override
-	public List<Msg> findChatListByChatId(String chatId) {
+	public List<Map<String, String>> findChatListByChatId(String chatId) {
 		return session.selectList("talk.findChatListByChatId", chatId);
+	}
+
+	@Override
+	public List<Map<String, String>> findRecentList() {
+		return session.selectList("talk.findRecentList");
 	}
 	
 	

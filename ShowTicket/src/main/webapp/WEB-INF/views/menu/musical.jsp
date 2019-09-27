@@ -11,6 +11,7 @@
 var cpage = 2;
 var srchFlag = false;
 var srchOFlag = false;
+
 $(function(){
      getList(cpage);
      cpage++;
@@ -176,6 +177,31 @@ function getList(cpage){
 <!-- NHN AD MORE Script -->
 
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
+
+<script>
+	var _croID = '5d148869e4b0adaa9beaa9d1';
+
+	function getMoreRecommend (e, n) {
+		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
+			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
+	}
+
+	function createMoreRCView (e) {
+		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
+			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
+	}
+
+	function mcroPushEvent (n) {
+		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
+			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
+	}
+
+	function _cro_initialize () {
+		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
+	}
+</script>
+<script async type="text/javascript"
+	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
 <script type="text/javascript">
 var index=0;
@@ -460,28 +486,21 @@ ul.lst_thumb li.on::before {
 					</div>
 				</div>
 
-
-
-				<div class="searchContainer">
-
-					<ul id="musicalListAll" class="goods_list" style="clear: both;">
-						<c:forEach items="${musicalList}" var="map">
-							<li><a
-								href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
-									<p>
-										<img src="${map.poster }" alt="">
-									</p>
-									<div class="list_info">
-										<strong class="elp">${map.prfnm }</strong>
-										<dl>
-											<dt>기간</dt>
-											<dd>${map.prfpdfrom }~ ${map.prfpdto }</dd>
-											<dt>장소</dt>
-											<dd>${map.fcltynm }</dd>
-										</dl>
-									</div>
-							</a></li>
-
+	       	<div class="searchContainer">
+		        <ul id="musicalListAll" class="goods_list" style="clear:both;">
+		                  <c:forEach items="${musicalList}" var="map">
+			                <li><a href="http://www.ticketlink.co.kr/product/29767">
+			                    <p><img src="${map.poster }" alt=""></p>
+			                    <div class="list_info">
+			                        <strong class="elp">${map.prfnm }</strong>
+			                        <dl>
+			                            <dt>기간</dt>
+			                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
+			                            <dt>장소</dt>
+			                            <dd>${map.fcltynm }</dd>
+			                        </dl>
+			                    </div>
+			                </a></li>
 						</c:forEach>
 					</ul>
 

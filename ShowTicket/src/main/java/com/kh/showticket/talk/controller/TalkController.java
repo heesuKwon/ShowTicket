@@ -1,7 +1,10 @@
 package com.kh.showticket.talk.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -20,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
-import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.talk.model.service.TalkService;
 import com.kh.showticket.talk.model.vo.ChatRoom;
 import com.kh.showticket.talk.model.vo.Msg;
@@ -37,7 +39,7 @@ public class TalkController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping("/talk.do")
+	@RequestMapping(value= {"/talk.do", "/talk.do/{chatId}"})
 	public ModelAndView websocket(ModelAndView mav, HttpSession session) {
 		//@SessionAttribute(value="memberLoggedIn", required=false) Member memberLoggedIn
 		//비회원일 경우, httpSessionId값을 memberId로 사용한다.
@@ -73,11 +75,29 @@ public class TalkController {
 	          talkService.insertChatRoom(list);
 
 	    }
-	    //chatId가 존재하는 경우, 채팅내역 조회
+	    //chatId가 존재하는 경우, 채팅내역 조회 
 	  		else{
-	  			List<Msg> chatList = talkService.findChatListByChatId(chatId);
+	  			List<Map<String,String>> chatList = talkService.findChatListByChatId(chatId);
+	  			
+	  			for(Map<String, String> msg : chatList) {
+	  				long longTypeTime = Long.parseLong(String.valueOf(msg.get("time")));
+	  				Date date = new Date(longTypeTime);
+	  				
+	  				//날짜형식설정
+	  				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd a hh:mm");
+	  				String StringTypeTime = sdf.format(date);
+	  				
+	  				//logger.debug("stringtypeTime={}", StringTypeTime);
+	  				
+	  				msg.remove("time");
+	  				msg.put("time", StringTypeTime);
+	  				
+	  				//logger.debug("타임 = {}", msg.get("time"));
+	  			}
+	  			
 	  			mav.addObject("chatList", chatList);
 	  		}
+	    
 	    
 	    logger.info("memberId=[{}], chatId=[{}]",memberId, chatId);
 	    
@@ -133,20 +153,22 @@ public class TalkController {
 	}
 	
 	@MessageMapping("/chat/{chatId}")
-	@SendTo(value={"/chat/{chatId}", "/chat/admin"})
+	@SendTo(value={"/chat/{chatId}", "/chat/supporter"})
 	public Msg sendEcho(Msg fromMessage, @DestinationVariable String chatId, @Header("simpSessionId") String sessionId) {
 		logger.info("fromMessage={}", fromMessage);
 		logger.info("chatId={}", chatId);
 		logger.info("sessionId={}", sessionId);
 		
-		//여기가 문제!
+		logger.info("fromMessage에서 memberId만 왜 안오지? = {}", fromMessage);
+		
+		
 		talkService.insertChatLog(fromMessage);
 		
 		return fromMessage;
 	}
 	
 	@MessageMapping("/lastCheck")
-	@SendTo(value={"/chat/admin"})
+	@SendTo(value={"/chat/supporter"})
 	public Msg lastCheck(@RequestBody Msg fromMessage) {
 		logger.info("fromMessage={}", fromMessage);
 		talkService.updateLastCheck(fromMessage);
@@ -154,5 +176,22 @@ public class TalkController {
 		return fromMessage;
 	}
 	
-
+	
+	//임시(관리자페이지에 연결하자ㅏ!)
+	@RequestMapping("/help/supporter.do")
+	public ModelAndView support(ModelAndView mav, HttpSession session) {
+		//메소드 파라미터에 차후 추가 : @SessionAttribute(value="memberLoggedIn"), required=false) Member memberLoggedIn
+		//String memberId = Optional.ofNullable(memberLoggedIn).map(Member::getMemberId).orElse(session.getId());
+		
+		//차후 서포터 아이디로 수정 (mapper에 있는 findRecentList 쿼리도 바꿔줄 것!)
+		String memberId = "admin";
+		String chatId = null;
+		
+		List<Map<String, String>> recentList = talkService.findRecentList();
+		logger.info("recentList={}", recentList);
+		
+		mav.addObject("recentList", recentList);
+		mav.setViewName("help/supporterTalk");
+		return mav;
+	}
 }

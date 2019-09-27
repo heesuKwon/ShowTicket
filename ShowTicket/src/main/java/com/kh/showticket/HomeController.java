@@ -1,9 +1,8 @@
 package com.kh.showticket;
 
-import static com.kh.showticket.common.getApi.getApi.getList;
 import static com.kh.showticket.common.getApi.getApi.getBoxList;
-import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
+import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
 
 import java.util.List;
 import java.util.Locale;

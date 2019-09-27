@@ -624,12 +624,11 @@ ul.lst_thumb li.on::before {
 			$(".rangkingImg").attr("src", $(this).data("url"));
 			$(".rangkingImgLink").attr("href", "/product/" + $(this).data("productid"));
 		});
+
     </script>
-	<script type="text/javascript" src="/resources/js/date.js"></script>
-	<script type="text/javascript">
 
-	//<![CDATA[
-
+<script type="text/javascript" src="/resources/js/date.js"></script>
+<script type="text/javascript">
 	var page = 1;
 	var categoryNum = 10;
 	var itemPerPage = 30;
