@@ -353,8 +353,9 @@ public class MemberController {
 	    				if(result>0) {
 	    					msg="비밀번호 변경성공";
 	    					String script="self.close()";
-	    					
+	    					loc="/memberLogout.do";
 	    					model.addAttribute("script",script);
+	    					model.addAttribute("script",loc);
 	    				}else {
 	    					msg="변경실패";
 	    				}

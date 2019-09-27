@@ -34,16 +34,16 @@
 		<ul class="event_top_list">
 			<c:forEach items="${eventList }" var="evt">
 			<li>
-				<a href="${pageContext.request.contextPath }/event/eventView.do"> 
+				<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${evt.mt20id }"> 
 					<img
 					src="${evt.poster}"
 					alt="poster" width="285" height="386">
 					<div class="event_top_info">
-						
+						<input type="hidden" name="evtID" value="${evt.mt20id }" />
 						<dl>
 							<dt>제목</dt>
 							<dd class="event_title">
-								<span>[초대]</span> <br />
+								<span>[초대]  ${evt.genrenm} </span> <br />
 								
 								&lt; ${evt.prfnm} &gt;
 							</dd>
