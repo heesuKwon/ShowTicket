@@ -68,7 +68,7 @@ function getSearchList(cpage){
 	         		
 	            for(var i=0; i<data.length; i++){
 	                		
-		            html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+		            html+="<li><a href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+data[i].mt20id+"'>";
 		            html+="<p><img src="+data[i].poster+" alt=''></p>";
 		            html+="<div class='list_info'>";
 		            html+="<strong class='elp'>"+data[i].prfnm+"</strong>";
@@ -124,7 +124,7 @@ function getList(cpage){
                 	
                 	for(var i=0; i<data.length; i++){
                 		
-	                	html+="<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+	                	html+="<li><a href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+data[i].mt20id+"'>";
 	                	html+="<p><img src="+data[i].poster+" alt=''></p>";
 	                	html+="<div class='list_info'>";
 	                	html+="<strong class='elp'>"+data[i].prfnm+"</strong>";

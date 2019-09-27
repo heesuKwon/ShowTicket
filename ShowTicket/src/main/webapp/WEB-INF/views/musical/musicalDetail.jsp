@@ -1,3 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="com.kh.showticket.common.MusicalAndShow"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -9,6 +12,55 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
 
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+<script type='text/javascript'
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+
+<%
+	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
+
+	String[] times = musical.getTime().split(", ");
+	Map<String, String> dayTime = new HashMap<>();
+	Map<String, Integer> days = new HashMap<>();
+	days.put("월",0);
+	days.put("화",1);
+	days.put("수",2);
+	days.put("목",3);
+	days.put("금",4);
+	days.put("토",5);
+	days.put("일",6);
+	String[] d = {"월","화","수","목","금","토","일"};
+	for(String s: times){
+		System.out.println(s);
+		String time = s.substring(s.indexOf("(")+1, s.indexOf(")"));
+		String[] ts = time.split(",");
+		System.out.println(time);
+		if(s.contains("~")){
+			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
+			String day2 = s.substring(s.lastIndexOf("요일")-1,s.lastIndexOf("요일"));
+			System.out.println(day1);
+			System.out.println(day2);
+			for(int i=days.get(day1);i<=days.get(day2);i++){
+				System.out.println(i);
+				for(int j=0;j<ts.length;j++){
+					System.out.println(d[i]);
+					System.out.println(ts[j]);
+					dayTime.put(d[i],ts[j]);
+				}
+			}				
+		}
+		else{
+			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
+			
+			for(int i=0;i<ts.length;i++){
+				System.out.println(ts[i]);
+				dayTime.put(day1,ts[i]);
+			}
+		} 
+	}
+%>
 
 
 <script language='javascript'>
@@ -622,16 +674,12 @@
 		<div class="detail_box_top ">
 			<div class="bx_title">
 				<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
-				<div class="title">
-					뮤지컬
-					&lt;${musical.getName()}&gt;
-				</div>
+				<div class="title">뮤지컬 &lt;${musical.getName()}&gt;</div>
 			</div>
 			<div class="detail_info">
 				<div class="bx_thumb">
 					<span class="bx_img"> <!-- 뮤지컬포스터 --> <img
-						src="${musical.getPoster()}"
-						alt="대표이미지" width="314" height="382">
+						src="${musical.getPoster()}" alt="대표이미지" width="314" height="382">
 					</span>
 				</div>
 				<div class="etc_info">
@@ -645,13 +693,13 @@
 						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 					</div>
 					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">${musical.getStateDate()}~2019.10.27</span>
+						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()} ~ ${musical.getEndDate()}</span>
 					</div>
 
 
 
 					<div class="bx_dummy">
-						<em class="info_tit">관람시간</em> <span class="txt">135분</span>
+						<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
 					</div>
 
 
@@ -659,7 +707,7 @@
 
 
 					<div class="bx_dummy border_type">
-						<em class="info_tit">관람등급</em> <span class="txt">만7세이상</span>
+						<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
 					</div>
 
 
@@ -678,19 +726,16 @@
 						<em class="info_tit">가격</em>
 						<div class="txt ui-dialog  price-dialog">
 							<ul class="lst_dsc">
-
-								<li>VIP석 - <span class="color_purple fbold">140,000</span>원
-								</li>
-								<br />
-								<li>R석 - <span class="color_purple fbold">120,000</span>원
-								</li>
-								<br />
-								<li>S석 - <span class="color_purple fbold">90,000</span>원
-								</li>
-								<br />
-								<li>A석 - <span class="color_purple fbold">60,000</span>원
-								</li>
-								<br />
+								<%
+									String[] prices = musical.getPrice().split(", ");
+								%>
+								<c:forEach items="<%=prices%>" var="m">
+									<li>${fn:substring(m,0,fn:indexOf(m,"석")+1)}-<span
+										class="color_purple fbold">${fn:substring(m,fn:indexOf(m,"석")+1,fn:indexOf(m,"원")) }</span>
+										${fn:substring(m,fn:indexOf(m,"원"),fn:indexOf(m,"원")+1)}
+									</li>
+									<br />
+								</c:forEach>
 							</ul>
 
 							<!-- [D] 활성화 시 display:block 처리 -->
@@ -721,55 +766,22 @@
 					</div>
 
 
-				</div><div class="bx_dummy">
-						<em class="info_tit">대기공연추가</em>
-						<span class="txt">
-					<span class="wait"><img src="${pageContext.request.contextPath }/resources/images/heart.png" alt="" width=15px; /></span>
-				</span>
-					</div>
-				
+				</div>
+				<div class="bx_dummy">
+					<em class="info_tit">대기공연추가</em> <span class="txt"> <span
+						class="wait"><img
+							src="${pageContext.request.contextPath }/resources/images/heart.png"
+							alt="" width=15px; /></span>
+					</span>
+				</div>
+
 
 			</div>
-			<div class="">
-				<!-- FE 지원 form 시작 -->
+			<!-- FE 지원 form 시작 -->
+			<c:if test="${musical.getState() eq '공연중'}">
+				<div class="detail_info_right">
+					<div id="calendar"></div>
 
-
-				<div class="detail_info_right" id="calendar">
-					<div class="ui-datepicker dotline_x">
-						<div class="ui-datepicker-header">
-							<a class="ui-datepicker-prev calendar-btn-prev-mon" title="이전달"><span>이전달</span></a>
-							<a class="ui-datepicker-next calendar-btn-next-mon" title="다음달"><span>다음달</span></a>
-							<div class="ui-datepicker-title"></div>
-						</div>
-						<div class="ui-datepicker-body">
-							<table>
-								<thead>
-									<tr>
-										<th><span title="일요일">일</span></th>
-										<th><span title="월요일">월</span></th>
-										<th><span title="화요일">화</span></th>
-										<th><span title="수요일">수</span></th>
-										<th><span title="목요일">목</span></th>
-										<th><span title="금요일">금</span></th>
-										<th><span title="토요일">토</span></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr class="calendar-week">
-										<!-- 달력의 한 주에 해당하는 엘리먼트 컨테이너 -->
-										<td class="calendar-date"></td>
-										<!-- 날짜가 표시될 엘리먼트 -->
-										<td class="calendar-date"></td>
-										<td class="calendar-date"></td>
-										<td class="calendar-date"></td>
-										<td class="calendar-date"></td>
-										<td class="calendar-date"></td>
-										<td class="calendar-date"></td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>
 					<dl class="dotline_x">
 						<dt>예매가능 회차</dt>
 						<dd>
@@ -780,7 +792,7 @@
 								<option value="">18시 30분</option>
 							</select>
 						</dd>
-						<dt>예매가능 좌석</dt>
+						<!-- <dt>예매가능 좌석</dt>
 						<dd>
 							<ul class="seat" id="seatingInfoPerRound">
 								<li>전체 <span class="color_purple fbold">427</span>석
@@ -798,9 +810,8 @@
 								<li>A석 <span class="color_purple fbold">427</span>석
 								</li>
 							</ul>
-						</dd>
+						</dd> -->
 					</dl>
-
 
 
 
@@ -808,16 +819,22 @@
 						onclick="">
 						<span>예매하기 </span>
 					</button>
-
-
-
-
-
-
-
 				</div>
-				<!-- FE 지원 form 종료 -->
-			</div>
+			</c:if>
+			<c:if test="${musical.getState() eq '공연예정'}">
+				<div class="detail_info_right">
+					<div class="noinfo_txt">
+                     	티켓 오픈일은 공지사항을 참고해주세요.
+                    </div>
+
+					<button type="button" class="btn reserve due s_after first-child"
+						onclick="">
+						<span>판매예정 </span>
+					</button>
+				</div>
+			</c:if>
+
+			<!-- FE 지원 form 종료 -->
 		</div>
 		<!-- 배너영역 -->
 
@@ -860,7 +877,7 @@
 					<link rel="stylesheet" type="text/css"
 						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">
 					<link rel="stylesheet" type="text/css"
-						href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/contents.css">
+						href="${pageContext.request.contextPath}/resources/css/contents.css">
 					<div class="detail_cont detail_cont_v2">
 						<div class="title_wrap">
 							<strong class="title title21">네티즌 별점 및 후기</strong>
@@ -921,30 +938,28 @@
 						</div>
 						<div class="review_list">
 							<ul id="reviewUl" style="word-break: break-all;">
-								<li class="reviewOne">
-
-									<span class="reviewId color_purple">honggd<span class="reviewDate small-font">2019.09.20 17:10</span></span>
-										<div class="btns">
-									<button class="btn-sm btn-primary" id="mReview">수정</button>
-									<button class="btn-sm btn-primary" id="dReview">삭제</button>
+								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
+										class="reviewDate small-font">2019.09.20 17:10</span></span>
+									<div class="btns">
+										<button class="btn-sm btn-primary" id="mReview">수정</button>
+										<button class="btn-sm btn-primary" id="dReview">삭제</button>
 									</div>
-									<div class="reviewContent">
-										뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가 가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬 느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서 인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는 인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.
+									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
+										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
+										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
+										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
+										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div></li>
+								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
+										class="reviewDate small-font">2019.09.20 17:10</span></span>
+									<div class="btns">
+										<button class="btn-sm btn-primary" id="mReview">수정</button>
+										<button class="btn-sm btn-primary" id="dReview">삭제</button>
 									</div>
-								
-								</li>
-								<li class="reviewOne">
-
-									<span class="reviewId color_purple">honggd<span class="reviewDate small-font">2019.09.20 17:10</span></span>
-										<div class="btns">
-									<button class="btn-sm btn-primary" id="mReview">수정</button>
-									<button class="btn-sm btn-primary" id="dReview">삭제</button>
-									</div>
-									<div class="reviewContent">
-										뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가 가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬 느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서 인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는 인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.
-									</div>
-								
-								</li>
+									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
+										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
+										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
+										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
+										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div></li>
 							</ul>
 						</div>
 
@@ -990,29 +1005,26 @@
 						<div class="contents">
 							<p>
 								<strong><span style="font-family: 돋움, dotum;">1)
-										일반배송</span></strong><br>
-								<span style="font-family: 돋움, dotum;"> 티켓 예매 확인 후 인편으로
-									배송되며, 예매 후 10일 이내(영업일 기준) 수령 가능합니다.</span><br>
-								<span style="font-family: 돋움, dotum;">일괄 배송 상품의 경우 고지된
-									배송일 이후 10일 이내(영업일 기준) 수령 가능합니다.</span><br>
-								<span style="font-family: 돋움, dotum;">배송비는 행사에
-									따라&nbsp;상이합니다. 상품 상세 페이지 안내에서 확인할 수 있습니다. </span><br>
-								<span style="font-family: 돋움, dotum;">행사 또는 행사일에 따라 우편배송
-									방법의 선택이 제한될 수 있습니다.</span>
+										일반배송</span></strong><br> <span style="font-family: 돋움, dotum;"> 티켓
+									예매 확인 후 인편으로 배송되며, 예매 후 10일 이내(영업일 기준) 수령 가능합니다.</span><br> <span
+									style="font-family: 돋움, dotum;">일괄 배송 상품의 경우 고지된 배송일 이후
+									10일 이내(영업일 기준) 수령 가능합니다.</span><br> <span
+									style="font-family: 돋움, dotum;">배송비는 행사에 따라&nbsp;상이합니다.
+									상품 상세 페이지 안내에서 확인할 수 있습니다. </span><br> <span
+									style="font-family: 돋움, dotum;">행사 또는 행사일에 따라 우편배송 방법의
+									선택이 제한될 수 있습니다.</span>
 							</p>
 							<p>
 								<span style="font-family: 나눔고딕, NanumGothic, sans-serif;"></span><br>
 								<strong><span style="font-family: 돋움, dotum;">2)
-										현장수령</span></strong><br>
-								<span style="font-family: 돋움, dotum;"> 행사당일 공연 시작 1시간~30분
-									전까지 행사장 매표소에서 수령하실 수 있습니다.</span><br>
-								<span style="font-family: 돋움, dotum;">예매번호, 예매하신 분의
-									신분증(필수), 예매확인서(프린트 또는, 티켓링크 앱 예매확인 페이지)를&nbsp;매표소에 제시하시면 편리하게
-									티켓을 수령하실 수 있습니다.</span><br>
-								<span style="font-family: 돋움, dotum;">행사 또는 행사일에 따라 현장수령
-									방법의 선택이 제한될 수 있습니다.</span><br>
-								<span style="font-family: 돋움, dotum;">수령장소는 각 행사장 매표소이며,
-									매표소의 예매자 전용 창구를 이용하시면 됩니다.&nbsp;</span>
+										현장수령</span></strong><br> <span style="font-family: 돋움, dotum;">
+									행사당일 공연 시작 1시간~30분 전까지 행사장 매표소에서 수령하실 수 있습니다.</span><br> <span
+									style="font-family: 돋움, dotum;">예매번호, 예매하신 분의 신분증(필수),
+									예매확인서(프린트 또는, 티켓링크 앱 예매확인 페이지)를&nbsp;매표소에 제시하시면 편리하게 티켓을 수령하실 수
+									있습니다.</span><br> <span style="font-family: 돋움, dotum;">행사
+									또는 행사일에 따라 현장수령 방법의 선택이 제한될 수 있습니다.</span><br> <span
+									style="font-family: 돋움, dotum;">수령장소는 각 행사장 매표소이며, 매표소의
+									예매자 전용 창구를 이용하시면 됩니다.&nbsp;</span>
 							</p>
 						</div>
 
@@ -1120,9 +1132,8 @@
 										<td>예매후 7일 이내 / 예매당일</td>
 										<td>없음</td>
 										<td rowspan="7">예매 당일에 취소하는 경우 이외에는<br>예매수수료가 환불되지
-											않음 (약관 28조 의거)<br>
-										<br>예매 후 7일 이내라도 취소 시점이 공연일로부터<br>10일 이내라면 그에 해당하는
-											취소수수료가 부과됨<br>(약관 32조 의거)
+											않음 (약관 28조 의거)<br> <br>예매 후 7일 이내라도 취소 시점이 공연일로부터<br>10일
+											이내라면 그에 해당하는 취소수수료가 부과됨<br>(약관 32조 의거)
 										</td>
 									</tr>
 									<tr>
@@ -1158,9 +1169,9 @@
 
 						<strong>[티켓 환불 안내]</strong>
 						<div class="contents">
-							<span class="fbold">신용카드</span> : 취소 시 승인이 취소됩니다.<br>
-							<span class="fbold">무통장입금</span> : 인터넷 또는 콜센터(1588-7890)로 접수된
-							고객님의 환불계좌로 입금해드립니다.
+							<span class="fbold">신용카드</span> : 취소 시 승인이 취소됩니다.<br> <span
+								class="fbold">무통장입금</span> : 인터넷 또는 콜센터(1588-7890)로 접수된 고객님의
+							환불계좌로 입금해드립니다.
 						</div>
 
 
@@ -1308,8 +1319,8 @@
 		</li>
 
 		<li>뮤지컬 <사랑했어요> 실물 유료 티켓 소지자 (재관람 할인) - <span
-				class="color_green fbold">20</span>
-			<span class="color_green fbold"> % </span> 할인 </li>
+				class="color_green fbold">20</span> <span class="color_green fbold">
+				% </span> 할인 </li>
 
 		<li>학생 할인 (초,중,고) - <span class="color_green fbold">20</span><span
 			class="color_green fbold"> % </span> 할인
@@ -1397,8 +1408,33 @@
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
 
+	<!-- 달력 -->
+	$.fn.datepicker.dates['kr'] = {
+			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
+			daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
+			daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+			months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+			monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
+		    today: "Today",
+		    clear: "Clear",
+		    format: "mm/dd/yyyy",
+		    titleFormat: "yyyy.mm", /* Leverages same syntax as 'format' */
+		    weekStart: 0
+	};
+	
+	
 	$(document).ready(function () {
-
+		
+		$('#calendar').datepicker({
+			format: "yyyy.mm.dd",
+			startDate: '${musical.getStartDate()}',
+			endDate: '${musical.getEndDate()}',
+			calendarWeeks: false,
+            todayHighlight: true,
+            daysOfWeekDisabled : [0,6],
+			language: 'kr'
+		});
+		
 		//기능 설정
 		setDialog();
 		onCloseIfOutOfSelect();
