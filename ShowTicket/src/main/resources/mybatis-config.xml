@@ -20,6 +20,8 @@
 
   	<typeAlias type="com.kh.showticket.help.model.vo.NoticeTicketOpen"
   		       alias="NoticeTicketOpen"/>
+  	<typeAlias type="com.kh.showticket.help.model.vo.Faq"
+  		       alias="faq"/>
 
   	<typeAlias type="com.kh.showticket.member.model.vo.Ticket"
   			   alias="ticket"/>

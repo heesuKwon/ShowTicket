@@ -97,11 +97,11 @@ function updatePwd() {
 	<br>
 	<div class="div-memberFrm">
 		<form name="memberUpdateFrm" id="memberUpdateFrm" action="memberUpdate.do" method="post" onsubmit="return validate();" >
-	<h2 class="small-title"style="text-align:left;">회원정보 수정</h2>
-	<br />
-		<table style="margin-left:auto; margin-right:auto;">
-			<tr>
-
+			<h2 class="small-title"style="text-align:left;">회원정보 수정</h2>
+			<br />
+			<table style="margin-left:auto; margin-right:auto;">
+				<tr>
+	
 				<th>아이디</th>
 				<td><input type="text" class="form-control" name="memberId" id="memberId" value="honggd" required readonly>
 				</td>
@@ -164,7 +164,6 @@ function updatePwd() {
 			탈퇴</button>
 		<br /><br />
 	</form>
-
-</div>
-</div>
+	</div> <!-- div-memberFrm 끝 -->
+</div> <!-- container끝  -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
