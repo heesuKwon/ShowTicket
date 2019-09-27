@@ -25,7 +25,10 @@
   			   alias="ticket"/>
   		       
   	<typeAlias type="com.kh.showticket.coupon.model.vo.MyCoupon"
-  			   alias="mycoupon"/>	       
+  			   alias="mycoupon"/>	 
+  			   
+  	<typeAlias type="com.kh.showticket.talk.model.vo.Msg"
+  			   alias="msg"/>
 
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>

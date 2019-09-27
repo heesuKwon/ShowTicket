@@ -49,7 +49,7 @@ public class MusicalController {
 	
 	@RequestMapping("/musical.do")
 	public ModelAndView show(ModelAndView mav) {
-		logger.debug("뮤지컬리스트페이지");
+		//logger.debug("뮤지컬리스트페이지");
 	
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
 
@@ -64,8 +64,8 @@ public class MusicalController {
 	@RequestMapping("/musicalAjax.do")
 	@ResponseBody
 	public List<Map<String,String>> musicalAjax(@RequestParam int cpage) {
-		logger.debug("전체뮤지컬 AJAX");
-		logger.debug("cpage={}", cpage);
+		//logger.debug("전체뮤지컬 AJAX");
+		//logger.debug("cpage={}", cpage);
 
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
 		
@@ -88,14 +88,14 @@ public class MusicalController {
 	
 	@RequestMapping("/musicalSearch.do")
 	public List<Map<String,String>> musicalSearch(ModelAndView mav, @RequestParam String cate, @RequestParam String srchKeyword, @RequestParam int cpage) {
-			//cate : searchAll / searchTitle / searchActor
-			//srchKeyword : String
-			//cpage
+		//cate : searchAll / searchTitle / searchActor
+		//srchKeyword : String
+		//cpage
 
 		final int numPerPage = 8;
 		
-		logger.debug("cate={}", cate);
-		logger.debug("srchKeyword={}", srchKeyword);
+		//logger.debug("cate={}", cate);
+		//logger.debug("srchKeyword={}", srchKeyword);
 		
 		List<Map<String, String>> result = new ArrayList<>();
 		List<Map<String, String>> resultPaged = new ArrayList<>(8);
