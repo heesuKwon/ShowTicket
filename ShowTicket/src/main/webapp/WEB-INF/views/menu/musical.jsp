@@ -176,6 +176,7 @@ function getList(cpage){
 <!-- NHN AD MORE Script -->
 
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
+<<<<<<< HEAD
 
 <script>
 	var _croID = '5d148869e4b0adaa9beaa9d1';
@@ -201,7 +202,6 @@ function getList(cpage){
 </script>
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 
 <script type="text/javascript">
 var index=0;
@@ -486,29 +486,6 @@ ul.lst_thumb li.on::before {
 					</div>
 				</div>
 
-
-
-				<div class="searchContainer">
-
-					<ul id="musicalListAll" class="goods_list" style="clear: both;">
-						<c:forEach items="${musicalList}" var="map">
-							<li><a
-								href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
-									<p>
-										<img src="${map.poster }" alt="">
-									</p>
-									<div class="list_info">
-										<strong class="elp">${map.prfnm }</strong>
-										<dl>
-											<dt>기간</dt>
-											<dd>${map.prfpdfrom }~ ${map.prfpdto }</dd>
-											<dt>장소</dt>
-											<dd>${map.fcltynm }</dd>
-										</dl>
-									</div>
-							</a></li>
-
-<<<<<<< HEAD
 	       	<div class="searchContainer">
 		        <ul id="musicalListAll" class="goods_list" style="clear:both;">
 		                  <c:forEach items="${musicalList}" var="map">
@@ -524,17 +501,6 @@ ul.lst_thumb li.on::before {
 			                        </dl>
 			                    </div>
 			                </a></li>
-			       
-		           		 </c:forEach>     
-		        </ul>
-	        	<div id="srchEmpty">검색결과가 없습니다.<div>
-	        </div>
-        
-    		
-	</div>
-</div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
 						</c:forEach>
 					</ul>
 
@@ -596,225 +562,4 @@ ul.lst_thumb li.on::before {
 			$(".rangkingImgLink").attr("href", "/product/" + $(this).data("productid"));
 		});
     </script>
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 
-<<<<<<< HEAD
-
-=======
-<script type="text/javascript" src="/resources/js/date.js"></script>
-<script type="text/javascript">
-	//<![CDATA[
-
-	var page = 1;
-	var categoryNum = 10;
-	var itemPerPage = 30;
-	var isEndOfItem = false;
-	var isLoadingNow = false;
-
-	$(document).ready(function () {
-		switch (document.URL.split("/concert/")[1]) {
-			case "main" :
-				categoryNum = 10;
-				$("#concertListDiv").text("전체");
-				isEndOfItem = true;
-				break;
-			case "musical" :
-				categoryNum = 16;
-				$("#concertListDiv").text("뮤지컬");
-				break;
-			case "theater" :
-				categoryNum = 15;
-				$("#concertListDiv").text("연극");
-				break;
-			case "concert" :
-				categoryNum = 14;
-				$("#concertListDiv").text("콘서트");
-				break;
-			case "classic" :
-				categoryNum = 18;
-				$("#concertListDiv").text("클래식/무용");
-				break;
-			case "daehakro" :
-				categoryNum = 84;
-				$("#concertListDiv").text("대학로");
-				break;
-			case "family" :
-				categoryNum = 85;
-				$("#concertListDiv").text("아동/가족");
-				break;
-		}
-		switch (document.URL.split("/preview/")[1]) {
-			case "main" :
-				categoryNum = 10;
-				$("#concertListDiv").text("전체");
-				isEndOfItem = true;
-				break;
-			case "musical" :
-				categoryNum = 16;
-				$("#concertListDiv").text("뮤지컬");
-				break;
-			case "theater" :
-				categoryNum = 15;
-				$("#concertListDiv").text("연극");
-				break;
-			case "concert" :
-				categoryNum = 14;
-				$("#concertListDiv").text("콘서트");
-				break;
-			case "classic" :
-				categoryNum = 18;
-				$("#concertListDiv").text("클래식/무용");
-				break;
-			case "daehakro" :
-				categoryNum = 84;
-				$("#concertListDiv").text("대학로");
-				break;
-			case "family" :
-				categoryNum = 85;
-				$("#concertListDiv").text("아동/가족");
-				break;
-		}
-		switch (document.URL.split("/exhibition/")[1]) {
-			case "family" :
-				categoryNum = 85;
-				$("#concertListDiv").text("아동/가족");
-				break;
-		}
-
-		if (!isEndOfItem) {
-			/* getConcertList(page++, categoryNum, true);
-			$(window).scroll(function () {
-				if (!isLoadingNow) {
-					var maxHeight = $(document).height();
-					var currentScroll = $(window).scrollTop() + $(window).height();
-					if (maxHeight <= currentScroll + 100) {
-						if (!isEndOfItem) {
-							isLoadingNow = true;
-							getConcertList(page++, categoryNum, false);
-						}
-					}
-				}
-			}); */
-		}
-	});
-
-	/* function getConcertList (page, varCategoryNum, isCleanProductList) {
-		categoryNum = varCategoryNum;
-		$.ajax({
-			dataType: "json",
-			async: "false",
-			url: "/concert/getConcertList",
-			data: {
-				page: page,
-				categoryId: categoryNum,
-				frontExposureYn: 'Y'
-			},
-			success: function (result) {
-				if (result.result == null) {
-					alert("오류가 발생했습니다. 관리자에게 문의하세요.");
-					isLoadingNow = false;
-					return;
-				}
-				toggleDiv(categoryNum);
-				displayConcert(result.result.result, categoryNum, isCleanProductList, isCleanProductList);
-				isLoadingNow = false;
-			},
-			error: function (status) {
-				/* alert("오류가 발생했습니다. 관리자에게 문의하세요."); 
-				isLoadingNow = false;
-			}
-		});
-	} */
-
-	function toggleDiv (categoryNum) {
-		if (categoryNum == 14 || categoryNum == 15 || categoryNum == 16 || categoryNum == 18 || categoryNum == 84 || categoryNum == 85) {
-			$(".genre_main").css("display", "block");
-			$("#d2_main").css("display", "inline-block");
-			$("#d2_path").css("display", "none");
-			$(".bottom_area").css("background", "#dadad9");
-		} else {
-			$(".genre_main").css("display", "none");
-			$("#d2_main").css("display", "none");
-			$("#d2_path").css("display", "block");
-			$(".bottom_area").css("background", "#F4F4F4");
-			$("#d2_path").css("padding-top", "0px");
-		}
-	}
-
-	function displayConcert (concertList, categoryNum, isCleanProductList) {
-		var concertItemUl = $("#goodsList");
-
-		$(".depth3 li").removeClass("on");
-		$("#" + categoryNum).addClass("on");
-		$(".lastCategoryName").text($("#" + categoryNum + " a").text());
-
-		if (isCleanProductList) {
-			concertItemUl.html('');
-			isEndOfItem = false;
-		}
-		for (var i = 0; i < concertList.length; i++) {
-			var startDate = getDateFromFormat(concertList[i].startDate, 'yyyy.MM.dd');
-			var endDate = getDateFromFormat(concertList[i].endDate, 'yyyy.MM.dd');
-			var url = concertList[i].bridgeId == null ? "/product/" + concertList[i].productId : "/bridge/" + concertList[i].bridgeId;
-			var displayName = concertList[i].productThumbName ? concertList[i].productThumbName : concertList[i].productName;
-
-			var contents = "<li><a href='" + url + "'>";
-			contents += getSpanTag(concertList[i]);
-			contents += "<p><img src='" + concertList[i].productImagePath + "' alt='상품 썸네일'></p><div class='list_info'>";
-			contents += "<strong class='elp'>" + displayName + "</strong>";
-			contents += "<dl><dt>기간</dt><dd>" + startDate + " ~ " + endDate + "</dd><dt>장소</dt><dd>" + concertList[i].hallName + "</dd></dl>";
-			contents += "</div></a></li>"
-			concertItemUl.append(contents);
-		}
-
-		if (concertList.length == 0 && page == 2) {
-			var contents = "<li>등록된 상품이 없습니다.</li>";
-			concertItemUl.append(contents);
-		}
-
-		if (concertList.length != itemPerPage) {
-			isEndOfItem = true;
-		}
-	}
-
-	function getSpanTag (product) {
-		if (product.solelySaleCode == "HIDE" && !product.productDiscountText) {
-			return "";
-		}
-
-		var spanCss = product.productDiscountText ? "flag_vr sale" : "flag_vr level";
-		var emCss = (product.productDiscountText && product.solelySaleCode != "HIDE") ? "flag_txt type2" : "flag_txt";
-		var flagText = "";
-
-		switch (product.solelySaleCode) {
-			case "RELATIVE" :
-				flagText += "상대우위";
-				break;
-			case "SOLELY" :
-				flagText += "단독판매";
-				break;
-			case "ABSOLUTE" :
-				flagText += "절대우위";
-				break;
-			case "CUSTOM" :
-				flagText += product.customCodeValue;
-				break;
-		}
-
-		if (emCss == "flag_txt type2") {
-			flagText += "<br/>";
-		}
-
-		if (product.productDiscountText) {
-			flagText += product.productDiscountText;
-		}
-
-		var spanTag = "<span class='" + spanCss + "'><em class='" + emCss + "'>" + flagText + "</em></span>";
-
-		return spanTag;
-	}
-
-	//]]>
-</script>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git

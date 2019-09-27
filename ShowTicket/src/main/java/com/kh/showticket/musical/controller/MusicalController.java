@@ -81,7 +81,6 @@ public class MusicalController {
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
 		
 		mav.addObject("musical", musical);
-	
 
 		mav.setViewName("musical/musicalDetail");
 		return mav;
@@ -89,9 +88,9 @@ public class MusicalController {
 	
 	@RequestMapping("/musicalSearch.do")
 	public List<Map<String,String>> musicalSearch(ModelAndView mav, @RequestParam String cate, @RequestParam String srchKeyword, @RequestParam int cpage) {
-			//cate : searchAll / searchTitle / searchActor
-			//srchKeyword : String
-			//cpage
+		//cate : searchAll / searchTitle / searchActor
+		//srchKeyword : String
+		//cpage
 
 		final int numPerPage = 8;
 		
