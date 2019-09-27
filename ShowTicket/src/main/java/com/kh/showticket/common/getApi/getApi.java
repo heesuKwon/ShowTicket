@@ -137,13 +137,13 @@ public class getApi {
 					//logger.debug("공연명: {}", getTagValue("prfnm", element));
 					//logger.debug("공연기간: {}", getTagValue("prfpd", element));
 					//logger.debug("공연지역: {}", getTagValue("area", element));
-					logger.debug("포스터이미지경로: {}", getTagValue("poster", element));
+					//logger.debug("포스터이미지경로: {}", getTagValue("poster", element));
 					//logger.debug("공연장르: {}", getTagValue("cate", element));
 					//logger.debug("=================================");
 					
 					
 					Map<String, String> Mmap = new HashMap<>();
-					logger.debug("MAP이후=================================");
+					//logger.debug("MAP이후=================================");
 					//공연 Id
 					Mmap.put("mt20id", getTagValue("mt20id", element));
 					//공연명
@@ -241,7 +241,7 @@ public class getApi {
 		List<Map<String,String>> totalBoxList = new ArrayList<>();
 		totalBoxList.addAll(musicalList);
 		totalBoxList.addAll(showList);
-		logger.debug("totalBoxListFromGetAPI"+totalBoxList);
+		//logger.debug("totalBoxListFromGetAPI"+totalBoxList);
 
 		return totalBoxList;
 
