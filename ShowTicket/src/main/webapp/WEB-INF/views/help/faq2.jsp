@@ -18,62 +18,80 @@
 <script>
 
 $(()=>{
-	/* function faqList(){ */
-		
-		var faq ={};
-		
-		$("#genreNav > li > a").click((e)=>{		
-			faq.type = $(e.target).attr('id');
-						$(e.target).
-			alert(faq.type);
-		
-	    $.ajax({
-	        url : '${pageContext.request.contextPath}/help/faqTicketList.do',
-	        data: JSON.stringify(faq),
-			contentType: 'application/json; charset=utf-8',
-			dataType: "json",
-			type: "POST",
-	        success : function(data) {
-	           console.log(data);
+	alert("hi");
+	var param = {type : type,}
 	
-	           var html = "";
-	               html += "<table><caption>faq 리스트</caption><colgroup><col style='width: 100px'><col><col style='width: 270px'></colgroup><thead>";
-	   
-	               html +="<tr><th scope='col'>카테고리</th><th colspan='2' scope='col'>질문</th></tr></thead><tbody id='nTableBody'>";
-	                if(data.length>0){
-	                    for(var i in data){
-	                        html += "<tr><td>"+(data[i].type=='T'?"예매/취소":(data[i].type=='M'?"회원":(data[i].type=='C'?"쿠폰/이벤트":(data[i].type=='B'?"결제":"기타"))))+"<input type='hidden' id='faqNo' value="+data[i].faqNo+"/><input type='hidden' id='type' value="+data[i].type+"/></td>";
-	                        html += "<td colspan='2'>"+data[i].question+"</td></tr>"; 
-	                    
-	                    
-	                    } /* for문끝 */
-	                }  /* if문끝 */
-	                    else{
-	                    	html+="<tr><td colspan='3'>faq가 존재하지 않습니다.</td></tr>";
-	                    }
-	                    html+="</tbody></table>";
-	                    $("#basic_tbl").html(html);
-	                
-	               
-	                	
-	                	
-	                
-	       /*function success(data)끝 */
-	       },error:function(e){
-	            if(e.status==300){
-	               alert("데이터를 가져오는데 실패하였습니다.");
-	           }; 
-	       }
-	    }); 
-	});
-	 
-	/* } /* faqList끝 */ 
+    $.ajax({
+        url : '${pageContext.request.contextPath}/help/faqTicketList.do',
+         /* data : param, */ 
+        success : function(data) {
+        	console.log(data);
+
+                /* 	var html = "<table><caption>faq 리스트</caption><colgroup><col style='width: 100px'><col><col style='width: 270px'></colgroup><thead>";
+            
+   
+                if(data.length>0){
+                    html+="<tr><th scope='col'>카테고리</th><th colspan='2' scope='col'>질문</th></tr></thead><tbody id='nTableBody'>";
+                    for(var i in data){
+                    	if(data[i].type)
+                        html += "<tr><td>"+data[i].type+"<input type='hidden' id='faqNo' value="+data[i].faqNo+"</td>";
+                        html += "<td colspan='2'>"+data[i].question+"</td></tr>"; */
+                    
+                       
+								
+							/* 	<c:if test="${not empty list }">
+								<c:forEach items="${list}" var="f">
+									<tr>
+										<td>
+											<c:if test="${f.type.equals('T') }">예매/취소</c:if>
+											<c:if test="${f.type.equals('M') }">회원</c:if>
+											<c:if test="${f.type.equals('B') }">결제</c:if>
+											<c:if test="${f.type.equals('C') }">쿠폰/이벤트</c:if>
+											<c:if test="${f.type.equals('E') }">기타</c:if>
+											
+											<input type="hidden" id="faqNo" value="${f.faqNo }">
+										</td>
+										<td colspan="2">${f.question}</td>
+									</tr>
+									</c:forEach>
+								</c:if>
+						</tbody>
+					</table> */
+                    
+                    
+                    
+                    
+                    
+                  /*   
+                    }
+                    else{
+                    	html+="<tr><td colspan='3'>faq가 존재하지 않습니다.</td></tr>";
+                    }
+                    html+="</tbody></table>";
+                    $("#basic_tbl").html(html);
+                }
+             */
+         
+       },error:function(e){
+           /* if(e.status==300){
+               alert("데이터를 가져오는데 실패하였습니다.");
+           }; */
+       }
+    }); 
+ 
 	$("#write").click(function() {
 		location.href = "${pageContext.request.contextPath}/help/faqWrite.do";
 	});
-		
+	
+	//테이블의 열을 클릭시 해당 게시물로 이동
+<%-- 	$("td").click((e)=>{		
+		var faqNo = $(e.target).parents("tr").children("th").text();
 
+		location.href = "<%=request.getContextPath()%>/board/community/free/freeView?freeNo="+freeNo; 
+	});
+ --%>
 });
+
 
 
 </script>
@@ -146,16 +164,16 @@ $(()=>{
 				</div>
 				
 				<ul id="genreNav" class="nav nav-pills nav-justified">
-					<li class="nav-item"><a class="nav-link select nav-font"
-						href="javascript:faqList()" id="T">예매/취소</a></li>
+					<li class="nav-item" value="T"><a class="nav-link select nav-font"
+						href="#">예매/취소</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="javascript:faqList()" id="B">결제</a></li>
+						href="#">결제</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="javascript:faqList()" id="M">회원</a></li>
+						href="#">회원</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="javascript:faqList()" id="C">쿠폰/이벤트</a></li>
+						href="#">쿠폰/이벤트</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="javascript:faqList()" id="E">기타</a></li>
+						href="#">기타</a></li>
 				</ul>
 				
 				<div class="basic_tbl" id="basic_tbl">
@@ -175,7 +193,7 @@ $(()=>{
 						<tbody id="nTableBody">
 								<c:if test="${empty list }">
 										<tr>
-											<td colspan="2">faq가 존재하지 않습니다.</td>
+											<td colspan="3">faq가 존재하지 않습니다.</td>
 										</tr>
 								</c:if>
 								<c:if test="${not empty list }">
