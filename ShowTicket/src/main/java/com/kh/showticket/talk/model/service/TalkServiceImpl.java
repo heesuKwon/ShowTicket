@@ -1,6 +1,7 @@
 package com.kh.showticket.talk.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -49,7 +50,12 @@ public class TalkServiceImpl implements TalkService {
 	}
 
 	@Override
-	public List<Msg> findChatListByChatId(String chatId) {
+	public List<Map<String,String>> findChatListByChatId(String chatId) {
 		return talkDAO.findChatListByChatId(chatId);
+	}
+
+	@Override
+	public List<Map<String, String>> findRecentList() {
+		return talkDAO.findRecentList();
 	}
 }

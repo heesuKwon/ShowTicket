@@ -11,6 +11,7 @@
 var cpage = 2;
 var srchFlag = false;
 var srchOFlag = false;
+
 $(function(){
      getList(cpage);
      cpage++;
@@ -176,7 +177,6 @@ function getList(cpage){
 <!-- NHN AD MORE Script -->
 
 <script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<<<<<<< HEAD
 
 <script>
 	var _croID = '5d148869e4b0adaa9beaa9d1';

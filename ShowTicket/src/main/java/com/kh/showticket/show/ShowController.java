@@ -65,7 +65,7 @@ public class ShowController {
 	@RequestMapping("/showAjax.do")
 	public List<Map<String,String>> showAjax(@RequestParam int cpage) {
 		logger.debug("전체쇼 AJAX");
-		logger.debug("cpage={}", cpage);
+		//logger.debug("cpage={}", cpage);
 
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20190923&cpage="+cpage+"&rows=8&shcate=AAAA";
 		
@@ -81,8 +81,8 @@ public class ShowController {
 
 		final int numPerPage = 8;
 		
-		logger.debug("cate={}", cate);
-		logger.debug("srchKeyword={}", srchKeyword);
+		//logger.debug("cate={}", cate);
+		//logger.debug("srchKeyword={}", srchKeyword);
 		
 		List<Map<String, String>> result = new ArrayList<>();
 		List<Map<String, String>> resultPaged = new ArrayList<>(8);

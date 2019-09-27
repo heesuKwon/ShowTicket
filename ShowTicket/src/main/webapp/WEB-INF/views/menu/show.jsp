@@ -624,14 +624,8 @@ ul.lst_thumb li.on::before {
 			$(".rangkingImg").attr("src", $(this).data("url"));
 			$(".rangkingImgLink").attr("href", "/product/" + $(this).data("productid"));
 		});
-<<<<<<< HEAD
+
     </script>
-<<<<<<< HEAD
-				</div>
-			</div>
-
-
-		</div>
 
 <script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript">

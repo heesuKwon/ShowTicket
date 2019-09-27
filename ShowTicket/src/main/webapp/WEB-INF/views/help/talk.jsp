@@ -1,8 +1,11 @@
+<%@page import="com.kh.showticket.talk.model.vo.Msg"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,8 +41,11 @@
 </head>
 
 <body>
-	<div>
-    	<ul class="list-group list-group-flush" id="data"></ul>
+	<div class="chatContainer" style="overflow-y:auto; height:588px; background:transparent">	
+    	<ul class="list-group list-group-flush" id="data">
+    		<c:forEach items="${chatList }" var="msg">
+    			<li class="list-group-item">${msg.memberId } : ${msg.msg } ${msg.time }</li>
+    		</c:forEach>
 	</div>
 	<div id="msgInput">
 		<div class="input-group mb-3">
@@ -52,8 +58,12 @@
 	
 <script type="text/javascript">
 $(document).ready(function(){
+	//채팅공간 스크롤 자동으로 내리기
+	$(".chatContainer").scrollTop($(".chatContainer").prop('scrollHeight'));
+
 	$("#sendBtn").click(function(){
 		sendMessage();
+		$(".chatContainer").scrollTop($(".chatContainer").prop('scrollHeight'));
 	});
 	$("#message").keydown(function(key){
 		if(key.keyCode == 13){
@@ -88,22 +98,28 @@ stompClient.connect({},function(frame){
 	
 	stompClient.subscribe('/chat/${chatId}', function(message) {
 		console.log("receive from /subscribe/stomp/abcde :", message);
-		let messsageBody = JSON.parse(message.body);
-		$("#data").append("<li class=\"list-group-item\">"+messsageBody.memberId+" : "+messsageBody.msg+ "</li>");
+		let messageBody = JSON.parse(message.body);
+		var date = new Date(messageBody.time);
+		var year = date.getFullYear();
+		var month = date.getMonth() + 1;
+		var day = date.getDate();
+		var hour = date.getHours();
+		var minute = date.getMinutes();
+		var ba = date.getHours >= 12 ? '오후' : '오전';
+		$("#data").append("<li class=\"list-group-item\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
 	});
 	
 });
 
 function sendMessage(){
-	
 	let data = {
 			chatId : "${chatId}",
-			memeberId : "${memberId}",
+			memberId : "${memberId}",
 			msg : $("#message").val(),
 			time : new Date().getTime(),
 			type : "MESSAGE"
 	}
-	console.log("${memberId}");
+	console.log("멤버아이디:  ${memberId}");
 	
 	//테스트용 /hello
 	//stompClient.send("<c:url value='/hello' />", {}, JSON.stringify(data));

@@ -440,8 +440,8 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .event_cont{margin-top:-240px !important}
 .event_cont .inner{padding:280px 0 253px !important}
 
-.event_top_list{overflow:hidden;margin-bottom:37px;height: 528px;}
-.event_top_list li{width:317px;float:left;box-shadow:1px 1px 2px 1px #d3d3d3;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
+.event_top_list{overflow:hidden;margin-bottom:37px;height: 528px;margin-left: 45px;}
+.event_top_list li{width:285px;float:left;box-shadow:1px 1px 2px 1px #d3d3d3;padding-bottom:3px;border-radius:2px;overflow:hidden;margin-left:18px}
 .event_top_list li:first-child{margin-left:0}
 .event_top_list li a{display:block;background:url(../img/img_defalt_evt.jpg) no-repeat 0 0;height:522px;position:relative;}
 .event_top_list li .event_top_info{background:#fff;padding:10px 10px 24px 10px;position:absolute;top:386px;left:0;width:305px;height:93px;}
@@ -451,7 +451,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .event_top_list li .event_top_info .event_date{font-family:Tahoma;font-weight:bold;font-size:11px;margin-top:8px}
 
 .event_tab{overflow:hidden;margin-bottom:-2px}
-.event_tab li{float:left;height:48px}
+.event_tab li{float:left;height:48px} #saleWritebtn{margin-left: 863px;margin-bottom: 10px;}
 .event_tab li a{height:48px;vertical-align:top}
 .event_tab li a.tab1{width:330px;background-position:0 0}
 .event_tab li a.tab2{width:331px;background-position:-331px 0}
@@ -2347,6 +2347,11 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .detail_box_top .coupon .coupon_down{display:block;width:235px;margin-top:5px}
 .detail_box_top .coupon .coupon_down:first-child{margin-top:0}
 .detail_box_top .coupon .coupon_down img{width:100%}
+
+.nav-pills .nav-link.default:hover {
+	color: #fff;
+    background-color: #8f01a3;
+}
 
 .nav-pills .nav-link.select{
     color: #fff;
