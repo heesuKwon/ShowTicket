@@ -12,6 +12,7 @@
 	margin-bottom: 0px;
 	padding-bottom: 0px;
 }
+
 /* 
 .event_cont{margin-top:-240px !important}
 .event_cont .inner{padding:280px 0 253px !important}
@@ -93,11 +94,17 @@
 }
 
 #detail #service {
-	width: 150px;
+	width: 110px;
 }
 
 #detail #title {
 	width: 200px;
+}
+#detail #start{
+	width:130px;
+}
+#detail #finish{
+	width:130px;
 }
 
 #search {
@@ -117,7 +124,7 @@
 }
 
 #enroll .enrollText {
-	width: 150px;
+	width: 177px;
 	height: 40px;
 	padding: 4px;
 	border-radius: 5px;
