@@ -36,6 +36,23 @@
 
 #write{
 	margin-left: 680px;
+	margin-bottom: 10px;
 	
+}
+
+#faqWriteEnd{
+	margin-left: 50px;
+	padding: 10px 0;
+
+}
+#faqWriteTable th{
+	padding: 20px 10px;	
+}
+#complete{
+	margin-left: 342px;
+    margin-top: 20px
+}
+#cancel{
+    margin-top: 20px
 }
 
