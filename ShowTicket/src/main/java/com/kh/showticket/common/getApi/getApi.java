@@ -25,7 +25,7 @@ public class getApi {
 	static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	static DocumentBuilder documentBuilder;
 	static Document doc;
-
+	
 	public static String getTagValue(String tag, Element element) {
 		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
 		Node value = (Node)nodeList.item(0);
@@ -215,7 +215,8 @@ public class getApi {
 			//공연런타임 : prfruntime
 			//공연 관람 연령 : prfage	
 			//제작사 :entrpsnm
-			//티켓가격 : pcseguidance
+			//티켓가격
+			map.put("pcseguidance", getTagValue("pcseguidance", element));
 			//줄거리(null일수있음) : sty
 			//장르 : genrenm
 			//소개이미지목록 : styurls - styurl
