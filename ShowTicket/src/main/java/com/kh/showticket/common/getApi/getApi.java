@@ -263,7 +263,8 @@ public class getApi {
 			NodeList nodeList = doc.getElementsByTagName("db");
 			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
 		
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+//			transFormat.parse(getTagValue("prfpdfrom", element))
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
@@ -273,8 +274,8 @@ public class getApi {
 				
 				mas.setId(getTagValue("mt20id", element));
 				mas.setName(getTagValue("prfnm", element));
-				mas.setStartDate(transFormat.parse(getTagValue("prfpdfrom", element)));			
-				mas.setEndDate(transFormat.parse(getTagValue("prfpdto", element)));			
+				mas.setStartDate(getTagValue("prfpdfrom", element));			
+				mas.setEndDate(getTagValue("prfpdto", element));			
 				mas.setHallId(getTagValue("mt10id", element));
 				mas.setHallName(getTagValue("fcltynm", element));
 				mas.setCast(getTagValue("prfcast", element));
