@@ -53,7 +53,7 @@ $(()=>{
 			
 			
 		});
-		
+		console.log("tdARRR>>>>>>"+tdArr[1]);
 		for(var i=0; i<Data.length; i++){
 		var html=""; 
 		
@@ -68,9 +68,9 @@ $(()=>{
 		contain+="<th id='finish'>공연 종료일</th>";
 		contain+="<th>공연 상태</th>";
 		contain+="</tr>";
-
+			
 		contain+="<tr>";
-		contain+="<td id='showId' name='showId'>"+tdArr[1]+"</td>";
+		contain+="<td id='showId' name=''>"+tdArr[1]+"</td>";
 		contain+="<td id='showGenre'>"+tdArr[2]+"</td>";
 		contain+="<td id='showName'>"+tdArr[3]+"</td>";
 		contain+="<td id='showStart'name='start'> "+tdArr[4]+"</td>";
@@ -78,6 +78,7 @@ $(()=>{
 		contain+="<td id='sale_yn' >"+tdArr[6]+"</td>";
 		contain+="</tr>";
 		contain+="<input type='hidden' name='disCountImg' value='"+tdArr[0]+"' />"
+		contain+="<input type='hidden' name='showId' value='"+tdArr[1]+"' />"
 		contain+="</table><br/><br/><br/>";
 		contain+="<div id='enroll'><h2 class='small-title'>할인률</h2>"; 
 		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
@@ -87,7 +88,7 @@ $(()=>{
 		contain+="</form></div>";
 		
 		html+=contain;
-		$("div#searchC").append(html);
+		$("div#searchC").html(html);
 		}
 		
 		

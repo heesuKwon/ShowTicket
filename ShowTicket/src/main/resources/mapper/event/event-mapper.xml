@@ -21,4 +21,7 @@
 		<result column="announcement_date" property="announcementDate" />
 		<result column="event_status" property="statusDate" />
 	</resultMap>
+	
+
+	
 </mapper>

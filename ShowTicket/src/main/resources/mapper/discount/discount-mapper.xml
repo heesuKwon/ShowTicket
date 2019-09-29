@@ -8,5 +8,6 @@
 		(#{showId},#{disCountRate},#{disCountStartDate},#{disCountEndDate},#{disCountImg})
 	
 	</insert>
-
+	
+	
 </mapper>
