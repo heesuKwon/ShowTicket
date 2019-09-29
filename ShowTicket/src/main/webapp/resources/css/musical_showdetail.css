@@ -29,13 +29,18 @@
 }
 
 #watchTime{
-	width:194px;
+	width:224px;
 	padding:5px;
 }
 
 button.reserve{
-	background-color: 	#8f01a3;
-	width:194px !important;
+	background-color:#8f01a3;
+	width:224px !important;
+}
+
+button.reserve.due{
+	background-color: #666;
+	width:224px !important;
 }
 
 .reserve span{
@@ -43,6 +48,7 @@ button.reserve{
 	font-weight:bold;
 	font-size:15px;
 	letter-spacing:3px;
+	font-family: 'Gothic A1', sans-serif;	
 }
 
 .detail_box_top .detail_info_right dl{
@@ -118,4 +124,20 @@ button.btn_reply{
 .btns{
 	float:right;
 	padding-right:18px;
+}
+
+.datepicker table tr td.day {
+    color: #000;
+   	font-weight:bold;
+    background-color: #e9ceed;
+    border-color: #e9ceed;
+    border-radius: 0px;
+}
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+  	font-weight:normal;
+}
+.datepicker table tr td.day.active{
+	color: #fff;
+    background-color: #8f01a3 !important;
+    border-color: #8f01a3 !important;
 }

@@ -25,7 +25,7 @@ public class getApi {
 	static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	static DocumentBuilder documentBuilder;
 	static Document doc;
-
+	
 	public static String getTagValue(String tag, Element element) {
 		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
 		Node value = (Node)nodeList.item(0);
@@ -219,7 +219,8 @@ public class getApi {
 			//공연런타임 : prfruntime
 			//공연 관람 연령 : prfage	
 			//제작사 :entrpsnm
-			//티켓가격 : pcseguidance
+			//티켓가격
+			map.put("pcseguidance", getTagValue("pcseguidance", element));
 			//줄거리(null일수있음) : sty
 			//장르 : genrenm
 			//소개이미지목록 : styurls - styurl
@@ -267,7 +268,8 @@ public class getApi {
 			NodeList nodeList = doc.getElementsByTagName("db");
 			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
 		
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+//			transFormat.parse(getTagValue("prfpdfrom", element))
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
@@ -277,8 +279,8 @@ public class getApi {
 				
 				mas.setId(getTagValue("mt20id", element));
 				mas.setName(getTagValue("prfnm", element));
-				mas.setStartDate(transFormat.parse(getTagValue("prfpdfrom", element)));			
-				mas.setEndDate(transFormat.parse(getTagValue("prfpdto", element)));			
+				mas.setStartDate(getTagValue("prfpdfrom", element));			
+				mas.setEndDate(getTagValue("prfpdto", element));			
 				mas.setHallId(getTagValue("mt10id", element));
 				mas.setHallName(getTagValue("fcltynm", element));
 				mas.setCast(getTagValue("prfcast", element));

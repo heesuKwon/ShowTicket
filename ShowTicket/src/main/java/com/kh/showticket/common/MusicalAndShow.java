@@ -10,8 +10,8 @@ public class MusicalAndShow {
 	
 	private String id;	//공연ID
 	private String name; //공연명
-	private Date startDate; //공연시작일
-	private Date endDate; //공연종료일
+	private String startDate; //공연시작일
+	private String endDate; //공연종료일
 	private String hallId; //공연시설ID
 	private String hallName; // 공연시설명
 	private String cast; //출연진

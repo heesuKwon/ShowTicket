@@ -1,6 +1,7 @@
 package com.kh.showticket.talk.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.showticket.talk.model.vo.ChatRoom;
 import com.kh.showticket.talk.model.vo.Msg;
@@ -15,7 +16,9 @@ public interface TalkDAO {
 
 	void updateLastCheck(Msg fromMessage);
 
-	List<Msg> findChatListByChatId(String chatId);
+	List<Map<String, String>> findChatListByChatId(String chatId);
+
+	List<Map<String, String>> findRecentList();
 	
 
 }

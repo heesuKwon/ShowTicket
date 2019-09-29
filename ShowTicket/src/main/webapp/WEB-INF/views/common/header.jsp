@@ -263,11 +263,11 @@
 				</a>
 
 				<div class="search">
-					<form name="searchForm" action="http://www.ticketlink.co.kr/search"
+					<form name="searchForm" action="${pageContext.request.contextPath }/main/search.do"
 						method="GET">
 						<fieldset id="fieldsetS">
 							<legend>검색</legend>
-							<input type="text" name="query" title="검색어 입력" value="">
+							<input type="text" name="queryKeyword" title="검색어 입력" value="" style="padding:10px;">
 							<p class="btn_search">
 								<a href="javascript:document.searchForm.submit()"
 									class="material-icons w3-xlarge">search</a>
