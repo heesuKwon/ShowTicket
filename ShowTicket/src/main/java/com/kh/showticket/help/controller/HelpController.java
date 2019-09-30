@@ -34,7 +34,7 @@ public class HelpController {
 	
 	@RequestMapping("/main.do")
 	public ModelAndView main(ModelAndView mav) {
-		logger.debug("help페이지 요청");
+//		logger.debug("help페이지 요청");
 		
 		mav.setViewName("help/main");
 		return mav;
@@ -54,7 +54,7 @@ public class HelpController {
 	@ResponseBody
 	@RequestMapping("/faq.do")
 	public ModelAndView faq(ModelAndView mav) {
-		logger.debug("help페이지 요청");
+//		logger.debug("help페이지 요청");
 		
 		  List<Faq> faqTicketList = faqService.faqList();
 		  logger.debug("faqTicketList="+faqTicketList); mav.addObject("list",
@@ -65,14 +65,14 @@ public class HelpController {
 	}
 	@RequestMapping("/faqWrite.do")
 	public ModelAndView faqWrite(ModelAndView mav) {
-		logger.debug("help페이지 요청");
+//		logger.debug("help페이지 요청");
 		
 		mav.setViewName("help/faqWrite");
 		return mav;
 	}
 	@RequestMapping(value="/faqWriteEnd.do", method=RequestMethod.POST)
 	public ModelAndView faqWriteEnd(Faq faq, Model model, ModelAndView mav) {
-		logger.debug("faq"+ faq);
+//		logger.debug("faq"+ faq);
 		
 		String msg = "";
 		String loc="";
@@ -99,7 +99,7 @@ public class HelpController {
 	public List<Faq> faqTicketList(@RequestBody Faq faq) {
 		logger.debug("post로 넘어온 help.faq:"+faq);
 		List<Faq> list = faqService.faqTicketList(faq);
-		logger.debug("faqTicketList="+list);
+//		logger.debug("faqTicketList="+list);
 		return list;
 	}
 	@RequestMapping("faqView.do")
@@ -119,7 +119,7 @@ public class HelpController {
 	
 	@RequestMapping("/faqUpdate.do")
 	public ModelAndView faqUpdate(@RequestParam int faqNo, ModelAndView mav) {
-		logger.debug("help페이지 요청");
+//		logger.debug("help페이지 요청");
 		Faq faq = faqService.selectOne(faqNo);
 		mav.addObject("faq", faq);
 		mav.setViewName("help/faqUpdate");
@@ -130,7 +130,7 @@ public class HelpController {
 	
 	@RequestMapping(value="/faqUpdateEnd.do", method=RequestMethod.POST)
 	public ModelAndView faqUpdateEnd(Faq faq, Model model, ModelAndView mav) {
-		logger.debug("faq"+ faq);
+//		logger.debug("faq"+ faq);
 		
 		String msg = "";
 		String loc="";
@@ -177,7 +177,7 @@ public class HelpController {
 	public ModelAndView mainSearch(Faq faq, ModelAndView mav) {
 		logger.debug("mainSearch로 넘어온 help.faq:"+faq);
 		List<Faq> list = faqService.faqTicketList(faq);
-		logger.debug("main="+list);
+//		logger.debug("main="+list);
 		mav.addObject("list", list);
 		mav.setViewName("help/faq");
 		return mav;

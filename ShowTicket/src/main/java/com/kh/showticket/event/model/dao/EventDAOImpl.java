@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.showticket.event.model.vo.Event;
+
 @Repository
 public class EventDAOImpl implements EventDAO {
 	
@@ -21,5 +23,7 @@ public class EventDAOImpl implements EventDAO {
 	public List<Map<String, String>> searchEventList(String queryKeyword) {
 		return session.selectList("event.searchEventList", queryKeyword);
 	}
+
+
 
 }

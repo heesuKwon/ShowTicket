@@ -108,24 +108,24 @@ function faqList(type, searchType){
 		<div class="quick_menu">
 			<div class="title">고객센터</div>
 			<ul>
-				<li class="qmenu1"><i class="material-icons">lock_open</i> <a
+				<li class="qmenu1"><i class="material-icons">lock_open <a
 					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=62">아이디/비밀번호<br>찾기
-				</a></li>
-				<li class="qmenu2"><i class="material-icons">shopping_cart</i>
+				</a></i></li>
+				<li class="qmenu2"><i class="material-icons">shopping_cart
 					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64">예매/취소<br>환불
 				</a></li>
-				<li class="qmenu3"><i class="material-icons">location_on</i> <a
+				<li class="qmenu3"><i class="material-icons">location_o <a
 					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=69">티켓수령<br>문의
-				</a></li>
-				<li class="qmenu4"><i class="material-icons">turned_in_not</i>
+				</a></i></li>
+				<li class="qmenu4"><i class="material-icons">turned_in_not
 					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=66">할인수단<br>안내
-				</a></li>
+				</a></i></li>
 				<li class="qmenu5"><i class="material-icons">hourglass_empty</i>
 					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=68">관심공연알림<br>안내
 				</a></li>
-				<li class="qmenu6"><i class="material-icons">star_border</i> <a
+				<li class="qmenu6"><i class="material-icons">star_border <a
 					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=67">이벤트<br>안내
-				</a></li>
+				</a></i></li>
 			</ul>
 		</div>
 

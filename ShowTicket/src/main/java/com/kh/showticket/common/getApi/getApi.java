@@ -72,7 +72,7 @@ public class getApi {
 					//logger.debug("공연종료일: {}", getTagValue("prfpdto", element));
 					//logger.debug("포스터이미지경로: {}", getTagValue("poster", element));
 					//logger.debug("공연장명 : {}", getTagValue("fcltynm", element));
-
+					//logger.debug("공연장장르 : {}", getTagValue("genrenm", element));
 					Map<String, String> map = new HashMap<>();
 
 					//공연ID
@@ -87,7 +87,11 @@ public class getApi {
 					map.put("poster", getTagValue("poster", element));
 					//공연장명
 					map.put("fcltynm", getTagValue("fcltynm", element));
-
+					//공연장르
+					map.put("genrenm", getTagValue("genrenm", element));
+					
+					map.put("prfstate", getTagValue("prfstate", element));
+					
 					list.add(map);
 
 				}
@@ -363,6 +367,5 @@ public class getApi {
 		return map;
 	}
 
-	
 	
 }

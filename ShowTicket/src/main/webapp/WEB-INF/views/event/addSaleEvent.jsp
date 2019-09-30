@@ -23,22 +23,24 @@ $(()=>{
 		var rowData= new Array(); 
 		var tdArr = new Array(); 
 		var chkbox = $("input[name=chk_yn]:checked");
-
+		
 		chkbox.each(function(i){
 			var tr =  chkbox.parent().parent().eq(i); 
 			
 			var td = tr.children();  
-
+ 			
 		
 		 	Data.push(tr.eq(0));
-			var showId = td.eq(0).text(); 
-			var genre = td.eq(1).text(); 
-			var showName = td.eq(2).text(); 
-			var startDate = td.eq(3).text(); 
-			var endDate = td.eq(4).text(); 
-			var status = td.eq(5).text(); 
-			var dicaYN = td.eq(6).text();  //할인 유무
-	
+		 	var img =td.eq(0).text();
+			var showId = td.eq(1).text(); 
+			var genre = td.eq(2).text(); 
+			var showName = td.eq(3).text(); 
+			var startDate = td.eq(4).text(); 
+			var endDate = td.eq(5).text(); 
+			var status = td.eq(6).text(); 
+			var dicaYN = td.eq(7).text();  //할인 유무
+		
+			tdArr.push(img);
 			tdArr.push(showId); 
 			tdArr.push(genre);
 			tdArr.push(showName);
@@ -51,12 +53,13 @@ $(()=>{
 			
 			
 		});
-	
+		console.log("tdARRR>>>>>>"+tdArr[1]);
 		for(var i=0; i<Data.length; i++){
 		var html=""; 
 		
 
-		var contain= "<br/><div class='search'><form action='${pageContext.request.contextPath}/event/insertAddSale.do'><img id='photo' src='//image.toast.com/aaaaab/ticketlink/TKL_1/bea_0722.jpg'width='100px' height='122px'>"; 
+		var contain= "<br/><div class='search'><form action='${pageContext.request.contextPath}/event/insertAddSale.do'>";
+		contain+="<img id='photo' src='"+tdArr[0]+"'width='100px' height='122px'>"; 
 		contain +="<table class='ListTable' id='detail' style='position:relative;'>";
 		contain+="<tr><th id='service'>공연아이디</th>";
 		contain+="<th id='genre'>종류</th>"; 
@@ -65,16 +68,17 @@ $(()=>{
 		contain+="<th id='finish'>공연 종료일</th>";
 		contain+="<th>공연 상태</th>";
 		contain+="</tr>";
-
+			
 		contain+="<tr>";
-		contain+="<td id='showId'><input  name='showId' value='"+tdArr[0]+"' readonly='readonly'></td>";
-		contain+="<td id='showGenre'><input  name='showGenre' value='"+tdArr[1]+"' readonly='readonly'></td>";
-		contain+="<td id='showName'><input  name='showName' value='"+tdArr[2]+"' readonly='readonly'></td>";
-		contain+="<td id='showStart'><input  name='start' value='"+tdArr[3]+"' readonly='readonly'></td>";
-		contain+="<td id='showEnd'><input  name='finish' value='"+tdArr[4]+"' readonly='readonly'></td>";
-		contain+="<td id='sale_yn'><input  name='sale_yn' value='"+tdArr[5]+"' readonly='readonly'></td>";
+		contain+="<td id='showId' name=''>"+tdArr[1]+"</td>";
+		contain+="<td id='showGenre'>"+tdArr[2]+"</td>";
+		contain+="<td id='showName'>"+tdArr[3]+"</td>";
+		contain+="<td id='showStart'name='start'> "+tdArr[4]+"</td>";
+		contain+="<td id='showEnd' name='finish'>"+tdArr[5]+"</td>";
+		contain+="<td id='sale_yn' >"+tdArr[6]+"</td>";
 		contain+="</tr>";
-		
+		contain+="<input type='hidden' name='disCountImg' value='"+tdArr[0]+"' />"
+		contain+="<input type='hidden' name='showId' value='"+tdArr[1]+"' />"
 		contain+="</table><br/><br/><br/>";
 		contain+="<div id='enroll'><h2 class='small-title'>할인률</h2>"; 
 		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
@@ -84,7 +88,7 @@ $(()=>{
 		contain+="</form></div>";
 		
 		html+=contain;
-		$("div#searchC").append(html);
+		$("div#searchC").html(html);
 		}
 		
 		
@@ -119,7 +123,7 @@ input {border: none; }
 			<th>공연명</th>
 			<th>공연시작일</th>
 			<th>공연종료일</th>
-			<th>공연상태</th>
+			<th>공연유무</th>
 			<th>할인선택</th>
 		</tr>
 		</table>
@@ -129,26 +133,22 @@ input {border: none; }
 		width:98%; height:200px; overflow:auto;}
 		</style>
 		
-		
 			<table class="ListTable scrolltable" id="showList" width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td>1000001</td>
-					<td>뮤지컬</td>
-					<td>BEA</td>
-					<td>2019.09.03</td>
-					<td>2019.10.03</td>
-					<td>Y</td>
-					<td><input type="checkbox" name="chk_yn" id="chk_yn"></td>
-				</tr>
-				<tr>
-					<td>2000000</td>
-					<td>뮤지컬</td>
-					<td>BEA</td>
-					<td>2019.09.03</td>
-					<td>2019.10.03</td>
-					<td>Y</td>
-					<td><input type="checkbox" name="chk_yn" id="chk_yn"></td>
-				</tr>
+				<c:forEach items="${eventList }" var="evt">
+					<c:if test="${evt.prfstate eq '공연중'}">
+						<tr>
+							<td style="display: none;">${evt.poster }</td>
+							<td>${evt.mt20id }</td>
+							<td>${evt.genrenm}</td>
+							<td>${evt.prfnm}</td>
+							<td>${evt.prfpdfrom}</td>
+							<td>${evt.prfpdto}</td>
+							<td>${evt.prfstate}</td>
+							<td><input type="radio" name="chk_yn" id="chk_yn"></td>
+						</tr>
+					</c:if>
+				</c:forEach>
+				
 				
 			</table>
 		</div>
