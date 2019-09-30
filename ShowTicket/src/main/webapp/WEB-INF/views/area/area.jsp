@@ -16,32 +16,27 @@ var cpage = 2;
 var area = '';
 
 $(()=>{
-	$(".nav-item").on({
-		mouseover : function(){
-			$(this).on('mouseleave');
-			$(this).css("cursor", "pointer");
-			$(this).children().removeClass("default").addClass("select");
-		},
-		mouseleave : function(){
-			 $(this).on('mouseleave');
-			 $(this).children().removeClass("select").addClass("default");
-		},
-		click: function(){
-			$(this).off('mouseleave')
-			$(".nav-link").removeClass("select").addClass("default");
-			$(this).children().removeClass("default").addClass("select");
+
+	$("ul > li > div").click((e)=>{
+
+			$(".nav-pills .nav-link.select").attr('class', 'nav-link nav-font default');
+			$(e.target).attr('class','nav-link select nav-font')
+
 			
 			cpage=1;
-			area = $(this).children().html();
+			
+			area = $(e.target).html();
 
         	$(".title").html(area);
 
 			getList(cpage);
 			cpage++;
-		}
-	})
+
+		
+	});
+
 	
-})
+});
 
 
 $(window).scroll(function(){   //스크롤이 최하단 으로 내려가면 리스트를 조회하고 page를 증가시킨다.

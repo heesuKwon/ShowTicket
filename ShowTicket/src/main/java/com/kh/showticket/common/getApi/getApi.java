@@ -1,5 +1,6 @@
 package com.kh.showticket.common.getApi;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -17,13 +18,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.kh.showticket.common.DescendingByPrfpdfrom;
+import com.kh.showticket.common.MusicalAndShow;
 
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
 	static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 	static DocumentBuilder documentBuilder;
 	static Document doc;
-
+	
 	public static String getTagValue(String tag, Element element) {
 		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
 		Node value = (Node)nodeList.item(0);
@@ -70,7 +72,7 @@ public class getApi {
 					//logger.debug("공연종료일: {}", getTagValue("prfpdto", element));
 					//logger.debug("포스터이미지경로: {}", getTagValue("poster", element));
 					//logger.debug("공연장명 : {}", getTagValue("fcltynm", element));
-
+					//logger.debug("공연장장르 : {}", getTagValue("genrenm", element));
 					Map<String, String> map = new HashMap<>();
 
 					//공연ID
@@ -85,7 +87,11 @@ public class getApi {
 					map.put("poster", getTagValue("poster", element));
 					//공연장명
 					map.put("fcltynm", getTagValue("fcltynm", element));
-
+					//공연장르
+					map.put("genrenm", getTagValue("genrenm", element));
+					
+					map.put("prfstate", getTagValue("prfstate", element));
+					
 					list.add(map);
 
 				}
@@ -141,7 +147,7 @@ public class getApi {
 					
 					
 					Map<String, String> Mmap = new HashMap<>();
-					
+
 					//공연 Id
 					Mmap.put("mt20id", getTagValue("mt20id", element));
 					//공연명
@@ -164,6 +170,73 @@ public class getApi {
 		return Blist;
 	}
 	
+	//공연상세조회 : 필요한 항목이 있다면 추가 바람
+	public static Map<String, String> getDetailList(String url){
+		
+		Map<String, String> map = new HashMap<>();
+		
+		try {
+			documentBuilder = factory.newDocumentBuilder();
+			doc = documentBuilder.parse(url);
+
+			
+		doc.getDocumentElement().normalize();
+		//logger.debug("Root element: {} ", doc.getDocumentElement().getNodeName()); // Root element: dbs
+		
+		NodeList nodeList = doc.getElementsByTagName("db");
+		//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
+			
+	
+		for(int i=0; i<nodeList.getLength(); i++){
+			Node node = nodeList.item(i);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+									
+			Element element = (Element)node;
+					
+			//logger.debug("=================================");
+			//logger.debug("공연ID: {}", getTagValue("mt20id", element));
+			//logger.debug("공연명: {}", getTagValue("prfnm", element));
+			//logger.debug("공연시작일: {}", getTagValue("prfpdfrom", element));
+			//logger.debug("공연종료일: {}", getTagValue("prfpdto", element));
+			//logger.debug("포스터이미지경로: {}", getTagValue("poster", element));
+			//logger.debug("공연장명 : {}", getTagValue("fcltynm", element));
+					
+			//공연ID
+			map.put("mt20id", getTagValue("mt20id", element));
+			//공연명
+			map.put("prfnm", getTagValue("prfnm", element));
+			//공연시작일
+			map.put("prfpdfrom", getTagValue("prfpdfrom", element));
+			//공연종료일
+			map.put("prfpdto", getTagValue("prfpdto", element));
+			//포스터이미지경로
+			map.put("poster", getTagValue("poster", element));
+			//공연장명
+			map.put("fcltynm", getTagValue("fcltynm", element));
+			//공연출연진
+			map.put("prfcast", getTagValue("prfcast", element));
+			//공연제작진 : prfcrew
+			//공연런타임 : prfruntime
+			//공연 관람 연령 : prfage	
+			//제작사 :entrpsnm
+			//티켓가격
+			map.put("pcseguidance", getTagValue("pcseguidance", element));
+			//줄거리(null일수있음) : sty
+			//장르 : genrenm
+			//소개이미지목록 : styurls - styurl
+			//공연시간 : dtguidance
+			
+			
+				
+			}
+		}
+			} catch (Exception e) {
+		
+		}
+		
+		return map;
+	}
+	
 	
 	//뮤지컬/연극 박스오피스 통합목록조회
 	public static List<Map<String, String>> getTotalBoxList(String url1, String url2){
@@ -178,4 +251,60 @@ public class getApi {
 		return totalBoxList;
 
 	}
+	
+	//공연 상세조회
+	public MusicalAndShow getMusicalAndShow(String id) {
+		MusicalAndShow mas = new MusicalAndShow();
+		
+		try {
+			
+			String url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+id+"?service=3127d89913494563a0e9684779988063";			
+			documentBuilder = factory.newDocumentBuilder();
+			doc = documentBuilder.parse(url);
+
+			System.out.println(url);
+			
+			doc.getDocumentElement().normalize();
+			NodeList nodeList = doc.getElementsByTagName("db");
+			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
+		
+//			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
+//			transFormat.parse(getTagValue("prfpdfrom", element))
+		
+//			for(int i=0; i<nodeList.getLength(); i++){
+			Node node = nodeList.item(0);
+			if(node.getNodeType() == Node.ELEMENT_NODE){
+				
+				Element element = (Element)node;
+				
+				mas.setId(getTagValue("mt20id", element));
+				mas.setName(getTagValue("prfnm", element));
+				mas.setStartDate(getTagValue("prfpdfrom", element));			
+				mas.setEndDate(getTagValue("prfpdto", element));			
+				mas.setHallId(getTagValue("mt10id", element));
+				mas.setHallName(getTagValue("fcltynm", element));
+				mas.setCast(getTagValue("prfcast", element));
+				mas.setRuntime(getTagValue("prfruntime", element));
+				mas.setAge(getTagValue("prfage", element));
+				mas.setPrice(getTagValue("pcseguidance", element));
+				mas.setPoster(getTagValue("poster", element));
+				mas.setState(getTagValue("prfstate", element));
+				//mas.setUrls(getTagValue("styurl", element));
+				mas.setTime(getTagValue("dtguidance", element));				
+			}
+//			}
+		} catch (Exception e) {
+		
+		}
+		
+		
+		return mas;
+	}
+	
+	
+	
+	
+	
+	
+	
 }

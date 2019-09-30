@@ -173,8 +173,8 @@
 				    <button type="button" class="btn logincancel" data-dismiss="modal">취소</button>		    
 				</div>
 		      	<div class="find">
-					<a href="/findid.nhn?loginUrl=%2Foauth2.0%2Fauthorize%3FisBackButton%3Dfalse%26response_type%3Dcode%26client_id%3DZ9Ur2WLH9rB59Gy4_cJ3%26serviceOfferYn%3DY%26serviceClientId%3DZ9Ur2WLH9rB59Gy4_cJ3%26viewType%3D%26serviceProviderCode%3DTKLINK%26scope%3D%26state%3D1%26termsYN%3DN%26redirect_uri%3Dhttp%253A%252F%252Fwww.ticketlink.co.kr%252Fauth%252Fcallback%253FselfRedirect%253DN&serviceProviderCode=TKLINK" class="findcolor">아이디 찾기</a>
-					<span class="findcolor">|</span> <a href="/findpwd.nhn?loginUrl=%2Foauth2.0%2Fauthorize%3FisBackButton%3Dfalse%26response_type%3Dcode%26client_id%3DZ9Ur2WLH9rB59Gy4_cJ3%26serviceOfferYn%3DY%26serviceClientId%3DZ9Ur2WLH9rB59Gy4_cJ3%26viewType%3D%26serviceProviderCode%3DTKLINK%26scope%3D%26state%3D1%26termsYN%3DN%26redirect_uri%3Dhttp%253A%252F%252Fwww.ticketlink.co.kr%252Fauth%252Fcallback%253FselfRedirect%253DN&serviceProviderCode=TKLINK" class="findcolor">비밀번호 찾기</a>
+					<a href="javascript:popId()" class="findcolor">아이디 찾기</a>
+					<span class="findcolor">|</span> <a href="javascript:popPwd()" class="findcolor">비밀번호 찾기</a>
 		  	  	</div>
 		      </div>
 		  </form>
@@ -189,6 +189,20 @@
 	meta.setAttribute('name', 'more_page_type');
 	meta.setAttribute('content', 'main');
 	document.getElementsByTagName('head')[0].appendChild(meta);
+	
+	
+	function popId(){
+	    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
+	    var name = "popup test";
+	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    window.open(url, name, option);
+	}
+	function popPwd(){
+	    var url = "${pageContext.request.contextPath}/member/memberPwdFind.do";
+	    var name = "popup test";
+	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    window.open(url, name, option);
+	}
 </script>
 
 	<div id="wrap">
@@ -249,11 +263,11 @@
 				</a>
 
 				<div class="search">
-					<form name="searchForm" action="http://www.ticketlink.co.kr/search"
+					<form name="searchForm" action="${pageContext.request.contextPath }/main/search.do"
 						method="GET">
 						<fieldset id="fieldsetS">
 							<legend>검색</legend>
-							<input type="text" name="query" title="검색어 입력" value="">
+							<input type="text" name="queryKeyword" title="검색어 입력" value="" style="padding:10px;">
 							<p class="btn_search">
 								<a href="javascript:document.searchForm.submit()"
 									class="material-icons w3-xlarge">search</a>

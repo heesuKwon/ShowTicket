@@ -2,7 +2,7 @@
 
 
 #searchNav{
-	width:700px;
+	width:500px;
 	margin:39px auto;
 }
 
@@ -26,12 +26,12 @@
 
 .resultTitle{
 	font-family: 'Gothic A1', sans-serif;
-	font-size:2em;
+	font-size:2.5em;
 	margin:60px 180px 0px;
 	display:block;
 }
 
- .resultInfo{
+.resultInfo{
 	margin: 0 auto;
 	border:1px solid;
 	width:600px !important;
@@ -52,28 +52,28 @@
 	left: 0px;
 }
 
-.ticketInfo{
+.ticketInfo, .eventInfo{
 	position: absolute;
 	top: 10px;
 	left: 195px;
 }
 
-.ticketInfo span{
+.ticketInfo span, .eventInfo span {
 	padding-top: 10px;
 	display:block;
-		font-family: 'Gothic A1', sans-serif;
+	font-family: 'Gothic A1', sans-serif;
 }
 
-.ticketTitle{
+.ticketTitle, .eventTitle{
 	font-size:2em;
 	font-weight:bold;
 }
-.ticketLoc{
+.ticketLoc, .eventContent{
 
 	font-size:1.5em;
 	font-weight:bold;
 }
-.ticketDate, .ticketPrice{
+.ticketDate, .ticketPrice, .eventDate{
 
 	font-size:1.2em;
 

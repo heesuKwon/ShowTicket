@@ -34,4 +34,25 @@
 /* .material-icons {text-align:center;color: white;} */
 .help_rcont .search .btn_search{display:inline-block;background-color:#8f01a3;background-position:-206px 8px;width:40px;height:36px;padding:6px 6px 6px 10px;vertical-align:top;position:absolute;top:0;right:0;}
 
+#write{
+	margin-left: 680px;
+	margin-bottom: 10px;
+	
+}
+
+#faqWriteEnd{
+	margin-left: 50px;
+	padding: 10px 0;
+
+}
+#faqWriteTable th{
+	padding: 20px 10px;	
+}
+#complete{
+	margin-left: 342px;
+    margin-top: 20px
+}
+#cancel{
+    margin-top: 20px
+}
 

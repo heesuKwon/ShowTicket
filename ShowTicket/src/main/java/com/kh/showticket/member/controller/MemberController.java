@@ -36,7 +36,7 @@ import com.kh.showticket.member.model.vo.MyPoint;
 @SessionAttributes("memberLoggedIn")
 public class MemberController {
 
-	@Autowired()
+	@Autowired
 	MemberService memberService;
 	
 	@Autowired
@@ -102,16 +102,9 @@ public class MemberController {
 		int totalPoint = 0;
 		
 		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
-		
-		for(MyPoint mp : myPointList) {
-			if(mp.getSaveUse().equals("s")) {
-				totalPoint += mp.getPointAccount();				
-			}
-			else if(mp.getSaveUse().equals("u")) {
-				totalPoint -= mp.getPointAccount();
-			}
-		}
-		
+
+		//멤버에서끌어오기
+		totalPoint = memberService.selectOneMember(memberLoggedIn).getPoint();
 		
 		mav.addObject("myPointList", myPointList);
 		mav.addObject("totalPoint", totalPoint);
@@ -360,7 +353,9 @@ public class MemberController {
 	    				if(result>0) {
 	    					msg="비밀번호 변경성공";
 	    					String script="self.close()";
+	    					loc="/memberLogout.do";
 	    					model.addAttribute("script",script);
+	    					model.addAttribute("script",loc);
 	    				}else {
 	    					msg="변경실패";
 	    				}
