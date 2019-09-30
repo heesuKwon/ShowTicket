@@ -18,8 +18,14 @@ public class PostConstructing {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
+	//뮤지컬, 연극 전체(상세) 리스트
 	public static List<Map<String,String>> musicalDetailList;
 	public static List<Map<String,String>> showDetailList;
+	
+	//검색리스트
+	public static List<Map<String,String>> mTicketResult;
+	public static List<Map<String,String>> sTicketResult;
+	public static List<Map<String,String>> eventResult;
 	
 	@PostConstruct
 	public void postConstruct() {
@@ -44,6 +50,9 @@ public class PostConstructing {
 			url = "http://www.kopis.or.kr/openApi/restful/pblprfr/"+map.get("mt20id")+"?service=3127d89913494563a0e9684779988063";
 			showDetailList.add(getDetailList(url));
 		}
+		
+		
+		
 	}
 
 }

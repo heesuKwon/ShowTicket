@@ -240,7 +240,6 @@ public class getApi {
 			//소개이미지목록 : styurls - styurl
 			//공연시간 : dtguidance
 			
-			
 				
 			}
 		}
