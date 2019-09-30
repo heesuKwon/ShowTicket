@@ -21,4 +21,17 @@
 		<result column="announcement_date" property="announcementDate" />
 		<result column="event_status" property="statusDate" />
 	</resultMap>
+	
+	<insert id="insertEvnet">
+		insert into event values
+		(event_no.nextval,#{eventTitle},#{eventContent},
+			#{eventStartDate},#{eventEndDate},#{originalFileName},#{reNamedFileName},#{announcementDate},
+			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind})
+	
+		<selectKey keyProperty="eventNo" resultType="_int" order="AFTER">
+			select seq_event_no.currval from dual
+		</selectKey>
+	</insert>
+	
+	
 </mapper>

@@ -2,7 +2,10 @@ package com.kh.showticket.event.controller;
 
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
 
-import java.sql.Date;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +13,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.event.model.exception.EventException;
 import com.kh.showticket.event.model.service.DiscountService;
+import com.kh.showticket.event.model.service.EventService;
 import com.kh.showticket.event.model.vo.Discount;
+import com.kh.showticket.event.model.vo.Event;
+
+
 
 
 @Controller
@@ -22,6 +31,7 @@ public class EventController {
 	
 	@Autowired 
 	DiscountService discountService;
+	EventService eventService;
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -60,14 +70,12 @@ public class EventController {
 		mav.setViewName("/event/addSaleEvent");
 		
 		
-		/*
-		 * String
-		 * url1=" http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190901&eddate=20190923&rows=10&cpage=1"
-		 * ; String url2=
-		 * "http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=5&shcate=AAAB";
-		 */
+		
+		  String url1=" http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190901&eddate=20190923&rows=10&cpage=1";
+		  String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=5&shcate=AAAB";
+		 
 
-		//mav.addObject("S_event",getConcatList(url1,url2));
+		mav.addObject("S_event",getConcatList(url1,url2));
 		
 		
 		
@@ -112,5 +120,12 @@ public class EventController {
 		
 		/*.setViewName("redirect:/event/addSaleEvent.do");*/
 		return "common/msg";
+	}
+	
+	@RequestMapping("/insertEvent.do")
+	public String insertEvent(Event event, Model model, HttpServletRequest request,MultipartFile upFile) {
+	
+		
+		return "common/msg"; 
 	}
 }
