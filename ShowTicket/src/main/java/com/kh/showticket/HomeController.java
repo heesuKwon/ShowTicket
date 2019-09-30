@@ -1,10 +1,11 @@
 package com.kh.showticket;
 
-import static com.kh.showticket.common.getApi.getApi.getList;
 import static com.kh.showticket.common.getApi.getApi.getBoxList;
-import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
+import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,24 +37,44 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView model,@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
+		Calendar c1 = Calendar.getInstance();
+		c1.add(Calendar.DATE, -1); // 오늘날짜로부터 -1
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // 날짜 포맷 
+		String sysdate = sdf.format(c1.getTime()); // String으로 저장
+		c1.add(Calendar.DATE, -2); // 오늘날짜로부터 -2
+		SimpleDateFormat sd = new SimpleDateFormat("yyyyMMdd");
+		String yesterday = sd.format(c1.getTime());
+		c1.add(Calendar.DATE, 30); // 오늘날짜로부터 30
+		SimpleDateFormat nm = new SimpleDateFormat("yyyyMMdd");
+		String nextMonth = nm.format(c1.getTime());
 		
-		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190923&catecode=AAAA";
-		String url2 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190823&catecode=AAAB";
-		String url3 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate=20191011&eddate=20200101&rows=5&cpage=1&shcate=AAAA";		
-		String url4 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate=20191011&eddate=20200101&rows=5&cpage=1&shcate=AAAB";		
+		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date="+sysdate+"&catecode=AAAB";
+		String url2 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date="+sysdate+"&catecode=AAAA";
+		String url2_1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date="+yesterday+"&catecode=AAAA";
+
+		String urlDL1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190923&catecode=AAAA";
+		String urlDL2 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190823&catecode=AAAB";
+		
+		
+		String url3 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate="+sysdate+"&eddate="+nextMonth+"&rows=5&cpage=1&shcate=AAAA";		
+		String url4 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate="+sysdate+"&eddate="+nextMonth+"&rows=5&cpage=1&shcate=AAAB";		
 		
 		List<NoticeTicketOpen> list = noticeService.selectNoticeTicketOpenList(cPage);
-		 
+		
 		model.addObject("list",list); 
 		model.addObject("BoxlistM", getBoxList(url1));
-		model.addObject("BoxlistP", getBoxList(url2));
+		model.addObject("BoxlistP", getTotalBoxList(url2,url2_1));
 		model.addObject("ticketOpen",getConcatList(url3,url4));
-		model.addObject("BoxlistT", getTotalBoxList(url2,url1));
 		
-		logger.debug("ticketOpen"+getConcatList(url3,url4));
+		//NoticeController.saveInfo(getConcatList(url3,url4));
+		
+		model.addObject("BoxlistT", getTotalBoxList(urlDL2,urlDL1));
 		
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");
+		
+		logger.debug("ticketOpen"+getConcatList(url3,url4));
+		
 		return model;
 	}
 	
