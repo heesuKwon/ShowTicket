@@ -170,5 +170,6 @@ div.evt_content table th ,td{ font-size: 18px;}
 button#rebtn{width: 92.5px;height: 56.25px;} 
 dd.evt_date>h6>span {color:gray;}
 div#comment-container{margin-left: 20%;}
+#boardCommentContent{margin-left: 3px;}
 </style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
