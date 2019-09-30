@@ -6,8 +6,10 @@ import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,10 +67,17 @@ public class HomeController {
 		model.addObject("BoxlistM", getBoxList(url1));
 		model.addObject("BoxlistP", getTotalBoxList(url2,url2_1));
 		model.addObject("ticketOpen",getConcatList(url3,url4));
-		
-		//NoticeController.saveInfo(getConcatList(url3,url4));
-		
 		model.addObject("BoxlistT", getTotalBoxList(urlDL2,urlDL1));
+		/*
+		 * for(int i=0;i<getConcatList(url3,url4).size();i++) {
+		 * logger.debug("list"+i+"번째");
+		 * logger.debug("list내용"+getConcatList(url3,url4).get(i)); Map<String, String>
+		 * map = new HashMap<String, String>(); map = getConcatList(url3,url4).get(i);
+		 * NoticeTicketOpen nto = new NoticeTicketOpen(); nto.set
+		 * 
+		 * int result = noticeService.insertOne(map); }
+		 */
+		
 		
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");

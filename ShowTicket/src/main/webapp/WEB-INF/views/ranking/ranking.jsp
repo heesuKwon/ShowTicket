@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
-
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Calendar"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/contents.css"/>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/area.css"/>
@@ -32,15 +33,15 @@ $(()=>{
 		}
 	})
 });
+</script>
+<script>
 
-
-	
-	$.ajax({
+	/* $.ajax({
 		url:'${pageContext.request.contextPath}/',
 		success: function(data){
 			var html=""; 
 		 	$("show_list").html("");
-			html+="<td><span style='position:relateive; top:-8px;' class='ranknum n1'>순위번호<span>"; //순위번호
+			html+="<td><span style='position:relateive; top:-8px;' class='ranknum n1'><span>"; //순위번호
 			html+="<input type='hidden'name='productId' value='208807'>"; //value값에다 공연 아이디 
 			html+="<input type='hidden'name='saleStatus' value='ON_SALE'>"; //value값에 할인 유무
 			html+="</td>";
@@ -69,16 +70,78 @@ $(()=>{
 			//마지막에 반드시 처리되는 함수.
 			console.log("complete!!!!!!");		
 		}
+	}); */
+
+	$(()=>{
+
+		$("ul > li > div").click((e)=>{
+
+				$(".nav-pills .nav-link.select").attr('class', 'nav-link nav-font default');
+				$(e.target).attr('class','nav-link select nav-font');
+				
+				type = $(e.target).html();
+
+	        	$(".title").html(type);
+
+				getList();
+
+		});
+
+		
 	});
+	function getList(){
+		<%
+		SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+		Calendar cal = Calendar.getInstance();
+		cal.add(cal.DATE,-1);
+		%>
+		var yesterday = <%date.format(cal.getTime());%>
+		var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&ststype=day&date="+yesterday+"&catecode=AAAB";
+		
+		var param={url1:url1}
+		
+		$.ajax({
+			url:'${pageContext.request.contextPath}/ranking/rankAjax.do',
+			data:param,
+			success: function(data){
+				var html=""; 
+			 	$("show_list").html("");
+			 	if(data.length>0){
+				html+="<td><span style='position:relateive; top:-8px;' class='ranknum n1'>1<span>"; //순위번호
+				html+="<input type='hidden'name='productId' value='208807'>"; //value값에다 공연 아이디 
+				html+="<input type='hidden'name='saleStatus' value='ON_SALE'>"; //value값에 할인 유무
+				html+="</td>";
+				html+="<td class='img_box'> <a class='detail_link' href='javascript:;'>";
+				html+="<img src='http://www.kopis.or.kr/"+data[i].poster+"
+						+"width='100px' height='122px' alt='공연 포스터'>";  //src에 공연 포스터 
+				html+="</a>"
+				html+="</td>";
+				html+="<td class='tl tx'>";
+				html+="<a class='detail_link' href='javascript:;'>"+data[i].prfnm+"</a>"; //뮤지컬 제목
+				html+="</td>"; 
+				html+="<td class='tl ff_tahoma'>"+data[i].prfpd+"</td>"; //공연기간
+				html+="<td class='tl desc_vt'>"+data[i].prfplcnm+"</td>";	//공연장소	
+				html+="<td><button type='button' class='btn btn-secondary'>예매하기</button><td>";
+				
+				$("#show_list").html(html);
+			
+			},
+			error: function(jqxhr, textStatus, errorThrown){
+				console.log("ajax처리실패!");
+				console.log(jqxhr, textStatus, errorThrown);
+			},
+			complete: function(){
+				//실행이 정상 혹은 에러를 발생시켜도 
+				//마지막에 반드시 처리되는 함수.
+				console.log("complete!!!!!!");		
+			}
+		
+	}
 	
 	
-
-
-
-
 </script>
-
-<div id="container" class="ranking_wrap">
+<% int i = 0;%>
+<div id="container" class="ranking_wrap" style="margin-bottom:10%;">
 	<div class="inner" style="padding-top: 0px;">
 		<h2 class="blind">
 			<span> 랭킹 </span>
@@ -128,77 +191,44 @@ $(()=>{
 					<div class="basic_tbl rank_tbl">
 						<table>
 							<caption>랭킹 집계 결과 목록</caption>
-							<colgroup>
-								<col style="width: 65px">
-								<col style="width: 130px">
-								<col style="width: 282px">
-								<col style="width: 90px">
-								<col style="width: 100px">
-								<col>
-								<col style="width: 150px">
-							</colgroup>
+							
 							<thead>
 								<tr>
-									<th scope="col"
-										style="width: padding-left: 10px; padding-right: 10px;">랭킹</th>
-									<th scope="col" colspan="2">공연명</th>
-									<th scope="col">예매율</th>
-									<th scope="col">공연기간</th>
-									<th scope="col">장소</th>
-									<th scope="col">예매하기</th>
+									<th style="width: 65px; padding-left: 10px; padding-right: 10px;">랭킹</th>
+									<th style="width: 130px">포스터</th>
+									<th style="width: 282px">공연명</th>
+									<th style="width: 80px">기간</th>
+									<th style="width: 110px">장소</th>
+									<th style="width: 150px">예매하기</th>
 								</tr>
 							</thead>
 							<tbody>
 								<!-- 여기 show_list -->
+								<c:forEach items="${dayBoxList }" var="map" begin="0" end="9">
 								<tr class="show_list" id="show_list">
-									<td>
-										<span style="position: relative; top: -8px; color:black;"class="ranknum n1">1</span> 
+									<td style="width: 65px">
+										<span style="position: relative; top: -8px; color:black;"class="ranknum n1"><%=++i %></span> 
 										<input type="hidden"name="productId" value="28807">
 										<input type="hidden"name="saleStatus" value="ON_SALE"> 
 										
 									</td>
-									<td class="img_box">
+									<td class="img_box" style="width: 130px">
 									<a class="detail_link"href="javascript:;">
-										<img src="//image.toast.com/aaaaab/ticketlink/TKL_5/jl_main09101725.jpg"
+										<img src="http://www.kopis.or.kr/${map.poster }"
 												width="100px" height="122px" alt="공연 포스터">
 									</a>
 									</td>
-									<td class="tl tx">
-										<a class="detail_link" href="javascript:;">뮤지컬 [정글라이프]</a>
+									<td style="width: 282px">
+										<a class="detail_link" href="javascript:;">${map.prfnm }</a>
 									</td>
-									<td class="ff_tahoma">27.03 %</td>
-									<td class="tl ff_tahoma">2019.08.10 ~ 2019.10.06</td>
-									<td class="tl desc_vt">고스트씨어터(구,다소니씨어터)</td>
+									<td style="width: 80px;word-break:break-all;">${map.prfpd }</td>
+									<td style="width: 110px">${map.prfplcnm }</td>
 									<td>
 										<button type="button" class="btn btn-secondary" style="">예매하기</button>
 									</td>
 								</tr>
-								<tr class="show_list" id="show_list">
-									<td>
-										<span style="position: relative; top: -8px; color:black;"class="ranknum n1">1</span> 
-										<input type="hidden"name="productId" value="28807">
-										<input type="hidden"name="saleStatus" value="ON_SALE"> 
-										
-									</td>
-									<td class="img_box">
-									<a class="detail_link"href="javascript:;">
-										<img src="//image.toast.com/aaaaab/ticketlink/TKL_5/jl_main09101725.jpg"
-												width="100px" height="122px" alt="공연 포스터">
-									</a>
-									</td>
-									<td class="tl tx">
-										<a class="detail_link" href="javascript:;">뮤지컬 [정글라이프]</a>
-									</td>
-									<td class="ff_tahoma">27.03 %</td>
-									<td class="tl ff_tahoma">2019.08.10 ~ 2019.10.06</td>
-									<td class="tl desc_vt">고스트씨어터(구,다소니씨어터)</td>
-									<td>
-										<button type="button" class="btn btn-secondary" style="">예매하기</button>
-									</td>
-								</tr>
-
-
-
+								</c:forEach>
+								
 							</tbody>
 						</table>
 

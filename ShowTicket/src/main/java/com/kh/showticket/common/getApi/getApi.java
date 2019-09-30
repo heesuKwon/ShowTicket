@@ -1,6 +1,5 @@
 package com.kh.showticket.common.getApi;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -19,6 +18,7 @@ import org.w3c.dom.NodeList;
 
 import com.kh.showticket.common.DescendingByPrfpdfrom;
 import com.kh.showticket.common.MusicalAndShow;
+
 
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
@@ -160,6 +160,8 @@ public class getApi {
 					Mmap.put("poster", getTagValue("poster", element));
 					//공연장르
 					Mmap.put("cate", getTagValue("cate", element));
+					//공연장
+					Mmap.put("prfplcnm",getTagValue("prfplcnm",element));
 
 					Blist.add(Mmap);
 				}
@@ -300,11 +302,6 @@ public class getApi {
 		
 		return mas;
 	}
-	
-	
-	
-	
-	
 	
 	
 }
