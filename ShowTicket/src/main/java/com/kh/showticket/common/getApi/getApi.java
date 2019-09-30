@@ -289,9 +289,8 @@ public class getApi {
 				mas.setPrice(getTagValue("pcseguidance", element));
 				mas.setPoster(getTagValue("poster", element));
 				mas.setState(getTagValue("prfstate", element));
-				//mas.setUrls(getTagValue("styurls", element));
-				mas.setTime(getTagValue("dtguidance", element));
-				
+				//mas.setUrls(getTagValue("styurl", element));
+				mas.setTime(getTagValue("dtguidance", element));				
 			}
 //			}
 		} catch (Exception e) {

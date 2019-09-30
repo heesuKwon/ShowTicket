@@ -1431,7 +1431,7 @@
 	
 	$(document).ready(function () {
 		
-		<!-- 달력 -->
+		//달력
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',

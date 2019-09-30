@@ -115,11 +115,6 @@ public class HelpController {
 		mav.setViewName("help/faqView");
 		return mav;
 	}
-//	@RequestMapping("/talk.do")
-//	public ModelAndView talk(ModelAndView mav) {
-//		mav.setViewName("help/talk");
-//		return mav;
-//	}
 	
 	@RequestMapping("/faqUpdate.do")
 	public ModelAndView faqUpdate(@RequestParam int faqNo, ModelAndView mav) {
