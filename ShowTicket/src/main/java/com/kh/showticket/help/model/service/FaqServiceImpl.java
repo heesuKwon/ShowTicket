@@ -30,25 +30,30 @@ public class FaqServiceImpl implements FaqService {
 		return faqDAO.faqTicketList(faq);
 	}
 
-	@Override
-	public List<Faq> faqBuyList() {
-		return faqDAO.faqBuyList();	}
+
 
 	@Override
-	public List<Faq> faqMemberList() {
-		return faqDAO.faqMemberList();	}
+	public List<Faq> faqList() {
+		// TODO Auto-generated method stub
+		return faqDAO.faqList();
+	}
 
 	@Override
-	public List<Faq> faqCouponList() {
-		return faqDAO.faqCouponList();	}
+	public Faq selectOne(int faqNo) {
+		// TODO Auto-generated method stub
+		return faqDAO.selectOne(faqNo);
+	}
 
 	@Override
-	public List<Faq> faqElseList() {
-		return faqDAO.faqElseList();	}
+	public int faqUpdateEnd(Faq faq) {
+		// TODO Auto-generated method stub
+		return faqDAO.faqUpdateEnd(faq);
+	}
 
 	@Override
-	public List<Faq> faqAllList() {
-		return faqDAO.faqAllList();	}
+	public int faqDelete(int faqNo) {
+		return faqDAO.faqDelete(faqNo);
+	}
 
 	
 	

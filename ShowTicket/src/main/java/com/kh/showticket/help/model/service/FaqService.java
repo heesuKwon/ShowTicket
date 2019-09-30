@@ -10,14 +10,13 @@ public interface FaqService {
 
 	List<Faq> faqTicketList(Faq faq);
 
-	List<Faq> faqBuyList();
 
-	List<Faq> faqMemberList();
+	List<Faq> faqList();
 
-	List<Faq> faqCouponList();
+	Faq selectOne(int faqNo);
 
-	List<Faq> faqElseList();
+	int faqUpdateEnd(Faq faq);
 
-	List<Faq> faqAllList();
+	int faqDelete(int faqNo);
 
 }

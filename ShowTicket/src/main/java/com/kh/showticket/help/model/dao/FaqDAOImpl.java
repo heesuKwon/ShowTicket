@@ -23,35 +23,27 @@ public class FaqDAOImpl implements FaqDAO {
 		return sqlSession.selectList("faq.faqTicketList", faq);
 	}
 
+	
 	@Override
-	public List<Faq> faqBuyList() {
-		return sqlSession.selectList("faq.faqBuyList");
+	public List<Faq> faqList() {
+		return sqlSession.selectList("faq.faqTicketList");
 	}
 
 	@Override
-	public List<Faq> faqMemberList() {
-		return sqlSession.selectList("faq.faqMemberList");
+	public Faq selectOne(int faqNo) {
+		return sqlSession.selectOne("faq.selectOne", faqNo);
 	}
 
 	@Override
-	public List<Faq> faqCouponList() {
-		return sqlSession.selectList("faq.faqCouponList");
-
+	public int faqUpdateEnd(Faq faq) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("faq.faqUpdateEnd", faq);
 	}
 
 	@Override
-	public List<Faq> faqElseList() {
-		return sqlSession.selectList("faq.faqElseList");
-
+	public int faqDelete(int faqNo) {
+		return sqlSession.delete("faq.faqDelete",faqNo);
 	}
 
-	@Override
-	public List<Faq> faqAllList() {
-		return sqlSession.selectList("faq.faqAllList");
-	}
 
-	/*
-	 * @Override public List<Faq> searchFaq() { // TODO Auto-generated method stub
-	 * return sqlSession.selectList("faq.searchFaq"); }
-	 */
 }

@@ -6,7 +6,11 @@
 <fmt:requestEncoding value="utf-8" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
+<%
+	String memberId = request.getParameter("memberId");
+	System.out.println("memberId="+memberId);
 
+%>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>

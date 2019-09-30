@@ -28,6 +28,7 @@ $(()=>{
 });
 
 
+
 </script>
 
 <div id="container">
@@ -39,7 +40,7 @@ $(()=>{
 					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=62">아이디/비밀번호<br>찾기
 				</a></li>
 				<li class="qmenu2"><i class="material-icons">shopping_cart</i>
-					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64">예매/취소<br>환불
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64">예매취소<br>환불
 				</a></li>
 				<li class="qmenu3"><i class="material-icons">location_on</i> <a
 					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=69">티켓수령<br>문의
@@ -76,18 +77,19 @@ $(()=>{
 					<h2>FAQ</h2>
 				</div>
 				<div id="enroll-container">
-	<form name="faqWriteFrm" id="faqWriteEnd" action="faqWriteEnd.do" method="post" onsubmit="return validate();" >
+	<form name="faqUpdateEndFrm" id="faqUpdateEnd" action="faqUpdateEnd.do" method="post" onsubmit="return validate();" >
 		<table id="faqWriteTable">
 			<tr>
 				<th>종류<span class="star">*</span></th>
 				<td>
+					<input type="hidden" name="faqNo" value="${faq.faqNo }" />
 					 <div id="type-container">
 			            <select name="type" id="type">
-			            <option value="T">예매/취소</option>
-			            <option value="B">결제</option>
-			            <option value="M">회원</option>
-			            <option value="C">쿠폰/이벤트</option>
-			            <option value="E">기타</option>
+			            <option value="T" ${'T' eq faq.type?"selected":"" }>예매/취소</option>
+			            <option value="B" ${'B' eq faq.type?"selected":"" }>결제</option>
+			            <option value="M" ${'M' eq faq.type?"selected":"" }>회원</option>
+			            <option value="C" ${'C' eq faq.type?"selected":"" }>쿠폰/이벤트</option>
+			            <option value="E" ${'E' eq faq.type?"selected":"" }>기타</option>
 			            </select>
 					</div>
 				</td>
@@ -96,7 +98,7 @@ $(()=>{
 			<tr>
 				<th>질문<span class="star">*</span></th>
 				<td>
-					<input type="text" class="form-control" name="question" id="question" required>
+					<input type="text" class="form-control" name="question" id="question" value="${faq.question}"required>
 				</td>
 			</tr>
 			
@@ -104,7 +106,7 @@ $(()=>{
 				<th>답<span class="star">*</span></th>
 				<td>
 					<div id="password-container">
-						<textarea name="answer" id="answer" cols="60" rows="15"></textarea>
+						<textarea name="answer" id="answer" cols="60" rows="15" required>${faq.question }</textarea>
 					</div>
 				</td>
 			</tr>  

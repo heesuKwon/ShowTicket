@@ -522,7 +522,7 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 .tbl table th,.tbl table td{line-height:18px;padding:8px 0 6px}
 .basic_tbl{border-bottom:1px solid #c7c7c7}
 .basic_tbl table{width:100%}
-.basic_tbl table thead th{background:#f0f0f0;color:#767676;padding:17px 20px 14px;line-height:11px;letter-spacing:-1px}
+.basic_tbl table thead th{background:#f0f0f0;color:#767676;padding:17px 20px 14px;line-height:11px;letter-spacing:-1px;text-align:center}
 .basic_tbl table tbody td{border-top:1px solid #ececec;color:#767676;text-align:center;padding:9px 20px 6px;line-height:20px}
 .basic_tbl table tbody tr:first-child td{padding-top:15px;border-top:0}
 .basic_tbl table tbody td a{color:#000}

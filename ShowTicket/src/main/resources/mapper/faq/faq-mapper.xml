@@ -20,7 +20,7 @@
 				type = #{type}			
 			</if>
 			<if test="question != '' and question != null">
-				question LIKE '%'||#{question}||'%'
+				question LIKE '%'||#{question}||'%' and
 
 			</if>
 			<if test="answer != '' and answer != null">
@@ -28,32 +28,33 @@
 			</if>
 						
 		</where>
-		order by type
+		order by type desc
 	</select>
-	 <select id="faqBuyList" resultMap="faqMap">
+	<select id="selectOne" resultMap="faqMap">
 		select *
 		from faq
-		where type='B'
-	</select>
-	 <select id="faqMemberList" resultMap="faqMap">
-		select *
-		from faq
-		where type='M'
-	</select>
-	 <select id="faqCouponList" resultMap="faqMap">
-		select *
-		from faq
-		where type='C'
-	</select>
-	 <select id="faqElseList" resultMap="faqMap">
-		select *
-		from faq
-		where type='E'
-	</select>
-	 <select id="faqAllList" resultMap="faqMap">
-		select *
-		from faq
+		where faq_no = #{faqNo}
 	</select>
 	
+	<update id="faqUpdateEnd">
+		update faq
+		<trim prefix="set" suffixOverrides=",">
+			<if test="type != null and type !=''">
+			type = #{type},
+			</if>
+			<if test="question != null and question !=''">
+			question = #{question},
+			</if>
+			<if test="answer != null and answer !=''">
+			answer= #{answer},
+			</if>
+		</trim>
 		
+		where faq_no = #{faqNo}
+	
+	</update>
+	
+	<delete id="faqDelete">
+	  delete from faq where faq_no = #{faqNo}
+	</delete>	
 </mapper>

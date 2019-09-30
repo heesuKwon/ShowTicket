@@ -10,14 +10,12 @@ public interface FaqDAO {
 
 	List<Faq> faqTicketList(Faq faq);
 
-	List<Faq> faqBuyList();
+	List<Faq> faqList();
 
-	List<Faq> faqMemberList();
+	Faq selectOne(int faqNo);
 
-	List<Faq> faqCouponList();
+	int faqUpdateEnd(Faq faq);
 
-	List<Faq> faqElseList();
-
-	List<Faq> faqAllList();
+	int faqDelete(int faqNo);
 
 }
