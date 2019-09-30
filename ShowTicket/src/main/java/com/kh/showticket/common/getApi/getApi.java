@@ -36,6 +36,18 @@ public class getApi {
 
 		return value.getNodeValue();
 	}
+	
+	
+	public static NodeList getTagValues(String tag, Element element) {
+		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+		NodeList values = (NodeList)nodeList.item(0);
+
+		if(values==null) {
+			return null;
+		}
+
+		return values;
+	}
 
 	//최신순 정렬
 	public static List<Map<String, String>> getOrderedListByDate(List<Map<String,String>> list){
@@ -270,6 +282,7 @@ public class getApi {
 		
 //			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 //			transFormat.parse(getTagValue("prfpdfrom", element))
+			
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
@@ -290,6 +303,15 @@ public class getApi {
 				mas.setPoster(getTagValue("poster", element));
 				mas.setState(getTagValue("prfstate", element));
 				//mas.setUrls(getTagValue("styurl", element));
+				NodeList styurls = element.getElementsByTagName("styurl");
+//				NodeList styurls = getTagValue("styurl",element);
+				System.out.println(styurls.getLength());
+//				for(int i=0;i<styurls.getLength();i++) {
+//					Node styurl = styurls.item(i);
+//					Element urlElement = (Element)styurl;
+//					System.out.println(getTagValue("styurl",urlElement));
+//				}
+//				System.out.println(getTagValues("styurl", element));
 				mas.setTime(getTagValue("dtguidance", element));				
 			}
 //			}
