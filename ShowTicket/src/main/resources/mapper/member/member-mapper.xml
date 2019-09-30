@@ -50,7 +50,7 @@
     <select id="selectReservationList" resultType="ticket">
     	select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
     		   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
-    		   from ticket where ticket_buyer=#{memberId}
+    	from ticket where ticket_buyer=#{memberId}
     </select>
 	
 	<select id="chkEmailUsable"
@@ -61,6 +61,20 @@
 	<select id="selectMyPointList"
 			resultType="mypoint">
 		select * from point where member_id = #{memberLoggedIn}
+	</select>
+	
+	<select id="selectReservationTerm" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from ticket
+		where ticket_buyer = #{memberId} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate
+	</select>
+	
+	<select id="selectReservationTerm15" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from ticket
+		where ticket_buyer = #{memberId} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate
 	</select>
 	
 </mapper>

@@ -358,20 +358,23 @@ ul.lst_thumb li.on::before {
 					<div class="attention">
 						<ul style="width: 1880px">
 							<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
+						<c:forEach items="${recentShowList }" var="sList">
+							<li class="SHOW_ISSUE_V1_FIRST">
+								<a href="http://www.ticketlink.co.kr/bridge/498">
+									<img src="${sList.poster }" alt="최신연극 포스터">
+									<div class="list_info" style="height: 50px;">
+										<!--제목-->
+										<strong class="elp">${sList.prfnm }</strong>
+										<!--기간-->
+										<small>${sList.prfpdfrom } ~ ${sList.prfpdto }</small><br />
+										<!--장소-->
+										<small>${sList.fcltynm }</small>
+									</div>
+								</a>
+							</li>
+						</c:forEach>
 
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/bridge/498"> <span
-									class="ribbon 
-                                    ">HIDE
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg"
-									alt="">
-									<p>
-										<em>제목등 소개 들어갈곳</em>
-									</p>
-							</a></li>
-
-							<li class="SHOW_ISSUE_V1_FIRST"><a
+					<!-- 		<li class="SHOW_ISSUE_V1_FIRST"><a
 								href="http://www.ticketlink.co.kr/bridge/496"> <span
 									class="ribbon 
                                     
@@ -512,7 +515,7 @@ ul.lst_thumb li.on::before {
 									<p>
 										<em> 전북예술회관 대공연장</em>
 									</p>
-							</a></li>
+							</a></li> -->
 
 						</ul>
 					</div>

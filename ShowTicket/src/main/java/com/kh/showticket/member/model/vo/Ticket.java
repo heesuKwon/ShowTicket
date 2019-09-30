@@ -2,6 +2,8 @@ package com.kh.showticket.member.model.vo;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class Ticket {
 
 	private int ticketNo;
@@ -9,12 +11,15 @@ public class Ticket {
 	private String ticketShowId;
 	private int ticketPrice;
 	private String ticketGrade;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date ticketDate;
 	private String ticketPlace;
 	private int ticketCount;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date ticketEnrollDate;
 	private String ticketSeat;
 	private String ticketTime;
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date ticketCancel;
 	private String ticketStatus;
 	private int payNo;

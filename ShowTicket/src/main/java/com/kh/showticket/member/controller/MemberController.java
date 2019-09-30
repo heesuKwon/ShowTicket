@@ -2,6 +2,7 @@ package com.kh.showticket.member.controller;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,8 +32,8 @@ import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
-import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
+import com.kh.showticket.member.model.vo.Ticket;
 
 @RequestMapping("/member")
 @Controller
@@ -69,16 +73,39 @@ public class MemberController {
 				
 		// 2.view단처리
 		model.addAttribute("list", list);
-				
+		model.addAttribute("memberId", memberId);
+		
 		return "/member/reservation";
 	}
-	
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping("/reservation15.do") public String reservation15(){
-	 * List<Ticket> list = }
-	 */
+
+	 @ResponseBody
+	 @RequestMapping(value="/reservationTermAjax.do", method=RequestMethod.POST)
+	 public List<Ticket> reservationTermAjax(@RequestParam String memberId, @RequestParam int num) {
+		
+		List<Ticket> list = new ArrayList<>();
+		
+		int minusNum = num * -1;
+		Map<String, Object> map = new HashMap<>();
+		
+		logger.debug("ajax용 memberId :" + memberId);
+		logger.debug("ajax용 num:" + minusNum);
+
+		map.put("memberId", memberId);
+		map.put("num", minusNum);
+		
+		if(minusNum == -100){
+			list = memberService.selectReservationList(memberId);						
+		}
+		else if(minusNum == -1 || minusNum == -2 || minusNum == -3) {
+			list = memberService.selectReservationTerm(map);			
+		}
+		else if(minusNum == -15) {			
+			list = memberService.selectReservationTerm15(map);
+			System.out.println("15list!!!!!!!!!!!!!!!!!!!!!"+list);
+		}
+		
+		return list;
+	 }
 	
 	
 	@RequestMapping("/memberView.do")

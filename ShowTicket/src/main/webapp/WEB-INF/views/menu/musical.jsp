@@ -395,82 +395,62 @@ ul.lst_thumb li.on::before {
 					<div class="attention">
 						<ul style="width: 1880px">
 							<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
-
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/bridge/498"> <span
-									class="ribbon 
-                                    ">HIDE
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg"
-									alt="">
-									<p>
-										<em>제목등 소개 들어갈곳</em>
-									</p>
-							</a></li>
-
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/bridge/496"> <span
-									class="ribbon 
-                                    
-                                    
-                                    
-                                    ">HIDE
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg"
-									alt="">
+							<c:forEach items="${recentMusicalList }" var="rList">
+								<li class="SHOW_ISSUE_V1_FIRST">
+									<a href="http://www.ticketlink.co.kr/bridge/498">
+										<img src="${rList.poster }" alt="최신뮤지컬 포스터">
+										<div class="list_info" style="height: 50px;">
+											<!--제목-->
+											<strong class="elp">${rList.prfnm }</strong>
+											<!--기간-->
+											<small>${rList.prfpdfrom } ~ ${rList.prfpdto }</small><br />
+											<!--장소-->
+											<small>${rList.fcltynm }</small>
+										</div>
+									</a>
+								</li>
+							</c:forEach>
+							
+							<!--기존에 있던 코드인데 여쭤보고 지우기 -->
+<!-- 							<li class="SHOW_ISSUE_V1_FIRST">
+								<a href="http://www.ticketlink.co.kr/bridge/496">
+									<span class="ribbon">HIDE</span>
+									<img src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg" alt="">
 									<p>
 										<em>크러쉬/우원재/그레이</em>
 									</p>
-							</a></li>
+								</a>
+							</li>
 
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/product/29544"> <span
-									class="ribbon 
-                                    
-                                    
-                                        label level2
-                                    
-                                    
-                                    ">SOLELY
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg"
-									alt="">
+							<li class="SHOW_ISSUE_V1_FIRST">
+								<a href="http://www.ticketlink.co.kr/product/29544">
+									<span class="ribbon label level2">SOLELY</span>
+									<img src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg" alt="">
 									<p>
 										<em>얼리버드 티켓 판매중</em>
 									</p>
-							</a></li>
+								</a>
+							</li>
 
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/product/29582"> <span
-									class="ribbon 
-                                    
-                                    
-                                    
-                                    ">HIDE
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg"
-									alt="">
+							<li class="SHOW_ISSUE_V1_FIRST">
+								<a href="http://www.ticketlink.co.kr/product/29582">
+									<span class="ribbon">HIDE</span>
+									<img src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg" alt="">
 									<p>
 										<em>트로트 여신</em>
 									</p>
-							</a></li>
+								</a>
+							</li>
 
-							<li class="SHOW_ISSUE_V1_FIRST"><a
-								href="http://www.ticketlink.co.kr/product/29703"> <span
-									class="ribbon 
-                                    
-                                    
-                                        label level2
-                                    
-                                    
-                                    ">SOLELY
-								</span> <img
-									src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg"
-									alt="">
+							<li class="SHOW_ISSUE_V1_FIRST">
+								<a href="http://www.ticketlink.co.kr/product/29703">
+									<span class="ribbon label level2">SOLELY</span>
+									<img src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg" alt="">
 									<p>
 										<em>얼리버드 반값 티켓!</em>
 									</p>
-							</a></li>
+								</a>
+							</li>
 
 
 							<li class="SHOW_ISSUE_V1_SECOND"><a
@@ -549,7 +529,7 @@ ul.lst_thumb li.on::before {
 									<p>
 										<em> 전북예술회관 대공연장</em>
 									</p>
-							</a></li>
+							</a></li> -->
 
 						</ul>
 					</div>
@@ -590,7 +570,7 @@ ul.lst_thumb li.on::before {
 	                    <div class="list_info">
 	                        <strong class="elp">${map.prfnm }</strong>
 	                        <dl>
-	                            <dt>기간</dt>
+	                        	<dt>기간</dt>
 	                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
 	                            <dt>장소</dt>
 	                            <dd>${map.fcltynm }</dd>

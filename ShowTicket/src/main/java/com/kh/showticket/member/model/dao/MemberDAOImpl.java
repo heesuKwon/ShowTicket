@@ -1,6 +1,7 @@
 package com.kh.showticket.member.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +56,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
 		return sqlSession.selectList("member.selectMyPointList", memberLoggedIn);
 	}
+
+	@Override
+	public List<Ticket> selectReservationTerm(Map<String, Object> map) {
+		return sqlSession.selectList("member.selectReservationTerm", map);
+	}
+
+	@Override
+	public List<Ticket> selectReservationTerm15(Map<String, Object> map) {
+		return sqlSession.selectList("member.selectReservationTerm15", map);
+	}
+
+	
 }

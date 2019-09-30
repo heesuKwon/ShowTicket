@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 	
@@ -11,6 +12,91 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 
+<script>
+$(()=>{
+	$("#btn1").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation(100);
+	});
+	$("#btn2").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation(15);
+	});
+	$("#btn3").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation(1);
+	});
+	$("#btn4").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation(2);
+	});
+	$("#btn5").click(function() {
+		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
+		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
+		getReservation(3);
+	});
+	
+	function getReservation(num) {
+		$.ajax({
+			type: "POST",
+			url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
+			dataType: "json",
+			cache: false,
+			data: {
+				memberId: "${memberId}",
+				num: num
+			},
+			success: function(data) {
+				var html = "";
+				var status = "";
+				console.log(data);
+				
+				html += "<tr>"
+				html += "<th id='num'>예매번호</th>";
+				html += "<th>공연명</th>";
+				html += "<th id='date'>관람일시</th>";
+				html += "<th id='count'>매수</th>";
+				html += "<th id='Cancledate'>취소가능일</th>";
+				html += "<th id='state'>상태</th>";
+				html += "</tr>"
+				for(var i=0; i<data.length; i++){
+					console.log(data[i].ticketNo);
+					html += "<tr>";
+					html += "<td>"+data[i].ticketNo+"</td>";
+					html += "<td>"+data[i].ticketShowId+"</td>";
+					html += "<td>"+data[i].ticketDate+"</td>";
+					html += "<td>"+data[i].ticketCount+"</td>";
+					html += "<td>"+data[i].ticketCancel+"</td>";
+					status = data[i].ticketStatus.trim();
+					console.log(status);
+					if($.trim(status) == "Y"){
+						html += "<td>예매완료</td>";						
+					}
+					else if($.trim(status) != "Y"){
+						html += "<td>예매취소</td>";
+					}
+					html += "</tr>";
+				}
+				
+				console.log(data.length);
+				console.log("성공!!!!!"+data);
+				/* alert("ajax 성공!");	 */
+				$("#ListTable").html(html);
+			},
+			error: function(data) {
+				console.log("실패ㅜㅠ"+data);
+				alert("ajax 실패ㅠㅠ");
+				console.log(data[0].ticketNo);
+			}
+		});		
+	};
+		
+});
+</script>
 
 <div id="container">
 	<jsp:include page="/WEB-INF/views/common/memberViewnav.jsp">
@@ -20,21 +106,21 @@
 	<br>
 	<div class="div-memberFrm">
 		<h2 class="small-title">예매 확인/취소</h2>
-	<!-- 	<form id="reservation"> -->
+		<div id="reservation">
 			<hr />
 			<br />
 			<div id="search">
 				<label id="dateSearch">기간별</label>&nbsp;
 				<div class="btn-group">
-					<button id="btn1" class="r_btnSelect">15일</button>
-					<button id="btn2" class="r_btnDefault">1개월</button>
-					<button id="btn3" class="r_btnDefault">2개월</button>
-					<button id="btn4" class="r_btnDefault">3개월</button>
+					<button id="btn1" class="r_btnSelect">전체</button>
+					<button id="btn2" class="r_btnDefault">15일</button>
+					<button id="btn3" class="r_btnDefault">1개월</button>
+					<button id="btn4" class="r_btnDefault">2개월</button>
+					<button id="btn5" class="r_btnDefault">3개월</button>
 				</div>
 			</div>
 			<button type="button" id="find">조회</button>
 			<br /> <br /> <br />
-
 			<table id="ListTable" style="margin: auto;">
 				<tr>
 					<th id="num">예매번호</th>
@@ -51,7 +137,15 @@
 						<td>${list.ticketDate }</td>
 						<td>${list.ticketCount }</td>
 						<td>${list.ticketCancel }</td>
-						<td>${list.ticketStatus }</td>
+						<c:set var="status" value="${list.ticketStatus }"/>
+						<c:choose>
+							<c:when test="${status eq 'Y'}">
+								<td>예매완료</td>								
+							</c:when>
+							<c:when test="${status eq 'N'}">
+								<td>예매취소</td>								
+							</c:when>
+						</c:choose>
 					</tr>
 				</c:forEach>
 			</table>
@@ -90,46 +184,8 @@
 						이용해주세요.</li>
 				</ul>
 			</div>
-		<!-- </form> -->
+		</div>
 	</div>
 </div>
 
-<script>
-$(()=>{
-	$("#btn1").click(function() {
-		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
-		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
-		//getReservation();
-	});
-	$("#btn2").click(function() {
-		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
-		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
-		getReservation();
-	});
-	$("#btn3").click(function() {
-		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
-		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
-		getReservation();
-	});
-	$("#btn4").click(function() {
-		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
-		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
-		getReservation();
-	});
-	
-	/* function getReservation() {
-		$.ajax({
-			type: "get",
-			url: "${pageContext.request.contextPath}/member/reservation15.do",
-			success: function(data) {
-				alert("ajax 성공!");				
-			},
-			error: function() {
-				alert("ajax 실패ㅠㅠ");
-			}
-		});		
-	} */
-	
-});
-</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
