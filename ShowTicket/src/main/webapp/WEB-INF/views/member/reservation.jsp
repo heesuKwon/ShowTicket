@@ -125,7 +125,6 @@ $(()=>{
 					<button id="btn5" class="r_btnDefault">3개월</button>
 				</div>
 			</div>
-			<button type="button" id="find">조회</button>
 			<br /> <br /> <br />
 			<table id="ListTable" style="margin: auto;">
 				<tr>

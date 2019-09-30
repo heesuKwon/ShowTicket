@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.showticket.event.model.dao.EventDAO;
-<<<<<<< HEAD
 import com.kh.showticket.event.model.exception.EventException;
-=======
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 import com.kh.showticket.event.model.vo.Event;
 
 @Service
