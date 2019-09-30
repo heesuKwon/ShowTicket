@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -17,48 +18,51 @@
 <script type='text/javascript'
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+<!--지도api  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
 
 <%
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
+			System.out.println("urls:"+musical.getUrls());
+			System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
 	Map<String, String> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
-	days.put("월",0);
-	days.put("화",1);
-	days.put("수",2);
-	days.put("목",3);
-	days.put("금",4);
-	days.put("토",5);
-	days.put("일",6);
-	String[] d = {"월","화","수","목","금","토","일"};
-	for(String s: times){
+	days.put("월", 0);
+	days.put("화", 1);
+	days.put("수", 2);
+	days.put("목", 3);
+	days.put("금", 4);
+	days.put("토", 5);
+	days.put("일", 6);
+	String[] d = {"월", "화", "수", "목", "금", "토", "일"};
+	for (String s : times) {
 		System.out.println(s);
-		String time = s.substring(s.indexOf("(")+1, s.indexOf(")"));
+		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
 		String[] ts = time.split(",");
 		System.out.println(time);
-		if(s.contains("~")){
-			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			String day2 = s.substring(s.lastIndexOf("요일")-1,s.lastIndexOf("요일"));
+		if (s.contains("~")) {
+			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
+			String day2 = s.substring(s.lastIndexOf("요일") - 1, s.lastIndexOf("요일"));
 			System.out.println(day1);
 			System.out.println(day2);
-			for(int i=days.get(day1);i<=days.get(day2);i++){
+			for (int i = days.get(day1); i <= days.get(day2); i++) {
 				System.out.println(i);
-				for(int j=0;j<ts.length;j++){
+				for (int j = 0; j < ts.length; j++) {
 					System.out.println(d[i]);
 					System.out.println(ts[j]);
-					dayTime.put(d[i],ts[j]);
+					dayTime.put(d[i], ts[j]);
 				}
-			}				
-		}
-		else{
-			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			
-			for(int i=0;i<ts.length;i++){
-				System.out.println(ts[i]);
-				dayTime.put(day1,ts[i]);
 			}
-		} 
+		} else {
+			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
+
+			for (int i = 0; i < ts.length; i++) {
+				System.out.println(ts[i]);
+				dayTime.put(day1, ts[i]);
+			}
+		}
 	}
 %>
 
@@ -153,6 +157,17 @@
     _A_ct = Array('99');
 </script>
 
+<script>
+//지도 kakao maps api
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption); 
+</script>
 
 <script type="text/javascript">
 	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
@@ -601,7 +616,7 @@
 		$("#go_to_naver_map").attr("href", goToNaverMapAddress);
 
 		var centerPoint = new naver.maps.LatLng(y, x);
-		var oMap = new naver.maps.Map(document.getElementById('map'), {
+		var oMap = new naver.maps.Map(document.getElementById('maps'), {
 				center: centerPoint,
 				zoom: 11,
 				enableWheelZoom: true,
@@ -660,6 +675,17 @@
 
 
 <div id="container">
+<div id="maps" style="width:500px;height:400px;"></div>
+	<script>
+ 		var container = document.getElementById('maps');
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new kakao.maps.Map(container, options); 
+	</script>
+	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 	<input type="hidden" id="adultYn" value="false" />
@@ -693,7 +719,8 @@
 						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 					</div>
 					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()} ~ ${musical.getEndDate()}</span>
+						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+							~ ${musical.getEndDate()}</span>
 					</div>
 
 
@@ -823,9 +850,7 @@
 			</c:if>
 			<c:if test="${musical.getState() eq '공연예정'}">
 				<div class="detail_info_right">
-					<div class="noinfo_txt">
-                     	티켓 오픈일은 공지사항을 참고해주세요.
-                    </div>
+					<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
 					<button type="button" class="btn reserve due s_after first-child"
 						onclick="">
@@ -873,7 +898,7 @@
 				</div>
 
 				<div class="tabs-Num" id="tabs-2">
-
+			
 					<link rel="stylesheet" type="text/css"
 						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">
 					<link rel="stylesheet" type="text/css"
@@ -971,13 +996,14 @@
 				<div class="tabs-Num" id="tabs-3">
 
 					<script type="text/javascript"
-						src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ebd2punvyx"></script>
+						src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=3jhem4sl09"></script>
 
 					<div class="detail_cont">
 
 
 						<strong>[공연장 정보]</strong>
 						<div class="contents">
+
 							장소 : 성남아트센터 오페라하우스<br> 주소 : 경기도 성남시 분당구 야탑동 757 성남아트센터<br>
 							대표번호 : <span id="phoneNumber"></span><br>
 
@@ -1247,7 +1273,6 @@
     </script>
 
 
-</div>
 <!-- 다이얼로그 창  -->
 <div class="layer l_installment popup" id="dialog1"
 	style="display: none">
@@ -2200,7 +2225,6 @@
 			$(domObj).parents("td").html("발급완료");
 		});
 	}
-
-	//]]>
+		//]]>
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

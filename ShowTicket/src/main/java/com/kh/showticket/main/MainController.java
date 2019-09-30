@@ -44,11 +44,11 @@ public class MainController {
 		
 		//1.검색 키워드
 		logger.debug("queryKeyword="+queryKeyword);
-
 		//2.티켓 검색
 		for(Map<String,String> map : musicalDetailList) {
 			if(map.get("prfnm").contains(queryKeyword) || map.get("prfcast").contains(queryKeyword)) {
 				mTicketResult.add(map);
+				logger.debug("mticket:"+ mTicketResult);
 			}
 		}
 		

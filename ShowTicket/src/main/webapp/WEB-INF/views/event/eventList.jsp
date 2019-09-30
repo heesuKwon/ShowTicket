@@ -67,10 +67,6 @@
 		<!-- 이벤트 글쓰기 페이지  -->
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
 				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button>
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onclick="location.href='javascript:popup()'">아이디찾기</button>
-<%-- 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button> --%>
 		<div class="event_cont_box">
 			<div class="event_list_inner">
 				<ul id="eventList">
@@ -187,16 +183,7 @@
 <script type="text/javascript">
 		$("iframe[name='google_conversion_frame']").css("display", "none");
     </script>
-<script>
 
-function popup(){
-    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
-    var name = "popup test";
-    var option = "width = 430, height = 550, top = 100, left = 400, location = no"
-    window.open(url, name, option);
-}
-
-</script>
 <script type="text/javascript" src="/resources/js/pagingJs.js"></script>
 <script type="text/javascript"
 	src="/resources/js/jquery.formatDateTime.min.js"></script>

@@ -168,7 +168,7 @@
 .detail_box_bot .btn_viewmap.on,.detail_box_bot .btn_viewmap:hover{background-color:#eee}
 .detail_box_bot .btn_viewmap.on+.map_wrap{display:block}
 
-.detail_tab{display:table;table-layout:fixed;width:100%}
+.detail_tab{display:table;table-layout:fixed;width:992px;}
 .detail_tab li{display:table-cell;width:100%;height:48px;border:1px solid #dedede;background-color:#fff;border-left:0;box-sizing:border-box;vertical-align:middle}
 .detail_tab li:first-child{border-left:1px solid #dedede}
 .detail_tab li.on{border-color:#6e6e6e;background-color:#767676}

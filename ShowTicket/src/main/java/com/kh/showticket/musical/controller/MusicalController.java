@@ -36,9 +36,8 @@ public class MusicalController {
 		//logger.debug("뮤지컬리스트페이지");
 		
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
-
-		List<Map<String,String>> musicalList = getList(url);
 		
+		List<Map<String,String>> musicalList = getList(url);
 		mav.addObject("musicalList", musicalList);
 		mav.setViewName("menu/musical");
 		return mav;
@@ -64,8 +63,13 @@ public class MusicalController {
 		
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
 		
+//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
+		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+musical.getHallId()+"?service=3127d89913494563a0e9684779988063";
+		Map<String, String> address = musicalService.selectPlace(url);
+		logger.debug("musicalAll"+ musical);
+		logger.info("musicalAddress"+ address);
 		mav.addObject("musical", musical);
-
+		mav.addObject("address", address);
 		mav.setViewName("musical/musicalDetail");
 		return mav;
 	}
