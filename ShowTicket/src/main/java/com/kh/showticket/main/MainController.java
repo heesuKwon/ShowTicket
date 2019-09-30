@@ -135,7 +135,7 @@ public class MainController {
 			mPageNo++;
 		}
 		
-		if(mPageEnd >= mPageNo) {
+		if(mPageEnd >= mTotalPages) {
 			//mPageBar += "<span>[다음]</span>";
 		}
 		else {
@@ -169,8 +169,8 @@ public class MainController {
 			sPageNo++;
 		}
 		
-		if(sPageEnd >= sPageNo) {
-			sPageBar += "<span>[다음]</span>";
+		if(sPageEnd >= sTotalPages) {
+			//sPageBar += "<span>[다음]</span>";
 		}
 		else {
 			sPageBar += "<a href='"+request.getContextPath()+"/main/search.do?queryKeyword="+queryKeyword+"&sCPage="+(sPageNo)+"'>[다음]</a>";
