@@ -2347,6 +2347,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .detail_box_top .coupon .coupon_down:first-child{margin-top:0}
 .detail_box_top .coupon .coupon_down img{width:100%}
 
+
 .nav-pills .nav-link.default:hover {
 	color: #fff;
     background-color: #8f01a3;
@@ -2355,6 +2356,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .nav-pills .nav-link.select{
     color: #fff;
     background-color: #8f01a3;
+       cursor: pointer;
 }
 .nav-pills .nav-font{
 	font: 15px bold;
@@ -2365,6 +2367,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .nav-pills .nav-link.default{
 	color: #8f01a3;
     border-left: 1px solid #8f01a3;
+    cursor: pointer;
 }
 
 .nav-pills .nav-item:first-child .nav-link.default{
@@ -2376,4 +2379,3 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
     border-radius: .25rem;
     margin-bottom: 20px;
 }
-
