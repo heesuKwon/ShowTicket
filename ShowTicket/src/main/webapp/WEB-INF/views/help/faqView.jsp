@@ -18,18 +18,35 @@
 <script>
 
 $(()=>{
-
-
-	$("#write").click(function() {
-			location.href = "${pageContext.request.contextPath}/help/faqWrite.do";
-		}
-	});
+		var type = "";
+		var searchType = "";
+		
+		/*nav 메뉴 */
+		$("#genreNav > li > a").click((e)=>{		
+			type = $(e.target).attr('id');
+		 	$(".nav-pills .nav-link.select").attr('class','nav-link nav-font default');
+			$(e.target).attr('class','nav-link select nav-font'); 
+			
+			faqList(type, searchType);
+		});
+		
+		/*글쓰기 페이지 이동*/
+	 	$("#write").click(function() {
+		location.href = "${pageContext.request.contextPath}/help/faqWrite.do";
+		});
 
 });
+function faqList(type, searchType){
+	
+	var faq ={};
+	faq.type = type;
+	faq.question =searchType;
+	faq.answer = searchType;
 
+   
+}
 
 </script>
-
 <div id="container">
 	<div class="inner">
 		<div class="quick_menu">
@@ -74,71 +91,63 @@ $(()=>{
 			<div class="help_rcont">
 				<div>
 					<h2>FAQ</h2>
+					<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
 				</div>
-				<div id="enroll-container">
-	<form name="faqWriteFrm" id="faqWriteEnd" action="faqWriteEnd.do" method="post" onsubmit="return validate();" >
-		<table id="faqWriteTable">
-			<tr>
-				<th>종류<span class="star">*</span></th>
-				<td>
-					 <div id="type-container">
-			            <select name="type" id="type">
-			            <option value="T">예매/취소</option>
-			            <option value="B">결제</option>
-			            <option value="M">회원</option>
-			            <option value="C">쿠폰/이벤트</option>
-			            <option value="E">기타</option>
-			            </select>
-					</div>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>질문<span class="star">*</span></th>
-				<td>
-					<input type="text" class="form-control" name="question" id="question" required>
-				</td>
-			</tr>
-			
-			<tr>
-				<th>답<span class="star">*</span></th>
-				<td>
-					<div id="password-container">
-						<textarea name="answer" id="answer" cols="60" rows="15"></textarea>
-					</div>
-				</td>
-			</tr>  
-			
-			
-		</table>
-		<input class="btn btn-color" id="complete" type="submit" value="완료" >
-		<input class="btn btn-gray" id="cancel" type="button" onclick="location.href='${pageContext.request.contextPath}/help/faq.do'" value="취소">
-	</form>
-</div>
 				
+				<div class="basic_tbl" id="basic_tbl">
+				
+					<table>
+						<caption>공지사항 리스트</caption>
+						<colgroup>
+							<col style="width: 100px">
+							<col>
+							<col style="width: 270px">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col">카테고리</th>
+								<th colspan="2" scope="col">질문</th>
+							</tr>
+						</thead>
+						<tbody id="nTableBody">
+								<c:if test="${empty faq }">
+										<tr>
+											<td colspan="2">faq가 존재하지 않습니다.</td>
+										</tr>
+								</c:if>
+								<c:if test="${not empty faq }">
+									<tr>
+										<td>
+											<c:if test="${faq.type.equals('T') }">예매/취소</c:if>
+											<c:if test="${faq.type.equals('M') }">회원</c:if>
+											<c:if test="${faq.type.equals('B') }">결제</c:if>
+											<c:if test="${faq.type.equals('C') }">쿠폰/이벤트</c:if>
+											<c:if test="${faq.type.equals('E') }">기타</c:if>
+											
+											<input type="hidden" id="faqType" name="type" value="${f.type }">
+											<input type="hidden" id="faqNo" name="faqNo" value="${f.faqNo }">
+										</td>
+										<td colspan="2">${faq.question}</td>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;">내용</td>
+										<td colspan="2"><textarea cols="50" rows="15" style="text-align: center; padding:8% 0%;  width:100%;" readonly>${faq.answer}</textarea></td>
+									</tr>
+								</c:if>
+						</tbody>
+					</table>
+				</div>
+					<input class="btn btn-color" id="complete" type="button" onclick="location.href='${pageContext.request.contextPath}/help/faqUpdate.do?faqNo=${faq.faqNo }'" value="수정하기" >
+					<input class="btn btn-gray" id="cancel" type="button"  onclick="location.href='${pageContext.request.contextPath}/help/faqDelete.do?faqNo=${faq.faqNo }'" value="삭제">
+					<input class="btn btn-gray" id="cancel" type="button"  onclick="location.href='${pageContext.request.contextPath}/help/faq.do'" value="목록으로">
 
 
 
+			
 
 			</div>
 		</div>
 	</div>
 </div>
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
-
-<script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
-<script type="text/javascript">
-	//<![CDATA[
-	$(document).ready(function () {
-		$("#help_lmeu1").addClass("on");
-		$('input, textarea').placeholder();
-	});
-
-	function searchFaq () {
-		var searchKeyword = encodeURI($("#search_help").val());
-		location.replace("/help/faq?searchKeyword=" + searchKeyword + "");
-	}
-	//]]>
-</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -5,8 +5,9 @@
 <mapper namespace="discount">
 	<insert id="insertAddSale">
 		insert into discount values
-		(#{showId},#{disCountRate},#{disCountStartDate},#{disCountEndDate})
+		(#{showId},#{disCountRate},#{disCountStartDate},#{disCountEndDate},#{disCountImg})
 	
 	</insert>
-
+	
+	
 </mapper>

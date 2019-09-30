@@ -30,4 +30,5 @@ public class EventDAOImpl implements EventDAO {
 		return session.insert("event.insertEvent", event);
 	}
 
+
 }

@@ -35,10 +35,10 @@ $(()=>{
 		var end = td.eq(4).text();
 		var detail = td.eq(5).text();
 	
-
 	
 		var html=""; 
 		
+
 		var contain ="<form action='${pageContext.request.contextPath}/event/insertEvent.do' method='post'  enctype='multipart/form-data'>";
 		contain+="<table class='table table-bordered' id='eventWriteTable'>";
 		contain+="<tbody><col width='200px'/><col width='400px'/>";

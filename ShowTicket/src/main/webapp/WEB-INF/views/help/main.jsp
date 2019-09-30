@@ -22,6 +22,14 @@ function talkPopup(){
     window.open(url, name, option);
 }
 
+function search(){
+	//검색 버튼 클릭
+		var srch = "";
+		
+		srch = $(".help_rcont .search input[type=text] ").val();
+		location.href = "${pageContext.request.contextPath}/help/mainSearch.do?question="+srch+"&answer="+srch;
+
+}
 </script>
 
 <div id="container">
@@ -30,22 +38,22 @@ function talkPopup(){
 			<div class="title">고객센터</div>
 			<ul>
 				<li class="qmenu1"><i class="material-icons">lock_open</i> <a
-					href="/help/guide/memberInfo">아이디/비밀번호<br>찾기
+					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=62">아이디/비밀번호<br>찾기
 				</a></li>
 				<li class="qmenu2"><i class="material-icons">shopping_cart</i>
-					<a href="/help/consult">예매취소<br>환불
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64">예매/취소<br>환불
 				</a></li>
 				<li class="qmenu3"><i class="material-icons">location_on</i> <a
-					href="/help/guide/cancel">티켓수령<br>문의
+					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=69">티켓수령<br>문의
 				</a></li>
 				<li class="qmenu4"><i class="material-icons">turned_in_not</i>
-					<a href="/help/guide/discountMethod">할인수단<br>안내
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=66">할인수단<br>안내
 				</a></li>
 				<li class="qmenu5"><i class="material-icons">hourglass_empty</i>
-					<a href="/help/guide/reservation/baseball">관심공연알림<br>안내
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=68">관심공연알림<br>안내
 				</a></li>
 				<li class="qmenu6"><i class="material-icons">star_border</i> <a
-					href="/help/guide/discountCard/baseball">이벤트<br>안내
+					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=67">이벤트<br>안내
 				</a></li>
 			</ul>
 		</div>
@@ -80,7 +88,7 @@ function talkPopup(){
 								<legend>검색</legend>
 								<input type="text" name="query" title="검색어 입력" value="">
 								<p class="btn_search">
-									<a href="javascript:document.searchForm.submit()"
+									<a href="javascript:search()"
 										class="material-icons w3-xlarge">search</a>
 								<p>
 							</fieldset>
@@ -91,14 +99,14 @@ function talkPopup(){
 				</div>
 
 				<ul class="help_link">
-					<li class="first"><a href="/help/guide/reservation/baseball"
+					<li class="first"><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64"
 						class="hlink1"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/appoint.png" /></a>
 					</li>
 					<li><a href="javascript:talkPopup();" class="hlink2" id="hlink2"> <img
-							src="${pageContext.request.contextPath }/resources/images/help/talk.PNG" /></a>
-					</li>
-					<li><a href="/help/faq" class="hlink3"> <img
+                            src="${pageContext.request.contextPath }/resources/images/help/talk.PNG" /></a>
+                    </li>
+					<li><a href="${pageContext.request.contextPath}/help/faq.do" class="hlink3"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/faq.PNG" /></a>
 					</li>
 					<li class="first"><a href="/help/notice" class="hlink4"> <img
@@ -115,15 +123,11 @@ function talkPopup(){
 					<div class="helpmain_question">
 						<strong>자주 묻는 질문</strong>
 						<ul>
-							<li><a href="/help/guide/memberInfo#tabs-2">비밀번호 변경을 하고
-									싶어요.</a></li>
-							<li><a href="/help/guide/memberInfo#tabs-2">내 정보를 변경하고
-									싶어요.</a></li>
-							<li><a href="/help/guide/reservation/baseball">프로야구 예매를
-									빨리 하려면?</a></li>
-							<li><a href="/help/guide/discountMethod">할인수단을 알고 싶어요.</a></li>
-							<li><a href="/help/guide/discountCard/baseball">티켓링크에서
-									할인이 되는 신용카드는?</a></li>
+							<li><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=25">티켓 환불은 어떻게 받나요??</a></li>
+							<li><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=16">회원 가입은 어떻게 하나요?</a></li>
+							<li><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=14">[아이디 찾기]와 [비밀번호 찾기]는 어떻게 하나요?</a></li>
+							<li><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=23">이벤트 당첨되었는데 티켓은 어떻게 받나요?</a></li>
+							<li><a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=18">각종 쿠폰 오픈쿠폰 등은 언제 지급되나요?</a></li>
 						</ul>
 					</div>
 					<div class="helpmain_notice">

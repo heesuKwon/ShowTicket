@@ -52,9 +52,15 @@
 			}				
 		}
 		else{
-			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			
+			String day1 = "";
+			if(s.contains("HOL")){
+				day1 = "HOL";
+			}
+			else{
+				day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
+			}
 			for(int i=0;i<ts.length;i++){
+				System.out.println(day1);
 				System.out.println(ts[i]);
 				dayTime.put(day1,ts[i]);
 			}
@@ -1425,6 +1431,7 @@
 	
 	$(document).ready(function () {
 		
+		//달력
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',
