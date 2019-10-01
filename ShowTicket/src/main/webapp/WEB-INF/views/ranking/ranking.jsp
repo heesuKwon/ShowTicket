@@ -16,6 +16,7 @@
 <script type="text/javascript">
 var type='';
 var day ='';
+
 $(()=>{
 	$(".nav-item > div").click((e)=>{
 			$(".nav-pills .nav-link.select").attr('class', 'nav-link nav-font default')
@@ -39,9 +40,11 @@ function getList(){
 
 	if(type=='뮤지컬'){
 		url1+="&catecode=AAAB";
+	
 	}
 	else if(type=='연극'){
 		url1+="&catecode=AAAA";
+		
 	}
 	
 	var param = {url1 : url1}
@@ -63,7 +66,7 @@ function getList(){
 	                	html+="<td style='width: 282px'><a class='detail_link' href='javascript:;'>"+data[i].prfnm+"</a></td>";
 	                	html+="<td style='width: 80px; word-break: break-all;'>"+data[i].prfpd+"</td>";
 	                	html+="<td style='width: 110px'>"+data[i].prfplcnm+"</td>";
-	                	html+="<td><button type='button' class='btn btn-secondary'>예매하기</button>";
+	                	html+="<td><button type='button' class='btn btn-secondary' onclick=\"buttongo('"+data[i].mt20id+"');\">예매하기</button>";
 						html+="</td></tr>";
                 	}
             
@@ -75,6 +78,17 @@ function getList(){
                
        }
     }); 
+}
+</script>
+<script>
+function buttongo(x){
+	var type = $("#select").html();
+	if(type=='뮤지컬'){
+		location.href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+x;
+	}
+	else if(type=='연극'){
+		location.href="${pageContext.request.contextPath}/show/showDetail.do?showId="+x;
+	}
 }
 </script>
 <script type="text/javascript">
@@ -97,32 +111,32 @@ function getDayList(){
 	if(type=='뮤지컬'){
         if(day=='오늘'){
         url1+="&ststype=day&catecode=AAAB";
-        console.log("뮤지컬 오늘");
+      	
         }
         else if(day=='주간'){
         url1+="&ststype=week&catecode=AAAB";
-        console.log("뮤지컬 주간"); 
+        
         }
         else if(day=='월간'){
         url1+="&ststype=month&catecode=AAAB";
-        console.log("뮤지컬 월간");
+        
         }
     }
     else if(type=='연극'){
         if(day=='오늘'){
         url1+="&catecode=AAAA&ststype=day";
-        console.log("연극 오늘");
+      
         }
         else if(day=='주간'){
         url1+="&catecode=AAAA&ststype=week";
-        console.log("연극 주간");
+       
         }
         else if(day=='월간'){
         url1+="&catecode=AAAA&ststype=month";
-        console.log("연극 월간");
+       
         }
     }
-    console.log("url1==>"+url1);
+    
 	var param = {url1 : url1}
 	
     $.ajax({
@@ -142,7 +156,7 @@ function getDayList(){
 	                	html+="<td style='width: 282px'><a class='detail_link' href='javascript:;'>"+data[i].prfnm+"</a></td>";
 	                	html+="<td style='width: 80px; word-break: break-all;'>"+data[i].prfpd+"</td>";
 	                	html+="<td style='width: 110px'>"+data[i].prfplcnm+"</td>";
-	                	html+="<td><button type='button' class='btn btn-secondary'>예매하기</button>";
+	                	html+="<td><button type='button' class='btn btn-secondary' onclick=\"buttongo('"+data[i].mt20id+"');\">예매하기</button>";
 						html+="</td></tr>";
                 	}
             
@@ -156,6 +170,8 @@ function getDayList(){
     });
     
 }
+
+
 </script>
 <%
 	int i = 0;
@@ -184,8 +200,10 @@ function getDayList(){
 
 			<ul class="nav nav-pills nav-justified"
 				style="margin-top: 30px; margin-bottom: 20px;">
-				<li class="nav-item"><div class="nav-link select nav-font" id="select">뮤지컬</div></li>
-				<li class="nav-item"><div class="nav-link default nav-font" id="default">연극</div></li>
+				<li class="nav-item"><div class="nav-link select nav-font"
+						id="select">뮤지컬</div></li>
+				<li class="nav-item"><div class="nav-link default nav-font"
+						id="default">연극</div></li>
 			</ul>
 
 			<div class="tabCon">
@@ -237,7 +255,8 @@ function getDayList(){
 										<td style="width: 80px; word-break: break-all;">${map.prfpd }</td>
 										<td style="width: 110px">${map.prfplcnm }</td>
 										<td>
-											<button type="button" class="btn btn-secondary" style="">예매하기</button>
+											<button type="button" class="btn btn-secondary"
+												onclick="location.href = '${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}'">예매하기</button>
 										</td>
 									</tr>
 								</c:forEach>
