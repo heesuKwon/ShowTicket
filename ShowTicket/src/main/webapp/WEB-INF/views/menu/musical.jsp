@@ -489,7 +489,7 @@ ul.lst_thumb li.on::before {
 	       	<div class="searchContainer">
 		        <ul id="musicalListAll" class="goods_list" style="clear:both;">
 		                  <c:forEach items="${musicalList}" var="map">
-			                <li><a href="http://www.ticketlink.co.kr/product/29767">
+			                <li><a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
 			                    <p><img src="${map.poster }" alt=""></p>
 			                    <div class="list_info">
 			                        <strong class="elp">${map.prfnm }</strong>

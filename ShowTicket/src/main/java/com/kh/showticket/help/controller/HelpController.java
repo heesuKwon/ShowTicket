@@ -56,9 +56,9 @@ public class HelpController {
 	public ModelAndView faq(ModelAndView mav) {
 //		logger.debug("help페이지 요청");
 		
-		  List<Faq> faqTicketList = faqService.faqList();
-		  logger.debug("faqTicketList="+faqTicketList); mav.addObject("list",
-		  faqTicketList);
+		 List<Faq> faqTicketList = faqService.faqList();
+		 logger.debug("faqTicketList="+faqTicketList); 
+		 mav.addObject("list",faqTicketList);
 		 
 		mav.setViewName("help/faq");
 		return mav;

@@ -58,7 +58,6 @@ public class getApi {
 			NodeList nodeList = doc.getElementsByTagName("db");
 			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
 
-
 			for(int i=0; i<nodeList.getLength(); i++){
 				Node node = nodeList.item(i);
 				if(node.getNodeType() == Node.ELEMENT_NODE){
@@ -267,12 +266,13 @@ public class getApi {
 			doc.getDocumentElement().normalize();
 			NodeList nodeList = doc.getElementsByTagName("db");
 			//logger.debug("파싱할 리스트 수 : {}", nodeList.getLength());  // 파싱할 리스트 수 :  8
-		
+
 //			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 //			transFormat.parse(getTagValue("prfpdfrom", element))
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
+			
 			if(node.getNodeType() == Node.ELEMENT_NODE){
 				
 				Element element = (Element)node;
@@ -289,7 +289,25 @@ public class getApi {
 				mas.setPrice(getTagValue("pcseguidance", element));
 				mas.setPoster(getTagValue("poster", element));
 				mas.setState(getTagValue("prfstate", element));
-				//mas.setUrls(getTagValue("styurls", element));
+//				mas.setUrls(getTagValue("styurls", element));
+				/*
+				 * NodeList nl = element.getElementsByTagName("styurl"); NodeList urlList;
+				 * String[] arr = new String[nl.getLength()]; for(int i=0;i<nl.getLength();i++)
+				 * { urlList = nl.item(i).getChildNodes(); Node value = (Node)urlList.item(0);
+				 * arr[i] = value.getNodeValue();
+				 * 
+				 * System.out.println(value.getNodeValue()); } System.out.println("arr:"+ arr);
+				 */
+				NodeList nl = element.getElementsByTagName("styurl");
+				
+				NodeList urlList;
+				for(int i=0;i<nl.getLength();i++) {
+					urlList = nl.item(i).getChildNodes();
+					Node value = (Node)urlList.item(0);
+					
+					System.out.println(value.getNodeValue());
+				}
+				//mas.setUrls(arr);
 				mas.setTime(getTagValue("dtguidance", element));
 				
 			}

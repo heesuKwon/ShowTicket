@@ -54,14 +54,22 @@
 					System.out.println(ts[j]);
 					dayTime.put(d[i], ts[j]);
 				}
+			}				
+		}
+		else{
+			String day1 = "";
+			if(s.contains("HOL")){
+				day1 = "HOL";
 			}
-		} else {
-			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
-
-			for (int i = 0; i < ts.length; i++) {
+			else{
+				day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
+			}
+			for(int i=0;i<ts.length;i++){
+				System.out.println(day1);
 				System.out.println(ts[i]);
-				dayTime.put(day1, ts[i]);
+				dayTime.put(day1,ts[i]);
 			}
+		
 		}
 	}
 %>
@@ -564,94 +572,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 
 <script type="text/javascript">
-	var isDrawed = false;
-	$(".map_wrap").hide();
+	
 
-	function drawNaverMap () {
-		if (isDrawed || (typeof $("#map").val() === "undefined")) {
-			return;
-		}
-
-		setTimeout(function () {
-			drawMap();
-		}, 10);
-
-
-	}
-
-	function drawMap () {
-		var x;
-		var y;
-		var productId = 29652;
-		var isMapShow = false;
-
-		$.ajax({
-			url: '/product/coordinate/' + productId,
-			method: 'GET',
-			async: false,
-			success: function (result) {
-				x = result.result.x;
-				y = result.result.y;
-
-				if (x === 0 || y === 0) {
-					return;
-				}
-				isMapShow = true;
-			},
-			error: function () {
-				alert("위치 정보를 정상적으로 가져올 수 없습니다.");
-				return false;
-			}
-
-		});
-
-		if (!isMapShow) {
-			return;
-		}
-
-		$(".map_wrap").show();
-		var address = '경기도 성남시 분당구 야탑동 757 성남아트센터';
-		var goToNaverMapAddress = "http://map.naver.com/index.nhn?menu=route&mapMode=0&elng=" + x + "&elat=" + y +
-			"&pathType=0&dtPathType=0&eText=" + address;
-		$("#go_to_naver_map").attr("href", goToNaverMapAddress);
-
-		var centerPoint = new naver.maps.LatLng(y, x);
-		var oMap = new naver.maps.Map(document.getElementById('maps'), {
-				center: centerPoint,
-				zoom: 11,
-				enableWheelZoom: true,
-				enableDragPan: true,
-				enableDblClickZoom: false,
-				mapMode: 0,
-				activateTrafficMap: false,
-				activateBicycleMap: false,
-				minMaxLevel: [1, 14],
-				size: new naver.maps.Size(690, 400),
-				zoomControl: true,
-				zoomControlOptions: {
-					setPosition: {
-						top: 100,
-						right: 10
-					}
-				},
-				mapTypeControl: true,
-				mapTypeControlOptions: {
-					setPosition: {
-						top: 10,
-						right: 10
-					}
-				}
-			}
-		);
-		var marker = new naver.maps.Marker(
-			{
-				position: centerPoint,
-				map: oMap,
-				title: '성남아트센터 오페라하우스'
-			});
-		isDrawed = true;
-	}
-
+	
 
 </script>
 <meta property="og:type" content="website" />
@@ -675,8 +598,8 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 
 <div id="container">
-<div id="maps" style="width:500px;height:400px;"></div>
-	<script>
+<!-- <div id="maps" style="width:500px;height:400px;"></div>-->	
+<script>
  		var container = document.getElementById('maps');
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
@@ -684,7 +607,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		};
 
 		var map = new kakao.maps.Map(container, options); 
-	</script>
+</script>
 	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
@@ -890,9 +813,20 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 					</li>
 				</ul>
 				<div class="tabs-Num" id="tabs-1">
-
-
-					<div class="detail_cont"></div>
+				
+					<div class="detail_cont">
+								<%-- <c:if test="${empty musical. }">
+								이미지가 존재하지 않습니다.
+								</c:if>
+								<c:if test="${not empty list }">
+								<c:forEach items="${list}" var="f">
+											<c:if test="${f.type.equals('T') }">
+											</c:if>
+									</c:forEach>
+								</c:if> --%>
+						테스트하기
+						<img src="http://www.kopis.or.kr/upload/pfmIntroImage/PF_PF148915_190614_0923120.png" alt="" style="max-width: 900px" />
+					</div>
 
 
 				</div>
@@ -995,8 +929,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 				</div>
 				<div class="tabs-Num" id="tabs-3">
 
-					<script type="text/javascript"
-						src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=3jhem4sl09"></script>
 
 					<div class="detail_cont">
 
@@ -1389,7 +1321,17 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 	</ul>
 </div>
+<style>
+.detail_box_bot .detailbox_bot_left .detail_cont {
+    clear: both;
+    padding: 41px 30px 100px;
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: #dedede;
+    min-height: 1300px;
+}
 
+</style>
 
 
 
@@ -1450,6 +1392,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	
 	$(document).ready(function () {
 		
+		<!-- 달력 -->
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',

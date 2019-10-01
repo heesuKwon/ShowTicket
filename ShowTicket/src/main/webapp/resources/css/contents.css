@@ -540,7 +540,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 }
 .quick_menu li {border: 1px solid #8f01a3; margin: 0px 5px; }
 
-.quick_menu li i{font-size:38px;color:#8f01a3; padding-top:10px;}
+.quick_menu li i{font-size:38px;color:#8f01a3;}
 .quick_menu li.qmenu1 {}
 
 
