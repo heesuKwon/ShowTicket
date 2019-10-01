@@ -114,7 +114,7 @@ $(()=>{
 				<td>2019.10.12</td>
 				<td>2019.10.15</td>
 				<td>화~일 14:00, 18:00</td>
-				<td><input type="button" class="checkBtn" value="클릭" /></td>
+				<td><input type="radio" class="checkBtn" /></td>
 			</tr>
 		</table>
 	

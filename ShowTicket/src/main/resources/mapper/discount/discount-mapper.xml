@@ -8,6 +8,22 @@
 		(#{showId},#{disCountRate},#{disCountStartDate},#{disCountEndDate},#{disCountImg})
 	
 	</insert>
+
+	<select id="checkCnt"  resultType="_int">
+		select count(*) from discount
+	</select>
+	<delete id="deleteAddSale">
+		delete from discount  where discount_end_date in (select min(discount_end_date) from discount)
+	</delete>
+	<select id="selectdcList" resultMap="discountMap">
+		select * from discount order by discount_start_date asc
+	</select>
 	
-	
+	<resultMap type="map" id="discountMap">
+		<id column="showid" property="showId"/>
+		<result column="discount_rate" property="disCountRate"/>
+		<result column="discount_start_date" property="disCountStartDate"/>
+		<result column="discount_end_date" property="disCountEndDate"/>
+		<result column="discount_img" property="disCountImg"/>
+	</resultMap>
 </mapper>

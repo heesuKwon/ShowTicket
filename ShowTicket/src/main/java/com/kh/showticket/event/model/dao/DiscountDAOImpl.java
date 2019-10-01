@@ -17,6 +17,21 @@ public class DiscountDAOImpl implements DiscountDAO {
 		return sqlSession.insert("discount.insertAddSale",discount);
 	}
 
+	@Override
+	public int checkCnt() {
+		return sqlSession.selectOne("discount.checkCnt");
+	}
+
+	@Override
+	public int deleteAddSale() {
+		return sqlSession.delete("discount.deleteAddSale"); 
+	}
+
+	@Override
+	public List<Discount> selectdcList() {
+		return sqlSession.selectList("discount.selectdcList"); 
+	}
+
 	
 	
 	
