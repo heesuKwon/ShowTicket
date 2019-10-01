@@ -12,9 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@RestController
 @RequestMapping("/ranking")  
 public class RankingController {
 
@@ -29,7 +30,7 @@ public class RankingController {
 		cal.add(cal.DATE,-1);
 		String yesterday = date.format(cal.getTime());
 		
-		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&ststype=day&date="+yesterday+"&catecode=AAAA";
+		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&catecode=AAAB&ststype=day&date="+yesterday;
 		
 		mav.addObject("dayBoxList",getBoxList(url1));
 		logger.debug("dayBoxList=="+getBoxList(url1));
@@ -39,6 +40,7 @@ public class RankingController {
 	
 	@RequestMapping("/rankAjax.do")
 	public List<Map<String,String>> getRankList(@RequestParam String url1){
+		logger.debug("controller"+getBoxList(url1));
 		return getBoxList(url1);
 	}
 
