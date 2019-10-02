@@ -12,9 +12,13 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 <style>
-
+input {border: none; }
+::-webkit-input-placeholder { text-align:right;pointer-events: none; }
+#inputText{width:100px;    display: contents;}
+.enrollText{width:180px;}
 ::-webkit-scrollbar-thumb {background-color:#8f01a3;border-radius: 10px;}
 div.search{    display: inline-block;  margin-bottom: 23px;}
+div#showList-box{width:98%; height:200px; overflow:auto;}
 </style>
 <script>
 $(()=>{
@@ -99,10 +103,7 @@ $(()=>{
 </script>
 
 <style>
-input {border: none; }
-::-webkit-input-placeholder { text-align:right;pointer-events: none; }
-#inputText{width:100px;    display: contents;}
-.enrollText{width:180px;}
+
 </style>
 
 <div id="container" class="event_cont">
@@ -128,10 +129,7 @@ input {border: none; }
 		</tr>
 		</table>
 		<div id="showList-box">
-		<style>
-		div#showList-box{
-		width:98%; height:200px; overflow:auto;}
-		</style>
+
 		
 			<table class="ListTable scrolltable" id="showList" width="100%" border="0" cellspacing="0" cellpadding="0">
 				<c:forEach items="${eventList }" var="evt">

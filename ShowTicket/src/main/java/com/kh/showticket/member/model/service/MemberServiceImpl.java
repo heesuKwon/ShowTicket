@@ -1,6 +1,7 @@
 package com.kh.showticket.member.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -87,5 +88,16 @@ public class MemberServiceImpl implements MemberService {
 	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
 		return memberDAO.selectMyPointList(memberLoggedIn);
 	}
+
+	@Override
+	public List<Ticket> selectReservationTerm(Map<String, Object> map) {
+		return memberDAO.selectReservationTerm(map);
+	}
+
+	@Override
+	public List<Ticket> selectReservationTerm15(Map<String, Object> map) {
+		return memberDAO.selectReservationTerm15(map);
+	}
+	
 
 }

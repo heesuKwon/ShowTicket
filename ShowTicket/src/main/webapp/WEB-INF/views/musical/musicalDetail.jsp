@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.kh.showticket.common.MusicalAndShow"%>
@@ -11,6 +13,8 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <link rel="stylesheet" type="text/css"
+						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
+<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
 
 <link rel="stylesheet"
@@ -20,8 +24,12 @@
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
+ <link rel="stylesheet" type="text/css"
+						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css"> 
 
 <%
+
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
 			System.out.println("urls:"+musical.getUrls());
 			System.out.println("musical"+musical);
@@ -36,7 +44,7 @@
 	days.put("금", 4);
 	days.put("토", 5);
 	days.put("일", 6);
-	String[] d = {"월", "화", "수", "목", "금", "토", "일"};
+	String[] d = { "월", "화", "수", "목", "금", "토", "일"};
 	for (String s : times) {
 		System.out.println(s);
 		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
@@ -54,28 +62,53 @@
 					System.out.println(ts[j]);
 					dayTime.put(d[i], ts[j]);
 				}
-			}				
-		}
-		else{
+			}
+		} else {
 			String day1 = "";
-			if(s.contains("HOL")){
+			if (s.contains("HOL")) {
 				day1 = "HOL";
+			} else {
+				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			else{
-				day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			}
-			for(int i=0;i<ts.length;i++){
+			for (int i = 0; i < ts.length; i++) {
 				System.out.println(day1);
 				System.out.println(ts[i]);
-				dayTime.put(day1,ts[i]);
+				dayTime.put(day1, ts[i]);
 			}
-		
 		}
 	}
+	
+	Object[] str = dayTime.keySet().toArray();
+	String[] day = { "일", "월", "화", "수", "목", "금", "토"};
+	String st = "";
+	for(Object s:str){
+		System.out.println((String)s);
+		st += (String)s;		
+	}
+
+	List<Integer> list = new ArrayList<>();
+	for(int i=0;i<day.length;i++){
+		if(!st.contains(day[i])){
+			list.add(i);	
+		}
+	}
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 %>
 
 
 <script language='javascript'>
+/*--------------------------석현씨 코딩영역-----------------------------  */	
+
+$(()=>{
+	 $(".tabs-Num").css("display","none");
+	
+	$("#tabs-3").css("display","block");
+})
+
+
+
+/*--------------------------석현씨 코딩영역-----------------------------  */		
+
     var _JV = "AMZ2013010701";//script Version
     var _UD = 'undefined';
     var _UN = 'unknown';
@@ -115,7 +148,7 @@
         return a
     }
     ;
-    function AEC_F_D (pd, md, cnum) {
+    function AEC_F_D (pd, md, cnum)	 {
         var i = 0, amt = 0, num = 0;
         var cat = '', nm = '';
         num = cnum;
@@ -165,17 +198,7 @@
     _A_ct = Array('99');
 </script>
 
-<script>
-//지도 kakao maps api
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
 
-// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-var map = new kakao.maps.Map(mapContainer, mapOption); 
-</script>
 
 <script type="text/javascript">
 	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
@@ -279,9 +302,8 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
 	}
 </script>
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- End NHN AD MORE Script -->
+<!-- <script async type="text/javascript"
+	src="//cro.myshp.us/resources/common/js/more-common.js"></script> -->
 
 
 
@@ -316,13 +338,13 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	}
 </script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.desktop.ns.min.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.Component.js"></script>
+	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.UIComponent.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.StarRating.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 
@@ -521,7 +543,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		getProductReviewList(page);
 	}
 
-	function openReviewSelectList () {
+	function openReviewList () {
 		if ($("#review_select_list").css("display") == "block") {
 			$("#review_select_list").css("display", "none");
 			return;
@@ -568,6 +590,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	});
 
 	//]]>
+
 </script>
 
 
@@ -597,17 +620,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 </script>
 
 
-<div id="container">
-<!-- <div id="maps" style="width:500px;height:400px;"></div>-->	
-<script>
- 		var container = document.getElementById('maps');
-		var options = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
-		};
+<div id="detailContainer">
 
-		var map = new kakao.maps.Map(container, options); 
-</script>
+
 	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
@@ -750,6 +765,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 								<br />
 								<li>VIP석 <span class="color_purple fbold">427</span>석
 								</li>
+							
 								<br />
 								<li>R석 <span class="color_purple fbold">427</span>석
 								</li>
@@ -815,17 +831,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 				<div class="tabs-Num" id="tabs-1">
 				
 					<div class="detail_cont">
-								<%-- <c:if test="${empty musical. }">
-								이미지가 존재하지 않습니다.
-								</c:if>
-								<c:if test="${not empty list }">
-								<c:forEach items="${list}" var="f">
-											<c:if test="${f.type.equals('T') }">
-											</c:if>
-									</c:forEach>
-								</c:if> --%>
-						테스트하기
-						<img src="http://www.kopis.or.kr/upload/pfmIntroImage/PF_PF148915_190614_0923120.png" alt="" style="max-width: 900px" />
+						
+							<strong>[공연장 정보]</strong><br />
+							장소 : ${musical.hallName }<br> 주소 : ${address.adres }<br>
+								대표번호 : <span id="phoneNumber">${address.telno }</span><br> <br /> <br /> <br />							
+ 								<div id="map" style="clear:both; width:800px;height:400px;position: relative;
+    												overflow: visible;margin-left:66px;"></div>
 					</div>
 
 
@@ -833,11 +844,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 				<div class="tabs-Num" id="tabs-2">
 			
-					<link rel="stylesheet" type="text/css"
-						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">
-					<link rel="stylesheet" type="text/css"
-						href="${pageContext.request.contextPath}/resources/css/contents.css">
+					
 					<div class="detail_cont detail_cont_v2">
+						
 						<div class="title_wrap">
 							<strong class="title title21">네티즌 별점 및 후기</strong>
 						</div>
@@ -895,7 +904,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 								href="javascript:;" class="btn_text3 fr"
 								id="displayAllReviewBtn" onclick="displayAllreview();">전체후기보기</a>
 						</div>
+						
 						<div class="review_list">
+
 							<ul id="reviewUl" style="word-break: break-all;">
 								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
 										class="reviewDate small-font">2019.09.20 17:10</span></span>
@@ -929,31 +940,73 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 				</div>
 				<div class="tabs-Num" id="tabs-3">
 
-
-					<div class="detail_cont">
-
-
-						<strong>[공연장 정보]</strong>
-						<div class="contents">
-
-							장소 : 성남아트센터 오페라하우스<br> 주소 : 경기도 성남시 분당구 야탑동 757 성남아트센터<br>
-							대표번호 : <span id="phoneNumber"></span><br>
-
-							<div class="btn_viewmap on" style="display: none;"></div>
-							<div class="map_wrap">
-								<div class="map_area" id="map"></div>
-								<div class="bx">
-									<a href="" target="_blank" class="btn_map" id="go_to_naver_map">빠른길
-										찾기</a>
-								</div>
+						
+						<div class="detail_cont" style="clear:both;">
+							<strong>[공연시간 정보]</strong>
+							<div class="bx_dummy">
+								<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 							</div>
-
+							<div class="bx_dummy">
+								<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+									~ ${musical.getEndDate()}</span>
+							</div>
+		
+		
+		
+							<div class="bx_dummy">
+								<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+							</div>
+							<c:if test="${not empty musical.time }">
+							<div class="bx_dummy">
+								<em class="info_tit">정기 공연일정</em> <br /> 
+									<span class="txt">
+										${musical.time }
+										<%-- <c:forTokens var="item" items="${musical.time}" delims=",">${item}<br /></c:forTokens> --%>
+	
+									</span>
+							</div>
+							</c:if>
+							<div class="bx_dummy">
+								<c:if test="${empty musical.urls }">
+								</c:if>
+								<c:if test="${not empty musical.urls }">
+									<c:forEach items="${musical.urls}" var="f">
+												<img src="${f }" alt="" style="max-width: 900px; margin-left:110px;"/>	
+									</c:forEach>
+								</c:if> 
+							</div>
 						</div>
 
 
 					</div>
 
 				</div>
+				<script>
+
+
+//지도 kakao maps api
+//지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+   		var container = document.getElementById('map'); 
+   		
+   		var la = ${address.la};//위도
+   		var lo = ${address.lo};//경도
+		var options = {
+			center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+		};
+		var map = new kakao.maps.Map(container, options);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  =new kakao.maps.LatLng(la, lo); 
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map); 
+	</script>
 
 				<div class="tabs-Num" id="tabs-4">
 
@@ -1182,7 +1235,6 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 			<!-- [D] 스크롤 발생 시 .moving 추가 -->
 		</div>
 	</div>
-</div>
 
 
 <script type="text/javascript">
@@ -1322,14 +1374,16 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	</ul>
 </div>
 <style>
-.detail_box_bot .detailbox_bot_left .detail_cont {
+.detail_box_bot .detailbox_bot_left .detail_cont .detail_cont>div {
     clear: both;
     padding: 41px 30px 100px;
     border-width: 0 1px 1px;
     border-style: solid;
     border-color: #dedede;
     min-height: 1300px;
-}
+    text-align: left;
+    font-size: 20px;
+	}
 
 </style>
 
@@ -1342,28 +1396,30 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 <input type="hidden" id="isValidProduct" value="true">
 <input type="hidden" id="reviewExposureYn" value="Y">
 
+<%--
 <script type="text/javascript"
-	src="/resources/js/jquery-ui-1.11.2.min.js"></script>
-<script type="text/javascript" src="/resources/js/date.js"></script>
-<script type="text/javascript" src="/resources/js/number.js?20170831"></script>
-<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
+ 	src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.11.2.min.js"></script>
+ --%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/number.js?20170831"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pagingJs.js"></script>
+ <%-- <script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery.formatDateTime.min.js"></script> --%> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/userDetail-0.0.3.js"></script>
+<%-- <script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.min.js"></script> --%>
 <script type="text/javascript"
-	src="/resources/js/jquery.formatDateTime.min.js"></script>
-<!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
-<script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.min.js"></script>
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponCodeType.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponTemplate.js"></script>
-<script type="text/javascript" src="/resources/js/coupon/coupon.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponTemplate.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script> 
 
 <script type="text/javascript">
 	//<![CDATA[
-
+	
 	var RESERVE_DATA = {
 		SELECTED_DATE: "",
 		SELECTED_ROUND: "",
@@ -1390,19 +1446,26 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 	};
 	
 	
+	
+	
 	$(document).ready(function () {
-		
-		<!-- 달력 -->
+		/*-------------------------------희수 코딩 영역--------------------------------*/
+		//달력
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',
 			endDate: '${musical.getEndDate()}',
 			calendarWeeks: false,
             todayHighlight: true,
-            daysOfWeekDisabled : [0,6],
+            daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
 		});
+	
+		$("#calendar").on("click",(e)=>{
+			
+		});
 		
+		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//기능 설정
 		setDialog();
 		onCloseIfOutOfSelect();
@@ -1452,6 +1515,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 
 		initCleanReserveInfo();
 		setLongTitle();
+		
+		
+		
 	});
 
 	function initCleanReserveInfo () {
@@ -1722,13 +1788,12 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		
 		$(".tabs-Num").css("display","none");
 		
-
 		if ($(obj).attr('id') == "detailTop") {
-			$("#tabs-1").css("display","block");
+			$("#tabs-3").css("display","block");
 		} else if ($(obj).attr('id') == "reviewTap") {
 			$("#tabs-2").css("display","block");
 		} else if ($(obj).attr('id') == "placeTap") {
-			$("#tabs-3").css("display","block");
+			$("#tabs-1").css("display","block");
 		} else if ($(obj).attr('id') == "cancelTap") {
 			$("#tabs-4").css("display","block");
 		}
@@ -2169,5 +2234,9 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 		});
 	}
 		//]]>
+	
+	
+
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

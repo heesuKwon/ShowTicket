@@ -56,3 +56,6 @@
     margin-top: 20px
 }
 
+#nTableBody tr, #NTableBody tr{
+	cursor:pointer;
+}

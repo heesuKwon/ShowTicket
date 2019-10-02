@@ -35,22 +35,22 @@ $(()=>{
 		var end = td.eq(4).text();
 		var detail = td.eq(5).text();
 	
-
 	
 		var html=""; 
 		
-		var contain ="<form action='${pageContext.request.contextPath}/event/insertEvent.do' method='post'>";
+
+		var contain ="<form action='${pageContext.request.contextPath}/event/insertEvent.do' method='post'  enctype='multipart/form-data'>";
 		contain+="<table class='table table-bordered' id='eventWriteTable'>";
 		contain+="<tbody><col width='200px'/><col width='400px'/>";
 		contain+="<tr><th>제목:</th> <td><input type='text' name='eventTitle' class='form-control'/></td>";
 		contain+="</tr><tr> <th>항목:</th><td><select class='form-control' name='eventKind'><option value='I'>초대</option><option value='E'>응모</option></select></td></tr>";
 		contain+="<tr><th>내용:</th><td><textarea id='textLine' name='eventContent' rows='5' cols='78'></textarea></td></tr>"; 
-		contain+="<tr><th>사진첨부:</th><td><input type='file' name='originalFileName' id='originalFileName' style='text-align:center; font-size:15px;'/></td></tr>"; 
+		contain+="<tr><th>사진첨부:</th><td><input type='file'  name='upFile'/></td></tr>"; 
 		contain+="<tr><th>이벤트 날짜:</th><td style='vertical-align:middle;'>"; 
 		contain+="<input type='date' class='form-control eventDate'name='eventStartDate' /><span style='float:left; font-size:15px;'>~</span>";
 		contain+="<input type='date' class='form-control eventDate1' name='eventEndDate'/></td></tr>";
 		contain+="<tr><th>당첨자 발표날짜:</th><td><input type='date' class='form-control eventDate' name='announcementDate'/></td></tr>"; 
-		contain+="<tr><th>이벤트 상세날짜:</th><td><input type='date' class='form-control eventDate'/></td></tr>";
+		contain+="<tr><th>이벤트 상세날짜:</th><td><input type='date' class='form-control eventDate' name='eventDetailDate'/></td></tr>";
 		contain+="<tr><th>상세 시간 및 인원:</th><td><input type='text' palceholder='상세 시간 및 인원을 입력 해주세요' class='form-control' name='eventTimeMen'/></td></tr>"; 
 		contain+="</tbody></table>";
 		contain+="<input type='hidden' name='showId'  value='"+id+"'/>";

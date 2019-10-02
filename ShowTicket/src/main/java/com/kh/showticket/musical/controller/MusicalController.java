@@ -36,13 +36,21 @@ public class MusicalController {
 		//logger.debug("뮤지컬리스트페이지");
 		
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
+		String url2 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=ebfe5d2574de4631b6eda133b56b1297&stdate=20190928&eddate=20191031&cpage=1&rows=5&shcate=AAAB&prfstate=02";
 		
 		List<Map<String,String>> musicalList = getList(url);
+		List<Map<String,String>> recentMusicalList = getList(url2);
+		
 		mav.addObject("musicalList", musicalList);
+		mav.addObject("recentMusicalList", recentMusicalList);
 		mav.setViewName("menu/musical");
 		return mav;
 	}
-	
+	@RequestMapping("/starRating.do")
+	public ModelAndView starRating(ModelAndView mav) {
+		mav.setViewName("musical/starRating");
+		return mav;
+	}
 	
 	@RequestMapping("/musicalAjax.do")
 	@ResponseBody
@@ -125,4 +133,7 @@ public class MusicalController {
 			
 		return resultPaged;
 	}
+	
+	
+	
 }

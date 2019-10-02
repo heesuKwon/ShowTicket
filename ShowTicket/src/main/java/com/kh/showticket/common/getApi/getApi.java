@@ -1,6 +1,5 @@
 package com.kh.showticket.common.getApi;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +19,7 @@ import org.w3c.dom.NodeList;
 import com.kh.showticket.common.DescendingByPrfpdfrom;
 import com.kh.showticket.common.MusicalAndShow;
 
+
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
 	static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -35,6 +35,18 @@ public class getApi {
 		}
 
 		return value.getNodeValue();
+	}
+	
+	
+	public static NodeList getTagValues(String tag, Element element) {
+		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+		NodeList values = (NodeList)nodeList.item(0);
+
+		if(values==null) {
+			return null;
+		}
+
+		return values;
 	}
 
 	//최신순 정렬
@@ -146,7 +158,7 @@ public class getApi {
 					
 					
 					Map<String, String> Mmap = new HashMap<>();
-					//logger.debug("MAP이후=================================");
+
 					//공연 Id
 					Mmap.put("mt20id", getTagValue("mt20id", element));
 					//공연명
@@ -159,6 +171,8 @@ public class getApi {
 					Mmap.put("poster", getTagValue("poster", element));
 					//공연장르
 					Mmap.put("cate", getTagValue("cate", element));
+					//공연장
+					Mmap.put("prfplcnm",getTagValue("prfplcnm",element));
 
 					Blist.add(Mmap);
 				}
@@ -225,7 +239,6 @@ public class getApi {
 			//소개이미지목록 : styurls - styurl
 			//공연시간 : dtguidance
 			
-			
 				
 			}
 		}
@@ -269,6 +282,7 @@ public class getApi {
 
 //			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 //			transFormat.parse(getTagValue("prfpdfrom", element))
+			
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
@@ -289,29 +303,25 @@ public class getApi {
 				mas.setPrice(getTagValue("pcseguidance", element));
 				mas.setPoster(getTagValue("poster", element));
 				mas.setState(getTagValue("prfstate", element));
-//				mas.setUrls(getTagValue("styurls", element));
-				/*
-				 * NodeList nl = element.getElementsByTagName("styurl"); NodeList urlList;
-				 * String[] arr = new String[nl.getLength()]; for(int i=0;i<nl.getLength();i++)
-				 * { urlList = nl.item(i).getChildNodes(); Node value = (Node)urlList.item(0);
-				 * arr[i] = value.getNodeValue();
-				 * 
-				 * System.out.println(value.getNodeValue()); } System.out.println("arr:"+ arr);
-				 */
-				NodeList nl = element.getElementsByTagName("styurl");
 				
-				NodeList urlList;
-				for(int i=0;i<nl.getLength();i++) {
-					urlList = nl.item(i).getChildNodes();
-					Node value = (Node)urlList.item(0);
-					
-					System.out.println(value.getNodeValue());
-				}
-				//mas.setUrls(arr);
+				NodeList nl = element.getElementsByTagName("styurl"); NodeList urlList;
+				String[] arr = new String[nl.getLength()]; 
+				for(int i=0;i<nl.getLength();i++)
+				{ 
+					  urlList = nl.item(i).getChildNodes();
+					  Node value = (Node)urlList.item(0);
+					  arr[i] = value.getNodeValue();
+					  
+					  System.out.println("arr:"+ arr[i]);
+//					  System.out.println(value.getNodeValue()); 
+				} 
+				 
+				
+				
+				mas.setUrls(arr);
 				mas.setTime(getTagValue("dtguidance", element));
 				
 			}
-//			}
 		} catch (Exception e) {
 		
 		}

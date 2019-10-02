@@ -302,161 +302,21 @@ ul.lst_thumb li.on::before {
 				<div class="attention">
 					<ul style="width: 1880px">
 						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
-
-						<li class="SHOW_ISSUE_V1_FIRST"><a
-							href="http://www.ticketlink.co.kr/bridge/498"> <span
-								class="ribbon 
-                                    ">HIDE
-							</span> <img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_3/mom_main_0805.jpg"
-								alt="">
-								<p>
-									<em>제목등 소개 들어갈곳</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_FIRST"><a
-							href="http://www.ticketlink.co.kr/bridge/496"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                    ">HIDE
-							</span> <img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_4/south0730.jpg"
-								alt="">
-								<p>
-									<em>크러쉬/우원재/그레이</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_FIRST"><a
-							href="http://www.ticketlink.co.kr/product/29544"> <span
-								class="ribbon 
-                                    
-                                    
-                                        label level2
-                                    
-                                    
-                                    ">SOLELY
-							</span> <img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_8/zan_main0820.jpg"
-								alt="">
-								<p>
-									<em>얼리버드 티켓 판매중</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_FIRST"><a
-							href="http://www.ticketlink.co.kr/product/29582"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                    ">HIDE
-							</span> <img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_10/ju_main0805.jpg"
-								alt="">
-								<p>
-									<em>트로트 여신</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_FIRST"><a
-							href="http://www.ticketlink.co.kr/product/29703"> <span
-								class="ribbon 
-                                    
-                                    
-                                        label level2
-                                    
-                                    
-                                    ">SOLELY
-							</span> <img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_10/660_980_08221404.jpg"
-								alt="">
-								<p>
-									<em>얼리버드 반값 티켓!</em>
-								</p>
-						</a></li>
-
-
-						<li class="SHOW_ISSUE_V1_SECOND"><a
-							href="http://www.ticketlink.co.kr/bridge/402"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                ">HIDE</span>
-								<img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_9/leemija_0726.jpg"
-								alt="">
-								<p>
-									<em>노래인생 60년 기념</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_SECOND"><a
-							href="http://www.ticketlink.co.kr/product/29640"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                ">HIDE</span>
-								<img src="//image.toast.com/aaaaab/ticketlink/TKL_7/ori0806.jpg"
-								alt="">
-								<p>
-									<em>40주년 전국투어 콘서트</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_SECOND"><a
-							href="http://www.ticketlink.co.kr/product/29652"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                ">HIDE</span>
-								<img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_10/loved0807.jpg"
-								alt="">
-								<p>
-									<em>조기예매 할인</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_SECOND"><a
-							href="http://www.ticketlink.co.kr/product/28714"> <span
-								class="ribbon 
-                                    
-                                    
-                                    
-                                ">HIDE</span>
-								<img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_8/201906141356a.jpg"
-								alt="">
-								<p>
-									<em>광주</br> 상무지구 기분좋은극장
-									</em>
-								</p>
-						</a></li>
-
-						<li class="SHOW_ISSUE_V1_SECOND"><a
-							href="http://www.ticketlink.co.kr/product/27881"> <span
-								class="ribbon 
-                                    
-                                    
-                                        label level2
-                                    
-                                    
-                                ">SOLELY</span>
-								<img
-								src="//image.toast.com/aaaaab/ticketlink/TKL_5/hongdo_0412.jpg"
-								alt="">
-								<p>
-									<em> 전북예술회관 대공연장</em>
-								</p>
-						</a></li>
-
+							<c:forEach items="${recentMusicalList }" var="rList">
+								<li class="SHOW_ISSUE_V1_FIRST">
+									<a href="http://www.ticketlink.co.kr/bridge/498">
+										<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
+										<div class="list_info" style="height: 50px;">
+											<!--제목-->
+											<strong class="elp">${rList.prfnm }</strong>
+											<!--기간-->
+											<small>${rList.prfpdfrom } ~ ${rList.prfpdto }</small><br />
+											<!--장소-->
+											<small>${rList.fcltynm }</small>
+										</div>
+									</a>
+								</li>
+							</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -490,7 +350,7 @@ ul.lst_thumb li.on::before {
 		        <ul id="musicalListAll" class="goods_list" style="clear:both;">
 		                  <c:forEach items="${musicalList}" var="map">
 			                <li><a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
-			                    <p><img src="${map.poster }" alt=""></p>
+			                    <p><img src="${map.poster }" alt="" /></p>
 			                    <div class="list_info">
 			                        <strong class="elp">${map.prfnm }</strong>
 			                        <dl>
@@ -503,16 +363,16 @@ ul.lst_thumb li.on::before {
 			                </a></li>
 						</c:forEach>
 					</ul>
-
-					<div id="srchEmpty">검색결과가 없습니다.</div>
-				</div>
-			</div>
-			
-		</div>
+        
+        			<div id="srchEmpty">검색결과가 없습니다.<div>
+        		</div>
+   			 </div>
+    	</div>
 	</div>
 </div>
-<script type="text/javascript"
-	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
+</div>
+</div>
+<script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
 <script type="text/javascript">
 
 		if ($("#noticeList").find("ul> li").length > 4) {

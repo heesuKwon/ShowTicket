@@ -117,9 +117,9 @@ function search(){
 						class="hlink1"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/appoint.png" /></a>
 					</li>
-					<li><a href="#" class="hlink2" id="hlink2"> <img
-							src="${pageContext.request.contextPath }/resources/images/help/talk.PNG" /></a>
-					</li>
+					<li><a href="javascript:talkPopup();" class="hlink2" id="hlink2"> <img
+                            src="${pageContext.request.contextPath }/resources/images/help/talk.PNG" /></a>
+                    </li>
 					<li><a href="${pageContext.request.contextPath}/help/faq.do" class="hlink3"> <img
 							src="${pageContext.request.contextPath }/resources/images/help/faq.PNG" /></a>
 					</li>

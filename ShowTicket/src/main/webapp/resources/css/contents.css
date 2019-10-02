@@ -160,7 +160,7 @@
 .detail_info_right .ticket_open .dsc{margin-bottom:33px;padding:0;font-size:14px;font-weight:bold;line-height:22px;text-align:center;text-indent:0}
 .detail_info_right .ticket_open .dsc:before{display:block;width:111px;height:92px;margin:0 auto 11px;background:url(../img/img_comingsoon.jpg) no-repeat;content:''}
 .detail_box_top.has_penclub{min-height:610px}
-.detail_box_bot{overflow:hidden}
+/* .detail_box_bot{overflow:hidden} */
 .detail_box_bot .detailbox_bot_left{width:754px;float:left;margin-right:10px;background:#fff;border-radius:2px;overflow:hidden}
 .detail_box_bot .map_wrap{display:none}
 .detail_box_bot .btn_viewmap{display:block;position:relative;margin-bottom:10px;cursor:pointer;width:74px;height:23px;border:1px solid #dedede;text-align:center;text-indent:17px;font-size:12px;line-height:23px;letter-spacing:-1.95px;background-color:#fff}
@@ -2347,6 +2347,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .detail_box_top .coupon .coupon_down:first-child{margin-top:0}
 .detail_box_top .coupon .coupon_down img{width:100%}
 
+
 .nav-pills .nav-link.default:hover {
 	color: #fff;
     background-color: #8f01a3;
@@ -2355,6 +2356,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .nav-pills .nav-link.select{
     color: #fff;
     background-color: #8f01a3;
+       cursor: pointer;
 }
 .nav-pills .nav-font{
 	font: 15px bold;
@@ -2365,6 +2367,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 .nav-pills .nav-link.default{
 	color: #8f01a3;
     border-left: 1px solid #8f01a3;
+    cursor: pointer;
 }
 
 .nav-pills .nav-item:first-child .nav-link.default{
@@ -2376,4 +2379,3 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
     border-radius: .25rem;
     margin-bottom: 20px;
 }
-
