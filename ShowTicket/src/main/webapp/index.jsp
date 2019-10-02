@@ -43,7 +43,8 @@ window.onload = function () {
 <script type="text/javascript"
 	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
 <script type="text/javascript">	
-$( document ).ready( function() {
+$(function() {
+
 	var i;
 	var x = document.getElementsByClassName("mySlides");
 	for(i=0; i<x.length;i++){
@@ -57,8 +58,8 @@ $( document ).ready( function() {
 	setTimeout(slideShow,4000);
 	
 	
-	
-  } );
+});
+
 </script>	
 <script type="text/javascript">
 var index=0;
@@ -161,7 +162,7 @@ window.onload = function(){
 								</a></li>
 							</c:forEach>
 							<c:forEach items="${ticketOpen}" var="map" begin="0" end="4" varStatus="status">
-								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}"
+								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}" style="font-weight:bold;"
 									data-url="${map.poster }"><a
 									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
 							</c:forEach>

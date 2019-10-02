@@ -89,6 +89,7 @@ public class PostConstructing {
 		
 		ticketOpenList = getConcatList(url3,url4);
 		
+		
 		//일간 랭킹 리스트
 		url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&catecode=AAAB&ststype=day&date="+yesterday;
 		String url2 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&catecode=AAAA&ststype=day&date="+yesterday;

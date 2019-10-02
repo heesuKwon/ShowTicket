@@ -176,7 +176,7 @@ function getDayList(){
 <%
 	int i = 0;
 %>
-<div id="container" class="ranking_wrap" ">
+<div id="container" class="ranking_wrap" style ="padding-bottom:20px;margin-bottom:0px;">
 	<div class="inner" style="padding-top: 0px;">
 		<h2 class="blind">
 			<span> 랭킹 </span>
@@ -209,7 +209,7 @@ function getDayList(){
 			<div class="tabCon">
 				<h3 class="blind">랭킹 집계 결과</h3>
 				<!-- 집계결과 -->
-				<div class="rslt_bx">
+				<div class="rslt_bx" style="padding-bottom:20px;">
 					<!-- 버튼 -->
 					<div class="btn_lst">
 						<!-- [D] 활성화시 a에 .on 추가-->

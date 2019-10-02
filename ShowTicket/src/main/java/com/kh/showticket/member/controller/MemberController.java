@@ -75,7 +75,7 @@ public class MemberController {
 		model.addAttribute("list", list);
 		model.addAttribute("memberId", memberId);
 		
-		return "/member/reservation";
+		return "member/reservation";
 	}
 
 	 @ResponseBody

@@ -1,11 +1,5 @@
 package com.kh.showticket;
 
-import static com.kh.showticket.common.getApi.getApi.getBoxList;
-import static com.kh.showticket.common.getApi.getApi.getConcatList;
-import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -18,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.kh.showticket.common.postconstruct.PostConstructing;
 import com.kh.showticket.help.model.service.NoticeService;
 import com.kh.showticket.help.model.vo.NoticeTicketOpen;
@@ -57,6 +52,17 @@ public class HomeController {
 		model.addObject("BoxlistT2", dayBoxList2);
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");
+		
+		for (Map<String,String> map: ticketOpen) {
+			logger.debug("map객체"+map);
+			NoticeTicketOpen nt = new NoticeTicketOpen();
+			nt.setPlayName(map.get("prfnm"));
+			nt.setPlayOpen(map.get("prfpd"));
+			nt.setPlayPlace(map.get("prfplcnm"));
+			nt.setPlayPoster(map.get("poster"));
+			
+			int result = noticeService.insertOne(nt);
+		}
 		
 		
 		return model;
