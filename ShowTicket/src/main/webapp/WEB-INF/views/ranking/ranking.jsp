@@ -176,7 +176,7 @@ function getDayList(){
 <%
 	int i = 0;
 %>
-<div id="container" class="ranking_wrap" style="margin-bottom: 10%;">
+<div id="container" class="ranking_wrap" ">
 	<div class="inner" style="padding-top: 0px;">
 		<h2 class="blind">
 			<span> 랭킹 </span>
@@ -238,7 +238,7 @@ function getDayList(){
 							</thead>
 							<tbody id="showTable">
 								<!-- 여기 show_list -->
-								<c:forEach items="${dayBoxList }" var="map" begin="0" end="9">
+								<c:forEach items="${dayBoxList1}" var="map" begin="0" end="9">
 									<tr class="show_list" id="show_list">
 										<td style="width: 65px"><span
 											style="position: relative; top: -8px; color: black;"
