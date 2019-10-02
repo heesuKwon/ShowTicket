@@ -31,32 +31,35 @@ import com.kh.showticket.event.model.vo.Event;
 @Controller
 @RequestMapping("/event")
 public class EventController {
-	
+
 	@Autowired 
 	DiscountService discountService;
 
 	@Autowired 
 	EventService eventService;
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/eventList.do")
 	public ModelAndView event(ModelAndView mav) {
 		logger.debug("event페이지 요청");
-		
+
 		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=2&shcate=AAAA";
-		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=1&shcate=AAAB";
-		
+		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=2&shcate=AAAB";
+
+		List<Discount> dcList = discountService.selectdcList();
+	
 		mav.setViewName("event/eventList");
+		mav.addObject("dcList", dcList);
 		mav.addObject("eventList",getConcatList(url1,url2));
-		
+
 		return mav;
 	}
 
 	@RequestMapping("/endEventList.do")
 	public ModelAndView endEvent(ModelAndView mav) {
 		logger.debug("endEvent페이지 요청");
-		
+
 		mav.setViewName("event/endEventList");
 		return mav;
 	}
@@ -72,18 +75,18 @@ public class EventController {
 	@RequestMapping("/addSaleEvent.do")
 	public ModelAndView addSaleEvent(ModelAndView mav) {
 
-		
-		
+
+
 		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190123&eddate=20191011&cpage=1&rows=20&shcate=AAAA";
 		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190123&eddate=20191011&cpage=1&rows=20&shcate=AAAB";
-		
+
 		mav.setViewName("/event/addSaleEvent");
 
 		mav.addObject("eventList",getConcatList(url1,url2));
 
-		
-		
-		
+
+
+
 		return mav;
 	}
 
@@ -92,50 +95,62 @@ public class EventController {
 
 		return "/event/writeprizewinner";
 	}
-	
+
 	@RequestMapping("/eventWrite.do")
 	public ModelAndView eventWrite(ModelAndView mav) {
 		logger.debug("eventWrite페이지 요청");
 
 		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr/?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191030&cpage=1&rows=5&shcate=AAAA";
 		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191030&cpage=1&rows=5&shcate=AAAB";
-		
-		
-		
+
+
+
 		mav.setViewName("event/eventWrite");
-		
-		
+
+
 		return mav;
 	}
-	
+
 	@RequestMapping("/eventView.do")
 	public ModelAndView eventView(ModelAndView mav) {
 		logger.debug("prizewinner페이지 요청");
-		
+
 		mav.setViewName("event/eventView");
 		return mav;
 	}
-	
+
 	@RequestMapping("/insertAddSale.do")
 	public String insertAddSale(Discount discount, Model model) {
-		
+
 		logger.info("특가 할인 입력 기능 요청");
-		
-		int result = discountService.insertAddSale(discount);
-		
+		int result=0; 
+		int rst=0;
+		int cnt  =  discountService.checkCnt();
+		System.out.println("cnt수 >>>>>"+cnt);
+		if(cnt<4){
+			result = discountService.insertAddSale(discount);
+			
+		}else{			
+			rst= discountService.deleteAddSale(); 
+			if(rst>0){
+				
+				result = discountService.insertAddSale(discount);
+			}
+		}
+
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"할인 등록성공":"할인 등록 실패");
 		model.addAttribute("loc", "/event/addSaleEvent.do");
 
-		
-	
+
+
 		return "common/msg";
 	}
-	
+
 	@RequestMapping("/insertEvent.do")
 	public String insertEvent(Event event, Model model, HttpServletRequest request,MultipartFile upFile) {
-	
-		
+
+
 		return "common/msg"; 
 	}
 
