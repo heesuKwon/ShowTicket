@@ -8,12 +8,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
 
-<%
-	String memberId = request.getParameter("memberId");
-	System.out.println("memberId="+memberId);
-
-%>
-
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
@@ -46,6 +40,15 @@ $(()=>{
 		getReservation(3);
 	});
 	
+	/* $("input[name='cancel").click(function() {
+		var select = $("input[name='cancel']").parent("td").prev().prev();
+		console.log(select);
+	});
+	
+	$("#test").click(function() {
+		//getPage();
+	}); */
+	
 	function getReservation(num) {
 		$.ajax({
 			type: "POST",
@@ -54,30 +57,44 @@ $(()=>{
 			cache: false,
 			data: {
 				memberId: "${memberId}",
-				num: num
+				num: num,
+				s: "${page.startContent }",
+				e: "${page.endContent }"
 			},
 			success: function(data) {
 				var html = "";
+				var list = data.reservationList;
+				//var page = "";
 				var status = "";
+				//var barNo = ${page.barNo};
+				//var barEnd = ${page.barEnd};
+				//var totalPage = ${page.totalPage};
+				//var cPage = ${page.cPage};
+				//console.log(barNo+"원래 페이지바 시작 숫자는");
+				//console.log(barEnd+"원래 페이지바 마지막 숫자는");
+				//console.log(totalPage+"원래 totalPage는");
 				console.log(data);
 				
-				html += "<tr>"
+				html += "<tr>";
 				html += "<th id='num'>예매번호</th>";
 				html += "<th>공연명</th>";
+				html += "<th id='date'>예매일</th>";
 				html += "<th id='date'>관람일시</th>";
 				html += "<th id='count'>매수</th>";
 				html += "<th id='Cancledate'>취소가능일</th>";
 				html += "<th id='state'>상태</th>";
-				html += "</tr>"
-				for(var i=0; i<data.length; i++){
-					console.log(data[i].ticketNo);
+				html += "</tr>";
+				
+				for(var i=0; i<list.length; i++){
+					console.log(list[i].ticketNo);
 					html += "<tr>";
-					html += "<td>"+data[i].ticketNo+"</td>";
-					html += "<td>"+data[i].ticketShowId+"</td>";
-					html += "<td>"+data[i].ticketDate+"</td>";
-					html += "<td>"+data[i].ticketCount+"</td>";
-					html += "<td>"+data[i].ticketCancel+"</td>";
-					status = data[i].ticketStatus.trim();
+					html += "<td>"+list[i].ticketNo+"</td>";
+					html += "<td>"+list[i].ticketShowId+"</td>";
+					html += "<td>"+list[i].ticketEnrollDate+"</td>";
+					html += "<td>"+list[i].ticketDate+"</td>";
+					html += "<td>"+list[i].ticketCount+"</td>";
+					html += "<td>"+list[i].ticketCancel+"</td>";
+					status = list[i].ticketStatus.trim();
 					console.log(status);
 					if($.trim(status) == "Y"){
 						html += "<td>예매완료</td>";						
@@ -87,11 +104,11 @@ $(()=>{
 					}
 					html += "</tr>";
 				}
-				
-				console.log(data.length);
-				console.log("성공!!!!!"+data);
+				console.log(list.length);
+				console.log("성공!!!!!"+list);
 				/* alert("ajax 성공!");	 */
 				$("#ListTable").html(html);
+				//$("#page").html(page);
 			},
 			error: function(data) {
 				console.log("실패ㅜㅠ"+data);
@@ -100,7 +117,10 @@ $(()=>{
 			}
 		});		
 	};
+	
+	/* function getPage() {
 		
+	} */
 });
 </script>
 
@@ -108,7 +128,6 @@ $(()=>{
 	<jsp:include page="/WEB-INF/views/common/memberViewnav.jsp">
 		<jsp:param value="마이 페이지" name="pageTitle" />
 	</jsp:include>
-
 	<br>
 	<div class="div-memberFrm">
 		<h2 class="small-title">예매 확인/취소</h2>
@@ -125,25 +144,37 @@ $(()=>{
 					<button id="btn5" class="r_btnDefault">3개월</button>
 				</div>
 			</div>
-			<button type="button" id="find">조회</button>
+			
 			<br /> <br /> <br />
 			<table id="ListTable" style="margin: auto;">
 				<tr>
 					<th id="num">예매번호</th>
-					<th>공연명</th>
+					<th colspan="2">공연명</th>
+					<th id="date">예매일</th>
 					<th id="date">관람일시</th>
 					<th id="count">매수</th>
 					<th id="Cancledate">취소가능일</th>
 					<th id="state">상태</th>
 				</tr>
-				<c:forEach items="${list }" var="list">
+				<c:forEach items="${pageList }" var="list">
 					<tr>
+						<c:set var="status" value="${list.ticketStatus }"/>
 						<td>${list.ticketNo }</td>
 						<td>${list.ticketShowId }</td>
+						<c:choose>
+							<c:when test="${status eq 'Y'}">
+								<td>
+									<input type="button" class="cancelBtn_" value="예매취소" />
+								</td>
+							</c:when>
+							<c:when test="${status eq 'N'}">
+								<td></td>								
+							</c:when>
+						</c:choose>
+						<td>${list.ticketEnrollDate }</td>
 						<td>${list.ticketDate }</td>
 						<td>${list.ticketCount }</td>
 						<td>${list.ticketCancel }</td>
-						<c:set var="status" value="${list.ticketStatus }"/>
 						<c:choose>
 							<c:when test="${status eq 'Y'}">
 								<td>예매완료</td>								
@@ -156,25 +187,28 @@ $(()=>{
 				</c:forEach>
 			</table>
 			<br />
-			<nav aria-label="Page navigation example">
+			
+			<nav id="page" aria-label="Page navigation example" >
 				<ul class="pagination justify-content-center">
-					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="-1" aria-disabled="true"
-						style="background-color: #F2F2F2; border: 0px;"><</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">1</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">2</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">4</a></li>
-					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="1" aria-disabled="true"
-						style="background-color: #F2F2F2; border: 0px;">></a></li>
+				<!-- 위에부터 정리하고 다시 -->
+		<%-- 		<c:set var="barNo" value="${page.barNo }"/>
+				<c:set var="barEnd" value="${page.barEnd }"/>
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="-1" aria-disabled="true" style="background-color: #F2F2F2; border: 0px;">&lt;</a>
+					</li>
+					<c:forEach var="barNo" begin="${barNo }" end="${barEnd }">
+						<li class="page-item">
+							<a class="page-link" href="${pageContext.request.contextPath }/member/reservation.do?memberId=${memberLoggedIn.memberId }&cPage=${barNo}" style="color: gray; border: 0px;">${barNo}</a>
+							<a id="test" class="page-link" style="color: gray; border: 0px;">${barNo}</a>
+						</li>
+					</c:forEach>
+					<li class="page-item disabled">
+						<a class="page-link" href="#" tabindex="1" aria-disabled="true" style="background-color: #F2F2F2; border: 0px;">&gt;</a>
+					</li>  --%>
 				</ul>
 			</nav>
 			<br />
+			
 			<div id="info">
 				<h6>
 					<img alt=""
