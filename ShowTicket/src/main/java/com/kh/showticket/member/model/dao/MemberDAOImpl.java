@@ -58,14 +58,20 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm(Map<String, Object> map) {
-		return sqlSession.selectList("member.selectReservationTerm", map);
+	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationTerm", content);
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm15(Map<String, Object> map) {
-		return sqlSession.selectList("member.selectReservationTerm15", map);
+	public List<Ticket> selectReservationTerm15(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationTerm15", content);
 	}
+
+	@Override
+	public List<Ticket> selectReservationPage(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationPage", content);
+	}
+
 
 	
 }

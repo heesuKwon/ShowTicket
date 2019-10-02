@@ -409,7 +409,7 @@ div#emailAuthContainer p.ok{display:none;font-size: 12px; color:green;}
 	height:25px;
 	/* color : #424242;
     background-color: white; */
-    border: 1px solid #BDBDBD;
+    border: 1px solid #8f01a3;
     font-size:12px;
     font-weight: normal;
 }
@@ -557,3 +557,5 @@ div.authContainer{
 /*----기간별 조회 버튼 css 부분 */
 #search .r_btnSelect{background-color: #8f01a3;color:white;}
 #search .r_btnDefault{background-color: white;color : #424242;}
+
+.cancelBtn_{color: rgb(64, 64, 64);border: 1px solid rgb(224, 224, 224);border-radius: 2px;background-color: rgb(224, 224, 224);}
