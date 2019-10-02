@@ -35,10 +35,7 @@
 
 <script async type="text/javascript"
 	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- End NHN AD MORE Script -->
-<script type="text/javascript" src="/resources/jsdev/util/tk.Utils.js"
-	charset="utf-8"></script>
-<script type="text/javascript" src="/resources/js/player.js"></script>
+
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
@@ -70,7 +67,6 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 
-<script type="text/javascript" src="/resources/js/jquery-ui.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/login.js"></script> -->
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
 <script type="text/javascript">
@@ -84,8 +80,7 @@
 	wcs_add["wa"] = "3ce26ce585ae64";
 	wcs_do();
 </script>
-<script type="text/javascript" src="/resources/js/lcslog.js"></script>
-<script type="text/javascript">lcs_do(); </script>
+
 <!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
 <script language='javascript'>
 	var _AceGID = (function () {
