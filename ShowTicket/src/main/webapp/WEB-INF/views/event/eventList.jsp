@@ -34,34 +34,33 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		<ul class="event_top_list">
 			<c:forEach items="${dcList }" var="dcList">
 			<li>
-				<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
 				
-				<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${evt.mt20id }"> 
+				
+				<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${dcList.showId }"> 
 					
 					<img
 					src="${dcList.disCountImg}"
 					alt="poster" width="285" height="386">
 					
 					<div class="event_top_info">
-						<input type="hidden" name="evtID" value="${dcList.mt20id }" />
+						<input type="hidden" name="evtID" value="${dcList.showId }" />
 						<dl>
 							<dt>제목</dt>
 							<dd class="event_title">
-								<span>[초대]  ${dcList.genrenm} </span> <br />
+								<span>[초대]  ${dcList.showGenre} </span> <br />
 								
-								&lt; ${dcList.prfnm} &gt;
+								&lt; ${dcList.showName} &gt;
 							</dd>
 							<dt>이벤트 내용</dt>
 							<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
 								 기대평 이벤트  
 							</dd>
 							<dt>기간</dt>
-							<dd class="event_date"> ${dcList.prfpdfrom}~${evt.prfpdto}</dd>
-							<dt>장소</dt>
-							<dd class="event_date">${evt.fcltynm }</dd>
+							<dd class="event_date"> ${dcList.disCountStartDate} ~ ${dcList.disCountEndDate}</dd>
 						</dl>
 					</div>
 				</a>
+				<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
 			</li>
 			</c:forEach>
 
