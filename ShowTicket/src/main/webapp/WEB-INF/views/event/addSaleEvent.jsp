@@ -76,19 +76,21 @@ $(()=>{
 		contain+="</tr>";
 			
 		contain+="<tr>";
-		contain+="<td id='showId' name=''>"+tdArr[1]+"</td>";
-		contain+="<td id='showGenre'>"+tdArr[2]+"</td>";
+		contain+="<td id='showId' >"+tdArr[1]+"</td>";
+		contain+="<td id='showGenre' >"+tdArr[2]+"</td>";
 		contain+="<td id='showName'>"+tdArr[3]+"</td>";
-		contain+="<td id='showStart'name='start'> "+tdArr[4]+"</td>";
-		contain+="<td id='showEnd' name='finish'>"+tdArr[5]+"</td>";
+		contain+="<td id='showStart'> "+tdArr[4]+"</td>";
+		contain+="<td id='showEnd' >"+tdArr[5]+"</td>";
 		contain+="<td id='sale_yn' >"+tdArr[6]+"</td>";
 		contain+="</tr>";
 		contain+="<input type='hidden' name='disCountImg' value='"+tdArr[0]+"' />"
 		contain+="<input type='hidden' name='showId' value='"+tdArr[1]+"' />"
+		contain+="<input type='hidden' name='showGenre' value='"+tdArr[2]+"' />"
+		contain+="<input type='hidden' name='showName' value='"+tdArr[3]+"' />"
 		contain+="</table><br/><br/><br/>";
 		contain+="<div id='enroll'><h2 class='small-title'>할인률</h2>"; 
 		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
-		contain+="<input type='Date' class='enrollText'name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='Date' name='disCountEndDate' class='enrollText'>";
+		contain+="<input type='date' class='enrollText' name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='date' name='disCountEndDate' class='enrollText' >";
 		contain+="</div><button type='submit' class='btn btn-secondary' id='changebutton'>작성완료</button>";
 		contain+="</div>";
 		contain+="</form></div>";
@@ -151,9 +153,7 @@ $(()=>{
 		
 		
 		
-		<div id="searchC" >
-			
-		</div>
+		<div id="searchC" ></div>
 		
 	</div>
 </div>

@@ -9,8 +9,6 @@ public class Event {
 	private String eventContent;
 	private Date eventStartDate; 
 	private Date eventEndDate; 
-	private String originalFileName; 
-	private String reNamedFileName; 
 	private Date announcementDate; 
 	private String eventStatus;
 	private Date eventDetailDate; 
@@ -22,16 +20,14 @@ public class Event {
 		// TODO Auto-generated constructor stub
 	}
 	public Event(int eventNo, String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
-			String originalFileName, String reNamedFileName, Date announcementDate, String eventStatus,
-			Date eventDetailDate, String eventTimeMen, String showId, String eventKind) {
+			Date announcementDate, String eventStatus, Date eventDetailDate, String eventTimeMen, String showId,
+			String eventKind) {
 		super();
 		this.eventNo = eventNo;
 		this.eventTitle = eventTitle;
 		this.eventContent = eventContent;
 		this.eventStartDate = eventStartDate;
 		this.eventEndDate = eventEndDate;
-		this.originalFileName = originalFileName;
-		this.reNamedFileName = reNamedFileName;
 		this.announcementDate = announcementDate;
 		this.eventStatus = eventStatus;
 		this.eventDetailDate = eventDetailDate;
@@ -68,18 +64,6 @@ public class Event {
 	}
 	public void setEventEndDate(Date eventEndDate) {
 		this.eventEndDate = eventEndDate;
-	}
-	public String getOriginalFileName() {
-		return originalFileName;
-	}
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
-	}
-	public String getReNamedFileName() {
-		return reNamedFileName;
-	}
-	public void setReNamedFileName(String reNamedFileName) {
-		this.reNamedFileName = reNamedFileName;
 	}
 	public Date getAnnouncementDate() {
 		return announcementDate;
@@ -120,14 +104,10 @@ public class Event {
 	@Override
 	public String toString() {
 		return "Event [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
-				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", originalFileName="
-				+ originalFileName + ", reNamedFileName=" + reNamedFileName + ", announcementDate=" + announcementDate
-				+ ", eventStatus=" + eventStatus + ", eventDetailDate=" + eventDetailDate + ", eventTimeMen="
-				+ eventTimeMen + ", showId=" + showId + ", eventKind=" + eventKind + "]";
+				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", announcementDate="
+				+ announcementDate + ", eventStatus=" + eventStatus + ", eventDetailDate=" + eventDetailDate
+				+ ", eventTimeMen=" + eventTimeMen + ", showId=" + showId + ", eventKind=" + eventKind + "]";
 	}
-	
-	
-	
 	
 	
 }

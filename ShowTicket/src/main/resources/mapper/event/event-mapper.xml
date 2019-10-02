@@ -23,9 +23,9 @@
 	</resultMap>
 
 
-	<insert id="insertEvnet">
+	<insert id="insertEvent">
 		insert into event values
-		(event_no.nextval,#{eventTitle},#{eventContent},
+		(seq_event_no.nextval,#{eventTitle},#{eventContent},
 			#{eventStartDate},#{eventEndDate},#{originalFileName},#{reNamedFileName},#{announcementDate},
 			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind})
 	
