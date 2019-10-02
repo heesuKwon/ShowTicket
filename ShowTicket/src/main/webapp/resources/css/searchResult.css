@@ -6,7 +6,7 @@
 	margin:39px auto;
 }
 
-.color_purple{
+.color_purple, .cPage{
 	color:#8f01a3 !important;
 }
 
@@ -39,13 +39,16 @@
 	position: relative;
 
 }
-
+.cont-result .pageBar{
+	text-align:center;
+}
 .cont-result .tbl-result{
 	margin:10px auto;
 }
 
 .cont-poster img{
-	width:163px;
+	 width: 175px;
+    height: 228px;
 	margin:10px;
 	position:absolute;
 	top: 0px;
@@ -90,3 +93,12 @@ button.reserve{
 .td-result{
 	padding:15px;
 }
+
+.pageBar{
+	font-family: 'Gothic A1', sans-serif;
+	font-size: 2em;
+	margin:0 auto;
+	letter-spacing:10px;
+}
+
+#sResultCont{display:none;}

@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.kh.showticket.common.MusicalAndShow"%>
@@ -19,53 +21,69 @@
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 
 <%
+
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
 
 	String[] times = musical.getTime().split(", ");
 	Map<String, String> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
-	days.put("월",0);
-	days.put("화",1);
-	days.put("수",2);
-	days.put("목",3);
-	days.put("금",4);
-	days.put("토",5);
-	days.put("일",6);
-	String[] d = {"월","화","수","목","금","토","일"};
-	for(String s: times){
+	days.put("월", 0);
+	days.put("화", 1);
+	days.put("수", 2);
+	days.put("목", 3);
+	days.put("금", 4);
+	days.put("토", 5);
+	days.put("일", 6);
+	String[] d = { "월", "화", "수", "목", "금", "토", "일"};
+	for (String s : times) {
 		System.out.println(s);
-		String time = s.substring(s.indexOf("(")+1, s.indexOf(")"));
+		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
 		String[] ts = time.split(",");
 		System.out.println(time);
-		if(s.contains("~")){
-			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			String day2 = s.substring(s.lastIndexOf("요일")-1,s.lastIndexOf("요일"));
+		if (s.contains("~")) {
+			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
+			String day2 = s.substring(s.lastIndexOf("요일") - 1, s.lastIndexOf("요일"));
 			System.out.println(day1);
 			System.out.println(day2);
-			for(int i=days.get(day1);i<=days.get(day2);i++){
+			for (int i = days.get(day1); i <= days.get(day2); i++) {
 				System.out.println(i);
-				for(int j=0;j<ts.length;j++){
+				for (int j = 0; j < ts.length; j++) {
 					System.out.println(d[i]);
 					System.out.println(ts[j]);
-					dayTime.put(d[i],ts[j]);
+					dayTime.put(d[i], ts[j]);
 				}
-			}				
-		}
-		else{
+			}
+		} else {
 			String day1 = "";
-			if(s.contains("HOL")){
+			if (s.contains("HOL")) {
 				day1 = "HOL";
+			} else {
+				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			else{
-				day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			}
-			for(int i=0;i<ts.length;i++){
+			for (int i = 0; i < ts.length; i++) {
 				System.out.println(day1);
 				System.out.println(ts[i]);
-				dayTime.put(day1,ts[i]);
+				dayTime.put(day1, ts[i]);
 			}
-		} 
+		}
 	}
+	
+	Object[] str = dayTime.keySet().toArray();
+	String[] day = { "일", "월", "화", "수", "목", "금", "토"};
+	String st = "";
+	for(Object s:str){
+		System.out.println((String)s);
+		st += (String)s;		
+	}
+
+	List<Integer> list = new ArrayList<>();
+	for(int i=0;i<day.length;i++){
+		if(!st.contains(day[i])){
+			list.add(i);	
+		}
+	}
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 %>
 
 
@@ -699,7 +717,8 @@
 						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 					</div>
 					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()} ~ ${musical.getEndDate()}</span>
+						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+							~ ${musical.getEndDate()}</span>
 					</div>
 
 
@@ -829,9 +848,7 @@
 			</c:if>
 			<c:if test="${musical.getState() eq '공연예정'}">
 				<div class="detail_info_right">
-					<div class="noinfo_txt">
-                     	티켓 오픈일은 공지사항을 참고해주세요.
-                    </div>
+					<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
 					<button type="button" class="btn reserve due s_after first-child"
 						onclick="">
@@ -1429,8 +1446,10 @@
 	};
 	
 	
+	
+	
 	$(document).ready(function () {
-		
+		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//달력
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
@@ -1438,10 +1457,15 @@
 			endDate: '${musical.getEndDate()}',
 			calendarWeeks: false,
             todayHighlight: true,
-            daysOfWeekDisabled : [0,6],
+            daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
 		});
+	
+		$("#calendar").on("click",(e)=>{
+			
+		});
 		
+		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//기능 설정
 		setDialog();
 		onCloseIfOutOfSelect();
@@ -1491,6 +1515,9 @@
 
 		initCleanReserveInfo();
 		setLongTitle();
+		
+		
+		
 	});
 
 	function initCleanReserveInfo () {

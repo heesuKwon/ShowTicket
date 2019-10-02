@@ -1,6 +1,5 @@
 package com.kh.showticket.common.getApi;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +19,7 @@ import org.w3c.dom.NodeList;
 import com.kh.showticket.common.DescendingByPrfpdfrom;
 import com.kh.showticket.common.MusicalAndShow;
 
+
 public class getApi {
 	static Logger logger = LoggerFactory.getLogger("com.kh.showticket.common.getApi.getApi");
 	static DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -35,6 +35,18 @@ public class getApi {
 		}
 
 		return value.getNodeValue();
+	}
+	
+	
+	public static NodeList getTagValues(String tag, Element element) {
+		NodeList nodeList = element.getElementsByTagName(tag).item(0).getChildNodes();
+		NodeList values = (NodeList)nodeList.item(0);
+
+		if(values==null) {
+			return null;
+		}
+
+		return values;
 	}
 
 	//최신순 정렬
@@ -147,7 +159,7 @@ public class getApi {
 					
 					
 					Map<String, String> Mmap = new HashMap<>();
-					//logger.debug("MAP이후=================================");
+
 					//공연 Id
 					Mmap.put("mt20id", getTagValue("mt20id", element));
 					//공연명
@@ -160,6 +172,8 @@ public class getApi {
 					Mmap.put("poster", getTagValue("poster", element));
 					//공연장르
 					Mmap.put("cate", getTagValue("cate", element));
+					//공연장
+					Mmap.put("prfplcnm",getTagValue("prfplcnm",element));
 
 					Blist.add(Mmap);
 				}
@@ -226,7 +240,6 @@ public class getApi {
 			//소개이미지목록 : styurls - styurl
 			//공연시간 : dtguidance
 			
-			
 				
 			}
 		}
@@ -270,6 +283,7 @@ public class getApi {
 		
 //			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy.MM.dd");
 //			transFormat.parse(getTagValue("prfpdfrom", element))
+			
 		
 //			for(int i=0; i<nodeList.getLength(); i++){
 			Node node = nodeList.item(0);
@@ -290,6 +304,15 @@ public class getApi {
 				mas.setPoster(getTagValue("poster", element));
 				mas.setState(getTagValue("prfstate", element));
 				//mas.setUrls(getTagValue("styurl", element));
+				NodeList styurls = element.getElementsByTagName("styurl");
+//				NodeList styurls = getTagValue("styurl",element);
+				System.out.println(styurls.getLength());
+//				for(int i=0;i<styurls.getLength();i++) {
+//					Node styurl = styurls.item(i);
+//					Element urlElement = (Element)styurl;
+//					System.out.println(getTagValue("styurl",urlElement));
+//				}
+//				System.out.println(getTagValues("styurl", element));
 				mas.setTime(getTagValue("dtguidance", element));				
 			}
 //			}
@@ -300,11 +323,6 @@ public class getApi {
 		
 		return mas;
 	}
-	
-	
-	
-	
-	
 	
 	
 }

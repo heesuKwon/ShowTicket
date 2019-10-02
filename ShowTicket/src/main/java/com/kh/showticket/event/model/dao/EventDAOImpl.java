@@ -24,6 +24,11 @@ public class EventDAOImpl implements EventDAO {
 		return session.selectList("event.searchEventList", queryKeyword);
 	}
 
+	@Override
+	public int insertEvent(Event event) {
+		logger.info("eventDAO={}",event);
+		return session.insert("event.insertEvent", event);
+	}
 
 
 }

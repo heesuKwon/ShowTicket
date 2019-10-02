@@ -10,5 +10,7 @@ public interface EventDAO {
 	List<Map<String, String>> searchEventList(String queryKeyword);
 
 
+	int insertEvent(Event event);
+
 
 }
