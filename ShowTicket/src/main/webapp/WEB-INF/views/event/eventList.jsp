@@ -71,10 +71,6 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		<!-- 이벤트 글쓰기 페이지  -->
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
 				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button>
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onclick="location.href='javascript:popup()'">아이디찾기</button>
-<%-- 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
-				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button> --%>
 		<div class="event_cont_box">
 			<div class="event_list_inner">
 				<ul id="eventList">
@@ -111,16 +107,27 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 </div>
 
 
-<script>
 
-function popup(){
-    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
-    var name = "popup test";
-    var option = "width = 430, height = 550, top = 100, left = 400, location = no"
-    window.open(url, name, option);
-}
+</style>
+<script type="text/javascript">
+		/* <![CDATA[ */
+		var google_conversion_id = 950223509;
+		var google_custom_params = window.google_tag_params;
+		var google_remarketing_only = true;
+		/* ]]> */
+    </script>
+<script type="text/javascript"
+	src="//www.googleadservices.com/pagead/conversion.js"></script>
+<noscript>
+	<div style="display: inline;">
+		<img height="1" width="1" style="border-style: none;" alt=""
+			src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/950223509/?value=0&amp;guid=ON&amp;script=0" />
+	</div>
+</noscript>
+<script type="text/javascript">
+		$("iframe[name='google_conversion_frame']").css("display", "none");
+    </script>
 
-</script>
 <script type="text/javascript" src="/resources/js/pagingJs.js"></script>
 <script type="text/javascript"
 	src="/resources/js/jquery.formatDateTime.min.js"></script>

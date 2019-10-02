@@ -1,5 +1,8 @@
 package com.kh.showticket.musical.model.service;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +25,19 @@ public class MusicalServiceImpl implements MusicalService {
 	@Override
 	public MusicalAndShow selectOne(String musicalId) {
 		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
+		
 		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
 		
 		logger.debug(musical.toString());
 		
 		return musical;
+	}
+
+	@Override
+	public Map<String, String> selectPlace(String url) {
+		Map<String, String> map = getApi.getPlaceList(url);
+		
+		return map;
 	}
 
 }

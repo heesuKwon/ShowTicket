@@ -35,23 +35,20 @@ $(()=>{
 		<div class="quick_menu">
 			<div class="title">고객센터</div>
 			<ul>
-				<li class="qmenu1"><i class="material-icons">lock_open</i> <a
-					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=62">아이디/비밀번호<br>찾기
+				<li class="qmenu1"> <a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=62"><i class="material-icons">lock_open</i><br />아이디/비밀번호<br>찾기
 				</a></li>
-				<li class="qmenu2"><i class="material-icons">shopping_cart</i>
-					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64">예매/취소<br>환불
+				<li class="qmenu2">
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=64"><i class="material-icons">shopping_cart</i><br/>예매/취소<br>환불
 				</a></li>
-				<li class="qmenu3"><i class="material-icons">location_on</i> <a
-					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=69">티켓수령<br>문의
+				<li class="qmenu3"> <a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=69"><i class="material-icons">location_on</i><br>티켓수령<br>문의
 				</a></li>
-				<li class="qmenu4"><i class="material-icons">turned_in_not</i>
-					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=66">할인수단<br>안내
+				<li class="qmenu4">
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=66"><i class="material-icons">turned_in_not</i><br />할인수단<br>안내
 				</a></li>
-				<li class="qmenu5"><i class="material-icons">hourglass_empty</i>
-					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=68">관심공연알림<br>안내
+				<li class="qmenu5">
+					<a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=68"><i class="material-icons">hourglass_empty</i><br />관심공연알림<br>안내
 				</a></li>
-				<li class="qmenu6"><i class="material-icons">star_border</i> <a
-					href="${pageContext.request.contextPath}/help/faqView.do?faqNo=67">이벤트<br>안내
+				<li class="qmenu6"> <a href="${pageContext.request.contextPath}/help/faqView.do?faqNo=67"><i class="material-icons">star_border</i><br />이벤트<br>안내
 				</a></li>
 			</ul>
 		</div>

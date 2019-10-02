@@ -9,9 +9,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<link rel="stylesheet" type="text/css"
+						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
 
@@ -19,11 +22,17 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+<!--지도api  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
+ <link rel="stylesheet" type="text/css"
+						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css"> 
 
 <%
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
+			System.out.println("urls:"+musical.getUrls());
+			System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
 	Map<String, List<String>> dayTime = new HashMap<>();
@@ -90,6 +99,18 @@
 
 
 <script language='javascript'>
+/*--------------------------석현씨 코딩영역-----------------------------  */	
+
+$(()=>{
+	 $(".tabs-Num").css("display","none");
+	
+	$("#tabs-3").css("display","block");
+})
+
+
+
+/*--------------------------석현씨 코딩영역-----------------------------  */		
+
     var _JV = "AMZ2013010701";//script Version
     var _UD = 'undefined';
     var _UN = 'unknown';
@@ -129,7 +150,7 @@
         return a
     }
     ;
-    function AEC_F_D (pd, md, cnum) {
+    function AEC_F_D (pd, md, cnum)	 {
         var i = 0, amt = 0, num = 0;
         var cat = '', nm = '';
         num = cnum;
@@ -178,6 +199,7 @@
     _A_pn = Array('뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ');
     _A_ct = Array('99');
 </script>
+
 
 
 <script type="text/javascript">
@@ -283,13 +305,13 @@
 	}
 </script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.desktop.ns.min.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.Component.js"></script>
+	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.UIComponent.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.StarRating.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 
@@ -477,7 +499,7 @@
 		getProductReviewList(page);
 	}
 
-	function openReviewSelectList () {
+	function openReviewList () {
 		if ($("#review_select_list").css("display") == "block") {
 			$("#review_select_list").css("display", "none");
 			return;
@@ -524,98 +546,14 @@
 	});
 
 	//]]>
+
 </script>
 
 
 <script type="text/javascript">
-	var isDrawed = false;
-	$(".map_wrap").hide();
+	
 
-	function drawNaverMap () {
-		if (isDrawed || (typeof $("#map").val() === "undefined")) {
-			return;
-		}
-
-		setTimeout(function () {
-			drawMap();
-		}, 10);
-
-
-	}
-
-	function drawMap () {
-		var x;
-		var y;
-		var productId = 29652;
-		var isMapShow = false;
-
-		$.ajax({
-			url: '/product/coordinate/' + productId,
-			method: 'GET',
-			async: false,
-			success: function (result) {
-				x = result.result.x;
-				y = result.result.y;
-
-				if (x === 0 || y === 0) {
-					return;
-				}
-				isMapShow = true;
-			},
-			error: function () {
-				alert("위치 정보를 정상적으로 가져올 수 없습니다.");
-				return false;
-			}
-
-		});
-
-		if (!isMapShow) {
-			return;
-		}
-
-		$(".map_wrap").show();
-		var address = '경기도 성남시 분당구 야탑동 757 성남아트센터';
-		var goToNaverMapAddress = "http://map.naver.com/index.nhn?menu=route&mapMode=0&elng=" + x + "&elat=" + y +
-			"&pathType=0&dtPathType=0&eText=" + address;
-		$("#go_to_naver_map").attr("href", goToNaverMapAddress);
-
-		var centerPoint = new naver.maps.LatLng(y, x);
-		var oMap = new naver.maps.Map(document.getElementById('map'), {
-				center: centerPoint,
-				zoom: 11,
-				enableWheelZoom: true,
-				enableDragPan: true,
-				enableDblClickZoom: false,
-				mapMode: 0,
-				activateTrafficMap: false,
-				activateBicycleMap: false,
-				minMaxLevel: [1, 14],
-				size: new naver.maps.Size(690, 400),
-				zoomControl: true,
-				zoomControlOptions: {
-					setPosition: {
-						top: 100,
-						right: 10
-					}
-				},
-				mapTypeControl: true,
-				mapTypeControlOptions: {
-					setPosition: {
-						top: 10,
-						right: 10
-					}
-				}
-			}
-		);
-		var marker = new naver.maps.Marker(
-			{
-				position: centerPoint,
-				map: oMap,
-				title: '성남아트센터 오페라하우스'
-			});
-		isDrawed = true;
-	}
-
+	
 
 </script>
 <meta property="og:type" content="website" />
@@ -638,7 +576,10 @@
 </script>
 
 
-<div id="container">
+<div id="detailContainer">
+
+
+	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 	<input type="hidden" id="adultYn" value="false" />
@@ -779,6 +720,7 @@
 								<br />
 								<li>VIP석 <span class="color_purple fbold">427</span>석
 								</li>
+							
 								<br />
 								<li>R석 <span class="color_purple fbold">427</span>석
 								</li>
@@ -842,20 +784,24 @@
 					</li>
 				</ul>
 				<div class="tabs-Num" id="tabs-1">
-
-
-					<div class="detail_cont"></div>
+				
+					<div class="detail_cont">
+						
+							<strong>[공연장 정보]</strong><br />
+							장소 : ${musical.hallName }<br> 주소 : ${address.adres }<br>
+								대표번호 : <span id="phoneNumber">${address.telno }</span><br> <br /> <br /> <br />							
+ 								<div id="map" style="clear:both; width:800px;height:400px;position: relative;
+    												overflow: visible;margin-left:66px;"></div>
+					</div>
 
 
 				</div>
 
 				<div class="tabs-Num" id="tabs-2">
-
-					<link rel="stylesheet" type="text/css"
-						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">
-					<link rel="stylesheet" type="text/css"
-						href="${pageContext.request.contextPath}/resources/css/contents.css">
+			
+					
 					<div class="detail_cont detail_cont_v2">
+						
 						<div class="title_wrap">
 							<strong class="title title21">네티즌 별점 및 후기</strong>
 						</div>
@@ -913,7 +859,9 @@
 								href="javascript:;" class="btn_text3 fr"
 								id="displayAllReviewBtn" onclick="displayAllreview();">전체후기보기</a>
 						</div>
+						
 						<div class="review_list">
+
 							<ul id="reviewUl" style="word-break: break-all;">
 								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
 										class="reviewDate small-font">2019.09.20 17:10</span></span>
@@ -947,32 +895,73 @@
 				</div>
 				<div class="tabs-Num" id="tabs-3">
 
-					<script type="text/javascript"
-						src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ebd2punvyx"></script>
-
-					<div class="detail_cont">
-
-
-						<strong>[공연장 정보]</strong>
-						<div class="contents">
-							장소 : 성남아트센터 오페라하우스<br> 주소 : 경기도 성남시 분당구 야탑동 757 성남아트센터<br>
-							대표번호 : <span id="phoneNumber"></span><br>
-
-							<div class="btn_viewmap on" style="display: none;"></div>
-							<div class="map_wrap">
-								<div class="map_area" id="map"></div>
-								<div class="bx">
-									<a href="" target="_blank" class="btn_map" id="go_to_naver_map">빠른길
-										찾기</a>
-								</div>
+						
+						<div class="detail_cont" style="clear:both;">
+							<strong>[공연시간 정보]</strong>
+							<div class="bx_dummy">
+								<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 							</div>
-
+							<div class="bx_dummy">
+								<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+									~ ${musical.getEndDate()}</span>
+							</div>
+		
+		
+		
+							<div class="bx_dummy">
+								<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+							</div>
+							<c:if test="${not empty musical.time }">
+							<div class="bx_dummy">
+								<em class="info_tit">정기 공연일정</em> <br /> 
+									<span class="txt">
+										${musical.time }
+										<%-- <c:forTokens var="item" items="${musical.time}" delims=",">${item}<br /></c:forTokens> --%>
+	
+									</span>
+							</div>
+							</c:if>
+							<div class="bx_dummy">
+								<c:if test="${empty musical.urls }">
+								</c:if>
+								<c:if test="${not empty musical.urls }">
+									<c:forEach items="${musical.urls}" var="f">
+												<img src="${f }" alt="" style="max-width: 900px; margin-left:110px;"/>	
+									</c:forEach>
+								</c:if> 
+							</div>
 						</div>
 
 
 					</div>
 
 				</div>
+				<script>
+
+
+//지도 kakao maps api
+//지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+   		var container = document.getElementById('map'); 
+   		
+   		var la = ${address.la};//위도
+   		var lo = ${address.lo};//경도
+		var options = {
+			center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+		};
+		var map = new kakao.maps.Map(container, options);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  =new kakao.maps.LatLng(la, lo); 
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map); 
+	</script>
 
 				<div class="tabs-Num" id="tabs-4">
 
@@ -1201,7 +1190,6 @@
 			<!-- [D] 스크롤 발생 시 .moving 추가 -->
 		</div>
 	</div>
-</div>
 
 
 <script type="text/javascript">
@@ -1224,7 +1212,6 @@
     </script>
 
 
-</div>
 <!-- 다이얼로그 창  -->
 <div class="layer l_installment popup" id="dialog1"
 	style="display: none">
@@ -1341,7 +1328,19 @@
 
 	</ul>
 </div>
+<style>
+.detail_box_bot .detailbox_bot_left .detail_cont .detail_cont>div {
+    clear: both;
+    padding: 41px 30px 100px;
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: #dedede;
+    min-height: 1300px;
+    text-align: left;
+    font-size: 20px;
+	}
 
+</style>
 
 
 
@@ -1356,19 +1355,16 @@
 <script type="text/javascript" src="/resources/js/pagingJs.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
 <script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
+
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponCodeType.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponTemplate.js"></script>
-<script type="text/javascript" src="/resources/js/coupon/coupon.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponTemplate.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script> 
 
 <script type="text/javascript">
 	//<![CDATA[
-
+	
 	var RESERVE_DATA = {
 		SELECTED_DATE: "",
 		SELECTED_ROUND: "",
@@ -1729,13 +1725,12 @@
 		
 		$(".tabs-Num").css("display","none");
 		
-
 		if ($(obj).attr('id') == "detailTop") {
-			$("#tabs-1").css("display","block");
+			$("#tabs-3").css("display","block");
 		} else if ($(obj).attr('id') == "reviewTap") {
 			$("#tabs-2").css("display","block");
 		} else if ($(obj).attr('id') == "placeTap") {
-			$("#tabs-3").css("display","block");
+			$("#tabs-1").css("display","block");
 		} else if ($(obj).attr('id') == "cancelTap") {
 			$("#tabs-4").css("display","block");
 		}
@@ -2175,7 +2170,10 @@
 			$(domObj).parents("td").html("발급완료");
 		});
 	}
+		//]]>
+	
+	
 
-	//]]>
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
