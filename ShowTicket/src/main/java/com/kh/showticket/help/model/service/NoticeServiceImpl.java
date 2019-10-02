@@ -27,10 +27,11 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int insertOne(Map<String, String> map) {
-		return noticeDAO.insertOne(map);
+	public int insertOne(NoticeTicketOpen nt) {
+		return noticeDAO.insertNoticeTicketOpen(nt);
 	}
 
+	
 	
 
 }

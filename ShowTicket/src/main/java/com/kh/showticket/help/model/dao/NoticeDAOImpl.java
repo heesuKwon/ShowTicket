@@ -28,8 +28,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int insertOne(Map<String, String> map) {
-		return sqlSession.insert("notice.insertNotice",map);
+	public int insertNoticeTicketOpen(NoticeTicketOpen nt) {
+		return sqlSession.insert("notice.insertNoticeTicketOpen",nt);
 	}
+
+
 
 }

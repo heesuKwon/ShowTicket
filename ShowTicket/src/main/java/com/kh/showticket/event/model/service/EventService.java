@@ -12,5 +12,5 @@ public interface EventService {
 
 	int insertEvent(Event event, List<EventAttachment> eattachList);
 
-
+	int insertEvent(Event event);
 }
