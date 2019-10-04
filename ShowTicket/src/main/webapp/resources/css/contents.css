@@ -657,7 +657,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
 
 
 .list_view{overflow:hidden;margin-top:36px;border-width:1px 0;border-style:solid;border-color:#c7c7c7;position:relative}
-.list_view .th{float:left;width:65px;height:23px;line-height:23px;padding:20px;font-weight:bold;*border-bottom:1px solid #ececec}
+.list_view .th{width:100px;height:23px;line-height:23px;padding:20px;font-weight:bold;}
 .list_view .list_title{height:23px;line-height:23px;padding:20px;font-size:16px;color:#010101;font-weight:bold;border-bottom:1px solid #ececec;letter-spacing:-1px}
 .list_view .list_date{height:13px;padding:9px 0 8px 18px;font-size:11px;color:#999;border-bottom:1px solid #ececec}
 .list_view .list_date .bar{margin:0 4px}

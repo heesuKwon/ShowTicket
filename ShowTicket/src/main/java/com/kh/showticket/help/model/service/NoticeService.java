@@ -10,6 +10,10 @@ public interface NoticeService {
 	
 	List<NoticeTicketOpen> selectNoticeTicketOpenList(int cPage);
 
+	NoticeTicketOpen selectOne(int noticeNo);
+
+	int noticeWriteEnd(NoticeTicketOpen notice);
+
 	//int insertOne(NoticeTicketOpen nt);
 
 	

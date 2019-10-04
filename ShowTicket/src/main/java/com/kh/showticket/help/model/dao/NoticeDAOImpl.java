@@ -27,6 +27,16 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.selectList("notice.selectNoticeTicketOpenList",null,rowBounds);
 	}
 
+	@Override
+	public NoticeTicketOpen selectOne(int noticeNo) {
+		return sqlSession.selectOne("notice.selectOne", noticeNo);
+	}
+
+	@Override
+	public int noticeWriteEnd(NoticeTicketOpen notice) {
+		return sqlSession.insert("notice.noticeWriteEnd", notice);
+	}
+
 	/*
 	 * @Override public int insertNoticeTicketOpen(NoticeTicketOpen nt) { return
 	 * sqlSession.insert("notice.insertNoticeTicketOpen",nt); }

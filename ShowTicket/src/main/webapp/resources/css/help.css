@@ -59,3 +59,41 @@
 #nTableBody tr, #NTableBody tr{
 	cursor:pointer;
 }
+
+table#tbl-write td div.custom-radio {
+    float: left;
+    margin-right: 30px;
+}
+
+table#tbl-write th {
+    color: #333;
+    font-size: 15px;
+    font-weight: 400;
+    border-right: 0;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+}
+
+table#tbl-write th.text-left {
+    padding-left: 30px;
+    width: 150px;
+}
+
+ 
+table#tbl-write th .ico-star {
+    font-style: normal;
+    vertical-align: middle;
+    color: red;
+}
+
+table#tbl-write td {
+    color: #666;
+    padding: 20px 40px;
+}
+
+.help-title{
+	font-family: 'Gothic A1', sans-serif;
+    font-size: 26px;
+    color: black;
+    font-weight: bold;
+}
