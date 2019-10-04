@@ -25,8 +25,13 @@ public interface MemberDAO {
 
 	List<MyPoint> selectMyPointList(String memberLoggedIn);
 
-	List<Ticket> selectReservationTerm(Map<String, Object> map);
+	List<Ticket> selectReservationTerm(Map<String, Object> content);
 
-	List<Ticket> selectReservationTerm15(Map<String, Object> map);
+	List<Ticket> selectReservationTerm15(Map<String, Object> content);
+
+	List<Ticket> selectReservationPage(Map<String, Object> content);
+
+	int updateReservation(Map<String, Object> cancel);
+
 
 }

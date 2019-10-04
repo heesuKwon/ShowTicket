@@ -12,63 +12,12 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta name="description" content="다른 별 이미지를 사용한 예제입니다.">
 <link rel="stylesheet" type="text/css"
-						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
+<link rel="stylesheet" type="text/css"
+						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
+<%-- <link rel="stylesheet" type="text/css"
+						href="${pageContext.request.contextPath}/resources/css/star.css">  --%>
 <!-- <link rel="stylesheet" type="text/css" href="../asset/demo.css">-->
-<style type="text/css">
-	/*  .starrating-background { background:transparent url(../resources/images/w_03.gif) repeat-x scroll 0 0; cursor:pointer; display:inline-block; height:19px; margin:0; width:90px; vertical-align:middle; }
-	.starrating-background span { background:transparent url(../resources/images/w_01.gif) repeat-x scroll 0 0; cursor:pointer;	display:inline-block; height:19px !important; }
-	.starrating-background em {position:absolute; top:0; left:0; width:0; height:0; overflow:hidden; visibility:hidden; font-size:0; line-height:0;} /* 대체텍스트 숨기기 */  
-	.starrating-background {
-     background: transparent url(../resources/images/T_01.png) repeat-x scroll 0 0; 
-    cursor: pointer;
-    display: inline-block;
-    height: 30px;
-    margin: 0;
-    width: 125px;
-    vertical-align: middle;
-}
-	
-.starrating-background span {
- 	background: transparent url(../resources/images/T_03.png)
-		repeat-x scroll 0 0; 
-	cursor: pointer;
-	display: inline-block;
-	height: 30px !important;
-}
-
-.starrating-background em {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 0;
-	height: 0;
-	overflow: hidden;
-	visibility: hidden;
-	font-size: 0;
-	line-height: 0;
-} 
-	
-/* /* Common */ 
- body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,pre,input,textarea,button,select{margin:0;padding:0}
-body,input,textarea,select,button,table{font-family:'돋움',dotum,applegothic,sans-serif;font-size:12px}
-img,fieldset{border:0}
-ul,ol{list-style:none}
-em,address{font-style:normal}
-a{text-decoration:none}
-a:hover,a:active,a:focus{text-decoration:underline} 
-
- div.demo { margin:10px; }
-
-.bg_blue { background-color:#0075c8; }
-.bc_darkgray { background-color:#999; }
-.bc_gray { background-color:#ccc; }
-.bg_lightgray { background-color:#eee; } 
-
-
-
-</style>
 </head>
 <body>
 	
@@ -114,6 +63,62 @@ a:hover,a:active,a:focus{text-decoration:underline}
 							</fieldset>
 							<div id="star_review_errors"></div>
 						</div>
+<style type="text/css">
+	/*  .starrating-background { background:transparent url(../resources/images/w_03.gif) repeat-x scroll 0 0; cursor:pointer; display:inline-block; height:19px; margin:0; width:90px; vertical-align:middle; }
+	.starrating-background span { background:transparent url(../resources/images/w_01.gif) repeat-x scroll 0 0; cursor:pointer;	display:inline-block; height:19px !important; }
+	.starrating-background em {position:absolute; top:0; left:0; width:0; height:0; overflow:hidden; visibility:hidden; font-size:0; line-height:0;} /* 대체텍스트 숨기기 */  
+  	.starrating-background {
+  	both:clear;
+     background: transparent url(../resources/images/T_03.png) repeat-x scroll 0 0; 
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0;
+    width: 125px;
+    vertical-align: middle;
+}
+	
+.starrating-background span {
+ 	both:clear;
+ 	background: transparent url(../resources/images/T_01.png)
+		repeat-x scroll 0 0; 
+	cursor: pointer;
+	display: inline-block;
+	height: 30px !important;
+}
+
+.starrating-background em {
+	both:clear;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+}   
+	
+/* 
+ body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,pre,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:'돋움',dotum,applegothic,sans-serif;font-size:12px}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active,a:focus{text-decoration:underline} 
+
+ div.demo { margin:10px; }
+
+.bg_blue { background-color:#0075c8; }
+.bc_darkgray { background-color:#999; }
+.bc_gray { background-color:#ccc; }
+.bg_lightgray { background-color:#eee; } 
+ */
+
+
+</style>
 <script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/resources/js/jindo2.ns.js"></script>
 <script type="text/javascript"  charset="utf-8"
 	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
@@ -121,6 +126,7 @@ a:hover,a:active,a:focus{text-decoration:underline}
 	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
 <script type="text/javascript"  charset="utf-8"
 	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
+
 
 <script type="text/javascript">
 	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {

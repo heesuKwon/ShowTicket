@@ -1,3 +1,4 @@
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
@@ -19,8 +20,7 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
-<script type='text/javascript'
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
@@ -35,7 +35,7 @@
 			System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
-	Map<String, String> dayTime = new HashMap<>();
+	Map<String, List<String>> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
 	days.put("월", 0);
 	days.put("화", 1);
@@ -57,11 +57,12 @@
 			System.out.println(day2);
 			for (int i = days.get(day1); i <= days.get(day2); i++) {
 				System.out.println(i);
-				for (int j = 0; j < ts.length; j++) {
+				/* for (int j = 0; j < ts.length; j++) {
 					System.out.println(d[i]);
 					System.out.println(ts[j]);
 					dayTime.put(d[i], ts[j]);
-				}
+				} */
+				dayTime.put(d[i], Arrays.asList(ts));
 			}
 		} else {
 			String day1 = "";
@@ -70,11 +71,12 @@
 			} else {
 				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			for (int i = 0; i < ts.length; i++) {
+			/* for (int i = 0; i < ts.length; i++) {
 				System.out.println(day1);
 				System.out.println(ts[i]);
 				dayTime.put(day1, ts[i]);
-			}
+			} */
+			dayTime.put(day1, Arrays.asList(ts));
 		}
 	}
 	
@@ -214,7 +216,6 @@ $(()=>{
 	wcs_do();
 </script>
 
-<script type="text/javascript">lcs_do(); </script>
 <!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
 <script language='javascript'>
 	var _AceGID = (function () {
@@ -244,12 +245,6 @@ $(()=>{
 		}
 	})();
 </script>
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-<script language='javascript' type='text/javascript'>
-	if (document.cookie.indexOf('VIEW_TKLINK_ID') > 0) {
-		var mr_id = 'member';	// ë¡ê·¸ì¸ íìíë¨( 'member' ê³ ì ê°)
-	}
-</script>
 <!-- AceClick WebSite Gathering Script V0.91.20190304-->
 <script type="text/Javascript">
 	if (typeof (AMRS_GC) == 'undefined') {
@@ -278,36 +273,7 @@ $(()=>{
 
 <!-- AceCounter Log Gathering Script End -->
 
-
-<!-- NHN AD MORE Script -->
 <script>
-	var _croID = '5d148869e4b0adaa9beaa9d1';
-
-	function getMoreRecommend (e, n) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
-			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
-	}
-
-	function createMoreRCView (e) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
-			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
-	}
-
-	function mcroPushEvent (n) {
-		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
-			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
-	}
-
-	function _cro_initialize () {
-		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
-	}
-</script>
-<!-- <script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script> -->
-
-
-
-<!-- <script>
 	
 	
 
@@ -336,15 +302,9 @@ $(()=>{
 	} catch
 		(e) {
 	}
-</script> -->
-
-
-<script type="text/javascript">
-	
-
-	
-
 </script>
+
+
 <meta property="og:type" content="website" />
 <meta property="og:title" content="[티켓링크]뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 <meta property="og:url"
@@ -363,10 +323,9 @@ $(()=>{
 	meta.setAttribute('content', 'detail');
 	document.getElementsByTagName('head')[0].appendChild(meta);
 </script>
+
 <div id="detailContainer">
 
-
-	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 	<input type="hidden" id="adultYn" value="false" />
@@ -496,8 +455,7 @@ $(()=>{
 							<!-- [D] 셀렉트박스 -->
 							<select name="watchTime" id="watchTime">
 								<option value="">회차선택(날짜선택후)</option>
-								<option value="">14시 00분</option>
-								<option value="">18시 30분</option>
+								<%-- ${dayTime.} --%>
 							</select>
 						</dd>
 						<!-- <dt>예매가능 좌석</dt>
@@ -586,7 +544,42 @@ $(()=>{
 				</div>
 
 				<div class="tabs-Num" id="tabs-2">
-			
+
+<style type="text/css">
+  	.starrating-background {
+  	both:clear;
+     background: transparent url(../resources/images/T_03.png) repeat-x scroll 0 0; 
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0;
+    width: 125px;
+    vertical-align: middle;
+}
+	
+.starrating-background span {
+both:clear;
+ 	background: transparent url(../resources/images/T_01.png)
+		repeat-x scroll 0 0; 
+	cursor: pointer;
+	display: inline-block;
+	height: 30px !important;
+}
+
+.starrating-background em {
+	both:clear;	
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+}   
+
+</style>
 					
 					<div class="detail_cont detail_cont_v2">
 						
@@ -599,18 +592,21 @@ $(()=>{
 							있으므로 게재를 삼가 주시기 바랍니다.<br> 운영 규정을 지속적으로 어기는 게시글을 게재할 경우 쇼티켓
 							게시판 이용이 제한될 수 있습니다.
 						</p>
+						
+						
+						
+				<!-- 				[D] st_off 영역에 마우스 오버시 : 클래스 st_over 추가
+                    [D] 버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가, 짝수 점수 버튼에 클래스 st_r 추가, 디폴트는 화면에 보이지 않는 0점 버튼
+								jindo.StarRating 을 사용함. http://jindo.dev.naver.com/docs/jindo-component/1.2.0/doc/external/classes/jindo.StarRating.html -->
 
 						<div class="star_review" id="star_review">
 							<fieldset>
 								<legend>네티즌 별점 및 후기 작성</legend>
-								<!-- [D] st_off 영역에 마우스 오버시 : 클래스 st_over 추가
-                    [D] 버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가, 짝수 점수 버튼에 클래스 st_r 추가, 디폴트는 화면에 보이지 않는 0점 버튼 -->
-								<!-- jindo.StarRating 을 사용함. http://jindo.dev.naver.com/docs/jindo-component/1.2.0/doc/external/classes/jindo.StarRating.html -->
-								<div class="star_rating">
+								 <div class="star_rating">
 									<strong class="blind">평점선택</strong>
 									<div class="starrating-background" id="star_rating"
 										style="float: left;">
-										<span><em></em></span>
+										<span style="width:50px;"><em></em></span>
 									</div>
 									
 									<span class="blind">평점</span> <span class="star_score"
@@ -699,7 +695,7 @@ $(()=>{
 		memberCommonCheck(url);
 	} */
 
-	function insertProductReview () {
+	/* function insertProductReview () { */
 		/* 	if(!checkLoginUsingCookie("tabs-2")){
          return;
          } */
@@ -744,8 +740,8 @@ $(()=>{
 				getProductInquiryList(1);
 				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
 			}
-		}); */
-	}
+		}); 
+	 } */
 
 	/* function deleteThisReview (reviewId) {
 		if (confirm("삭제하시겠습니까?")) {
@@ -928,7 +924,7 @@ $(()=>{
 		getProductReviewList(1);
 	}
 	*/
-	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
+	/* var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
 		nStep: 0.5,
 		nMaxValue: 5,
 		nDefaultValue: 0,
@@ -937,7 +933,7 @@ $(()=>{
 		set: function (oCustomEvent) {
 			jindo.$("score").innerHTML = oCustomEvent.nValue;
 		}
-	}); 
+	});  */
 
 	//]]>
 </script>
@@ -1401,21 +1397,11 @@ $(()=>{
 <input type="hidden" id="isValidProduct" value="true">
 <input type="hidden" id="reviewExposureYn" value="Y">
 
-<%--
-<script type="text/javascript"
- 	src="${pageContext.request.contextPath}/resources/js/jquery-ui-1.11.2.min.js"></script>
- --%>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/date.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/number.js?20170831"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/pagingJs.js"></script>
- <%-- <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery.formatDateTime.min.js"></script> --%> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> 
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/userDetail-0.0.3.js"></script>
-<%-- <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.min.js"></script> --%>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="/resources/js/number.js?20170831"></script>
+<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
+<script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
+
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
 <script type="text/javascript"
@@ -1436,21 +1422,22 @@ $(()=>{
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
 
+	var days = ["일", "월", "화", "수", "목", "금", "토", "일"];
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
-			daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
-			daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+			daysShort: days,
+			daysMin: days,
 			months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 			monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 		    today: "Today",
 		    clear: "Clear",
-		    format: "mm/dd/yyyy",
 		    titleFormat: "yyyy.mm", /* Leverages same syntax as 'format' */
 		    weekStart: 0
 	};
 	
 	
+	var selectDay;
 	
 	
 	$(document).ready(function () {
@@ -1464,11 +1451,19 @@ $(()=>{
             todayHighlight: true,
             daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
-		});
-	
-		$("#calendar").on("click",(e)=>{
+		}).on('changeDate',function(e){
+			var date = new Date(e.format());
+			var day = date.getDay();
+			console.log(day);
+			console.log(days[day]);
+			selectDay = days[day];
+			//$("#watchTime").attr("day", days[day]);
+			
+			<%-- var timeList = <%=dayTime.get(%>days[day]<%)%>; --%> 
 			
 		});
+		
+	
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//기능 설정
@@ -1554,23 +1549,6 @@ $(()=>{
 		}
 	}
 
-	ne.tkl.selectSchedule = new ne.tkl.SelectSchedule({
-		messages: {
-			EMPTYROUND: ' 회차 선택 '
-		},
-		onDateClicked: function (e) {
-			//날짜 전역변수값 설정, 회차, 스케쥴 초기화
-			RESERVE_DATA.SELECTED_DATE = e.productDate;
-			RESERVE_DATA.SELECTED_ROUND = "";
-			RESERVE_DATA.SELECTED_SCHEDULE = "";
-			$("#selectboxDefaultOption").text(" 회차 선택 ");
-			getProductRound(e.productDate);
-			makeSoldOutBtnToReserveBtn();
-		},
-		getProductDate: function (e) {
-			return e.productDate;
-		}
-	});
 
 	function getProductDatesByProductId () {
 		var postData = $("#productId").val();

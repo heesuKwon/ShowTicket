@@ -17,6 +17,7 @@
 <script>
 
 $(()=>{
+	
 	$(".checkBtn").click(function(){ 
 		
 		var str = ""
@@ -37,7 +38,7 @@ $(()=>{
 	
 	
 		var html=""; 
-		
+	
 
 		var contain ="<form action='${pageContext.request.contextPath}/event/insertEvent.do' method='post'  enctype='multipart/form-data'>";
 		contain+="<table class='table table-bordered' id='eventWriteTable'>";
@@ -45,7 +46,7 @@ $(()=>{
 		contain+="<tr><th>제목:</th> <td><input type='text' name='eventTitle' class='form-control'/></td>";
 		contain+="</tr><tr> <th>항목:</th><td><select class='form-control' name='eventKind'><option value='I'>초대</option><option value='E'>응모</option></select></td></tr>";
 		contain+="<tr><th>내용:</th><td><textarea id='textLine' name='eventContent' rows='5' cols='78'></textarea></td></tr>"; 
-		contain+="<tr><th>사진첨부:</th><td><input type='file'  name='upFile'/></td></tr>"; 
+		contain+="<tr><th>사진첨부:</th><td><input type='file' name='upFile' id='upFile1' ></td></tr>"; 
 		contain+="<tr><th>이벤트 날짜:</th><td style='vertical-align:middle;'>"; 
 		contain+="<input type='date' class='form-control eventDate'name='eventStartDate' /><span style='float:left; font-size:15px;'>~</span>";
 		contain+="<input type='date' class='form-control eventDate1' name='eventEndDate'/></td></tr>";
@@ -61,6 +62,9 @@ $(()=>{
 		
 		$("div#contain-frm").html(html);
 	});
+	
+
+
 });
 
 
@@ -114,7 +118,7 @@ $(()=>{
 				<td>2019.10.12</td>
 				<td>2019.10.15</td>
 				<td>화~일 14:00, 18:00</td>
-				<td><input type="button" class="checkBtn" value="클릭" /></td>
+				<td><input type="radio" class="checkBtn" /></td>
 			</tr>
 		</table>
 	

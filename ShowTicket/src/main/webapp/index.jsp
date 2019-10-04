@@ -12,7 +12,7 @@
 
 
 
-<script>
+<!-- <script>
 const all = ele => document.querySelectorAll(ele)
 const one = ele => document.querySelector(ele)
 const slide = _ => {
@@ -38,12 +38,13 @@ window.onload = function () {
   slide()
 }
 </script>
- 
+  -->
 
 <script type="text/javascript"
 	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
 <script type="text/javascript">	
-$( document ).ready( function() {
+$(function() {
+
 	var i;
 	var x = document.getElementsByClassName("mySlides");
 	for(i=0; i<x.length;i++){
@@ -57,8 +58,8 @@ $( document ).ready( function() {
 	setTimeout(slideShow,4000);
 	
 	
-	
-  } );
+});
+
 </script>	
 <script type="text/javascript">
 var index=0;
@@ -101,11 +102,16 @@ window.onload = function(){
 	var i = $("#rank4").attr("data-url");
 	var j = $("#rank5").attr("data-url");
 	
-	$("#rank1").hover(function(){$("#rangkingImg").attr("src",f)});
-	$("#rank2").hover(function(){$("#rangkingImg").attr("src",g)});
-	$("#rank3").hover(function(){$("#rangkingImg").attr("src",h)});
-	$("#rank4").hover(function(){$("#rangkingImg").attr("src",i)});
-	$("#rank5").hover(function(){$("#rangkingImg").attr("src",j)});
+	$("#rank1").hover(function(){$("#rangkingImg").attr("src",f)
+												  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank2").hover(function(){$("#rangkingImg").attr("src",g)
+												  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank3").hover(function(){$("#rangkingImg").attr("src",h)
+												  .attr("href","${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}")});
+	$("#rank4").hover(function(){$("#rangkingImg").attr("src",i)
+		 										  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank5").hover(function(){$("#rangkingImg").attr("src",j)
+												  .attr("href","${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}")});
 }
 </script>
 
@@ -138,7 +144,7 @@ window.onload = function(){
 			<div class="maintop_new open_spot">
 				<div class="maintop_left">
 					<div class="header">
-						<a href="${pageContext.request.contextPath }/">
+						<a href="${pageContext.request.contextPath }/help/notice.do">
 							<h2 class="title">
 								티켓오픈 <img
 									src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -156,7 +162,7 @@ window.onload = function(){
 								</a></li>
 							</c:forEach>
 							<c:forEach items="${ticketOpen}" var="map" begin="0" end="4" varStatus="status">
-								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}"
+								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}" style="font-weight:bold;"
 									data-url="${map.poster }"><a
 									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
 							</c:forEach>
@@ -164,10 +170,12 @@ window.onload = function(){
 					</div>
 				</div>
 			</div>
+			</div>
+			<div class="inner">
 			<div class="maintop_new real_ranking">
 				<div class="maintop_left">
 					<div class="header">
-						<a href="${pageContext.request.contextPath }/">
+						<a href="${pageContext.request.contextPath }/ranking/ranking.do">
 							<h2 class="title">
 								일간 랭킹 <img
 									src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -177,19 +185,38 @@ window.onload = function(){
 					</div>
 					<div class="maintop_cont">
 						<ul id="concertRankingListUl">
-							<c:forEach items="${BoxlistT}" var="map" begin="0" end="0">
+							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
 								<li class="first"><a class="rangkingImgLink"
-									href="/product/28807"> <img class="rangkingImg"
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"> <img class="rangkingImg"
 										id="rangkingImg" src="http://www.kopis.or.kr/${map.poster }" width="180" height="218"
 										alt="">
 								</a></li>
 							</c:forEach>
-							<c:forEach items="${BoxlistT}" var="map" begin="0" end="4" varStatus="status">
-								<li class='rankingItem on' data-productid="28807" id="rank${status.count }"
+							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
+								<li class='rankingItem on' data-productid="28807" id="rank1"
+									data-url="http://www.kopis.or.kr/${map.poster }"><a 
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;width:500px;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+							</c:forEach>
+							<c:forEach items="${BoxlistT2}" var="map" begin="0" end="0">
+								<li class='rankingItem on' data-productid="28807" id="rank2"
 									data-url="http://www.kopis.or.kr/${map.poster }"><a
 									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
-
+							<c:forEach items="${BoxlistT1}" var="map" begin="1" end="1">
+								<li class='rankingItem on' data-productid="28807" id="rank3"
+									data-url="http://www.kopis.or.kr/${map.poster }"><a
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+							</c:forEach>
+							<c:forEach items="${BoxlistT2}" var="map" begin="1" end="1">
+								<li class='rankingItem on' data-productid="28807" id="rank4"
+									data-url="http://www.kopis.or.kr/${map.poster }"><a
+									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+							</c:forEach>
+							<c:forEach items="${BoxlistT1}" var="map" begin="2" end="2">
+								<li class='rankingItem on' data-productid="28807" id="rank5"
+									data-url="http://www.kopis.or.kr/${map.poster }"><a
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -207,7 +234,7 @@ window.onload = function(){
 
 		<div class="section_best">
 			<div class="inner">
-				<a href="${pageContext.request.contextPath }/">
+				<a href="${pageContext.request.contextPath }/musical/musical.do">
 					<h2 class="title">
 						베스트뮤지컬 <img
 							src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -217,7 +244,7 @@ window.onload = function(){
 				<div class="suggest_wrap">
 					<ul class="best_list">
 						<c:forEach items="${BoxlistM}" var="map" begin="0" end="3">
-							<li><a href="http://www.ticketlink.co.kr/product/29652">
+							<li><a href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}">
 									<p>
 										<img src="http://www.kopis.or.kr/${map.poster }">
 									</p>
@@ -239,7 +266,7 @@ window.onload = function(){
 
 		<div class="section_best" style="padding-top: 0px;">
 			<div class="inner">
-				<a href="${pageContext.request.contextPath }/">
+				<a href="${pageContext.request.contextPath }/show/show.do">
 					<h2 class="title">
 						베스트 연극 <img
 							src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -248,7 +275,7 @@ window.onload = function(){
 				</a>
 				<ul class="best_list">
 					<c:forEach items="${BoxlistP}" var="map" begin="0" end="3">
-						<li><a href="http://www.ticketlink.co.kr/product/29652">
+						<li><a href="${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}">
 								<p>
 									<img src="http://www.kopis.or.kr/${map.poster }">
 								</p>

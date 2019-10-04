@@ -48,9 +48,7 @@
     </update>
     
     <select id="selectReservationList" resultType="ticket">
-    	select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
-    		   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
-    	from ticket where ticket_buyer=#{memberId}
+    	select * from ticket where ticket_buyer=#{memberId}
     </select>
 	
 	<select id="chkEmailUsable"
@@ -64,17 +62,30 @@
 	</select>
 	
 	<select id="selectReservationTerm" resultType="ticket">
-		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
+		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
-		from ticket
-		where ticket_buyer = #{memberId} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate
+		from(select rownum rnum, t.*
+		from(select * from ticket where ticket_buyer=#{memberId} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate order by ticket_enrolldate desc)t)t
+		where rnum between #{startContent} and #{endContent}
 	</select>
 	
 	<select id="selectReservationTerm15" resultType="ticket">
-		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_date as ticketDate,
+		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
-		from ticket
-		where ticket_buyer = #{memberId} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate
+		from(select rownum rnum, t.*
+		from(select * from ticket where ticket_buyer=#{memberId} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate order by ticket_enrolldate desc)t)t
+		where rnum between #{startContent} and #{endContent}
 	</select>
 	
+	<select id="selectReservationPage" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from(select rownum rnum, t.*
+		from(select * from ticket where ticket_buyer=#{memberId} order by ticket_enrolldate desc)t)t
+		where rnum between #{startContent} and #{endContent}
+	</select>
+	
+	<update id="updateReservation">
+		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberId}
+	</update>
 </mapper>

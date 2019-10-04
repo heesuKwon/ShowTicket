@@ -174,20 +174,19 @@ button.btn_reply{
 
 
 /* 별점 매기는 코드입니다 jindoStarRating */
-.starrating-background {
-	background: transparent url(../resources/images/T_03.png)
-		repeat-x scroll 0 0;
-	cursor: pointer;
-	display: inline-block;
-	height: 30px;
-	margin: 0;
-	width: 125px;
-	vertical-align: middle;
+/* .starrating-background {
+     background: transparent url(../resources/images/T_03.png) repeat-x scroll 0 0; 
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0;
+    width: 125px;
+    vertical-align: middle;
 }
-
+	
 .starrating-background span {
-	background: transparent url(../resources/images/T_01.png)
-		repeat-x scroll 0 0;
+ 	background: transparent url(../resources/images/T_01.png)
+		repeat-x scroll 0 0; 
 	cursor: pointer;
 	display: inline-block;
 	height: 30px !important;
@@ -203,5 +202,6 @@ button.btn_reply{
 	visibility: hidden;
 	font-size: 0;
 	line-height: 0;
-} 
+}  */
+
 

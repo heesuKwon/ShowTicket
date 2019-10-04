@@ -90,14 +90,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm(Map<String, Object> map) {
-		return memberDAO.selectReservationTerm(map);
+	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
+		return memberDAO.selectReservationTerm(content);
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm15(Map<String, Object> map) {
-		return memberDAO.selectReservationTerm15(map);
+	public List<Ticket> selectReservationTerm15(Map<String, Object> content) {
+		return memberDAO.selectReservationTerm15(content);
 	}
-	
 
+	@Override
+	public List<Ticket> selectReservationPage(Map<String, Object> content) {
+		return memberDAO.selectReservationPage(content);
+	}
+
+	@Override
+	public int updateReservation(Map<String, Object> cancel) {
+		return memberDAO.updateReservation(cancel);
+	}
+
+	
 }

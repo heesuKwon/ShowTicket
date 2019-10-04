@@ -231,7 +231,7 @@ function slideShow(){
 	
 }
 </script>
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style type="text/css">
@@ -292,8 +292,8 @@ ul.lst_thumb li.on::before {
 			</div>
 
 			<!-- [D] 전시메인의 경우 .exhibition 추가입니다. -->
-			<div class="attention_wrap concert" style="margin-top: 0px;">
-				<div class="header">
+			<div class="newMusical_wrap concert" style="margin-top: 0px;">
+				<div class="header" style="margin-bottom: 4px;">
 					<h2 class="small-title"
 						style="margin-top: 0px; display: inline-block">최신 뮤지컬</h2>
 					<img src="/showticket/resources/images/plus.png" alt="더보기"
@@ -303,10 +303,10 @@ ul.lst_thumb li.on::before {
 					<ul style="width: 1880px">
 						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
 							<c:forEach items="${recentMusicalList }" var="rList">
-								<li class="SHOW_ISSUE_V1_FIRST">
+								<li class="newMusical_first">
 									<a href="http://www.ticketlink.co.kr/bridge/498">
 										<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
-										<div class="list_info" style="height: 50px;">
+										<div class="list_info" style="height: 50px; margin-left: 4px;">
 											<!--제목-->
 											<strong class="elp">${rList.prfnm }</strong>
 											<!--기간-->
