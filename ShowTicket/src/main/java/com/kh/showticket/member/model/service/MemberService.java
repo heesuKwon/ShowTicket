@@ -34,5 +34,7 @@ public interface MemberService {
 
 	List<Ticket> selectReservationPage(Map<String,Object> content);
 
+	int updateReservation(Map<String, Object> cancel);
+
 
 }

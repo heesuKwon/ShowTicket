@@ -104,5 +104,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectReservationPage(content);
 	}
 
+	@Override
+	public int updateReservation(Map<String, Object> cancel) {
+		return memberDAO.updateReservation(cancel);
+	}
+
 	
 }
