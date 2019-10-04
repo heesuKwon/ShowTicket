@@ -124,4 +124,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateReservation(cancel);
 	}
 
+	@Override
+	public Map<String, String> selectOneTicketByNo(int ticketNo) {
+		return memberDAO.selectOneTicketByNo(ticketNo);
+	}
+
 }

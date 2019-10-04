@@ -232,15 +232,30 @@ public class MemberController {
 		
 		List<String> standByList = memberService.selectMyStandByList(memberLoggedIn);
 		List<Map<String, String>> myStandByList = null;
+		List<Map<String, String>> myStandByMList = new ArrayList<>();
+		List<Map<String, String>> myStandBySList = new ArrayList<>();
 		
-		for(String showId : standByList) {
-			String url = "http://kopis.or.kr/openApi/restful/pblprfr/"+showId+"?service=3127d89913494563a0e9684779988063";
-			myStandByList = getList(url);	
+		if(standByList.size()>0) {
+			for(String showId : standByList) {
+				String url = "http://kopis.or.kr/openApi/restful/pblprfr/"+showId+"?service=3127d89913494563a0e9684779988063";
+				myStandByList = getList(url);	
+			}	
+		}
+		
+		if(myStandByList != null) {
+			for(Map<String, String> map : myStandByList) {
+				if(map.get("genrenm").equals("뮤지컬")) {
+					myStandByMList.add(map);
+				}
+				if(map.get("genrenm").equals("연극")) {
+					myStandBySList.add(map);
+				}
+			}
 		}
 
-		logger.debug("myStandByList={}", myStandByList);
 
-		mav.addObject("myStandByList", myStandByList);
+		mav.addObject("myStandByMList", myStandByMList);
+		mav.addObject("myStandBySList", myStandBySList);
 		
 		mav.setViewName("member/myStandBy");
 		return mav;

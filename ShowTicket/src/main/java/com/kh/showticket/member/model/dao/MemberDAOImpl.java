@@ -90,6 +90,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.updateReservation", cancel);
 	}
 
+	@Override
+	public Map<String, String> selectOneTicketByNo(int ticketNo) {
+		return sqlSession.selectOne("member.selectOneTicketByNo", ticketNo);
+	}
+
 
 	
 

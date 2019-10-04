@@ -18,6 +18,7 @@ function deleteStandBy(showId){
 	location.href="${pageContext.request.contextPath}/member/deleteStandBy.do?showId="+showId;
 };
 $(()=>{
+	
 	$("#musical-nav").on("click", function(){
 		$("#showWList").css("display", "none");
 		$("#musicalWList").css("display", "block");
@@ -46,36 +47,39 @@ $(()=>{
 	<div class="div-memberFrm">
 		<h2 class="small-title">대기공연</h2>
 
-		 <ul id="searchNav" class="nav nav-pills nav-justified">
+		 <ul id="wNav" class="nav nav-pills nav-justified">
 			<li class="nav-item"><div class="nav-link select nav-font" id="musical-nav">뮤지컬</div></li>
 			<li class="nav-item"><div class="nav-link nav-font default" id="show-nav">연극</div></li>
 		</ul>
 
-			<div id="musicalWList">
+			<div class="wList" id="musicalWList" style="margin-top: 20px;">
 			<table class="playList">
 				<tr>
 					<th>공연명</th>
 					<th>취소</th>
 				</tr>
-				<c:forEach items="${myStandByList }" var='s'>
+				<c:if test="${not empty myStandByMList }">
+				<c:forEach items="${myStandByMList }" var='m'>
 					<tr>
-						<td>${s.prfnm }</td>
+						<td>${m.prfnm }</td>
 						<td>
 							<button type="button" class="btn btn-secondary"
-								onclick="deleteStandBy('${s.mt20id}')">취소</button>
+								onclick="deleteStandBy('${m.mt20id}')">취소</button>
 						</td>
 					</tr>
 				</c:forEach>
+				</c:if>
 			</table>
 			</div>
 			
-			<div id="showWList">
-			<table id="showWList" class="playList">
+			<div class="wList" id="showWList" style="margin-top: 20px;">
+			<table class="playList">
 				<tr>
 					<th>공연명</th>
 					<th>취소</th>
 				</tr>
-				<c:forEach items="${myStandByList }" var='s'>
+				<c:if test="${not empty myStandBySList }">
+				<c:forEach items="${myStandBySList }" var='s'>
 					<tr>
 						<td>${s.prfnm }</td>
 						<td>
@@ -84,30 +88,13 @@ $(()=>{
 						</td>
 					</tr>
 				</c:forEach>
+				</c:if>
 			</table>
 			</div>
 
 			<br />
 
 		
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="-1" aria-disabled="true"
-						style="background-color: #F2F2F2; border: 0px;"></a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">1</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">2</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">3</a></li>
-					<li class="page-item"><a class="page-link" href="#"
-						style="color: gray; border: 0px;">4</a></li>
-					<li class="page-item disabled"><a class="page-link" href="#"
-						tabindex="1" aria-disabled="true"
-						style="background-color: #F2F2F2; border: 0px;">></a></li>
-				</ul>
-			</nav>
 	
 	</div>
 </div>

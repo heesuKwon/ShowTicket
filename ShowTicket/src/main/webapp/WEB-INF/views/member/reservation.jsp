@@ -11,9 +11,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
 <script>
 $(()=>{
+
+	
 	$("#btn1").click(function() {
 		$(this).siblings().removeClass("r_btnSelect").addClass("r_btnDefault");
 		$(this).removeClass("r_btnDefault").addClass("r_btnSelect");
@@ -176,17 +178,29 @@ $(()=>{
 	}
 </script>
 
+
+<script type="text/javascript">
+
+//메시지 전송
+function sendAlarm(ticketNo) {
+	sock.send(ticketNo);
+}
+
+</script>	
+
+
+
 <form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancle.do" method="post">
 	<input type="hidden" name="memberId" value="${memberId }"/>
 </form>
 <script>
 function goCancel(ticketNo) {
-
 	var cancelTNo = ticketNo;
-	console.log("취소할 예매번호",cancelTNo);
+	//console.log("취소할 예매번호",cancelTNo);
 	
 	if(confirm("예매를 취소하시겠습니까?")){
-		$(".cancel").append("<input type='hidden' name='cancelTNo' value='"+cancelTNo+"'/>").submit();
+		//$(".cancel").append("<input type='hidden' name='cancelTNo' value='"+cancelTNo+"'/>").submit();
+		sendAlarm(ticketNo);
 	}
 	else{
 		return;

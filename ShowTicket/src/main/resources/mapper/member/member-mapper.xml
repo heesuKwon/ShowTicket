@@ -97,4 +97,13 @@
 		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberId}
 	</update>
 
+	<select id="selectOneTicketByNo"
+			resultMap="wAlarmMap">
+		select * from ticket where ticket_no = #{ticketNo}
+	</select>
+	<resultMap id="wAlarmMap" type="map">
+		<result column="ticket_showId" property="ticketShowId" />
+		<result column="ticket_date" property="ticketDate" />
+		<result column="ticket_time" property="ticketTime" />
+	</resultMap>
 </mapper>

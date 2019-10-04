@@ -69,6 +69,7 @@
 
 <!-- <script type="text/javascript" src="/resources/js/login.js"></script> -->
 <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
 <script type="text/javascript">
 	if (!wcs_add) var wcs_add = {};
 	wcs_add["wa"] = "s_765d50fa49a";
@@ -144,6 +145,32 @@
 
 <!-- AceCounter Log Gathering Script End -->
 
+
+<script type="text/javascript">
+let sock = new SockJS("${pageContext.request.contextPath}/wAlarm");
+
+sock.onopen = onOpen;
+sock.onmessage = onMessage;
+sock.onclose = onClose;
+
+function onOpen(){
+ 	console.log('websocket opened');
+}
+
+//서버로부터 메시지를 받았을 때
+function onMessage(msg) {
+    var data = msg.data;
+   	alert(data);
+}
+
+//서버와 연결을 끊었을 때
+function onClose(evt) {
+	console.log('websocket closed');
+}
+
+</script>	
+
+
 <!-- 로그인 관련 모달 부분 -->
 <!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -198,7 +225,9 @@
 	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
 	    window.open(url, name, option);
 	}
+
 </script>
+
 
 	<div id="wrap">
 		<div id="header">

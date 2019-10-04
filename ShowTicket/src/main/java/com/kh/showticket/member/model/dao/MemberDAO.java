@@ -38,6 +38,8 @@ public interface MemberDAO {
 
 	int updateReservation(Map<String, Object> cancel);
 
+	Map<String, String> selectOneTicketByNo(int ticketNo);
+
 
 
 }

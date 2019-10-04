@@ -40,4 +40,7 @@ public interface MemberService {
 
 	int updateReservation(Map<String, Object> cancel);
 
+	Map<String, String> selectOneTicketByNo(int ticketNo);
+
+
 }
