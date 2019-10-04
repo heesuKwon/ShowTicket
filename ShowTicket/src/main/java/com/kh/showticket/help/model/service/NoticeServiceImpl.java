@@ -26,11 +26,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.selectNoticeTicketOpenList(cPage);
 	}
 
-	@Override
-	public int insertOne(NoticeTicketOpen nt) {
-		return noticeDAO.insertNoticeTicketOpen(nt);
-	}
-
+	/*
+	 * @Override public int insertOne(NoticeTicketOpen nt) { return
+	 * noticeDAO.insertNoticeTicketOpen(nt); }
+	 */
 	
 	
 

@@ -9,5 +9,5 @@ public interface NoticeDAO {
 
 	List<NoticeTicketOpen> selectNoticeTicketOpenList(int cPage);
 
-	int insertNoticeTicketOpen(NoticeTicketOpen nt);
+	//int insertNoticeTicketOpen(NoticeTicketOpen nt);
 }
