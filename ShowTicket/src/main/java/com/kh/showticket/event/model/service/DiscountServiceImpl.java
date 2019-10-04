@@ -1,6 +1,8 @@
 package com.kh.showticket.event.model.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,21 @@ public class DiscountServiceImpl implements DiscountService {
 	@Override
 	public int insertAddSale(Discount discount) {
 		return discountDAO.insertAddSale(discount);
+	}
+
+	@Override
+	public int checkCnt() {
+		return discountDAO.checkCnt(); 
+	}
+
+	@Override
+	public int deleteAddSale() {
+		return discountDAO.deleteAddSale(); 
+	}
+
+	@Override
+	public List<Discount> selectdcList() {
+		return discountDAO.selectdcList(); 
 	}
 
 }

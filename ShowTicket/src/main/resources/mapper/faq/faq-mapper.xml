@@ -30,6 +30,13 @@
 		</where>
 		order by type desc
 	</select>
+	 <select id="faqList" resultMap="faqMap">
+		select *
+		from faq
+		
+			where	type = 'T'		
+		order by type desc
+	</select>
 	<select id="selectOne" resultMap="faqMap">
 		select *
 		from faq

@@ -8,6 +8,12 @@ public interface DiscountService {
 
 	int insertAddSale(Discount discount);
 
+	int checkCnt();
+
+	int deleteAddSale();
+
+	List<Discount> selectdcList();
+
 	
 
 }

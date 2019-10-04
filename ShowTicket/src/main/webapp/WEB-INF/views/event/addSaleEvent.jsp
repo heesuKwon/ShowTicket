@@ -4,25 +4,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/contents.css">
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/event.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/addSale.css">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
+	<jsp:param value="특가입력" name="pageTitle" />
 </jsp:include>
 <style>
+table#showList::-webkit-scrollbar-thumb {background-color:#8f01a3;background:#8f01a3;border-radius: 10px;}
+#showList-box::-webkit-input-placeholder { text-align:right;pointer-events: none; }
 input {border: none; }
-::-webkit-input-placeholder { text-align:right;pointer-events: none; }
 #inputText{width:100px;    display: contents;}
-.enrollText{width:180px;}
-::-webkit-scrollbar-thumb {background-color:#8f01a3;border-radius: 10px;}
-div.search{    display: inline-block;  margin-bottom: 23px;}
+.enrollText{width:190px;}
+div.search{display: inline-block;  margin-bottom: 23px;}
 div#showList-box{width:98%; height:200px; overflow:auto;}
+h2.title{font-size: 20px; !important;}
 </style>
 <script>
 $(()=>{
-	$("#okbutton").click(function(){  //확인 버튼 클릭시 체크된 row의 값을 가져온다 
+	$("input#chk_yn").click(function(){  //확인 버튼 클릭시 체크된 row의 값을 가져온다 
 		var Data =new Array(); //(0,1)
 		var rowData= new Array(); 
 		var tdArr = new Array(); 
@@ -62,7 +64,7 @@ $(()=>{
 		var html=""; 
 		
 
-		var contain= "<br/><div class='search'><form action='${pageContext.request.contextPath}/event/insertAddSale.do'>";
+		var contain= "<h2 class='title'>특가할인</h2><br/><div class='search'><form action='${pageContext.request.contextPath}/event/insertAddSale.do'>";
 		contain+="<img id='photo' src='"+tdArr[0]+"'width='100px' height='122px'>"; 
 		contain +="<table class='ListTable' id='detail' style='position:relative;'>";
 		contain+="<tr><th id='service'>공연아이디</th>";
@@ -74,19 +76,21 @@ $(()=>{
 		contain+="</tr>";
 			
 		contain+="<tr>";
-		contain+="<td id='showId' name=''>"+tdArr[1]+"</td>";
-		contain+="<td id='showGenre'>"+tdArr[2]+"</td>";
+		contain+="<td id='showId' >"+tdArr[1]+"</td>";
+		contain+="<td id='showGenre' >"+tdArr[2]+"</td>";
 		contain+="<td id='showName'>"+tdArr[3]+"</td>";
-		contain+="<td id='showStart'name='start'> "+tdArr[4]+"</td>";
-		contain+="<td id='showEnd' name='finish'>"+tdArr[5]+"</td>";
+		contain+="<td id='showStart'> "+tdArr[4]+"</td>";
+		contain+="<td id='showEnd' >"+tdArr[5]+"</td>";
 		contain+="<td id='sale_yn' >"+tdArr[6]+"</td>";
 		contain+="</tr>";
 		contain+="<input type='hidden' name='disCountImg' value='"+tdArr[0]+"' />"
 		contain+="<input type='hidden' name='showId' value='"+tdArr[1]+"' />"
+		contain+="<input type='hidden' name='showGenre' value='"+tdArr[2]+"' />"
+		contain+="<input type='hidden' name='showName' value='"+tdArr[3]+"' />"
 		contain+="</table><br/><br/><br/>";
 		contain+="<div id='enroll'><h2 class='small-title'>할인률</h2>"; 
 		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
-		contain+="<input type='Date' class='enrollText'name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='Date' name='disCountEndDate' class='enrollText'>";
+		contain+="<input type='date' class='enrollText' name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='date' name='disCountEndDate' class='enrollText' >";
 		contain+="</div><button type='submit' class='btn btn-secondary' id='changebutton'>작성완료</button>";
 		contain+="</div>";
 		contain+="</form></div>";
@@ -108,12 +112,7 @@ $(()=>{
 
 <div id="container" class="event_cont">
 	<div class="inner" style="width:970px;">
-		<ul class="nav nav-pills nav-justified">
-			<li class="nav-item" style="width: 40%"><a
-				class="nav-link nav-font default">특가할인 목록</a></li>
-			<li class="nav-item" style="width: 40%"><a
-				class="nav-link nav-font select">특가할인 추가</a></li>
-		</ul>
+
 		<h2 class="title scrolltbody">공연목록</h2>
 		
 		
@@ -150,14 +149,11 @@ $(()=>{
 				
 			</table>
 		</div>
-		<button type="button" class="btn btn-secondary" id="okbutton">확인</button>
 		<button type="button" class="btn btn-secondary" id="goList">목록으로</button>
 		
 		
-		<h2 class="title">특가할인</h2>
-		<div id="searchC" style="width: 100%; height: 100%;">
-			
-		</div>
+		
+		<div id="searchC" ></div>
 		
 	</div>
 </div>
