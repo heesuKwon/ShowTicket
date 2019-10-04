@@ -18,4 +18,13 @@
 		<result column="notice_count" property="noticeCount"/>
 		
 	</resultMap>
+	
+	<!-- <insert id="insertNoticeTicketOpen">
+		insert into notice
+		(notice_no,notice_title,notice_content,notice_enrolldate,notice_category,notice_count,play_name,play_open,play_place,play_poster) 
+		values(seq_notice_no.nextval,'뮤지컬 스위니토드','뮤지컬 스위니토드 티켓이 오픈했습니다.',sysdate,'t',0,'스위니토드','2019-01-01','세종문화회관','poster');
+	
+	
+	</insert> -->
+	
 </mapper>

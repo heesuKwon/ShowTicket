@@ -9,5 +9,10 @@ public interface NoticeService {
 	int NUM_PER_PAGE = 15;
 	
 	List<NoticeTicketOpen> selectNoticeTicketOpenList(int cPage);
+
+	//int insertOne(NoticeTicketOpen nt);
+
 	
+
+
 }

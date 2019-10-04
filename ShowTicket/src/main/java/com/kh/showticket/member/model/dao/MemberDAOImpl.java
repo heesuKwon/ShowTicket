@@ -70,4 +70,27 @@ public class MemberDAOImpl implements MemberDAO {
 		param.put("showId", showId);	
 		sqlSession.delete("member.deleteMyStandBy", param);
 	}
+
+	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationTerm", content);
+	}
+
+	@Override
+	public List<Ticket> selectReservationTerm15(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationTerm15", content);
+	}
+
+	@Override
+	public List<Ticket> selectReservationPage(Map<String, Object> content) {
+		return sqlSession.selectList("member.selectReservationPage", content);
+	}
+
+	@Override
+	public int updateReservation(Map<String, Object> cancel) {
+		return sqlSession.update("member.updateReservation", cancel);
+	}
+
+
+	
+
 }

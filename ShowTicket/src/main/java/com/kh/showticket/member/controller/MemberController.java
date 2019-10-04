@@ -2,6 +2,7 @@ package com.kh.showticket.member.controller;
 
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,9 @@ import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.member.model.vo.MyPoint;
 import com.kh.showticket.member.model.vo.Ticket;
+
 import com.kh.showticket.member.model.vo.MyPoint;
 import static com.kh.showticket.common.getApi.getApi.*;
 
@@ -62,18 +65,124 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/reservation.do")
-	public String reservation(Model model, @RequestParam String memberId) {
+	public String reservation(Model model, @RequestParam String memberId, @RequestParam int cPage) {
 
+		//cPage = 1;
+		int showContent = 10;
+		//int pageBarSize = 4;
+		
 		// 1.업무 로직
 		List<Ticket> list = memberService.selectReservationList(memberId);
-				
 		logger.debug("마이페이지 예매자 확인 :" + memberId);
-				
+		
+		// 해당 회원의 전체 예매수 및 전체 페이지수
+		int totalContentCount = list.size();
+		logger.debug("예매자의 총 예매수 : "+totalContentCount);
+		
+		//int totalPage = (int)Math.ceil(((double)totalContentCount/showContent));
+		//logger.debug("총 예매수에 따라 나와야할 총 페이지수 : "+totalPage);
+		
+		//int barStart = ((cPage-1)/pageBarSize)*pageBarSize + 1;
+		//int barEnd = barStart + pageBarSize -1;
+		///int barNo = barStart;
+		//logger.debug("시작페이지 "+barStart+"~"+"종료페이지"+barEnd);
+		//logger.debug("현재페이지랑 비교값 : "+barNo);
+		
+		int startContent = (cPage-1)*showContent + 1;
+		int endContent = cPage*showContent;
+		
+		Map<String,Object> page = new HashMap<>();
+		page.put("memberId",memberId);
+		page.put("startContent",startContent);
+		page.put("endContent",endContent);	
+//		page.put("totalPage",totalPage);
+//		page.put("barEnd",barEnd);
+//		page.put("barNo",barNo);
+		page.put("cPage",cPage);
+
+		List<Ticket> pageList = memberService.selectReservationPage(page);
+		
 		// 2.view단처리
-		model.addAttribute("list", list);
+		//model.addAttribute("list", list);
+		model.addAttribute("pageList", pageList);
+		model.addAttribute("memberId", memberId);
+		model.addAttribute("page", page);
 				
 		return "/member/reservation";
 	}
+
+	 @ResponseBody
+	 @RequestMapping(value="/reservationTermAjax.do", method=RequestMethod.POST)
+	public Map<String,Object> reservationTermAjax(@RequestParam String memberId, @RequestParam int num,
+												 @RequestParam int s, @RequestParam int e, @RequestParam int page) {
+		// 현재 list들은 10개씩만 나오게 되어있다.
+		
+		int startContent = s;
+		int endContent = e;
+		int minusNum = num * -1;
+
+		// 페이징바 변수
+		int cPage = 1;
+		int showContent = 10;
+		int pageBarSize = 4;
+		int totalContent = 0;
+		int totalPage = 0;
+		int barStart = 0;
+		int barEnd = 0;
+		int barNo = 0;
+		
+		Map<String,Object> rMap = new HashMap<>();	
+		
+		List<Ticket> list = new ArrayList<>();
+		
+		Map<String,Object> content = new HashMap<>();
+		content.put("memberId", memberId);
+		content.put("num", minusNum);
+		content.put("startContent",startContent);
+		content.put("endContent",endContent);
+		
+		Map<String,Object> paging = new HashMap<>();
+		
+		
+		logger.debug("ajax용 memberId :" + memberId);
+		logger.debug("ajax용 num:" + minusNum);
+		logger.debug("ajax용 s:" + startContent);
+		logger.debug("ajax용 e:" + endContent);
+
+		if(minusNum == -100){
+			list = memberService.selectReservationPage(content);
+			totalContent = list.size();
+			totalPage = (int)Math.ceil(((double)totalContent/showContent));
+			cPage = page;
+		}
+		else if(minusNum == -1 || minusNum == -2 || minusNum == -3) {
+			list = memberService.selectReservationTerm(content);
+			totalContent = list.size();
+			totalPage = (int)Math.ceil(((double)totalContent/showContent));
+			cPage = page;
+		}
+		else if(minusNum == -15) {			
+			list = memberService.selectReservationTerm15(content);
+			totalContent = list.size();
+			totalPage = (int)Math.ceil(((double)totalContent/showContent));
+			System.out.println("15list!!!!!!!!!!!!!!!!!!!!!"+list);
+			cPage = page;
+		}
+		
+		barStart = ((cPage-1)/pageBarSize)*pageBarSize + 1;
+		barEnd = barStart + pageBarSize -1;
+		barNo = barStart;
+		
+		rMap.put("reservationList",list);
+		rMap.put("totalPage",totalPage);
+		rMap.put("barNo",barNo);
+		rMap.put("barEnd",barEnd);
+		rMap.put("memberId",memberId);
+		rMap.put("cPage",cPage);
+		
+		return rMap;
+	 }
+	
 	
 	@RequestMapping("/memberView.do")
 	public void memberView() {
@@ -459,6 +568,24 @@ public class MemberController {
     	
     	
     	return authCode;
+    }
+    
+    @RequestMapping(value="/reservationCancle.do",method=RequestMethod.POST)
+    public String reservationCancle(Model model, @RequestParam int cancelTNo, @RequestParam String memberId) {
+    	
+    	logger.debug("취소할 예매번호: "+cancelTNo);
+    	logger.debug("취소할 예매자: "+memberId);
+
+    	Map<String, Object> cancel = new HashMap<>();
+    	cancel.put("cancelTNo",cancelTNo);
+    	cancel.put("memberId",memberId);
+    	
+    	int result = memberService.updateReservation(cancel);
+    	
+ 		model.addAttribute("msg", result>0?"예매 취소 완료":"예매 취소 실패!");
+    	model.addAttribute("loc", "/member/reservation.do?memberId="+memberId+"&cPage="+1);
+
+    	return "common/msg";
     }
 	
 }

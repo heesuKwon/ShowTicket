@@ -30,16 +30,14 @@
 	                       <h2><span>[응모]</span>뮤지컬 <span>&lt;사랑했어요&gt;</span> 관람평 이벤트</h2> 
 	                    </dd>
                   	</div>
-                  	<div class="event_inner">
-                  		<h6>%할인</h6>
-                  	</div>
+                 
                     <div class="rhr" style="background: gray;"></div> <!-- 선 -->
 	                    <dd class="evt_date">
 	                    	<h6>
 	                    		<span>이벤트 기간 </span>
 	                    		<span>2019.09.20~2019.10.04</span>
 	                    	</h6>
-	                        
+	                         <button type="button" id="detailView" class="btn btn-secondary ">공연 정보 상세보기</button> 
 	                    </dd>
 	                    <div class="container-t">
 	                    	<h2><span>Showticket</span>과 뮤지컬<span>&lt;뮤지컬제목&gt;</span>가 함께하는 이벤트</h2>
@@ -49,17 +47,17 @@
 	                        <div>
 	                        	<img src="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" alt="뮤지컬<사랑했어요>관람후기이벤트" border="0" usemap="#Map">
 				                <div class="inner">
-				                 		<h5><strong><span>뮤지컬&lt;뮤지컬명&gt;에 대한 기대평을 남겨주세요. </strong><br />
+				                 		<h6><strong><span>뮤지컬&lt;뮤지컬명&gt;에 대한 기대평을 남겨주세요. </strong><br />
 										
 										기대평을 남겨주신 분 중, 추첨을 통해 총 10명의 회원님께 <br />
 										
 										뮤지컬&lt;뮤지컬명&gt;공연 관람권을 드립니다. <br /><br />
 										
-										*본 이벤트는 당사의 운영 정책에 따라 진행되며 내부 사정에 의해 <br /> 
+										*본 이벤트는 당사의 운영 정책에 따라 진행되며 <br /> 
 										
-										별도의 고지 없이 변경될 수 있습니다. <br /></span>
-				                 		</h5>
-			          
+										 내부 사정에  의해  변경될 수 있습니다. <br /></span>
+				                 		</h6>
+			          				
 				                </div>
 				                <div class="rhr" style="background: gray;"></div> <!-- 선 -->
 				                
@@ -79,7 +77,7 @@
 								  </tr>
 				                	
 				                 </table>
-				                	 <button type="button" class="btn btn-secondary ">공연 정보 상세보기</button> 
+				                	
 				                </div>
 				                
 				                
@@ -105,8 +103,7 @@
 		
 						
 						<textarea name="boardCommentContent" id="boardCommentContent" cols="80" rows="3"></textarea>
-						<button type="submit" id="rebtn"class="btn btn-primary">댓글입력</button>
-						
+						<button type="submit" id="rebtn"class="btn btn-primary" style="background-color:#8f01a3; border-color: white;">댓글입력</button>
 					</form>
 				</div>
 			
@@ -119,16 +116,11 @@
 							<br />
 							
 						</td>
-						<td>
+						<!-- <td>
 						
-							<button class="btn-reply" >대댓글</button>
-							
-					
-								
-								<button class="btn-delete" value="">삭제</button>
-								
-							
-						</td>
+							<button class="btn-delete" value="">삭제</button>
+
+						</td> -->
 					</tr>
 					
 					
@@ -160,16 +152,19 @@
 </body>
 
 <style>
-div#btnbox{ margin-left: 22%; margin-top: 20px; padding-bottom: 20px;}
+div#btnbox{ margin-left: 18%; margin-top: 20px; padding-bottom: 20px;}
 dl.evt_detail>div.event_inner{position: absolute; background: #8f01a3; border-radius: 10px; width: 82px;height: 40px;left: 80%; top:32px;	}
-.event_inner h6{margin-top: 12%;color: white;font-family: 'Gothic A1', sans-serif;}
-div.evt_content{ height: 200px; margin-left: 22%;width: 443px;}
+div.evt_content{ height: 200px; margin-left: 23%;width: 443px;}
 div.evt_content table{font-family: 'Gothic A1', sans-serif; margin-left: 10%; margin-top:5%;width: 443px;}
 div.evt_content table th ,td{padding-bottom: 25px;}
-div.evt_content table th ,td{ font-size: 18px;}
+div.evt_content table th ,td{ font-size: 15px;}
 button#rebtn{width: 92.5px;height: 56.25px;} 
 dd.evt_date>h6>span {color:gray;}
-div#comment-container{margin-left: 20%;}
-#boardCommentContent{margin-left: 3px;}
+div#comment-container{margin-left: 18%;  width: 493px;}
+div.comment-editor{    width: 493px;}
+#boardCommentContent{margin-left: 3px; width: 393px;}
+button#detailView{margin-left: 40%;     position: absolute; top: 87px; left: 300px;}
+h6{font-family: 'Gothic A1', sans-serif;}
+button {font-family: 'Gothic A1', sans-serif;}
 </style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

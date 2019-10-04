@@ -1,3 +1,6 @@
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.kh.showticket.common.MusicalAndShow"%>
@@ -6,70 +9,108 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
+<link rel="stylesheet" type="text/css"
+						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
-<script type='text/javascript'
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+<!--지도api  -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
+ <link rel="stylesheet" type="text/css"
+						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css"> 
 
 <%
+
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
+			System.out.println("urls:"+musical.getUrls());
+			System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
-	Map<String, String> dayTime = new HashMap<>();
+	Map<String, List<String>> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
-	days.put("월",0);
-	days.put("화",1);
-	days.put("수",2);
-	days.put("목",3);
-	days.put("금",4);
-	days.put("토",5);
-	days.put("일",6);
-	String[] d = {"월","화","수","목","금","토","일"};
-	for(String s: times){
+	days.put("월", 0);
+	days.put("화", 1);
+	days.put("수", 2);
+	days.put("목", 3);
+	days.put("금", 4);
+	days.put("토", 5);
+	days.put("일", 6);
+	String[] d = { "월", "화", "수", "목", "금", "토", "일"};
+	for (String s : times) {
 		System.out.println(s);
-		String time = s.substring(s.indexOf("(")+1, s.indexOf(")"));
+		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
 		String[] ts = time.split(",");
 		System.out.println(time);
-		if(s.contains("~")){
-			String day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			String day2 = s.substring(s.lastIndexOf("요일")-1,s.lastIndexOf("요일"));
+		if (s.contains("~")) {
+			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
+			String day2 = s.substring(s.lastIndexOf("요일") - 1, s.lastIndexOf("요일"));
 			System.out.println(day1);
 			System.out.println(day2);
-			for(int i=days.get(day1);i<=days.get(day2);i++){
+			for (int i = days.get(day1); i <= days.get(day2); i++) {
 				System.out.println(i);
-				for(int j=0;j<ts.length;j++){
+				/* for (int j = 0; j < ts.length; j++) {
 					System.out.println(d[i]);
 					System.out.println(ts[j]);
-					dayTime.put(d[i],ts[j]);
-				}
-			}				
-		}
-		else{
+					dayTime.put(d[i], ts[j]);
+				} */
+				dayTime.put(d[i], Arrays.asList(ts));
+			}
+		} else {
 			String day1 = "";
-			if(s.contains("HOL")){
+			if (s.contains("HOL")) {
 				day1 = "HOL";
+			} else {
+				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			else{
-				day1 = s.substring(s.indexOf("요일")-1,s.indexOf("요일"));
-			}
-			for(int i=0;i<ts.length;i++){
+			/* for (int i = 0; i < ts.length; i++) {
 				System.out.println(day1);
 				System.out.println(ts[i]);
-				dayTime.put(day1,ts[i]);
-			}
-		} 
+				dayTime.put(day1, ts[i]);
+			} */
+			dayTime.put(day1, Arrays.asList(ts));
+		}
 	}
+	
+	Object[] str = dayTime.keySet().toArray();
+	String[] day = { "일", "월", "화", "수", "목", "금", "토"};
+	String st = "";
+	for(Object s:str){
+		System.out.println((String)s);
+		st += (String)s;		
+	}
+
+	List<Integer> list = new ArrayList<>();
+	for(int i=0;i<day.length;i++){
+		if(!st.contains(day[i])){
+			list.add(i);	
+		}
+	}
+	/*-------------------------------희수 코딩 영역--------------------------------*/
 %>
 
 
 <script language='javascript'>
+/*--------------------------석현씨 코딩영역-----------------------------  */	
+
+$(()=>{
+	 $(".tabs-Num").css("display","none");
+	
+	$("#tabs-3").css("display","block");
+})
+
+
+
+/*--------------------------석현씨 코딩영역-----------------------------  */		
+
     var _JV = "AMZ2013010701";//script Version
     var _UD = 'undefined';
     var _UN = 'unknown';
@@ -109,7 +150,7 @@
         return a
     }
     ;
-    function AEC_F_D (pd, md, cnum) {
+    function AEC_F_D (pd, md, cnum)	 {
         var i = 0, amt = 0, num = 0;
         var cat = '', nm = '';
         num = cnum;
@@ -160,6 +201,7 @@
 </script>
 
 
+
 <script type="text/javascript">
 	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
 	if (!wcs_add) var wcs_add = {};
@@ -174,7 +216,6 @@
 	wcs_do();
 </script>
 
-<script type="text/javascript">lcs_do(); </script>
 <!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
 <script language='javascript'>
 	var _AceGID = (function () {
@@ -204,12 +245,6 @@
 		}
 	})();
 </script>
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-<script language='javascript' type='text/javascript'>
-	if (document.cookie.indexOf('VIEW_TKLINK_ID') > 0) {
-		var mr_id = 'member';	// ë¡ê·¸ì¸ íìíë¨( 'member' ê³ ì ê°)
-	}
-</script>
 <!-- AceClick WebSite Gathering Script V0.91.20190304-->
 <script type="text/Javascript">
 	if (typeof (AMRS_GC) == 'undefined') {
@@ -237,35 +272,6 @@
 </noscript>
 
 <!-- AceCounter Log Gathering Script End -->
-
-
-<!-- NHN AD MORE Script -->
-<script>
-	var _croID = '5d148869e4b0adaa9beaa9d1';
-
-	function getMoreRecommend (e, n) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
-			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
-	}
-
-	function createMoreRCView (e) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
-			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
-	}
-
-	function mcroPushEvent (n) {
-		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
-			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
-	}
-
-	function _cro_initialize () {
-		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
-	}
-</script>
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-<!-- End NHN AD MORE Script -->
-
 
 
 <script>
@@ -299,13 +305,13 @@
 	}
 </script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.desktop.ns.min.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.Component.js"></script>
+	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.UIComponent.js"></script>
+	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
 <script type="text/javascript"
-	src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/js/jindo.StarRating.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 
@@ -448,17 +454,6 @@
 	}
 
 
-	function getBannerImageSrc (productId) {
-		if (productId === 28633) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_city_v2.jpg"/>';
-		}
-
-		if (productId === 29652) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_love.jpg"/>'
-		}
-	}
-
-
 	function resetReviewData (ratingAverage, countReviewe) {
 		if (ratingAverage != null) {
 			$("#ratingAverage").text(ratingAverage.toFixed(1));
@@ -504,7 +499,7 @@
 		getProductReviewList(page);
 	}
 
-	function openReviewSelectList () {
+	function openReviewList () {
 		if ($("#review_select_list").css("display") == "block") {
 			$("#review_select_list").css("display", "none");
 			return;
@@ -551,98 +546,14 @@
 	});
 
 	//]]>
+
 </script>
 
 
 <script type="text/javascript">
-	var isDrawed = false;
-	$(".map_wrap").hide();
+	
 
-	function drawNaverMap () {
-		if (isDrawed || (typeof $("#map").val() === "undefined")) {
-			return;
-		}
-
-		setTimeout(function () {
-			drawMap();
-		}, 10);
-
-
-	}
-
-	function drawMap () {
-		var x;
-		var y;
-		var productId = 29652;
-		var isMapShow = false;
-
-		$.ajax({
-			url: '/product/coordinate/' + productId,
-			method: 'GET',
-			async: false,
-			success: function (result) {
-				x = result.result.x;
-				y = result.result.y;
-
-				if (x === 0 || y === 0) {
-					return;
-				}
-				isMapShow = true;
-			},
-			error: function () {
-				alert("위치 정보를 정상적으로 가져올 수 없습니다.");
-				return false;
-			}
-
-		});
-
-		if (!isMapShow) {
-			return;
-		}
-
-		$(".map_wrap").show();
-		var address = '경기도 성남시 분당구 야탑동 757 성남아트센터';
-		var goToNaverMapAddress = "http://map.naver.com/index.nhn?menu=route&mapMode=0&elng=" + x + "&elat=" + y +
-			"&pathType=0&dtPathType=0&eText=" + address;
-		$("#go_to_naver_map").attr("href", goToNaverMapAddress);
-
-		var centerPoint = new naver.maps.LatLng(y, x);
-		var oMap = new naver.maps.Map(document.getElementById('map'), {
-				center: centerPoint,
-				zoom: 11,
-				enableWheelZoom: true,
-				enableDragPan: true,
-				enableDblClickZoom: false,
-				mapMode: 0,
-				activateTrafficMap: false,
-				activateBicycleMap: false,
-				minMaxLevel: [1, 14],
-				size: new naver.maps.Size(690, 400),
-				zoomControl: true,
-				zoomControlOptions: {
-					setPosition: {
-						top: 100,
-						right: 10
-					}
-				},
-				mapTypeControl: true,
-				mapTypeControlOptions: {
-					setPosition: {
-						top: 10,
-						right: 10
-					}
-				}
-			}
-		);
-		var marker = new naver.maps.Marker(
-			{
-				position: centerPoint,
-				map: oMap,
-				title: '성남아트센터 오페라하우스'
-			});
-		isDrawed = true;
-	}
-
+	
 
 </script>
 <meta property="og:type" content="website" />
@@ -665,7 +576,10 @@
 </script>
 
 
-<div id="container">
+<div id="detailContainer">
+
+
+	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 	<input type="hidden" id="adultYn" value="false" />
@@ -699,7 +613,8 @@
 						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 					</div>
 					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()} ~ ${musical.getEndDate()}</span>
+						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+							~ ${musical.getEndDate()}</span>
 					</div>
 
 
@@ -794,8 +709,7 @@
 							<!-- [D] 셀렉트박스 -->
 							<select name="watchTime" id="watchTime">
 								<option value="">회차선택(날짜선택후)</option>
-								<option value="">14시 00분</option>
-								<option value="">18시 30분</option>
+								<%-- ${dayTime.} --%>
 							</select>
 						</dd>
 						<!-- <dt>예매가능 좌석</dt>
@@ -806,6 +720,7 @@
 								<br />
 								<li>VIP석 <span class="color_purple fbold">427</span>석
 								</li>
+							
 								<br />
 								<li>R석 <span class="color_purple fbold">427</span>석
 								</li>
@@ -829,9 +744,7 @@
 			</c:if>
 			<c:if test="${musical.getState() eq '공연예정'}">
 				<div class="detail_info_right">
-					<div class="noinfo_txt">
-                     	티켓 오픈일은 공지사항을 참고해주세요.
-                    </div>
+					<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
 					<button type="button" class="btn reserve due s_after first-child"
 						onclick="">
@@ -871,20 +784,24 @@
 					</li>
 				</ul>
 				<div class="tabs-Num" id="tabs-1">
-
-
-					<div class="detail_cont"></div>
+				
+					<div class="detail_cont">
+						
+							<strong>[공연장 정보]</strong><br />
+							장소 : ${musical.hallName }<br> 주소 : ${address.adres }<br>
+								대표번호 : <span id="phoneNumber">${address.telno }</span><br> <br /> <br /> <br />							
+ 								<div id="map" style="clear:both; width:800px;height:400px;position: relative;
+    												overflow: visible;margin-left:66px;"></div>
+					</div>
 
 
 				</div>
 
 				<div class="tabs-Num" id="tabs-2">
-
-					<link rel="stylesheet" type="text/css"
-						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">
-					<link rel="stylesheet" type="text/css"
-						href="${pageContext.request.contextPath}/resources/css/contents.css">
+			
+					
 					<div class="detail_cont detail_cont_v2">
+						
 						<div class="title_wrap">
 							<strong class="title title21">네티즌 별점 및 후기</strong>
 						</div>
@@ -942,7 +859,9 @@
 								href="javascript:;" class="btn_text3 fr"
 								id="displayAllReviewBtn" onclick="displayAllreview();">전체후기보기</a>
 						</div>
+						
 						<div class="review_list">
+
 							<ul id="reviewUl" style="word-break: break-all;">
 								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
 										class="reviewDate small-font">2019.09.20 17:10</span></span>
@@ -976,32 +895,73 @@
 				</div>
 				<div class="tabs-Num" id="tabs-3">
 
-					<script type="text/javascript"
-						src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ebd2punvyx"></script>
-
-					<div class="detail_cont">
-
-
-						<strong>[공연장 정보]</strong>
-						<div class="contents">
-							장소 : 성남아트센터 오페라하우스<br> 주소 : 경기도 성남시 분당구 야탑동 757 성남아트센터<br>
-							대표번호 : <span id="phoneNumber"></span><br>
-
-							<div class="btn_viewmap on" style="display: none;"></div>
-							<div class="map_wrap">
-								<div class="map_area" id="map"></div>
-								<div class="bx">
-									<a href="" target="_blank" class="btn_map" id="go_to_naver_map">빠른길
-										찾기</a>
-								</div>
+						
+						<div class="detail_cont" style="clear:both;">
+							<strong>[공연시간 정보]</strong>
+							<div class="bx_dummy">
+								<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 							</div>
-
+							<div class="bx_dummy">
+								<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+									~ ${musical.getEndDate()}</span>
+							</div>
+		
+		
+		
+							<div class="bx_dummy">
+								<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+							</div>
+							<c:if test="${not empty musical.time }">
+							<div class="bx_dummy">
+								<em class="info_tit">정기 공연일정</em> <br /> 
+									<span class="txt">
+										${musical.time }
+										<%-- <c:forTokens var="item" items="${musical.time}" delims=",">${item}<br /></c:forTokens> --%>
+	
+									</span>
+							</div>
+							</c:if>
+							<div class="bx_dummy">
+								<c:if test="${empty musical.urls }">
+								</c:if>
+								<c:if test="${not empty musical.urls }">
+									<c:forEach items="${musical.urls}" var="f">
+												<img src="${f }" alt="" style="max-width: 900px; margin-left:110px;"/>	
+									</c:forEach>
+								</c:if> 
+							</div>
 						</div>
 
 
 					</div>
 
 				</div>
+				<script>
+
+
+//지도 kakao maps api
+//지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+   		var container = document.getElementById('map'); 
+   		
+   		var la = ${address.la};//위도
+   		var lo = ${address.lo};//경도
+		var options = {
+			center: new kakao.maps.LatLng(la, lo), // 지도의 중심좌표
+			level: 3 // 지도의 확대 레벨
+		};
+		var map = new kakao.maps.Map(container, options);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  =new kakao.maps.LatLng(la, lo); 
+
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map); 
+	</script>
 
 				<div class="tabs-Num" id="tabs-4">
 
@@ -1230,7 +1190,6 @@
 			<!-- [D] 스크롤 발생 시 .moving 추가 -->
 		</div>
 	</div>
-</div>
 
 
 <script type="text/javascript">
@@ -1253,7 +1212,6 @@
     </script>
 
 
-</div>
 <!-- 다이얼로그 창  -->
 <div class="layer l_installment popup" id="dialog1"
 	style="display: none">
@@ -1370,7 +1328,19 @@
 
 	</ul>
 </div>
+<style>
+.detail_box_bot .detailbox_bot_left .detail_cont .detail_cont>div {
+    clear: both;
+    padding: 41px 30px 100px;
+    border-width: 0 1px 1px;
+    border-style: solid;
+    border-color: #dedede;
+    min-height: 1300px;
+    text-align: left;
+    font-size: 20px;
+	}
 
+</style>
 
 
 
@@ -1381,28 +1351,20 @@
 <input type="hidden" id="isValidProduct" value="true">
 <input type="hidden" id="reviewExposureYn" value="Y">
 
-<script type="text/javascript"
-	src="/resources/js/jquery-ui-1.11.2.min.js"></script>
-<script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript" src="/resources/js/number.js?20170831"></script>
 <script type="text/javascript" src="/resources/js/pagingJs.js"></script>
-<script type="text/javascript"
-	src="/resources/js/jquery.formatDateTime.min.js"></script>
 <!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
 <script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
+
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
 <script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponCodeType.js"></script>
-<script type="text/javascript"
-	src="/resources/js/coupon/couponTemplate.js"></script>
-<script type="text/javascript" src="/resources/js/coupon/coupon.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/couponTemplate.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script> 
 
 <script type="text/javascript">
 	//<![CDATA[
-
+	
 	var RESERVE_DATA = {
 		SELECTED_DATE: "",
 		SELECTED_ROUND: "",
@@ -1414,23 +1376,26 @@
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
 
+	var days = ["일", "월", "화", "수", "목", "금", "토", "일"];
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
-			daysShort: ["일", "월", "화", "수", "목", "금", "토", "일"],
-			daysMin: ["일", "월", "화", "수", "목", "금", "토", "일"],
+			daysShort: days,
+			daysMin: days,
 			months: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 			monthsShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"],
 		    today: "Today",
 		    clear: "Clear",
-		    format: "mm/dd/yyyy",
 		    titleFormat: "yyyy.mm", /* Leverages same syntax as 'format' */
 		    weekStart: 0
 	};
 	
 	
+	var selectDay;
+	
+	
 	$(document).ready(function () {
-		
+		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//달력
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
@@ -1438,10 +1403,23 @@
 			endDate: '${musical.getEndDate()}',
 			calendarWeeks: false,
             todayHighlight: true,
-            daysOfWeekDisabled : [0,6],
+            daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
+		}).on('changeDate',function(e){
+			var date = new Date(e.format());
+			var day = date.getDay();
+			console.log(day);
+			console.log(days[day]);
+			selectDay = days[day];
+			//$("#watchTime").attr("day", days[day]);
+			
+			<%-- var timeList = <%=dayTime.get(%>days[day]<%)%>; --%> 
+			
 		});
 		
+	
+		
+		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//기능 설정
 		setDialog();
 		onCloseIfOutOfSelect();
@@ -1491,6 +1469,9 @@
 
 		initCleanReserveInfo();
 		setLongTitle();
+		
+		
+		
 	});
 
 	function initCleanReserveInfo () {
@@ -1522,23 +1503,6 @@
 		}
 	}
 
-	ne.tkl.selectSchedule = new ne.tkl.SelectSchedule({
-		messages: {
-			EMPTYROUND: ' 회차 선택 '
-		},
-		onDateClicked: function (e) {
-			//날짜 전역변수값 설정, 회차, 스케쥴 초기화
-			RESERVE_DATA.SELECTED_DATE = e.productDate;
-			RESERVE_DATA.SELECTED_ROUND = "";
-			RESERVE_DATA.SELECTED_SCHEDULE = "";
-			$("#selectboxDefaultOption").text(" 회차 선택 ");
-			getProductRound(e.productDate);
-			makeSoldOutBtnToReserveBtn();
-		},
-		getProductDate: function (e) {
-			return e.productDate;
-		}
-	});
 
 	function getProductDatesByProductId () {
 		var postData = $("#productId").val();
@@ -1761,13 +1725,12 @@
 		
 		$(".tabs-Num").css("display","none");
 		
-
 		if ($(obj).attr('id') == "detailTop") {
-			$("#tabs-1").css("display","block");
+			$("#tabs-3").css("display","block");
 		} else if ($(obj).attr('id') == "reviewTap") {
 			$("#tabs-2").css("display","block");
 		} else if ($(obj).attr('id') == "placeTap") {
-			$("#tabs-3").css("display","block");
+			$("#tabs-1").css("display","block");
 		} else if ($(obj).attr('id') == "cancelTap") {
 			$("#tabs-4").css("display","block");
 		}
@@ -2207,7 +2170,10 @@
 			$(domObj).parents("td").html("발급완료");
 		});
 	}
+		//]]>
+	
+	
 
-	//]]>
 </script>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

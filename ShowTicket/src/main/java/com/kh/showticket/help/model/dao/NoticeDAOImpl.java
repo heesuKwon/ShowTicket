@@ -1,6 +1,7 @@
 package com.kh.showticket.help.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,5 +26,12 @@ public class NoticeDAOImpl implements NoticeDAO {
 		
 		return sqlSession.selectList("notice.selectNoticeTicketOpenList",null,rowBounds);
 	}
+
+	/*
+	 * @Override public int insertNoticeTicketOpen(NoticeTicketOpen nt) { return
+	 * sqlSession.insert("notice.insertNoticeTicketOpen",nt); }
+	 */
+
+
 
 }

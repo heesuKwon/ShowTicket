@@ -12,7 +12,7 @@
 
 
 
-<script>
+<!-- <script>
 const all = ele => document.querySelectorAll(ele)
 const one = ele => document.querySelector(ele)
 const slide = _ => {
@@ -38,38 +38,33 @@ window.onload = function () {
   slide()
 }
 </script>
+  -->
 
-<script type="text/javascript"> 
-
-imgslide(); //페이지가 로딩될때 함수를 실행합니다
-
-function imgslide(){
-
-  $val = $("#slide").attr("val"); //현재 이미지 번호를 가져옵니다
-
-  $mx = $("#slide").attr("mx"); //총 이미지 개수를 가져옵니다
-
-	$("#img"+$val).hide(); //현재 이미지를 사라지게 합니다.
-
-	if( $val == $mx ){ $val = 1; } //현재이미지가 마지막 번호라면 1번으로 되돌립니다.
-
-	else{ $val++; } //마지막 번호가 아니라면 카운트를 증가시켜줍니다
-
-	$("#img"+$val).fadeIn(500); //변경된 번호의 이미지영역을 나타나게 합니다.괄호 안에 숫자는 페이드인 되는 시간을 나타냅니다.
-
-	$("#slide").attr('val',$val); //변경된 이미지영역의 번호를 부여합니다.
-
-	setTimeout('imgslide()',5000); //1초 뒤에 다시 함수를 호출합니다.(숫자값 1000당 1초)
-
-}
-
-</script>
 <script type="text/javascript"
 	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
+<script type="text/javascript">	
+$(function() {
+
+	var i;
+	var x = document.getElementsByClassName("mySlides");
+	for(i=0; i<x.length;i++){
+		x[i].style.display="none";
+	}
+	index++;
+	if(index>x.length){
+		index=1;
+	}
+	x[index-1].style.display = "block";
+	setTimeout(slideShow,4000);
+	
+	
+});
+
+</script>	
 <script type="text/javascript">
 var index=0;
 window.onload = function(){
-	slideShow();
+	//slideShow();
 	change();
 }
 function slideShow(){
@@ -86,20 +81,38 @@ function slideShow(){
 	setTimeout(slideShow,4000);
 	
 }
-function change(){
-	$("#rank1").hover(function(){$("#rangkingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF154006_190903_125710.jpg")})
-	$("#rank2").hover(function(){$("#rangkingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF152414_190731_091332.jpg")})
-	$("#rank3").hover(function(){$("#rangkingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF152642_190806_113424.gif")})
-	$("#rank4").hover(function(){$("#rangkingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF153249_190820_101253.gif")})
-	$("#rank5").hover(function(){$("#rangkingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF151548_190712_140833.gif")})
+</script>
+<script type="text/javascript">
+window.onload = function(){
+	var a = $("#ticket1").attr("data-url");
+	var b = $("#ticket2").attr("data-url");
+	var c = $("#ticket3").attr("data-url");
+	var d = $("#ticket4").attr("data-url");
+	var e = $("#ticket5").attr("data-url");
 	
-	$("#ticket1").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155141_190925_151605.gif")})
-	$("#ticket2").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155116_190925_132746.jpg")})
-	$("#ticket3").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155115_190925_132705.gif")})
-	$("#ticket4").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155114_190925_132128.gif")})
-	$("#ticket5").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF154958_190923_154442.gif")})
+	$("#ticket1").hover(function(){$("#openingImg").attr("src",a)});
+	$("#ticket2").hover(function(){$("#openingImg").attr("src",b)});
+	$("#ticket3").hover(function(){$("#openingImg").attr("src",c)});
+	$("#ticket4").hover(function(){$("#openingImg").attr("src",d)});
+	$("#ticket5").hover(function(){$("#openingImg").attr("src",e)});
+	
+	var f = $("#rank1").attr("data-url");
+	var g = $("#rank2").attr("data-url");
+	var h = $("#rank3").attr("data-url");
+	var i = $("#rank4").attr("data-url");
+	var j = $("#rank5").attr("data-url");
+	
+	$("#rank1").hover(function(){$("#rangkingImg").attr("src",f)
+												  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank2").hover(function(){$("#rangkingImg").attr("src",g)
+												  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank3").hover(function(){$("#rangkingImg").attr("src",h)
+												  .attr("href","${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}")});
+	$("#rank4").hover(function(){$("#rangkingImg").attr("src",i)
+		 										  .attr("href","${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}")});
+	$("#rank5").hover(function(){$("#rangkingImg").attr("src",j)
+												  .attr("href","${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}")});
 }
-
 </script>
 
 <div class="w3-content w3-section" style="max-width: 500px"></div>
@@ -131,7 +144,7 @@ function change(){
 			<div class="maintop_new open_spot">
 				<div class="maintop_left">
 					<div class="header">
-						<a href="${pageContext.request.contextPath }/">
+						<a href="${pageContext.request.contextPath }/help/notice.do">
 							<h2 class="title">
 								티켓오픈 <img
 									src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -139,55 +152,30 @@ function change(){
 							</h2>
 						</a>
 					</div>
-					
+
 					<div class="maintop_cont">
-						<ul style="list-style-type: square;">
+						<ul style="list-style-type: square;" id="ticketO">
 							<c:forEach items="${ticketOpen}" var="map" begin="0" end="0">
 								<li class="first"><a class="rangkingImgLink"
-									href="/product/28807"> <img class="rangkingImg" id="openingImg"
-										src="${map.poster }"
-										width="180" height="218" alt="">
+									href="/product/28807"> <img class="rangkingImg"
+										id="openingImg" src="${map.poster }" width="180" height="218">
 								</a></li>
 							</c:forEach>
-							
-							<c:forEach items="${ticketOpen}" var="map" begin="0" end="0">
-								<li class='rankingItem on' data-productid="28807" id="ticket1"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
-							</c:forEach>
-							<c:forEach items="${ticketOpen}" var="map" begin="1" end="1">
-								<li class='rankingItem on' data-productid="28807" id="ticket2"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
-							</c:forEach>
-							<c:forEach items="${ticketOpen}" var="map" begin="2" end="2">
-								<li class='rankingItem on' data-productid="28807" id="ticket3"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
-							</c:forEach>
-							<c:forEach items="${ticketOpen}" var="map" begin="3" end="3">
-								<li class='rankingItem on' data-productid="28807" id="ticket4"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
-							</c:forEach>
-							<c:forEach items="${ticketOpen}" var="map" begin="4" end="4">
-								<li class='rankingItem on' data-productid="28807" id="ticket5"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
+							<c:forEach items="${ticketOpen}" var="map" begin="0" end="4" varStatus="status">
+								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}" style="font-weight:bold;"
+									data-url="${map.poster }"><a
+									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
 							</c:forEach>
 						</ul>
 					</div>
 				</div>
 			</div>
+			</div>
+			<div class="inner">
 			<div class="maintop_new real_ranking">
 				<div class="maintop_left">
 					<div class="header">
-						<a href="${pageContext.request.contextPath }/">
+						<a href="${pageContext.request.contextPath }/ranking/ranking.do">
 							<h2 class="title">
 								일간 랭킹 <img
 									src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -196,45 +184,38 @@ function change(){
 						</a>
 					</div>
 					<div class="maintop_cont">
-
 						<ul id="concertRankingListUl">
-							<c:forEach items="${BoxlistT}" var="map" begin="0" end="0">
+							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
 								<li class="first"><a class="rangkingImgLink"
-									href="/product/28807"> <img class="rangkingImg" id="rangkingImg"
-										src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF154006_190903_125710.jpg"
-										width="180" height="218" alt="">
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"> <img class="rangkingImg"
+										id="rangkingImg" src="http://www.kopis.or.kr/${map.poster }" width="180" height="218"
+										alt="">
 								</a></li>
 							</c:forEach>
-							<!-- [D] 활성될 때 on 클래스 추가 -->
-							<c:forEach items="${BoxlistT}" var="map" begin="1" end="1">
+							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
 								<li class='rankingItem on' data-productid="28807" id="rank1"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">1.
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+									data-url="http://www.kopis.or.kr/${map.poster }"><a 
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;width:500px;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
-							<c:forEach items="${BoxlistT}" var="map" begin="17" end="17">
+							<c:forEach items="${BoxlistT2}" var="map" begin="0" end="0">
 								<li class='rankingItem on' data-productid="28807" id="rank2"
 									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">2.
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
-							<c:forEach items="${BoxlistT}" var="map" begin="5" end="5">
+							<c:forEach items="${BoxlistT1}" var="map" begin="1" end="1">
 								<li class='rankingItem on' data-productid="28807" id="rank3"
 									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">3.
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
-							<c:forEach items="${BoxlistT}" var="map" begin="18" end="18">
+							<c:forEach items="${BoxlistT2}" var="map" begin="1" end="1">
 								<li class='rankingItem on' data-productid="28807" id="rank4"
 									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">4.
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
-							<c:forEach items="${BoxlistT}" var="map" begin="6" end="6">
+							<c:forEach items="${BoxlistT1}" var="map" begin="2" end="2">
 								<li class='rankingItem on' data-productid="28807" id="rank5"
 									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;">5.
-										${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -253,17 +234,17 @@ function change(){
 
 		<div class="section_best">
 			<div class="inner">
-				<a href="${pageContext.request.contextPath }/">
+				<a href="${pageContext.request.contextPath }/musical/musical.do">
 					<h2 class="title">
 						베스트뮤지컬 <img
 							src="${pageContext.request.contextPath }/resources/images/plus.png"
 							alt="더보기" style="width: 30px;" />
 					</h2>
 				</a>
-				
+				<div class="suggest_wrap">
 					<ul class="best_list">
 						<c:forEach items="${BoxlistM}" var="map" begin="0" end="3">
-							<li><a href="http://www.ticketlink.co.kr/product/29652">
+							<li><a href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}">
 									<p>
 										<img src="http://www.kopis.or.kr/${map.poster }">
 									</p>
@@ -279,13 +260,13 @@ function change(){
 							</a></li>
 						</c:forEach>
 					</ul>
-	
+				</div>
 			</div>
 		</div>
 
-		<div class="section_best" style="padding-top:0px;">
+		<div class="section_best" style="padding-top: 0px;">
 			<div class="inner">
-				<a href="${pageContext.request.contextPath }/">
+				<a href="${pageContext.request.contextPath }/show/show.do">
 					<h2 class="title">
 						베스트 연극 <img
 							src="${pageContext.request.contextPath }/resources/images/plus.png"
@@ -294,7 +275,7 @@ function change(){
 				</a>
 				<ul class="best_list">
 					<c:forEach items="${BoxlistP}" var="map" begin="0" end="3">
-						<li><a href="http://www.ticketlink.co.kr/product/29652">
+						<li><a href="${pageContext.request.contextPath }/show/showDetail.do?showId=${map.mt20id}">
 								<p>
 									<img src="http://www.kopis.or.kr/${map.poster }">
 								</p>
@@ -333,7 +314,7 @@ function change(){
 				$("#wingright").removeClass("moving");
 			}
 		});
-
+	
 		setTodayViewProduct();
 
 		$("#prev_btn").on("click", clickLeftButton);

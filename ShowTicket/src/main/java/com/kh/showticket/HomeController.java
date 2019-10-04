@@ -1,11 +1,8 @@
 package com.kh.showticket;
 
-import static com.kh.showticket.common.getApi.getApi.getBoxList;
-import static com.kh.showticket.common.getApi.getApi.getConcatList;
-import static com.kh.showticket.common.getApi.getApi.getTotalBoxList;
-
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.common.postconstruct.PostConstructing;
 import com.kh.showticket.help.model.service.NoticeService;
 import com.kh.showticket.help.model.vo.NoticeTicketOpen;
 
@@ -28,6 +26,12 @@ public class HomeController {
 	@Autowired
 	NoticeService noticeService;
 
+	List<Map<String,String>> BoxlistM = PostConstructing.mBestList;
+	List<Map<String,String>> BoxlistP = PostConstructing.sBestList;
+	List<Map<String,String>> ticketOpen = PostConstructing.ticketOpenList;
+	List<Map<String,String>> dayBoxList1 = PostConstructing.dayRankList1;
+	List<Map<String,String>> dayBoxList2 = PostConstructing.dayRankList2;
+	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
@@ -36,23 +40,31 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView model,@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
 		
-		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190923&catecode=AAAA";
-		String url2 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=day&date=20190823&catecode=AAAB";
-		String url3 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate=20191011&eddate=20200101&rows=5&cpage=1&shcate=AAAA";		
-		String url4 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=9f6a9651f5e648ac95d2cc7a210a4587&stdate=20191011&eddate=20200101&rows=5&cpage=1&shcate=AAAB";		
 		
 		List<NoticeTicketOpen> list = noticeService.selectNoticeTicketOpenList(cPage);
-		 
-		model.addObject("list",list); 
-		model.addObject("BoxlistM", getBoxList(url1));
-		model.addObject("BoxlistP", getBoxList(url2));
-		model.addObject("ticketOpen",getConcatList(url3,url4));
-		model.addObject("BoxlistT", getTotalBoxList(url2,url1));
+
+		model.addObject("list",list);
 		
-		logger.debug("ticketOpen"+getConcatList(url3,url4));
-		
+		model.addObject("BoxlistM", BoxlistM);
+		model.addObject("BoxlistP", BoxlistP);
+		model.addObject("ticketOpen",ticketOpen);
+		model.addObject("BoxlistT1", dayBoxList1);
+		model.addObject("BoxlistT2", dayBoxList2);
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");
+		
+		for (Map<String,String> map: ticketOpen) {
+			logger.debug("map객체"+map);
+			NoticeTicketOpen nt = new NoticeTicketOpen();
+			nt.setPlayName(map.get("prfnm"));
+			nt.setPlayOpen(map.get("prfpd"));
+			nt.setPlayPlace(map.get("prfplcnm"));
+			nt.setPlayPoster(map.get("poster"));
+			
+			//int result = noticeService.insertOne(nt);
+		}
+		
+		
 		return model;
 	}
 	
