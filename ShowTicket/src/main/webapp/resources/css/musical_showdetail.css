@@ -144,7 +144,6 @@ button.btn_reply{
 
 
 
-@charset "utf-8";
 
 #detailContainer {
     background: none;
@@ -171,3 +170,38 @@ button.btn_reply{
     min-width: 990px;
     /* height: 20000px; */
 }
+
+
+
+/* 별점 매기는 코드입니다 jindoStarRating */
+.starrating-background {
+	background: transparent url(../resources/images/T_03.png)
+		repeat-x scroll 0 0;
+	cursor: pointer;
+	display: inline-block;
+	height: 30px;
+	margin: 0;
+	width: 125px;
+	vertical-align: middle;
+}
+
+.starrating-background span {
+	background: transparent url(../resources/images/T_01.png)
+		repeat-x scroll 0 0;
+	cursor: pointer;
+	display: inline-block;
+	height: 30px !important;
+}
+
+.starrating-background em {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+} 
+

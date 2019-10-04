@@ -24,8 +24,8 @@
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
- <link rel="stylesheet" type="text/css"
-						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css"> 
+<!--  <link rel="stylesheet" type="text/css"
+						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">  -->
 
 <%
 
@@ -307,7 +307,7 @@ $(()=>{
 
 
 
-<script>
+<!-- <script>
 	
 	
 
@@ -336,262 +336,7 @@ $(()=>{
 	} catch
 		(e) {
 	}
-</script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js/jindo.desktop.ns.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
-<script type="text/javascript">
-	//<![CDATA[
-
-	function callMemberCommonCheck () {
-		var url = "/product/" + $('#productId').val();
-		memberCommonCheck(url);
-	}
-
-	function insertProductReview () {
-		/* 	if(!checkLoginUsingCookie("tabs-2")){
-         return;
-         } */
-		var url = "/product/" + $('#productId').val();
-		if (!memberCommonCheck(url)) {
-			return;
-		}
-
-		if (!isValidReview()) {
-			return;
-		}
-
-		$("#reviewInsertButton").attr("onclick", "");
-
-		var productId = $("#productId").val();
-		$.ajax({
-			async: false,
-			type: "POST",
-			dataType: 'json',
-			url: "/product/review/insertProductReview.nhn",
-			data: {
-				productId: productId,
-				rating: $("#score").text(),
-				reviewContent: $("#reviewContent").val()
-			},
-			success: function (result) {
-				if (result.message == "validation fail") {
-					setValidationMessage(result.result);
-					return;
-				}
-				alert("후기가 등록되었습니다.");
-				getProductReviewList(1);
-				$("#reviewContent").val("");
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			},
-			error: function (request, status, error) {
-				alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
-				getProductInquiryList(1);
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			}
-		});
-	}
-
-	function deleteThisReview (reviewId) {
-		if (confirm("삭제하시겠습니까?")) {
-			var productId = $("#productId").val();
-			$.ajax({
-				type: "POST",
-				dataType: 'json',
-				url: "/product/review/deleteProductReview",
-				data: {
-					productId: productId,
-					reviewId: reviewId
-				},
-				success: function (result) {
-					if (result && result.result && result.result == "error") {
-						alert("오류가 발생하였습니다. 재로그인 후 다시 시도해주세요.");
-						return;
-					} else {
-						alert("후기를 삭제했습니다.");
-						getProductReviewList(1);
-					}
-				},
-				error: function (request, status, error) {
-					alert("오류가 발생하였습니다. 관리자에게 문의하세요");
-				}
-			});
-		}
-	}
-
-	function isValidReview () {
-		var rating = $.trim($("#score").text());
-		var reviewContent = $.trim($("#reviewContent").val());
-
-		if (rating == "" || rating == null) {
-			alert("별점을 선택해주세요.");
-			return false
-		} else if (reviewContent == "" || reviewContent == null) {
-			alert("후기를 입력해주세요.");
-			return false
-		} else {
-			return true;
-		}
-	}
-
-	function setValidationMessage (validationList) {
-		var starReviewErrors = $("#star_review_errors");
-		starReviewErrors.html('');
-		for (var i = 0; i < validationList.length; i++) {
-			contents = "<p style='color:red; margin-top:5px;'>" + validationList[i] + "</p>";
-			starReviewErrors.append(contents);
-		}
-	}
-
-	function getProductReviewList (page) {
-
-		var ajaxData = {
-			productId: $("#productId").val(),
-			page: page
-		};
-
-		if ($("#review_search_type").val() == "memberId") {
-			ajaxData.memberId = $.trim($("#review_search_key").val());
-		} else {
-			ajaxData.reviewContent = $.trim($("#review_search_key").val());
-		}
-
-		$.ajax({
-			cache: false,
-			dataType: "json",
-			url: "/product/review/getProductReviewList.nhn",
-			data: ajaxData,
-			success: function (result) {
-				displayReviewList(result.result.result);
-				displayPage(result.result.paging, $('#pagination'));
-				makeBannerLayer(result.result.productReview)
-				resetReviewData(result.result.ratingAverage, result.result.countReviewe);
-			}
-		});
-	}
-
-	function makeBannerLayer (productReview) {
-		var imgSrc = this.getBannerImageSrc(productReview.productId);
-		if (imgSrc == "") {
-			return;
-		}
-
-		if ($(".banner_area").find('img').length === 0) {
-			$(".banner_area").append(imgSrc);
-		}
-	}
-
-
-	function getBannerImageSrc (productId) {
-		if (productId === 28633) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_city_v2.jpg"/>';
-		}
-
-		if (productId === 29652) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_love.jpg"/>'
-		}
-	}
-
-
-	function resetReviewData (ratingAverage, countReviewe) {
-		if (ratingAverage != null) {
-			$("#ratingAverage").text(ratingAverage.toFixed(1));
-		}
-		$("#ratingAverageStar").css("width", ratingAverage * 20 + "%");
-		$("#countReviewe").text(countReviewe + "명");
-		$("#reviewContent").val("");
-		$("#score").text("");
-		$("#star_review_errors").html('');
-		oStarRating.reset();
-	}
-
-	function displayReviewList (reviewList) {
-		var searchedReviewList = $('#reviewUl');
-		searchedReviewList.html('');
-		for (var i = 0; i < reviewList.length; i++) {
-			var date = new Date(reviewList[i].reviewDatetime);
-			var list = $('<li>');
-			list.appendTo(searchedReviewList);
-			var contents = "<div class='review_info'><dl class='star_average'><dt>별점</dt><dd class='grade_star'><span class='star_gauge' style='width: " + (reviewList[i].rating * 20) + "%'></span></dd>" +
-				"<dt>아이디</dt><dd class='review_user'>" + reviewList[i].memberId + "</dd>" +
-				"<dt>날짜</dt><dd class='review_date'>" + $.formatDateTime('yy.mm.dd hh:ii', date) + "</dd>";
-			if (reviewList[i].isMyReview) {
-				contents += '<dt>삭제여부</dt><dd class="review_delete"><a href="javascript:;" onclick="deleteThisReview(' + reviewList[i].reviewId + ')" class="delete">댓글삭제</a></dd>';
-			}
-			contents += "</dl></div>" + reviewList[i].reviewContent;
-			list.append(contents);
-		}
-
-		if ($.trim($("#review_search_key").val()) == "") {
-			$("#displayAllReviewBtn").css("visibility", "hidden");
-		} else {
-			$("#displayAllReviewBtn").css("visibility", "visible");
-		}
-
-		if (reviewList.length == 0) {
-			var contents = '<li class="no_data">등록된 후기가 없습니다.</li>';
-			searchedReviewList.append(contents);
-		}
-	}
-
-	function goPage (page) {
-		getProductReviewList(page);
-	}
-
-	function openReviewList () {
-		if ($("#review_select_list").css("display") == "block") {
-			$("#review_select_list").css("display", "none");
-			return;
-		}
-		$("#review_select_list").css("display", "block");
-	}
-
-	function closeReviewSelectList (obj) {
-		$("#review_search_option").text($(obj).text());
-		if ($(obj).text() == '내용') {
-			$("#review_search_type").val("reviewContent");
-		} else {
-			$("#review_search_type").val("memberId");
-		}
-		$("#review_select_list").css("display", "none");
-	}
-
-	function searchReview () {
-		getProductReviewList(1);
-	}
-
-	function searchReviewUsingEnter () {
-		$('#review_search_key').keyup(function (e) {
-			if (e.keyCode == 13) {
-				getProductReviewList(1);
-			}
-		});
-	}
-
-	function displayAllreview () {
-		$("#review_search_key").val("");
-		getProductReviewList(1);
-	}
-
-	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
-		nStep: 0.5,
-		nMaxValue: 5,
-		nDefaultValue: 0,
-		bSnap: true
-	}).attach({
-		set: function (oCustomEvent) {
-			jindo.$("score").innerHTML = oCustomEvent.nValue;
-		}
-	});
-
-	//]]>
-
-</script>
+</script> -->
 
 
 <script type="text/javascript">
@@ -618,8 +363,6 @@ $(()=>{
 	meta.setAttribute('content', 'detail');
 	document.getElementsByTagName('head')[0].appendChild(meta);
 </script>
-
-
 <div id="detailContainer">
 
 
@@ -869,6 +612,7 @@ $(()=>{
 										style="float: left;">
 										<span><em></em></span>
 									</div>
+									
 									<span class="blind">평점</span> <span class="star_score"
 										id="score" name="rating"></span>
 								</div>
@@ -938,6 +682,267 @@ $(()=>{
 
 					</div>
 				</div>
+<!-- 후기 별점 api  -->				
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/resources/js/jindo2.ns.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
+
+<script type="text/javascript">
+	//<![CDATA[
+
+	/* function callMemberCommonCheck () {
+		var url = "/product/" + $('#productId').val();
+		memberCommonCheck(url);
+	} */
+
+	function insertProductReview () {
+		/* 	if(!checkLoginUsingCookie("tabs-2")){
+         return;
+         } */
+         
+         
+         
+         
+		/* var url = "/product/" + $('#productId').val();
+		if (!memberCommonCheck(url)) {
+			return;
+		}
+
+		if (!isValidReview()) {
+			return;
+		}
+
+		$("#reviewInsertButton").attr("onclick", "");
+
+		var productId = $("#productId").val();
+		$.ajax({
+			async: false,
+			type: "POST",
+			dataType: 'json',
+			url: "/product/review/insertProductReview.nhn",
+			data: {
+				productId: productId,
+				rating: $("#score").text(),
+				reviewContent: $("#reviewContent").val()
+			},
+			success: function (result) {
+				if (result.message == "validation fail") {
+					setValidationMessage(result.result);
+					return;
+				}
+				alert("후기가 등록되었습니다.");
+				getProductReviewList(1);
+				$("#reviewContent").val("");
+				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
+			},
+			error: function (request, status, error) {
+				alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
+				getProductInquiryList(1);
+				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
+			}
+		}); */
+	}
+
+	/* function deleteThisReview (reviewId) {
+		if (confirm("삭제하시겠습니까?")) {
+			var productId = $("#productId").val();
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: "/product/review/deleteProductReview",
+				data: {
+					productId: productId,
+					reviewId: reviewId
+				},
+				success: function (result) {
+					if (result && result.result && result.result == "error") {
+						alert("오류가 발생하였습니다. 재로그인 후 다시 시도해주세요.");
+						return;
+					} else {
+						alert("후기를 삭제했습니다.");
+						getProductReviewList(1);
+					}
+				},
+				error: function (request, status, error) {
+					alert("오류가 발생하였습니다. 관리자에게 문의하세요");
+				}
+			});
+		}
+	}
+
+	function isValidReview () {
+		var rating = $.trim($("#score").text());
+		var reviewContent = $.trim($("#reviewContent").val());
+
+		if (rating == "" || rating == null) {
+			alert("별점을 선택해주세요.");
+			return false
+		} else if (reviewContent == "" || reviewContent == null) {
+			alert("후기를 입력해주세요.");
+			return false
+		} else {
+			return true;
+		}
+	}
+
+	function setValidationMessage (validationList) {
+		var starReviewErrors = $("#star_review_errors");
+		starReviewErrors.html('');
+		for (var i = 0; i < validationList.length; i++) {
+			contents = "<p style='color:red; margin-top:5px;'>" + validationList[i] + "</p>";
+			starReviewErrors.append(contents);
+		}
+	}
+
+	function getProductReviewList (page) {
+
+		var ajaxData = {
+			productId: $("#productId").val(),
+			page: page
+		};
+
+		if ($("#review_search_type").val() == "memberId") {
+			ajaxData.memberId = $.trim($("#review_search_key").val());
+		} else {
+			ajaxData.reviewContent = $.trim($("#review_search_key").val());
+		}
+
+		$.ajax({
+			cache: false,
+			dataType: "json",
+			url: "/product/review/getProductReviewList.nhn",
+			data: ajaxData,
+			success: function (result) {
+				displayReviewList(result.result.result);
+				displayPage(result.result.paging, $('#pagination'));
+				makeBannerLayer(result.result.productReview)
+				resetReviewData(result.result.ratingAverage, result.result.countReviewe);
+			}
+		});
+	}
+
+	function makeBannerLayer (productReview) {
+		var imgSrc = this.getBannerImageSrc(productReview.productId);
+		if (imgSrc == "") {
+			return;
+		}
+
+		if ($(".banner_area").find('img').length === 0) {
+			$(".banner_area").append(imgSrc);
+		}
+	}
+
+
+	function getBannerImageSrc (productId) {
+		if (productId === 28633) {
+			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_city_v2.jpg"/>';
+		}
+
+		if (productId === 29652) {
+			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_love.jpg"/>'
+		}
+	}
+
+
+	function resetReviewData (ratingAverage, countReviewe) {
+		if (ratingAverage != null) {
+			$("#ratingAverage").text(ratingAverage.toFixed(1));
+		}
+		$("#ratingAverageStar").css("width", ratingAverage * 20 + "%");
+		$("#countReviewe").text(countReviewe + "명");
+		$("#reviewContent").val("");
+		$("#score").text("");
+		$("#star_review_errors").html('');
+		oStarRating.reset();
+	}
+
+	function displayReviewList (reviewList) {
+		var searchedReviewList = $('#reviewUl');
+		searchedReviewList.html('');
+		for (var i = 0; i < reviewList.length; i++) {
+			var date = new Date(reviewList[i].reviewDatetime);
+			var list = $('<li>');
+			list.appendTo(searchedReviewList);
+			var contents = "<div class='review_info'><dl class='star_average'><dt>별점</dt><dd class='grade_star'><span class='star_gauge' style='width: " + (reviewList[i].rating * 20) + "%'></span></dd>" +
+				"<dt>아이디</dt><dd class='review_user'>" + reviewList[i].memberId + "</dd>" +
+				"<dt>날짜</dt><dd class='review_date'>" + $.formatDateTime('yy.mm.dd hh:ii', date) + "</dd>";
+			if (reviewList[i].isMyReview) {
+				contents += '<dt>삭제여부</dt><dd class="review_delete"><a href="javascript:;" onclick="deleteThisReview(' + reviewList[i].reviewId + ')" class="delete">댓글삭제</a></dd>';
+			}
+			contents += "</dl></div>" + reviewList[i].reviewContent;
+			list.append(contents);
+		}
+
+		if ($.trim($("#review_search_key").val()) == "") {
+			$("#displayAllReviewBtn").css("visibility", "hidden");
+		} else {
+			$("#displayAllReviewBtn").css("visibility", "visible");
+		}
+
+		if (reviewList.length == 0) {
+			var contents = '<li class="no_data">등록된 후기가 없습니다.</li>';
+			searchedReviewList.append(contents);
+		}
+	}
+
+	function goPage (page) {
+		getProductReviewList(page);
+	}
+
+	function openReviewSelectList () {
+		if ($("#review_select_list").css("display") == "block") {
+			$("#review_select_list").css("display", "none");
+			return;
+		}
+		$("#review_select_list").css("display", "block");
+	}
+
+	function closeReviewSelectList (obj) {
+		$("#review_search_option").text($(obj).text());
+		if ($(obj).text() == '내용') {
+			$("#review_search_type").val("reviewContent");
+		} else {
+			$("#review_search_type").val("memberId");
+		}
+		$("#review_select_list").css("display", "none");
+	}
+
+	function searchReview () {
+		getProductReviewList(1);
+	}
+
+	function searchReviewUsingEnter () {
+		$('#review_search_key').keyup(function (e) {
+			if (e.keyCode == 13) {
+				getProductReviewList(1);
+			}
+		});
+	}
+
+	function displayAllreview () {
+		$("#review_search_key").val("");
+		getProductReviewList(1);
+	}
+	*/
+	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
+		nStep: 0.5,
+		nMaxValue: 5,
+		nDefaultValue: 0,
+		bSnap: true
+	}).attach({
+		set: function (oCustomEvent) {
+			jindo.$("score").innerHTML = oCustomEvent.nValue;
+		}
+	}); 
+
+	//]]>
+</script>
+<!--리뷰 후기 영역  -->				
+				
 				<div class="tabs-Num" id="tabs-3">
 
 						
