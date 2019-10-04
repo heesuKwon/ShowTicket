@@ -27,4 +27,15 @@
 	
 	</insert> -->
 	
+	<select id="selectOne" resultType="NoticeTicketOpen">
+		select *
+		from notice
+		where notice_no = #{noticeNo}
+	</select>
+	
+	<insert id="noticeWriteEnd">
+		insert into notice
+		values (seq_notice_no.nextval, #{noticeTitle}, #{noticeContent}, default, #{noticeCategory}, default, null, null, null, null)
+	</insert>
+	
 </mapper>

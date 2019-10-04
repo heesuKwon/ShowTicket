@@ -11,7 +11,7 @@ public class NoticeTicketOpen {
 	private String noticeContent;
 	private Date noticeEnrollDate;
 	private String noticeCategory;
-	private int notice_count;
+	private int noticeCount;
 	private String playName;
 	private String playOpen;
 	private String playPlace;
