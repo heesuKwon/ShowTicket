@@ -14,7 +14,7 @@
 
 <script>
 function deleteStandBy(showId){
-	console.log("실행은 되니?");
+
 	location.href="${pageContext.request.contextPath}/member/deleteStandBy.do?showId="+showId;
 };
 $(()=>{
@@ -68,7 +68,8 @@ $(()=>{
 				</c:forEach>
 			</table>
 			</div>
-				<div id="showWList">
+			
+			<div id="showWList">
 			<table id="showWList" class="playList">
 				<tr>
 					<th>공연명</th>
@@ -88,6 +89,7 @@ $(()=>{
 
 			<br />
 
+		
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
 					<li class="page-item disabled"><a class="page-link" href="#"
@@ -106,7 +108,7 @@ $(()=>{
 						style="background-color: #F2F2F2; border: 0px;">></a></li>
 				</ul>
 			</nav>
-		</form>
+	
 	</div>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
