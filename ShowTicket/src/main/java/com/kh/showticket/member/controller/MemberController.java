@@ -30,6 +30,8 @@ import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
+import static com.kh.showticket.common.getApi.getApi.*;
+
 
 @RequestMapping("/member")
 @Controller
@@ -114,10 +116,47 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myStandBy.do")
-	public String myStandBy() {
+	public ModelAndView myStandBy(ModelAndView mav) {
+		
+		//임시
+		String memberLoggedIn = "honggd";
+		
+		List<String> standByList = memberService.selectMyStandByList(memberLoggedIn);
+		List<Map<String, String>> myStandByList = null;
+		
+		for(String showId : standByList) {
+			String url = "http://kopis.or.kr/openApi/restful/pblprfr/"+showId+"?service=3127d89913494563a0e9684779988063";
+			myStandByList = getList(url);	
+		}
 
-		return "/member/myStandBy";
+		logger.debug("myStandByList={}", myStandByList);
+
+		mav.addObject("myStandByList", myStandByList);
+		
+		mav.setViewName("member/myStandBy");
+		return mav;
 	}
+	
+	@RequestMapping("/deleteStandBy.do")
+	public ModelAndView deleteMyStandBy(ModelAndView mav,
+										@RequestParam String showId) {
+		logger.debug("showId={}", showId);
+		
+		String memberLoggedIn = "honggd";
+		
+		memberService.deleteMyStandBy(memberLoggedIn, showId);
+		
+		String msg = "대기가 취소되었습니다.";
+		String loc = "/member/myStandBy.do";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		mav.setViewName("common/msg");
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping("/myInterest.do")
 	public String myInterest() {
 

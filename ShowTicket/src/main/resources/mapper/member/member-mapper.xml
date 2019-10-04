@@ -63,4 +63,11 @@
 		select * from point where member_id = #{memberLoggedIn}
 	</select>
 	
+	<select id="selectStandByList"
+			resultType="string">
+		select waiting_showId from waiting where member_id = #{memberLoggedIn}
+	</select>
+	<delete id="deleteMyStandBy">
+		delete from waiting where member_id = #{memberLoggedIn} and waiting_showid = #{showId}
+	</delete>
 </mapper>

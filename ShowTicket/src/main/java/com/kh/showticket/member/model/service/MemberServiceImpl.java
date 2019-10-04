@@ -1,10 +1,13 @@
 package com.kh.showticket.member.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.showticket.common.email.MailUtils;
@@ -16,6 +19,9 @@ import com.kh.showticket.member.model.vo.MyPoint;
 
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED,
+isolation=Isolation.READ_COMMITTED,
+rollbackFor=Exception.class)
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
@@ -86,6 +92,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<MyPoint> selectMyPointList(String memberLoggedIn) {
 		return memberDAO.selectMyPointList(memberLoggedIn);
+	}
+
+	@Override
+	public List<String> selectMyStandByList(String memberLoggedIn) {
+		return memberDAO.selectMyStandByList(memberLoggedIn);
+	}
+
+	@Override
+	public void deleteMyStandBy(String memberLoggedIn, String showId) {
+		memberDAO.deleteMyStandBy(memberLoggedIn, showId);
 	}
 
 }
