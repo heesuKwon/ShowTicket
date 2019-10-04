@@ -85,4 +85,7 @@
 		where rnum between #{startContent} and #{endContent}
 	</select>
 	
+	<update id="updateReservation">
+		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberId}
+	</update>
 </mapper>

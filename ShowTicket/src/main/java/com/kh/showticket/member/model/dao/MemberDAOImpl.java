@@ -72,6 +72,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("member.selectReservationPage", content);
 	}
 
+	@Override
+	public int updateReservation(Map<String, Object> cancel) {
+		return sqlSession.update("member.updateReservation", cancel);
+	}
+
 
 	
 }

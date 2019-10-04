@@ -40,18 +40,12 @@ $(()=>{
 		getReservation(3);
 	});
 	
-	/* $("input[name='cancel").click(function() {
-		var select = $("input[name='cancel']").parent("td").prev().prev();
-		console.log(select);
-	});
-	
-	$("#test").click(function() {
-		//getPage();
-	}); */
+	var a = 0;
 	
 	function getReservation(num) {
 		$.ajax({
 			type: "POST",
+			async: false,
 			url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
 			dataType: "json",
 			cache: false,
@@ -59,25 +53,33 @@ $(()=>{
 				memberId: "${memberId}",
 				num: num,
 				s: "${page.startContent }",
-				e: "${page.endContent }"
+				e: "${page.endContent }",
+				page: a
 			},
 			success: function(data) {
+				//var test = '${pageContext.request.contextPath}/member/reservationTermAjax.do';
+				//console.log("test값은?",test);
+				
 				var html = "";
 				var list = data.reservationList;
-				//var page = "";
 				var status = "";
-				//var barNo = ${page.barNo};
-				//var barEnd = ${page.barEnd};
-				//var totalPage = ${page.totalPage};
-				//var cPage = ${page.cPage};
-				//console.log(barNo+"원래 페이지바 시작 숫자는");
-				//console.log(barEnd+"원래 페이지바 마지막 숫자는");
-				//console.log(totalPage+"원래 totalPage는");
+				
+				var page = "";
+				var totalPage = data.totalPage;//컨트롤러에서 보내주는게 확실함
+				
+				var barNo = data.barNo;
+				var barEnd = data.barEnd;
+				var cPage = data.cPage;
+				console.log("원래 totalPage는?",totalPage);
+				console.log("원래 페이지바 시작 숫자 barNo은?",barNo);
+				console.log("원래 페이지바 마지막 숫자는?",barEnd);
+				console.log("cPage는?",cPage);
+				
 				console.log(data);
 				
 				html += "<tr>";
 				html += "<th id='num'>예매번호</th>";
-				html += "<th>공연명</th>";
+				html += "<th colspan='2'>공연명</th>";
 				html += "<th id='date'>예매일</th>";
 				html += "<th id='date'>관람일시</th>";
 				html += "<th id='count'>매수</th>";
@@ -86,16 +88,24 @@ $(()=>{
 				html += "</tr>";
 				
 				for(var i=0; i<list.length; i++){
-					console.log(list[i].ticketNo);
+					//console.log(list[i].ticketNo);
+					status = list[i].ticketStatus.trim();
+
 					html += "<tr>";
 					html += "<td>"+list[i].ticketNo+"</td>";
 					html += "<td>"+list[i].ticketShowId+"</td>";
+					if($.trim(status) == 'Y'){
+						html += "<td>";
+						html += "<button type='button' class='cancelBtn_' onclick='goCancel("+list[i].ticketNo+");'>예매취소</button>";
+						html += "</td>";
+					}
+					else if($.trim(status) != "Y"){
+						html += "<td></td>";
+					}
 					html += "<td>"+list[i].ticketEnrollDate+"</td>";
 					html += "<td>"+list[i].ticketDate+"</td>";
 					html += "<td>"+list[i].ticketCount+"</td>";
 					html += "<td>"+list[i].ticketCancel+"</td>";
-					status = list[i].ticketStatus.trim();
-					console.log(status);
 					if($.trim(status) == "Y"){
 						html += "<td>예매완료</td>";						
 					}
@@ -103,25 +113,95 @@ $(()=>{
 						html += "<td>예매취소</td>";
 					}
 					html += "</tr>";
+				}			
+					
+				/* page바 부분 */
+				page += "<ul class='pagination justify-content-center'>";
+				page += "<li class='page-item disabled'>";
+				if(barNo == 1){
+					/* 통과 */
+					page += "<a class='page-link' aria-disabled='true' style='background-color: yellow; border: 0px;'>&lt;</a>";
+					//console.log("barNo==1일떄"+barNo);
 				}
-				console.log(list.length);
+				else{
+					console.log("barNo이 1이 아니면 이전페이지 작동해야함");
+					page += "<a class='page-link' aria-disabled='true' style='background-color: red; border: 0px;' href='${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+(barNo-1)+"'>&lt;</a>";
+				}
+				page += "</li>";
+				while(!(barNo > barEnd && barNo > totalPage)){
+					if(cPage == barNo){
+						console.log("잘나오면 클래스 속성주기 글씨 진하게");
+						page += "<li class='page-item'>";
+						page += "<a class='page-link' href='' style='color: black; border: 0px;'>"+barNo+"</a>"
+						page += "</li>";
+						console.log("cPage==barNo"+barNo);
+					}
+					else{
+						console.log("barNo잘 찍혀라ㅠㅠ"+barNo);
+						page += "<li class='page-item'>";
+						/*잘나오는거 page += "<a class='page-link test' href='${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+barNo+"' style='color: gray; border: 0px;'>"+barNo+"</a>"; */
+ 						page += "<a class='page-link test' onclick='aClick("+barNo+");' style='color: gray; border: 0px;'>"+barNo+"</a>";
+						page += "</li>";
+					}
+						//a = barNo;
+						//console.log("dddddddddddddsdfsfdd"+a);
+						barNo = barNo + 1;
+					console.log("barNo 몇??"+barNo);
+				}
+				page += "<li class='page-item disabled'>";
+				page += "<a class='page-link' href='#' tabindex='1' aria-disabled='true' style='background-color: #F2F2F2; border: 0px;'>&gt;</a>";
+				page += "</li>";
+				page += "</ul>";
+				//console.log(list.length);
 				console.log("성공!!!!!"+list);
-				/* alert("ajax 성공!");	 */
+				
 				$("#ListTable").html(html);
-				//$("#page").html(page);
+				$("#page").html(page);
 			},
 			error: function(data) {
 				console.log("실패ㅜㅠ"+data);
 				alert("ajax 실패ㅠㅠ");
-				console.log(data[0].ticketNo);
+				//console.log(data[0].ticketNo);
 			}
 		});		
 	};
-	
-	/* function getPage() {
+
 		
-	} */
 });
+	function aClick(barNo) {
+		a = barNo;
+		alert(a);
+	//url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
+	location.href = "${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+a;
+	}
+</script>
+
+<form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancle.do" method="post">
+	<input type="hidden" name="memberId" value="${memberId }"/>
+</form>
+<script>
+function goCancel(ticketNo) {
+
+	var cancelTNo = ticketNo;
+	console.log("취소할 예매번호",cancelTNo);
+	
+	if(confirm("예매를 취소하시겠습니까?")){
+		$(".cancel").append("<input type='hidden' name='cancelTNo' value='"+cancelTNo+"'/>").submit();
+	}
+	else{
+		return;
+	}
+}
+
+/* function aClick(barNo) {
+	var b = barNo;
+	//var s = ${memberId};
+	alert(b);
+	//location.href = "${pageContext.request.contextPath}/demo/updateDev.do?devNo="+devNo;
+	//url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
+	location.href = "${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+barNo;
+
+} */
 </script>
 
 <div id="container">
@@ -164,7 +244,7 @@ $(()=>{
 						<c:choose>
 							<c:when test="${status eq 'Y'}">
 								<td>
-									<input type="button" class="cancelBtn_" value="예매취소" />
+									<button type="button" class="cancelBtn_" onclick="goCancel(${list.ticketNo});">예매취소</button>
 								</td>
 							</c:when>
 							<c:when test="${status eq 'N'}">
@@ -189,8 +269,8 @@ $(()=>{
 			<br />
 			
 			<nav id="page" aria-label="Page navigation example" >
-				<ul class="pagination justify-content-center">
 				<!-- 위에부터 정리하고 다시 -->
+				<!-- <ul class="pagination justify-content-center"> -->
 		<%-- 		<c:set var="barNo" value="${page.barNo }"/>
 				<c:set var="barEnd" value="${page.barEnd }"/>
 					<li class="page-item disabled">
@@ -205,7 +285,7 @@ $(()=>{
 					<li class="page-item disabled">
 						<a class="page-link" href="#" tabindex="1" aria-disabled="true" style="background-color: #F2F2F2; border: 0px;">&gt;</a>
 					</li>  --%>
-				</ul>
+				<!-- </ul> -->
 			</nav>
 			<br />
 			
