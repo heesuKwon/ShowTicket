@@ -21,13 +21,13 @@
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a></li>
 			</ul>
-
+	
 
 		<div class="event_cont_box event_cont_box_v2">
                 <dl class="evt_detail">
                    	<div class="evt_inner">
 	                    <dd class="evt_title" id="eventTitle">
-	                       <h2><span>[응모]</span>뮤지컬 <span>&lt;사랑했어요&gt;</span> 관람평 이벤트</h2> 
+	                       <h2><span>[특가]</span>${dcList.showGenre } <span>&lt;${dcList.showName }&gt;</span> 특가할인 이벤트</h2> 
 	                    </dd>
                   	</div>
                  
@@ -35,19 +35,19 @@
 	                    <dd class="evt_date">
 	                    	<h6>
 	                    		<span>이벤트 기간 </span>
-	                    		<span>2019.09.20~2019.10.04</span>
+	                    		<span>${dcList.disCountStartDate } ~${dcList.disCountEndDate } </span>
 	                    	</h6>
 	                         <button type="button" id="detailView" class="btn btn-secondary ">공연 정보 상세보기</button> 
 	                    </dd>
 	                    <div class="container-t">
-	                    	<h2><span>Showticket</span>과 뮤지컬<span>&lt;뮤지컬제목&gt;</span>가 함께하는 이벤트</h2>
+	                    	<h2><span>Showticket</span>과 ${dcList.showGenre }<span>&lt;${dcList.showName }&gt;</span>가 함께하는 이벤트</h2>
 	                    </div>
 	                    <dd class="evt_cont">
 	                       
 	                        <div>
-	                        	<img src="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" alt="뮤지컬<사랑했어요>관람후기이벤트" border="0" usemap="#Map">
+	                        	<img src="${dcList.disCountImg }" alt="뮤지컬<사랑했어요>관람후기이벤트" border="0" usemap="#Map">
 				                <div class="inner">
-				                 		<h6><strong><span>뮤지컬&lt;뮤지컬명&gt;에 대한 기대평을 남겨주세요. </strong><br />
+				                 		<h6><strong><span>${dcList.showGenre }&lt;${dcList.showName }&gt;에 대한 기대평을 남겨주세요. </strong><br />
 										
 										기대평을 남겨주신 분 중, 추첨을 통해 총 10명의 회원님께 <br />
 										
@@ -69,7 +69,7 @@
 								  </tr>
 				                   <tr>
 								     <th>이벤트 기간</th>
-								     <td>이벤트 기간</td>
+								     <td>${dcList.disCountStartDate } ~${dcList.disCountEndDate }</td>
 								  </tr>
 				                   <tr>
 								     <th>당첨자 발표</th>
@@ -84,7 +84,7 @@
 				   
 				                
 				  			</div>
-				  			<div id="btnbox" style="width:60%;" >
+				  			<div id="btnbox" style="width:65%;" >
 			                <button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button> 
 				  			</div>
 				  		
@@ -124,20 +124,6 @@
 					</tr>
 					
 					
-					<tr class="level2">
-						<td>
-							<sub class="comment-writer"></sub>
-							<sub class="comment-date"></sub>
-							<br />
-							
-						</td>
-						<td>
-								
-							</td>
-						
-						
-						</tr>
-					
 					</table>
 				
 					</div>
@@ -154,13 +140,13 @@
 <style>
 div#btnbox{ margin-left: 18%; margin-top: 20px; padding-bottom: 20px;}
 dl.evt_detail>div.event_inner{position: absolute; background: #8f01a3; border-radius: 10px; width: 82px;height: 40px;left: 80%; top:32px;	}
-div.evt_content{ height: 200px; margin-left: 23%;width: 443px;}
+div.evt_content{ height: 200px; margin-left: 20%;width: 443px;}
 div.evt_content table{font-family: 'Gothic A1', sans-serif; margin-left: 10%; margin-top:5%;width: 443px;}
 div.evt_content table th ,td{padding-bottom: 25px;}
 div.evt_content table th ,td{ font-size: 15px;}
 button#rebtn{width: 92.5px;height: 56.25px;} 
 dd.evt_date>h6>span {color:gray;}
-div#comment-container{margin-left: 18%;  width: 493px;}
+div#comment-container{margin-left: 20%;  width: 493px;}
 div.comment-editor{    width: 493px;}
 #boardCommentContent{margin-left: 3px; width: 393px;}
 button#detailView{margin-left: 40%;     position: absolute; top: 87px; left: 300px;}

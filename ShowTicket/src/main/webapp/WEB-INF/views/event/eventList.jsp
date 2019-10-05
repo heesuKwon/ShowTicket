@@ -31,41 +31,43 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		</ul>
 		<h2 class="title">특가 진행</h2>
 			<button type="button" class="btn btn-info" id="saleWritebtn" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
-		<ul class="event_top_list">
-			<c:forEach items="${dcList }" var="dcList">
-			<li>
-				
-				
-				<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${dcList.showId }"> 
+		<c:if test="${empty dcList }"> <br /> <h2>진행중인 이벤트가 없습니다.</h2><br /></c:if>
+		<c:if test="${!empty dcList }"> 
+		
+			<ul class="event_top_list" >
+				<c:forEach items="${dcList }" var="dcList">
+				<li showId="${dcList.showId }">
 					
-					<img
-					src="${dcList.disCountImg}"
-					alt="poster" width="285" height="386">
-					
-					<div class="event_top_info">
-						<input type="hidden" name="evtID" value="${dcList.showId }" />
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[초대]  ${dcList.showGenre} </span> <br />
-								
-								&lt; ${dcList.showName} &gt;
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								 기대평 이벤트  
-							</dd>
-							<dt>기간</dt>
-							<dd class="event_date"> ${dcList.disCountStartDate} ~ ${dcList.disCountEndDate}</dd>
-						</dl>
-					</div>
-				</a>
-				<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
-			</li>
-			</c:forEach>
-
-		</ul>
-
+					<a href="${pageContext.request.contextPath }/event/eventView.do?showId=${dcList.showId }"> 
+						
+						<img
+						src="${dcList.disCountImg}"
+						alt="poster" width="285" height="386">
+						
+						<div class="event_top_info">
+							<input type="hidden" name="evtID" value="${dcList.showId }" />
+							<dl>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[특가]  ${dcList.showGenre} </span> <br />
+									
+									&lt; ${dcList.showName} &gt;
+								</dd>
+								<dt>이벤트 내용</dt>
+								<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+									 특가 할인 이벤트  
+								</dd>
+								<dt>기간</dt>
+								<dd class="event_date"> <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountStartDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountEndDate}"/></dd>
+							</dl>
+						</div>
+					</a>
+					<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
+				</li>
+				</c:forEach>
+	
+			</ul>
+		</c:if>
 		<h2 class="small-title">전체 이벤트</h2>
 		<!-- 이벤트 글쓰기 페이지  -->
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"

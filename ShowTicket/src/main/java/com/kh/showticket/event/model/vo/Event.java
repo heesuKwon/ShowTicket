@@ -15,6 +15,9 @@ public class Event {
 	private String eventTimeMen; 
 	private String showId; 
 	private String eventKind;
+	
+	
+	
 	public Event() {
 		super();
 		// TODO Auto-generated constructor stub

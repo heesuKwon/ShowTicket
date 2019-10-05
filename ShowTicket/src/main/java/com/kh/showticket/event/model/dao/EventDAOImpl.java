@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.showticket.event.model.vo.Event;
+import com.kh.showticket.event.model.vo.EventAttachment;
 
 @Repository
 public class EventDAOImpl implements EventDAO {
@@ -25,10 +26,15 @@ public class EventDAOImpl implements EventDAO {
 	}
 
 	@Override
-	public int insertEvent(Event event) {
-		logger.info("eventDAO={}",event);
-		return session.insert("event.insertEvent", event);
+	public int insertEAttachment(EventAttachment a) {
+		return session.insert("event.insertEAttachment", a);
 	}
 
+	@Override
+	public int insertEventEnd(Event event) {
+		return session.insert("event.insertEventEnd", event);
+	}
+
+	
 
 }

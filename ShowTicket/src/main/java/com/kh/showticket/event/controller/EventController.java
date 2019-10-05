@@ -2,6 +2,7 @@ package com.kh.showticket.event.controller;
 
 import static com.kh.showticket.common.getApi.getApi.getConcatList;
 
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +15,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.util.HelloSpringUtils;
 import com.kh.showticket.event.model.exception.EventException;
 import com.kh.showticket.event.model.service.DiscountService;
+import com.kh.showticket.event.model.service.EndDiscountService;
 import com.kh.showticket.event.model.service.EventService;
 import com.kh.showticket.event.model.vo.Discount;
+import com.kh.showticket.event.model.vo.EndDiscount;
 import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventAttachment;
 
@@ -35,6 +39,9 @@ public class EventController {
 
 	@Autowired 
 	DiscountService discountService;
+	
+	@Autowired 
+	EndDiscountService enddiscountService;
 
 	@Autowired 
 	EventService eventService;
@@ -49,7 +56,7 @@ public class EventController {
 		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20190923&cpage=1&rows=2&shcate=AAAB";
 
 		List<Discount> dcList = discountService.selectdcList();
-	
+		
 		mav.setViewName("event/eventList");
 		mav.addObject("dcList", dcList);
 		mav.addObject("eventList",getConcatList(url1,url2));
@@ -60,7 +67,9 @@ public class EventController {
 	@RequestMapping("/endEventList.do")
 	public ModelAndView endEvent(ModelAndView mav) {
 		logger.debug("endEvent페이지 요청");
+		List<EndDiscount> EdcList = enddiscountService.selectEdcList();
 
+		mav.addObject("EdcList", EdcList);
 		mav.setViewName("event/endEventList");
 		return mav;
 	}
@@ -78,14 +87,12 @@ public class EventController {
 
 
 
-		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190123&eddate=20191011&cpage=1&rows=20&shcate=AAAA";
-		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190123&eddate=20191011&cpage=1&rows=20&shcate=AAAB";
+		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191021&cpage=1&rows=20&shcate=AAAA";
+		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191021&cpage=1&rows=20&shcate=AAAB";
 
 		mav.setViewName("/event/addSaleEvent");
 
-		mav.addObject("eventList",getConcatList(url1,url2));
-
-
+		mav.addObject("evt",getConcatList(url1,url2));
 
 
 		return mav;
@@ -101,22 +108,23 @@ public class EventController {
 	public ModelAndView eventWrite(ModelAndView mav) {
 		logger.debug("eventWrite페이지 요청");
 		
+		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191025&cpage=1&rows=3&shcate=AAAA";
+		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191025&cpage=1&rows=3&shcate=AAAB";
 		
-		String url1="http://www.kopis.or.kr/openApi/restful/pblprfr/?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191030&cpage=1&rows=5&shcate=AAAA";
-		String url2="http://www.kopis.or.kr/openApi/restful/pblprfr?service=61b91b2730084f47a2c5304ed87d2294&stdate=20190623&eddate=20191030&cpage=1&rows=5&shcate=AAAB";
 
-		
 		mav.addObject("loc", "/event/eventWrite.do");
-
+		mav.addObject("eventList",getConcatList(url1, url2));
 		return mav;
 	}
 
 	@RequestMapping("/eventView.do")
-	public ModelAndView eventView(ModelAndView mav) {
-		logger.debug("prizewinner페이지 요청");
-
-		mav.setViewName("event/eventView");
-		return mav;
+	public String eventView(Model model, @RequestParam String showId) {
+		logger.debug("특가 상세보기페이지 요청");
+		
+		model.addAttribute("dcList",discountService.selectOneDc(showId));
+		System.out.println("dcLIST>>>>>>>>>>>>>"+model);
+		
+		return "event/eventView";
 	}
 
 	@RequestMapping("/insertAddSale.do")
@@ -127,9 +135,6 @@ public class EventController {
 		int rst=0;
 		int cnt  =  discountService.checkCnt();
 		
-		
-		
-		System.out.println("cnt수 >>>>>"+cnt);
 		if(cnt<4){
 			result = discountService.insertAddSale(discount);
 			
@@ -149,17 +154,21 @@ public class EventController {
 
 		return "common/msg";
 	}
-
 	@RequestMapping("/insertEvent.do")
+	public void insertEvent() {
+		logger.debug("이벤트 작성페이지 요청!!");
+	}
+	@RequestMapping("/insertEventEnd.do")
 	public String insertEvent(Event event, Model model, HttpServletRequest request,MultipartFile[] upFile) {
-
+	
+		
 		try {
 			//파일업로드:서버에 파일저장
 			String saveDirectory
 				= request.getSession()
 						 .getServletContext()
-						 .getRealPath("/resources/upload/board");
-			
+						 .getRealPath("/resources/upload/event");
+			System.out.println("saveDirectory>>"+saveDirectory);
 			//db에 파일 메타정보
 			List<EventAttachment> eattachList = new ArrayList<>();
 			
@@ -178,7 +187,7 @@ public class EventController {
 						e.printStackTrace();
 					}
 					
-					//attachment vo객체 담기
+					
 					EventAttachment eattach = new EventAttachment();
 					eattach.setOriginalFileName(originalFileName);
 					eattach.setRenamedFileName(renamedFileName);
@@ -189,15 +198,15 @@ public class EventController {
 			}
 			
 			
-			int result =  eventService.insertEvent(event,eattachList);
+			int result =  eventService.insertEventEnd(event,eattachList);
 			String msg = result>0?"이벤트 등록성공":"이벤트 등록 실패";
 			
 			model.addAttribute("msg", msg);
 			model.addAttribute("loc", "/event/eventWrite.do");
 		}catch(Exception e) {
-			logger.error("게시물 등록 오류", e);
+			logger.error("이벤트 등록 오류", e);
 			
-			throw new EventException("게시물 등록 오류", e);
+			throw new EventException("이벤트 등록 오류", e);
 		}
 		
 		

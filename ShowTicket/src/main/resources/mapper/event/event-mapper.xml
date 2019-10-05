@@ -22,16 +22,22 @@
 		<result column="event_status" property="statusDate" />
 	</resultMap>
 
-
-	<insert id="insertEvent">
+	<insert id="insertEventEnd">
 		insert into event values
 		(seq_event_no.nextval,#{eventTitle},#{eventContent},
-			#{eventStartDate},#{eventEndDate},#{originalFileName},#{reNamedFileName},#{announcementDate},
+			#{eventStartDate},#{eventEndDate},#{announcementDate},
 			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind})
 	
 		<selectKey keyProperty="eventNo" resultType="_int" order="AFTER">
 			select seq_event_no.currval from dual
 		</selectKey>
 	</insert>
+	
+	<insert id="insertEAttachment">
+		insert into event_attachment values(seq_event_attachment.nextval,#{eventNo},#{originalFileName},#{renamedFileName})
+	</insert>
+	
+	
+	
 	
 </mapper>

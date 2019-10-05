@@ -84,6 +84,7 @@ public class Discount {
 	public void setShowGenre(String showGenre) {
 		this.showGenre = showGenre;
 	}
+	
 
 	@Override
 	public String toString() {

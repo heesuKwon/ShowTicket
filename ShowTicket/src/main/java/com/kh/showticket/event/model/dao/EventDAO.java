@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.showticket.event.model.vo.Event;
+import com.kh.showticket.event.model.vo.EventAttachment;
 
 public interface EventDAO {
 
 	List<Map<String, String>> searchEventList(String queryKeyword);
 
+	int insertEAttachment(EventAttachment a);
 
-	int insertEvent(Event event);
+	int insertEventEnd(Event event);
 
 
 }

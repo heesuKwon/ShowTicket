@@ -35,4 +35,9 @@ public class DiscountServiceImpl implements DiscountService {
 		return discountDAO.selectdcList(); 
 	}
 
+	@Override
+	public Discount selectOneDc(String evtID) {
+		return discountDAO.selectOneDc(evtID);
+	}
+
 }
