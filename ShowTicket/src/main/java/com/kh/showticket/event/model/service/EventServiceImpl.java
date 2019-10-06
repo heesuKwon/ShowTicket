@@ -54,6 +54,16 @@ public class EventServiceImpl implements EventService {
 		return result;
 	}
 
+	@Override
+	public List<Event> selectEventList() {
+		return eventDAO.selectEventList(); 
+	}
+
+	@Override
+	public Event selectOneEvent(int eventNo) {
+		return eventDAO.selectOneEvent(eventNo);
+	}
+
 
 	
 

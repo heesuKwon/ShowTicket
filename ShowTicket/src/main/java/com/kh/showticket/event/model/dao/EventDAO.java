@@ -14,5 +14,9 @@ public interface EventDAO {
 
 	int insertEventEnd(Event event);
 
+	List<Event> selectEventList();
+
+	Event selectOneEvent(int eventNo);
+
 
 }

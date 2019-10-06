@@ -9,14 +9,11 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>   
-<<<<<<< HEAD
+
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bookticket.css">
  <style>
 nav-pills .nav-link {border-radius: 0;}
-=======
-<style>
-.nav-pills .nav-link {border-radius: 0;}
->>>>>>> refs/remotes/origin/seulgi
+
 </style>
     <body>
     	
@@ -67,20 +64,11 @@ nav-pills .nav-link {border-radius: 0;}
      	 	
      	 	</div>
   
-<<<<<<< HEAD
      	 	<div class="t_btndiv">
             <input type="button" value="이전단계" class="t_button1"/>
             <input type="button" value="결제하기" class="t_button2"/>
        		</div>
-=======
-     	 	
-     	 	<div class="t_btndiv">
-            <input type="button" value="이전단계" class="t_button1"/>
-            <input type="button" value="결제하기" class="t_button2"/>
-        </div>
 
-     
->>>>>>> refs/remotes/origin/seulgi
      	 	
      	 	
      	</div>

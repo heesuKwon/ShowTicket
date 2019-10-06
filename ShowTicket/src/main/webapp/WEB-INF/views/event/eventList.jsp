@@ -38,7 +38,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 				<c:forEach items="${dcList }" var="dcList">
 				<li showId="${dcList.showId }">
 					
-					<a href="${pageContext.request.contextPath }/event/eventView.do?showId=${dcList.showId }"> 
+					<a href="${pageContext.request.contextPath }/event/addSaleView.do?showId=${dcList.showId }"> 
 						
 						<img
 						src="${dcList.disCountImg}"
@@ -76,23 +76,23 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 			<div class="event_list_inner">
 				<ul id="eventList">
 					<c:forEach items="${eventList }" var="evt">
-						<li>
-							<a href="${pageContext.request.contextPath }/"> <!-- 전체 이벤트 페이지 ??  -->
+						<li >
+							<a href="${pageContext.request.contextPath }/event/eventView.do?eventNo=${evt.eventNo}"> <!-- 전체 이벤트 페이지 ??  -->
 								<dl>
 									<dt>대표이미지</dt>
 									<dd class="thumb">
 										<img
-											src="${evt.poster}" alt="poster"
+											src="${evt.eventImg}" alt="poster"
 											width="110" height="134">
 									</dd>
 									<dt>제목</dt>
 									<dd class="event_title">
-										<span>[응모]</span>${evt.genrenm}  &lt;${evt.prfnm}&gt; 관람평 이벤트
+										<span>[응모]</span> &lt;${evt.eventTitle}&gt; 이벤트
 									</dd>
 									<dt>이벤트내용</dt>
-									<dd>${evt.genrenm} &lt;${evt.prfnm}&gt; 관람평 이벤트</dd>
+									<dd>&lt;${evt.eventTitle}&gt; 이벤트</dd>
 									<dt>기간</dt>
-									<dd class="event_date">${evt.prfpdfrom}~${evt.prfpdto}</dd>
+									<dd class="event_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate}"/>~<fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate}"/>까지</dd>
 									
 								</dl>
 							</a>

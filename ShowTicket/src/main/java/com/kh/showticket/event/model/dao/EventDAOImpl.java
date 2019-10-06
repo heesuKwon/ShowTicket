@@ -35,6 +35,16 @@ public class EventDAOImpl implements EventDAO {
 		return session.insert("event.insertEventEnd", event);
 	}
 
+	@Override
+	public List<Event> selectEventList() {
+		return session.selectList("event.selectEventList");
+	}
+
+	@Override
+	public Event selectOneEvent(int eventNo) {
+		return session.selectOne("event.selectOneEvent", eventNo);
+	}
+
 	
 
 }

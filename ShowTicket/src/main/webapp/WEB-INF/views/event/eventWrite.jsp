@@ -64,6 +64,7 @@ $(()=>{
 		contain+="</tbody></table>";
 		contain+="<input type='hidden' name='showId'  value='"+id+"'/>";
 		contain+="<input type='hidden' name='eventStatus' value='"+detail+"'/>";
+		contain+="<input type='hidden' name='eventImg' value='"+ing+"'/>";
 		contain+="<input type='submit' value='등록'  class='pull-right'/>";
 		contain+="<input type='button' value='목록으로' class='btn btn-primary btn-color btn-sm pull-left' onclick='javascript:location.href='eventList.do'/></form>";
 		
@@ -127,6 +128,7 @@ $(()=>{
 							<td>${l.prfpdfrom}</td>
 							<td>${l.prfpdto}</td>
 							<td>${l.prfstate}</td>
+							<td style="display: none;">${l.poster }</td>
 							<td><input type="radio" class="checkBtn"></td>
 						</tr>
 					</c:forEach>

@@ -12,5 +12,9 @@ public interface EventService {
 
 	int insertEventEnd(Event event, List<EventAttachment> eattachList);
 
+	List<Event> selectEventList();
+
+	Event selectOneEvent(int eventNo);
+
 	
 }
