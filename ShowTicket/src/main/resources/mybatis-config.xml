@@ -18,8 +18,9 @@
   	<typeAlias type="com.kh.showticket.coupon.model.vo.Coupon"
   			   alias="coupon"/>
 
-  	<typeAlias type="com.kh.showticket.help.model.vo.NoticeTicketOpen"
-  		       alias="NoticeTicketOpen"/>
+  	<typeAlias type="com.kh.showticket.help.model.vo.Notice"
+  		       alias="notice"/>
+  		       
   	<typeAlias type="com.kh.showticket.help.model.vo.Faq"
   		       alias="faq"/>
 

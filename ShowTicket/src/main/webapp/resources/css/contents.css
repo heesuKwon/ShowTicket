@@ -2379,3 +2379,7 @@ h3.malgun{font-family:Malgun Gothic,'맑은 고딕';font-weight:bold;letter-spac
     border-radius: .25rem;
     margin-bottom: 20px;
 }
+.nav-member{
+	width: 90%;
+    margin: 20px auto;
+}

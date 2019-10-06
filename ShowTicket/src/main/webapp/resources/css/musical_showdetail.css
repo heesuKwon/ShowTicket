@@ -13,10 +13,13 @@
 	font-weight:bold;
 }
 
-.wait{
+#wait{
  	padding:5px;
 	margin-left:5px;
 	box-shadow: 0px 0px 1px 1px #d3d3d3;
+}
+#wait:hover{
+	cursor: pointer;
 }
 
 .detailbox_bot_left{
@@ -171,3 +174,9 @@ button.btn_reply{
     min-width: 990px;
     /* height: 20000px; */
 }
+
+.star-rating { width:205px; }   //별이미지크기
+
+.star-rating,.star-rating span { display:inline-block; height:39px; overflow:hidden; background:url(star.png)no-repeat; } //두개의 span에 동시에 주는 효과들
+
+.star-rating span{ background-position:left bottom; line-height:0; vertical-align:top; } //안쪽 span에만 적용

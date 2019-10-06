@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.help.model.service.FaqService;
 import com.kh.showticket.help.model.service.NoticeService;
 import com.kh.showticket.help.model.vo.Faq;
-import com.kh.showticket.help.model.vo.NoticeTicketOpen;
+import com.kh.showticket.help.model.vo.Notice;
 
 @RestController
 @RequestMapping("/help")

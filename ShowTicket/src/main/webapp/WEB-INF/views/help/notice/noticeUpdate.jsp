@@ -67,6 +67,7 @@
 					<form name="noticeUpdateFrm" id="noticeUpdate"
 						action="noticeUpdateEnd.do" method="post"
 						onsubmit="return validate();">
+						<input type="hidden" name="noticeNo" value="${n.noticeNo}"/>
 						<table id="tbl-write" class="table">
 							<tr>
 								<th class="text-left">제목<i class="ico-star">*</i>
@@ -130,9 +131,9 @@
 		$('input, textarea').placeholder();
 	});
 
-	function searchFaq() {
+	function searchNotice() {
 		var searchKeyword = encodeURI($("#search_help").val());
-		location.replace("/help/faq?searchKeyword=" + searchKeyword + "");
+		location.replace("/help/notice?searchKeyword=" + searchKeyword + "");
 	}
 	//]]>
 </script>

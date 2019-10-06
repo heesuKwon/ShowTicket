@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
+import com.kh.showticket.coupon.model.vo.Coupon;
 import com.kh.showticket.musical.model.dao.MusicalDAO;
 
 @Service
@@ -38,6 +39,16 @@ public class MusicalServiceImpl implements MusicalService {
 		Map<String, String> map = getApi.getPlaceList(url);
 		
 		return map;
+	}
+
+	@Override
+	public int insertWait(Map<String, String> userAndMusical) {
+		return musicalDAO.insertWait(userAndMusical);
+	}
+
+	@Override
+	public List<Coupon> selectCoupon(String musicalId) {
+		return musicalDAO.selectCoupon(musicalId);
 	}
 
 }

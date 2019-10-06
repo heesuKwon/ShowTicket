@@ -31,11 +31,11 @@
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
-			System.out.println("urls:"+musical.getUrls());
-			System.out.println("musical"+musical);
+	System.out.println("urls:"+musical.getUrls());
+	System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
-	Map<String, List<String>> dayTime = new HashMap<>();
+	Map<String, String> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
 	days.put("월", 0);
 	days.put("화", 1);
@@ -46,23 +46,13 @@
 	days.put("일", 6);
 	String[] d = { "월", "화", "수", "목", "금", "토", "일"};
 	for (String s : times) {
-		System.out.println(s);
+		//System.out.println(s);
 		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
-		String[] ts = time.split(",");
-		System.out.println(time);
 		if (s.contains("~")) {
 			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			String day2 = s.substring(s.lastIndexOf("요일") - 1, s.lastIndexOf("요일"));
-			System.out.println(day1);
-			System.out.println(day2);
 			for (int i = days.get(day1); i <= days.get(day2); i++) {
-				System.out.println(i);
-				/* for (int j = 0; j < ts.length; j++) {
-					System.out.println(d[i]);
-					System.out.println(ts[j]);
-					dayTime.put(d[i], ts[j]);
-				} */
-				dayTime.put(d[i], Arrays.asList(ts));
+				dayTime.put(d[i], time);
 			}
 		} else {
 			String day1 = "";
@@ -71,12 +61,7 @@
 			} else {
 				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			/* for (int i = 0; i < ts.length; i++) {
-				System.out.println(day1);
-				System.out.println(ts[i]);
-				dayTime.put(day1, ts[i]);
-			} */
-			dayTime.put(day1, Arrays.asList(ts));
+			dayTime.put(day1, time);
 		}
 	}
 	
@@ -84,7 +69,6 @@
 	String[] day = { "일", "월", "화", "수", "목", "금", "토"};
 	String st = "";
 	for(Object s:str){
-		System.out.println((String)s);
 		st += (String)s;		
 	}
 
@@ -550,20 +534,6 @@ $(()=>{
 </script>
 
 
-<script type="text/javascript">
-	
-
-	
-
-</script>
-<meta property="og:type" content="website" />
-<meta property="og:title" content="[티켓링크]뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
-<meta property="og:url"
-	content="http://www.ticketlink.co.kr/product/29652" />
-<meta property="og:description" content="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
-<meta property="og:image"
-	content="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" />
-
 </head>
 
 
@@ -616,32 +586,13 @@ $(()=>{
 						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
 							~ ${musical.getEndDate()}</span>
 					</div>
-
-
-
 					<div class="bx_dummy">
 						<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
 					</div>
-
-
-
-
-
 					<div class="bx_dummy border_type">
 						<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
 					</div>
-
-
-
-
-
-
 					<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
-
-
-
-
-
 
 					<div class="bx_dummy include_layer">
 						<em class="info_tit">가격</em>
@@ -664,39 +615,26 @@ $(()=>{
 						</div>
 					</div>
 
-
-
-
-
 					<div class="bx_dummy include_layer border_type">
 						<em class="info_tit">할인</em>
 						<div class="txt ui-dialog  price-dialog">
 							<ul class="lst_dsc">
-
-								<li>쿠폰할인 - <span class="color_purple fbold ">30</span>% 할인
-								</li>
-
-								<li><사랑했어요>기대평 이벤트 - <span
-										class="color_purple fbold">40</span>% 할인 </li>
-
+								<c:forEach items="${coupon}" var="c">
+									<li>${c.couponTitle } - <span class="color_purple fbold ">${c.couponPrice }</span>원 할인</li>
+								</c:forEach>
+								<!-- <li><사랑했어요>기대평 이벤트 - <span
+										class="color_purple fbold">40</span>% 할인 </li> -->
 							</ul>
-
-
-
 						</div>
 					</div>
-
-
 				</div>
 				<div class="bx_dummy">
-					<em class="info_tit">대기공연추가</em> <span class="txt"> <span
-						class="wait"><img
-							src="${pageContext.request.contextPath }/resources/images/heart.png"
-							alt="" width=15px; /></span>
+					<em class="info_tit">대기공연추가</em>
+					<span id="wait">
+						<img src="${pageContext.request.contextPath }/resources/images/heart.png"
+						alt="" width=15px; />
 					</span>
 				</div>
-
-
 			</div>
 			<!-- FE 지원 form 시작 -->
 			<c:if test="${musical.getState() eq '공연중'}">
@@ -708,35 +646,12 @@ $(()=>{
 						<dd>
 							<!-- [D] 셀렉트박스 -->
 							<select name="watchTime" id="watchTime">
-								<option value="">회차선택(날짜선택후)</option>
-								<%-- ${dayTime.} --%>
+								<option>회차선택(날짜선택후)</option>
 							</select>
 						</dd>
-						<!-- <dt>예매가능 좌석</dt>
-						<dd>
-							<ul class="seat" id="seatingInfoPerRound">
-								<li>전체 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>VIP석 <span class="color_purple fbold">427</span>석
-								</li>
-							
-								<br />
-								<li>R석 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>S석 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>A석 <span class="color_purple fbold">427</span>석
-								</li>
-							</ul>
-						</dd> -->
 					</dl>
 
-
-
-					<button type="button" class="btn reserve s_after first-child"
+					<button type="button" class="btn reserve s_after first-child" id="book"
 						onclick="">
 						<span>예매하기 </span>
 					</button>
@@ -749,6 +664,16 @@ $(()=>{
 					<button type="button" class="btn reserve due s_after first-child"
 						onclick="">
 						<span>판매예정 </span>
+					</button>
+				</div>
+			</c:if>
+			<c:if test="${musical.getState() eq '공연완료'}">
+				<div class="detail_info_right">
+					<div class="noinfo_txt">공연이 종료되었습니다.</div>
+
+					<button type="button" class="btn reserve due s_after first-child"
+						onclick="">
+						<span>공연완료</span>
 					</button>
 				</div>
 			</c:if>
@@ -1212,122 +1137,7 @@ $(()=>{
     </script>
 
 
-<!-- 다이얼로그 창  -->
-<div class="layer l_installment popup" id="dialog1"
-	style="display: none">
-	<a href="javascript:;" onclick="$('#dialog1').dialog('close');"
-		class="close">레이어 닫기</a> <strong>무이자 할부</strong>
-	<table>
-		<caption>무이자 할부 정보</caption>
-		<colgroup>
-			<col style="width: 62px">
-			<col style="width: 59px">
-			<col>
-		</colgroup>
-		<tbody>
 
-		</tbody>
-	</table>
-</div>
-
-
-<div class="layer l_installment popup" id="dialog4"
-	style="display: none">
-	<a href="javascript:;" onclick="$('#dialog4').dialog('close');"
-		class="close">레이어 닫기</a> <strong>가격정보</strong>
-	<ul class="fs11">
-
-		VIP석 -
-		<span class="num">140,000</span>원
-		<br> R석 -
-		<span class="num">120,000</span>원
-		<br> S석 -
-		<span class="num">90,000</span>원
-		<br> A석 -
-		<span class="num">60,000</span>원
-		<br>
-
-	</ul>
-</div>
-
-<div class="layer l_installment popup" id="dialog5"
-	style="display: none">
-	<a href="javascript:;" onclick="$('#dialog5').dialog('close');"
-		class="close">레이어 닫기</a> <strong>가격정보</strong>
-	<ul class="fs11">
-
-		일반 -
-		<span class="num">140,000</span>원
-		<br>
-		</span>
-
-	</ul>
-</div>
-
-<div class="layer l_installment popup" id="dialog7"
-	style="display: none">
-	<a href="javascript:;" onclick="$('#dialog7').dialog('close');"
-		class="close">레이어 닫기</a> <strong>할인정보</strong>
-	<ul class="fs11">
-
-		<li>추억만들기 - <span class="color_green fbold">30</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>초연기념특별할인 - <span class="color_green fbold">40</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>마티네 할인 - <span class="color_green fbold">30</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>뮤지컬 <사랑했어요> 실물 유료 티켓 소지자 (재관람 할인) - <span
-				class="color_green fbold">20</span> <span class="color_green fbold">
-				% </span> 할인 </li>
-
-		<li>학생 할인 (초,중,고) - <span class="color_green fbold">20</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>학생 할인 (초,중,고) - <span class="color_green fbold">30</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>대학생 할인 - <span class="color_green fbold">20</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>대학생 할인 - <span class="color_green fbold">30</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>장애인 1-3급(1인 2매) - <span class="color_green fbold">50</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>장애인 4-6급(1인 1매) - <span class="color_green fbold">50</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>국가유공자(1인 1매) - <span class="color_green fbold">50</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>경기도 성남시 거주자 및 직장인할인 - <span class="color_green fbold">20</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>4인 이상 - <span class="color_green fbold">30</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-		<li>영피프티(50세 이상) - <span class="color_green fbold">40</span><span
-			class="color_green fbold"> % </span> 할인
-		</li>
-
-	</ul>
-</div>
 <style>
 .detail_box_bot .detailbox_bot_left .detail_cont .detail_cont>div {
     clear: both;
@@ -1376,7 +1186,7 @@ $(()=>{
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
 
-	var days = ["일", "월", "화", "수", "목", "금", "토", "일"];
+	days = ["일","월","화","수","목","금","토"];
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
@@ -1408,70 +1218,60 @@ $(()=>{
 		}).on('changeDate',function(e){
 			var date = new Date(e.format());
 			var day = date.getDay();
-			console.log(day);
-			console.log(days[day]);
-			selectDay = days[day];
-			//$("#watchTime").attr("day", days[day]);
+			var timeList;
+			if(day==0){
+				timeList = '<%=dayTime.get("일")%>';
+			}
+			else if(day==1){
+				timeList = '<%=dayTime.get("월")%>';
+			}
+			else if(day==2){
+				timeList = '<%=dayTime.get("화")%>';
+			}
+			else if(day==3){
+				timeList = '<%=dayTime.get("수")%>';		
+			}
+			else if(day==4){
+				timeList = '<%=dayTime.get("목")%>';
+			}
+			else if(day==5){
+				timeList = '<%=dayTime.get("금")%>';
+			}
+			else if(day==6){
+				timeList = '<%=dayTime.get("토")%>';
+			}
 			
-			<%-- var timeList = <%=dayTime.get(%>days[day]<%)%>; --%> 
+			$("#watchTime").children().remove();
 			
+			var times = timeList.split(",")
+			for(var i=0;i<times.length;i++){
+				var time = times[i].split(":");
+				var html = "<option value='"+times[i]+"'>"+time[0]+"시 "+time[1]+"분</option>";
+				$("#watchTime").append(html);				
+			}		
 		});
 		
+		$("#wait").on("click",()=>{
+			if(${memberLoggedIn!=null}){
+				location.href = "${pageContext.request.contextPath}/musical/insertWait.do?musicalId=${musical.getId()}";
+			}
+			else{
+				alert("로그인이 필요합니다.");
+			}
+		});
 	
+		/* $("#book").on("click",()=>{
+			if(${memberLoggedIn==null}){
+				alert("로그인이 필요합니다.");
+				break;
+			}
+			//if()//날짜나 회차가 선택되지 않은 경우 
+			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}";
+			
+		}); */
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
-		//기능 설정
-		setDialog();
-		onCloseIfOutOfSelect();
-		makeTap();
-		//searchReviewUsingEnter();
-		//searchInquiryUsingEnter();
-		//setTextareaMax(document.getElementById("reviewContent"));
-		//setTextareaMax(document.getElementById("inquiryContent"));
-		$('input, textarea').placeholder();
-		if ($("#productServiceType").val() != "CLP" && $("#productTypeCode").val() != "SEASON") {
-			getProductDatesByProductId();
-		}
-		//ui설정
-		setTopTitleTag();
-		setPhoneNumber();
-
-		var anchorString = window.location.hash.substring(1);
-		if (anchorString == "tabs-2") {
-			getProductReviewList(1);
-
-			$("ul.detail_tab li").removeClass("on");
-			$("#ui-id-5").parent().addClass("on");
-		}
-
-		/* getProductReviewList(1);
-         getProductInquiryList(1); */
-		setProductTap();
-		if ($("#reviewExposureYn").val() == "Y") {
-			searchReviewUsingEnter();
-			setTextareaMax(document.getElementById("reviewContent"));
-		}
-		$(window).scroll(function () {
-			if ($(window).scrollTop() > 420) {
-				$("#wingright").addClass("moving");
-
-			} else if ($(window).scrollTop() <= 420) {
-				$("#wingright").removeClass("moving");
-			}
-		});
-
-		$("body").click(function(e){
-			if($("#popup_payco").css("display") == "block" && !$(e.target).hasClass('paycoImg')) {
-				closePaycoCouponPopup();
-			}
-        });
-
-
-		initCleanReserveInfo();
-		setLongTitle();
-		
-		
-		
+	
 	});
 
 	function initCleanReserveInfo () {
@@ -1702,25 +1502,6 @@ $(()=>{
 	}
 
 
-	function setPhoneNumber () {
-		$("#phoneNumber").text(makePhoneFormat("0317838000"));
-	}
-
-	function showPaycoCouponPopup (obj) {
-		$('#popup_payco_dimmed').show();
-		$('#popup_payco').show();
-	}
-
-	function closePaycoCouponPopup(){
-		$('#popup_payco_dimmed').hide();
-		$('#popup_payco').hide();
-	}
-
-	function goPaycoApp () {
-		window.open('https://bill.payco.com/ad/downloadsms', '', 'width=490,height=570');
-	}
-
-
 	function selectTap (obj) {
 		
 		$(".tabs-Num").css("display","none");
@@ -1767,37 +1548,7 @@ $(()=>{
 		}
 	}
 
-	function onCloseIfOutOfSelect () {
-		$(document).on("click", function (e) {
-			if ($(e.target).parents("#roundSelect").size() == 0) {
-				$("#product_round_select_list").css("display", "none");
-			}
-
-			if ($(e.target).parents(".ui-dialog").size() == 0) {
-				$("#dialog1").dialog("close");
-				$("#dialog2").dialog("close");
-			}
-
-
-			if ($(e.target).parents(".price-dialog").size() == 0) {
-				$("#dialog4").dialog("close");
-				$("#dialog5").dialog("close");
-				$("#dialog7").dialog("close");
-			}
-
-			if ($(e.target).parents(".coupon-dialog").size() == 0 && $(e.target).parents(".l_coupon").size() == 0) {
-				$("#dialog6").dialog("close");
-			}
-
-			if ($(e.target).parents("#review_search_div").size() == 0) {
-				$("#review_select_list").css("display", "none");
-			}
-
-			if ($(e.target).parents("#inquiry_search_div").size() == 0) {
-				$("#inquiry_select_list").css("display", "none");
-			}
-		});
-	}
+	
 
 	function authorizedFanclubCallback () {
 		window.open('/member/fanclub/auth?productId=' + 29652, '', 'width=500, height=500');
@@ -1818,9 +1569,6 @@ $(()=>{
 		}
 	}
 
-	function  goGlobalWeb () {
-		window.open('/global/en/product/' + 29652, '');
-	}
 
 	function popReserveDialog () {
 
@@ -1917,103 +1665,6 @@ $(()=>{
 		if (confirm("성인인증이 필요한 상품입니다. 성인인증 페이지로 이동하시겠습니까?")) {
 			document.location.href = "/adult/confirm?nextPage=" + nextPage;
 		}
-	}
-
-	function setDialog () {
-		$("#dialog1").dialog({
-			autoOpen: false,
-			position: {my: "right top", at: "right bottom", of: '#buttonForDialog1'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog1").on("click", function () {
-			$("#dialog2").dialog("close");
-			$("#dialog1").dialog("open");
-			$("#dialog6").dialog("close");
-		});
-		$("#dialog2").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog2'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog2").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("open");
-			$("#dialog6").dialog("close");
-		});
-
-		$("#buttonForDialog3").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog6").dialog("close");
-		});
-		$("#dialog4").dialog({
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog4'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog4").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("open");
-			$("#dialog5").dialog("close");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("close");
-		});
-		$("#dialog5").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog5'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-
-		$("#dialog7").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog7'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-
-		$("#buttonForDialog5").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("close");
-			$("#dialog5").dialog("open");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("close");
-		});
-		$("#buttonForDialog7").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("close");
-			$("#dialog5").dialog("close");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("open");
-		});
-
-		$("#dialog6").dialog({
-			closeText: false,
-			autoOpen: false,
-			width: 620,
-			position: {my: "right top", at: "right bottom", of: '#buttonForDialog6'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog6").on("click", function () {
-			$.ajax({
-				url: "/product/29652/coupons",
-				dataType: "json",
-				success: function (result) {
-					var couponList = result.result;
-					var template = createCouponLayerTemplate(couponList);
-
-					$("#dialog6 > table > tbody").html(template);
-				},
-				error: function (response, status, error) {
-					alert("에러가 발생했습니다.");
-				},
-				complete: function () {
-					$("#dialog1").dialog("close");
-					$("#dialog2").dialog("close");
-					$("#dialog4").dialog("close");
-					$("#dialog5").dialog("close");
-					$("#dialog6").dialog("open");
-				}
-			});
-		});
 	}
 
 	function createCouponLayerTemplate (couponList) {

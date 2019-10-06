@@ -20,17 +20,7 @@
 <script>
 
 $(()=>{
-		var type = "";
-		var searchType = "";
-		
-		/*nav 메뉴 */
-		$("#genreNav > li > a").click((e)=>{		
-			type = $(e.target).attr('id');
-		 	$(".nav-pills .nav-link.select").attr('class','nav-link nav-font default');
-			$(e.target).attr('class','nav-link select nav-font'); 
-			
-			faqList(type, searchType);
-		});
+	
 
 });
 
@@ -79,13 +69,45 @@ $(()=>{
 			</ul>
 
 			<div class="help_rcont">
-				<h2 class="title">공지사항</h2>
+				<h2 class="help-title">공지사항</h2>
 
 				<table class="table list_view">
+					<c:if test="${n.noticeCategory eq 't'}">
+					<thead>
+						<tr class="info">
+                             <td width="160px">
+                                 <img src="${mas.poster}" width="111" height="136">
+                             </td>
+                             <td>
+	                             <dd class="title" id="noticeTitle">${n.noticeTitle}</dd>
+	                             <dt>오픈일</dt>
+	                             <dd class="color_green fbold" id="ticketOpenDatetime">${mas.startDate }</dd>
+	                             <dt>장소</dt>
+	                             <dd>${mas.hallName }</dd>
+	                             <dd>
+	                             <c:if test="${mas.state eq '공연중'}">
+	                             	<c:if test="${mas.genre eq '뮤지컬'}">
+	                             	<button class="btn btn-color btn-reserve" type="button"
+											onclick="location.href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${n.playId}'">예매하기</button>
+	                             	</c:if>
+	                             	<c:if test="${mas.genre eq '연극'}">
+	                             	<button class="btn btn-color btn-reserve" type="button"
+											onclick="location.href='${pageContext.request.contextPath}/show/showDetail.do?showId=${n.playId}'">예매하기</button>
+	                             	</c:if>
+	                             </c:if>	
+	                             <c:if test="${mas.state eq '공연예정' }">
+	                             	<button class="btn btn-gray btn-reserve sm-font" type="button"
+											onclick="addFollow();">관심공연 추가</button>
+	                             </c:if>
+	                             </dd>               
+                             </td>
+                        </tr>
+					</thead>
+					</c:if>
+					<c:if test="${n.noticeCategory ne 't'}">
 					<thead>
 						<tr>
 							<th scope="col" class="th"><c:choose>
-									<c:when test="${n.noticeCategory eq 't'}">티켓오픈</c:when>
 									<c:when test="${n.noticeCategory eq 's'}">시스템</c:when>
 									<c:when test="${n.noticeCategory eq 'c'}">변경/취소</c:when>
 									<c:when test="${n.noticeCategory eq 'o'}">기타</c:when>
@@ -94,6 +116,7 @@ $(()=>{
 								${n.noticeTitle}</th>
 						</tr>
 					</thead>
+					</c:if>
 					<tbody>
 						<tr>
 							<td colspan="2" class="list_date">
@@ -102,22 +125,41 @@ $(()=>{
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2" class="list_cont">${n.noticeContent }</td>
+							<td colspan="2">
+							<textarea cols="50" rows="20" style="padding:3% 3%;  width:100%; border: white;" readonly>${n.noticeContent }</textarea></td>
 						</tr>
 					</tbody>
 				</table>
-				<div class="list_btn">
-					<button class="btn btn-color" type="button"
-						onclick="location.href='${pageContext.request.contextPath}/help/noticeUpdate.do?noticeNo=${n.noticeNo}'">수정</button>
-					<button class="btn btn-gray" type="button"
-						onclick="location.href='${pageContext.request.contextPath}/help/noticeDelete.do?noticeNo=${n.noticeNo }'">삭제</button>
-					<button class="btn btn-gray fr" type="button"
-						onclick="location.href='${pageContext.request.contextPath}/help/notice.do'">목록으로</button>
-				</div>
+					<div class="list_btn">
+						<c:if test="${'admin' eq memberLoggedIn.memberId}">
+						<button class="btn btn-color" type="button"
+							onclick="location.href='${pageContext.request.contextPath}/help/noticeUpdate.do?noticeNo=${n.noticeNo}'">수정</button>
+						<button class="btn btn-gray" type="button"
+							onclick="noticeDelete();">삭제</button>
+						</c:if>
+						<button class="btn btn-gray fr" type="button"
+							onclick="location.href='${pageContext.request.contextPath}/help/notice.do'">목록으로</button>
+					</div>
 			</div>
 
 		</div>
 	</div>
 </div>
+<script>
+function noticeDelete(){
+	if(!confirm("정말 삭제하시겠습니까?")){
+		return;
+	}
+	location.href="${pageContext.request.contextPath}/help/noticeDelete.do?noticeNo=${n.noticeNo }";		
+}
+function addFollow(){
+	if(${memberLoggedIn == null}){
+		alert("로그인이 필요합니다.");
+		return;
+	}
+	location.href="${pageContext.request.contextPath}/help/insertFollow.do?playId=${n.playId}&noticeNo=${n.noticeNo}";
+}
+	
+</script>
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

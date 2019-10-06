@@ -40,6 +40,10 @@ public interface MemberDAO {
 
 	Map<String, String> selectOneTicketByNo(int ticketNo);
 
+	List<String> selectFollow(String memberId);
+
+	int deleteFollow(Map<String, String> follow);
+
 
 
 }

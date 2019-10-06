@@ -18,16 +18,17 @@
 <script>
 
 $(()=>{
-		var type = "";
-		var searchType = "";
+		var category = "";
+		var searchTitle = "";
 		
 		/*nav 메뉴 */
 		$("#genreNav > li > a").click((e)=>{		
-			type = $(e.target).attr('id');
+			category = $(e.target).attr('id');
 		 	$(".nav-pills .nav-link.select").attr('class','nav-link nav-font default');
 			$(e.target).attr('class','nav-link select nav-font'); 
 			
-			faqList(type, searchType);
+			$(".help_rcont .search input[type=text] ").val("");
+			noticeList(category, searchTitle);
 		});
 		
 		//테이블의 열을 클릭시 해당 게시물로 이동
@@ -35,9 +36,7 @@ $(()=>{
 			var noticeNo = $(e.target).parents("tr").children("td").children(".noticeNo").val();
 			location.href = "${pageContext.request.contextPath}/help/noticeView.do?noticeNo="+noticeNo; 
 		});
-	 	
-		
-		
+	
 		/*글쓰기 페이지 이동*/
 	 	$("#write").click(function() {
 			location.href = "${pageContext.request.contextPath}/help/noticeWrite.do";
@@ -54,34 +53,30 @@ $(()=>{
 //엔터키처리
 function enterkey() {
     if (window.event.keyCode == 13) {
-
          // 엔터키가 눌렸을 때 실행할 내용
          search();
     }
 }
 
-
-
 function search(){
 	//검색 버튼 클릭
-		var type = "";
-		var searchType = "";
-		
-		searchType = $(".help_rcont .search input[type=text] ").val();
-		
-		faqList(type, searchType);
+	var category = "";
+	var searchTitle = "";
+	
+	searchTitle = $(".help_rcont .search input[type=text] ").val();
+	
+	noticeList(category, searchTitle);
 }
 
-function faqList(type, searchType){
+function noticeList(category, searchTitle){
 	
-	var faq ={};
-	faq.type = type;
-	faq.question =searchType;
-	faq.answer = searchType;
+	var notice ={};
+	notice.noticeCategory = category;
+	notice.noticeTitle = searchTitle;
 
     $.ajax({
-        url : '${pageContext.request.contextPath}/help/faqTicketList.do',
-        data: JSON.stringify(faq),
+        url : '${pageContext.request.contextPath}/help/noticeList.do',
+        data: JSON.stringify(notice),
 		contentType: 'application/json; charset=utf-8',
 		dataType: "json",
 		type: "POST",
@@ -89,27 +84,25 @@ function faqList(type, searchType){
            console.log(data);
 
            var html = "";
-               html += "<table><caption>faq 리스트</caption><colgroup><col style='width: 100px'><col><col style='width: 270px'></colgroup><thead>";
-   
-               html +="<tr><th scope='col'>카테고리</th><th colspan='2' scope='col'>질문</th></tr></thead><tbody id='nTableBody'>";
-                if(data.length>0){
-                    for(var i in data){
-                        html += "<tr><td>"+(data[i].type=='T'?"예매/취소":(data[i].type=='M'?"회원":(data[i].type=='C'?"쿠폰/이벤트":(data[i].type=='B'?"결제":"기타"))))+"<input type='hidden' id='faqNo' value='"+data[i].faqNo+"'/><input type='hidden' id='type' value='"+data[i].type+"'/></td>";
-                        html += "<td colspan='2'>"+data[i].question+"</td></tr>"; 
-                    
-                    
-                    } /* for문끝 */
-                }  /* if문끝 */
-                    else{
-                    	html+="<tr><td colspan='3'>faq가 존재하지 않습니다.</td></tr>";
-                    }
-                    html+="</tbody></table>";
-                    $("#basic_tbl").html(html);
-                
-               
-                	
-                	
-                
+           html += "<table><col style='width: 100px'><col style='width: 372px'><col style='width: 270px'><thead>";
+           html +="<tr><th scope='col' style='text-align: center'>카테고리</th><th scope='col' style='text-align: center'>제목</th><th scope='col' style='text-align: center'>등록일</th></tr></thead><tbody id='nTableBody'>";
+           if(data.length>0){
+               for(var i in data){
+                   html += "<tr><td style='text-align: center'><input type='hidden' class='noticeNo' value='"+data[i].noticeNo+"'>";
+                   html += (data[i].noticeCategory=='t'?"티켓오픈":(data[i].noticeCategory=='s'?"시스템":(data[i].noticeCategory=='c'?"변경/취소":"기타")))+"</td>";
+                   html += "<td style='text-align: left'>"+data[i].noticeTitle+"</td>";
+                  var fullDate = new Date(data[i].noticeEnrollDate);
+                  var month = fullDate.getMonth()+1;
+                  var date = fullDate.getDate();
+                   html += "<td style='text-align: center'>"+fullDate.getFullYear()+"-"+(month<10?'0'+month:month)+"-"+(date<10?'0'+date:date)+"</td></tr>";
+               } /* for문끝 */
+           }  /* if문끝 */
+           else{
+           		html+="<tr><td colspan='3'>공지사항이 존재하지 않습니다.</td></tr>";
+           }
+           html+="</tbody></table>";
+           $("#basic_tbl").html(html);
+              
        /*function success(data)끝 */
        },error:function(e){
             if(e.status==300){
@@ -169,41 +162,37 @@ function faqList(type, searchType){
 
 
 					<div class="question">공지 검색하기</div>
-					<div class="search">
-						<form name="searchForm"
-							action="http://www.ticketlink.co.kr/search" method="GET">
-							<fieldset id="fieldsetS">
-								<legend>검색</legend>
-								<input type="text" name="query" title="검색어 입력" value="">
-								<p class="btn_search">
-									<a href="javascript:document.searchForm.submit()"
-										class="material-icons w3-xlarge">search</a>
-								<p>
-							</fieldset>
-						</form>
+					<div class="search" id="searchBtn">
+						<fieldset id="fieldsetS">
+							<legend>검색</legend>
+							<input type="text" title="검색어 입력" onkeyup="enterkey();">
+							<p class="btn_search">
+								<a href="javascript:search()"
+									class="material-icons w3-xlarge">search</a>
+							<p>
+						</fieldset>
 					</div>
 
 					<!-- // 검색창 덮는 배너 추가 -->
 				</div>
-				<c:if test="${!empty memberLoggedIn}">
+				<c:if test="${'admin' eq memberLoggedIn.memberId}">
 					<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
 				</c:if>
 				<ul id="genreNav" class="nav nav-pills nav-justified">
 					<li class="nav-item"><a class="nav-link select nav-font"
 						href="#">전체</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">티켓오픈</a></li>
+						href="#" id="t">티켓오픈</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">시스템관련</a></li>
+						href="#" id="s">시스템관련</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">변경취소</a></li>
+						href="#" id="c">변경취소</a></li>
 					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">기타</a></li>
+						href="#" id="o">기타</a></li>
 				</ul>
 
-				<div class="basic_tbl">
+				<div class="basic_tbl" id="basic_tbl">
 					<table>
-						<caption>공지사항 리스트</caption>
 						<colgroup>
 							<col style="width: 100px">
 							<col style="width: 372px">
@@ -219,7 +208,7 @@ function faqList(type, searchType){
 						<tbody id="NTableBody">
 							<c:if test="${empty list }">
 								<tr>
-									<td colspan="2">공지사항이 존재하지 않습니다.</td>
+									<td colspan="3">공지사항이 존재하지 않습니다.</td>
 								</tr>
 							</c:if>
 							<c:if test="${not empty list }">
@@ -239,65 +228,6 @@ function faqList(type, searchType){
 									</tr>
 								</c:forEach>
 							</c:if>
-							<%-- <c:if test="${empty list }">
-										<tr>
-											<td colspan="2">faq가 존재하지 않습니다.</td>
-										</tr>
-								</c:if>
-								<c:if test="${not empty list }">
-								<c:forEach items="${list}" var="f">
-											<c:if test="${f.type.equals('T') }">
-												<tr>
-													<td>예매/취소
-														<input type="hidden" id="faqNo" value="${f.faqNo }">
-													</td>
-													<td colspan="2">${f.question}</td>
-														
-														
-												</tr>
-											</c:if>
-											<c:if test="${f.type.equals('M') }">
-												<tr>
-													<td>회원
-														<input type="hidden" id="faqNo" value="${f.faqNo }">
-													</td>
-													<td colspan="2">${f.question}</td>
-														
-														
-												</tr>
-											</c:if>
-											<c:if test="${f.type.equals('B') }">
-												<tr>
-													<td>결제
-														<input type="hidden" id="faqNo" value="${f.faqNo }">
-													</td>
-													<td colspan="2">${f.question}</td>
-														
-														
-												</tr>
-											</c:if>
-											<c:if test="${f.type.equals('C') }">
-												<tr>
-													<td>쿠폰/이벤트
-														<input type="hidden" id="faqNo" value="${f.faqNo }">
-													</td>
-													<td colspan="2">${f.question}</td>
-														
-														
-												</tr>
-											</c:if>
-											<c:if test="${f.type.equals('E') }">
-												<tr>
-													<td>기타
-														<input type="hidden" id="faqNo" value="${f.faqNo }">
-													</td>
-													<td colspan="2">${f.question}</td>
-														
-														
-												</tr>
-											</c:if>
-									</c:forEach>
-								</c:if> --%>
 						</tbody>
 					</table>
 				</div>

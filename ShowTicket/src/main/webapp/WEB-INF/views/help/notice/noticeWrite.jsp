@@ -16,6 +16,50 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 
+<script>
+$(()=>{
+	$("#t").on("click",()=>{
+		$.ajax({
+	        url : '${pageContext.request.contextPath}/help/ticketOpenList.do',
+			contentType: 'application/json; charset=utf-8',
+			dataType: "json",
+			type: "POST",
+	        success : function(data) {
+	           console.log(data);
+
+	           var html = "";
+	           html += "<table class='openList'><tr><th style='width:100px;'>장르</th><th>공연명</th><th style='width:150px;'>공연오픈일</th><th style='width:100px;'>공연선택</th></tr>";
+	           if(data.length>0){
+	               for(var i in data){
+	                   html += "<tr><td>"+data[i].genrenm+"</td>";
+	                   html += "<td>"+data[i].prfnm+"</td>";
+	                   html += "<td>"+data[i].prfpdfrom+"</td>";
+	                   html += "<td><input type='radio' name='chk_yn' class='chk_yn'>";
+	                   html += "<div class='ticketInfo playId'>"+data[i].mt20id+"</div><div class='ticketInfo endDate'>"+data[i].prfpdto+"</div><div class='ticketInfo stateName'>"+data[i].fcltynm+"</div></td></tr>";
+	               } /* for문끝 */
+	           }  /* if문끝 */
+	           else{
+	           		html+="<tr><td colspan='3'> 오픈티켓이 존재하지 않습니다.</td></tr>";
+	           }
+	           html+="</table>";
+	           $("#show-list").html(html);
+	           $(".openList tbody").attr("style","display:block;");
+	              
+	       /*function success(data)끝 */
+	       },error:function(e){
+	            if(e.status==300){
+	               alert("데이터를 가져오는데 실패하였습니다.");
+	           }; 
+	       }
+		});
+	});
+	
+	$(".chk_yn").on("click",(e)=>{
+		console.log("라디오 눌림!");
+		console.log($(e.target).siblings(".playId").text());
+	});
+});
+</script>
 
 <div id="container">
 	<div class="inner">
@@ -64,6 +108,8 @@
 				<div>
 					<h2 class="help-title">공지사항</h2>
 				</div>
+				<div id="show-list">
+				</div>
 				<div id="enroll-container">
 					<form name="noticeWriteFrm" id="noticeWrite"
 						action="noticeWriteEnd.do" method="post"
@@ -80,7 +126,7 @@
 								<th class="text-left">카테고리<i class="ico-star">*</i></th>
 								<td>
 									<div class="custom-radio">
-										<input type="radio" name="noticeCategory" id="t" value="t" checked
+										<input type="radio" name="noticeCategory" id="t" value="t"
 											required /> <label for="t">티켓오픈</label>
 									</div>
 									<div class="custom-radio">
@@ -117,8 +163,6 @@
 </div>
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
-<script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	$(document).ready(function() {
@@ -126,10 +170,6 @@
 		$('input, textarea').placeholder();
 	});
 
-	function searchFaq() {
-		var searchKeyword = encodeURI($("#search_help").val());
-		location.replace("/help/faq?searchKeyword=" + searchKeyword + "");
-	}
 	//]]>
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -95,6 +95,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.selectOneTicketByNo", ticketNo);
 	}
 
+	@Override
+	public List<String> selectFollow(String memberId) {
+		return sqlSession.selectList("member.selectFollow", memberId);
+	}
+
+	@Override
+	public int deleteFollow(Map<String, String> follow) {
+		return sqlSession.delete("member.deleteFollow", follow);
+	}
+
 
 	
 
