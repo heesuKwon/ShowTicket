@@ -18,7 +18,7 @@ function talkPopup(){
 
 	var url = "${pageContext.request.contextPath}/talk.do";
     var name = "popup test";
-    var option = "width = 500, height = 650, top = 100, left = 400, location = no"
+    var option = "width = 400, height = 500, top = 100, left = 400, location = no"
     window.open(url, name, option);
 }
 

@@ -6,35 +6,16 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<script>
-	document.write('<link rel="apple-touch-icon" href="http://ticketlink.dn.toastoven.net/web/IOS.png" />');
-	document.write('<link rel="icon" type="image/png" href="http://ticketlink.dn.toastoven.net/web/AOS.ico" />');
-	document.write('<link rel="shortcut icon" href="http://ticketlink.dn.toastoven.net/web/AOS.png" />');
-</script>
 
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta name="description"
-	content="티켓예매, 스포츠, 공연, 전시 등 티켓 예매서비스 제공 . 페이코(PAYCO)간편결제 지원" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="티켓링크" />
-<meta property="og:description"
-	content="티켓예매, 스포츠, 공연, 전시 등 티켓 예매서비스 제공 . 페이코(PAYCO)간편결제 지원" />
 <meta property="og:image"
 	content="https://tketlink.dn.toastoven.net/static/ticketlink.png" />
 <title>ShowTicket</title>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="naver-site-verification"
-	content="86eedba5250abe392904d952feac4c2b02322e81" />
 
-<link rel="shortcut icon" type="image/x-icon"
-	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/common.css">
-
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
@@ -51,8 +32,6 @@
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
 
-<link rel="shortcut icon" type="image/x-icon"
-	href="http://ticketlink.dn.toastoven.net/web/favicon.ico" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -67,91 +46,13 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 
-<!-- <script type="text/javascript" src="/resources/js/login.js"></script> -->
-<script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
-<script type="text/javascript">
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "s_765d50fa49a";
-	if (!_nasa) var _nasa = {};
-	wcs.inflow();
-	wcs_do(_nasa);
-
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "3ce26ce585ae64";
-	wcs_do();
-</script>
-
-<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
-<script language='javascript'>
-	var _AceGID = (function () {
-		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
-		var _CI = (!_AceGID) ? [] : _AceGID.val;
-		var _N = 0;
-		var _T = new Image(0, 0);
-		if (_CI.join('.').indexOf(Inf[3]) < 0) {
-			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
-			_CI.push(Inf);
-			_N = _CI.length;
-		}
-		return {o: _N, val: _CI};
-	})();
-	var _AceCounter = (function () {
-		var G = _AceGID;
-		var _sc = document.createElement('script');
-		var _sm = document.getElementsByTagName('script')[0];
-		if (G.o != 0) {
-			var _A = G.val[G.o - 1];
-			var _G = (_A[0]).substr(0, _A[0].indexOf('.'));
-			var _C = (_A[7] != '0') ? (_A[2]) : _A[3];
-			var _U = (_A[5]).replace(/\,/g, '_');
-			_sc.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/Web/AceCounter_' + _C + '.js?gc=' + _A[2] + '&py=' + _A[4] + '&gd=' + _G + '&gp=' + _A[1] + '&up=' + _U + '&rd=' + (new Date().getTime());
-			_sm.parentNode.insertBefore(_sc, _sm);
-			return _sc.src;
-		}
-	})();
-</script>
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-<script language='javascript' type='text/javascript'>
-	if (document.cookie.indexOf('VIEW_TKLINK_ID') > 0) {
-		var mr_id = 'member';	// ë¡ê·¸ì¸ íìíë¨( 'member' ê³ ì ê°)
-	}
-</script>
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-<script type="text/Javascript">
-	if (typeof (AMRS_GC) == 'undefined') {
-		var AMRS_O = [];
-		var AMRS_CK = new Image();
-		var AMRS_GC = 'AG5A4302491053';
-		var AMRS_GD = 'mrsg.aceclick.co.kr';
-		var AMRS_GP = '8080';
-		var AMRS_TI = (new Date()).getTime();
-		var AMRS_PR = location.protocol == "https:" ? "https://" + AMRS_GD + ":843" : "http://" + AMRS_GD + ":" + AMRS_GP;
-		AMRS_CK.src = AMRS_PR + '/?cookie';
-		if (typeof (Array.prototype.push) != 'undefined') {
-			AMRS_O.push(AMRS_CK);
-		}
-		var _AMSC = document.createElement('script');
-		var _AMSM = document.getElementsByTagName('script')[0];
-		_AMSC.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/aceclick.js?rt=' + AMRS_TI;
-		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
-	}
-</script>
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<noscript>
-	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
-		border='0' width='0' height='0' alt=''>
-</noscript>
-
-<!-- AceCounter Log Gathering Script End -->
-
-
 <script type="text/javascript">
 let sock = new SockJS("${pageContext.request.contextPath}/wAlarm");
 
 sock.onopen = onOpen;
 sock.onmessage = onMessage;
 sock.onclose = onClose;
+
 
 function onOpen(){
  	console.log('websocket opened');

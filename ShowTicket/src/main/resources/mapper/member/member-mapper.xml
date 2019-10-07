@@ -19,7 +19,7 @@
 		update member
 		<trim prefix="set" suffixOverrides=",">
 			<if test="password != null and password !=''">
-			password= #{pasdissword},
+			password= #{password},
 			</if>
 			<if test="memberName != null and memberName !=''">
 			member_name = #{memberName},
@@ -107,4 +107,14 @@
 		<result column="ticket_date" property="ticketDate" />
 		<result column="ticket_time" property="ticketTime" />
 	</resultMap>
+	
+	<select id="selectFollow" resultType="string">
+		select * from follow
+		where member_id = #{memberId}
+	</select>
+	
+	<delete id="deleteFollow">
+		delete from follow
+		where member_id = #{memberId} and follow_showid = #{playId}
+	</delete>
 </mapper>

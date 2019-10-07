@@ -14,6 +14,8 @@ public interface DiscountDAO {
 
 	List<Discount> selectdcList();
 
+	Discount selectOneDc(String evtID);
+
 
 
 }

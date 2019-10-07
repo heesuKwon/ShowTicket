@@ -129,4 +129,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectOneTicketByNo(ticketNo);
 	}
 
+	@Override
+	public List<String> selectFollow(String memberId) {
+		return memberDAO.selectFollow(memberId);
+	}
+
+	@Override
+	public int deleteFollow(Map<String, String> follow) {
+		return memberDAO.deleteFollow(follow);
+	}
+
 }

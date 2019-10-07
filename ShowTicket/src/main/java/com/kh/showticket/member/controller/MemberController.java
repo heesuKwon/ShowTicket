@@ -1,6 +1,8 @@
 package com.kh.showticket.member.controller;
 
 
+import static com.kh.showticket.common.getApi.getApi.getList;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.common.MusicalAndShow;
+import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.mailhandler.MailHandler;
 import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
@@ -31,9 +36,6 @@ import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.MyPoint;
 import com.kh.showticket.member.model.vo.Ticket;
-
-import com.kh.showticket.member.model.vo.MyPoint;
-import static com.kh.showticket.common.getApi.getApi.*;
 
 
 @RequestMapping("/member")
@@ -281,11 +283,39 @@ public class MemberController {
 	}
 	
 	
-	@RequestMapping("/myInterest.do")
-	public String myInterest() {
+	@RequestMapping("/myFollow.do")
+	public ModelAndView myFollow(HttpSession session, ModelAndView mav) {
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
 
-		return "/member/myInterest";
+		List<String> follows = memberService.selectFollow(memberId);
+		List<MusicalAndShow> masList = new ArrayList<>();
+		getApi getApi = new getApi();
+		for(String follow: follows) {
+			masList.add(getApi.getMusicalAndShow(follow));
+		}
+		mav.addObject("masList", masList);
+		mav.setViewName("/member/myFollow");
+		return mav;
 	}
+	
+	@RequestMapping("/deleteFollow.do")
+	public ModelAndView deleteFollow(HttpSession session, ModelAndView mav, @RequestParam String playId) {
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
+		Map<String, String> follow = new HashMap<>();
+		follow.put("memberId", memberId);
+		follow.put("playId",playId);
+		memberService.deleteFollow(follow);
+		
+		String msg = "관심공연이 취소되었습니다.";
+		String loc = "/member/myFollow.do";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		mav.setViewName("common/msg");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
 		logger.debug("memberId="+member.getMemberId());
