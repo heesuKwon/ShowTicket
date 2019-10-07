@@ -64,7 +64,7 @@ public class Selenium2Example {
 		driver.findElement(By.id("userPwd")).click();
 		
 //		자기 "비밀번호" 넣어주세요~~~
-		driver.findElement(By.id("userPwd")).sendKeys("No32tjrgus!@");
+		driver.findElement(By.id("userPwd")).sendKeys("!nterpark12");
 
 		driver.findElement(By.id("btn_login")).click();
     driver.findElement(By.id("Nav_SearchWord")).click();

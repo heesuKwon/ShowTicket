@@ -181,10 +181,11 @@ public class MemberController {
 	
 	
 	@RequestMapping("/memberView.do")
-	public String memberView(Model model, @RequestParam String memberId) {
-		Member member = memberService.selectOneMember(memberId);
-		model.addAttribute("member", member);
-		return "/member/memberView";
+	public void memberView() {
+		/*
+		 * Member member = memberService.selectOneMember(memberId);
+		 * model.addAttribute("member", member); return "/member/memberView";
+		 */
 	}
 
 	@RequestMapping("/myCoupon.do")
