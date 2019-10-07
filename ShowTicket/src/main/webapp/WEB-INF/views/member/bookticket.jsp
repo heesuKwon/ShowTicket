@@ -45,12 +45,13 @@ nav-pills .nav-link {
 
 		</div>
 
+
 		<div class="t_btndiv">
 			<input type="button" value="이전단계" class="t_button1" /> <input
 				type="button" value="결제하기" class="t_button2" />
 		</div>
 
 
-
 	</div>
+
 </body>

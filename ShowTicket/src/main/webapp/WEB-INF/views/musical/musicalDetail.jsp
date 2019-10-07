@@ -24,8 +24,8 @@
 <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
- <link rel="stylesheet" type="text/css"
-						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css"> 
+<!--  <link rel="stylesheet" type="text/css"
+						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">  -->
 
 <%
 
@@ -95,449 +95,9 @@ $(()=>{
 
 /*--------------------------석현씨 코딩영역-----------------------------  */		
 
-    var _JV = "AMZ2013010701";//script Version
-    var _UD = 'undefined';
-    var _UN = 'unknown';
-    function _IDV (a) {
-        return (typeof a != _UD) ? 1 : 0
-    }
-    var _CRL = 'http://' + 'gtc9.acecounter.com:8080/';
-    var _GCD = 'BS2A39876863068';
-    if (document.URL.substring(0, 8) == 'https://') {
-        _CRL = 'https://gtc9.acecounter.com/logecgather/';
-    }
-    ;
-    if (!_IDV(_A_i)) var _A_i = new Image();
-    if (!_IDV(_A_i0)) var _A_i0 = new Image();
-    if (!_IDV(_A_i1)) var _A_i1 = new Image();
-    if (!_IDV(_A_i2)) var _A_i2 = new Image();
-    if (!_IDV(_A_i3)) var _A_i3 = new Image();
-    if (!_IDV(_A_i4)) var _A_i4 = new Image();
-    function _RP (s, m) {
-        if (typeof s == 'string') {
-            if (m == 1) {
-                return s.replace(/[#&^@,]/g, '');
-            } else {
-                return s.replace(/[#&^@]/g, '');
-            }
-        } else {
-            return s;
-        }
-    }
-    ;
-    function _RPS (a, b, c) {
-        var d = a.indexOf(b), e = b.length > 0 ? c.length : 1;
-        while (a && d >= 0) {
-            a = a.substring(0, d) + c + a.substring(d + b.length);
-            d = a.indexOf(b, d + e);
-        }
-        return a
-    }
-    ;
-    function AEC_F_D (pd, md, cnum)	 {
-        var i = 0, amt = 0, num = 0;
-        var cat = '', nm = '';
-        num = cnum;
-        md = md.toLowerCase();
-        if (md == 'b' || md == 'i' || md == 'o') {
-            for (i = 0; i < _A_pl.length; i++) {
-                if (_A_nl[i] == '' || _A_nl[i] == 0)_A_nl[i] = '1';
-                if (num == 0 || num == '')num = '1';
-                if (_A_pl[i] == pd) {
-                    nm = _RP(_A_pn[i]);
-                    amt = (parseInt(_RP(_A_amt[i], 1)) / parseInt(_RP(_A_nl[i], 1))) * num;
-                    cat = _RP(_A_ct[i]);
-                    var _A_cart = _CRL + '?cuid=' + _GCD;
-                    _A_cart += '&md=' + md + '&ll=' + _RPS(escape(cat + '@' + nm + '@' + amt + '@' + num + '^&'), '+', '%2B');
-                    break;
-                }
-                ;
-            }
-            ;
-            if (_A_cart.length > 0)_A_i.src = _A_cart + "rn=" + String(new Date().getTime());
-            setTimeout("", 2000);
-        }
-        ;
-    }
-    ;
-    if (!_IDV(_A_pl)) var _A_pl = Array(1);
-    if (!_IDV(_A_nl)) var _A_nl = Array(1);
-    if (!_IDV(_A_ct)) var _A_ct = Array(1);
-    if (!_IDV(_A_pn)) var _A_pn = Array(1);
-    if (!_IDV(_A_amt)) var _A_amt = Array(1);
-    if (!_IDV(_pd)) var _pd = '';
-    if (!_IDV(_ct)) var _ct = '';
-    if (!_IDV(_amt)) var _amt = '';
 </script>
-<!-- Function and Variables Definition Block End-->
-
-<!-- Data Allocation (Product_Detail) -->
-<script language='javascript'>
-    _pd = _RP("뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ");
-    _ct = _RP("창작뮤지컬");
-    _amt = _RP("0", 1); // _RP(1)-> price
-
-    _A_amt = Array('0');
-    _A_nl = Array('1');
-    _A_pl = Array('29652');
-    _A_pn = Array('뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ');
-    _A_ct = Array('99');
-</script>
-
-
-
-<script type="text/javascript">
-	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "s_765d50fa49a";
-	if (!_nasa) var _nasa = {};
-	wcs.inflow();
-	wcs_do(_nasa);
-
-	// ë¤ì´ë² ë¡ê·¸ (ê¸°ì¡´ë¶í° ì¡´ì¬)
-	if (!wcs_add) var wcs_add = {};
-	wcs_add["wa"] = "3ce26ce585ae64";
-	wcs_do();
-</script>
-
-<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
-<script language='javascript'>
-	var _AceGID = (function () {
-		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
-		var _CI = (!_AceGID) ? [] : _AceGID.val;
-		var _N = 0;
-		var _T = new Image(0, 0);
-		if (_CI.join('.').indexOf(Inf[3]) < 0) {
-			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
-			_CI.push(Inf);
-			_N = _CI.length;
-		}
-		return {o: _N, val: _CI};
-	})();
-	var _AceCounter = (function () {
-		var G = _AceGID;
-		var _sc = document.createElement('script');
-		var _sm = document.getElementsByTagName('script')[0];
-		if (G.o != 0) {
-			var _A = G.val[G.o - 1];
-			var _G = (_A[0]).substr(0, _A[0].indexOf('.'));
-			var _C = (_A[7] != '0') ? (_A[2]) : _A[3];
-			var _U = (_A[5]).replace(/\,/g, '_');
-			_sc.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/Web/AceCounter_' + _C + '.js?gc=' + _A[2] + '&py=' + _A[4] + '&gd=' + _G + '&gp=' + _A[1] + '&up=' + _U + '&rd=' + (new Date().getTime());
-			_sm.parentNode.insertBefore(_sc, _sm);
-			return _sc.src;
-		}
-	})();
-</script>
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-<script type="text/Javascript">
-	if (typeof (AMRS_GC) == 'undefined') {
-		var AMRS_O = [];
-		var AMRS_CK = new Image();
-		var AMRS_GC = 'AG5A4302491053';
-		var AMRS_GD = 'mrsg.aceclick.co.kr';
-		var AMRS_GP = '8080';
-		var AMRS_TI = (new Date()).getTime();
-		var AMRS_PR = location.protocol == "https:" ? "https://" + AMRS_GD + ":843" : "http://" + AMRS_GD + ":" + AMRS_GP;
-		AMRS_CK.src = AMRS_PR + '/?cookie';
-		if (typeof (Array.prototype.push) != 'undefined') {
-			AMRS_O.push(AMRS_CK);
-		}
-		var _AMSC = document.createElement('script');
-		var _AMSM = document.getElementsByTagName('script')[0];
-		_AMSC.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/aceclick.js?rt=' + AMRS_TI;
-		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
-	}
-</script>
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<noscript>
-	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
-		border='0' width='0' height='0' alt=''>
-</noscript>
-
-<!-- AceCounter Log Gathering Script End -->
-
-
-<script>
-	
-	
-
-	try {
-		var evt_data = {};
-		evt_data.evt = "view"; // 고정
-		evt_data.p_no = "29652"; // 상품코드
-		evt_data.p_name = "뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) "; // 상품명
-		evt_data.thumb = "http://image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg"; // 상품이미지 url
-		evt_data.p_url = "http://www.ticketlink.co.kr/product/29652"; // 해당 상품페이지 url
-		evt_data.p_url_m = "http://m.ticketlink.co.kr/product/29652"; // 해당 상품페이지 모바일 url
-		evt_data.startdate = "20190920"; // 공연시작일
-		evt_data.enddate = "20191027"; // 공연종료일
-		evt_data.sale_startdate = "20190807"; // 예매오픈일
-		evt_data.place = "성남아트센터 오페라하우스"; // 공연장소
-		evt_data.view_grade = "만7세이상"; // 관람등급
-		evt_data.city = "경기"; // 공연지역
-		evt_data.price = "60000"; // 상품판매가격(숫자만 포함한 문자열)
-		evt_data.price_table = "A석:60000|S석:90000|R석:120000|VIP석:140000"; // 좌석별 가격표 (가격오름차순, 가격은 숫자만 포함한 문자열)
-		evt_data.soldout = "0"; // 품절여부. (품절이 아닐경우 '0', 품절일 경우 '1')
-		evt_data.cate1 = '공연'; // 카테고리 대분류. 존재하지 않으면 ''
-		evt_data.cate2 = '뮤지컬'; // 카테고리 중분류. 존재하지 않으면 ''
-		evt_data.cate3 = ''; // 카테고리 소분류. 존재하지 않으면 ''
-
-		mcroPushEvent(evt_data);
-	} catch
-		(e) {
-	}
-</script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js/jindo.desktop.ns.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
-<script type="text/javascript">
-	//<![CDATA[
-
-	function callMemberCommonCheck () {
-		var url = "/product/" + $('#productId').val();
-		memberCommonCheck(url);
-	}
-
-	function insertProductReview () {
-		/* 	if(!checkLoginUsingCookie("tabs-2")){
-         return;
-         } */
-		var url = "/product/" + $('#productId').val();
-		if (!memberCommonCheck(url)) {
-			return;
-		}
-
-		if (!isValidReview()) {
-			return;
-		}
-
-		$("#reviewInsertButton").attr("onclick", "");
-
-		var productId = $("#productId").val();
-		$.ajax({
-			async: false,
-			type: "POST",
-			dataType: 'json',
-			url: "/product/review/insertProductReview.nhn",
-			data: {
-				productId: productId,
-				rating: $("#score").text(),
-				reviewContent: $("#reviewContent").val()
-			},
-			success: function (result) {
-				if (result.message == "validation fail") {
-					setValidationMessage(result.result);
-					return;
-				}
-				alert("후기가 등록되었습니다.");
-				getProductReviewList(1);
-				$("#reviewContent").val("");
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			},
-			error: function (request, status, error) {
-				alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
-				getProductInquiryList(1);
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			}
-		});
-	}
-
-	function deleteThisReview (reviewId) {
-		if (confirm("삭제하시겠습니까?")) {
-			var productId = $("#productId").val();
-			$.ajax({
-				type: "POST",
-				dataType: 'json',
-				url: "/product/review/deleteProductReview",
-				data: {
-					productId: productId,
-					reviewId: reviewId
-				},
-				success: function (result) {
-					if (result && result.result && result.result == "error") {
-						alert("오류가 발생하였습니다. 재로그인 후 다시 시도해주세요.");
-						return;
-					} else {
-						alert("후기를 삭제했습니다.");
-						getProductReviewList(1);
-					}
-				},
-				error: function (request, status, error) {
-					alert("오류가 발생하였습니다. 관리자에게 문의하세요");
-				}
-			});
-		}
-	}
-
-	function isValidReview () {
-		var rating = $.trim($("#score").text());
-		var reviewContent = $.trim($("#reviewContent").val());
-
-		if (rating == "" || rating == null) {
-			alert("별점을 선택해주세요.");
-			return false
-		} else if (reviewContent == "" || reviewContent == null) {
-			alert("후기를 입력해주세요.");
-			return false
-		} else {
-			return true;
-		}
-	}
-
-	function setValidationMessage (validationList) {
-		var starReviewErrors = $("#star_review_errors");
-		starReviewErrors.html('');
-		for (var i = 0; i < validationList.length; i++) {
-			contents = "<p style='color:red; margin-top:5px;'>" + validationList[i] + "</p>";
-			starReviewErrors.append(contents);
-		}
-	}
-
-	function getProductReviewList (page) {
-
-		var ajaxData = {
-			productId: $("#productId").val(),
-			page: page
-		};
-
-		if ($("#review_search_type").val() == "memberId") {
-			ajaxData.memberId = $.trim($("#review_search_key").val());
-		} else {
-			ajaxData.reviewContent = $.trim($("#review_search_key").val());
-		}
-
-		$.ajax({
-			cache: false,
-			dataType: "json",
-			url: "/product/review/getProductReviewList.nhn",
-			data: ajaxData,
-			success: function (result) {
-				displayReviewList(result.result.result);
-				displayPage(result.result.paging, $('#pagination'));
-				makeBannerLayer(result.result.productReview)
-				resetReviewData(result.result.ratingAverage, result.result.countReviewe);
-			}
-		});
-	}
-
-	function makeBannerLayer (productReview) {
-		var imgSrc = this.getBannerImageSrc(productReview.productId);
-		if (imgSrc == "") {
-			return;
-		}
-
-		if ($(".banner_area").find('img').length === 0) {
-			$(".banner_area").append(imgSrc);
-		}
-	}
-
-
-	function resetReviewData (ratingAverage, countReviewe) {
-		if (ratingAverage != null) {
-			$("#ratingAverage").text(ratingAverage.toFixed(1));
-		}
-		$("#ratingAverageStar").css("width", ratingAverage * 20 + "%");
-		$("#countReviewe").text(countReviewe + "명");
-		$("#reviewContent").val("");
-		$("#score").text("");
-		$("#star_review_errors").html('');
-		oStarRating.reset();
-	}
-
-	function displayReviewList (reviewList) {
-		var searchedReviewList = $('#reviewUl');
-		searchedReviewList.html('');
-		for (var i = 0; i < reviewList.length; i++) {
-			var date = new Date(reviewList[i].reviewDatetime);
-			var list = $('<li>');
-			list.appendTo(searchedReviewList);
-			var contents = "<div class='review_info'><dl class='star_average'><dt>별점</dt><dd class='grade_star'><span class='star_gauge' style='width: " + (reviewList[i].rating * 20) + "%'></span></dd>" +
-				"<dt>아이디</dt><dd class='review_user'>" + reviewList[i].memberId + "</dd>" +
-				"<dt>날짜</dt><dd class='review_date'>" + $.formatDateTime('yy.mm.dd hh:ii', date) + "</dd>";
-			if (reviewList[i].isMyReview) {
-				contents += '<dt>삭제여부</dt><dd class="review_delete"><a href="javascript:;" onclick="deleteThisReview(' + reviewList[i].reviewId + ')" class="delete">댓글삭제</a></dd>';
-			}
-			contents += "</dl></div>" + reviewList[i].reviewContent;
-			list.append(contents);
-		}
-
-		if ($.trim($("#review_search_key").val()) == "") {
-			$("#displayAllReviewBtn").css("visibility", "hidden");
-		} else {
-			$("#displayAllReviewBtn").css("visibility", "visible");
-		}
-
-		if (reviewList.length == 0) {
-			var contents = '<li class="no_data">등록된 후기가 없습니다.</li>';
-			searchedReviewList.append(contents);
-		}
-	}
-
-	function goPage (page) {
-		getProductReviewList(page);
-	}
-
-	function openReviewList () {
-		if ($("#review_select_list").css("display") == "block") {
-			$("#review_select_list").css("display", "none");
-			return;
-		}
-		$("#review_select_list").css("display", "block");
-	}
-
-	function closeReviewSelectList (obj) {
-		$("#review_search_option").text($(obj).text());
-		if ($(obj).text() == '내용') {
-			$("#review_search_type").val("reviewContent");
-		} else {
-			$("#review_search_type").val("memberId");
-		}
-		$("#review_select_list").css("display", "none");
-	}
-
-	function searchReview () {
-		getProductReviewList(1);
-	}
-
-	function searchReviewUsingEnter () {
-		$('#review_search_key').keyup(function (e) {
-			if (e.keyCode == 13) {
-				getProductReviewList(1);
-			}
-		});
-	}
-
-	function displayAllreview () {
-		$("#review_search_key").val("");
-		getProductReviewList(1);
-	}
-
-	var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
-		nStep: 0.5,
-		nMaxValue: 5,
-		nDefaultValue: 0,
-		bSnap: true
-	}).attach({
-		set: function (oCustomEvent) {
-			jindo.$("score").innerHTML = oCustomEvent.nValue;
-		}
-	});
-
-	//]]>
-
-</script>
-
 
 </head>
-
-
-
 <script>
 	var meta = document.createElement('meta');
 	meta.setAttribute('name', 'more_page_type');
@@ -545,11 +105,8 @@ $(()=>{
 	document.getElementsByTagName('head')[0].appendChild(meta);
 </script>
 
-
 <div id="detailContainer">
 
-
-	
 	<input type="hidden" id="productId" value="29652" /> <input
 		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
 	<input type="hidden" id="adultYn" value="false" />
@@ -723,7 +280,42 @@ $(()=>{
 				</div>
 
 				<div class="tabs-Num" id="tabs-2">
-			
+
+<style type="text/css">
+  	.starrating-background {
+  	both:clear;
+     background: transparent url(../resources/images/T_03.png) repeat-x scroll 0 0; 
+    cursor: pointer;
+    display: inline-block;
+    height: 30px;
+    margin: 0;
+    width: 125px;
+    vertical-align: middle;
+}
+	
+.starrating-background span {
+both:clear;
+ 	background: transparent url(../resources/images/T_01.png)
+		repeat-x scroll 0 0; 
+	cursor: pointer;
+	display: inline-block;
+	height: 30px !important;
+}
+
+.starrating-background em {
+	both:clear;	
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 0;
+	height: 0;
+	overflow: hidden;
+	visibility: hidden;
+	font-size: 0;
+	line-height: 0;
+}   
+
+</style>
 					
 					<div class="detail_cont detail_cont_v2">
 						
@@ -736,19 +328,23 @@ $(()=>{
 							있으므로 게재를 삼가 주시기 바랍니다.<br> 운영 규정을 지속적으로 어기는 게시글을 게재할 경우 쇼티켓
 							게시판 이용이 제한될 수 있습니다.
 						</p>
+						
+						
+						
+				<!-- 				[D] st_off 영역에 마우스 오버시 : 클래스 st_over 추가
+                    [D] 버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가, 짝수 점수 버튼에 클래스 st_r 추가, 디폴트는 화면에 보이지 않는 0점 버튼
+								jindo.StarRating 을 사용함. http://jindo.dev.naver.com/docs/jindo-component/1.2.0/doc/external/classes/jindo.StarRating.html -->
 
 						<div class="star_review" id="star_review">
 							<fieldset>
 								<legend>네티즌 별점 및 후기 작성</legend>
-								<!-- [D] st_off 영역에 마우스 오버시 : 클래스 st_over 추가
-                    [D] 버튼 선택시 : 선택된 버튼 클래스 'on' 추가, 대체텍스트 '선택됨' 추가, 짝수 점수 버튼에 클래스 st_r 추가, 디폴트는 화면에 보이지 않는 0점 버튼 -->
-								<!-- jindo.StarRating 을 사용함. http://jindo.dev.naver.com/docs/jindo-component/1.2.0/doc/external/classes/jindo.StarRating.html -->
-								<div class="star_rating">
+								 <div class="star_rating">
 									<strong class="blind">평점선택</strong>
 									<div class="starrating-background" id="star_rating"
 										style="float: left;">
-										<span><em></em></span>
+										<span style="width:50px;"><em></em></span>
 									</div>
+									
 									<span class="blind">평점</span> <span class="star_score"
 										id="score" name="rating"></span>
 								</div>
@@ -818,6 +414,267 @@ $(()=>{
 
 					</div>
 				</div>
+<!-- 후기 별점 api  -->				
+<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/resources/js/jindo2.ns.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
+<script type="text/javascript"  charset="utf-8"
+	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
+
+<script type="text/javascript">
+	//<![CDATA[
+
+	/* function callMemberCommonCheck () {
+		var url = "/product/" + $('#productId').val();
+		memberCommonCheck(url);
+	} */
+
+	/* function insertProductReview () { */
+		/* 	if(!checkLoginUsingCookie("tabs-2")){
+         return;
+         } */
+         
+         
+         
+         
+		/* var url = "/product/" + $('#productId').val();
+		if (!memberCommonCheck(url)) {
+			return;
+		}
+
+		if (!isValidReview()) {
+			return;
+		}
+
+		$("#reviewInsertButton").attr("onclick", "");
+
+		var productId = $("#productId").val();
+		$.ajax({
+			async: false,
+			type: "POST",
+			dataType: 'json',
+			url: "/product/review/insertProductReview.nhn",
+			data: {
+				productId: productId,
+				rating: $("#score").text(),
+				reviewContent: $("#reviewContent").val()
+			},
+			success: function (result) {
+				if (result.message == "validation fail") {
+					setValidationMessage(result.result);
+					return;
+				}
+				alert("후기가 등록되었습니다.");
+				getProductReviewList(1);
+				$("#reviewContent").val("");
+				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
+			},
+			error: function (request, status, error) {
+				alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
+				getProductInquiryList(1);
+				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
+			}
+		}); 
+	 } */
+
+	/* function deleteThisReview (reviewId) {
+		if (confirm("삭제하시겠습니까?")) {
+			var productId = $("#productId").val();
+			$.ajax({
+				type: "POST",
+				dataType: 'json',
+				url: "/product/review/deleteProductReview",
+				data: {
+					productId: productId,
+					reviewId: reviewId
+				},
+				success: function (result) {
+					if (result && result.result && result.result == "error") {
+						alert("오류가 발생하였습니다. 재로그인 후 다시 시도해주세요.");
+						return;
+					} else {
+						alert("후기를 삭제했습니다.");
+						getProductReviewList(1);
+					}
+				},
+				error: function (request, status, error) {
+					alert("오류가 발생하였습니다. 관리자에게 문의하세요");
+				}
+			});
+		}
+	}
+
+	function isValidReview () {
+		var rating = $.trim($("#score").text());
+		var reviewContent = $.trim($("#reviewContent").val());
+
+		if (rating == "" || rating == null) {
+			alert("별점을 선택해주세요.");
+			return false
+		} else if (reviewContent == "" || reviewContent == null) {
+			alert("후기를 입력해주세요.");
+			return false
+		} else {
+			return true;
+		}
+	}
+
+	function setValidationMessage (validationList) {
+		var starReviewErrors = $("#star_review_errors");
+		starReviewErrors.html('');
+		for (var i = 0; i < validationList.length; i++) {
+			contents = "<p style='color:red; margin-top:5px;'>" + validationList[i] + "</p>";
+			starReviewErrors.append(contents);
+		}
+	}
+
+	function getProductReviewList (page) {
+
+		var ajaxData = {
+			productId: $("#productId").val(),
+			page: page
+		};
+
+		if ($("#review_search_type").val() == "memberId") {
+			ajaxData.memberId = $.trim($("#review_search_key").val());
+		} else {
+			ajaxData.reviewContent = $.trim($("#review_search_key").val());
+		}
+
+		$.ajax({
+			cache: false,
+			dataType: "json",
+			url: "/product/review/getProductReviewList.nhn",
+			data: ajaxData,
+			success: function (result) {
+				displayReviewList(result.result.result);
+				displayPage(result.result.paging, $('#pagination'));
+				makeBannerLayer(result.result.productReview)
+				resetReviewData(result.result.ratingAverage, result.result.countReviewe);
+			}
+		});
+	}
+
+	function makeBannerLayer (productReview) {
+		var imgSrc = this.getBannerImageSrc(productReview.productId);
+		if (imgSrc == "") {
+			return;
+		}
+
+		if ($(".banner_area").find('img').length === 0) {
+			$(".banner_area").append(imgSrc);
+		}
+	}
+
+
+	function getBannerImageSrc (productId) {
+		if (productId === 28633) {
+			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_city_v2.jpg"/>';
+		}
+
+		if (productId === 29652) {
+			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_love.jpg"/>'
+		}
+	}
+
+
+	function resetReviewData (ratingAverage, countReviewe) {
+		if (ratingAverage != null) {
+			$("#ratingAverage").text(ratingAverage.toFixed(1));
+		}
+		$("#ratingAverageStar").css("width", ratingAverage * 20 + "%");
+		$("#countReviewe").text(countReviewe + "명");
+		$("#reviewContent").val("");
+		$("#score").text("");
+		$("#star_review_errors").html('');
+		oStarRating.reset();
+	}
+
+	function displayReviewList (reviewList) {
+		var searchedReviewList = $('#reviewUl');
+		searchedReviewList.html('');
+		for (var i = 0; i < reviewList.length; i++) {
+			var date = new Date(reviewList[i].reviewDatetime);
+			var list = $('<li>');
+			list.appendTo(searchedReviewList);
+			var contents = "<div class='review_info'><dl class='star_average'><dt>별점</dt><dd class='grade_star'><span class='star_gauge' style='width: " + (reviewList[i].rating * 20) + "%'></span></dd>" +
+				"<dt>아이디</dt><dd class='review_user'>" + reviewList[i].memberId + "</dd>" +
+				"<dt>날짜</dt><dd class='review_date'>" + $.formatDateTime('yy.mm.dd hh:ii', date) + "</dd>";
+			if (reviewList[i].isMyReview) {
+				contents += '<dt>삭제여부</dt><dd class="review_delete"><a href="javascript:;" onclick="deleteThisReview(' + reviewList[i].reviewId + ')" class="delete">댓글삭제</a></dd>';
+			}
+			contents += "</dl></div>" + reviewList[i].reviewContent;
+			list.append(contents);
+		}
+
+		if ($.trim($("#review_search_key").val()) == "") {
+			$("#displayAllReviewBtn").css("visibility", "hidden");
+		} else {
+			$("#displayAllReviewBtn").css("visibility", "visible");
+		}
+
+		if (reviewList.length == 0) {
+			var contents = '<li class="no_data">등록된 후기가 없습니다.</li>';
+			searchedReviewList.append(contents);
+		}
+	}
+
+	function goPage (page) {
+		getProductReviewList(page);
+	}
+
+	function openReviewSelectList () {
+		if ($("#review_select_list").css("display") == "block") {
+			$("#review_select_list").css("display", "none");
+			return;
+		}
+		$("#review_select_list").css("display", "block");
+	}
+
+	function closeReviewSelectList (obj) {
+		$("#review_search_option").text($(obj).text());
+		if ($(obj).text() == '내용') {
+			$("#review_search_type").val("reviewContent");
+		} else {
+			$("#review_search_type").val("memberId");
+		}
+		$("#review_select_list").css("display", "none");
+	}
+
+	function searchReview () {
+		getProductReviewList(1);
+	}
+
+	function searchReviewUsingEnter () {
+		$('#review_search_key').keyup(function (e) {
+			if (e.keyCode == 13) {
+				getProductReviewList(1);
+			}
+		});
+	}
+
+	function displayAllreview () {
+		$("#review_search_key").val("");
+		getProductReviewList(1);
+	}
+	*/
+	/* var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
+		nStep: 0.5,
+		nMaxValue: 5,
+		nDefaultValue: 0,
+		bSnap: true
+	}).attach({
+		set: function (oCustomEvent) {
+			jindo.$("score").innerHTML = oCustomEvent.nValue;
+		}
+	});  */
+
+	//]]>
+</script>
+<!--리뷰 후기 영역  -->				
+				
 				<div class="tabs-Num" id="tabs-3">
 
 						
@@ -1526,26 +1383,6 @@ $(()=>{
 
 	function makeTap () {
 		$("#tabs").tabs();
-	}
-
-	function setTopTitleTag () {
-		var solelySaleCode = "HIDE";
-		var tagButton = $("span.ico_tag");
-		if (solelySaleCode == "SOLELY") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_monopoly");
-			tagButton.innerText = "단독판매";
-		} else if (solelySaleCode == "ABSOLUTE") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_advantage");
-			tagButton.innerText = "절대우위";
-		} else if (solelySaleCode == "RELATIVE") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_dominant");
-			tagButton.innerText = "상대우위";
-		} else if (solelySaleCode == "HIDE" || solelySaleCode == "") {
-			tagButton.css("display", "none");
-		}
 	}
 
 	

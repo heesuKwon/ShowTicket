@@ -62,7 +62,7 @@ public class MusicalController {
 		//logger.debug("전체뮤지컬 AJAX");
 		//logger.debug("cpage={}", cpage);
 
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d899134	94563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
 		
 		return getList(url);
 	}

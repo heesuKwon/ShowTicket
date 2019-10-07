@@ -19,7 +19,7 @@
 		update member
 		<trim prefix="set" suffixOverrides=",">
 			<if test="password != null and password !=''">
-			password= #{pasdissword},
+			password= #{password},
 			</if>
 			<if test="memberName != null and memberName !=''">
 			member_name = #{memberName},
