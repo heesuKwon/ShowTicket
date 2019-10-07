@@ -1,16 +1,11 @@
 package com.kh.showticket.musical.controller;
 
-import static com.kh.showticket.common.getApi.getApi.getBoxList;
-import static com.kh.showticket.common.getApi.getApi.getList;
+import static com.kh.showticket.common.getApi.getApi.*;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
+import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
-import com.kh.showticket.coupon.model.vo.Coupon;
-import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.musical.model.service.MusicalService;
 
 
@@ -40,7 +34,7 @@ public class MusicalController {
 	
 	@RequestMapping("/musical.do")
 	public ModelAndView musical(ModelAndView mav) {
-		//logger.debug("ë®¤ì§€ì»¬ë¦¬ìŠ¤íŠ¸í˜ì´ì§€");
+		//logger.debug("¹ÂÁöÄÃ¸®½ºÆ®ÆäÀÌÁö");
 		
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
 		String url2 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=ebfe5d2574de4631b6eda133b56b1297&stdate=20190928&eddate=20191031&cpage=1&rows=5&shcate=AAAB&prfstate=02";
@@ -62,10 +56,10 @@ public class MusicalController {
 	@RequestMapping("/musicalAjax.do")
 	@ResponseBody
 	public List<Map<String,String>> musicalAjax(@RequestParam int cpage) {
-		//logger.debug("ì „ì²´ë®¤ì§€ì»¬ AJAX");
+		//logger.debug("ÀüÃ¼¹ÂÁöÄÃ AJAX");
 		//logger.debug("cpage={}", cpage);
 
-		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d899134	94563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
+		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
 		
 		return getList(url);
 	}
@@ -73,9 +67,10 @@ public class MusicalController {
 
 	@RequestMapping("/musicalDetail.do")
 	public ModelAndView musicalDetail(ModelAndView mav, @RequestParam String musicalId) {
-
+		//logger.debug("¹ÂÁöÄÃ»ó¼¼ÆäÀÌÁö");
+		//logger.debug("musicalId={}",musicalId);
+		
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
-		List<Coupon> coupon = musicalService.selectCoupon(musicalId);
 		
 //		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
 		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+musical.getHallId()+"?service=3127d89913494563a0e9684779988063";
@@ -84,7 +79,6 @@ public class MusicalController {
 		logger.info("musicalAddress"+ address);
 		mav.addObject("musical", musical);
 		mav.addObject("address", address);
-		mav.addObject("coupon",coupon);
 		mav.setViewName("musical/musicalDetail");
 		return mav;
 	}
@@ -136,38 +130,24 @@ public class MusicalController {
 		for(int i=startPage; i<endPage; i++) {
 			resultPaged.add(result.get(i));
 		}
+		
 			
 		return resultPaged;
 	}
 	
-	@RequestMapping("/insertWait.do")
-	public ModelAndView insertWait(@RequestParam String musicalId, ModelAndView mav, HttpSession session) {
-		Map<String, String> userAndMusical = new HashMap<>();
-		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
-		userAndMusical.put("memberId", memberId);
-		userAndMusical.put("musicalId",musicalId);
-		int result = musicalService.insertWait(userAndMusical);
-
-		String msg = "";
-		String loc = "/musical/musicalDetail.do?musicalId="+musicalId;
-		if(result>0) {
-			msg="ëŒ€ê¸°ê³µì—°ì— ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.";
-		}
-		else {
-			msg="ëŒ€ê¸°ê³µì—° ì¶”ê°€ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";
-		}
-		
-		mav.addObject("msg", msg);
-		mav.addObject("loc", loc);
-		mav.setViewName("common/msg");
-		return mav;
-	}
-	
 	@RequestMapping("/musicalrankAjax.do")
 	public List<Map<String, String>> musicalrankAjax(@RequestParam String url1) {
-		
+
 		return getBoxList(url1);
 		
+	}
+	
+	@RequestMapping("/musicalNewAjax.do")
+	public List<Map<String, String>>musicalNewAjax(@RequestParam String url1) {
+		
+		List<Map<String,String>> dayList = getApi.getOrderedListByDate2(getList(url1));
+		
+		return dayList;
 	}
 	
 }
