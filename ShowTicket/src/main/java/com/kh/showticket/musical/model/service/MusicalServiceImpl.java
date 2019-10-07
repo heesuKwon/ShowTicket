@@ -26,7 +26,7 @@ public class MusicalServiceImpl implements MusicalService {
 	public MusicalAndShow selectOne(String musicalId) {
 		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
 		
-		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
+//		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
 		
 		logger.debug(musical.toString());
 		
