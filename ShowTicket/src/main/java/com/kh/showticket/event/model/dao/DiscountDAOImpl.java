@@ -32,6 +32,11 @@ public class DiscountDAOImpl implements DiscountDAO {
 		return sqlSession.selectList("discount.selectdcList"); 
 	}
 
+	@Override
+	public Discount selectOneDc(String evtID) {
+		return sqlSession.selectOne("discount.selectOneDc", evtID);
+	}
+
 	
 	
 	

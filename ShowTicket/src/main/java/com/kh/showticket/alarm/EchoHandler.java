@@ -41,11 +41,10 @@ public class EchoHandler extends TextWebSocketHandler {
         //임시
         String memberLoggedIn = "honggd";
         List<String> myStandByList = memberService.selectMyStandByList(memberLoggedIn);
-        
-        String ticketId= "";
+
+        String ticketShowName = "";
         String ticketDate = "";
         String ticketTime = "";
-        
         
         String ticketNo_ = message.getPayload();
         int ticketNo = Integer.parseInt(ticketNo_);
@@ -53,17 +52,18 @@ public class EchoHandler extends TextWebSocketHandler {
         Map<String, String> canceledInfo =  memberService.selectOneTicketByNo(ticketNo);
         logger.debug("canceledInfo={}", canceledInfo);
         
-        //for(String wId : myStandByList) {
+        for(String wId : myStandByList) {
         	//타이틀추가되면 그때 수정
-        	//if(wId.equals(canceledInfo.get("ticketShowId"))) {
-        		ticketId = canceledInfo.get("ticketShowId");
+        	if(wId.equals(canceledInfo.get("ticketShowId"))) {
+        		ticketShowName = canceledInfo.get("ticketShowName");
+                ticketDate = canceledInfo.get("ticketDate");
         		ticketTime = canceledInfo.get("ticketTime");
-        	//}
-        //}
+        	}
+        }
   
         for (WebSocketSession sess : sessionList) {
             //sess.sendMessage(new TextMessage(session.getId() + " : " + message.getPayload()));
-        	 sess.sendMessage(new TextMessage("대기공연에 등록하신 "+ticketId+"의 "+ticketDate+" "+ticketTime+" 취소표가 나왔습니다."));
+        	 sess.sendMessage(new TextMessage("대기공연에 등록하신 "+ticketShowName+"의 "+ticketDate+" "+ticketTime+" 취소표가 나왔습니다."));
         }
     }
 

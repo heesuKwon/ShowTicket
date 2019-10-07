@@ -281,10 +281,11 @@ function slideShow(){
 </script>
 <script type="text/javascript">
 $(()=>{
-	var type = $("#order-show option:selected").val();
 	 $("#order-show").change(function(){
-		 if("byDate".equals($("#order-show option:selected").val())){getNewList()}
-		 else if("byRank".equals($("#order-show option:selected").val())){getDateList()}
+		 var type = $("#order-show option:selected").val();
+		 alert(type);
+		 if("byDate".equals(type)){getNewList()}
+		 else if("byRank".equals(type){getDateList()}
         
 	});
 });

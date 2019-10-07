@@ -13,6 +13,7 @@ import com.kh.showticket.event.model.exception.EventException;
 import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventAttachment;
 
+
 @Service
 public class EventServiceImpl implements EventService {
 	
@@ -27,15 +28,45 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public int insertEvent(Event event) {
-		logger.info("eventService={}",event);
-		return eventDAO.insertEvent(event);
+	public int insertEventEnd(Event event, List<EventAttachment> eattachList) {
+		int result = eventDAO.insertEventEnd(event); 
+		
+		if(result == 0) {
+			throw new EventException("게시글 등록 오류!");
+		}
+		
+		int eventNo = event.getEventNo(); 
+		logger.debug("event={}",event);
+		
+		//첨부파일 등록
+		if(eattachList.size() > 0) {
+			for(EventAttachment a: eattachList) {
+				a.setEventNo(eventNo);
+				
+				result = eventDAO.insertEAttachment(a);
+				if(result == 0) {
+					throw new EventException("첨부파일 등록 오류");
+				}
+				
+			}
+		}
+		
+		return result;
 	}
 
 	@Override
-	public int insertEvent(Event event, List<EventAttachment> eattachList) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Event> selectEventList() {
+		return eventDAO.selectEventList(); 
 	}
+
+	@Override
+	public Event selectOneEvent(int eventNo) {
+		return eventDAO.selectOneEvent(eventNo);
+	}
+
+	
+
+
+	
 
 }

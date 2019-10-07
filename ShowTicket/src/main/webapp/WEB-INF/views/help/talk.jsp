@@ -144,7 +144,7 @@ function sendMessage(){
 	
 	//테스트용 /hello
 	//stompClient.send("<c:url value='/hello' />", {}, JSON.stringify(data));
-	
+		
 	//채팅메세지: 1:1채팅을 위해 고유한 chatId를 서버측에서 발급해 관리한다.
 	stompClient.send('<c:url value="/chat/${chatId}" />', {}, JSON.stringify(data));
 	

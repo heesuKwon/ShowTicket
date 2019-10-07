@@ -233,23 +233,6 @@ function slideShow(){
 }
 </script>
 <script type="text/javascript">
-var type='';
-
-$(()=>{
-	$("#order-show").click((e)=>{
-		
-			type = $(e.target).html();
-			if(type=='랭킹순'){
-			getRankList();
-			}
-			else if(type=='최신순'){
-			getNewList();
-			}
-			
-			
-	});
-});
-
 function getRankList(){
 	
 	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>

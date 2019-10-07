@@ -52,7 +52,7 @@ public class HomeController {
 		model.addObject("BoxlistT2", dayBoxList2);
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");
-			
+
 		return model;
 	}
 	

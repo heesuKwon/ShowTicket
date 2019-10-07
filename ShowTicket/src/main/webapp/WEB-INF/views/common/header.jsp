@@ -17,8 +17,6 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/common.css">
 
-
-
 <link rel="stylesheet" type="text/css"
 	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
 </head>
@@ -54,6 +52,7 @@ let sock = new SockJS("${pageContext.request.contextPath}/wAlarm");
 sock.onopen = onOpen;
 sock.onmessage = onMessage;
 sock.onclose = onClose;
+
 
 function onOpen(){
  	console.log('websocket opened');

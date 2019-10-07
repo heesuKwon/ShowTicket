@@ -10,7 +10,13 @@ public interface EventService {
 
 	List<Map<String, String>> searchEventList(String queryKeyword);
 
-	int insertEvent(Event event, List<EventAttachment> eattachList);
+	int insertEventEnd(Event event, List<EventAttachment> eattachList);
 
-	int insertEvent(Event event);
+	List<Event> selectEventList();
+
+	Event selectOneEvent(int eventNo);
+
+
+
+	
 }

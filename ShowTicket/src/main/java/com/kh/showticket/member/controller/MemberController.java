@@ -192,11 +192,11 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myCoupon.do")
-	public ModelAndView myCoupon(ModelAndView mav/*,String memberLoggedIn*/) {
+	public ModelAndView myCoupon(ModelAndView mav, HttpSession session) {
 		//임시
 		//@SessionAttribute...
-		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
-		String memberLoggedIn = "honggd";
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+		//String memberLoggedIn = "honggd";
 		
 		List<Map<String,String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
 		
@@ -207,10 +207,9 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myPoint.do")
-	public ModelAndView myPoint(ModelAndView mav) {
+	public ModelAndView myPoint(ModelAndView mav, HttpSession session) {
 		
-		//임시
-		String memberLoggedIn = "honggd";
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		
 		int totalPoint = 0;
 		
@@ -227,10 +226,10 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myStandBy.do")
-	public ModelAndView myStandBy(ModelAndView mav) {
+	public ModelAndView myStandBy(ModelAndView mav, HttpSession session) {
 		
 		//임시
-		String memberLoggedIn = "honggd";
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		
 		List<String> standByList = memberService.selectMyStandByList(memberLoggedIn);
 		List<Map<String, String>> myStandByList = null;
@@ -265,10 +264,10 @@ public class MemberController {
 	
 	@RequestMapping("/deleteStandBy.do")
 	public ModelAndView deleteMyStandBy(ModelAndView mav,
-										@RequestParam String showId) {
+										@RequestParam String showId, HttpSession session) {
 		logger.debug("showId={}", showId);
 		
-		String memberLoggedIn = "honggd";
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		
 		memberService.deleteMyStandBy(memberLoggedIn, showId);
 		
@@ -492,20 +491,20 @@ public class MemberController {
 /*-----------------*/	
 
 
-	/*관리자페이지로 이동???*/
-    @ResponseBody
-    @RequestMapping("/adminpage.do")
-    public ModelAndView adminPage(ModelAndView mav) {
-        mav.setViewName("member/adminreport");
-        return mav;
-    }
-    
-    @ResponseBody
-    @RequestMapping("/adminmList.do")
-    public ModelAndView adminmemberList(ModelAndView mav) {
-        mav.setViewName("member/adminmList");
-        return mav;
-    }
+//	/*관리자페이지로 이동???*/
+//    @ResponseBody
+//    @RequestMapping("/adminpage.do")
+//    public ModelAndView adminPage(ModelAndView mav) {
+//        mav.setViewName("member/adminreport");
+//        return mav;
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping("/adminmList.do")
+//    public ModelAndView adminmemberList(ModelAndView mav) {
+//        mav.setViewName("member/adminmList");
+//        return mav;
+//    }
     @ResponseBody
     @RequestMapping("/bookticket.do")
     public ModelAndView bookticket(ModelAndView mav) {

@@ -31,41 +31,43 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		</ul>
 		<h2 class="title">특가 진행</h2>
 			<button type="button" class="btn btn-info" id="saleWritebtn" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
-		<ul class="event_top_list">
-			<c:forEach items="${dcList }" var="dcList">
-			<li>
-				
-				
-				<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${dcList.showId }"> 
+		<c:if test="${empty dcList }"> <br /> <h2>진행중인 이벤트가 없습니다.</h2><br /></c:if>
+		<c:if test="${!empty dcList }"> 
+		
+			<ul class="event_top_list" >
+				<c:forEach items="${dcList }" var="dcList">
+				<li showId="${dcList.showId }">
 					
-					<img
-					src="${dcList.disCountImg}"
-					alt="poster" width="285" height="386">
-					
-					<div class="event_top_info">
-						<input type="hidden" name="evtID" value="${dcList.showId }" />
-						<dl>
-							<dt>제목</dt>
-							<dd class="event_title">
-								<span>[초대]  ${dcList.showGenre} </span> <br />
-								
-								&lt; ${dcList.showName} &gt;
-							</dd>
-							<dt>이벤트 내용</dt>
-							<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-								 기대평 이벤트  
-							</dd>
-							<dt>기간</dt>
-							<dd class="event_date"> ${dcList.disCountStartDate} ~ ${dcList.disCountEndDate}</dd>
-						</dl>
-					</div>
-				</a>
-				<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
-			</li>
-			</c:forEach>
-
-		</ul>
-
+					<a href="${pageContext.request.contextPath }/event/addSaleView.do?showId=${dcList.showId }"> 
+						
+						<img
+						src="${dcList.disCountImg}"
+						alt="poster" width="285" height="386">
+						
+						<div class="event_top_info">
+							<input type="hidden" name="evtID" value="${dcList.showId }" />
+							<dl>
+								<dt>제목</dt>
+								<dd class="event_title">
+									<span>[특가]  ${dcList.showGenre} </span> <br />
+									
+									&lt; ${dcList.showName} &gt;
+								</dd>
+								<dt>이벤트 내용</dt>
+								<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+									 특가 할인 이벤트  
+								</dd>
+								<dt>기간</dt>
+								<dd class="event_date"> <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountStartDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountEndDate}"/></dd>
+							</dl>
+						</div>
+					</a>
+					<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
+				</li>
+				</c:forEach>
+	
+			</ul>
+		</c:if>
 		<h2 class="small-title">전체 이벤트</h2>
 		<!-- 이벤트 글쓰기 페이지  -->
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
@@ -74,23 +76,26 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 			<div class="event_list_inner">
 				<ul id="eventList">
 					<c:forEach items="${eventList }" var="evt">
-						<li>
-							<a href="${pageContext.request.contextPath }/"> <!-- 전체 이벤트 페이지 ??  -->
+						<li >
+							<a href="${pageContext.request.contextPath }/event/eventView.do?eventNo=${evt.eventNo}"> <!-- 전체 이벤트 페이지 ??  -->
 								<dl>
 									<dt>대표이미지</dt>
 									<dd class="thumb">
 										<img
-											src="${evt.poster}" alt="poster"
+											src="${evt.eventImg}" alt="poster"
 											width="110" height="134">
 									</dd>
 									<dt>제목</dt>
 									<dd class="event_title">
-										<span>[응모]</span>${evt.genrenm}  &lt;${evt.prfnm}&gt; 관람평 이벤트
+										<span>
+											<c:if test="${evt.EVENT_KIND eq 'I' }">[초대]</c:if>
+											<c:if test="${evt.EVENT_KIND eq 'E' }">[응모]</c:if>
+										</span> &lt;${evt.eventTitle}&gt; 이벤트
 									</dd>
 									<dt>이벤트내용</dt>
-									<dd>${evt.genrenm} &lt;${evt.prfnm}&gt; 관람평 이벤트</dd>
+									<dd>&lt;${evt.eventTitle}&gt; 이벤트</dd>
 									<dt>기간</dt>
-									<dd class="event_date">${evt.prfpdfrom}~${evt.prfpdto}</dd>
+									<dd class="event_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate}"/>~<fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate}"/>까지</dd>
 									
 								</dl>
 							</a>
@@ -107,47 +112,5 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 
 
 
-</style>
-<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 950223509;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-    </script>
-<script type="text/javascript"
-	src="//www.googleadservices.com/pagead/conversion.js"></script>
-<noscript>
-	<div style="display: inline;">
-		<img height="1" width="1" style="border-style: none;" alt=""
-			src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/950223509/?value=0&amp;guid=ON&amp;script=0" />
-	</div>
-</noscript>
-<script type="text/javascript">
-		$("iframe[name='google_conversion_frame']").css("display", "none");
-    </script>
-
-<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
-<script type="text/javascript"
-	src="/resources/js/jquery.formatDateTime.min.js"></script>
-<script type="text/javascript">
-    //<![CDATA[
-	
-    var globalEventTypeCode;
-    var firstPage = 1;
-    $(document).ready(function () {
-        getEventList(firstPage);
-
-        if ($(".event_top_list li").length < 3) {
-            for (var i = $(".event_top_list li").length; i < 3; i++) {
-                $(".event_top_list").append('<li><a href="javascript:;"><img	alt="" width="318" height="386"><div class="event_top_info">'
-                        + '</div></a></li>');
-            }
-        }
-
-    });
-
-    //]]>
-</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

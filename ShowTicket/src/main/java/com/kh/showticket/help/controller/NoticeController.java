@@ -36,6 +36,7 @@ public class NoticeController {
 	NoticeService noticeService;
 
 	Logger logger = LoggerFactory.getLogger(getClass());
+	getApi getApi = new getApi();
 
 	@RequestMapping("/notice.do")
 	public ModelAndView notice(@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
@@ -98,7 +99,7 @@ public class NoticeController {
 		}
 		Notice notice = noticeService.selectOne(noticeNo);
 		
-		MusicalAndShow mas = new getApi().getMusicalAndShow(notice.getPlayId());
+		MusicalAndShow mas = getApi.getMusicalAndShow(notice.getPlayId());
 		mav.addObject("mas", mas);
 		mav.addObject("n",notice);
 		mav.setViewName("help/notice/noticeView");
@@ -203,5 +204,13 @@ public class NoticeController {
 		mav.addObject("loc", loc);
 		mav.setViewName("common/msg");
 		return mav;
+	}
+	
+	@RequestMapping("/getPlayInfo.do")
+	@ResponseBody
+	public MusicalAndShow getPlayInfo(@RequestParam String playId) {
+		logger.debug("ajax 성공");
+		MusicalAndShow mas = getApi.getMusicalAndShow(playId);
+		return mas;
 	}
 }

@@ -61,11 +61,9 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.insertFollow(userAndMusical);
 	}
 
-	/*
-	 * @Override public int insertOne(NoticeTicketOpen nt) { return
-	 * noticeDAO.insertNoticeTicketOpen(nt); }
-	 */
+	@Override
+	public List<Notice> selectList() {
+		return noticeDAO.selectList();
+	}
 	
-	
-
 }

@@ -23,5 +23,5 @@ public interface NoticeDAO {
 
 	int insertFollow(Map<String, String> userAndMusical);
 
-	//int insertNoticeTicketOpen(NoticeTicketOpen nt);
+	List<Notice> selectList();
 }

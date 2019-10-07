@@ -62,11 +62,9 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.insert("notice.insertFollow", userAndMusical);
 	}
 
-	/*
-	 * @Override public int insertNoticeTicketOpen(NoticeTicketOpen nt) { return
-	 * sqlSession.insert("notice.insertNoticeTicketOpen",nt); }
-	 */
-
-
+	@Override
+	public List<Notice> selectList() {
+		return sqlSession.selectList("notice.selectList");
+	}
 
 }
