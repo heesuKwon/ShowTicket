@@ -32,7 +32,16 @@
   			   
   	<typeAlias type="com.kh.showticket.talk.model.vo.Msg"
   			   alias="msg"/>
+
+	<typeAlias type="com.kh.showticket.admin.model.vo.Report"
+  			   alias="report"/>
   			   
+  	<typeAlias type="com.kh.showticket.admin.model.vo.Review"
+  			   alias="review"/>
+
+  	<typeAlias type="com.kh.showticket.common.typehandler.StringArrayTypeHandler"
+  			   alias="strArrTypeHandler"/>
+   
   	<typeAlias type="com.kh.showticket.event.model.vo.Discount"
   			   alias="discount"/>
   			   
@@ -44,8 +53,6 @@
 
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>
-  	<typeAlias type="com.kh.spring.common.typehandler.StringArrayTypeHandler"
-  			   alias="strArrTypeHandler"/>
   	<typeAlias type="com.kh.spring.board.model.vo.BoardWithFileCount"
   			   alias="boardWithFileCount"/>
   	<typeAlias type="com.kh.spring.board.model.vo.BoardVO"
