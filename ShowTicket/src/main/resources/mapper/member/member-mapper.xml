@@ -103,6 +103,7 @@
 	</select>
 	<resultMap id="wAlarmMap" type="map">
 		<result column="ticket_showId" property="ticketShowId" />
+		<result column="ticket_showname" property="ticketShowName" />
 		<result column="ticket_date" property="ticketDate" />
 		<result column="ticket_time" property="ticketTime" />
 	</resultMap>

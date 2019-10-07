@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
+import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.talk.model.service.TalkService;
 import com.kh.showticket.talk.model.vo.ChatRoom;
 import com.kh.showticket.talk.model.vo.Msg;
@@ -44,17 +46,11 @@ public class TalkController {
 		//@SessionAttribute(value="memberLoggedIn", required=false) Member memberLoggedIn
 		//비회원일 경우, httpSessionId값을 memberId로 사용한다.
 		
-		//임시
-		String memberId = "honggd";
-		
-//	    String memberId = Optional.ofNullable(memberLoggedIn)
-//	                              .map(Member::getMemberId)
-//	                              .orElse(session.getId());      
-		 //HttpSession의 JSESSIONID값을 저장
 
-		//Member memberLoggedIn = memberService.selectOneMember(memberId);
-		
-		//String memberId = memberLoggedIn.getMemberId();
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+	    String memberId = Optional.ofNullable(memberLoggedIn)
+	                              .map(Member::getMemberId)
+	                              .orElse(session.getId());      
 	    	
 	    String chatId = null;
 	    
