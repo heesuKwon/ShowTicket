@@ -17,6 +17,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.kh.showticket.common.DescendingByPrfpdfrom;
+//import com.kh.showticket.common.DescendingByprfpdto;
 import com.kh.showticket.common.MusicalAndShow;
 
 
@@ -56,6 +57,11 @@ public class getApi {
 		return list;
 	}
 
+	/*
+	 * public static List<Map<String, String>>
+	 * getOrderedListByDate2(List<Map<String,String>> list){ Collections.sort(list,
+	 * new DescendingByprfpdto()); //logger.debug("정렬결과 : {}", list); return list; }
+	 */
 	//뮤지컬/연극단일목록조회
 	public static List<Map<String, String>> getList(String url){
 		List<Map<String,String>> list = new ArrayList<>();	

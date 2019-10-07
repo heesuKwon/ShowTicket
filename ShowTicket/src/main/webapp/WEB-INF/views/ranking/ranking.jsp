@@ -35,7 +35,6 @@ function getList(){
 	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
 	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
 	
-	
 	var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=3127d89913494563a0e9684779988063&ststype=day&date="+${yesterday};
 
 	if(type=='뮤지컬'){

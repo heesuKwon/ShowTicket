@@ -5,6 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.util.Date"%>
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css"
@@ -278,7 +279,89 @@ function slideShow(){
 	
 }
 </script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/newMS.css">
+<script type="text/javascript">
+$(()=>{
+	var type = $("#order-show option:selected").val();
+	 $("#order-show").change(function(){
+		 if("byDate".equals($("#order-show option:selected").val())){getNewList()}
+		 else if("byRank".equals($("#order-show option:selected").val())){getDateList()}
+        
+	});
+});
+</script>
+<script type="text/javascript">
+function getDateList(){
+	
+	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
+	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
+	
+	var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=month&date="+${yesterday}+"&catecode=AAAA";
+
+	var param = {url1:url1}
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/show/showrankAjax.do',
+        data : param,
+        success : function(data) {
+        	
+        	var html = "";
+        	for(var i=0;i<data.length;i++){
+        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<p><img src='http://www.kopis.or.kr/"+data[i].poster+"' </p>";
+        	html += "<div class='list_info'>";
+			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd+"</dd>";
+        	html += "<dt>장소</dt><dd>"+data[i].prfplcnm+"</dd>";	
+        	html += "</dl></div></a></li>";
+        	}
+        	
+        	$("#showListAll").html(html);
+        	
+      	  }, error: function(jqxhr, textStatus, errorThrown){
+            console.log(jqxhr, textStatus, errorThrown);
+                alert("데이터를 가져오는데 실패하였습니다.");
+                
+        }
+	});
+}
+function getNewList(){
+
+	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
+	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
+	
+	var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=month&date="+${yesterday}+"&catecode=AAAA";
+
+	var param = {url1:url1}
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/show/showNewAjax.do',
+        data : param,
+        success : function(data) {
+        	
+        	var html = "";
+        	for(var i=0;i<data.length;i++){
+        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<p><img src='"+data[i].poster+"' </p>";
+        	html += "<div class='list_info'>";
+			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd+"</dd>";
+        	html += "<dt>장소</dt><dd>"+data[i].prfplcnm+"</dd>";	
+        	html += "</dl></div></a></li>";
+        	}
+        	
+        	$("#showListAll").html(html);
+        	
+      	  }, error: function(jqxhr, textStatus, errorThrown){
+            console.log(jqxhr, textStatus, errorThrown);
+                alert("데이터를 가져오는데 실패하였습니다.");
+                
+        }
+	});
+}
+}
+</script>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style type="text/css">
@@ -298,73 +381,59 @@ ul.lst_thumb li.on::before {
 </style>
 
 
-	<div id="wrap" class="subwrap">
+<div id="wrap" class="subwrap">
 
-		<div id="container" class="submain_front">
+	<div id="container" class="submain_front">
 
-			<div class="inner">
-				<h2 class="blind">공연</h2>
-				<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-
-				<ul id="genreNav" class="nav nav-pills nav-justified">
-					<li class="nav-item"><a class="nav-link select nav-font"
-						href="#">전체</a></li>
-					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">로맨틱</a></li>
-					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">코미디</a></li>
-					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">드라마</a></li>
-					<li class="nav-item"><a class="nav-link nav-font default"
-						href="#">스릴러</a></li>
-				</ul>
-
-				<div class="top_area"
-					style="padding-bottom: 0px; margin-bottom: 39px;">
-					<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
-						연극</h2>
-					<img src="/showticket/resources/images/plus.png" alt="더보기"
-						style="width: 35px; height: 35px;">
-					<div class="submain_topban">
-						<div class="submain_goods" style="width: 990px; margin: auto;">
-							<img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_3/[제작용]공연전시_메인_990x280_발칙한-로맨스(3).jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_8/990x280_BEA.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_4/990x280_k.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_3/990x280_l.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_4/990x280_T.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_8/[제작용]공연전시_메인_990x280.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_고스트.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_6/[제작용]공연전시_메인_990x280_연극장수상회.jpg"
-								width="990" height="280"> <img class="mySlides"
-								src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연메인빅배너_첫사랑-로맨스-연극-[사춘기메들리](1).jpg"
-								width="990" height="280">
-						</div>
+		<div class="inner">
+			<h2 class="blind">공연</h2>
+			<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
+			<div class="top_area"
+				style="padding-bottom: 0px; margin-bottom: 39px;">
+				<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
+					연극</h2>
+				<img src="/showticket/resources/images/plus.png" alt="더보기"
+					style="width: 35px; height: 35px;">
+				<div class="submain_topban">
+					<div class="submain_goods" style="width: 990px; margin: auto;">
+						<img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_3/[제작용]공연전시_메인_990x280_발칙한-로맨스(3).jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_8/990x280_BEA.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_4/990x280_k.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_3/990x280_l.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_4/990x280_T.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_8/[제작용]공연전시_메인_990x280.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연전시_메인_990x280_고스트.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_6/[제작용]공연전시_메인_990x280_연극장수상회.jpg"
+							width="990" height="280"> <img class="mySlides"
+							src="//image.toast.com/aaaaab/ticketlink/TKL_7/공연메인빅배너_첫사랑-로맨스-연극-[사춘기메들리](1).jpg"
+							width="990" height="280">
 					</div>
 				</div>
+			</div>
 
-				<!-- [D] 전시메인의 경우 .exhibition 추가입니다. -->
-				<div class="newMusical_wrap concert" style="margin-top: 0px;">
-					<div class="header" style="margin-bottom: 4px;">
-						<h2 class="small-title"
-							style="margin-top: 0px; display: inline-block">최신 연극</h2>
-						<img src="/showticket/resources/images/plus.png" alt="더보기"
-							style="width: 35px; height: 35px;">
-					</div>
-					<div class="attention">
-						<ul style="width: 1880px">
-							<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
+			<!-- [D] 전시메인의 경우 .exhibition 추가입니다. -->
+			<div class="newMusical_wrap concert" style="margin-top: 0px;">
+				<div class="header" style="margin-bottom: 4px;">
+					<h2 class="small-title"
+						style="margin-top: 0px; display: inline-block">최신 연극</h2>
+					<img src="/showticket/resources/images/plus.png" alt="더보기"
+						style="width: 35px; height: 35px;">
+				</div>
+				<div class="attention">
+					<ul style="width: 1880px">
+						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
 						<c:forEach items="${recentShowList }" var="sList">
-							<li class="newMusical_first">
-								<a href="http://www.ticketlink.co.kr/bridge/498">
-									<img src="${sList.poster }" alt="최신연극 포스터">
+							<li class="newMusical_first"><a
+								href="http://www.ticketlink.co.kr/bridge/498"> <img
+									src="${sList.poster }" alt="최신연극 포스터">
 									<div class="list_info" style="height: 50px; margin-left: 4px;">
 										<!--제목-->
 										<strong class="elp">${sList.prfnm }</strong>
@@ -373,70 +442,68 @@ ul.lst_thumb li.on::before {
 										<!--장소-->
 										<small>${sList.fcltynm }</small>
 									</div>
-								</a>
-							</li>
+							</a></li>
 						</c:forEach>
-						</ul>
-					</div>
+					</ul>
 				</div>
+			</div>
 
 
-				<div class="bottom_area">
-					<div class="inner">
-						<h2 class="title beforeSearch">전체 연극</h2>
-						<div class="searchFrm">
-							<select name="searchCategory" id="category-show">
-								<option value="searchAll">전체</option>
-								<option value="searchTitle">제목</option>
-								<option value="searchActor">배우</option>
-							</select> <input type="text" class="form-control form-control-lg"
-								id="searchKeyword">
-							<button type="button" class="btn btn-primary btn-color btn-sm"
-								id="searchBtn">검색</button>
-						</div>
+			<div class="bottom_area">
+				<div class="inner">
+					<h2 class="title beforeSearch">전체 연극</h2>
+					<div class="searchFrm">
+						<select name="searchCategory" id="category-show">
+							<option value="searchAll">전체</option>
+							<option value="searchTitle">제목</option>
+							<option value="searchActor">배우</option>
+						</select> <input type="text" class="form-control form-control-lg"
+							id="searchKeyword">
+						<button type="button" class="btn btn-primary btn-color btn-sm"
+							id="searchBtn">검색</button>
+					</div>
 
 
 
-						<div class="orderWrap">
-							<select name="selectOrder" id="order-show">
-								<option value="byRank">랭킹순</option>
-								<option value="byDate">최신순</option>
-								<option value="byStar">별점순</option>
-							</select>
-						</div>
+					<div class="orderWrap">
+						<select name="selectOrder" id="order-show">
+							<option value="byRank" id="byRank">랭킹순</option>
+							<option value="byDate" id="byDate">최신순</option>
+						</select>
+					</div>
 
-						<div class="searchContainer">
+					<div class="searchContainer">
 
-							<ul id="showListAll" class="goods_list" style="clear: both;">
+						<ul id="showListAll" class="goods_list" style="clear: both;">
 
-								<c:forEach items="${showList}" var="map">
-									<li><a href="http://www.ticketlink.co.kr/product/29767">
-											<p>
-												<img src="${map.poster }" alt="">
-											</p>
-											<div class="list_info">
-												<strong class="elp">${map.prfnm }</strong>
-												<dl>
-													<dt>기간</dt>
-													<dd>${map.prfpdfrom }~${map.prfpdto }</dd>
-													<dt>장소</dt>
-													<dd>${map.fcltynm }</dd>
-												</dl>
-											</div>
-									</a></li>
-								</c:forEach>
-							</ul>
+							<c:forEach items="${showList}" var="map">
+								<li><a href="http://www.ticketlink.co.kr/product/29767">
+										<p>
+											<img src="${map.poster }" alt="">
+										</p>
+										<div class="list_info">
+											<strong class="elp">${map.prfnm }</strong>
+											<dl>
+												<dt>기간</dt>
+												<dd>${map.prfpdfrom }~${map.prfpdto }</dd>
+												<dt>장소</dt>
+												<dd>${map.fcltynm }</dd>
+											</dl>
+										</div>
+								</a></li>
+							</c:forEach>
+						</ul>
 
-							<div id="srchEmpty">검색결과가 없습니다.</div>
-						</div>
+						<div id="srchEmpty">검색결과가 없습니다.</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
-	<script type="text/javascript">
+</div>
+<script type="text/javascript"
+	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
+<script type="text/javascript">
 
 		if ($("#noticeList").find("ul> li").length > 4) {
 			$(function () {
@@ -703,4 +770,4 @@ ul.lst_thumb li.on::before {
 
 	//]]>
 </script>
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
