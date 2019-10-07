@@ -147,23 +147,13 @@ function search(){
 					<div class="helpmain_notice">
 						<strong>최근 공지 사항</strong>
 						<ul>
-
-							<li><a href="/help/notice/50875">[티켓오픈] NEW 신비아파트 뮤지컬
-									시즌3 - 고양 ​티켓오픈 안내</a></li>
-
-							<li><a href="/help/notice/50874">[시스템] <b>[공지]</b>
-									Microsoft Edge 브라우저 오류관련 안내
-							</a></li>
-
-							<li><a href="/help/notice/50873">[티켓오픈] 뮤지컬 <사랑했어요>
-									(사랑의 가객 故김현식 뮤지컬) 마지막 티켓 오픈​ 안내</a></li>
-
-							<li><a href="/help/notice/50871">[티켓오픈] 2019 유방암 캠페인
-									＂핑크리본 FESTA＂ 티켓오픈안내</a></li>
-
-							<li><a href="/help/notice/50870">[티켓오픈] 2019 최현우〈THE
-									BRAIN〉 - 부산 티켓오픈 안내</a></li>
-
+							<c:forEach items="${noticeList}" var="n">
+								<li>
+									<a href="${pageContext.request.contextPath}/help/noticeView.do?noticeNo=${n.noticeNo}">
+										[${(n.noticeCategory=='t'?"티켓오픈":(n.noticeCategory=='s'?"시스템":(n.noticeCategory=='c'?"변경/취소":"기타")))}] ${n.noticeTitle}
+									</a>
+								</li>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
@@ -178,8 +168,6 @@ function search(){
 
 <a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
-<script type="text/javascript"
-	src="/resources/js/jquery.placeholder.min.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 	$(document).ready(function () {

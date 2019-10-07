@@ -25,9 +25,6 @@ public interface NoticeService {
 
 	int insertFollow(Map<String, String> userAndMusical);
 
-	//int insertOne(NoticeTicketOpen nt);
-
-	
-
+	List<Notice> selectList();
 
 }

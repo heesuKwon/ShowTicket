@@ -74,4 +74,14 @@
 		values(#{playId}, #{memberId})
 	</insert> 
 	
+	<select id="selectList" resultType="notice">
+		<![CDATA[
+		select A.*
+		from (select notice_no, notice_title, notice_category
+				from notice
+				order by notice_enrolldate desc) A
+		where rownum <= 5
+		]]>
+	</select>
+	
 </mapper>
