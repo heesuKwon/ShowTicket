@@ -14,7 +14,6 @@
 	href="${pageContext.request.contextPath}/resources/css/eventWrite.css">
 
 <style>
-table#showList::-webkit-scrollbar-thumb {background-color:#8f01a3;background:#8f01a3;border-radius: 10px;}
 #showList-box::-webkit-input-placeholder { text-align:right;pointer-events: none; }
 div#showList-box{width:98%; height:200px; overflow:auto;margin-bottom: 50px;}
 .ListTable {border: 2px solid #D8D8D8;}
