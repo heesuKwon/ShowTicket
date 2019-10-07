@@ -176,7 +176,7 @@ td .input_block .hyphen{color:#999}
 #top_banner a{position:absolute;top:0;left:50%;margin-left:-1000px}
 #header{z-index:200;position:relative;background:#fff}
 #container{background:#f4f4f4;position:relative;zoom:1;min-height:100%;margin:-193px 0 -203px}
-#footer{background:#333;height:153px;padding-top:50px;position:relative}
+#footer{background:#333;height:153px;padding-top:30px;position:relative}
 #back_to_top{position:fixed;top:50%;right:0;margin-top:-22px;background-position:-270px -123px;width:44px;height:44px;z-index:1000}
 .inner{width:990px;margin:0 auto;position:relative}
 #gnb .inner:after{display:block;clear:both;content:''}

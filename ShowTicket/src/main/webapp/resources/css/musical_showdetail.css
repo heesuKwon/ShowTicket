@@ -4,9 +4,9 @@
 .color_purple{
 	color:#8f01a3 !important;
 }
-.reviewId .small-font{
+.small-font{
 	color:gray;
-	font-size:0.6em;
+	font-size:15px;
 	padding-left:3px;
 }
 .info_tit{
@@ -106,16 +106,18 @@ button.btn_reply{
 }
 .reviewId{
 	position: absolute;
-	top:10px;
-	left:15px;
+	top:11px;
+	left:123px;
 	font-size:1.5em;
 	font-family: 'Gothic A1', sans-serif;	
 	padding: 10px;
 	min-width:100px;
 }
+.review_list{clear: both;text-align:left; padding: 5px 5px;}
+
 
 .reviewContent{
-	padding:35px 25px 15px 25px;
+	padding:5px 5px 10px 5px;
 	letter-spacing: 2px;
 }
 #mReview{
@@ -175,3 +177,5 @@ button.btn_reply{
 }
 
 
+.fa-thumbs-up{color:#8f0ac3;font-size: 12px;}
+#likes{height: 20px;min-width: 45px;font-size: 12px;float: right;margin-right: 10px;margin-bottom: 10px;background: white;border: 1px solid gray;}

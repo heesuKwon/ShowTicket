@@ -26,7 +26,11 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
 <!--  <link rel="stylesheet" type="text/css"
 						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">  -->
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/demo.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/star-rating-svg.css">
+	<script type="text/javascript"  charset="utf-8" src="${pageContext.request.contextPath}/resources/js/jquery.star-rating-svg.js"></script>
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	
 <%
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
@@ -281,42 +285,7 @@ $(()=>{
 
 				<div class="tabs-Num" id="tabs-2">
 
-<style type="text/css">
-  	.starrating-background {
-  	both:clear;
-     background: transparent url(../resources/images/T_03.png) repeat-x scroll 0 0; 
-    cursor: pointer;
-    display: inline-block;
-    height: 30px;
-    margin: 0;
-    width: 125px;
-    vertical-align: middle;
-}
-	
-.starrating-background span {
-both:clear;
- 	background: transparent url(../resources/images/T_01.png)
-		repeat-x scroll 0 0; 
-	cursor: pointer;
-	display: inline-block;
-	height: 30px !important;
-}
-
-.starrating-background em {
-	both:clear;	
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 0;
-	height: 0;
-	overflow: hidden;
-	visibility: hidden;
-	font-size: 0;
-	line-height: 0;
-}   
-
-</style>
-					
+		
 					<div class="detail_cont detail_cont_v2">
 						
 						<div class="title_wrap">
@@ -338,16 +307,10 @@ both:clear;
 						<div class="star_review" id="star_review">
 							<fieldset>
 								<legend>네티즌 별점 및 후기 작성</legend>
-								 <div class="star_rating">
 									<strong class="blind">평점선택</strong>
-									<div class="starrating-background" id="star_rating"
-										style="float: left;">
-										<span style="width:50px;"><em></em></span>
-									</div>
+									<span class="my-rating-9" style="float:left;"></span>
+									<span class="live-rating" id="rating" style="float:left;"></span>
 									
-									<span class="blind">평점</span> <span class="star_score"
-										id="score" name="rating"></span>
-								</div>
 
 								<dl class="star_average">
 									<dt>현재 평균 별점</dt>
@@ -362,13 +325,13 @@ both:clear;
 								</dl>
 								<div class="write_review">
 									<textarea title="후기 작성하기" id="reviewContent"
-										name="reviewContent" onclick="callMemberCommonCheck();"
+										name="reviewContent" onclick="MemberCommonCheck();"
 										onkeyup="checkTextLength(this);"
 										onpaste="checkTextLength(this);"
 										onchange="checkTextLength(this);"
 										style="height: 25px; resize: none;" maxlength="3000"
 										placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-									<button type="button" id="reviewInsertButton"
+									<button type="button" id="reviewInsertButton" onclick="isValidReview()"
 										class="btn btn_reply">댓글입력</button>
 								</div>
 							</fieldset>
@@ -381,297 +344,219 @@ both:clear;
 								id="displayAllReviewBtn" onclick="displayAllreview();">전체후기보기</a>
 						</div>
 						
-						<div class="review_list">
+						<div id="review_list" class="review_list">
 
 							<ul id="reviewUl" style="word-break: break-all;">
-								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
-										class="reviewDate small-font">2019.09.20 17:10</span></span>
+								<li class="reviewOne">
+									<span class="my-rating-7"></span>
+									<span class="reviewId color_purple">honggd
+									<a href="#">
+										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="width:18px; height:18px;">
+									</a>
+									</span>
+									
 									<div class="btns">
-										<button class="btn-sm btn-primary" id="mReview">수정</button>
 										<button class="btn-sm btn-primary" id="dReview">삭제</button>
 									</div>
 									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
 										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
 										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
 										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
-										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div></li>
-								<li class="reviewOne"><span class="reviewId color_purple">honggd<span
-										class="reviewDate small-font">2019.09.20 17:10</span></span>
+										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div>
+										<span class="reviewDate small-font">2019.09.20 17:10</span>
+										<button id="likes"><i class='far fa-thumbs-up'></i>  0</button>
+										
+										</li>
+								<li class="reviewOne">
+										<span class="my-rating-7"></span>
+										<span class="reviewId color_purple">honggd
+										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="width:10px; height:10px;">
+										<span class="reviewDate small-font">2019.09.20 17:10</span></span>
 									<div class="btns">
-										<button class="btn-sm btn-primary" id="mReview">수정</button>
 										<button class="btn-sm btn-primary" id="dReview">삭제</button>
 									</div>
 									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
 										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
 										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
 										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
-										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div></li>
+										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div>
+										<button id="likes"><i class='far fa-thumbs-up'></i>좋아요</button>
+										<button id="likes"><i class='fas fa-thumbs-up'></i>좋아요</button>
+										
+										</li>
 							</ul>
 						</div>
+						<script>
+						var review = {};
+						review.reviewShowId = ${musical.id};
+						
+						
+					    $.ajax({
+					        url : '${pageContext.request.contextPath}/musical/review.do',
+					        data: JSON.stringify(faq),
+							contentType: 'application/json; charset=utf-8',
+							dataType: "json",
+							type: "GET",
+					        success : function(data) {
+					           console.log(data);
 
+					           var html = "";
+					               html += "<ul id='reviewUL' style='word-break: break-all;'>";
+					   
+					                if(data.length>0){
+					                    for(var i in data){
+					               			html += "<li class='reviewOne'>"
+					                        html += "<span class='review-rating-"+i+"'></span>";
+					                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter;
+					                        html += "<a href='#'>";
+					                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='width:18px; height:18px;'></a>";
+					                        html += "</span>";
+					                        html += "<div class='btns'><button class='btn-sm btn-primary' id='dReview'>삭제</button></div>"
+					                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
+					                        html += "<span class='reviewDate small-font'>"+data[i].reviewDate;
+					                        html += "</span>";
+					                        html += "<button id='likes'><i class='far fa-thumbs-up'></i>  0</button>";
+					                        html += "</li>"; 
+					                        $(".review-rating-"+i).starRating({
+					                    	    initialRating: data[i].reviewStar,
+					                    	    readOnly: true,
+					                    	    starSize: 25,
+					                    	  });
+					                    
+					                    } /* for문끝 */
+					                }  /* if문끝 */
+					                    else{
+					               			html += "<li class='reviewOne'>"
+					                        html += "<div class='reviewContent'>리뷰가 존재하지 않습니다.</div>";
+					                        html += "</li>"; 
+					                    }
+					                    html+="</ul>";
+					                    $("#review_list").html(html);
+					                
+					               
+					                	
+					                	
+					                
+					       /*function success(data)끝 */
+					       },error:function(e){
+					            if(e.status==300){
+					               alert("데이터를 가져오는데 실패하였습니다.");
+					           }; 
+					       }
+					    }); 
+						
+						
+						
+						
+						</script>
 						<div id="pagination" class="paging"></div>
-
 
 					</div>
 				</div>
 <!-- 후기 별점 api  -->				
-<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath }/resources/js/jindo2.ns.js"></script>
-<script type="text/javascript"  charset="utf-8"
-	src="${pageContext.request.contextPath }/resources/js//jindo.Component.js"></script>
-<script type="text/javascript"  charset="utf-8"
-	src="${pageContext.request.contextPath }/resources/js/jindo.UIComponent.js"></script>
-<script type="text/javascript"  charset="utf-8"
-	src="${pageContext.request.contextPath}/resources/js/jindo.StarRating.js"></script>
+
 
 <script type="text/javascript">
-	//<![CDATA[
 
-	/* function callMemberCommonCheck () {
-		var url = "/product/" + $('#productId').val();
-		memberCommonCheck(url);
+$(function() {
+
+
+
+	  $(".my-rating-7").starRating({
+	    initialRating: 3.5,
+	    readOnly: true,
+	    starSize: 25,
+	  });
+
+
+
+	  $(".my-rating-9").starRating({
+	    totalStars: 5,
+	    
+	    disableAfterRate: false,
+	    emptyColor: 'gray',
+	    hoverColor: '#8f01a3',
+	    activeColor: '#8f01a3',
+	    strokeColor: '#8f01a3',
+	  
+	    onHover: function(currentIndex, currentRating, $el){
+	      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
+	      $('.live-rating').text(currentIndex);
+	    },
+	    onLeave: function(currentIndex, currentRating, $el){
+	      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
+	      $('.live-rating').text(currentRating);
+	    }
+	  });
+
+	});
+
+</script>
+<script type="text/javascript">
+
+function MemberCommonCheck(){
+	var memberId = "";	
+	if(memberId == "${memberLoggedIn}"){
+		alert("로그인 해주세요");
+		$("#goLogin").click();				
+	}
+	
+}
+	/* if(MemberLoggedIn == "null"){
+		$(.login).attr("onclick", "");
 	} */
 
-	/* function insertProductReview () { */
-		/* 	if(!checkLoginUsingCookie("tabs-2")){
-         return;
-         } */
-         
-         
-         
-         
-		/* var url = "/product/" + $('#productId').val();
-		if (!memberCommonCheck(url)) {
-			return;
-		}
+function isValidReview() {
+	var rating = $.trim($("#rating").text());
+	var reviewContent = $.trim($("#reviewContent").val());
 
-		if (!isValidReview()) {
-			return;
-		}
-
-		$("#reviewInsertButton").attr("onclick", "");
-
-		var productId = $("#productId").val();
-		$.ajax({
-			async: false,
-			type: "POST",
-			dataType: 'json',
-			url: "/product/review/insertProductReview.nhn",
-			data: {
-				productId: productId,
-				rating: $("#score").text(),
-				reviewContent: $("#reviewContent").val()
-			},
-			success: function (result) {
-				if (result.message == "validation fail") {
-					setValidationMessage(result.result);
-					return;
-				}
-				alert("후기가 등록되었습니다.");
-				getProductReviewList(1);
-				$("#reviewContent").val("");
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			},
-			error: function (request, status, error) {
-				alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
-				getProductInquiryList(1);
-				$("#reviewInsertButton").attr("onclick", "insertProductReview();");
-			}
-		}); 
-	 } */
-
-	/* function deleteThisReview (reviewId) {
-		if (confirm("삭제하시겠습니까?")) {
-			var productId = $("#productId").val();
-			$.ajax({
-				type: "POST",
-				dataType: 'json',
-				url: "/product/review/deleteProductReview",
-				data: {
-					productId: productId,
-					reviewId: reviewId
-				},
-				success: function (result) {
-					if (result && result.result && result.result == "error") {
-						alert("오류가 발생하였습니다. 재로그인 후 다시 시도해주세요.");
-						return;
-					} else {
-						alert("후기를 삭제했습니다.");
-						getProductReviewList(1);
-					}
-				},
-				error: function (request, status, error) {
-					alert("오류가 발생하였습니다. 관리자에게 문의하세요");
-				}
-			});
-		}
+	if (rating == "" || rating == null) {
+		alert("별점을 선택해주세요.");
+		return false
+	} else if (reviewContent == "" || reviewContent == null) {
+		alert("후기를 입력해주세요.");
+		return false
+	} else {
+		return true;
 	}
+}
 
-	function isValidReview () {
-		var rating = $.trim($("#score").text());
-		var reviewContent = $.trim($("#reviewContent").val());
-
-		if (rating == "" || rating == null) {
-			alert("별점을 선택해주세요.");
-			return false
-		} else if (reviewContent == "" || reviewContent == null) {
-			alert("후기를 입력해주세요.");
-			return false
-		} else {
-			return true;
-		}
+function insertReview(){
+	var review = {};
+	review.reviewShowId = ${musical.id};
+	review.reviewWriter = ${memberLoggedIn.id};
+	review.reviewStar = ${"#rating"}.text();
+	review.reviewContent = $("#reviewContent").val();
+	if(!isValidReview()){
+		return;
 	}
+	
 
-	function setValidationMessage (validationList) {
-		var starReviewErrors = $("#star_review_errors");
-		starReviewErrors.html('');
-		for (var i = 0; i < validationList.length; i++) {
-			contents = "<p style='color:red; margin-top:5px;'>" + validationList[i] + "</p>";
-			starReviewErrors.append(contents);
+	
+	$.ajax({
+		dataType: "json",
+		contentType: 'application/json; charset=utf-8',
+        url : '${pageContext.request.contextPath}/musical/insertReview.do',
+		type: "POST",
+		data: JSON.stringify(review),
+		success: function (result) {
+			/* if (result.message == "validation fail") {
+				setValidationMessage(result.result);
+				return;
+			} */
+			alert("후기가 등록되었습니다.");
+			/* $("#reviewContent").val("");
+			$("#reviewInsertButton").attr("onclick", "insertProductReview();"); */
+		},
+		error: function (request, status, error) {
+			alert("오류가 발생하였습니다. 관리자에게 문의하세요.");
+			/* $("#reviewInsertButton").attr("onclick", "insertProductReview();"); */
 		}
-	}
-
-	function getProductReviewList (page) {
-
-		var ajaxData = {
-			productId: $("#productId").val(),
-			page: page
-		};
-
-		if ($("#review_search_type").val() == "memberId") {
-			ajaxData.memberId = $.trim($("#review_search_key").val());
-		} else {
-			ajaxData.reviewContent = $.trim($("#review_search_key").val());
-		}
-
-		$.ajax({
-			cache: false,
-			dataType: "json",
-			url: "/product/review/getProductReviewList.nhn",
-			data: ajaxData,
-			success: function (result) {
-				displayReviewList(result.result.result);
-				displayPage(result.result.paging, $('#pagination'));
-				makeBannerLayer(result.result.productReview)
-				resetReviewData(result.result.ratingAverage, result.result.countReviewe);
-			}
-		});
-	}
-
-	function makeBannerLayer (productReview) {
-		var imgSrc = this.getBannerImageSrc(productReview.productId);
-		if (imgSrc == "") {
-			return;
-		}
-
-		if ($(".banner_area").find('img').length === 0) {
-			$(".banner_area").append(imgSrc);
-		}
-	}
+	});
+}
 
 
-	function getBannerImageSrc (productId) {
-		if (productId === 28633) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_city_v2.jpg"/>';
-		}
 
-		if (productId === 29652) {
-			return '<img src="//tketlink.dn.toastoven.net/static/event/image/web/pc_love.jpg"/>'
-		}
-	}
-
-
-	function resetReviewData (ratingAverage, countReviewe) {
-		if (ratingAverage != null) {
-			$("#ratingAverage").text(ratingAverage.toFixed(1));
-		}
-		$("#ratingAverageStar").css("width", ratingAverage * 20 + "%");
-		$("#countReviewe").text(countReviewe + "명");
-		$("#reviewContent").val("");
-		$("#score").text("");
-		$("#star_review_errors").html('');
-		oStarRating.reset();
-	}
-
-	function displayReviewList (reviewList) {
-		var searchedReviewList = $('#reviewUl');
-		searchedReviewList.html('');
-		for (var i = 0; i < reviewList.length; i++) {
-			var date = new Date(reviewList[i].reviewDatetime);
-			var list = $('<li>');
-			list.appendTo(searchedReviewList);
-			var contents = "<div class='review_info'><dl class='star_average'><dt>별점</dt><dd class='grade_star'><span class='star_gauge' style='width: " + (reviewList[i].rating * 20) + "%'></span></dd>" +
-				"<dt>아이디</dt><dd class='review_user'>" + reviewList[i].memberId + "</dd>" +
-				"<dt>날짜</dt><dd class='review_date'>" + $.formatDateTime('yy.mm.dd hh:ii', date) + "</dd>";
-			if (reviewList[i].isMyReview) {
-				contents += '<dt>삭제여부</dt><dd class="review_delete"><a href="javascript:;" onclick="deleteThisReview(' + reviewList[i].reviewId + ')" class="delete">댓글삭제</a></dd>';
-			}
-			contents += "</dl></div>" + reviewList[i].reviewContent;
-			list.append(contents);
-		}
-
-		if ($.trim($("#review_search_key").val()) == "") {
-			$("#displayAllReviewBtn").css("visibility", "hidden");
-		} else {
-			$("#displayAllReviewBtn").css("visibility", "visible");
-		}
-
-		if (reviewList.length == 0) {
-			var contents = '<li class="no_data">등록된 후기가 없습니다.</li>';
-			searchedReviewList.append(contents);
-		}
-	}
-
-	function goPage (page) {
-		getProductReviewList(page);
-	}
-
-	function openReviewSelectList () {
-		if ($("#review_select_list").css("display") == "block") {
-			$("#review_select_list").css("display", "none");
-			return;
-		}
-		$("#review_select_list").css("display", "block");
-	}
-
-	function closeReviewSelectList (obj) {
-		$("#review_search_option").text($(obj).text());
-		if ($(obj).text() == '내용') {
-			$("#review_search_type").val("reviewContent");
-		} else {
-			$("#review_search_type").val("memberId");
-		}
-		$("#review_select_list").css("display", "none");
-	}
-
-	function searchReview () {
-		getProductReviewList(1);
-	}
-
-	function searchReviewUsingEnter () {
-		$('#review_search_key').keyup(function (e) {
-			if (e.keyCode == 13) {
-				getProductReviewList(1);
-			}
-		});
-	}
-
-	function displayAllreview () {
-		$("#review_search_key").val("");
-		getProductReviewList(1);
-	}
-	*/
-	/* var oStarRating = new jindo.StarRating(jindo.$("star_rating"), {
-		nStep: 0.5,
-		nMaxValue: 5,
-		nDefaultValue: 0,
-		bSnap: true
-	}).attach({
-		set: function (oCustomEvent) {
-			jindo.$("score").innerHTML = oCustomEvent.nValue;
-		}
-	});  */
-
-	//]]>
 </script>
 <!--리뷰 후기 영역  -->				
 				
