@@ -1,8 +1,11 @@
 package com.kh.showticket.musical.controller;
 
+import static com.kh.showticket.common.getApi.getApi.getBoxList;
 import static com.kh.showticket.common.getApi.getApi.getList;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -158,6 +161,13 @@ public class MusicalController {
 		mav.addObject("loc", loc);
 		mav.setViewName("common/msg");
 		return mav;
+	}
+	
+	@RequestMapping("/musicalrankAjax.do")
+	public List<Map<String, String>> musicalrankAjax(@RequestParam String url1) {
+		
+		return getBoxList(url1);
+		
 	}
 	
 }

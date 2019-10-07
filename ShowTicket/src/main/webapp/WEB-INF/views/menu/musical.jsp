@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
+<%@ page import="java.util.Date"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_show.css">
@@ -229,6 +230,59 @@ function slideShow(){
 	x[index-1].style.display = "block";
 	setTimeout(slideShow,4000);
 	
+}
+</script>
+<script type="text/javascript">
+var type='';
+
+$(()=>{
+	$("#order-show").click((e)=>{
+		
+			type = $(e.target).html();
+			if(type=='랭킹순'){
+			getRankList();
+			}
+			else if(type=='최신순'){
+			getNewList();
+			}
+			
+			
+	});
+});
+
+function getRankList(){
+	
+	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
+	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
+	
+	var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=month&date="+${yesterday}+"&catecode=AAAB";
+
+	var param = {url1:url1}
+	
+	$.ajax({
+		url : '${pageContext.request.contextPath}/musical/musicalrankAjax.do',
+        data : param,
+        success : function(data) {
+        	
+        	var html = "";
+        	for(var i=0;i<data.length;i++){
+        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<p><img src='http://www.kopis.or.kr/"+data[i].poster+"' </p>";
+        	html += "<div class='list_info'>";
+			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd+"</dd>";
+        	html += "<dt>장소</dt><dd>"+data[i].prfplcnm+"</dd>";	
+        	html += "</dl></div></a></li>";
+        	}
+        	
+        	$("#musicalListAll").html(html);
+        	
+      	  }, error: function(jqxhr, textStatus, errorThrown){
+            console.log(jqxhr, textStatus, errorThrown);
+                alert("데이터를 가져오는데 실패하였습니다.");
+                
+        }
+	});
 }
 </script>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/newMS.css">
