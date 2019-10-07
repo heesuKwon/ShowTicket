@@ -16,5 +16,7 @@ public interface EventService {
 
 	Event selectOneEvent(int eventNo);
 
+
+
 	
 }

@@ -66,5 +66,4 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.selectList();
 	}
 	
-
 }

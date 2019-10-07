@@ -1064,6 +1064,7 @@ both:clear;
 	$(document).ready(function () {
 		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//달력
+		
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',
@@ -1073,7 +1074,12 @@ both:clear;
             daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
 		}).on('changeDate',function(e){
+			var today = new Date();	//오늘 날짜
 			var date = new Date(e.format());
+			if(today>date){
+				alert("지난 날짜입니다. 다시 선택해주세요.");
+				return;
+			}
 			var day = date.getDay();
 			var timeList;
 			if(day==0){
