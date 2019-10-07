@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.member.model.service.MemberService;
+import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.talk.model.service.TalkService;
 import com.kh.showticket.talk.model.vo.ChatRoom;
 import com.kh.showticket.talk.model.vo.Msg;
@@ -39,37 +42,38 @@ public class TalkController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@RequestMapping(value= {"/talk.do", "/talk.do/{chatId}"})
-	public ModelAndView websocket(ModelAndView mav, HttpSession session) {
+	@RequestMapping("/talk.do")
+	public ModelAndView websocket(ModelAndView mav, HttpSession session, HttpServletRequest request) {
 		//@SessionAttribute(value="memberLoggedIn", required=false) Member memberLoggedIn
 		//비회원일 경우, httpSessionId값을 memberId로 사용한다.
 		
-		//임시
-		String memberId = "honggd";
-		
-//	    String memberId = Optional.ofNullable(memberLoggedIn)
-//	                              .map(Member::getMemberId)
-//	                              .orElse(session.getId());      
-		 //HttpSession의 JSESSIONID값을 저장
+		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+	    String memberId = Optional.ofNullable(memberLoggedIn)
+	                              .map(Member::getMemberId)
+	                              .orElse(session.getId());      
 
-		//Member memberLoggedIn = memberService.selectOneMember(memberId);
-		
-		//String memberId = memberLoggedIn.getMemberId();
-	    	
-	    String chatId = null;
+	    
+	    String chatId = request.getParameter("chatId");
+	    if(chatId == null) {
+	    	chatId =  talkService.findChatIdByMemberId(memberId);
+	    } 
+	    
+	    logger.debug("@@@@@@@@@@@@@@@@@@@@@chatId={}" , chatId);
+	    
+
+	    //chatId = request.getParameter("chatId");
+	    logger.debug("chatId={}", chatId);
 	    
 	    //chatId조회
 	    //1.memberId로 등록한 chatroom존재여부 검사. 있는 경우 chatId 리턴
-	    chatId = talkService.findChatIdByMemberId(memberId);
-	    
-	    logger.debug("확인: {}", chatId);
-	    
+
+	    //logger.debug("확인: {}", chatId);
+	   
 	    //2.로그인을 하지 않았거나, 로그인을 해도 최초 접속인 경우 chatId를 발급하고 db에 저장한다.
-	    if(chatId == null) {
+	    if(chatId==null) {
 	          chatId = getRandomChatId(15); //chat_randomToken -> jdbcType = char(20byte)
 	          
 	          List<ChatRoom> list = new ArrayList<>();
-	          list.add(new ChatRoom(chatId, "admin", 0, "Y", null, null));
 	          list.add(new ChatRoom(chatId, memberId, 0, "Y", null, null));
 
 	          talkService.insertChatRoom(list);
@@ -78,6 +82,7 @@ public class TalkController {
 	    //chatId가 존재하는 경우, 채팅내역 조회 
 	  		else{
 	  			List<Map<String,String>> chatList = talkService.findChatListByChatId(chatId);
+	  			logger.debug("chatList={}", chatList);
 	  			
 	  			for(Map<String, String> msg : chatList) {
 	  				long longTypeTime = Long.parseLong(String.valueOf(msg.get("time")));
@@ -87,7 +92,7 @@ public class TalkController {
 	  				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd a hh:mm");
 	  				String StringTypeTime = sdf.format(date);
 	  				
-	  				//logger.debug("stringtypeTime={}", StringTypeTime);
+	  				logger.debug("chatList={}", chatList);
 	  				
 	  				msg.remove("time");
 	  				msg.put("time", StringTypeTime);
@@ -161,7 +166,6 @@ public class TalkController {
 		
 		logger.info("fromMessage에서 memberId만 왜 안오지? = {}", fromMessage);
 		
-		
 		talkService.insertChatLog(fromMessage);
 		
 		return fromMessage;
@@ -177,15 +181,15 @@ public class TalkController {
 	}
 	
 	
-	//임시(관리자페이지에 연결하자ㅏ!)
 	@RequestMapping("/help/supporter.do")
 	public ModelAndView support(ModelAndView mav, HttpSession session) {
 		//메소드 파라미터에 차후 추가 : @SessionAttribute(value="memberLoggedIn"), required=false) Member memberLoggedIn
-		//String memberId = Optional.ofNullable(memberLoggedIn).map(Member::getMemberId).orElse(session.getId());
+		Member memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn"));
+		String memberId = Optional.ofNullable(memberLoggedIn)
+                 		.map(Member::getMemberId)
+                 		.orElse(session.getId());      
 		
 		//차후 서포터 아이디로 수정 (mapper에 있는 findRecentList 쿼리도 바꿔줄 것!)
-		String memberId = "admin";
-		String chatId = null;
 		
 		List<Map<String, String>> recentList = talkService.findRecentList();
 		logger.info("recentList={}", recentList);
