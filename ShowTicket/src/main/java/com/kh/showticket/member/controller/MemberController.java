@@ -1,6 +1,8 @@
 package com.kh.showticket.member.controller;
 
 
+import static com.kh.showticket.common.getApi.getApi.getList;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +27,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.common.MusicalAndShow;
+import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.mailhandler.MailHandler;
 import com.kh.showticket.common.mailhandler.TempKey;
 import com.kh.showticket.coupon.model.service.CouponService;
@@ -31,6 +36,7 @@ import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.MyPoint;
 import com.kh.showticket.member.model.vo.Ticket;
+
 
 @RequestMapping("/member")
 @Controller
@@ -221,15 +227,95 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myStandBy.do")
-	public String myStandBy() {
+	public ModelAndView myStandBy(ModelAndView mav) {
+		
+		//임시
+		String memberLoggedIn = "honggd";
+		
+		List<String> standByList = memberService.selectMyStandByList(memberLoggedIn);
+		List<Map<String, String>> myStandByList = null;
+		List<Map<String, String>> myStandByMList = new ArrayList<>();
+		List<Map<String, String>> myStandBySList = new ArrayList<>();
+		
+		if(standByList.size()>0) {
+			for(String showId : standByList) {
+				String url = "http://kopis.or.kr/openApi/restful/pblprfr/"+showId+"?service=3127d89913494563a0e9684779988063";
+				myStandByList = getList(url);	
+			}	
+		}
+		
+		if(myStandByList != null) {
+			for(Map<String, String> map : myStandByList) {
+				if(map.get("genrenm").equals("뮤지컬")) {
+					myStandByMList.add(map);
+				}
+				if(map.get("genrenm").equals("연극")) {
+					myStandBySList.add(map);
+				}
+			}
+		}
 
-		return "/member/myStandBy";
-	}
-	@RequestMapping("/myInterest.do")
-	public String myInterest() {
 
-		return "/member/myInterest";
+		mav.addObject("myStandByMList", myStandByMList);
+		mav.addObject("myStandBySList", myStandBySList);
+		
+		mav.setViewName("member/myStandBy");
+		return mav;
 	}
+	
+	@RequestMapping("/deleteStandBy.do")
+	public ModelAndView deleteMyStandBy(ModelAndView mav,
+										@RequestParam String showId) {
+		logger.debug("showId={}", showId);
+		
+		String memberLoggedIn = "honggd";
+		
+		memberService.deleteMyStandBy(memberLoggedIn, showId);
+		
+		String msg = "대기가 취소되었습니다.";
+		String loc = "/member/myStandBy.do";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		mav.setViewName("common/msg");
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping("/myFollow.do")
+	public ModelAndView myFollow(HttpSession session, ModelAndView mav) {
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
+
+		List<String> follows = memberService.selectFollow(memberId);
+		List<MusicalAndShow> masList = new ArrayList<>();
+		getApi getApi = new getApi();
+		for(String follow: follows) {
+			masList.add(getApi.getMusicalAndShow(follow));
+		}
+		mav.addObject("masList", masList);
+		mav.setViewName("/member/myFollow");
+		return mav;
+	}
+	
+	@RequestMapping("/deleteFollow.do")
+	public ModelAndView deleteFollow(HttpSession session, ModelAndView mav, @RequestParam String playId) {
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
+		Map<String, String> follow = new HashMap<>();
+		follow.put("memberId", memberId);
+		follow.put("playId",playId);
+		memberService.deleteFollow(follow);
+		
+		String msg = "관심공연이 취소되었습니다.";
+		String loc = "/member/myFollow.do";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("loc", loc);
+		mav.setViewName("common/msg");
+		
+		return mav;
+	}
+	
 	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
 		logger.debug("memberId="+member.getMemberId());

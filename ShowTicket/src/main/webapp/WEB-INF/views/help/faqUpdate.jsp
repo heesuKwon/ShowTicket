@@ -103,7 +103,7 @@ $(()=>{
 				<th>답<span class="star">*</span></th>
 				<td>
 					<div id="password-container">
-						<textarea name="answer" id="answer" cols="60" rows="15" required>${faq.question }</textarea>
+						<textarea name="answer" id="answer" cols="60" rows="15" required>${faq.answer }</textarea>
 					</div>
 				</td>
 			</tr>  

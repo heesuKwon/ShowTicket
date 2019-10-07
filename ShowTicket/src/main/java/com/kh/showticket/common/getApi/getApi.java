@@ -302,6 +302,7 @@ public class getApi {
 				mas.setAge(getTagValue("prfage", element));
 				mas.setPrice(getTagValue("pcseguidance", element));
 				mas.setPoster(getTagValue("poster", element));
+				mas.setGenre(getTagValue("genrenm", element));
 				mas.setState(getTagValue("prfstate", element));
 				
 				NodeList nl = element.getElementsByTagName("styurl"); NodeList urlList;

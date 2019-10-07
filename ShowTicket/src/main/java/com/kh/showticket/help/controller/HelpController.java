@@ -17,15 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.help.model.service.FaqService;
 import com.kh.showticket.help.model.service.NoticeService;
 import com.kh.showticket.help.model.vo.Faq;
-import com.kh.showticket.help.model.vo.NoticeTicketOpen;
+import com.kh.showticket.help.model.vo.Notice;
 
 @RestController
 @RequestMapping("/help")
 //@SessionAttributes("memberLoggedIn")
 public class HelpController {
 	
-	@Autowired
-	NoticeService noticeService;
 	@Autowired
 	FaqService faqService;
 	
@@ -39,18 +37,7 @@ public class HelpController {
 		mav.setViewName("help/main");
 		return mav;
 	}
-	@RequestMapping("/notice.do")
-	public ModelAndView notice(@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
-		logger.debug("help페이지 요청");
-		ModelAndView mav = new ModelAndView();
-		
-		List<NoticeTicketOpen> list = noticeService.selectNoticeTicketOpenList(cPage);
 	
-		mav.addObject("list",list);
-		mav.addObject("cPage",cPage);
-		mav.setViewName("help/notice");
-		return mav;
-	}
 	@ResponseBody
 	@RequestMapping("/faq.do")
 	public ModelAndView faq(ModelAndView mav) {
@@ -60,14 +47,14 @@ public class HelpController {
 		 logger.debug("faqTicketList="+faqTicketList); 
 		 mav.addObject("list",faqTicketList);
 		 
-		mav.setViewName("help/faq");
+		mav.setViewName("help/faq/faq");
 		return mav;
 	}
 	@RequestMapping("/faqWrite.do")
 	public ModelAndView faqWrite(ModelAndView mav) {
 //		logger.debug("help페이지 요청");
 		
-		mav.setViewName("help/faqWrite");
+		mav.setViewName("help/faq/faqWrite");
 		return mav;
 	}
 	@RequestMapping(value="/faqWriteEnd.do", method=RequestMethod.POST)
@@ -108,7 +95,7 @@ public class HelpController {
 		Faq faq = faqService.selectOne(faqNo);
 		
 		mav.addObject("faq",faq);
-		mav.setViewName("help/faqView");
+		mav.setViewName("help/faq/faqView");
 		return mav;
 	}
 	
@@ -117,7 +104,7 @@ public class HelpController {
 //		logger.debug("help페이지 요청");
 		Faq faq = faqService.selectOne(faqNo);
 		mav.addObject("faq", faq);
-		mav.setViewName("help/faqUpdate");
+		mav.setViewName("help/faq/faqUpdate");
 		return mav;
 	}
 	
@@ -174,7 +161,7 @@ public class HelpController {
 		List<Faq> list = faqService.faqTicketList(faq);
 //		logger.debug("main="+list);
 		mav.addObject("list", list);
-		mav.setViewName("help/faq");
+		mav.setViewName("help/faq/faq");
 		return mav;
 	}
 }

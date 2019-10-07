@@ -20,18 +20,31 @@
 		<result column="renamed_file_name" property="renamedFileName" />
 		<result column="announcement_date" property="announcementDate" />
 		<result column="event_status" property="statusDate" />
+		<result column="event_img" property="eventImg" />
 	</resultMap>
 
-
-	<insert id="insertEvent">
+	<insert id="insertEventEnd">
 		insert into event values
 		(seq_event_no.nextval,#{eventTitle},#{eventContent},
-			#{eventStartDate},#{eventEndDate},#{originalFileName},#{reNamedFileName},#{announcementDate},
-			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind})
+			#{eventStartDate},#{eventEndDate},#{announcementDate},
+			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind},#{eventImg})
 	
 		<selectKey keyProperty="eventNo" resultType="_int" order="AFTER">
 			select seq_event_no.currval from dual
 		</selectKey>
 	</insert>
+	
+	<insert id="insertEAttachment">
+		insert into event_attachment values(seq_event_attachment.nextval,#{eventNo},#{originalFileName},#{renamedFileName})
+	</insert>
+	
+	<select id="selectEventList" resultMap="eventMap">
+		select * from event order by event_no asc
+	</select>
+	<select id="selectOneEvent" resultType="event">
+		select * from event where event_no=#{eventNo}
+	</select>
+	
+	
 	
 </mapper>

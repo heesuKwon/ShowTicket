@@ -40,6 +40,7 @@ div#emailAuthContainer p.ok{display:none;font-size: 12px; color:green;}
 	width: 70%;
 	margin-left: 30%;
 	margin-top: -17px;
+	min-height: 500px;
 }
 /* 회원정보수정페이지 */
 #memberUpdateFrm {
@@ -290,25 +291,25 @@ div#emailAuthContainer p.ok{display:none;font-size: 12px; color:green;}
 	font-size: 15px;
 	font-weight:bold;
 }
-#playList{
+.playList{
 	width:90%;
-	border-top: 2px solid #BDBDBD;
-	border-bottom: 2px solid #BDBDBD;
+	border-top: 1px solid #BDBDBD;
+	border-bottom: 1px solid #BDBDBD;
 	text-align:center;
 	margin:auto;
 	font-size:15px;
 }
-#playList th{
+.playList th{
 	font-weight : 700;
 	border-bottom: 2px solid #E6E6E6;
 	color : #424242;
 	background-color : #E6E6E6;
 	height: 30px;
 }
-#playList tr{
+.playList tr{
 	border-bottom : 1.5px solid #E6E6E6;
 }
-#playList button{
+.playList button{
 	width: 70px; 
 	height: 35px; 
 	background-color: #D8D8D8; 
@@ -320,7 +321,7 @@ div#emailAuthContainer p.ok{display:none;font-size: 12px; color:green;}
 	margin-top : 5px;
 	margin-bottom: 5px;
 }
-#playList td{
+.playList td{
 	align:center;
 }
 .page-link{
@@ -554,8 +555,18 @@ div.authContainer{
 	 display:none;
 }
 
+
+#showWList{
+	display:none;
+}
+
 /*----기간별 조회 버튼 css 부분 */
 #search .r_btnSelect{background-color: #8f01a3;color:white;}
 #search .r_btnDefault{background-color: white;color : #424242;}
 
 .cancelBtn_{color: rgb(64, 64, 64);border: 1px solid rgb(224, 224, 224);border-radius: 2px;background-color: rgb(224, 224, 224);}
+
+
+#wNav{
+	margin-top: 20px !important;
+}

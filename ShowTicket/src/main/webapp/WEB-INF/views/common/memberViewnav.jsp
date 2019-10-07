@@ -80,7 +80,7 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myInterest.do'">관심
+				onclick="location.href='${pageContext.request.contextPath}/member/myFollow.do'">관심
 				공연</td>
 		</tr>
 	</table>

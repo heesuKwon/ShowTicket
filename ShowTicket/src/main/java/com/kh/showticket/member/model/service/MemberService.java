@@ -28,6 +28,10 @@ public interface MemberService {
 
 	List<MyPoint> selectMyPointList(String memberLoggedIn);
 
+	List<String> selectMyStandByList(String memberLoggedIn);
+
+	void deleteMyStandBy(String memberLoggedIn, String showId);
+
 	List<Ticket> selectReservationTerm(Map<String, Object> content);
 
 	List<Ticket> selectReservationTerm15(Map<String, Object> content);
@@ -35,6 +39,12 @@ public interface MemberService {
 	List<Ticket> selectReservationPage(Map<String,Object> content);
 
 	int updateReservation(Map<String, Object> cancel);
+
+	Map<String, String> selectOneTicketByNo(int ticketNo);
+
+	List<String> selectFollow(String memberId);
+
+	int deleteFollow(Map<String, String> follow);
 
 
 }

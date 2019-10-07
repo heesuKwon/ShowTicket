@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.postconstruct.PostConstructing;
 import com.kh.showticket.help.model.service.NoticeService;
-import com.kh.showticket.help.model.vo.NoticeTicketOpen;
+import com.kh.showticket.help.model.vo.Notice;
 
 /**
  * Handles requests for the application home page.
@@ -41,7 +41,7 @@ public class HomeController {
 	public ModelAndView home(Locale locale, ModelAndView model,@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
 		
 		
-		List<NoticeTicketOpen> list = noticeService.selectNoticeTicketOpenList(cPage);
+		List<Notice> list = noticeService.selectNoticeTicketOpenList(cPage);
 
 		model.addObject("list",list);
 		
@@ -55,13 +55,9 @@ public class HomeController {
 		
 		for (Map<String,String> map: ticketOpen) {
 			logger.debug("map객체"+map);
-			NoticeTicketOpen nt = new NoticeTicketOpen();
-			nt.setPlayName(map.get("prfnm"));
-			nt.setPlayOpen(map.get("prfpd"));
-			nt.setPlayPlace(map.get("prfplcnm"));
-			nt.setPlayPoster(map.get("poster"));
+			Notice nt = new Notice();
 			
-			
+
 		}
 		
 		

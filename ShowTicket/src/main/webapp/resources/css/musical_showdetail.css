@@ -13,10 +13,13 @@
 	font-weight:bold;
 }
 
-.wait{
+#wait{
  	padding:5px;
 	margin-left:5px;
 	box-shadow: 0px 0px 1px 1px #d3d3d3;
+}
+#wait:hover{
+	cursor: pointer;
 }
 
 .detailbox_bot_left{
@@ -144,7 +147,6 @@ button.btn_reply{
 
 
 
-@charset "utf-8";
 
 #detailContainer {
     background: none;
@@ -171,3 +173,5 @@ button.btn_reply{
     min-width: 990px;
     /* height: 20000px; */
 }
+
+

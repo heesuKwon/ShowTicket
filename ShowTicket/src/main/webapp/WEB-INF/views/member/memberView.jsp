@@ -11,8 +11,13 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 <script>
+
+var emailAuthFlag = 0; //이메일 인증 버튼 누르지 않음.
 $(()=>{
-	var emailAuthFlag = 0; //이메일 인증 버튼 누르지 않음.
+	
+	if($("#email").val().trim().length>0){
+		emailAuthFlag = 1;
+	}
 
 	$("#deleteMember").click(function() {
 		var bool = confirm("정말로 탈퇴하시겠습니까?");
@@ -60,11 +65,15 @@ $(()=>{
 	       }
 	    });
 	});
+	
+	$("#email").on("keyup",function(){
+		emailAuthFlag = 0;
+	});
 
 });
 function validate(){
 	
-	if($("#email").val().trim().length()>0 && emailAuthFlag == 0){
+	if(emailAuthFlag == 0){
 		alert("이메일을 인증해주십시오.");
 		return false;
 	}
@@ -130,7 +139,7 @@ function updatePwd() {
 				<th>이메일</th>
 				<td>
 					<div>
-					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email"value="${memberLoggedIn.email}">
+					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email" value="${memberLoggedIn.email}">
 					<button type="button" class="btn btn-primary" id="emailAuth">인증</button>
 					</div>
 					<div class="authContainer" id="emailAuthContainer">

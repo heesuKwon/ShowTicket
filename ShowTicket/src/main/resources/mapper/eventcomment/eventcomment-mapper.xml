@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="eventcomment">
+
+	<insert id="insertComment">
+		insert into event_comment values
+		(seq_comment_no.nextval,#{eventNo},#{memberId},#{commentContent},sysdate)
+		<selectKey keyProperty="commentNo" resultType="_int" order="AFTER">
+			select seq_comment_no.currval from dual
+		</selectKey>
+	</insert>
+
+	<select id="eCommentList" resultType="eventComment">
+		 select * from event_comment where event_no=#{eventNo} order by comment_no desc
+	</select>
+
+
+</mapper>

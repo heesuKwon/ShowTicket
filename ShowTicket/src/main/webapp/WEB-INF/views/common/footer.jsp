@@ -9,6 +9,11 @@
 	left: 20%;
     width: 200px;
 }
+#footer{
+	clear:both;
+	position: relative;
+	
+}
 </style>
 <div id="footer">
     <img src="${pageContext.request.contextPath}/resources/images/showticket_logo_gray.png" alt="로고">
