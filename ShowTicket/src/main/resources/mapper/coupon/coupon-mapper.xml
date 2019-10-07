@@ -30,4 +30,8 @@
 		<result column="coupon_Time" property="couponTime" />
 		<result column="coupon_end_date" property="couponEndDate" />
 	</resultMap>
+	
+	<insert id="insertCouponAdd">
+		insert into coupon values(seq_coupon_no.nextval, #{couponTitle}, #{couponPrice}, #{couponTime}, #{couponCount}, #{showId})
+	</insert>
 </mapper>

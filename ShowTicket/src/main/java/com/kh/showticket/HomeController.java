@@ -57,7 +57,7 @@ public class HomeController {
 			logger.debug("map객체"+map);
 			Notice nt = new Notice();
 			
-			//int result = noticeService.insertOne(nt);
+
 		}
 		
 		

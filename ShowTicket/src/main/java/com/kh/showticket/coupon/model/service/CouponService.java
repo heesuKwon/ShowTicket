@@ -15,4 +15,6 @@ public interface CouponService {
 
 	List<Map<String, String>> selectMyCouponList(String memberLoggedIn);
 
+	int insertCouponAdd(Map<String, Object> addMap);
+
 }
