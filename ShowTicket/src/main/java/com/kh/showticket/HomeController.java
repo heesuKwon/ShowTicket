@@ -61,7 +61,7 @@ public class HomeController {
 			nt.setPlayPlace(map.get("prfplcnm"));
 			nt.setPlayPoster(map.get("poster"));
 			
-			int result = noticeService.insertOne(nt);
+			
 		}
 		
 		

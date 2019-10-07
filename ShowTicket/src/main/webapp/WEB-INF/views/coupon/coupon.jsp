@@ -32,7 +32,8 @@ $(()=>{
 			</ul>
 			
             <h2 class="title">쿠폰</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-            <button class="btn btn-primary btn-sm btn-color" id="couponAdd">추가</button>
+            <button class="btn btn-primary btn-sm btn-color" id="couponUpdate" onclick="location.href='${pageContext.request.contextPath}/coupon/couponUpdate.do'">수정</button>
+            <button class="btn btn-primary btn-sm btn-color" id="couponAdd" onclick="location.href='${pageContext.request.contextPath}/coupon/couponAdd.do'">추가</button>
             <div class="coupon_main" style="clear:both;">
                <div class="coupon_lst_wrap">
 <!--                     <table class="coupon_lst"> -->

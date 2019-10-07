@@ -10,7 +10,6 @@ public interface NoticeService {
 	
 	List<NoticeTicketOpen> selectNoticeTicketOpenList(int cPage);
 
-	int insertOne(NoticeTicketOpen nt);
 
 	
 
