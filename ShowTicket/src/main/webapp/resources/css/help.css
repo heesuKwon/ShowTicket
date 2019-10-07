@@ -59,3 +59,97 @@
 #nTableBody tr, #NTableBody tr{
 	cursor:pointer;
 }
+
+table#tbl-write td div.custom-radio {
+    float: left;
+    margin-right: 30px;
+}
+
+table#tbl-write th {
+    color: #333;
+    font-size: 15px;
+    font-weight: 400;
+    border-right: 0;
+    vertical-align: middle;
+    background-color: #f7f7f7;
+}
+
+table#tbl-write th.text-left {
+    padding-left: 30px;
+    width: 150px;
+}
+
+ 
+table#tbl-write th .ico-star {
+    font-style: normal;
+    vertical-align: middle;
+    color: red;
+}
+
+table#tbl-write td {
+    color: #666;
+    padding: 20px 40px;
+}
+
+.help-title{
+	font-family: 'Gothic A1', sans-serif;
+    font-size: 26px;
+    color: black;
+    font-weight: bold;
+}
+
+.list_view thead tr.info{
+	background:#f0f0f0;
+}
+.list_view tr.info td{
+	padding:23px 20px;
+}
+.list_view tr.info .title{
+	font-size: 16px;
+	line-height: 28px;
+	letter-spacing: -1px;
+	color: #000;
+	font-weight: bold;
+	max-width: 450px;
+	padding: 2px 0 13px
+}
+.list_view tr.info dt{
+	font-weight: bold;
+	float: left;
+	width: 55px;
+	line-height: 22px;
+}
+
+.btn-reserve{
+	margin-top: 10px;
+    width: 100px;
+    border-radius: 3%;
+}
+
+table.openList{
+	margin:20px auto;
+	border : 1px solid #dee2e6;
+}
+table.openList th{
+	text-align: center;
+	background: #aaa;
+	color: white;
+}
+table.openList td{
+	text-align: center;
+	border-bottom: 1px solid #dee2e6;
+}
+.openList tbody{
+	display: none;
+	height: 200px;
+	overflow: auto;
+}
+.ticketInfo{
+	display: none;
+}
+.sm-font{
+	font-size: 12px;
+}
+.basic_tbl tr td:hover{
+	cursor: pointer;
+}

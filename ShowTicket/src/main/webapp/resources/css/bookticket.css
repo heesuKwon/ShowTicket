@@ -5,7 +5,6 @@
     color: #fff;
     background-color: #8f01a3;
 }
-<<<<<<< HEAD
 .nav-pills .nav-font{
 	font-family: 'Gothic A1', sans-serif;
 	font: 15px ;
@@ -55,7 +54,6 @@
 div#btng button#dropM:first-child { background-color: #8f01a3;border: 1px solid #8f01a3;}
 div#btng button#dropM:hover:first-child {background-color: white;border: 1px solid #8f01a3;color: #8f01a3; font-weight: bold;}
 #container>span{font-weight: bold;    position: absolute; top: 10px;}  
-=======
 .nav-pills .nav-link {
 	border-radius: 0px;
 }
@@ -120,7 +118,6 @@ body{font-family: 'Gothic A1', sans-serif;}
 
 
 
->>>>>>> refs/remotes/origin/seulgi
 
 
 

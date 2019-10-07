@@ -678,48 +678,60 @@ function kakaoPayCertResultAlert(code) {
 	<div class="accordionMenu">
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item"><a class="nav-link select nav-font"
-				href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디 찾기</a></li>
+				href="${pageContext.request.contextPath}/member/memberIdFind.do">아이디
+					찾기</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default"
-				href="${pageContext.request.contextPath}/member/memberPwdFind.do">비밀번호 찾기</a></li>
+				href="${pageContext.request.contextPath}/member/memberPwdFind.do">비밀번호
+					찾기</a></li>
 		</ul>
 		<hr />
 		<div id="html5" class="menuSection">
-			<h2><a href="#html5">생일로 찾기</a></h2>
+			<h2>
+				<a href="#html5">생일로 찾기</a>
+			</h2>
 			<div id="move">
-				<div class="inputEnter" style="display: block;">
-											<div class="inputBox">
-												<div class="styleInput">
-													<input id="memNm1" name="memNm" type="text" class="iInput" placeholder="이름">
-													<span id="conClear" class="delBtn" style="display: none;"></span>
-												</div>
-												<div class="styleInput">
-													<input id="inputHp" name="inputHp" type="text" class="iInput" inputmode="numeric" placeholder="생년월일을 입력하세요(6자리만입력)">
-													<span id="conClear" class="delBtn" style="display: none;"></span>
-													<p class="error" style="display:none"></p>
-												</div>
-											</div>
-											<div class="btnArea">
-												<button type="submit" onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_hp'); javascript:chkMemInfo(); return false;" class="btn8f">확인</button>
-											</div>
-				</div>
-				
+				<!-- <form name="findIdbyBirth" id="findIdbyBirth" action="findIdbyBirth.do" method="post"> -->
+					<div class="inputEnter" style="display: block;">
+						<div class="inputBox">
+							<input id="memNm1" name="memNm" type="text" class="iInput"
+								placeholder="이름"> <span id="conClear" class="delBtn"
+								style="display: none;"></span>
+						</div>
+						<div class="styleInput">
+							<input id="inputHp" name="inputHp" type="text" class="iInput"
+								inputmode="numeric" placeholder="생년월일을 입력하세요(6자리만입력)"> <span
+								id="conClear" class="delBtn" style="display: none;"></span>
+							<p class="error" style="display: none"></p>
+						</div>
+					</div>
+					<div class="btnArea">
+						<button type="submit"
+							onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_hp'); javascript:chkMemInfo(); return false;"
+							class="btn8f">확인</button>
+					</div>
+				<!-- </form> -->
 			</div>
 		</div>
-		<div id="css3" class="menuSection">
-			<h2><a href="#css3">등록된 이메일로 찾기</a></h2>
-			<div id="move">
-				<div class="inputEnter" style="display: block;">
-									<div class="inputBox">
-										<div class="styleInput">
-											<input name="memNm" id="memNm2" type="text" class="iInput" placeholder="이름">
-											<span id="conClear" class="delBtn" style="display: none;"></span>
-										</div>
-										<div class="emailInput">
-											<div class="styleInput">
-												<input name="memEmail1" id="memEmail1" type="text" class="iInput" placeholder="이메일">
-												<span id="conClear" class="delBtn" style="display: none;"></span>
-											</div>
-								<!-- 			<div class="customSelect">
+	</div>
+	<div id="css3" class="menuSection">
+		<h2>
+			<a href="#css3">등록된 이메일로 찾기</a>
+		</h2>
+		<div id="move">
+			<div class="inputEnter" style="display: block;">
+				<div class="inputBox">
+					<div class="styleInput">
+						<input name="memNm" id="memNm2" type="text" class="iInput"
+							placeholder="이름"> <span id="conClear" class="delBtn"
+							style="display: none;"></span>
+					</div>
+					<div class="emailInput">
+						<div class="styleInput">
+							<input name="memEmail1" id="memEmail1" type="text" class="iInput"
+								placeholder="이메일"> <span id="conClear" class="delBtn"
+								style="display: none;"></span>
+						</div>
+						<!-- 			<div class="customSelect">
 												<select name="memEmail2" id="memEmail2" onchange="chkMemEmail();">
 													<option value="etc">직접입력</option>
 													<option value="gmail.com">gmail.com</option>
@@ -742,36 +754,44 @@ function kakaoPayCertResultAlert(code) {
 												</select>
 											<div class="newSelect">직접입력</div><ul class="options"><li class="option" data-option="etc">직접입력</li><li class="option" data-option="gmail.com">gmail.com</li><li class="option" data-option="chol.com">chol.com</li><li class="option" data-option="dreamwiz.com">dreamwiz.com</li><li class="option" data-option="empal.com">empal.com</li><li class="option" data-option="freechal.com">freechal.com</li><li class="option" data-option="hanafos.com">hanafos.com</li><li class="option" data-option="hanmail.net">hanmail.net</li><li class="option" data-option="hanmir.com">hanmir.com</li><li class="option" data-option="hotmail.com">hotmail.com</li><li class="option" data-option="korea.com">korea.com</li><li class="option" data-option="nate.com">nate.com</li><li class="option" data-option="naver.com">naver.com</li><li class="option" data-option="netian.com">netian.com</li><li class="option" data-option="paran.com">paran.com</li><li class="option" data-option="sayclub.com">sayclub.com</li><li class="option" data-option="yahoo.co.kr">yahoo.co.kr</li><li class="option" data-option="yahoo.com">yahoo.com</li></ul></div>
 											<p class="error" style="display:none"></p> -->
-										</div>
-									</div>
-									<div class="btnArea">
-										<button type="submit" onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_email'); javascript:chkMemInfo(); return false;" class="btn8f">확인</button>
-									</div>
-							</div>
-				</div>
-		</div>
-		<div id="api" class="menuSection">
-			<h2><a href="#api">등록된 휴대폰으로 찾기</a></h2>
-			<div id="move">
-				<div class="inputEnter" style="display: block;">
-										<div class="inputBox">
-											<div class="styleInput">
-												<input id="memNm1" name="memNm" type="text" class="iInput" placeholder="이름">
-												<span id="conClear" class="delBtn" style="display: none;"></span>
-											</div>
-											<div class="styleInput">
-												<input id="inputHp" name="inputHp" type="text" class="iInput" inputmode="numeric" placeholder="휴대폰번호 (-없이 입력)">
-												<span id="conClear" class="delBtn" style="display: none;"></span>
-												<p class="error" style="display:none"></p>
-											</div>
-										</div>
-										<div class="btnArea">
-											<button type="submit" onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_hp'); javascript:chkMemInfo(); return false;" class="btn8f">확인</button>
-										</div>
 					</div>
+				</div>
+				<div class="btnArea">
+					<button type="submit"
+						onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_email'); javascript:chkMemInfo(); return false;"
+						class="btn8f">확인</button>
 				</div>
 			</div>
 		</div>
+	</div>
+	<div id="api" class="menuSection">
+		<h2>
+			<a href="#api">등록된 휴대폰으로 찾기</a>
+		</h2>
+		<div id="move">
+			<div class="inputEnter" style="display: block;">
+				<div class="inputBox">
+					<div class="styleInput">
+						<input id="memNm1" name="memNm" type="text" class="iInput"
+							placeholder="이름"> <span id="conClear" class="delBtn"
+							style="display: none;"></span>
+					</div>
+					<div class="styleInput">
+						<input id="inputHp" name="inputHp" type="text" class="iInput"
+							inputmode="numeric" placeholder="휴대폰번호 (-없이 입력)"> <span
+							id="conClear" class="delBtn" style="display: none;"></span>
+						<p class="error" style="display: none"></p>
+					</div>
+				</div>
+				<div class="btnArea">
+					<button type="submit"
+						onclick="javascript:egsIncorp.sendEventEgs('id_search', 'find_id_hp'); javascript:chkMemInfo(); return false;"
+						class="btn8f">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
 	</div>
 
 

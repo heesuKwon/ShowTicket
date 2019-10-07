@@ -26,7 +26,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 	crossorigin="anonymous"></script>
-	
+
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/talk.css">	
 <style>
 #msgInput{
   position:fixed; 
@@ -37,11 +39,27 @@
   color: white; 
 }
 
+
 </style>
 </head>
 
 <body>
-	<div class="chatContainer" style="overflow-y:auto; height:588px; background:transparent">	
+
+	<div class="background">
+		<ul class="msgbox" id="messages">
+			<c:forEach items="${chatList }" var="msg">
+				<c:if test="${memberLoggedIn.memberId eq msg.memberId}">
+    				<li class="list-group-item talk me">${msg.memberId } : ${msg.msg } ${msg.time }</li>
+    			</c:if>
+    			<c:if test="${memberLoggedIn.memberId ne msg.memberId}">
+    				<li class="list-group-item talk other">${msg.memberId } : ${msg.msg } ${msg.time }</li>
+    			</c:if>
+    		</c:forEach>
+		</ul>
+		<input id="message" class="msg" type="text" />
+		<button id="sendBtn" class="send" type="button">전송</button>
+	</div>
+	<%-- <div class="chatContainer" style="overflow-y:auto; height:588px; background:transparent">	
     	<ul class="list-group list-group-flush" id="data">
     		<c:forEach items="${chatList }" var="msg">
     			<li class="list-group-item">${msg.memberId } : ${msg.msg } ${msg.time }</li>
@@ -54,8 +72,9 @@
 			    <button id="sendBtn" class="btn btn-outline-secondary" type="button">Send</button>
 			</div>
 			</div>
-	</div>
-	
+	</div> --%>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 	//채팅공간 스크롤 자동으로 내리기
@@ -64,10 +83,12 @@ $(document).ready(function(){
 	$("#sendBtn").click(function(){
 		sendMessage();
 		$(".chatContainer").scrollTop($(".chatContainer").prop('scrollHeight'));
+		$("#message").val("");
 	});
 	$("#message").keydown(function(key){
 		if(key.keyCode == 13){
 			sendMessage();
+			$("#message").val("");
 		}
 	})
 	
@@ -106,7 +127,7 @@ stompClient.connect({},function(frame){
 		var hour = date.getHours();
 		var minute = date.getMinutes();
 		var ba = date.getHours >= 12 ? '오후' : '오전';
-		$("#data").append("<li class=\"list-group-item\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
+		$("#messages").append("<li class=\"list-group-item talk me\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
 	});
 	
 });
@@ -123,7 +144,7 @@ function sendMessage(){
 	
 	//테스트용 /hello
 	//stompClient.send("<c:url value='/hello' />", {}, JSON.stringify(data));
-	
+		
 	//채팅메세지: 1:1채팅을 위해 고유한 chatId를 서버측에서 발급해 관리한다.
 	stompClient.send('<c:url value="/chat/${chatId}" />', {}, JSON.stringify(data));
 	

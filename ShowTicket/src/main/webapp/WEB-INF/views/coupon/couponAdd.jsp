@@ -31,11 +31,11 @@ $(()=>{
 });
 
 var select = "";
-function goAdd(sId,cnt) {
-	var showId = sId;
-	var sList = cnt;
+function goAdd(Id,num) {
+	var showId = Id;
+	var sId = num;
 	console.log(showId);
-	console.log(cnt);
+	console.log(sId);
 	
 	//$("#couponDetail").attr(readonly);
 	//$(".pselectBtn").removeClass("cDefault").addClass("cSelected");
@@ -48,12 +48,12 @@ function goAdd(sId,cnt) {
 	console.log("select값은?"+select);
 	
 	if(select == null){		
-		$("#"+cnt).removeClass("cDefault").addClass("cSelected");
+		$("#"+sId).removeClass("cDefault").addClass("cSelected");
 		$("#nShowId").remove();
 		$(".add").append("<input type='hidden' id='showId' name='showId' value='"+showId+"'/>");
 	}
 	else if(select != null){
-		$("#"+cnt).removeClass("cSelected").addClass("cDefault");
+		$("#"+sId).removeClass("cSelected").addClass("cDefault");
 		$("#showId").remove();
 		$(".add").append("<p id='nShowId'><input type='hidden' name='showId' value='null'/></p>");
 	}
@@ -99,8 +99,8 @@ function submit() {
 									<td>${sList.prfpdto }</td>
 									<td>${sList.prfstate }</td>
 									<td>
-										<c:set var="cnt" value="sList${vs.count }"/>
- 										<button type="button" id="${cnt }" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}','${cnt }');">선택</button>
+										<c:set var="sCnt" value="sList${vs.count }"/>
+ 										<button type="button" id="${sCnt }" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}','${sCnt }');">선택</button>
 									</td>
 								</tr>
 							</c:forEach>

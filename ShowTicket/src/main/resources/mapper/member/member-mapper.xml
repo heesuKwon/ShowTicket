@@ -19,7 +19,7 @@
 		update member
 		<trim prefix="set" suffixOverrides=",">
 			<if test="password != null and password !=''">
-			password= #{pasdissword},
+			password= #{password},
 			</if>
 			<if test="memberName != null and memberName !=''">
 			member_name = #{memberName},
@@ -60,7 +60,7 @@
 			resultType="mypoint">
 		select * from point where member_id = #{memberLoggedIn}
 	</select>
-	
+
 	<select id="selectReservationTerm" resultType="ticket">
 		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
@@ -84,8 +84,37 @@
 		from(select * from ticket where ticket_buyer=#{memberId} order by ticket_enrolldate desc)t)t
 		where rnum between #{startContent} and #{endContent}
 	</select>
-	
+
+	<select id="selectStandByList"
+			resultType="string">
+		select waiting_showId from waiting where member_id = #{memberLoggedIn}
+	</select>
+	<delete id="deleteMyStandBy">
+		delete from waiting where member_id = #{memberLoggedIn} and waiting_showid = #{showId}
+	</delete>
+
 	<update id="updateReservation">
 		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberId}
 	</update>
+
+	<select id="selectOneTicketByNo"
+			resultMap="wAlarmMap">
+		select * from ticket where ticket_no = #{ticketNo}
+	</select>
+	<resultMap id="wAlarmMap" type="map">
+		<result column="ticket_showId" property="ticketShowId" />
+		<result column="ticket_showname" property="ticketShowName" />
+		<result column="ticket_date" property="ticketDate" />
+		<result column="ticket_time" property="ticketTime" />
+	</resultMap>
+	
+	<select id="selectFollow" resultType="string">
+		select * from follow
+		where member_id = #{memberId}
+	</select>
+	
+	<delete id="deleteFollow">
+		delete from follow
+		where member_id = #{memberId} and follow_showid = #{playId}
+	</delete>
 </mapper>

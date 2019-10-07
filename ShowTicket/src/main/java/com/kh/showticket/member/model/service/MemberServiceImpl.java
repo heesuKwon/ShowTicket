@@ -6,6 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.showticket.common.email.MailUtils;
@@ -17,6 +19,9 @@ import com.kh.showticket.member.model.vo.MyPoint;
 
 
 @Service
+@Transactional(propagation=Propagation.REQUIRED,
+isolation=Isolation.READ_COMMITTED,
+rollbackFor=Exception.class)
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
@@ -90,6 +95,16 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
+	public List<String> selectMyStandByList(String memberLoggedIn) {
+		return memberDAO.selectMyStandByList(memberLoggedIn);
+	}
+
+	@Override
+	public void deleteMyStandBy(String memberLoggedIn, String showId) {
+		memberDAO.deleteMyStandBy(memberLoggedIn, showId);
+	}
+
 	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
 		return memberDAO.selectReservationTerm(content);
 	}
@@ -109,5 +124,19 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updateReservation(cancel);
 	}
 
-	
+	@Override
+	public Map<String, String> selectOneTicketByNo(int ticketNo) {
+		return memberDAO.selectOneTicketByNo(ticketNo);
+	}
+
+	@Override
+	public List<String> selectFollow(String memberId) {
+		return memberDAO.selectFollow(memberId);
+	}
+
+	@Override
+	public int deleteFollow(Map<String, String> follow) {
+		return memberDAO.deleteFollow(follow);
+	}
+
 }

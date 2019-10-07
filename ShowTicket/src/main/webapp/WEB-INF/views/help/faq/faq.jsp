@@ -27,6 +27,7 @@ $(()=>{
 		 	$(".nav-pills .nav-link.select").attr('class','nav-link nav-font default');
 			$(e.target).attr('class','nav-link select nav-font'); 
 			
+			$(".help_rcont .search input[type=text] ").val("");
 			faqList(type, searchType);
 		});
 		//테이블의 열을 클릭시 해당 게시물로 이동

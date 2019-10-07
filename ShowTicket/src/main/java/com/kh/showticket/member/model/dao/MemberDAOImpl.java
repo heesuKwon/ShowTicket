@@ -1,5 +1,6 @@
 package com.kh.showticket.member.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.showticket.member.model.vo.Member;
-import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
+import com.kh.showticket.member.model.vo.Ticket;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -58,6 +59,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
+	public List<String> selectMyStandByList(String memberLoggedIn) {
+		return sqlSession.selectList("member.selectStandByList", memberLoggedIn);
+	}
+
+	@Override
+	public void deleteMyStandBy(String memberLoggedIn, String showId) {
+		Map<String, String> param = new HashMap<>();
+		param.put("memberLoggedIn", memberLoggedIn);
+		param.put("showId", showId);	
+		sqlSession.delete("member.deleteMyStandBy", param);
+	}
+
 	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
 		return sqlSession.selectList("member.selectReservationTerm", content);
 	}
@@ -77,6 +90,22 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.updateReservation", cancel);
 	}
 
+	@Override
+	public Map<String, String> selectOneTicketByNo(int ticketNo) {
+		return sqlSession.selectOne("member.selectOneTicketByNo", ticketNo);
+	}
+
+	@Override
+	public List<String> selectFollow(String memberId) {
+		return sqlSession.selectList("member.selectFollow", memberId);
+	}
+
+	@Override
+	public int deleteFollow(Map<String, String> follow) {
+		return sqlSession.delete("member.deleteFollow", follow);
+	}
+
 
 	
+
 }

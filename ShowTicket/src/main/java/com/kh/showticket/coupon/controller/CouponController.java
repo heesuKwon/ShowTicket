@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.coupon.model.vo.Coupon;
+import com.kh.showticket.member.model.vo.Member;
 
 import static com.kh.showticket.common.getApi.getApi.*;
 
@@ -40,14 +43,13 @@ public class CouponController {
 	}
 	
 	@RequestMapping("couponDownload.do")
-	public ModelAndView couponDownload(ModelAndView mav, @RequestParam int couponNo) {
+	public ModelAndView couponDownload(HttpSession session,ModelAndView mav, @RequestParam int couponNo) {
 		logger.debug("coupon다운로드 요청");
 
 		boolean flag = true;
 		
-		//String memberLoggedIn = (Member) session.getAttribute("memberLoggedIn");
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		//임시
-		String memberLoggedIn = "honggd";
 		String loc = "";
 		String msg = "";
 		List<Map<String, String>> couponList = couponService.selectMyCouponList(memberLoggedIn);
