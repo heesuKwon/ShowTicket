@@ -26,8 +26,44 @@
             <h2 class="title">종료된 이벤트</h2>
             <div class="event_cont_box">
                 <div class="event_list_inner">
+                	<c:if test="${empty EdcList }"> <h2>종료된 이벤트가 없습니다.</h2> <br /></c:if>
+					<c:if test="${!empty EdcList }"> 
                     <ul id="endEventList">
+
+						<c:forEach items="${EdcList }" var="EdcList">
+							
+						<li>
+							
+							<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${EdcList.showId }"> 
+								
+								<img
+								src="${EdcList.discountImg}"
+								alt="poster" width="285" height="386">
+								
+								<div class="event_top_info">
+									<input type="hidden" name="evtID" value="${EdcList.showId }" />
+									<dl>
+										<dt>제목</dt>
+										<dd class="event_title">
+											<span>[특가]  ${EdcList.showGenre} </span> <br />
+											
+											&lt; ${EdcList.showName} &gt;
+										</dd>
+										<dt>이벤트 내용</dt>
+										<dd style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+											 특가 할인 이벤트  
+										</dd>
+										<dt>기간</dt>
+										<dd class="event_date"> <fmt:formatDate pattern="yyyy-MM-dd" value="${EdcList.discountStartDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${EdcList.discountEndDate}"/></dd>
+									</dl>
+								</div>
+							</a>
+							<div id="saleC"> <h4>${EdcList.discountRate }%</h4></div>
+						</li>
+						</c:forEach>
+
                     </ul>
+                    </c:if>
                 </div>
                 <div class="paging" id="pagination">
                 </div>
@@ -39,23 +75,5 @@
 
 
 
-<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 
-    <script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 950223509;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-    </script>
-    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-    <noscript>
-        <div style="display:inline;">
-            <img height="1" width="1" style="border-style:none;" alt=""
-                 src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/950223509/?value=0&amp;guid=ON&amp;script=0"/>
-        </div>
-    </noscript>
-    <script type="text/javascript">
-		$("iframe[name='google_conversion_frame']").css("display", "none");
-    </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

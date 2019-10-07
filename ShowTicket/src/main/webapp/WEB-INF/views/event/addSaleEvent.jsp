@@ -21,8 +21,11 @@ input {border: none; }
 div.search{display: inline-block;  margin-bottom: 23px;}
 div#showList-box{width:98%; height:200px; overflow:auto;}
 h2.title{font-size: 20px; !important;}
+
 </style>
 <script>
+
+
 $(()=>{
 	$("input#chk_yn").click(function(){  //확인 버튼 클릭시 체크된 row의 값을 가져온다 
 		var Data =new Array(); //(0,1)
@@ -92,9 +95,9 @@ $(()=>{
 		contain+="<input type='number' class='enrollText' name='disCountRate' placeholder='%'><br/><h2 class='small-title'>할인기간</h2>";
 		contain+="<input type='date' class='enrollText' name='disCountStartDate' ><h2 id='inputText'>~</h2><input type='date' name='disCountEndDate' class='enrollText' >";
 		contain+="</div><button type='submit' class='btn btn-secondary' id='changebutton'>작성완료</button>";
-		contain+="</div>";
+		contain+="</div><button type='button' class='btn btn-secondary' id='goList' onclick=\"goList();\">목록으로</button>";
 		contain+="</form></div>";
-		
+																					
 		html+=contain;
 		$("div#searchC").html(html);
 		}
@@ -104,6 +107,10 @@ $(()=>{
 	});
 });
 
+
+function goList(){
+	location.href="${pageContext.request.contextPath}/event/eventList.do";
+}
 </script>
 
 <style>
@@ -129,9 +136,10 @@ $(()=>{
 		</table>
 		<div id="showList-box">
 
-		
+		<c:if test="${empty evt }"><h4>공연리스트가 없습니다.</h4></c:if>
+		<c:if test="${!empty evt }"> 
 			<table class="ListTable scrolltable" id="showList" width="100%" border="0" cellspacing="0" cellpadding="0">
-				<c:forEach items="${eventList }" var="evt">
+				<c:forEach items="${evt }" var="evt">
 					<c:if test="${evt.prfstate eq '공연중'}">
 						<tr>
 							<td style="display: none;">${evt.poster }</td>
@@ -148,8 +156,9 @@ $(()=>{
 				
 				
 			</table>
+		</c:if>	
 		</div>
-		<button type="button" class="btn btn-secondary" id="goList">목록으로</button>
+		
 		
 		
 		
