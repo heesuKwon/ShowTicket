@@ -52,15 +52,7 @@ public class HomeController {
 		model.addObject("BoxlistT2", dayBoxList2);
 		model.addObject("cPage",cPage);	
 		model.setViewName("forward:/index.jsp");
-		
-		for (Map<String,String> map: ticketOpen) {
-			logger.debug("map객체"+map);
-			Notice nt = new Notice();
 			
-			//int result = noticeService.insertOne(nt);
-		}
-		
-		
 		return model;
 	}
 	
