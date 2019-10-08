@@ -188,7 +188,10 @@ public class MemberController {
 	
 	@RequestMapping("/memberView.do")
 	public void memberView() {
-		
+		/*
+		 * Member member = memberService.selectOneMember(memberId);
+		 * model.addAttribute("member", member); return "/member/memberView";
+		 */
 	}
 
 	@RequestMapping("/myCoupon.do")
@@ -491,20 +494,20 @@ public class MemberController {
 /*-----------------*/	
 
 
-	/*관리자페이지로 이동???*/
-    @ResponseBody
-    @RequestMapping("/adminpage.do")
-    public ModelAndView adminPage(ModelAndView mav) {
-        mav.setViewName("member/adminreport");
-        return mav;
-    }
-    
-    @ResponseBody
-    @RequestMapping("/adminmList.do")
-    public ModelAndView adminmemberList(ModelAndView mav) {
-        mav.setViewName("member/adminmList");
-        return mav;
-    }
+//	/*관리자페이지로 이동???*/
+//    @ResponseBody
+//    @RequestMapping("/adminpage.do")
+//    public ModelAndView adminPage(ModelAndView mav) {
+//        mav.setViewName("member/adminreport");
+//        return mav;
+//    }
+//    
+//    @ResponseBody
+//    @RequestMapping("/adminmList.do")
+//    public ModelAndView adminmemberList(ModelAndView mav) {
+//        mav.setViewName("member/adminmList");
+//        return mav;
+//    }
     @ResponseBody
     @RequestMapping("/bookticket.do")
     public ModelAndView bookticket(ModelAndView mav) {

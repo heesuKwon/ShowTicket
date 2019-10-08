@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -102,11 +103,14 @@ public class EventController {
 	}
 
 	@RequestMapping("/prizewinnerWrite.do")
-	public ModelAndView writeprizewinner(ModelAndView mav) {
+	public String writeprizewinner(Model model , @RequestParam int eventNo ) {
+		
+		System.out.println("eventNo>>>"+eventNo);
+		
+//		model.addAttribute("wList",eventCommentService.selectOneEventJoin(eventNo) );
+		System.out.println("wList>>>>>>>>>>"+model);
 
-		mav.setViewName("/event/writeprizewinner");
-
-		return mav;
+		return "/event/writeprizewinner";
 	}
 
 	@RequestMapping("/eventWrite.do")
@@ -199,7 +203,7 @@ public class EventController {
 			String msg = result > 0 ? "이벤트 등록성공" : "이벤트 등록 실패";
 
 			model.addAttribute("msg", msg);
-			model.addAttribute("loc", "/event/eventWrite.do");
+			model.addAttribute("loc", "/event/eventList.do");
 		} catch (Exception e) {
 			logger.error("이벤트 등록 오류", e);
 
@@ -218,10 +222,9 @@ public class EventController {
 	}
 
 	@PostMapping("/eventCommentInsert")
+	@ResponseBody
 	public Map<String, String> eventCommnetInsert(@RequestBody EventComment eventComment) {
 		logger.info("댓글 기능 ");
-
-		System.out.println("model>>" + eventComment);
 
 		int result = eventCommentService.insertComment(eventComment);
 
@@ -229,7 +232,7 @@ public class EventController {
 		map.put("msg", result > 0 ? "댓글 등록 성공!" : "댓글 등록 실패!");
 		return map;
 	}
-
+	
 	@RequestMapping("/eventView.do")
 	public String eventView(Model model, @RequestParam int eventNo) {
 		logger.debug("전체이벤트 상세보기페이지 요청");
@@ -243,12 +246,18 @@ public class EventController {
 	  @RequestMapping("/list") //댓글 리스트
 	  @ResponseBody
 	  private List<EventComment> eCommentList(Model model,@RequestParam int eventNo) throws Exception{
-		  
-		  System.out.println("dssdf>>>"+ eventCommentService.eCommentList(eventNo));
+
 		  
 		  return eventCommentService.eCommentList(eventNo);
 	  }
 	 
 	 
+	  @RequestMapping("/delete/{commentNo}")
+	  @ResponseBody
+	  private int eCommentDelete (@PathVariable int commentNo) throws Exception{
+		
+		 return eventCommentService.eCommentDelete(commentNo); 
+	  }
+	  
 
 }

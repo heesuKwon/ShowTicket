@@ -87,7 +87,10 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 									</dd>
 									<dt>제목</dt>
 									<dd class="event_title">
-										<span>[응모]</span> &lt;${evt.eventTitle}&gt; 이벤트
+										<span>
+											<c:if test="${evt.EVENT_KIND eq 'I' }">[초대]</c:if>
+											<c:if test="${evt.EVENT_KIND eq 'E' }">[응모]</c:if>
+										</span> &lt;${evt.eventTitle}&gt; 이벤트
 									</dd>
 									<dt>이벤트내용</dt>
 									<dd>&lt;${evt.eventTitle}&gt; 이벤트</dd>
@@ -109,47 +112,5 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 
 
 
-</style>
-<script type="text/javascript">
-		/* <![CDATA[ */
-		var google_conversion_id = 950223509;
-		var google_custom_params = window.google_tag_params;
-		var google_remarketing_only = true;
-		/* ]]> */
-    </script>
-<script type="text/javascript"
-	src="//www.googleadservices.com/pagead/conversion.js"></script>
-<noscript>
-	<div style="display: inline;">
-		<img height="1" width="1" style="border-style: none;" alt=""
-			src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/950223509/?value=0&amp;guid=ON&amp;script=0" />
-	</div>
-</noscript>
-<script type="text/javascript">
-		$("iframe[name='google_conversion_frame']").css("display", "none");
-    </script>
-
-<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
-<script type="text/javascript"
-	src="/resources/js/jquery.formatDateTime.min.js"></script>
-<script type="text/javascript">
-    //<![CDATA[
-	
-    var globalEventTypeCode;
-    var firstPage = 1;
-    $(document).ready(function () {
-        getEventList(firstPage);
-
-        if ($(".event_top_list li").length < 3) {
-            for (var i = $(".event_top_list li").length; i < 3; i++) {
-                $(".event_top_list").append('<li><a href="javascript:;"><img	alt="" width="318" height="386"><div class="event_top_info">'
-                        + '</div></a></li>');
-            }
-        }
-
-    });
-
-    //]]>
-</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

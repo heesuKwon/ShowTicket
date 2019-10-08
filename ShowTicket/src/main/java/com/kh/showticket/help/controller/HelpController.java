@@ -27,6 +27,9 @@ public class HelpController {
 	@Autowired
 	FaqService faqService;
 	
+	@Autowired
+	NoticeService noticeService;
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	
@@ -34,6 +37,8 @@ public class HelpController {
 	public ModelAndView main(ModelAndView mav) {
 //		logger.debug("help페이지 요청");
 		
+		List<Notice> noticeList = noticeService.selectList();
+		mav.addObject("noticeList", noticeList);
 		mav.setViewName("help/main");
 		return mav;
 	}

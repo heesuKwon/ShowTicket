@@ -25,8 +25,7 @@
 		
             <!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
             <h2 class="title">당첨자 발표</h2>
-            <button class="btn btn-primary btn-sm btn-color" style="float:right; margin:10px; width:50px; height:30px;"
-            onclick = "location.href = '${pageContext.request.contextPath}/event/prizewinnerWrite.do' ">작성</button>
+            
             <div class="event_cont_box">
                 <div class="basic_tbl mgt10">
                     <table>
@@ -35,7 +34,8 @@
                             <col style="width: 80px">
                             <col style="width: 80px">
                             <col style="width:100px">
-                            <col style="width: 150px">
+                            <col style="width: 100px">
+                            <col style="width: 80px">
                         </colgroup>
                         <thead>
                         <tr>
@@ -43,6 +43,7 @@
                             <th scope="col">카테고리</th>
                             <th scope="col">이벤트명</th>
                             <th scope="col">기간</th>
+                            <th scope="col">작성</th>
                         </tr>
                         </thead>
 					<tbody id="winnerList">
@@ -58,6 +59,10 @@
 								<td> 
 								 <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate }"/>~
 								 <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate }"/>
+							    </td>
+								<td style="text-align: center;"> 
+								 	<button class="btn btn-primary btn-sm btn-color" style="margin:10px; width:50px; height:30px;"
+            						onclick = "location.href = '${pageContext.request.contextPath}/event/prizewinnerWrite.do?eventNo=${evt.eventNo }' ">작성</button>
 							    </td>
 							</tr>
 						</c:forEach>	

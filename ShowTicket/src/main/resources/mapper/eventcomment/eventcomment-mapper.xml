@@ -15,6 +15,29 @@
 	<select id="eCommentList" resultType="eventComment">
 		 select * from event_comment where event_no=#{eventNo} order by comment_no desc
 	</select>
-
-
+	<delete id="eCommentDelete">
+		 delete from event_comment where comment_no=#{commentNo}
+	</delete>
+	
+	<!-- <select id="selectOneEventJoin" resultMap="eventprizeMap">
+		select m.member_id,m.member_name, m.phone, e.comment_date 
+		from event_comment e join member m on e.member_id= m.member_id where event_no =#{eventNo}
+	</select>
+	
+	<resultMap type="eventComment" id="eventprizeMap">
+		<id column="comment_no" property="commentNo"/>
+		<result column="event_no" property="eventNo"/>
+		<result column="member_id" property="memberId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="comment_date" property="CommentDate"/>
+		<collection property="member" ofType="member">
+			<id column="member_id" property="memberId"/>
+			<result column="member_name" property="memberName"/>
+			<result column="phone" property="phone"/>
+		</collection>
+	</resultMap> -->
+	
+	
+	
+	
 </mapper>

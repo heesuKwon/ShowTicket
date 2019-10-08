@@ -54,9 +54,30 @@ $(()=>{
 		});
 	});
 	
-	$(".chk_yn").on("click",(e)=>{
-		console.log("라디오 눌림!");
-		console.log($(e.target).siblings(".playId").text());
+	$(document).on('click', '.chk_yn', function(e){
+		var playId = $(e.target).siblings(".playId").text();
+		console.log(playId);
+		
+		$.ajax({
+			url: '${pageContext.request.contextPath}/help/getPlayInfo.do',
+			data: "playId="+playId,
+	        success : function(data) {
+	        	console.log(data);
+	        	var text = "안녕하세요. SHOW티켓입니다. \n\n";
+	        	
+	        	text += data.genre+" "+data.name+" 오픈 안내입니다. \n\n";
+	        	text += "<공연정보> \n공연 기간 : "+data.startDate+" ~ "+data.endDate+"\n";
+	        	text += "공연 시간 : "+data.time+"\n공연 장소 : "+data.hallName+"\n티켓 가격 : "+data.price+"\n기타 정보 : "+data.age+", "+data.runtime+"\n";
+	        	
+	        	$("#playInfo").text(text);
+	        	$("#tbl-write").after("<input type='hidden' name='playId' value='"+data.id+"'></input>");
+	        }
+			,error:function(e){
+	            if(e.status==300){
+		           alert("데이터를 가져오는데 실패하였습니다.");
+		        }; 
+		    }
+		});	
 	});
 });
 </script>
@@ -108,8 +129,7 @@ $(()=>{
 				<div>
 					<h2 class="help-title">공지사항</h2>
 				</div>
-				<div id="show-list">
-				</div>
+				<div id="show-list"></div>
 				<div id="enroll-container">
 					<form name="noticeWriteFrm" id="noticeWrite"
 						action="noticeWriteEnd.do" method="post"
@@ -146,14 +166,13 @@ $(()=>{
 
 							<tr>
 								<th class="text-left">내용<i class="ico-star">*</i></th>
-								<td><textarea name="noticeContent" cols="40" rows="5"
+								<td><textarea name="noticeContent" cols="40" rows="10" id="playInfo"
 										class="form-control" required></textarea></td>
 							</tr>
 						</table>
-						<input type="submit" value="등록" class="btn btn-color" 
-							id="complete"/> 
-						<input
-							type="button" value="취소" class="btn btn-gray" id="cancel"
+						<input type="submit" value="등록" class="btn btn-color"
+							id="complete" /> <input type="button" value="취소"
+							class="btn btn-gray" id="cancel"
 							onclick="location.href='${pageContext.request.contextPath}/help/notice.do'" />
 					</form>
 				</div>

@@ -44,6 +44,11 @@ public class CouponDAOImpl implements CouponDAO {
 		return session.selectList("coupon.selectMyCouponList", memberLoggedIn);
 	}
 
+	@Override
+	public int insertCouponAdd(Map<String, Object> addMap) {
+		return session.insert("coupon.insertCouponAdd", addMap);
+	}
+
 	
 
 }
