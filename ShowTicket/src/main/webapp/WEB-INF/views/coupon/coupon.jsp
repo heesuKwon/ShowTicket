@@ -9,16 +9,40 @@
 </jsp:include>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/coupon.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css">
+
+<form id="edit" method="post" action="${pageContext.request.contextPath}/coupon/couponUpdate.do"></form>
 <script>
 $(()=>{
 	$(".couponDown").mouseover(function(){
 		$(this).css("cursor", "pointer");
-	})
+	});
 	
 	$(".couponDown").click(function(){
-		location.href="${pageContext.request.contextPath}/coupon/couponDownload.do?couponNo="+$(this).attr("id");
-	})
-})
+		if(${memberLoggedIn != null}){
+			location.href="${pageContext.request.contextPath}/coupon/couponDownload.do?couponNo="+$(this).attr("id");			
+		}
+		else{
+			alert("로그인 후 이용해 주세요");
+		}
+	});
+});
+
+function goEdit(id,title,price,time,count,no) {
+	var showId = id;
+	var couponTitle = title;
+	var couponPrice = price;
+	var couponTime = time;
+	var couponCount = count;
+	var couponNo = no;
+	
+	$("#edit").append("<input type='hidden' name='showId' value='"+showId+"'/>")
+			  .append("<input type='hidden' name='couponTitle' value='"+couponTitle+"'/>")
+			  .append("<input type='hidden' name='couponPrice' value='"+couponPrice+"'/>")
+			  .append("<input type='hidden' name='couponTime' value='"+couponTime+"'/>")
+			  .append("<input type='hidden' name='couponCount' value='"+couponCount+"'/>")
+			  .append("<input type='hidden' name='couponNo' value='"+couponNo+"'/>").submit();
+}
+
 </script>
 
 
@@ -32,8 +56,9 @@ $(()=>{
 			</ul>
 			
             <h2 class="title">쿠폰</h2><!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-            <button class="btn btn-primary btn-sm btn-color" id="couponUpdate" onclick="location.href='${pageContext.request.contextPath}/coupon/couponUpdate.do'">수정</button>
-            <button class="btn btn-primary btn-sm btn-color" id="couponAdd" onclick="location.href='${pageContext.request.contextPath}/coupon/couponAdd.do'">추가</button>
+            <c:if test="${memberLoggedIn.memberId == 'admin' }">
+            	<button class="btn btn-primary btn-sm btn-color" id="couponAdd" onclick="location.href='${pageContext.request.contextPath}/coupon/couponAdd.do'">추가</button>
+            </c:if>
             <div class="coupon_main" style="clear:both;">
                <div class="coupon_lst_wrap">
 <!--                     <table class="coupon_lst"> -->
@@ -47,17 +72,32 @@ $(()=>{
                        			</c:if>
                        			<td>
 		             				<div class="couponWrap">
+		             				<c:if test="${memberLoggedIn.memberId == 'admin' }">
+		             					<div class="coupon cCursor" onclick="goEdit('${coupon.showId == null?'null':coupon.showId}','${coupon.couponTitle }','${coupon.couponPrice }','${coupon.couponTime }','${coupon.couponCount }','${coupon.couponNo }');">
+										     <h2 class="couponTitle">${coupon.couponTitle }</h2>
+										     <div class="couponMore">
+										      <p class="couponExpire">기간 ${coupon.couponTime }일</p>
+										      <p class="couponDetail">
+										      		${coupon.showId==null? '전 공연 대상' : '해당 공연 대상'}</p>
+		 								     </div>
+		 								     <div class="couponDown" id="${coupon.couponNo }">
+										      		<p>쿠폰다운</p>     			
+		                       				 </div>      			
+		                       			</div>
+		             				</c:if>
+		             				<c:if test="${memberLoggedIn.memberId != 'admin'}">
 		                       			<div class="coupon">
 										     <h2 class="couponTitle">${coupon.couponTitle }</h2>
 										     <div class="couponMore">
 										      <p class="couponExpire">기간 ${coupon.couponTime }일</p>
 										      <p class="couponDetail">
 										      		${coupon.showId==null? '전 공연 대상' : '해당 공연 대상'}</p>
-		 								      	</div>
-		 								      	<div class="couponDown" id="${coupon.couponNo }">
-										      		<p>쿠폰다운</p>     			
-		                       					</div>      			
+		 								     </div>
+		 								     <div class="couponDown" id="${coupon.couponNo }">
+										      		<p>쿠폰다운</p>
+		                       				 </div>
 		                       			</div>
+		                       		</c:if>
 		                       		</div>
                        			</td>
                        			<c:if test="${vs.count%3 == 0}">
@@ -65,8 +105,6 @@ $(()=>{
                        			</c:if>
                        		</c:forEach>
                        </tr>
-                       
-                      
                     </table>
                 </div>
 

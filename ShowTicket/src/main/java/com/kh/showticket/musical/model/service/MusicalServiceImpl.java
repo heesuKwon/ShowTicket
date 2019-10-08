@@ -12,12 +12,15 @@ import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.coupon.model.vo.Coupon;
 import com.kh.showticket.musical.model.dao.MusicalDAO;
+import com.kh.showticket.review.model.dao.ReviewDAO;
 
 @Service
 public class MusicalServiceImpl implements MusicalService {
 	
 	@Autowired
 	MusicalDAO musicalDAO;
+	@Autowired
+	ReviewDAO reviewDAO;
 	
 	getApi getApi = new getApi();
 	
@@ -27,7 +30,7 @@ public class MusicalServiceImpl implements MusicalService {
 	public MusicalAndShow selectOne(String musicalId) {
 		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
 		
-//		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
+		musical.setReviewStar(reviewDAO.selectReviewStar(musicalId));
 		
 		logger.debug(musical.toString());
 		

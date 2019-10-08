@@ -22,4 +22,9 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public int insertReview(Review review) {
 		return sqlSession.insert("review.insertReview", review);
 	}
+
+	@Override
+	public double selectReviewStar(String musicalId) {
+		return sqlSession.selectOne("review.selectReviewStar", musicalId)==null?-1:sqlSession.selectOne("review.selectReviewStar", musicalId);
+	}
 }

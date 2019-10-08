@@ -12,10 +12,7 @@
 $(".nav").click(function(){
     $(this).css("color","#8f01a3");
 });
-	
-function Popup() { 
-	window.open("bookticket.do", "a", "width=900px, height=630px, left=100, top=0"); 
-}	
+
 </script>
 
 <nav id="myPageNavBar">
@@ -26,9 +23,6 @@ function Popup() {
 		</tr>
 		<tr>
 			<td class="nav" onclick="location.href='${pageContext.request.contextPath}/admin/adminMemberList.do'">내 회원목록</td>
-		</tr>
-		<tr>
-			<td class="nav" onclick="Popup();">내예매팝업</td>
 		</tr>		
 	</table>
 </nav>

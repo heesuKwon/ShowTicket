@@ -318,7 +318,7 @@ $(()=>{
 
 								<dl class="star_average">
 									<dt>현재 평균 별점</dt>
-									<dd class="grade color_purple" id="ratingAverage">점</dd>
+									<dd class="grade color_purple" id="ratingAverage">${musical.reviewStar }점</dd>
 									<dd class="grade_star">
 										<span class="star_gauge" id="ratingAverageStar"
 											style="width: 0%"></span>
@@ -414,14 +414,21 @@ $(()=>{
 						                    for(var i in data){
 						               			html += "<li class='reviewOne'>"
 						                        /* html += "<span class='my-rating-7'></span>"; */
+						                        html += "<input type='hidden' value='"+data[i].reviewNo+"'>"
 						                        html += "<span class='review-rating-"+i+"'></span>"; 
 						                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter+"&nbsp;";
-						                        html += "<a href='#'>";
+						                        <c:if test="${empty memberLoggedIn}">
+						                        html += "<a href='javascript:MemberCommonCheck();'>";
+						                        </c:if>
+						                        <c:if test="${not empty memberLoggedIn}">
+						                        html += "<a href='${pageContext.request.contextPath}/help/main.do'>";
+						                        </c:if>
+
 						                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='padding-bottom:2px; width:18px; height:18px;'></a>";
 						                        html += "</span>";
 						                        html += "<div class='btns'><button class='btn-sm btn-primary' id='dReview'>삭제</button></div>"
 						                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
-						                        html += "<span class='reviewDate small-font'>"+new Date(data[i].reviewDate)+"</span>";
+						                        html += "<span class='reviewDate small-font'>"+data[i].reviewDate+"</span>";
 						                        html += "<button id='likes'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
 						                        html += "</li>"; 
 						                       /*  $(".review-rating-"+i).starRating({
@@ -525,6 +532,7 @@ function MemberCommonCheck(){
 		$(.login).attr("onclick", "");
 	} */
 
+	
 function isValidReview() {
 	var rating = $.trim($("#rating").text());
 	var reviewContent = $.trim($("#reviewContent").val());

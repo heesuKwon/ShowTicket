@@ -2,7 +2,8 @@ package com.kh.showticket.review.model.vo;
 
 import java.sql.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Review {
 	private int reviewNo;
@@ -11,12 +12,12 @@ public class Review {
 	private String reviewContent;
 	private int reviewLike;
 	private double reviewStar;
-	@DateTimeFormat(pattern = "YYYY-MM-DD:HH24:MI:SS")
+	@JsonFormat(pattern = "YYYY-MM-DD")
 	private Date reviewDate;
 	
 	public Review() {}
 
-	
+		
 	public Review(int reviewNo, String reviewShowId, String reviewWriter, String reviewContent, int reviewLike,
 			double reviewStar, Date reviewDate) {
 		super();
