@@ -50,7 +50,7 @@
 	<table id="navBar">
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId }'">예매확인/취소</td>
+				onclick="location.href='${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId }&cPage=1'">예매확인/취소</td>
 		</tr>
 		<tr>
 			<td class="nav"

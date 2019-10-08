@@ -19,14 +19,10 @@ $(()=>{
 		$("#search-"+type).css("display","inline-block");
 	});
 	
-});
-
-function Popup() { 
-	window.open("bookticket.do", "a", "width=900px, height=630px, left=100, top=0"); 
-}
-
-$(".nav").click(function(){
-    $(this).css("color","#8f01a3");
+	$(".nav").click(function(){
+	    $(this).css("color","#8f01a3");
+	});
+	
 });
 
 function goOut(user) {
@@ -58,9 +54,6 @@ function goSearch(num) {
 		</tr>
 		<tr>
 			<td class="nav" onclick="location.href='${pageContext.request.contextPath}/admin/adminMemberList.do'">내 회원목록</td>
-		</tr>
-		<tr>
-			<td class="nav" onclick="Popup();">내예매팝업</td>
 		</tr>		
 	</table>
 </nav>
@@ -119,7 +112,8 @@ function goSearch(num) {
 			  </thead>
 			  <tbody>
 			  <c:forEach items="${memberList}" var="list">
-			  	<tr class="cursor" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId='+${list.memberId}">
+			  	<c:set var="memberId" value="${list.memberId }"/>
+			  	<tr class="cursor">
 			  		<th scope="row">${list.memberId}</th>
 					<td>${list.memberName}</td>
 				    <td>${list.email}</td>

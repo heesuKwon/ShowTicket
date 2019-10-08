@@ -170,12 +170,13 @@ $(()=>{
 
 		
 });
-	function aClick(barNo) {
-		a = barNo;
-		alert(a);
+
+function aClick(barNo) {
+	a = barNo;
+	alert(a);
 	//url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
 	location.href = "${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+a;
-	}
+}
 </script>
 
 

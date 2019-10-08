@@ -151,11 +151,20 @@ function onClose(evt) {
 							</c:if>
 							<!-- 로그인한 경우 -->
 							<c:if test="${memberLoggedIn != null }">
-								<span class="black"><a href="${pageContext.request.contextPath }/member/reservation.do?memberId=${memberLoggedIn.memberId}&cPage=1">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
-								&nbsp;
-								<button class="logout" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button><span>|</span> 
-								<a href="${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId}" id="reserveLogin">예매확인/취소</a><span>|</span>
-								<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
+								<c:if test="${memberLoggedIn.memberId == 'admin' }">
+									<span class="black"><a href="${pageContext.request.contextPath }/admin/adminReport.do">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
+									&nbsp;
+									<button class="logout" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button><span>|</span> 
+									<a href="${pageContext.request.contextPath}/admin/adminReport.do" id="reserveLogin">신고게시판</a><span>|</span>
+									<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
+								</c:if>
+								<c:if test="${memberLoggedIn.memberId != 'admin' }">
+									<span class="black"><a href="${pageContext.request.contextPath }/member/reservation.do?memberId=${memberLoggedIn.memberId}&cPage=1">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
+									&nbsp;
+									<button class="logout" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button><span>|</span> 
+									<a href="${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId}&cPage=1" id="reserveLogin">예매확인/취소</a><span>|</span>
+									<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
+								</c:if>
 							</c:if>
 
 							<%-- <a href="" id="reserve">예매확인/취소</a><span>|</span> 

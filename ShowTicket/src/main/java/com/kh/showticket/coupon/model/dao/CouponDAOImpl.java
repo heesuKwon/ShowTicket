@@ -49,6 +49,16 @@ public class CouponDAOImpl implements CouponDAO {
 		return session.insert("coupon.insertCouponAdd", addMap);
 	}
 
+	@Override
+	public int updateEditCoupon(Map<String, Object> addMap) {
+		return session.update("coupon.updateEditCoupon", addMap);
+	}
+
+	@Override
+	public int deleteCoupon(int couponNo) {
+		return session.delete("coupon.deleteCoupon", couponNo);
+	}
+
 	
 
 }
