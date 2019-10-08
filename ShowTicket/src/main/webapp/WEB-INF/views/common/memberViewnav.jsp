@@ -75,13 +75,11 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myStandBy.do'">대기
-				공연</td>
+				onclick="location.href='${pageContext.request.contextPath}/member/myStandBy.do'">대기 공연</td>
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myFollow.do'">관심
-				공연</td>
+				onclick="location.href='${pageContext.request.contextPath}/member/myFollow.do'">관심 공연</td>
 		</tr>
 	</table>
 </nav>

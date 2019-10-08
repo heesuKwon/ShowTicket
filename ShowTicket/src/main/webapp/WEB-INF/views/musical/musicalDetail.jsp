@@ -10,6 +10,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
+
+
+
 <fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
@@ -331,7 +335,7 @@ $(()=>{
 										onchange="checkTextLength(this);"
 										style="height: 25px; resize: none;" maxlength="3000"
 										placeholder="주민번호, 전화번호, 이메일 등 개인정보를 남기면 타인에 의해 악용될 소지가 있습니다."></textarea>
-									<button type="button" id="reviewInsertButton" onclick="isValidReview()"
+									<button type="button" id="reviewInsertButton" onclick="insertReview()"
 										class="btn btn_reply">댓글입력</button>
 								</div>
 							</fieldset>
@@ -346,105 +350,120 @@ $(()=>{
 						
 						<div id="review_list" class="review_list">
 
-							<ul id="reviewUl" style="word-break: break-all;">
+							<%-- <ul id="reviewUl" style="word-break: break-all;">
 								<li class="reviewOne">
 									<span class="my-rating-7"></span>
 									<span class="reviewId color_purple">honggd
 									<a href="#">
-										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="width:18px; height:18px;">
+										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style=" padding-bottom: 2px;width:18px; height:18px;">
 									</a>
 									</span>
 									
 									<div class="btns">
 										<button class="btn-sm btn-primary" id="dReview">삭제</button>
 									</div>
-									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
+									<br />
+									<div class="reviewContent">뮤지컬 </div>
+										<span class="reviewDate small-font">2019.09.20 17:10</span>
+										<button id="likes"><i class='far fa-thumbs-up'></i>  0</button>
+										
+								</li>
+								<li class="reviewOne">
+										<span class="my-rating-7"></span>
+										<span class="reviewId color_purple">honggd
+										<a href="#">
+										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="padding-bottom: 2px;width:18px; height:18px;">
+										</a>
+										</span>
+									
+										<div class="btns">
+										<button class="btn-sm btn-primary" id="dReview">삭제</button>
+										</div>
+										<br />
+										<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
 										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
 										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
 										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
 										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div>
 										<span class="reviewDate small-font">2019.09.20 17:10</span>
 										<button id="likes"><i class='far fa-thumbs-up'></i>  0</button>
-										
-										</li>
-								<li class="reviewOne">
-										<span class="my-rating-7"></span>
-										<span class="reviewId color_purple">honggd
-										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="width:10px; height:10px;">
-										<span class="reviewDate small-font">2019.09.20 17:10</span></span>
-									<div class="btns">
-										<button class="btn-sm btn-primary" id="dReview">삭제</button>
-									</div>
-									<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
-										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
-										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
-										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
-										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div>
-										<button id="likes"><i class='far fa-thumbs-up'></i>좋아요</button>
-										<button id="likes"><i class='fas fa-thumbs-up'></i>좋아요</button>
-										
-										</li>
-							</ul>
+								</li>
+							</ul> --%>
 						</div>
+<!--<button id="likes"><i class='fas fa-thumbs-up'></i>좋아요</button>-->										
 						<script>
-						var review = {};
-						review.reviewShowId = ${musical.id};
+						
+						function reviewList(){
+							
+						var reviewShowId = "${musical.id}";
 						
 						
-					    $.ajax({
-					        url : '${pageContext.request.contextPath}/musical/review.do',
-					        data: JSON.stringify(faq),
-							contentType: 'application/json; charset=utf-8',
-							dataType: "json",
-							type: "GET",
-					        success : function(data) {
-					           console.log(data);
+						    $.ajax({
+						        url : "${pageContext.request.contextPath}/review/reviewList.do",
+						        data: {reviewShowId: reviewShowId},
+								contentType: 'application/json; charset=utf-8',
+								dataType: "json",
+								type: "GET",
+						        success : function(data) {
+						           console.log(data);
+									
+						           var html = "";
+						               html += "<ul id='reviewUl' style='word-break: break-all;'>";
+						   
+						                if(data.length>0){
+						                    for(var i in data){
+						               			html += "<li class='reviewOne'>"
+						                        /* html += "<span class='my-rating-7'></span>"; */
+						                        html += "<span class='review-rating-"+i+"'></span>"; 
+						                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter+"&nbsp;";
+						                        html += "<a href='#'>";
+						                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='padding-bottom:2px; width:18px; height:18px;'></a>";
+						                        html += "</span>";
+						                        html += "<div class='btns'><button class='btn-sm btn-primary' id='dReview'>삭제</button></div>"
+						                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
+						                        html += "<span class='reviewDate small-font'>"+new Date(data[i].reviewDate)+"</span>";
+						                        html += "<button id='likes'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
+						                        html += "</li>"; 
+						                       /*  $(".review-rating-"+i).starRating({
+						                    	    initialRating: data[i].reviewStar,
+						                    	    readOnly: true,
+						                    	    starSize: 25,
+						                    	  }); */
+						                    	  
 
-					           var html = "";
-					               html += "<ul id='reviewUL' style='word-break: break-all;'>";
-					   
-					                if(data.length>0){
-					                    for(var i in data){
-					               			html += "<li class='reviewOne'>"
-					                        html += "<span class='review-rating-"+i+"'></span>";
-					                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter;
-					                        html += "<a href='#'>";
-					                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='width:18px; height:18px;'></a>";
-					                        html += "</span>";
-					                        html += "<div class='btns'><button class='btn-sm btn-primary' id='dReview'>삭제</button></div>"
-					                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
-					                        html += "<span class='reviewDate small-font'>"+data[i].reviewDate;
-					                        html += "</span>";
-					                        html += "<button id='likes'><i class='far fa-thumbs-up'></i>  0</button>";
-					                        html += "</li>"; 
-					                        $(".review-rating-"+i).starRating({
-					                    	    initialRating: data[i].reviewStar,
-					                    	    readOnly: true,
-					                    	    starSize: 25,
-					                    	  });
-					                    
-					                    } /* for문끝 */
-					                }  /* if문끝 */
-					                    else{
-					               			html += "<li class='reviewOne'>"
-					                        html += "<div class='reviewContent'>리뷰가 존재하지 않습니다.</div>";
-					                        html += "</li>"; 
-					                    }
-					                    html+="</ul>";
-					                    $("#review_list").html(html);
-					                
-					               
-					                	
-					                	
-					                
-					       /*function success(data)끝 */
-					       },error:function(e){
-					            if(e.status==300){
-					               alert("데이터를 가져오는데 실패하였습니다.");
-					           }; 
-					       }
-					    }); 
+						                    } /* for문끝 */
+						                }  /* if문끝 */
+						                    else{
+						               			html += "<li class='reviewOne'>"
+						                        html += "<div class='reviewContent'>리뷰가 존재하지 않습니다.</div>";
+						                        html += "</li>"; 
+						                    }
+						                    html+="</ul>";
+						                    $("#review_list").html(html);
+						                    var cnt = data.length;
+						                    var i = 0;
+						                    while(i < cnt) {
+							                	$(".review-rating-"+i).starRating({
+							                	    initialRating: data[i].reviewStar,
+							                	    readOnly: true,
+							                	    starSize: 25,
+							                	  });
+						                        
+						                    	i++;
+						                    }
+						               		
+						                    
+						                	
+						                
+						       /*function success(data)끝 */
+						       },error:function(e){
+						            if(e.status==300){
+						               alert("데이터를 가져오는데 실패하였습니다.");
+						           }; 
+						       }
+						    }); //ajax끝 
 						
+						}// reviewList끝
 						
 						
 						
@@ -458,7 +477,7 @@ $(()=>{
 
 <script type="text/javascript">
 
-$(function() {
+$(function colorRating() {
 
 
 
@@ -522,21 +541,21 @@ function isValidReview() {
 }
 
 function insertReview(){
-	var review = {};
-	review.reviewShowId = ${musical.id};
-	review.reviewWriter = ${memberLoggedIn.id};
-	review.reviewStar = ${"#rating"}.text();
-	review.reviewContent = $("#reviewContent").val();
 	if(!isValidReview()){
 		return;
 	}
 	
+	var review = {};
+	review.reviewShowId = "${musical.id}";
+	review.reviewWriter = "${memberLoggedIn.memberId}";
+	review.reviewStar = $("#rating").text();
+	review.reviewContent = $("#reviewContent").val();
 
 	
 	$.ajax({
 		dataType: "json",
 		contentType: 'application/json; charset=utf-8',
-        url : '${pageContext.request.contextPath}/musical/insertReview.do',
+        url : '${pageContext.request.contextPath}/review/insertReview.do',
 		type: "POST",
 		data: JSON.stringify(review),
 		success: function (result) {
@@ -545,6 +564,7 @@ function insertReview(){
 				return;
 			} */
 			alert("후기가 등록되었습니다.");
+			reviewList();
 			/* $("#reviewContent").val("");
 			$("#reviewInsertButton").attr("onclick", "insertProductReview();"); */
 		},
@@ -1258,6 +1278,7 @@ function insertReview(){
 			$("#tabs-3").css("display","block");
 		} else if ($(obj).attr('id') == "reviewTap") {
 			$("#tabs-2").css("display","block");
+			 reviewList(); 
 		} else if ($(obj).attr('id') == "placeTap") {
 			$("#tabs-1").css("display","block");
 		} else if ($(obj).attr('id') == "cancelTap") {
@@ -1317,7 +1338,7 @@ function insertReview(){
 
 		var url = "http://" + location.hostname + "/product/" + $('#productId').val() + "?productDate=" + RESERVE_DATA.SELECTED_DATE + "&scheduleId=" + RESERVE_DATA.SELECTED_SCHEDULE;
 
-		if (!memberCommonCheck(url, 'callBackPopReserveDialog')) {
+		if (!memberCommonCheck(url, 'callBackPopReserveDialog')	) {
 			return;
 		}
 
