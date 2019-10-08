@@ -51,7 +51,17 @@ public class CouponServiceImpl implements CouponService {
 		return couponDAO.insertCouponAdd(addMap);
 	}
 
+	@Override
+	public int updateEditCoupon(Map<String, Object> addMap) {
+		return couponDAO.updateEditCoupon(addMap);
+	}
 
+	@Override
+	public int deleteCoupon(int couponNo) {
+		return couponDAO.deleteCoupon(couponNo);
+	}
+
+	
 	
 
 	

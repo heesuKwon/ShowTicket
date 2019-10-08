@@ -13,11 +13,8 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/contents.css">
 
 <script>
-/* $(".performanceList").scroll( function() {
-	  console.log("ggg");
-}); */
+
 $(()=>{
-	
 	$("#couponTitle").keyup(function() {
 		$(".couponTitle").html($("#couponTitle").val());
 	});
@@ -31,28 +28,28 @@ $(()=>{
 });
 
 var select = "";
-function goAdd(Id,num) {
-	var showId = Id;
+function goAdd(id,num) {
+	var showId = id;
 	var sId = num;
 	console.log(showId);
 	console.log(sId);
 	
 	//$("#couponDetail").attr(readonly);
 	//$(".pselectBtn").removeClass("cDefault").addClass("cSelected");
-	if($(".add").children("#showId").val() == null){
+/* 	if($(".add").children("#showId").val() == null){
 		select = null;
 	}
 	else if($(".add").children("#showId").val() != null){
 		select = $(".add").children("#showId").val();		
-	}
+	} */
 	console.log("select값은?"+select);
 	
-	if(select == null){		
+	if($(".add").children("#showId").val() == null){
 		$("#"+sId).removeClass("cDefault").addClass("cSelected");
 		$("#nShowId").remove();
 		$(".add").append("<input type='hidden' id='showId' name='showId' value='"+showId+"'/>");
 	}
-	else if(select != null){
+	else {
 		$("#"+sId).removeClass("cSelected").addClass("cDefault");
 		$("#showId").remove();
 		$(".add").append("<p id='nShowId'><input type='hidden' name='showId' value='null'/></p>");
