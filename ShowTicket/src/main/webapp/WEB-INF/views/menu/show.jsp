@@ -368,6 +368,7 @@ function getRankList(){
 }
 </script>
 
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"
@@ -400,8 +401,7 @@ ul.lst_thumb li.on::before {
 				style="padding-bottom: 0px; margin-bottom: 39px;">
 				<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
 					연극</h2>
-				<img src="/showticket/resources/images/plus.png" alt="더보기"
-					style="width: 35px; height: 35px;">
+				
 				<div class="submain_topban">
 					<div class="submain_goods" style="width: 990px; margin: auto;">
 						<img class="mySlides"
@@ -432,8 +432,6 @@ ul.lst_thumb li.on::before {
 				<div class="header" style="margin-bottom: 4px;">
 					<h2 class="small-title"
 						style="margin-top: 0px; display: inline-block">최신 연극</h2>
-					<img src="/showticket/resources/images/plus.png" alt="더보기"
-						style="width: 35px; height: 35px;">
 				</div>
 				<div class="attention">
 					<ul style="width: 1880px">

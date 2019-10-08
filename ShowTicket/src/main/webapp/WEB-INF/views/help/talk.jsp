@@ -127,8 +127,13 @@ stompClient.connect({},function(frame){
 		var minute = date.getMinutes();
 		var ba = date.getHours >= 12 ? '오후' : '오전';
 		
-		$("#messages").append("<li class=\"list-group-item talk me\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
-	});
+		if(messageBody.memberId == '${memberLoggedIn.memberId}'){
+			$("#messages").append("<li class=\"list-group-item talk me\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
+		}
+		else{
+			$("#messages").append("<li class=\"list-group-item talk other\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
+		}
+		});
 	
 });
 

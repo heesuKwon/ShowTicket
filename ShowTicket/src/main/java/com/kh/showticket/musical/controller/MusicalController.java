@@ -4,8 +4,11 @@ import static com.kh.showticket.common.getApi.getApi.getBoxList;
 import static com.kh.showticket.common.getApi.getApi.getList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
+import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.musical.model.service.MusicalService;
 
 
@@ -31,9 +35,11 @@ public class MusicalController {
 	MusicalService musicalService;
 
 	List<Map<String,String>> musicalDetailList = PostConstructing.musicalDetailList;
-	
+
 	@RequestMapping("/musical.do")
 	public ModelAndView musical(ModelAndView mav) {
+		//logger.debug("�����ø���Ʈ������");
+
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
 		String url2 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=ebfe5d2574de4631b6eda133b56b1297&stdate=20190928&eddate=20191031&cpage=1&rows=5&shcate=AAAB&prfstate=02";
 
@@ -54,7 +60,7 @@ public class MusicalController {
 	@RequestMapping("/musicalAjax.do")
 	@ResponseBody
 	public List<Map<String,String>> musicalAjax(@RequestParam int cpage) {
-
+		//logger.debug("��ü������ AJAX");
 		//logger.debug("cpage={}", cpage);
 
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
@@ -65,9 +71,13 @@ public class MusicalController {
 
 	@RequestMapping("/musicalDetail.do")
 	public ModelAndView musicalDetail(ModelAndView mav, @RequestParam String musicalId) {
+	
+		//logger.debug("뮤지컬상세페이지");
+		//logger.debug("musicalId={}",musicalId);
 
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
 
+		//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
 		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+musical.getHallId()+"?service=3127d89913494563a0e9684779988063";
 		Map<String, String> address = musicalService.selectPlace(url);
 		logger.debug("musicalAll"+ musical);
@@ -77,8 +87,6 @@ public class MusicalController {
 		mav.setViewName("musical/musicalDetail");
 		return mav;
 	}
-
-
 
 	@RequestMapping("/musicalSearch.do")
 	public List<Map<String,String>> musicalSearch(ModelAndView mav, @RequestParam String cate, @RequestParam String srchKeyword, @RequestParam int cpage) {
@@ -128,6 +136,7 @@ public class MusicalController {
 			resultPaged.add(result.get(i));
 		}
 
+
 		return resultPaged;
 	}
 
@@ -145,4 +154,31 @@ public class MusicalController {
 
 		return dayList;
 	}
+
+
+	@RequestMapping("/insertWait.do")		
+	public ModelAndView insertWait(@RequestParam String musicalId, ModelAndView mav, HttpSession session) {		
+		Map<String, String> userAndMusical = new HashMap<>();	
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();	
+		userAndMusical.put("memberId", memberId);	
+		userAndMusical.put("musicalId",musicalId);	
+		int result = musicalService.insertWait(userAndMusical);	
+
+
+		String msg = "";			
+		String loc = "/musical/musicalDetail.do?musicalId="+musicalId;	
+		if(result>0) {	
+			msg="대기공연에 추가되었습니다.";	
+		}	
+		else {	
+			msg="대기공연 추가에 실패했습니다.";	
+		}	
+
+
+		mav.addObject("msg", msg);	
+		mav.addObject("loc", loc);	
+		mav.setViewName("common/msg");	
+		return mav;	
+	}
+
 }

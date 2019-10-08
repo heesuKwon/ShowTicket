@@ -3,15 +3,27 @@ package com.kh.showticket.event.model.vo;
 import java.sql.Date;
 
 public class EventComment {
-	private int commentNo; 
-	private int eventNo; 
-	private String memberId; 
-	private String commentContent; 
-	private Date CommentDate;
+	protected int commentNo; 
+	protected int eventNo; 
+	protected String memberId; 
+	protected String commentContent; 
+	protected Date CommentDate;
+	
 	public EventComment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	public EventComment(int commentNo, int eventNo, String memberId, String commentContent, Date commentDate) {
+		super();
+		this.commentNo = commentNo;
+		this.eventNo = eventNo;
+		this.memberId = memberId;
+		this.commentContent = commentContent;
+		CommentDate = commentDate;
+	}
+
 	public int getCommentNo() {
 		return commentNo;
 	}
