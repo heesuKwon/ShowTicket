@@ -10,4 +10,6 @@ public interface ReviewDAO {
 
 	int insertReview(Review review);
 
+	double selectReviewStar(String musicalId);
+
 }
