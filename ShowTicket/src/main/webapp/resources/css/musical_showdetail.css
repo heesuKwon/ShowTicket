@@ -110,8 +110,8 @@ button.btn_reply{
 	left:123px;
 	font-size:1.5em;
 	font-family: 'Gothic A1', sans-serif;	
-	padding: 10px;
-	min-width:100px;
+	padding: 9px;
+	min-width:120px;
 }
 .review_list{clear: both;text-align:left; padding: 5px 5px;}
 
@@ -129,6 +129,7 @@ button.btn_reply{
 .btns{
 	float:right;
 	padding-right:18px;
+    /* left: 733px; */
 }
 
 .datepicker table tr td.day {
@@ -178,4 +179,15 @@ button.btn_reply{
 
 
 .fa-thumbs-up{color:#8f0ac3;font-size: 12px;}
-#likes{height: 20px;min-width: 45px;font-size: 12px;float: right;margin-right: 10px;margin-bottom: 10px;background: white;border: 1px solid gray;}
+
+
+#likes {
+	height: 20px;
+	min-width: 45px;
+	font-size: 12px;
+	float: right;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background: white;
+	border: 1px solid gray;
+}

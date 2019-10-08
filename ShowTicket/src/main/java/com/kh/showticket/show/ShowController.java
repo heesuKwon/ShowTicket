@@ -114,14 +114,13 @@ public class ShowController {
 		
 	}
 	
-	/*
-	 * @RequestMapping("/showNewAjax.do") public List<Map<String, String>>
-	 * shownewAjax(@RequestParam String url1) {
-	 * 
-	 * logger.debug("getList(url1)"+getList(url1)); List<Map<String,String>> dayList
-	 * = getApi.getOrderedListByDate2(showList);
-	 * 
-	 * return dayList; }
-	 */
+
+	@RequestMapping("/showNewAjax.do")
+	public List<Map<String, String>> showNewAjax(@RequestParam String url1) {
+		
+		List<Map<String,String>> dayList = getApi.getOrderedListByDate2(getList(url1));
+		
+		return dayList;
+	}
 	
 }

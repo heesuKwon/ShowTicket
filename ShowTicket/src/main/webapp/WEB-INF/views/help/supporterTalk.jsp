@@ -8,6 +8,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+
+
+
 <!-- WebSocket:sock.js CDN -->	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
 
@@ -48,17 +51,16 @@ stompClient.connect({}, function(frame){
 	console.log('connected stomp over sockjs');
 	console.log(frame);
 
-
 	//subscribe message
 	stompClient.subscribe('/chat/supporter', function(message){
 		console.log("receive from /chat/supporter : ", message);
-		//새로운 메시지가 있을 때 목록 갱신을 위해서 reload함
-		location.relaod();
+		//새로운 메시지가 있을 때 목록 갱신을 위해서 reload함.
+		location.reload();
 	});
 });
 
 function goChat(chatId){
-	open("${pageContext.request.contextPath}/talk.do?chatId="+chatId, chatId, "width = 400, height = 500", false);
+	open("${pageContext.request.contextPath}/talk.do/"+chatId, chatId, "width = 400, height = 500", false);
 }
 
 </script>

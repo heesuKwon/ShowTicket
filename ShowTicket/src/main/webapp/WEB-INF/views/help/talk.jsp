@@ -16,6 +16,7 @@
 
 <!-- WebSocket: stomp.js CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <!-- bootstrap -->
 <link rel="stylesheet"
@@ -110,15 +111,13 @@ let stompClient = Stomp.over(socket);
 //connection 형성되면 콜백함수 호출
 stompClient.connect({},function(frame){
 	console.log("connected stomp over sockjs");
-	console.log(frame);
 	
 	//사용자확인
 	lastCheck();
 	
 	//stomp : 구독 개념으로 세션 관리. 핸들러 메소드의 @SendTo어노테이션과 상응
-	
 	stompClient.subscribe('/chat/${chatId}', function(message) {
-		console.log("receive from /subscribe/stomp/abcde :", message);
+		console.log("receive from /chat/${chatId} :", message);
 		let messageBody = JSON.parse(message.body);
 		var date = new Date(messageBody.time);
 		var year = date.getFullYear();
@@ -127,6 +126,7 @@ stompClient.connect({},function(frame){
 		var hour = date.getHours();
 		var minute = date.getMinutes();
 		var ba = date.getHours >= 12 ? '오후' : '오전';
+		
 		$("#messages").append("<li class=\"list-group-item talk me\">"+messageBody.memberId+" : "+messageBody.msg+" "+year+"."+month+"."+day+" "+ba+" "+hour+":"+minute+"</li>");
 	});
 	
