@@ -17,6 +17,12 @@ nav-pills .nav-link {
 	border-radius: 0;
 }
 </style>
+<script>
+$("#buy").on("click",()=>{
+	location.href =  "${pageContext.request.contextPath}/ticketing/ticketingPoint.do?play=${musical.getId()}&selectDate="+sDate+"&selectTime="+selectTime;
+	
+});
+</script>
 <body>
 
 	<div id="seatgdimg">
@@ -48,7 +54,7 @@ nav-pills .nav-link {
 
 		<div class="t_btndiv">
 			<input type="button" value="이전단계" class="t_button1" /> <input
-				type="button" value="결제하기" class="t_button2" />
+				type="button" value="결제하기" class="t_button2" id="buy"/>
 		</div>
 
 

@@ -1053,7 +1053,14 @@ function insertReview(){
 			var date = selectDate.getDate();
 			var sDate = year+"."+month+"."+date;
 		
-			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}&selectDate="+sDate+"&selectTime="+selectTime;
+			var url = "${pageContext.request.contextPath}/ticketing/bookticket.do?play=${musical.getId()}&selectDate="+sDate+"&selectTime="+selectTime;
+			var title = "bookPopup";
+			var status = "width=900px, height=630px, left 50px, top=50px";
+			var popup = open(url,title, status);
+			
+			
+			
+			//location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}&selectDate="+sDate+"&selectTime="+selectTime;
 			
 		});
 		
