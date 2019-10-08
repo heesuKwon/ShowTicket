@@ -1,16 +1,17 @@
 package com.kh.showticket.musical.controller;
 
-import static com.kh.showticket.common.getApi.getApi.*;
+import static com.kh.showticket.common.getApi.getApi.getList;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.postconstruct.PostConstructing;
+import com.kh.showticket.help.model.vo.Faq;
 import com.kh.showticket.musical.model.service.MusicalService;
 
 
@@ -81,6 +83,8 @@ public class MusicalController {
 		mav.setViewName("musical/musicalDetail");
 		return mav;
 	}
+
+	
 	
 	@RequestMapping("/musicalSearch.do")
 	public List<Map<String,String>> musicalSearch(ModelAndView mav, @RequestParam String cate, @RequestParam String srchKeyword, @RequestParam int cpage) {

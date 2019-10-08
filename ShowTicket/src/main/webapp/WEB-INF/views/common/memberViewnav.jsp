@@ -54,17 +54,17 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myPoint.do'">내
+				onclick="location.href='${pageContext.request.contextPath}/member/myPoint.do?memberId=${memberLoggedIn.memberId }'">내
 				포인트</td>
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myCoupon.do'">내
+				onclick="location.href='${pageContext.request.contextPath}/member/myCoupon.do?memberId=${memberLoggedIn.memberId }'">내
 				쿠폰</td>
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/memberView.do'">회원정보
+				onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${memberLoggedIn.memberId }'">회원정보
 				수정</td>
 		</tr>
 		<tr>
@@ -75,12 +75,12 @@
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myStandBy.do'">대기
+				onclick="location.href='${pageContext.request.contextPath}/member/myStandBy.do?memberId=${memberLoggedIn.memberId }'">대기
 				공연</td>
 		</tr>
 		<tr>
 			<td class="nav"
-				onclick="location.href='${pageContext.request.contextPath}/member/myInterest.do'">관심
+				onclick="location.href='${pageContext.request.contextPath}/member/myInterest.do?memberId=${memberLoggedIn.memberId }'">관심
 				공연</td>
 		</tr>
 	</table>

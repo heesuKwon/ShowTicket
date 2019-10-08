@@ -31,6 +31,8 @@
   			   
   	<typeAlias type="com.kh.showticket.talk.model.vo.Msg"
   			   alias="msg"/>
+  	<typeAlias type="com.kh.showticket.review.model.vo.Review"
+  			   alias="review"/>
 
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>

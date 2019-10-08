@@ -235,14 +235,17 @@ public class MemberController {
 	}
 	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
-		logger.debug("memberId="+member.getMemberId());
+//		logger.debug("memberId="+member.getMemberId());
 		logger.debug("member="+member);
 
 		int result = memberService.updateMember(member);
+		
+	
+		model.addAttribute("memberLoggedIn", member);
 
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
-		model.addAttribute("loc", "/");
+		model.addAttribute("loc", "/member/memberView.do");
 
 		return "common/msg";
 	}

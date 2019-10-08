@@ -277,7 +277,7 @@
 .star_review.inquire .write_review{padding-top:0}
 
 .review_list{border-width:2px 0 1px;border-style:solid;border-color:#999}
-.review_list li{border-top:1px solid #e1e1e1;padding:22px 0 25px;line-height:18px;}
+.review_list li{border-top:1px solid #e1e1e1;padding:22px 0 25px;line-height:18px; width:918px;}
 .review_list li:first-child{border:0}
 .review_list li.no_data{height:153px;line-height:153px;text-align:center;}
 .review_list li .review_info{margin:-1px 0 7px -2px;overflow:hidden}

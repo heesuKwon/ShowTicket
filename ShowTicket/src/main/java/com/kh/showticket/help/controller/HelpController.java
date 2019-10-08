@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.help.model.service.FaqService;
@@ -21,7 +22,7 @@ import com.kh.showticket.help.model.vo.NoticeTicketOpen;
 
 @RestController
 @RequestMapping("/help")
-//@SessionAttributes("memberLoggedIn")
+@SessionAttributes("memberLoggedIn")
 public class HelpController {
 	
 	@Autowired
