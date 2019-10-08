@@ -1052,9 +1052,39 @@ function insertReview(){
 			var month = selectDate.getMonth()+1;
 			var date = selectDate.getDate();
 			var sDate = year+"."+month+"."+date;
-		
-			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}&selectDate="+sDate+"&selectTime="+selectTime;
 			
+			var form = document.createElement("form");
+			form.setAttribute("charset", "UTF-8");
+			form.setAttribute("method", "Post"); // Get 또는 Post 입력
+			form.setAttribute("action", "${pageContext.request.contextPath}/ticketing/ticketingSeat.do");
+
+			 
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "playId");
+			hiddenField.setAttribute("value", "${musical.id}");
+			form.appendChild(hiddenField);
+
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectDate");
+			hiddenField.setAttribute("value", sDate);
+			form.appendChild(hiddenField);
+			
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectTime");
+			hiddenField.setAttribute("value", selectTime);
+			form.appendChild(hiddenField);
+		
+			var url = "${pageContext.request.contextPath}/ticketing/ticketingSeat.do";
+		    var name = "bookTicket";
+		    var option = "width = 900, height = 630, top = 0, left = 100, location = no";
+		    window.open(url, name, option);
+		    
+		    form.target = name;
+		    document.body.appendChild(form);
+		    form.submit();
 		});
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/

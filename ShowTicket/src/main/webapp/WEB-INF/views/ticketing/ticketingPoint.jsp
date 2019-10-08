@@ -106,7 +106,7 @@
 				</tr>
 				<tr>
 					<td rowspan="2">쿠폰</td>
-					<c:forEach items="${cList }" map="c">
+					<c:forEach items="${cList }" var="c">
 					<td>${c.getCouponPrice }</td>
 					<td class="t_dtable_price">
 						<span class="t_purple">10,000</span><span>원</span>
@@ -163,7 +163,7 @@
 		</div>
 		
 		<div class="t_dbtndiv">
-			<input type="button" value="이전단계" class="t_button1"/>
+			<input type="button" value="이전단계" class="t_button1" onclick="location.href='${pageContext.request.contextPath}/ticketing/ticketingSeat.do'"/>
 			<input type="button" value="다음단계" class="t_button2" onclick="location.href='${pageContext.request.contextPath}/ticketing/ticketConfirm.do'"/>
 		</div>
 	</div>
