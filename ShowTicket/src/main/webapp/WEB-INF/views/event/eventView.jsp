@@ -113,10 +113,10 @@
 
 				</div>
 				<div id="btnbox" style="width: 65%;">
-					<button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button>
+					<button type="button" class="btn btn-secondary btn-lg btn-block">공연 상세보기</button>
 				</div>
 			
-			<c:if test="<%=memberLoggedIn != null %>">				
+			<c:if test="<%=memberLoggedIn == null %>">				
 				<div id="comment-container" name="comment-container">
 					<div class="comment-editor">
 
@@ -137,11 +137,7 @@
 				</div>
 		</c:if>	
 
-<style>
-.comment-btn{background:#8f01a3; border-radius: 3px; font-family: 'Gothic A1', sans-serif; }
-div.commentArea{font-family: 'Gothic A1', sans-serif; font-size: 13px;}
-h7{margin-right: 100px;}
-</style>
+
 
 <script>
 $(document).ready(function(){
@@ -316,5 +312,9 @@ input {
 body {
 	font-family: 'Gothic A1', sans-serif;
 }
+
+.comment-btn{background:#8f01a3; border-radius: 3px; font-family: 'Gothic A1', sans-serif; }
+div.commentArea{font-family: 'Gothic A1', sans-serif; font-size: 13px;}
+h7{margin-right: 100px;}
 </style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

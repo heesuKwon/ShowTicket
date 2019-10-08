@@ -34,7 +34,7 @@
 							
 						<li id="innerLi">
 							<div id="saleC"> <h4>${EdcList.discountRate }%</h4></div>
-							<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${EdcList.showId }"> 
+							<a href="${pageContext.request.contextPath }/event/eventView.do?showId=${EdcList.showId }"> 
 								
 								<img
 								src="${EdcList.discountImg}"

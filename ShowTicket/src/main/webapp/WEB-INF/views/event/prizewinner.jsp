@@ -43,7 +43,9 @@
                             <th scope="col">카테고리</th>
                             <th scope="col">이벤트명</th>
                             <th scope="col">기간</th>
+                            <c:if test="${memberLoggedIn.memberId =='admin' }">
                             <th scope="col">작성</th>
+                            </c:if>
                         </tr>
                         </thead>
 					<tbody id="winnerList">
@@ -61,8 +63,10 @@
 								 <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate }"/>
 							    </td>
 								<td style="text-align: center;"> 
+								<c:if test="${memberLoggedIn.memberId =='admin' }">
 								 	<button class="btn btn-primary btn-sm btn-color" style="margin:10px; width:50px; height:30px;"
             						onclick = "location.href = '${pageContext.request.contextPath}/event/prizewinnerWrite.do?eventNo=${evt.eventNo }' ">작성</button>
+							    </c:if>
 							    </td>
 							</tr>
 						</c:forEach>	

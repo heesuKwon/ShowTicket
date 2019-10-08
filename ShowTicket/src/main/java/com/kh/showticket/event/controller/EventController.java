@@ -131,7 +131,7 @@ public class EventController {
 
 		model.addAttribute("dcList", discountService.selectOneDc(showId));
 
-		return "event/eventList";
+		return "event/addSaleView";
 	}
 
 	@RequestMapping("/insertAddSale.do")
@@ -155,7 +155,7 @@ public class EventController {
 
 		// 2. view단 처리
 		model.addAttribute("msg", result > 0 ? "할인 등록성공" : "할인 등록 실패");
-		model.addAttribute("loc", "/event/addSaleEvent.do");
+		model.addAttribute("loc", "/event/eventList.do");
 
 		return "common/msg";
 	}
