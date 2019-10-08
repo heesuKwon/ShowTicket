@@ -104,14 +104,7 @@ $(()=>{
 /*--------------------------석현씨 코딩영역-----------------------------  */		
 
 </script>
-<script type="text/javascript">
-window.onload = function(){
-	$("#bookButton").click(function(){
- var showTime = $("#watchTime").val();
- alert(showTime);
-	})
-}
-</script>
+
 </head>
 <script>
 	var meta = document.createElement('meta');
@@ -225,7 +218,7 @@ window.onload = function(){
 						</dd>
 					</dl>
 
-					<button type="button" class="btn reserve s_after first-child" id="bookButton">
+					<button type="button" class="btn reserve s_after first-child" id="book">
 						<span>예매하기 </span>
 					</button>
 				</div>
