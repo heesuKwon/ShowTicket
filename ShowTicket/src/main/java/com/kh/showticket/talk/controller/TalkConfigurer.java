@@ -27,7 +27,7 @@ public class TalkConfigurer implements WebSocketMessageBrokerConfigurer {
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry registry) {
 		//핸들러 메소드의 @SendTo에 대응함. 여기에 등록된 url을 subscribe하는 client에게 전송
-		registry.enableSimpleBroker("/hello", "/chat");
+		registry.enableSimpleBroker("/hello", "/chat", "lastcheck");
 		
 		//prefix로 contextPath를 달고 @Controller의 핸들러메소드 @MessageMapping을 찾는다.
 		registry.setApplicationDestinationPrefixes("/showticket"); //contextPath

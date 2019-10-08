@@ -18,8 +18,8 @@ import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -76,7 +76,6 @@ public class TalkController {
 	          
 	          List<ChatRoom> list = new ArrayList<>();
 	          list.add(new ChatRoom(chatId, memberId, 0, "Y", null, null));
-	          list.add(new ChatRoom(chatId, "ticket77", 0, "Y", null, null));
 
 	          talkService.insertChatRoom(list);
 
@@ -171,7 +170,7 @@ public class TalkController {
 		return fromMessage;
 	}
 	
-	@MessageMapping("/lastCheck")
+	@MessageMapping("/lastcheck")
 	@SendTo("/chat/supporter")
 	public Msg lastCheck(@RequestBody Msg fromMessage) {
 		logger.info("fromMessage={}", fromMessage);
@@ -181,7 +180,7 @@ public class TalkController {
 	}
 	
 	
-	@RequestMapping("/help/supporter.do")
+	@GetMapping("/help/supporter.do")
 	public ModelAndView support(ModelAndView mav, HttpSession session) {
 		//메소드 파라미터에 차후 추가 : @SessionAttribute(value="memberLoggedIn"), required=false) Member memberLoggedIn
 		Member memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn"));

@@ -161,7 +161,7 @@ function lastCheck(){
 			time : new Date().getTime()
 	}
 	
-	stompClient.send('<c:url value="/lastCheck" />', {}, JSON.stringify(data));
+	stompClient.send('<c:url value="/lastcheck" />', {}, JSON.stringify(data));
 }
 
 </script>	
