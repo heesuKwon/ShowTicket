@@ -117,7 +117,7 @@ stompClient.connect({},function(frame){
 	
 	//stomp : 구독 개념으로 세션 관리. 핸들러 메소드의 @SendTo어노테이션과 상응
 	stompClient.subscribe('/chat/${chatId}', function(message) {
-		console.log("receive from /subscribe/stomp/abcde :", message);
+		console.log("receive from /chat/${chatId} :", message);
 		let messageBody = JSON.parse(message.body);
 		var date = new Date(messageBody.time);
 		var year = date.getFullYear();
@@ -162,7 +162,7 @@ function lastCheck(){
 			time : new Date().getTime()
 	}
 	
-	stompClient.send('<c:url value="/lastcheck" />', {}, JSON.stringify(data));
+	stompClient.send('<c:url value="/lastCheck" />', {}, JSON.stringify(data));
 }
 
 </script>	

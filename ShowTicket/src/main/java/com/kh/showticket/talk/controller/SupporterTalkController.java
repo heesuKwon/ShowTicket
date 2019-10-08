@@ -11,8 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +25,7 @@ public class SupporterTalkController {
 	@Autowired
 	TalkService talkService;
 	
-	@GetMapping("/help/supporter.do")
+	@RequestMapping("/help/supporter.do")
 	public ModelAndView admin(ModelAndView mav, 
 					  HttpSession session, 
 					  @SessionAttribute(value="memberLoggedIn", required=false) Member memberLoggedIn){
@@ -33,18 +33,18 @@ public class SupporterTalkController {
 															 .orElseThrow(IllegalStateException::new);
 		String chatId = null;
 		
-		if(!"ticket77".equals(memberId)) throw new IllegalStateException("로그인 후 이용하세요.");
+		//if(!"ticket77".equals(memberId)) throw new IllegalStateException("로그인 후 이용하세요.");
 		
 		List<Map<String, String>> recentList = talkService.findRecentList();
 		logger.info("recentList={}",recentList);
 		
 		mav.addObject("recentList", recentList);
-		mav.setViewName("help/supportTalk");
+		mav.setViewName("help/supporterTalk");
 		return mav;
 	}
 	
 	
-	@GetMapping("/talk.do/{chatId}")
+	@RequestMapping("/talk.do/{chatId}")
 	public String adminChat(@PathVariable("chatId") String chatId, Model model){
 		
 		List<Map<String, String>> chatList = talkService.findChatListByChatId(chatId);
