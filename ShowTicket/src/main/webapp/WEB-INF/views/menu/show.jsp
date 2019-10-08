@@ -280,6 +280,7 @@ function slideShow(){
 }
 </script>
 <script type="text/javascript">
+
 window.onload = function(){
 	$("#order-show").change((e)=>{
 		var type = $(e.target).val();

@@ -1,20 +1,14 @@
 package com.kh.showticket.musical.controller;
 
 
-import static com.kh.showticket.common.getApi.getApi.*;
-
 import static com.kh.showticket.common.getApi.getApi.getBoxList;
 import static com.kh.showticket.common.getApi.getApi.getList;
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 import javax.servlet.http.HttpSession;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

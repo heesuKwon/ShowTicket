@@ -971,8 +971,7 @@ function insertReview(){
 	};
 	
 	
-	var selectDay;
-	
+	var selectDate;
 	
 	$(document).ready(function () {
 		/*-------------------------------희수 코딩 영역--------------------------------*/
@@ -988,12 +987,12 @@ function insertReview(){
 			language: 'kr'
 		}).on('changeDate',function(e){
 			var today = new Date();	//오늘 날짜
-			var date = new Date(e.format());
-			if(today>date){
+			selectDate = new Date(e.format());
+			if(today>selectDate){
 				alert("지난 날짜입니다. 다시 선택해주세요.");
 				return;
 			}
-			var day = date.getDay();
+			var day = selectDate.getDay();
 			var timeList;
 			if(day==0){
 				timeList = '<%=dayTime.get("일")%>';
@@ -1036,15 +1035,26 @@ function insertReview(){
 			}
 		});
 	
-		/* $("#book").on("click",()=>{
+		$("#book").on("click",()=>{
 			if(${memberLoggedIn==null}){
 				alert("로그인이 필요합니다.");
-				break;
+				return;
 			}
-			//if()//날짜나 회차가 선택되지 않은 경우 
-			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}";
+			var selectTime = $("#watchTime").val();
 			
-		}); */
+			if(selectDate==null||selectTime==''){//날짜나 회차가 선택되지 않은 경우 
+				alert("날짜와 회차를 선택해주세요");
+				return;
+			}
+			
+			var year = selectDate.getFullYear();
+			var month = selectDate.getMonth()+1;
+			var date = selectDate.getDate();
+			var sDate = year+"."+month+"."+date;
+		
+			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}&selectDate="+sDate+"&selectTime="+selectTime;
+			
+		});
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
 	
