@@ -368,6 +368,7 @@ function getRankList(){
 }
 </script>
 
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"

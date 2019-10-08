@@ -201,9 +201,6 @@ public class MemberController {
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		//String memberLoggedIn = "honggd";
 		
-		List<Map<String,String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
-		
-		mav.addObject("myCouponList", myCouponList);
 		mav.setViewName("member/myCoupon");
 		
 		return mav;
@@ -511,13 +508,8 @@ public class MemberController {
 //        mav.setViewName("member/adminmList");
 //        return mav;
 //    }
-    @ResponseBody
-    @RequestMapping("/bookticket.do")
-    public ModelAndView bookticket(ModelAndView mav) {
-        mav.setViewName("member/bookticket");
-        return mav;
-    }
-    
+  
+   
     
     @RequestMapping(value="/updatePwd.do",method=RequestMethod.GET)
 	public String changePasswd(@RequestParam String memberId, Model model) {

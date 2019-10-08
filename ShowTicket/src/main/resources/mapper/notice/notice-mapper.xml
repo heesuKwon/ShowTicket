@@ -6,6 +6,7 @@
 	<select id="selectNoticeTicketOpenList" resultType="notice">
 		select *
 		from notice
+		where notice_category ='t'
 		order by notice_enrolldate desc
 	</select>
 

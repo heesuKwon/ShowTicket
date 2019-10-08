@@ -1,9 +1,12 @@
+<%@page import="com.kh.showticket.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
+<%
+	Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
+%>
 <fmt:requestEncoding value="utf-8"/>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
@@ -53,7 +56,7 @@
 				</tr>
 				<tr>
 					<td class="t_hr">사용 포인트</td>
-					<td class="t_hr">0</td>
+					<td class="t_hr"><%=memberLoggedIn.getPoint() %></td>
 				</tr>
 				<tr>
 					<td class="t_hr">총 결제</td>
