@@ -62,7 +62,6 @@ $(()=>{
 			
 			
 		});
-		console.log("tdARRR>>>>>>"+tdArr[1]);
 		for(var i=0; i<Data.length; i++){
 		var html=""; 
 		
