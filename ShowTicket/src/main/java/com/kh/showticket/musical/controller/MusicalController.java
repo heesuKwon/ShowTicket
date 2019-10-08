@@ -1,10 +1,19 @@
 package com.kh.showticket.musical.controller;
 
+
 import static com.kh.showticket.common.getApi.getApi.*;
 
+import static com.kh.showticket.common.getApi.getApi.getBoxList;
+import static com.kh.showticket.common.getApi.getApi.getList;
+
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+import javax.servlet.http.HttpSession;
 
 
 import org.slf4j.Logger;
@@ -19,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
+import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.musical.model.service.MusicalService;
 
 
@@ -31,10 +41,10 @@ public class MusicalController {
 	MusicalService musicalService;
 	
 	List<Map<String,String>> musicalDetailList = PostConstructing.musicalDetailList;
-	
+
 	@RequestMapping("/musical.do")
 	public ModelAndView musical(ModelAndView mav) {
-		//logger.debug("¹ÂÁöÄÃ¸®½ºÆ®ÆäÀÌÁö");
+		//logger.debug("ï¿½ï¿½ï¿½ï¿½ï¿½Ã¸ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage=1&rows=8&shcate=AAAB";
 		String url2 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=ebfe5d2574de4631b6eda133b56b1297&stdate=20190928&eddate=20191031&cpage=1&rows=5&shcate=AAAB&prfstate=02";
@@ -56,7 +66,7 @@ public class MusicalController {
 	@RequestMapping("/musicalAjax.do")
 	@ResponseBody
 	public List<Map<String,String>> musicalAjax(@RequestParam int cpage) {
-		//logger.debug("ÀüÃ¼¹ÂÁöÄÃ AJAX");
+		//logger.debug("ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AJAX");
 		//logger.debug("cpage={}", cpage);
 
 		String url = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate=20190923&eddate=20191031&cpage="+cpage+"&rows=8&shcate=AAAB";
@@ -67,7 +77,7 @@ public class MusicalController {
 
 	@RequestMapping("/musicalDetail.do")
 	public ModelAndView musicalDetail(ModelAndView mav, @RequestParam String musicalId) {
-		//logger.debug("¹ÂÁöÄÃ»ó¼¼ÆäÀÌÁö");
+		//logger.debug("ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		//logger.debug("musicalId={}",musicalId);
 		
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
@@ -149,5 +159,31 @@ public class MusicalController {
 		
 		return dayList;
 	}
-	
+
+
+	@RequestMapping("/insertWait.do")		
+	public ModelAndView insertWait(@RequestParam String musicalId, ModelAndView mav, HttpSession session) {		
+		Map<String, String> userAndMusical = new HashMap<>();	
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();	
+		userAndMusical.put("memberId", memberId);	
+		userAndMusical.put("musicalId",musicalId);	
+		int result = musicalService.insertWait(userAndMusical);	
+
+
+		String msg = "";			
+		String loc = "/musical/musicalDetail.do?musicalId="+musicalId;	
+		if(result>0) {	
+			msg="ëŒ€ê¸°ê³µì—°ì— ì¶”ê°€ë˜ì—ˆìŠµë‹ˆë‹¤.";	
+		}	
+		else {	
+			msg="ëŒ€ê¸°ê³µì—° ì¶”ê°€ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.";	
+		}	
+
+
+		mav.addObject("msg", msg);	
+		mav.addObject("loc", loc);	
+		mav.setViewName("common/msg");	
+		return mav;	
+	}
+
 }
