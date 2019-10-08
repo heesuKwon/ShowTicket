@@ -189,8 +189,11 @@ $(()=>{
 								<c:forEach items="${coupon}" var="c">
 									<li>${c.couponTitle } - <span class="color_purple fbold ">${c.couponPrice }</span>원 할인</li>
 								</c:forEach>
+									<li>${discount }% 할인 중</li>
+								<%-- <c:forEach items="${eventList}" var="e"> --%>
 								<!-- <li><사랑했어요>기대평 이벤트 - <span
 										class="color_purple fbold">40</span>% 할인 </li> -->
+								<%-- </c:forEach> --%>
 							</ul>
 						</div>
 					</div>

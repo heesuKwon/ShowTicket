@@ -25,4 +25,11 @@
 		<result column="coupon_time" property="couponTime" />
 	</resultMap>
 	
+	<select id="selectDiscount" resultType="int">
+		<![CDATA[
+		select discount_rate
+		from discount
+		where showid = #{musicalId} and to_date(discount_end_date, 'yy/mm/dd') - sysdate >= 0 
+		]]>
+	</select>
 </mapper>

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
+import com.kh.showticket.coupon.model.vo.Coupon;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.musical.model.service.MusicalService;
 
@@ -76,6 +77,8 @@ public class MusicalController {
 		//logger.debug("musicalId={}",musicalId);
 
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
+		List<Coupon> coupon = musicalService.selectCoupon(musicalId);
+		int discount = musicalService.selectDiscount(musicalId); 
 
 		//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
 		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+musical.getHallId()+"?service=3127d89913494563a0e9684779988063";
@@ -83,6 +86,8 @@ public class MusicalController {
 		logger.debug("musicalAll"+ musical);
 		logger.info("musicalAddress"+ address);
 		mav.addObject("musical", musical);
+		mav.addObject("coupon", coupon);
+		mav.addObject("discount", discount);
 		mav.addObject("address", address);
 		mav.setViewName("musical/musicalDetail");
 		return mav;
