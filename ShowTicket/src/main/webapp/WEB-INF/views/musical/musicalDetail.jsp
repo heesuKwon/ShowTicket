@@ -150,12 +150,9 @@ $(()=>{
 						</span>
 					</div>
 					<div class="etc_info">
-
 						<div class="bx_dummy">
-							<em class="info_tit">별점</em> <span class="txt" id="review-star">${musical.getReviewStar()}</span>
+							<em class="info_tit">별점</em> <span class="txt"><span id="review-star"></span></span>
 						</div>
-
-
 						<div class="bx_dummy">
 							<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
 						</div>
@@ -170,7 +167,6 @@ $(()=>{
 							<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
 						</div>
 						<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
-
 						<div class="bx_dummy include_layer">
 							<em class="info_tit">가격</em>
 							<div class="txt ui-dialog  price-dialog">
@@ -191,70 +187,68 @@ $(()=>{
 
 							</div>
 						</div>
-
 						<div class="bx_dummy include_layer border_type">
 							<em class="info_tit">할인</em>
 							<div class="txt ui-dialog  price-dialog">
 								<ul class="lst_dsc">
 									<c:forEach items="${coupon}" var="c">
-										<li>${c.couponTitle }- <span class="color_purple fbold ">${c.couponPrice }</span>원
+										<li>${c.couponTitle }-<span class="color_purple fbold ">${c.couponPrice }</span>원
 											할인
 										</li>
 									</c:forEach>
-									<!-- <li><사랑했어요>기대평 이벤트 - <span
-										class="color_purple fbold">40</span>% 할인 </li> -->
+									<li>${discount }%할인중</li>
 								</ul>
 							</div>
 						</div>
-					</div>
-					<div class="bx_dummy">
-						<em class="info_tit">대기공연추가</em> <span id="wait"> <img
-							src="${pageContext.request.contextPath }/resources/images/heart.png"
-							alt="" width=15px; />
-						</span>
+						<div class="bx_dummy">
+							<em class="info_tit">대기공연추가</em> <span class="txt"> <span id="wait" ><img
+								src="${pageContext.request.contextPath }/resources/images/heart.png"
+								alt="" width=15px; /></span>
+							</span>
+						</div>
 					</div>
 				</div>
-				<!-- FE 지원 form 시작 -->
-				<c:if test="${musical.getState() eq '공연중'}">
-					<div class="detail_info_right">
-						<div id="calendar"></div>
+					<!-- FE 지원 form 시작 -->
+					<c:if test="${musical.getState() eq '공연중'}">
+						<div class="detail_info_right">
+							<div id="calendar"></div>
 
-						<dl class="dotline_x">
-							<dt>예매가능 회차</dt>
-							<dd>
-								<!-- [D] 셀렉트박스 -->
-								<select name="watchTime" id="watchTime">
-									<option>회차선택(날짜선택후)</option>
-								</select>
-							</dd>
-						</dl>
+							<dl class="dotline_x">
+								<dt>예매가능 회차</dt>
+								<dd>
+									<!-- [D] 셀렉트박스 -->
+									<select name="watchTime" id="watchTime">
+										<option>회차선택(날짜선택후)</option>
+									</select>
+								</dd>
+							</dl>
 
-						<button type="button" class="btn reserve s_after first-child"
-							id="book">
-							<span>예매하기 </span>
-						</button>
-					</div>
-				</c:if>
-				<c:if test="${musical.getState() eq '공연예정'}">
-					<div class="detail_info_right">
-						<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
+							<button type="button" class="btn reserve s_after first-child"
+								id="book">
+								<span>예매하기 </span>
+							</button>
+						</div>
+					</c:if>
+					<c:if test="${musical.getState() eq '공연예정'}">
+						<div class="detail_info_right">
+							<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
-						<button type="button" class="btn reserve due s_after first-child"
-							onclick="">
-							<span>판매예정 </span>
-						</button>
-					</div>
-				</c:if>
-				<c:if test="${musical.getState() eq '공연완료'}">
-					<div class="detail_info_right">
-						<div class="noinfo_txt">공연이 종료되었습니다.</div>
+							<button type="button" class="btn reserve due s_after first-child"
+								onclick="">
+								<span>판매예정 </span>
+							</button>
+						</div>
+					</c:if>
+					<c:if test="${musical.getState() eq '공연완료'}">
+						<div class="detail_info_right">
+							<div class="noinfo_txt">공연이 종료되었습니다.</div>
 
-						<button type="button" class="btn reserve due s_after first-child"
-							onclick="">
-							<span>공연완료</span>
-						</button>
-					</div>
-				</c:if>
+							<button type="button" class="btn reserve due s_after first-child"
+								onclick="">
+								<span>공연완료</span>
+							</button>
+						</div>
+					</c:if>
 			</form>
 			<!-- FE 지원 form 종료 -->
 		</div>

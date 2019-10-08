@@ -31,6 +31,11 @@ public class MusicalDAOImpl implements MusicalDAO {
 	public List<Coupon> selectCoupon(String musicalId) {
 		return sqlSession.selectList("musical.selectCoupon", musicalId);
 	}
+
+	@Override
+	public int selectDiscount(String musicalId) {
+		return sqlSession.selectOne("musical.selectDiscount", musicalId);
+	}
 	
 	
 }
