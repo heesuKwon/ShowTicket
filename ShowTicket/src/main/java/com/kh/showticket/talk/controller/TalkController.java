@@ -118,6 +118,30 @@ public class TalkController {
 		
 	}
 	
+	/*@MessageMapping("/hello")
+	@SendTo("/hello")
+	public Msg stomp(Msg fromMessage,
+					@Header("simpSessionId") String sessionId, //WebsocketSessionId값을 가져옴
+					SimpMessageHeaderAccessor headerAccessor//HttpSessionHandshakeInterceptor빈을 통해 httpSession의 속성에 접근 가능함.
+					) {
+		logger.info("fromMessage={}", fromMessage);
+		logger.info("@Header sessionId={}", sessionId); //WebsocketSessionId값을 가져옴.		
+		
+		//(생략)WesocketSessionId로 부터 httpSession속성 가져오기 테스트
+	    //String sessionIdFromHeaderAccessor = headerAccessor.getSessionId();//@Header sessionId와 동일
+	    //Map<String,Object> httpSessionAttr = headerAccessor.getSessionAttributes();
+	    //Member member = (Member)httpSessionAttr.get("memberLoggedIn");
+	    //String httpSessionId = (String)httpSessionAttr.get("HTTP.SESSION.ID");//비회원인 경우 chatId로 사용함.
+	    
+	    //logger.info("sessionIdFromHeaderAccessor={}",sessionIdFromHeaderAccessor);
+	    //logger.info("httpSessionAttr={}",httpSessionAttr);
+	    //logger.info("memberLoggedIn={}",member)
+		
+		logger.debug("fromMessage={}", fromMessage);
+		
+		return fromMessage;
+	}*/
+	
 	private String getRandomChatId(int len){
 		Random rnd = new Random();
 		StringBuffer buf =new StringBuffer();
