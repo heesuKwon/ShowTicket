@@ -8,6 +8,9 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
+
+
+
 <!-- WebSocket:sock.js CDN -->	
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
 
@@ -57,7 +60,7 @@ stompClient.connect({}, function(frame){
 });
 
 function goChat(chatId){
-	open("${pageContext.request.contextPath}/talk.do?chatId="+chatId, chatId, "width = 400, height = 500", false);
+	open("${pageContext.request.contextPath}/talk.do/"+chatId, chatId, "width = 400, height = 500", false);
 }
 
 </script>

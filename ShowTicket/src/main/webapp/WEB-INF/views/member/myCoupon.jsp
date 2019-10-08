@@ -30,11 +30,6 @@
 			</p>
 			<div id="mainCoupon">
 
-				<input type=button id="button1" onclick="function_click(this);"
-					value="사용 가능한 쿠폰"><input type=button id="button2"
-					onclick="function_click(this);" value="사용 완료된 쿠폰"> <br />
-				<br>
-
 				<table id="couponTable">
 					<tr>
 						<th>쿠폰명</th>
