@@ -6,8 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventComment;
+import com.kh.showticket.event.model.vo.EventVO;
 
 @Repository
 public class EventCommentDAOImpl implements EventCommentDAO {
@@ -29,11 +29,9 @@ public class EventCommentDAOImpl implements EventCommentDAO {
 		return session.delete("eventcomment.eCommentDelete", commentNo);
 	}
 
-	
-	  @Override public EventComment selectOneEventJoin(int eventNo) { 
-		  return session.selectOne("eventcomment.selectOneEventJoin", eventNo);
-	  }
-	 
+	@Override public List<EventVO> selectOneEventJoin(int eventNo) { 
+		return session.selectList("eventcomment.selectOneEventJoin", eventNo);
+	}
 
 	
 	

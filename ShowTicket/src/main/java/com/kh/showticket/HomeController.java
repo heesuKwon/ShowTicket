@@ -40,9 +40,10 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView model,@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
 		
-		
 		List<Notice> list = noticeService.selectNoticeTicketOpenList(cPage);
-
+	
+		logger.debug("List---->>>"+list);
+		
 		model.addObject("list",list);
 		
 		model.addObject("BoxlistM", BoxlistM);

@@ -60,7 +60,7 @@ stompClient.connect({}, function(frame){
 });
 
 function goChat(chatId){
-	open("${pageContext.request.contextPath}/talk.do/"+chatId, chatId, "width = 400, height = 500", false);
+	open("${pageContext.request.contextPath}/talk.do?chatId="+chatId, chatId, "width = 400, height = 500", false);
 }
 
 </script>

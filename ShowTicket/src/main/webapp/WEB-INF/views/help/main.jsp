@@ -15,6 +15,11 @@
 
 <script>
 function talkPopup(){
+	
+	if('${memberLoggedIn.memberId}'==''){
+		alert("로그인 후 사용해주십시오.");
+		return false;
+	}
 	var url = "${pageContext.request.contextPath}/talk.do";
     var name = "popup test";
     var option = "width = 400, height = 500, top = 100, left = 400, location = no"

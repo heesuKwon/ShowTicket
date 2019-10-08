@@ -84,17 +84,12 @@ function slideShow(){
 </script>
 <script type="text/javascript">
 window.onload = function(){
-	var a = $("#ticket1").attr("data-url");
-	var b = $("#ticket2").attr("data-url");
-	var c = $("#ticket3").attr("data-url");
-	var d = $("#ticket4").attr("data-url");
-	var e = $("#ticket5").attr("data-url");
 	
-	$("#ticket1").hover(function(){$("#openingImg").attr("src",a)});
-	$("#ticket2").hover(function(){$("#openingImg").attr("src",b)});
-	$("#ticket3").hover(function(){$("#openingImg").attr("src",c)});
-	$("#ticket4").hover(function(){$("#openingImg").attr("src",d)});
-	$("#ticket5").hover(function(){$("#openingImg").attr("src",e)});
+	$("#ticket1").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155674_191007_095930.gif")});
+	$("#ticket2").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155761_191007_164000.gif")});
+	$("#ticket3").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155492_191002_143931.JPG")});
+	$("#ticket4").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr/upload/pfmPoster/PF_PF155520_191004_093220.gif")});
+	$("#ticket5").hover(function(){$("#openingImg").attr("src","http://www.kopis.or.kr//upload/pfmPoster/PF_PF152640_190806_111855.gif")});
 	
 	var f = $("#rank1").attr("data-url");
 	var g = $("#rank2").attr("data-url");
@@ -155,16 +150,18 @@ window.onload = function(){
 
 					<div class="maintop_cont">
 						<ul style="list-style-type: square;" id="ticketO">
-							<c:forEach items="${ticketOpen}" var="map" begin="0" end="0">
+							
 								<li class="first"><a class="rangkingImgLink"
 									href="/product/28807"> <img class="rangkingImg"
-										id="openingImg" src="${map.poster }" width="180" height="218">
+										id="openingImg" src="http://www.kopis.or.kr/upload/pfmPoster/PF_PF155674_191007_095930.gif" width="180" height="218">
 								</a></li>
-							</c:forEach>
-							<c:forEach items="${ticketOpen}" var="map" begin="0" end="4" varStatus="status">
+					
+							<c:forEach items="${list}" var="map" begin="0" end="4" varStatus="status">
+							
 								<li class='rankingItem on' data-productid="28807" id="ticket${status.count}" style="font-weight:bold;"
-									data-url="${map.poster }"><a
-									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpdfrom }</a></li>
+									data-url="http://www.kopis.or.kr/upload/pfmPoster/"+${map.playId }+".gif"><a
+									href="/product/28807" style="color: #585858;"> ${map.noticeTitle }</a></li>
+						
 							</c:forEach>
 						</ul>
 					</div>
