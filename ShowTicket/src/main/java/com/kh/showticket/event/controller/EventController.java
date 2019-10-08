@@ -35,6 +35,7 @@ import com.kh.showticket.event.model.vo.EndDiscount;
 import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventAttachment;
 import com.kh.showticket.event.model.vo.EventComment;
+import com.kh.showticket.event.model.vo.EventVO;
 
 @Controller
 @RequestMapping("/event")
@@ -104,12 +105,11 @@ public class EventController {
 
 	@RequestMapping("/prizewinnerWrite.do")
 	public String writeprizewinner(Model model , @RequestParam int eventNo ) {
-		
-		System.out.println("eventNo>>>"+eventNo);
-		
-		model.addAttribute("wList",eventCommentService.selectOneEventJoin(eventNo) );
-		System.out.println("wList>>>>>>>>>>"+model);
 
+		List<EventVO>wList = eventCommentService.selectOneEventJoin(eventNo) ;
+		model.addAttribute("wList",wList);
+		
+		
 		return "/event/writeprizewinner";
 	}
 
@@ -131,7 +131,7 @@ public class EventController {
 
 		model.addAttribute("dcList", discountService.selectOneDc(showId));
 
-		return "event/addSaleView";
+		return "event/eventList";
 	}
 
 	@RequestMapping("/insertAddSale.do")

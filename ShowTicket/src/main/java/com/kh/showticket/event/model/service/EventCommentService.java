@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventComment;
+import com.kh.showticket.event.model.vo.EventVO;
 
 public interface EventCommentService {
 
@@ -13,7 +14,7 @@ public interface EventCommentService {
 
 	int eCommentDelete(int commentNo);
 
-	 EventComment selectOneEventJoin(int eventNo); 
+	 List<EventVO> selectOneEventJoin(int eventNo); 
 
 	
 

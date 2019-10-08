@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.showticket.event.model.dao.EventCommentDAO;
-import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventComment;
+import com.kh.showticket.event.model.vo.EventVO;
 
 
 
@@ -33,7 +33,7 @@ public class EventCommentServiceImpl implements EventCommentService {
 	}
 
 	
-    @Override public EventComment selectOneEventJoin(int eventNo) {
+    @Override public List<EventVO> selectOneEventJoin(int eventNo) {
 		 return eventCommentDAO.selectOneEventJoin(eventNo);
 	}
 	 

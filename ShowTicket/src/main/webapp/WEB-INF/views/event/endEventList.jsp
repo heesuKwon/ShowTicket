@@ -32,8 +32,8 @@
 
 						<c:forEach items="${EdcList }" var="EdcList">
 							
-						<li>
-							
+						<li id="innerLi">
+							<div id="saleC"> <h4>${EdcList.discountRate }%</h4></div>
 							<a href="${pageContext.request.contextPath }/event/eventView.do?evtID=${EdcList.showId }"> 
 								
 								<img
@@ -58,7 +58,7 @@
 									</dl>
 								</div>
 							</a>
-							<div id="saleC"> <h4>${EdcList.discountRate }%</h4></div>
+							
 						</li>
 						</c:forEach>
 
@@ -71,7 +71,13 @@
         </div>
     </div>
     
+<style>
+div#saleC {position: absolute;margin-top: 2%;margin-right: 2%;margin-left: 231px; border-radius:23px; background: #8f01a3;color: white;width: 44px;}
+#saleC>h4{text-align: center;}
+#innerLi{  float: left; margin: 0 0 30px 20px; padding-left: 130px; position: relative; min-height: 134px;}
 
+
+</style>
 
 
 
