@@ -39,11 +39,11 @@
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
 	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
-	System.out.println("urls:"+musical.getUrls());
-	System.out.println("musical"+musical);
+			System.out.println("urls:"+musical.getUrls());
+			System.out.println("musical"+musical);
 
 	String[] times = musical.getTime().split(", ");
-	Map<String, String> dayTime = new HashMap<>();
+	Map<String, List<String>> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
 	days.put("월", 0);
 	days.put("화", 1);
@@ -54,13 +54,23 @@
 	days.put("일", 6);
 	String[] d = { "월", "화", "수", "목", "금", "토", "일"};
 	for (String s : times) {
-		//System.out.println(s);
+		System.out.println(s);
 		String time = s.substring(s.indexOf("(") + 1, s.indexOf(")"));
+		String[] ts = time.split(",");
+		System.out.println(time);
 		if (s.contains("~")) {
 			String day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			String day2 = s.substring(s.lastIndexOf("요일") - 1, s.lastIndexOf("요일"));
+			System.out.println(day1);
+			System.out.println(day2);
 			for (int i = days.get(day1); i <= days.get(day2); i++) {
-				dayTime.put(d[i], time);
+				System.out.println(i);
+				/* for (int j = 0; j < ts.length; j++) {
+					System.out.println(d[i]);
+					System.out.println(ts[j]);
+					dayTime.put(d[i], ts[j]);
+				} */
+				dayTime.put(d[i], Arrays.asList(ts));
 			}
 		} else {
 			String day1 = "";
@@ -69,7 +79,12 @@
 			} else {
 				day1 = s.substring(s.indexOf("요일") - 1, s.indexOf("요일"));
 			}
-			dayTime.put(day1, time);
+			/* for (int i = 0; i < ts.length; i++) {
+				System.out.println(day1);
+				System.out.println(ts[i]);
+				dayTime.put(day1, ts[i]);
+			} */
+			dayTime.put(day1, Arrays.asList(ts));
 		}
 	}
 	
@@ -77,6 +92,7 @@
 	String[] day = { "일", "월", "화", "수", "목", "금", "토"};
 	String st = "";
 	for(Object s:str){
+		System.out.println((String)s);
 		st += (String)s;		
 	}
 
@@ -103,9 +119,212 @@ $(()=>{
 
 /*--------------------------석현씨 코딩영역-----------------------------  */		
 
+    var _JV = "AMZ2013010701";//script Version
+    var _UD = 'undefined';
+    var _UN = 'unknown';
+    function _IDV (a) {
+        return (typeof a != _UD) ? 1 : 0
+    }
+    var _CRL = 'http://' + 'gtc9.acecounter.com:8080/';
+    var _GCD = 'BS2A39876863068';
+    if (document.URL.substring(0, 8) == 'https://') {
+        _CRL = 'https://gtc9.acecounter.com/logecgather/';
+    }
+    ;
+    if (!_IDV(_A_i)) var _A_i = new Image();
+    if (!_IDV(_A_i0)) var _A_i0 = new Image();
+    if (!_IDV(_A_i1)) var _A_i1 = new Image();
+    if (!_IDV(_A_i2)) var _A_i2 = new Image();
+    if (!_IDV(_A_i3)) var _A_i3 = new Image();
+    if (!_IDV(_A_i4)) var _A_i4 = new Image();
+    function _RP (s, m) {
+        if (typeof s == 'string') {
+            if (m == 1) {
+                return s.replace(/[#&^@,]/g, '');
+            } else {
+                return s.replace(/[#&^@]/g, '');
+            }
+        } else {
+            return s;
+        }
+    }
+    ;
+    function _RPS (a, b, c) {
+        var d = a.indexOf(b), e = b.length > 0 ? c.length : 1;
+        while (a && d >= 0) {
+            a = a.substring(0, d) + c + a.substring(d + b.length);
+            d = a.indexOf(b, d + e);
+        }
+        return a
+    }
+    ;
+    function AEC_F_D (pd, md, cnum)	 {
+        var i = 0, amt = 0, num = 0;
+        var cat = '', nm = '';
+        num = cnum;
+        md = md.toLowerCase();
+        if (md == 'b' || md == 'i' || md == 'o') {
+            for (i = 0; i < _A_pl.length; i++) {
+                if (_A_nl[i] == '' || _A_nl[i] == 0)_A_nl[i] = '1';
+                if (num == 0 || num == '')num = '1';
+                if (_A_pl[i] == pd) {
+                    nm = _RP(_A_pn[i]);
+                    amt = (parseInt(_RP(_A_amt[i], 1)) / parseInt(_RP(_A_nl[i], 1))) * num;
+                    cat = _RP(_A_ct[i]);
+                    var _A_cart = _CRL + '?cuid=' + _GCD;
+                    _A_cart += '&md=' + md + '&ll=' + _RPS(escape(cat + '@' + nm + '@' + amt + '@' + num + '^&'), '+', '%2B');
+                    break;
+                }
+                ;
+            }
+            ;
+            if (_A_cart.length > 0)_A_i.src = _A_cart + "rn=" + String(new Date().getTime());
+            setTimeout("", 2000);
+        }
+        ;
+    }
+    ;
+    if (!_IDV(_A_pl)) var _A_pl = Array(1);
+    if (!_IDV(_A_nl)) var _A_nl = Array(1);
+    if (!_IDV(_A_ct)) var _A_ct = Array(1);
+    if (!_IDV(_A_pn)) var _A_pn = Array(1);
+    if (!_IDV(_A_amt)) var _A_amt = Array(1);
+    if (!_IDV(_pd)) var _pd = '';
+    if (!_IDV(_ct)) var _ct = '';
+    if (!_IDV(_amt)) var _amt = '';
+</script>
+<!-- Function and Variables Definition Block End-->
+
+<!-- Data Allocation (Product_Detail) -->
+<script language='javascript'>
+    _pd = _RP("뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ");
+    _ct = _RP("창작뮤지컬");
+    _amt = _RP("0", 1); // _RP(1)-> price
+
+    _A_amt = Array('0');
+    _A_nl = Array('1');
+    _A_pl = Array('29652');
+    _A_pn = Array('뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ');
+    _A_ct = Array('99');
 </script>
 
+
+
+<script type="text/javascript">
+	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
+	if (!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "s_765d50fa49a";
+	if (!_nasa) var _nasa = {};
+	wcs.inflow();
+	wcs_do(_nasa);
+
+	// ë¤ì´ë² ë¡ê·¸ (ê¸°ì¡´ë¶í° ì¡´ì¬)
+	if (!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "3ce26ce585ae64";
+	wcs_do();
+</script>
+
+<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
+<script language='javascript'>
+	var _AceGID = (function () {
+		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
+		var _CI = (!_AceGID) ? [] : _AceGID.val;
+		var _N = 0;
+		var _T = new Image(0, 0);
+		if (_CI.join('.').indexOf(Inf[3]) < 0) {
+			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
+			_CI.push(Inf);
+			_N = _CI.length;
+		}
+		return {o: _N, val: _CI};
+	})();
+	var _AceCounter = (function () {
+		var G = _AceGID;
+		var _sc = document.createElement('script');
+		var _sm = document.getElementsByTagName('script')[0];
+		if (G.o != 0) {
+			var _A = G.val[G.o - 1];
+			var _G = (_A[0]).substr(0, _A[0].indexOf('.'));
+			var _C = (_A[7] != '0') ? (_A[2]) : _A[3];
+			var _U = (_A[5]).replace(/\,/g, '_');
+			_sc.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/Web/AceCounter_' + _C + '.js?gc=' + _A[2] + '&py=' + _A[4] + '&gd=' + _G + '&gp=' + _A[1] + '&up=' + _U + '&rd=' + (new Date().getTime());
+			_sm.parentNode.insertBefore(_sc, _sm);
+			return _sc.src;
+		}
+	})();
+</script>
+<!-- AceClick WebSite Gathering Script V0.91.20190304-->
+<script type="text/Javascript">
+	if (typeof (AMRS_GC) == 'undefined') {
+		var AMRS_O = [];
+		var AMRS_CK = new Image();
+		var AMRS_GC = 'AG5A4302491053';
+		var AMRS_GD = 'mrsg.aceclick.co.kr';
+		var AMRS_GP = '8080';
+		var AMRS_TI = (new Date()).getTime();
+		var AMRS_PR = location.protocol == "https:" ? "https://" + AMRS_GD + ":843" : "http://" + AMRS_GD + ":" + AMRS_GP;
+		AMRS_CK.src = AMRS_PR + '/?cookie';
+		if (typeof (Array.prototype.push) != 'undefined') {
+			AMRS_O.push(AMRS_CK);
+		}
+		var _AMSC = document.createElement('script');
+		var _AMSM = document.getElementsByTagName('script')[0];
+		_AMSC.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/aceclick.js?rt=' + AMRS_TI;
+		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
+	}
+</script>
+<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
+<noscript>
+	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
+		border='0' width='0' height='0' alt=''>
+</noscript>
+
+<!-- AceCounter Log Gathering Script End -->
+
+<script>
+	
+	
+
+	try {
+		var evt_data = {};
+		evt_data.evt = "view"; // 고정
+		evt_data.p_no = "29652"; // 상품코드
+		evt_data.p_name = "뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) "; // 상품명
+		evt_data.thumb = "http://image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg"; // 상품이미지 url
+		evt_data.p_url = "http://www.ticketlink.co.kr/product/29652"; // 해당 상품페이지 url
+		evt_data.p_url_m = "http://m.ticketlink.co.kr/product/29652"; // 해당 상품페이지 모바일 url
+		evt_data.startdate = "20190920"; // 공연시작일
+		evt_data.enddate = "20191027"; // 공연종료일
+		evt_data.sale_startdate = "20190807"; // 예매오픈일
+		evt_data.place = "성남아트센터 오페라하우스"; // 공연장소
+		evt_data.view_grade = "만7세이상"; // 관람등급
+		evt_data.city = "경기"; // 공연지역
+		evt_data.price = "60000"; // 상품판매가격(숫자만 포함한 문자열)
+		evt_data.price_table = "A석:60000|S석:90000|R석:120000|VIP석:140000"; // 좌석별 가격표 (가격오름차순, 가격은 숫자만 포함한 문자열)
+		evt_data.soldout = "0"; // 품절여부. (품절이 아닐경우 '0', 품절일 경우 '1')
+		evt_data.cate1 = '공연'; // 카테고리 대분류. 존재하지 않으면 ''
+		evt_data.cate2 = '뮤지컬'; // 카테고리 중분류. 존재하지 않으면 ''
+		evt_data.cate3 = ''; // 카테고리 소분류. 존재하지 않으면 ''
+
+		mcroPushEvent(evt_data);
+	} catch
+		(e) {
+	}
+</script>
+
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="[티켓링크]뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
+<meta property="og:url"
+	content="http://www.ticketlink.co.kr/product/29652" />
+<meta property="og:description" content="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
+<meta property="og:image"
+	content="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" />
+
 </head>
+
+
+
 <script>
 	var meta = document.createElement('meta');
 	meta.setAttribute('name', 'more_page_type');
@@ -151,13 +370,32 @@ $(()=>{
 						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
 							~ ${musical.getEndDate()}</span>
 					</div>
+
+
+
 					<div class="bx_dummy">
 						<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
 					</div>
+
+
+
+
+
 					<div class="bx_dummy border_type">
 						<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
 					</div>
+
+
+
+
+
+
 					<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
+
+
+
+
+
 
 					<div class="bx_dummy include_layer">
 						<em class="info_tit">가격</em>
@@ -180,26 +418,39 @@ $(()=>{
 						</div>
 					</div>
 
+
+
+
+
 					<div class="bx_dummy include_layer border_type">
 						<em class="info_tit">할인</em>
 						<div class="txt ui-dialog  price-dialog">
 							<ul class="lst_dsc">
-								<c:forEach items="${coupon}" var="c">
-									<li>${c.couponTitle } - <span class="color_purple fbold ">${c.couponPrice }</span>원 할인</li>
-								</c:forEach>
-								<!-- <li><사랑했어요>기대평 이벤트 - <span
-										class="color_purple fbold">40</span>% 할인 </li> -->
+
+								<li>쿠폰할인 - <span class="color_purple fbold ">30</span>% 할인
+								</li>
+
+								<li><사랑했어요>기대평 이벤트 - <span
+										class="color_purple fbold">40</span>% 할인 </li>
+
 							</ul>
+
+
+
 						</div>
 					</div>
+
+
 				</div>
 				<div class="bx_dummy">
-					<em class="info_tit">대기공연추가</em>
-					<span id="wait">
-						<img src="${pageContext.request.contextPath }/resources/images/heart.png"
-						alt="" width=15px; />
+					<em class="info_tit">대기공연추가</em> <span class="txt"> <span
+						class="wait"><img
+							src="${pageContext.request.contextPath }/resources/images/heart.png"
+							alt="" width=15px; /></span>
 					</span>
 				</div>
+
+
 			</div>
 			<!-- FE 지원 form 시작 -->
 			<c:if test="${musical.getState() eq '공연중'}">
@@ -211,12 +462,35 @@ $(()=>{
 						<dd>
 							<!-- [D] 셀렉트박스 -->
 							<select name="watchTime" id="watchTime">
-								<option>회차선택(날짜선택후)</option>
+								<option value="">회차선택(날짜선택후)</option>
+								<%-- ${dayTime.} --%>
 							</select>
 						</dd>
+						<!-- <dt>예매가능 좌석</dt>
+						<dd>
+							<ul class="seat" id="seatingInfoPerRound">
+								<li>전체 <span class="color_purple fbold">427</span>석
+								</li>
+								<br />
+								<li>VIP석 <span class="color_purple fbold">427</span>석
+								</li>
+							
+								<br />
+								<li>R석 <span class="color_purple fbold">427</span>석
+								</li>
+								<br />
+								<li>S석 <span class="color_purple fbold">427</span>석
+								</li>
+								<br />
+								<li>A석 <span class="color_purple fbold">427</span>석
+								</li>
+							</ul>
+						</dd> -->
 					</dl>
 
-					<button type="button" class="btn reserve s_after first-child" id="book"
+
+
+					<button type="button" class="btn reserve s_after first-child"
 						onclick="">
 						<span>예매하기 </span>
 					</button>
@@ -229,16 +503,6 @@ $(()=>{
 					<button type="button" class="btn reserve due s_after first-child"
 						onclick="">
 						<span>판매예정 </span>
-					</button>
-				</div>
-			</c:if>
-			<c:if test="${musical.getState() eq '공연완료'}">
-				<div class="detail_info_right">
-					<div class="noinfo_txt">공연이 종료되었습니다.</div>
-
-					<button type="button" class="btn reserve due s_after first-child"
-						onclick="">
-						<span>공연완료</span>
 					</button>
 				</div>
 			</c:if>
@@ -417,12 +681,13 @@ $(()=>{
 						                        html += "<input type='hidden' value='"+data[i].reviewNo+"'>"
 						                        html += "<span class='review-rating-"+i+"'></span>"; 
 						                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter+"&nbsp;";
-						                        <c:if test="${empty memberLoggedIn}">
-						                        html += "<a href='javascript:MemberCommonCheck();'>";
-						                        </c:if>
-						                        <c:if test="${not empty memberLoggedIn}">
-						                        html += "<a href='${pageContext.request.contextPath}/help/main.do'>";
-						                        </c:if>
+						                        if("" == "${memberLoggedIn.memberId}"){
+							                        html += "<a href='javascript:MemberCommonCheck();'>";
+						                        }
+						                        	
+						                        if("" != "${memberLoggedIn.memberId}"){
+							                        /* html += "<a href='${pageContext.request.contextPath}/main.do?reviewNo="+data[i].reviewNo+"&reportMemberId2="+data[i].reviewWriter+"&reportMemberId="+${memberLoggedIn.memberId}+"'>"; */
+						                        }
 
 						                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='padding-bottom:2px; width:18px; height:18px;'></a>";
 						                        html += "</span>";
@@ -907,7 +1172,122 @@ function insertReview(){
     </script>
 
 
+<!-- 다이얼로그 창  -->
+<div class="layer l_installment popup" id="dialog1"
+	style="display: none">
+	<a href="javascript:;" onclick="$('#dialog1').dialog('close');"
+		class="close">레이어 닫기</a> <strong>무이자 할부</strong>
+	<table>
+		<caption>무이자 할부 정보</caption>
+		<colgroup>
+			<col style="width: 62px">
+			<col style="width: 59px">
+			<col>
+		</colgroup>
+		<tbody>
 
+		</tbody>
+	</table>
+</div>
+
+
+<div class="layer l_installment popup" id="dialog4"
+	style="display: none">
+	<a href="javascript:;" onclick="$('#dialog4').dialog('close');"
+		class="close">레이어 닫기</a> <strong>가격정보</strong>
+	<ul class="fs11">
+
+		VIP석 -
+		<span class="num">140,000</span>원
+		<br> R석 -
+		<span class="num">120,000</span>원
+		<br> S석 -
+		<span class="num">90,000</span>원
+		<br> A석 -
+		<span class="num">60,000</span>원
+		<br>
+
+	</ul>
+</div>
+
+<div class="layer l_installment popup" id="dialog5"
+	style="display: none">
+	<a href="javascript:;" onclick="$('#dialog5').dialog('close');"
+		class="close">레이어 닫기</a> <strong>가격정보</strong>
+	<ul class="fs11">
+
+		일반 -
+		<span class="num">140,000</span>원
+		<br>
+		</span>
+
+	</ul>
+</div>
+
+<div class="layer l_installment popup" id="dialog7"
+	style="display: none">
+	<a href="javascript:;" onclick="$('#dialog7').dialog('close');"
+		class="close">레이어 닫기</a> <strong>할인정보</strong>
+	<ul class="fs11">
+
+		<li>추억만들기 - <span class="color_green fbold">30</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>초연기념특별할인 - <span class="color_green fbold">40</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>마티네 할인 - <span class="color_green fbold">30</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>뮤지컬 <사랑했어요> 실물 유료 티켓 소지자 (재관람 할인) - <span
+				class="color_green fbold">20</span> <span class="color_green fbold">
+				% </span> 할인 </li>
+
+		<li>학생 할인 (초,중,고) - <span class="color_green fbold">20</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>학생 할인 (초,중,고) - <span class="color_green fbold">30</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>대학생 할인 - <span class="color_green fbold">20</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>대학생 할인 - <span class="color_green fbold">30</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>장애인 1-3급(1인 2매) - <span class="color_green fbold">50</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>장애인 4-6급(1인 1매) - <span class="color_green fbold">50</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>국가유공자(1인 1매) - <span class="color_green fbold">50</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>경기도 성남시 거주자 및 직장인할인 - <span class="color_green fbold">20</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>4인 이상 - <span class="color_green fbold">30</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+		<li>영피프티(50세 이상) - <span class="color_green fbold">40</span><span
+			class="color_green fbold"> % </span> 할인
+		</li>
+
+	</ul>
+</div>
 <style>
 .detail_box_bot .detailbox_bot_left .detail_cont .detail_cont>div {
     clear: both;
@@ -956,7 +1336,7 @@ function insertReview(){
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
 
-	days = ["일","월","화","수","목","금","토"];
+	var days = ["일", "월", "화", "수", "목", "금", "토", "일"];
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
@@ -977,7 +1357,6 @@ function insertReview(){
 	$(document).ready(function () {
 		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//달력
-		
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',
@@ -987,67 +1366,72 @@ function insertReview(){
             daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
 		}).on('changeDate',function(e){
-			var today = new Date();	//오늘 날짜
 			var date = new Date(e.format());
-			if(today>date){
-				alert("지난 날짜입니다. 다시 선택해주세요.");
-				return;
-			}
 			var day = date.getDay();
-			var timeList;
-			if(day==0){
-				timeList = '<%=dayTime.get("일")%>';
-			}
-			else if(day==1){
-				timeList = '<%=dayTime.get("월")%>';
-			}
-			else if(day==2){
-				timeList = '<%=dayTime.get("화")%>';
-			}
-			else if(day==3){
-				timeList = '<%=dayTime.get("수")%>';		
-			}
-			else if(day==4){
-				timeList = '<%=dayTime.get("목")%>';
-			}
-			else if(day==5){
-				timeList = '<%=dayTime.get("금")%>';
-			}
-			else if(day==6){
-				timeList = '<%=dayTime.get("토")%>';
-			}
+			console.log(day);
+			console.log(days[day]);
+			selectDay = days[day];
+			//$("#watchTime").attr("day", days[day]);
 			
-			$("#watchTime").children().remove();
+			<%-- var timeList = <%=dayTime.get(%>days[day]<%)%>; --%> 
 			
-			var times = timeList.split(",")
-			for(var i=0;i<times.length;i++){
-				var time = times[i].split(":");
-				var html = "<option value='"+times[i]+"'>"+time[0]+"시 "+time[1]+"분</option>";
-				$("#watchTime").append(html);				
-			}		
 		});
 		
-		$("#wait").on("click",()=>{
-			if(${memberLoggedIn!=null}){
-				location.href = "${pageContext.request.contextPath}/musical/insertWait.do?musicalId=${musical.getId()}";
-			}
-			else{
-				alert("로그인이 필요합니다.");
-			}
-		});
 	
-		/* $("#book").on("click",()=>{
-			if(${memberLoggedIn==null}){
-				alert("로그인이 필요합니다.");
-				break;
-			}
-			//if()//날짜나 회차가 선택되지 않은 경우 
-			location.href = "${pageContext.request.contextPath}/member/bookticket.do?play=${musical}";
-			
-		}); */
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
-	
+		//기능 설정
+		setDialog();
+		onCloseIfOutOfSelect();
+		makeTap();
+		//searchReviewUsingEnter();
+		//searchInquiryUsingEnter();
+		//setTextareaMax(document.getElementById("reviewContent"));
+		//setTextareaMax(document.getElementById("inquiryContent"));
+		$('input, textarea').placeholder();
+		if ($("#productServiceType").val() != "CLP" && $("#productTypeCode").val() != "SEASON") {
+			getProductDatesByProductId();
+		}
+		//ui설정
+		setTopTitleTag();
+		setPhoneNumber();
+
+		var anchorString = window.location.hash.substring(1);
+		if (anchorString == "tabs-2") {
+			getProductReviewList(1);
+
+			$("ul.detail_tab li").removeClass("on");
+			$("#ui-id-5").parent().addClass("on");
+		}
+
+		/* getProductReviewList(1);
+         getProductInquiryList(1); */
+		setProductTap();
+		if ($("#reviewExposureYn").val() == "Y") {
+			searchReviewUsingEnter();
+			setTextareaMax(document.getElementById("reviewContent"));
+		}
+		$(window).scroll(function () {
+			if ($(window).scrollTop() > 420) {
+				$("#wingright").addClass("moving");
+
+			} else if ($(window).scrollTop() <= 420) {
+				$("#wingright").removeClass("moving");
+			}
+		});
+
+		$("body").click(function(e){
+			if($("#popup_payco").css("display") == "block" && !$(e.target).hasClass('paycoImg')) {
+				closePaycoCouponPopup();
+			}
+        });
+
+
+		initCleanReserveInfo();
+		setLongTitle();
+		
+		
+		
 	});
 
 	function initCleanReserveInfo () {
@@ -1278,6 +1662,25 @@ function insertReview(){
 	}
 
 
+	function setPhoneNumber () {
+		$("#phoneNumber").text(makePhoneFormat("0317838000"));
+	}
+
+	function showPaycoCouponPopup (obj) {
+		$('#popup_payco_dimmed').show();
+		$('#popup_payco').show();
+	}
+
+	function closePaycoCouponPopup(){
+		$('#popup_payco_dimmed').hide();
+		$('#popup_payco').hide();
+	}
+
+	function goPaycoApp () {
+		window.open('https://bill.payco.com/ad/downloadsms', '', 'width=490,height=570');
+	}
+
+
 	function selectTap (obj) {
 		
 		$(".tabs-Num").css("display","none");
@@ -1305,7 +1708,57 @@ function insertReview(){
 		$("#tabs").tabs();
 	}
 
-	
+	function setTopTitleTag () {
+		var solelySaleCode = "HIDE";
+		var tagButton = $("span.ico_tag");
+		if (solelySaleCode == "SOLELY") {
+			tagButton.removeClass("blind");
+			tagButton.addClass("tag_monopoly");
+			tagButton.innerText = "단독판매";
+		} else if (solelySaleCode == "ABSOLUTE") {
+			tagButton.removeClass("blind");
+			tagButton.addClass("tag_advantage");
+			tagButton.innerText = "절대우위";
+		} else if (solelySaleCode == "RELATIVE") {
+			tagButton.removeClass("blind");
+			tagButton.addClass("tag_dominant");
+			tagButton.innerText = "상대우위";
+		} else if (solelySaleCode == "HIDE" || solelySaleCode == "") {
+			tagButton.css("display", "none");
+		}
+	}
+
+	function onCloseIfOutOfSelect () {
+		$(document).on("click", function (e) {
+			if ($(e.target).parents("#roundSelect").size() == 0) {
+				$("#product_round_select_list").css("display", "none");
+			}
+
+			if ($(e.target).parents(".ui-dialog").size() == 0) {
+				$("#dialog1").dialog("close");
+				$("#dialog2").dialog("close");
+			}
+
+
+			if ($(e.target).parents(".price-dialog").size() == 0) {
+				$("#dialog4").dialog("close");
+				$("#dialog5").dialog("close");
+				$("#dialog7").dialog("close");
+			}
+
+			if ($(e.target).parents(".coupon-dialog").size() == 0 && $(e.target).parents(".l_coupon").size() == 0) {
+				$("#dialog6").dialog("close");
+			}
+
+			if ($(e.target).parents("#review_search_div").size() == 0) {
+				$("#review_select_list").css("display", "none");
+			}
+
+			if ($(e.target).parents("#inquiry_search_div").size() == 0) {
+				$("#inquiry_select_list").css("display", "none");
+			}
+		});
+	}
 
 	function authorizedFanclubCallback () {
 		window.open('/member/fanclub/auth?productId=' + 29652, '', 'width=500, height=500');
@@ -1326,6 +1779,9 @@ function insertReview(){
 		}
 	}
 
+	function  goGlobalWeb () {
+		window.open('/global/en/product/' + 29652, '');
+	}
 
 	function popReserveDialog () {
 
@@ -1422,6 +1878,103 @@ function insertReview(){
 		if (confirm("성인인증이 필요한 상품입니다. 성인인증 페이지로 이동하시겠습니까?")) {
 			document.location.href = "/adult/confirm?nextPage=" + nextPage;
 		}
+	}
+
+	function setDialog () {
+		$("#dialog1").dialog({
+			autoOpen: false,
+			position: {my: "right top", at: "right bottom", of: '#buttonForDialog1'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+		$("#buttonForDialog1").on("click", function () {
+			$("#dialog2").dialog("close");
+			$("#dialog1").dialog("open");
+			$("#dialog6").dialog("close");
+		});
+		$("#dialog2").dialog({
+			closeText: false,
+			autoOpen: false,
+			position: {my: "left top", at: "left bottom", of: '#buttonForDialog2'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+		$("#buttonForDialog2").on("click", function () {
+			$("#dialog1").dialog("close");
+			$("#dialog2").dialog("open");
+			$("#dialog6").dialog("close");
+		});
+
+		$("#buttonForDialog3").on("click", function () {
+			$("#dialog1").dialog("close");
+			$("#dialog2").dialog("close");
+			$("#dialog6").dialog("close");
+		});
+		$("#dialog4").dialog({
+			autoOpen: false,
+			position: {my: "left top", at: "left bottom", of: '#buttonForDialog4'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+		$("#buttonForDialog4").on("click", function () {
+			$("#dialog1").dialog("close");
+			$("#dialog2").dialog("close");
+			$("#dialog4").dialog("open");
+			$("#dialog5").dialog("close");
+			$("#dialog6").dialog("close");
+			$("#dialog7").dialog("close");
+		});
+		$("#dialog5").dialog({
+			closeText: false,
+			autoOpen: false,
+			position: {my: "left top", at: "left bottom", of: '#buttonForDialog5'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+
+		$("#dialog7").dialog({
+			closeText: false,
+			autoOpen: false,
+			position: {my: "left top", at: "left bottom", of: '#buttonForDialog7'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+
+		$("#buttonForDialog5").on("click", function () {
+			$("#dialog1").dialog("close");
+			$("#dialog2").dialog("close");
+			$("#dialog4").dialog("close");
+			$("#dialog5").dialog("open");
+			$("#dialog6").dialog("close");
+			$("#dialog7").dialog("close");
+		});
+		$("#buttonForDialog7").on("click", function () {
+			$("#dialog1").dialog("close");
+			$("#dialog2").dialog("close");
+			$("#dialog4").dialog("close");
+			$("#dialog5").dialog("close");
+			$("#dialog6").dialog("close");
+			$("#dialog7").dialog("open");
+		});
+
+		$("#dialog6").dialog({
+			closeText: false,
+			autoOpen: false,
+			width: 620,
+			position: {my: "right top", at: "right bottom", of: '#buttonForDialog6'}
+		}).dialog("widget").find(".ui-dialog-titlebar").hide();
+		$("#buttonForDialog6").on("click", function () {
+			$.ajax({
+				url: "/product/29652/coupons",
+				dataType: "json",
+				success: function (result) {
+					var couponList = result.result;
+					var template = createCouponLayerTemplate(couponList);
+
+					$("#dialog6 > table > tbody").html(template);
+				},
+				error: function (response, status, error) {
+					alert("에러가 발생했습니다.");
+				},
+				complete: function () {
+					$("#dialog1").dialog("close");
+					$("#dialog2").dialog("close");
+					$("#dialog4").dialog("close");
+					$("#dialog5").dialog("close");
+					$("#dialog6").dialog("open");
+				}
+			});
+		});
 	}
 
 	function createCouponLayerTemplate (couponList) {

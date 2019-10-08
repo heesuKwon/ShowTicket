@@ -161,6 +161,18 @@ public class AdminController {
     	
     	return "common/msg";
     }
+//    @RequestMapping("/reportInsert.do")
+//    public String reportInsert(Model model, @RequestParam int reviewNo) {
+//    	
+//    	logger.debug("글 번호: ",reviewNo);
+//    	
+//    	int result = adminService.deleteReport(reviewNo);
+//    	
+//    	model.addAttribute("msg", result>0?"삭제 완료":"삭제 실패");
+//    	model.addAttribute("loc", "/admin/adminReport.do");
+//    	
+//    	return "common/msg";
+//    }
     
     @RequestMapping("/adminMemberDelete.do")
     public String adminMemberDelete(Model model, @RequestParam String memberId) {
