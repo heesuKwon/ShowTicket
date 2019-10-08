@@ -100,6 +100,7 @@ table.scrollList th:nth-of-type(5), .scrollList td:nth-of-type(5){width: 110px;}
 table.scrollList th:nth-of-type(6), .scrollList td:nth-of-type(6){width: 80px;}
 table.scrollList th:last-child{width: 122px;}
 table.scrollList td:last-child{width: calc(110px - 5px);}
+.cCursor{cursor: pointer;}
 .pselectBtn{width: 70px;height: 30px;border-radius: 5px;color: white;cursor: pointer;}
 .cAddDiv{text-align: center;margin-bottom: 3%;}
 .cAddP{font-family: 'Gothic A1';font-size: 17px;}
@@ -112,11 +113,16 @@ table.scrollList td:last-child{width: calc(110px - 5px);}
 .cPlusSize{height: 150px; width: 235px;}
 .dPlusSize{left: 233px; height: 150px;width: 52px;}
 .cAddEnd{margin-left: 48%;width: 70px;height: 30px;border-radius: 5px;color: white;background-color: #8f01a3;font-family: 'Gothic A1';font-size: 14px;margin-top: 25px;}
+/*-----------쿠폰 수정 부분----------------------- */
+.editperformanceList{width: 100%;border: 1.5px solid #d3d3d3;}
+table.scrollList tbody.editTbody{height: 45px;overflow: hidden;display: contents;}
+table.scrollList th.n2{width: 115px;}
+table.scrollList th.n3{width: 280px;}
+table.scrollList th.n4{width: 135px;}
+table.scrollList th.n5{width: 135px;}
 
-
-
-
-
+.cUpdate{margin-left: 43%;}
+.cDelete{margin-left: 3%;background-color: #d3d3d3;}
 
 
 

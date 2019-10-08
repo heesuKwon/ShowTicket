@@ -34,4 +34,12 @@
 	<insert id="insertCouponAdd">
 		insert into coupon values(seq_coupon_no.nextval, #{couponTitle}, #{couponPrice}, #{couponTime}, #{couponCount}, #{showId})
 	</insert>
+	
+	<update id="updateEditCoupon">
+		update coupon set coupon_title = #{couponTitle}, coupon_price = #{couponPrice}, coupon_time = #{couponTime}, coupon_count = #{couponCount} where coupon_no = #{no}
+	</update>
+	
+	<delete id="deleteCoupon">
+		delete coupon where coupon_no = #{couponNo}
+	</delete>
 </mapper>

@@ -170,12 +170,13 @@ $(()=>{
 
 		
 });
-	function aClick(barNo) {
-		a = barNo;
-		alert(a);
+
+function aClick(barNo) {
+	a = barNo;
+	alert(a);
 	//url: "${pageContext.request.contextPath}/member/reservationTermAjax.do",
 	location.href = "${pageContext.request.contextPath }/member/reservation.do?memberId=${memberId}&cPage="+a;
-	}
+}
 </script>
 
 
@@ -185,12 +186,11 @@ $(()=>{
 function sendAlarm(ticketNo) {
 	sock.send(ticketNo);
 }
-
 </script>	
 
 
 
-<form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancle.do" method="post">
+<form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancel.do" method="post">
 	<input type="hidden" name="memberId" value="${memberId }"/>
 </form>
 <script>

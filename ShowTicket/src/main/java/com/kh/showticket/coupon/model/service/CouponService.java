@@ -17,4 +17,8 @@ public interface CouponService {
 
 	int insertCouponAdd(Map<String, Object> addMap);
 
+	int updateEditCoupon(Map<String, Object> addMap);
+
+	int deleteCoupon(int couponNo);
+
 }

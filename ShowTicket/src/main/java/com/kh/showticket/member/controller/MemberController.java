@@ -320,14 +320,17 @@ public class MemberController {
 	
 	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
-		logger.debug("memberId="+member.getMemberId());
+//		logger.debug("memberId="+member.getMemberId());
 		logger.debug("member="+member);
 
 		int result = memberService.updateMember(member);
+		
+	
+		model.addAttribute("memberLoggedIn", member);
 
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 정보 수정 성공!":"회원 정보 수정 실패!");
-		model.addAttribute("loc", "/");
+		model.addAttribute("loc", "/member/memberView.do");
 
 		return "common/msg";
 	}
@@ -547,10 +550,9 @@ public class MemberController {
 	
 	    				if(result>0) {
 	    					msg="비밀번호 변경성공";
-	    					String script="self.close()";
-	    					loc="/memberLogout.do";
+	    					String script="self.close();";
 	    					model.addAttribute("script",script);
-	    					model.addAttribute("script",loc);
+	    					
 	    				}else {
 	    					msg="변경실패";
 	    				}
@@ -617,7 +619,7 @@ public class MemberController {
     	return authCode;
     }
     
-    @RequestMapping(value="/reservationCancle.do",method=RequestMethod.POST)
+    @RequestMapping(value="/reservationCancel.do",method=RequestMethod.POST)
     public String reservationCancle(Model model, @RequestParam int cancelTNo, @RequestParam String memberId) {
     	
     	logger.debug("취소할 예매번호: "+cancelTNo);

@@ -12,9 +12,6 @@
 <form class="delete" action="${pageContext.request.contextPath}/admin/adminReportDelete.do" method="post"></form>
 
 <script>
-function Popup() { 
-	window.open("bookticket.do", "a", "width=900px, height=630px, left=100, top=0"); 
-}	
 
 $(".nav").click(function(){
     $(this).css("color","#8f01a3");
@@ -55,9 +52,6 @@ function goDelete(num) {
 		</tr>
 		<tr>
 			<td class="nav" onclick="location.href='${pageContext.request.contextPath}/admin/adminMemberList.do'">내 회원목록</td>
-		</tr>
-		<tr>
-			<td class="nav" onclick="Popup();">내예매팝업</td>
 		</tr>
 	</table>
 </nav>
