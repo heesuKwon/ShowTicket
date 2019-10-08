@@ -13,7 +13,7 @@ public interface EventCommentService {
 
 	int eCommentDelete(int commentNo);
 
-	/* EventComment selectOneEventJoin(int eventNo); */
+	 EventComment selectOneEventJoin(int eventNo); 
 
 	
 

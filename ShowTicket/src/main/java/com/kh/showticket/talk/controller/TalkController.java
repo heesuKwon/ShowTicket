@@ -54,6 +54,7 @@ public class TalkController {
 
 	    
 	    String chatId = request.getParameter("chatId");
+	    
 	    if(chatId == null) {
 	    	chatId =  talkService.findChatIdByMemberId(memberId);
 	    } 
@@ -75,6 +76,7 @@ public class TalkController {
 	          
 	          List<ChatRoom> list = new ArrayList<>();
 	          list.add(new ChatRoom(chatId, memberId, 0, "Y", null, null));
+	          list.add(new ChatRoom(chatId, "ticket77", 0, "Y", null, null));
 
 	          talkService.insertChatRoom(list);
 
@@ -116,7 +118,7 @@ public class TalkController {
 		
 	}
 	
-	@MessageMapping("/hello")
+	/*@MessageMapping("/hello")
 	@SendTo("/hello")
 	public Msg stomp(Msg fromMessage,
 					@Header("simpSessionId") String sessionId, //WebsocketSessionId값을 가져옴
@@ -138,7 +140,7 @@ public class TalkController {
 		logger.debug("fromMessage={}", fromMessage);
 		
 		return fromMessage;
-	}
+	}*/
 	
 	private String getRandomChatId(int len){
 		Random rnd = new Random();
@@ -164,15 +166,13 @@ public class TalkController {
 		logger.info("chatId={}", chatId);
 		logger.info("sessionId={}", sessionId);
 		
-		logger.info("fromMessage에서 memberId만 왜 안오지? = {}", fromMessage);
-		
 		talkService.insertChatLog(fromMessage);
 		
 		return fromMessage;
 	}
 	
 	@MessageMapping("/lastCheck")
-	@SendTo(value={"/chat/supporter"})
+	@SendTo("/chat/supporter")
 	public Msg lastCheck(@RequestBody Msg fromMessage) {
 		logger.info("fromMessage={}", fromMessage);
 		talkService.updateLastCheck(fromMessage);
