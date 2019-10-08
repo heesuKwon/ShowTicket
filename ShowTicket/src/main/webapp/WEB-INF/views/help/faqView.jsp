@@ -88,7 +88,9 @@ function faqList(type, searchType){
 			<div class="help_rcont">
 				<div>
 					<h2>FAQ</h2>
-					<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
+					<c:if test="${'admin' eq memberLoggedIn.memberId}">
+						<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
+					</c:if>
 				</div>
 				
 				<div class="basic_tbl" id="basic_tbl">
@@ -134,8 +136,12 @@ function faqList(type, searchType){
 						</tbody>
 					</table>
 				</div>
-					<input class="btn btn-color" id="complete" type="button" onclick="location.href='${pageContext.request.contextPath}/help/faqUpdate.do?faqNo=${faq.faqNo }'" value="수정하기" >
-					<input class="btn btn-gray" id="cancel" type="button"  onclick="location.href='${pageContext.request.contextPath}/help/faqDelete.do?faqNo=${faq.faqNo }'" value="삭제">
+				
+					<c:if test="${'admin' eq memberLoggedIn.memberId}">
+					
+						<input class="btn btn-color" id="complete" type="button" onclick="location.href='${pageContext.request.contextPath}/help/faqUpdate.do?faqNo=${faq.faqNo }'" value="수정하기" >
+						<input class="btn btn-gray" id="cancel" type="button"  onclick="location.href='${pageContext.request.contextPath}/help/faqDelete.do?faqNo=${faq.faqNo }'" value="삭제">
+					</c:if>
 					<input class="btn btn-gray" id="cancel" type="button"  onclick="location.href='${pageContext.request.contextPath}/help/faq.do'" value="목록으로">
 
 

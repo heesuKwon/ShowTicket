@@ -1,6 +1,5 @@
 package com.kh.showticket.musical.model.service;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -11,12 +10,15 @@ import org.springframework.stereotype.Service;
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.musical.model.dao.MusicalDAO;
+import com.kh.showticket.review.model.dao.ReviewDAO;
 
 @Service
 public class MusicalServiceImpl implements MusicalService {
 	
 	@Autowired
 	MusicalDAO musicalDAO;
+	@Autowired
+	ReviewDAO reviewDAO;
 	
 	getApi getApi = new getApi();
 	
@@ -26,7 +28,7 @@ public class MusicalServiceImpl implements MusicalService {
 	public MusicalAndShow selectOne(String musicalId) {
 		MusicalAndShow musical = getApi.getMusicalAndShow(musicalId);
 		
-//		musical.setReviewStar(musicalDAO.selectReviewStar(musicalId));
+		musical.setReviewStar(reviewDAO.selectReviewStar(musicalId));
 		
 		logger.debug(musical.toString());
 		

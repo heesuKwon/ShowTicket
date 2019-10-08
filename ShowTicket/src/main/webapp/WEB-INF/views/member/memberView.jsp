@@ -157,9 +157,17 @@ function updatePwd() {
 			</tr> -->
 		</table>
 		<br /> <br />
+		
+		<c:if test="${memberId eq memberLoggedIn.memberId}">
+
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="updateMember"
 			>회원정보
 			수정</button>
+
+		</c:if>
+
+
+
 		<button class="btn btn-outline-success my-2 my-sm-0" type="button" id="deleteMember">회원정보
 			탈퇴</button>
 		<br /><br />
