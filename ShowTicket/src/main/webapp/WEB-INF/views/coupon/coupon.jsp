@@ -18,9 +18,12 @@ $(()=>{
 	});
 	
 	$(".couponDown").click(function(){
-		var test = $(this);
-		console.log(test);
-		location.href="${pageContext.request.contextPath}/coupon/couponDownload.do?couponNo="+$(this).attr("id");
+		if(${memberLoggedIn != null}){
+			location.href="${pageContext.request.contextPath}/coupon/couponDownload.do?couponNo="+$(this).attr("id");			
+		}
+		else{
+			alert("로그인 후 이용해 주세요");
+		}
 	});
 });
 
