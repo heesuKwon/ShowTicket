@@ -266,7 +266,7 @@ function getDayIndex(){
         	
         	var html = "";
         	for(var i=0;i<data.length;i++){
-        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<li><a href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+data[i].mt20id+"'>";
         	html += "<p><img src='"+data[i].poster+"' </p>";
         	html += "<div class='list_info'>";
 			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
@@ -303,7 +303,7 @@ function getRankList(){
         	
         	var html = "";
         	for(var i=0;i<data.length;i++){
-        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<li><a href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+data[i].mt20id+"'>";
         	html += "<p><img src='http://www.kopis.or.kr/"+data[i].poster+"' </p>";
         	html += "<div class='list_info'>";
 			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
@@ -395,7 +395,7 @@ ul.lst_thumb li.on::before {
 						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
 							<c:forEach items="${recentMusicalList }" var="rList">
 								<li class="newMusical_first">
-									<a href="http://www.ticketlink.co.kr/bridge/498">
+									<a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${rList.mt20id }">
 										<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
 										<div class="list_info" style="height: 50px; margin-left: 4px;">
 											<!--제목-->

@@ -106,7 +106,8 @@
 				</tr>
 				<tr>
 					<td rowspan="2">쿠폰</td>
-					<td>정글푸트60% 할인권(매니아카드/1인1매)</td>
+					<c:forEach items="${cList }" map="c">
+					<td>${c.getCouponPrice }</td>
 					<td class="t_dtable_price">
 						<span class="t_purple">10,000</span><span>원</span>
 					</td>
@@ -114,6 +115,7 @@
 						<select class="selectcss" name="coupon">
 							<option value="">1매</option>
 						</select>
+					</c:forEach>
 					</td>
 				</tr>
 				<tr>
