@@ -29,10 +29,11 @@ public class EventCommentDAOImpl implements EventCommentDAO {
 		return session.delete("eventcomment.eCommentDelete", commentNo);
 	}
 
-	/*
-	 * @Override public EventComment selectOneEventJoin(int eventNo) { return
-	 * session.selectOne("eventcomment.selectOneEventJoin", eventNo); }
-	 */
+	
+	  @Override public EventComment selectOneEventJoin(int eventNo) { 
+		  return session.selectOne("eventcomment.selectOneEventJoin", eventNo);
+	  }
+	 
 
 	
 	

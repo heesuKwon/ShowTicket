@@ -13,6 +13,6 @@ public interface EventCommentDAO {
 
 	int eCommentDelete(int commentNo);
 
-	/* EventComment selectOneEventJoin(int eventNo); */
+	EventComment selectOneEventJoin(int eventNo); 
 
 }

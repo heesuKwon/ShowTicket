@@ -107,7 +107,7 @@ public class EventController {
 		
 		System.out.println("eventNo>>>"+eventNo);
 		
-//		model.addAttribute("wList",eventCommentService.selectOneEventJoin(eventNo) );
+		model.addAttribute("wList",eventCommentService.selectOneEventJoin(eventNo) );
 		System.out.println("wList>>>>>>>>>>"+model);
 
 		return "/event/writeprizewinner";

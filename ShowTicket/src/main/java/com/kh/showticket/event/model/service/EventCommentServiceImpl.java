@@ -32,10 +32,11 @@ public class EventCommentServiceImpl implements EventCommentService {
 		return eventCommentDAO.eCommentDelete(commentNo);
 	}
 
-	/*
-	 * @Override public EventComment selectOneEventJoin(int eventNo) { return
-	 * eventCommentDAO.selectOneEventJoin(eventNo); }
-	 */
+	
+    @Override public EventComment selectOneEventJoin(int eventNo) {
+		 return eventCommentDAO.selectOneEventJoin(eventNo);
+	}
+	 
 
 	
 	
