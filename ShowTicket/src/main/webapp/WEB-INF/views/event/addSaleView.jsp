@@ -37,7 +37,7 @@
 	                    		<span>이벤트 기간 </span>
 	                    		<span>${dcList.disCountStartDate } ~${dcList.disCountEndDate } </span>
 	                    	</h6>
-	                         <button type="button" id="detailView" class="btn btn-secondary ">공연 정보 상세보기</button> 
+	                        
 	                    </dd>
 	                    <div class="container-t">
 	                    	<h2><span>Showticket</span>과 ${dcList.showGenre }<span>&lt;${dcList.showName }&gt;</span>가 함께하는 이벤트</h2>
@@ -85,7 +85,7 @@
 				                
 				  			</div>
 				  			<div id="btnbox" style="width:65%;" >
-			                <button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button> 
+			                <button type="button" class="btn btn-secondary btn-lg btn-block">공연 정보 상세보기</button> 
 				  			</div>
 				
 	

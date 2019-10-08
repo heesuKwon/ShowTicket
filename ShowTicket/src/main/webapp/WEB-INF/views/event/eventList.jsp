@@ -30,7 +30,8 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 			</li>
 		</ul>
 		<h2 class="title">특가 진행</h2>
-			<button type="button" class="btn btn-info" id="saleWritebtn" onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
+			<button type="button" class="btn btn-info" id="saleWritebtn" style="background-color: #8f01a3; border-color: none; font-family: 'Gothic A1', sans-serif;"
+				 onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
 		<c:if test="${empty dcList }"> <br /> <h2>진행중인 이벤트가 없습니다.</h2><br /></c:if>
 		<c:if test="${!empty dcList }"> 
 		
@@ -70,7 +71,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		</c:if>
 		<h2 class="small-title">전체 이벤트</h2>
 		<!-- 이벤트 글쓰기 페이지  -->
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button"
+		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color: #8f01a3; font-family: 'Gothic A1', sans-serif; color:white;margin-left: 920px;"
 				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button>
 		<div class="event_cont_box">
 			<div class="event_list_inner">
