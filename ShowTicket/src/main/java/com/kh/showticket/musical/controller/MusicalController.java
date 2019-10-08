@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
+import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
 import com.kh.showticket.musical.model.service.MusicalService;
 
@@ -134,6 +135,20 @@ public class MusicalController {
 		return resultPaged;
 	}
 	
+	@RequestMapping("/musicalrankAjax.do")
+	public List<Map<String, String>> musicalrankAjax(@RequestParam String url1) {
+
+		return getBoxList(url1);
+		
+	}
+	
+	@RequestMapping("/musicalNewAjax.do")
+	public List<Map<String, String>>musicalNewAjax(@RequestParam String url1) {
+		
+		List<Map<String,String>> dayList = getApi.getOrderedListByDate2(getList(url1));
+		
+		return dayList;
+	}
 	
 	
 }

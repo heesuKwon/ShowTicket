@@ -280,18 +280,59 @@ function slideShow(){
 }
 </script>
 <script type="text/javascript">
-$(()=>{
-	 $("#order-show").change(function(){
-		 var type = $("#order-show option:selected").val();
-		 alert(type);
-		 if("byDate".equals(type)){getNewList()}
-		 else if("byRank".equals(type){getDateList()}
-        
+window.onload = function(){
+	$("#order-show").change((e)=>{
+		var type = $(e.target).val();
+		if(type=='byRank'){
+		
+			getRankList();
+		}
+		else if(type=='byDate'){
+			getDayIndex();
+		}
 	});
-});
+}
 </script>
 <script type="text/javascript">
-function getDateList(){
+function getDayIndex(){
+	
+	<c:set var="monthBefore" value="<%=new Date(new Date().getTime()-30*60*60*24*1000)%>"/>
+	<fmt:formatDate value="${monthBefore}" pattern="yyyyMMdd" var="monthBefore"/>
+	<c:set var="today" value="<%=new Date(new Date().getTime())%>"/>
+	<fmt:formatDate value="${today}" pattern="yyyyMMdd" var="today"/>
+	
+	var url1 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate="+${monthBefore}+"&eddate="+${today}+"&shcate=AAAA&rows="+<%=Integer.MAX_VALUE%>+"&cpage=1";
+	
+	var param = {url1:url1}
+	$.ajax({
+		url : '${pageContext.request.contextPath}/show/showNewAjax.do',
+        data : param,
+        success : function(data) {
+        	
+        	var html = "";
+        	for(var i=0;i<data.length;i++){
+        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<p><img src='"+data[i].poster+"' </p>";
+        	html += "<div class='list_info'>";
+			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpdfrom+"~"+data[i].prfpdto+"</dd>";
+        	html += "<dt>장소</dt><dd>"+data[i].fcltynm+"</dd>";	
+        	html += "</dl></div></a></li>";
+        	}
+        	
+        	$("#showListAll").html(html);
+        	
+      	  }, error: function(jqxhr, textStatus, errorThrown){
+            console.log(jqxhr, textStatus, errorThrown);
+                alert("데이터를 가져오는데 실패하였습니다.");
+                
+        }
+	});
+}
+
+</script>
+<script type="text/javascript">
+function getRankList(){
 	
 	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
 	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
@@ -325,42 +366,8 @@ function getDateList(){
         }
 	});
 }
-function getNewList(){
-
-	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
-	<fmt:formatDate value="${yesterday}" pattern="yyyyMMdd" var="yesterday"/>
-	
-	var url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=month&date="+${yesterday}+"&catecode=AAAA";
-
-	var param = {url1:url1}
-	
-	$.ajax({
-		url : '${pageContext.request.contextPath}/show/showNewAjax.do',
-        data : param,
-        success : function(data) {
-        	
-        	var html = "";
-        	for(var i=0;i<data.length;i++){
-        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
-        	html += "<p><img src='"+data[i].poster+"' </p>";
-        	html += "<div class='list_info'>";
-			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
-			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd+"</dd>";
-        	html += "<dt>장소</dt><dd>"+data[i].prfplcnm+"</dd>";	
-        	html += "</dl></div></a></li>";
-        	}
-        	
-        	$("#showListAll").html(html);
-        	
-      	  }, error: function(jqxhr, textStatus, errorThrown){
-            console.log(jqxhr, textStatus, errorThrown);
-                alert("데이터를 가져오는데 실패하였습니다.");
-                
-        }
-	});
-}
-}
 </script>
+
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"

@@ -20,20 +20,20 @@ public class DescendingByprfpdto implements Comparator<Map<String, String>> {
 		
 		//logger.debug("prfpdfrom1={}",prfpdfrom1 );
 		
-		SimpleDateFormat stringToDate = new SimpleDateFormat("yyyyMMdd");
-
 		Date prfpdfto1_ = null;
 		Date prfpdfto2_ = null;
 		
 		try {
+			SimpleDateFormat stringToDate = new SimpleDateFormat("yyyy.MM.dd");
 			prfpdfto1_ = stringToDate.parse(prfpdto);
 			prfpdfto2_ = stringToDate.parse(prfpdto2);
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
+			
 		}
 		//logger.debug("prfpdfrom1={}",prfpdfrom1 );
-
+		
 		return prfpdfto2_.compareTo(prfpdfto1_);
 	}
 

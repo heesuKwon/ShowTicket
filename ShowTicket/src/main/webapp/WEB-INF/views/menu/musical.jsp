@@ -1,10 +1,12 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<fmt:requestEncoding value="utf-8" />
 <%@ page import="java.util.Date"%>
+<fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_show.css">
@@ -233,6 +235,58 @@ function slideShow(){
 }
 </script>
 <script type="text/javascript">
+window.onload = function(){
+	$("#order-musical").change((e)=>{
+		var type = $(e.target).val();
+		if(type=='byRank'){
+		
+			getRankList();
+		}
+		else if(type=='byDate'){
+			getDayIndex();
+		}
+	});
+}
+</script>
+<script type="text/javascript">
+function getDayIndex(){
+	
+	<c:set var="monthBefore" value="<%=new Date(new Date().getTime()-30*60*60*24*1000)%>"/>
+	<fmt:formatDate value="${monthBefore}" pattern="yyyyMMdd" var="monthBefore"/>
+	<c:set var="today" value="<%=new Date(new Date().getTime())%>"/>
+	<fmt:formatDate value="${today}" pattern="yyyyMMdd" var="today"/>
+	
+	var url1 = "http://www.kopis.or.kr/openApi/restful/pblprfr?service=3127d89913494563a0e9684779988063&stdate="+${monthBefore}+"&eddate="+${today}+"&shcate=AAAB&rows="+<%=Integer.MAX_VALUE%>+"&cpage=1";
+	
+	var param = {url1:url1}
+	$.ajax({
+		url : '${pageContext.request.contextPath}/musical/musicalNewAjax.do',
+        data : param,
+        success : function(data) {
+        	
+        	var html = "";
+        	for(var i=0;i<data.length;i++){
+        	html += "<li><a href='http://www.ticketlink.co.kr/product/29767'>";
+        	html += "<p><img src='"+data[i].poster+"' </p>";
+        	html += "<div class='list_info'>";
+			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpdfrom+"~"+data[i].prfpdto+"</dd>";
+        	html += "<dt>장소</dt><dd>"+data[i].fcltynm+"</dd>";	
+        	html += "</dl></div></a></li>";
+        	}
+        	
+        	$("#musicalListAll").html(html);
+        	
+      	  }, error: function(jqxhr, textStatus, errorThrown){
+            console.log(jqxhr, textStatus, errorThrown);
+                alert("데이터를 가져오는데 실패하였습니다.");
+                
+        }
+	});
+}
+
+</script>
+<script type="text/javascript">
 function getRankList(){
 	
 	<c:set var="yesterday" value="<%=new Date(new Date().getTime()-60*60*24*1000)%>"/>
@@ -378,7 +432,6 @@ ul.lst_thumb li.on::before {
 						<select name="selectOrder" id="order-musical">
 							<option value="byRank">랭킹순</option>
 							<option value="byDate">최신순</option>
-							<option value="byStar">별점순</option>
 						</select>
 					</div>
 				</div>

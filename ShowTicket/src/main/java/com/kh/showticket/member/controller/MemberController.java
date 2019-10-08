@@ -505,13 +505,8 @@ public class MemberController {
 //        mav.setViewName("member/adminmList");
 //        return mav;
 //    }
-    @ResponseBody
-    @RequestMapping("/bookticket.do")
-    public ModelAndView bookticket(ModelAndView mav) {
-        mav.setViewName("member/bookticket");
-        return mav;
-    }
-    
+  
+   
     
     @RequestMapping(value="/updatePwd.do",method=RequestMethod.GET)
 	public String changePasswd(@RequestParam String memberId, Model model) {

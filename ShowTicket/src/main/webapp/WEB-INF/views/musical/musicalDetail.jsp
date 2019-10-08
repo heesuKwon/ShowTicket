@@ -96,7 +96,14 @@ $(()=>{
 /*--------------------------석현씨 코딩영역-----------------------------  */		
 
 </script>
-
+<script type="text/javascript">
+window.onload = function(){
+	$("#bookButton").click(function(){
+ var showTime = $("#watchTime").val();
+ alert(showTime);
+	})
+}
+</script>
 </head>
 <script>
 	var meta = document.createElement('meta');
@@ -119,6 +126,8 @@ $(()=>{
 		<p class="location_path"></p>
 
 		<div class="detail_box_top ">
+		<form name="ticketingFrm"  method="post" 
+		  enctype="multipart/form-data"> 
 			<div class="bx_title">
 				<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
 				<div class="title">뮤지컬 &lt;${musical.getName()}&gt;</div>
@@ -198,7 +207,7 @@ $(()=>{
 				<div class="detail_info_right">
 					<div id="calendar"></div>
 
-					<dl class="dotline_x">
+					<dl class="dotline_x" >
 						<dt>예매가능 회차</dt>
 						<dd>
 							<!-- [D] 셀렉트박스 -->
@@ -208,8 +217,7 @@ $(()=>{
 						</dd>
 					</dl>
 
-					<button type="button" class="btn reserve s_after first-child" id="book"
-						onclick="">
+					<button type="button" class="btn reserve s_after first-child" id="bookButton">
 						<span>예매하기 </span>
 					</button>
 				</div>
@@ -234,7 +242,7 @@ $(()=>{
 					</button>
 				</div>
 			</c:if>
-
+			</form>
 			<!-- FE 지원 form 종료 -->
 		</div>
 		<!-- 배너영역 -->
