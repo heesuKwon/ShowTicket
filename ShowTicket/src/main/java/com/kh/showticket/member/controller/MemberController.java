@@ -710,7 +710,16 @@ public class MemberController {
 
 		String memberId = memberService.findIdByPhone(memInfo);
 
+		String authKey = "";
+		if(memberId.equals(memId)) {
+			AuthPhoneNumber ap = new AuthPhoneNumber();
+	    	authKey = ap.excuteGenerate();
+	    	
+			Message message = new Message(inputHp, "01099377714", "[" + authKey + "] 핸드폰 인증번호를 입력해주세요.");
+			UtilSms.sendMessage(message);
+		}
 		mav.addObject("memberId", memberId);
+		mav.addObject("authKey", authKey);
 		mav.setViewName("member/memberPwdFindEnd");
 		return mav;
 	}
@@ -719,11 +728,13 @@ public class MemberController {
 	public String updatePwdByFind(@RequestParam String memberId, @RequestParam String password_new, Model model) {
 		// 1.업무로직 : 회원 정보 가져오기
 		Member member = memberService.selectOneMember(memberId);
+		
 
 		String newpassword = passwordEncoder.encode(password_new); //변경비번
-
+		
+		System.out.println("변경할 비번:"+newpassword);
 		String msg = "";
-		String loc="";
+		String loc= "member/memberPwdFindEnd";
 		member.setPassword(newpassword);
 
 		int	result =memberService.updatePwd(member); 

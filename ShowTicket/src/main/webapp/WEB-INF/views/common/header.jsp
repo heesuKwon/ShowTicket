@@ -124,13 +124,13 @@ function onClose(evt) {
 	function popId(){
 	    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
 	    var name = "popup test";
-	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    var option = "width = 430, height = 550, top = 80, left = 600, location = no"
 	    window.open(url, name, option);
 	}
 	function popPwd(){
 	    var url = "${pageContext.request.contextPath}/member/memberPwdFind.do";
 	    var name = "popup test";
-	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    var option = "width = 430, height = 550, top = 80, left = 600, location = no"
 	    window.open(url, name, option);
 	}
 

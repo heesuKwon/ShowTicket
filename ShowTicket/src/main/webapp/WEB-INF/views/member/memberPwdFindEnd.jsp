@@ -63,6 +63,7 @@
 	}
 	
 $(()=>{
+	
 	// 비밀번호 검사
 	$(document).on('keyup', '#pwd2', function(){
  		
