@@ -16,4 +16,6 @@ public interface MusicalService {
 
 	List<Coupon> selectCoupon(String musicalId);
 
+	String selectDiscount(String musicalId);
+
 }

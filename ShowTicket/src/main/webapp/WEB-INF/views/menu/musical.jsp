@@ -1,12 +1,12 @@
+<%@page import="java.util.Map"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<fmt:requestEncoding value="utf-8" />
 <%@ page import="java.util.Date"%>
-<%@page import="java.util.Map"%>
-<%@page import="java.util.List"%>
+<fmt:requestEncoding value="utf-8" />
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_show.css">
@@ -239,6 +239,7 @@ window.onload = function(){
 	$("#order-musical").change((e)=>{
 		var type = $(e.target).val();
 		if(type=='byRank'){
+
 			getRankList();
 		}
 		else if(type=='byDate'){
@@ -283,6 +284,7 @@ function getDayIndex(){
         }
 	});
 }
+
 </script>
 <script type="text/javascript">
 function getRankList(){
@@ -301,6 +303,7 @@ function getRankList(){
         	
         	var html = "";
         	for(var i=0;i<data.length;i++){	
+
         	html += "<li><a href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId="+data[i].mt20id+"'>";
         	html += "<p><img src='http://www.kopis.or.kr/"+data[i].poster+"' </p>";
         	html += "<div class='list_info'>";
@@ -351,8 +354,7 @@ ul.lst_thumb li.on::before {
 				style="padding-bottom: 0px; margin-bottom: 39px;">
 				<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
 					뮤지컬</h2>
-				<img src="/showticket/resources/images/plus.png" alt="더보기"
-					style="width: 35px; height: 35px;">
+				
 				<div class="top_area">
 					<div class="submain_topban">
 						<div class="submain_goods" style="width: 990px; margin: auto;">
@@ -385,15 +387,14 @@ ul.lst_thumb li.on::before {
 				<div class="header" style="margin-bottom: 4px;">
 					<h2 class="small-title"
 						style="margin-top: 0px; display: inline-block">최신 뮤지컬</h2>
-					<img src="/showticket/resources/images/plus.png" alt="더보기"
-						style="width: 35px; height: 35px;">
+					
 				</div>
 				<div class="attention">
 					<ul style="width: 1880px">
 						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
 							<c:forEach items="${recentMusicalList }" var="rList">
 								<li class="newMusical_first">
-									<a href="http://www.ticketlink.co.kr/bridge/498">
+									<a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${rList.mt20id }">
 										<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
 										<div class="list_info" style="height: 50px; margin-left: 4px;">
 											<!--제목-->
@@ -430,6 +431,7 @@ ul.lst_thumb li.on::before {
 						<select name="selectOrder" id="order-musical">
 							<option value="byRank" id="byRank">랭킹순</option>
 							<option value="byDate" id="byDate">최신순</option>
+
 						</select>
 					</div>
 				</div>
