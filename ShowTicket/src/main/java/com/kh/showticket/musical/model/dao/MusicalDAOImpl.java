@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.coupon.model.vo.Coupon;
 
 @Repository
@@ -19,7 +18,13 @@ public class MusicalDAOImpl implements MusicalDAO {
 
 	@Override
 	public double selectReviewStar(String musicalId) {
-		return sqlSession.selectOne("musical.selectReviewStar", musicalId)==null?-1:sqlSession.selectOne("musical.selectReviewStar", musicalId);
+		String ans = sqlSession.selectOne("musical.selectReviewStar", musicalId);
+		if(ans==null) {
+			return -1.0;
+		}
+		else {
+			return Double.parseDouble(ans);
+		}
 	}
 
 	@Override
@@ -34,7 +39,13 @@ public class MusicalDAOImpl implements MusicalDAO {
 
 	@Override
 	public int selectDiscount(String musicalId) {
-		return sqlSession.selectOne("musical.selectDiscount", musicalId)!=null?sqlSession.selectOne("musical.selectDiscount", musicalId):0;
+		String ans = sqlSession.selectOne("musical.selectDiscount", musicalId);
+		if(ans==null) {
+			return 0;
+		}
+		else {
+			return Integer.parseInt(ans);
+		}
 	}
 	
 	
