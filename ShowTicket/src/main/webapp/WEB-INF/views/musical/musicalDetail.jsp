@@ -188,29 +188,28 @@ $(()=>{
 
 							</div>
 						</div>
-					</div>
-
-					<div class="bx_dummy include_layer border_type">
-						<em class="info_tit">할인</em>
-						<div class="txt ui-dialog  price-dialog">
-							<ul class="lst_dsc">
-								<c:forEach items="${coupon}" var="c">
-									<li>${c.couponTitle }-<span class="color_purple fbold ">${c.couponPrice }</span>원
-										할인
-									</li>
-								</c:forEach>
-								<c:if test="${discount != 0}">
-									<li>${discount }%할인중</li>
-								</c:if>
-							</ul>
+						<div class="bx_dummy include_layer border_type">
+							<em class="info_tit">할인</em>
+							<div class="txt ui-dialog  price-dialog">
+								<ul class="lst_dsc">
+									<c:forEach items="${coupon}" var="c">
+										<li>${c.couponTitle }- <span class="color_purple fbold ">${c.couponPrice }</span>원
+											할인
+										</li>
+									</c:forEach>
+									<c:if test="${discount != 0}">
+										<li><span class="color_purple fbold ">${discount }</span>%할인중</li>
+									</c:if>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<div class="bx_dummy">
-						<em class="info_tit">대기공연추가</em> <span class="txt"> <span
-							id="wait"><img
-								src="${pageContext.request.contextPath }/resources/images/heart.png"
-								alt="" width=15px; /></span>
-						</span>
+						<div class="bx_dummy">
+							<em class="info_tit">대기공연추가</em> <span class="txt"> <span
+								id="wait"><img
+									src="${pageContext.request.contextPath }/resources/images/heart.png"
+									alt="" width=15px; /></span>
+							</span>
+						</div>
 					</div>
 				</div>
 				<!-- FE 지원 form 시작 -->
