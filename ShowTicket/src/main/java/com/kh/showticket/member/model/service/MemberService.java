@@ -20,7 +20,7 @@ public interface MemberService {
 
 	int updatePwd(Member member);
 
-	List<Ticket> selectReservationList(String memberId);
+	List<Ticket> selectReservationList(Map<String, Object> paging);
 
 	String createMail(String email) throws Exception;
 
@@ -32,11 +32,11 @@ public interface MemberService {
 
 	void deleteMyStandBy(String memberLoggedIn, String showId);
 
-	List<Ticket> selectReservationTerm(Map<String, Object> content);
+	List<Ticket> selectReservationTerm(Map<String, Object> paging);
 
-	List<Ticket> selectReservationTerm15(Map<String, Object> content);
+	List<Ticket> selectReservationTerm15(Map<String, Object> paging);
 
-	List<Ticket> selectReservationPage(Map<String,Object> content);
+	List<Ticket> selectReservationAll(Map<String,Object> paging);
 
 	int updateReservation(Map<String, Object> cancel);
 
@@ -45,6 +45,14 @@ public interface MemberService {
 	List<String> selectFollow(String memberId);
 
 	int deleteFollow(Map<String, String> follow);
+
+	List<Ticket> selectRTotalCount();
+
+	List<Ticket> selectTotalCountA(Map<String,Object> paging);
+
+	List<Ticket> selectTotalCountT(Map<String,Object> paging);
+
+	List<Ticket> selectTotalCount15(Map<String,Object> paging);
 
 
 }

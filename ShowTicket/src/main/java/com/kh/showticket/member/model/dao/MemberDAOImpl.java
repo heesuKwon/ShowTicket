@@ -44,8 +44,8 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Ticket> selectReservationList(String memberId) {
-		return sqlSession.selectList("member.selectReservationList", memberId);
+	public List<Ticket> selectReservationList(Map<String, Object> paging) {
+		return sqlSession.selectList("member.selectReservationList", paging);
 	}
 	
 	@Override
@@ -71,18 +71,18 @@ public class MemberDAOImpl implements MemberDAO {
 		sqlSession.delete("member.deleteMyStandBy", param);
 	}
 
-	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
-		return sqlSession.selectList("member.selectReservationTerm", content);
+	public List<Ticket> selectReservationTerm(Map<String, Object> paging) {
+		return sqlSession.selectList("member.selectReservationTerm", paging);
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm15(Map<String, Object> content) {
-		return sqlSession.selectList("member.selectReservationTerm15", content);
+	public List<Ticket> selectReservationTerm15(Map<String, Object> paging) {
+		return sqlSession.selectList("member.selectReservationTerm15", paging);
 	}
 
 	@Override
-	public List<Ticket> selectReservationPage(Map<String, Object> content) {
-		return sqlSession.selectList("member.selectReservationPage", content);
+	public List<Ticket> selectReservationAll(Map<String, Object> paging) {
+		return sqlSession.selectList("member.selectReservationAll", paging);
 	}
 
 	@Override
@@ -103,6 +103,26 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int deleteFollow(Map<String, String> follow) {
 		return sqlSession.delete("member.deleteFollow", follow);
+	}
+
+	@Override
+	public List<Ticket> selectRTotalCount() {
+		return sqlSession.selectList("member.selectRTotalCount");
+	}
+
+	@Override
+	public List<Ticket> selectTotalCountA(Map<String,Object> paging) {
+		return sqlSession.selectList("member.selectTotalCountA", paging);
+	}
+
+	@Override
+	public List<Ticket> selectTotalCountT(Map<String,Object> paging) {
+		return sqlSession.selectList("member.selectTotalCountT", paging);
+	}
+
+	@Override
+	public List<Ticket> selectTotalCount15(Map<String,Object> paging) {
+		return sqlSession.selectList("member.selectTotalCount15", paging);
 	}
 
 

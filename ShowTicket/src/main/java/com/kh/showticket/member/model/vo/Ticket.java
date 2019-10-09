@@ -23,6 +23,7 @@ public class Ticket {
 	private Date ticketCancel;
 	private String ticketStatus;
 	private int payNo;
+	private String ticketShowName;
 	
 	public Ticket() {
 		super();
@@ -30,7 +31,7 @@ public class Ticket {
 
 	public Ticket(int ticketNo, String ticketBuyer, String ticketShowId, int ticketPrice, String ticketGrade,
 			Date ticketDate, String ticketPlace, int ticketCount, Date ticketEnrollDate, String ticketSeat,
-			String ticketTime, Date ticketCancel, String ticketStatus, int payNo) {
+			String ticketTime, Date ticketCancel, String ticketStatus, int payNo, String ticketShowName) {
 		super();
 		this.ticketNo = ticketNo;
 		this.ticketBuyer = ticketBuyer;
@@ -46,6 +47,7 @@ public class Ticket {
 		this.ticketCancel = ticketCancel;
 		this.ticketStatus = ticketStatus;
 		this.payNo = payNo;
+		this.ticketShowName = ticketShowName;
 	}
 
 	public int getTicketNo() {
@@ -160,13 +162,23 @@ public class Ticket {
 		this.payNo = payNo;
 	}
 
+	public String getTicketShowName() {
+		return ticketShowName;
+	}
+
+	public void setTicketShowName(String ticketShowName) {
+		this.ticketShowName = ticketShowName;
+	}
+
 	@Override
 	public String toString() {
 		return "Ticket [ticketNo=" + ticketNo + ", ticketBuyer=" + ticketBuyer + ", ticketShowId=" + ticketShowId
 				+ ", ticketPrice=" + ticketPrice + ", ticketGrade=" + ticketGrade + ", ticketDate=" + ticketDate
 				+ ", ticketPlace=" + ticketPlace + ", ticketCount=" + ticketCount + ", ticketEnrollDate="
 				+ ticketEnrollDate + ", ticketSeat=" + ticketSeat + ", ticketTime=" + ticketTime + ", ticketCancel="
-				+ ticketCancel + ", ticketStatus=" + ticketStatus + ", payNo=" + payNo + "]";
+				+ ticketCancel + ", ticketStatus=" + ticketStatus + ", payNo=" + payNo + ", ticketShowName="
+				+ ticketShowName + "]";
 	}
+	
 	
 }

@@ -80,8 +80,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Ticket> selectReservationList(String memberId) {
-		return memberDAO.selectReservationList(memberId);
+	public List<Ticket> selectReservationList(Map<String, Object> paging) {
+		return memberDAO.selectReservationList(paging);
 	}
 	
 	@Override
@@ -105,18 +105,18 @@ public class MemberServiceImpl implements MemberService {
 		memberDAO.deleteMyStandBy(memberLoggedIn, showId);
 	}
 
-	public List<Ticket> selectReservationTerm(Map<String, Object> content) {
-		return memberDAO.selectReservationTerm(content);
+	public List<Ticket> selectReservationTerm(Map<String, Object> paging) {
+		return memberDAO.selectReservationTerm(paging);
 	}
 
 	@Override
-	public List<Ticket> selectReservationTerm15(Map<String, Object> content) {
-		return memberDAO.selectReservationTerm15(content);
+	public List<Ticket> selectReservationTerm15(Map<String, Object> paging) {
+		return memberDAO.selectReservationTerm15(paging);
 	}
 
 	@Override
-	public List<Ticket> selectReservationPage(Map<String, Object> content) {
-		return memberDAO.selectReservationPage(content);
+	public List<Ticket> selectReservationAll(Map<String, Object> paging) {
+		return memberDAO.selectReservationAll(paging);
 	}
 
 	@Override
@@ -137,6 +137,26 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int deleteFollow(Map<String, String> follow) {
 		return memberDAO.deleteFollow(follow);
+	}
+
+	@Override
+	public List<Ticket> selectRTotalCount() {
+		return memberDAO.selectRTotalCount();
+	}
+
+	@Override
+	public List<Ticket> selectTotalCountA(Map<String,Object> paging) {
+		return memberDAO.selectTotalCountA(paging);
+	}
+
+	@Override
+	public List<Ticket> selectTotalCountT(Map<String,Object> paging) {
+		return memberDAO.selectTotalCountT(paging);
+	}
+
+	@Override
+	public List<Ticket> selectTotalCount15(Map<String,Object> paging) {
+		return memberDAO.selectTotalCount15(paging);
 	}
 
 }
