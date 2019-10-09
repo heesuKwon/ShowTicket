@@ -8,12 +8,8 @@
 	
 	<select id="reviewList" resultMap="reviewMap">
 	select * from review
-<!-- 	<where>
-			<if test="reviewShowId != '' and reviewShowId != null">
-				review_showid = #{reviewShowId}			
-			</if>
+	 where review_showid = #{reviewShowId}			
 						
-		</where> -->
 	</select>
 	<insert id="insertReview">
 		insert into review values
@@ -36,18 +32,18 @@
 	<select id="checkLikes" resultType="_int">
 		select count(*)
 		from likes
-		where review_no = #{reviewNO} and
+		where review_no = #{reviewNo} and
 		      likes_id = #{likesId}
 	</select>
 	<update id="downLikes">
 		update review set  
-		review_like = review_like + 1 
+		review_like = review_like - 1 
 		where review_no = #{reviewNo}
 	</update>
 	
 	<update id="upLikes">
 		update review set  
-		review_like = review_like - 1 
+		review_like = review_like + 1 
 		where review_no = #{reviewNo}
 	</update>
 	
@@ -64,7 +60,7 @@
 	
 	<select id="selectOne" resultType="_int">
 		select review_like from review
-		where review_no = #{reviewNO}
+		where review_no = #{reviewNo}
 	</select>		
 	
 	<select id="likesList" resultType="likes">

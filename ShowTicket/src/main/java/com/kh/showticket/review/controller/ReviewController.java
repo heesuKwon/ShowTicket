@@ -64,7 +64,7 @@ public class ReviewController {
 		//댓글 번호 아이디 받아옴 리뷰넘버
 		int check = reviewService.checkLikes(likes);
 		//1. 좋아요 누른경우
-		if( check >0) {
+		if( check > 0) {
 			//좋아요 테이블에서 아이디 삭제
 			   int del = reviewService.deleteLikes(likes);
 			//좋아요 -1

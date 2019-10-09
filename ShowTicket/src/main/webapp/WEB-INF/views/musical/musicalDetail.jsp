@@ -18,21 +18,28 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 
 <link rel="stylesheet" type="text/css"
-						href="${pageContext.request.contextPath}/resources/css/contents.css"> 
+	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/musical_showdetail.css">
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
 <!--  <link rel="stylesheet" type="text/css"
 						href="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201506191200/jindoStarRating/css/star.css">  -->
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/demo.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/resources/css/star-rating-svg.css">
-	<script type="text/javascript"  charset="utf-8" src="${pageContext.request.contextPath}/resources/js/jquery.star-rating-svg.js"></script>
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
-	
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/demo.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/star-rating-svg.css">
+<script type="text/javascript" charset="utf-8"
+	src="${pageContext.request.contextPath}/resources/js/jquery.star-rating-svg.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
 <%
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
@@ -118,7 +125,35 @@ $(()=>{
 		var receiveId = $(e.target).parents("li").children("input[id='reviewWriter']").val();
 		insertReport(reviewNo, receiveId);
 	});
+	/* 좋아요 */
+	$(document.body).delegate('#checkLikes', 'click', function(e) {
+		MemberCommonCheck();
+		var likes = {};
+		likes.reviewNo = $(e.target).parents("li").children("input[id='reviewNo']").val();
+		likes.likesId = "${memberLoggedIn.memberId}";
+		
+		 $.ajax({
+			url: "${pageContext.request.contextPath}/review/reviewLikes.do",
+			data: JSON.stringify(likes),
+			contentType: 'application/json; charset=utf-8',
+			dataType: "json",
+			type: "POST",
+			success: (data)=>{
+				var total = JSON.parse(data);
+				var html = "<i class='far fa-thumbs-up'></i>  ";
+				html += total;
+				$(e.target).parents("li").children("#checkLikes").html(html);
+			},
+			error: (xhr, txtStatus, err)=>{
+				console.log("ajax처리실패!",xhr, txtStatus, err);
+			}
+			
+		}); 
+	});
 	
+	
+	
+	/* 리뷰삭제 */
 	$(document.body).delegate('#dReview', 'click', function(e) {
 		if(!confirm("정말 삭제하시겠습니까?")){
 			return false;
@@ -364,11 +399,9 @@ $(()=>{
 	document.getElementsByTagName('head')[0].appendChild(meta);
 </script>
 
+
 <div id="detailContainer">
 
-	<input type="hidden" id="productId" value="29652" /> <input
-		type="hidden" id="productName" value="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
-	<input type="hidden" id="adultYn" value="false" />
 	<div class="inner">
 		<h2 class="blind">공연</h2>
 		<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
@@ -378,83 +411,56 @@ $(()=>{
 		<p class="location_path"></p>
 
 		<div class="detail_box_top ">
-			<div class="bx_title">
-				<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
-				<div class="title">뮤지컬 &lt;${musical.getName()}&gt;</div>
-			</div>
-			<div class="detail_info">
-				<div class="bx_thumb">
-					<span class="bx_img"> <!-- 뮤지컬포스터 --> <img
-						src="${musical.getPoster()}" alt="대표이미지" width="314" height="382">
-					</span>
+			<form name="ticketingFrm" method="post" enctype="multipart/form-data">
+				<div class="bx_title">
+					<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
+					<div class="title">뮤지컬 &lt;${musical.getName()}&gt;</div>
 				</div>
-				<div class="etc_info">
-
-					<div class="bx_dummy">
-						<em class="info_tit">별점</em> <span class="txt">${musical.getReviewStar()}</span>
+				<div class="detail_info">
+					<div class="bx_thumb">
+						<span class="bx_img"> <!-- 뮤지컬포스터 --> <img
+							src="${musical.getPoster()}" alt="대표이미지" width="314" height="382">
+						</span>
 					</div>
-
-
-					<div class="bx_dummy">
-						<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
-					</div>
-					<div class="bx_dummy">
-						<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
-							~ ${musical.getEndDate()}</span>
-					</div>
-
-
-
-					<div class="bx_dummy">
-						<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
-					</div>
-
-
-
-
-
-					<div class="bx_dummy border_type">
-						<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
-					</div>
-
-
-
-
-
-
-					<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
-
-
-
-
-
-
-					<div class="bx_dummy include_layer">
-						<em class="info_tit">가격</em>
-						<div class="txt ui-dialog  price-dialog">
-							<ul class="lst_dsc">
-								<%
+					<div class="etc_info">
+						<div class="bx_dummy">
+							<em class="info_tit">별점</em> <span class="txt"><span
+								id="review-star"></span></span>
+						</div>
+						<div class="bx_dummy">
+							<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
+						</div>
+						<div class="bx_dummy">
+							<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
+								~ ${musical.getEndDate()}</span>
+						</div>
+						<div class="bx_dummy">
+							<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+						</div>
+						<div class="bx_dummy border_type">
+							<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
+						</div>
+						<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
+						<div class="bx_dummy include_layer">
+							<em class="info_tit">가격</em>
+							<div class="txt ui-dialog  price-dialog">
+								<ul class="lst_dsc">
+									<%
 									String[] prices = musical.getPrice().split(", ");
 								%>
-								<c:forEach items="<%=prices%>" var="m">
-									<li>${fn:substring(m,0,fn:indexOf(m,"석")+1)}-<span
-										class="color_purple fbold">${fn:substring(m,fn:indexOf(m,"석")+1,fn:indexOf(m,"원")) }</span>
-										${fn:substring(m,fn:indexOf(m,"원"),fn:indexOf(m,"원")+1)}
-									</li>
-									<br />
-								</c:forEach>
-							</ul>
+									<c:forEach items="<%=prices%>" var="m">
+										<li>${fn:substring(m,0,fn:indexOf(m,"석")+1)}-<span
+											class="color_purple fbold">${fn:substring(m,fn:indexOf(m,"석")+1,fn:indexOf(m,"원")) }</span>
+											${fn:substring(m,fn:indexOf(m,"원"),fn:indexOf(m,"원")+1)}
+										</li>
+										<br />
+									</c:forEach>
+								</ul>
 
-							<!-- [D] 활성화 시 display:block 처리 -->
+								<!-- [D] 활성화 시 display:block 처리 -->
 
+							</div>
 						</div>
-					</div>
-
-
-
-
-
-
 						<div class="bx_dummy include_layer border_type">
 							<em class="info_tit">할인</em>
 							<div class="txt ui-dialog  price-dialog">
@@ -470,80 +476,63 @@ $(()=>{
 								</ul>
 							</div>
 						</div>
+						<div class="bx_dummy">
+							<em class="info_tit">대기공연추가</em> <span class="txt"> <span
+								id="wait"><img
+									src="${pageContext.request.contextPath }/resources/images/heart.png"
+									alt="" width=15px; /></span>
+							</span>
+						</div>
 					</div>
-
-
 				</div>
-				<div class="bx_dummy">
-					<em class="info_tit">대기공연추가</em> <span class="txt"> <span
-						class="wait"><img
-							src="${pageContext.request.contextPath }/resources/images/heart.png"
-							alt="" width=15px; /></span>
-					</span>
-				</div>
+				<!-- FE 지원 form 시작 -->
+				<c:if test="${musical.getState() eq '공연중'}">
+					<div class="detail_info_right">
+						<div id="calendar"></div>
 
+						<dl class="dotline_x">
+							<dt>예매가능 회차</dt>
+							<dd>
+								<!-- [D] 셀렉트박스 -->
+								<select name="watchTime" id="watchTime">
+									<option>회차선택(날짜선택후)</option>
+								</select>
+							</dd>
+						</dl>
 
-			</div>
-			<!-- FE 지원 form 시작 -->
-			<c:if test="${musical.getState() eq '공연중'}">
-				<div class="detail_info_right">
-					<div id="calendar"></div>
+						<button type="button" class="btn reserve s_after first-child"
+							id="book">
+							<span>예매하기 </span>
+						</button>
+					</div>
+				</c:if>
+				<c:if test="${musical.getState() eq '공연예정'}">
+					<div class="detail_info_right">
+						<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
-					<dl class="dotline_x">
-						<dt>예매가능 회차</dt>
-						<dd>
-							<!-- [D] 셀렉트박스 -->
-							<select name="watchTime" id="watchTime">
-								<option value="">회차선택(날짜선택후)</option>
-								<%-- ${dayTime.} --%>
-							</select>
-						</dd>
-						<!-- <dt>예매가능 좌석</dt>
-						<dd>
-							<ul class="seat" id="seatingInfoPerRound">
-								<li>전체 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>VIP석 <span class="color_purple fbold">427</span>석
-								</li>
-							
-								<br />
-								<li>R석 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>S석 <span class="color_purple fbold">427</span>석
-								</li>
-								<br />
-								<li>A석 <span class="color_purple fbold">427</span>석
-								</li>
-							</ul>
-						</dd> -->
-					</dl>
+						<button type="button" class="btn reserve due s_after first-child"
+							onclick="">
+							<span>판매예정 </span>
+						</button>
+					</div>
+				</c:if>
+				<c:if test="${musical.getState() eq '공연완료'}">
+					<div class="detail_info_right">
+						<div class="noinfo_txt">공연이 종료되었습니다.</div>
 
-
-
-					<button type="button" class="btn reserve s_after first-child"
-						onclick="">
-						<span>예매하기 </span>
-					</button>
-				</div>
-			</c:if>
-			<c:if test="${musical.getState() eq '공연예정'}">
-				<div class="detail_info_right">
-					<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
-
-					<button type="button" class="btn reserve due s_after first-child"
-						onclick="">
-						<span>판매예정 </span>
-					</button>
-				</div>
-			</c:if>
-
+						<button type="button" class="btn reserve due s_after first-child"
+							onclick="">
+							<span>공연완료</span>
+						</button>
+					</div>
+				</c:if>
+			</form>
 			<!-- FE 지원 form 종료 -->
 		</div>
 		<!-- 배너영역 -->
 
 		<!-- 하단 탭 출력 -->
+
 
 		<div class="detail_box_bot">
 			<div class="detailbox_bot_left" id="tabs">
@@ -702,7 +691,6 @@ $(()=>{
 								dataType: "json",
 								type: "GET",
 						        success : function(data) {
-						           console.log(data);
 									
 						           var html = "";
 						               html += "<ul id='reviewUl' style='word-break: break-all;'>";
@@ -737,7 +725,7 @@ $(()=>{
 						                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
 						                        html += "<span class='reviewDate small-font'>"+data[i].reviewDate+"</span>";
 						                        /*좋아요하는 부분  */
-						                        html += "<button id='likes' onclick='likesUp("+data[i].reviewNo+");'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
+						                        html += "<button id='checkLikes'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
 						                        html += "</li>"; 
 
 						                    } /* for문끝 */
@@ -850,6 +838,8 @@ function insertReport(reviewNo, receiveId){
 		dataType: "json",
 		type: "POST",
 		success: (data)=>{
+			var msg = JSON.parse(data);
+			alert(msg);
 			console.log(data.msg);
 		
 		},
@@ -861,32 +851,6 @@ function insertReport(reviewNo, receiveId){
 	
 	
 }
-	
-/*좋아요  */
-function likesUp(reviewNo){
-	if("" == "${memberLoggedIn.memberId}"){
-		alert("로그인해주세요");
-		return false;
-	}
-	var likes = {};
-	likes.reviewNo = no;
-	
-	/* $.ajax({
-		url: "${pageContext.request.contextPath}/review/likes",
-		data: JSON.stringify(likes),
-		contentType: 'application/json; charset=utf-8',
-		dataType: "json",
-		type: "POST",
-		success: (data)=>{
-			alert(data);
-		},
-		error: (xhr, txtStatus, err)=>{
-			console.log("ajax처리실패!",xhr, txtStatus, err);
-		}
-		
-	}); */
-	
-}	
 function isValidReview() {
 	var rating = $.trim($("#rating").text());
 	var reviewContent = $.trim($("#reviewContent").val());
