@@ -1056,7 +1056,9 @@ function insertReview(){
 				return;
 			}
 			
-			var year = selectDate.getFullYear();
+			console.log(${"#watchTime"}.children.attr("selected",selected));
+			
+			/* var year = selectDate.getFullYear();
 			var month = selectDate.getMonth()+1;
 			var date = selectDate.getDate();
 			var sDate = year+"."+month+"."+date;
@@ -1092,7 +1094,7 @@ function insertReview(){
 		    
 		    form.target = name;
 		    document.body.appendChild(form);
-		    form.submit();
+		    form.submit(); */
 		});
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
