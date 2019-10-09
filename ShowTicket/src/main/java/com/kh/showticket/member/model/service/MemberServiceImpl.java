@@ -139,4 +139,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.deleteFollow(follow);
 	}
 
+	@Override
+	public String findIdByEmail(Map<String, String> memInfo) {
+		return memberDAO.findIdByEmail(memInfo);
+	}
+
+	@Override
+	public String findIdByPhone(Map<String, String> memInfo) {
+		return memberDAO.findIdByPhone(memInfo);
+	}
+
+
 }

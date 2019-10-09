@@ -26,6 +26,7 @@
 
 
 <script language="JavaScript" type="text/JavaScript">
+
 	//마우스 우클릭 방지
 	document.oncontextmenu = function() {
 		return false;
@@ -41,6 +42,43 @@
 		return false;
 	}
 
+	function newPwd(){
+		var auth = $("#auth").val();
+		
+		console.log(auth);
+		if(auth != '${authKey}'){			
+			alert("인증번호가 틀렸습니다. 다시 입력해주세요. ");
+			$("#auth").val("");
+			return;
+		}
+	
+		var html ="<form name='updatePwdByFindfrm' id='updatePwdByFind' action='updatePwdByFind.do' method='post'>"; 
+		html +=	"<h4>비밀번호 재설정</h4> <div class='id'><span>ID : ${memberId}</span></div><input id='memberId' name='memberId' type='hidden' value='${memberId}'><div class='styleInput'>";
+		html += "<input id='pwd' name='password_new' type='password' class='iInput' required placeholder='새 비밀번호'></div>";
+		html += "<div class='styleInput'><input id='pwd2' type='password' class='iInput' required placeholder='새 비밀번호 확인'></div>";
+		html += "<span class='pw ok'>비밀번호 일치</span><span class='pw error'>비밀번호 불일치</span>"
+		html += "<div class='btnArea'><button type='submit' class='btn8f'>비밀번호 변경</button></div></form>";
+		
+		$(".resultBox").html(html);	
+	}
+	
+$(()=>{
+	// 비밀번호 검사
+	$(document).on('keyup', '#pwd2', function(){
+ 		
+ 		var password1 = $("#pwd").val().trim();
+ 		var password2 = $("#pwd2").val().trim();
+ 		
+ 		if(password1 != password2){
+ 			$(".pw.error").show();
+			$(".pw.ok").hide();
+ 		}
+ 		else{
+ 			$(".pw.error").hide();
+			$(".pw.ok").show();
+ 		}
+ 	});
+})
 </script>
 
 
@@ -61,58 +99,25 @@
 					찾기</a></li>
 		</ul>
 		<hr />
-	
-		<div id="css3" class="menuSection">
-			<h2>
-				<a href="#css3">등록된 이메일로 찾기</a>
-			</h2>
-			<div id="move">
-				<form name="findIdByEmailfrm" id="findIdByEmail"
-					action="findIdByEmail.do" method="post">
-					<div class="inputEnter" style="display: block;">
-						<div class="inputBox">
-							<div class="styleInput">
-								<input name="memNm" id="memNm2" type="text" class="iInput" required
-									placeholder="이름">
-							</div>
-							<div class="emailInput">
-								<div class="styleInput">
-									<input name="memEmail" id="memEmail" type="email" class="iInput" required
-										placeholder="이메일">
-								</div>
-							</div>
-						</div>
-						<div class="btnArea">
-							<button type="submit" class="btn8f">확인</button>
-						</div>
+		<div class="resultBox">
+			<h4>비밀번호 찾기</h4>
+			<c:if test="${authKey eq null }">
+				<div class="id">
+					<span>입력된 회원정보가 존재하지 않습니다. <br />비회원일 경우 회원가입 후 이용해주세요.
+					</span>
+				</div>
+			</c:if>
+			<c:if test="${authKey ne null }">
+				<div class="inputBox">
+					<div class="styleInput">
+						<input id="auth" name="auth" type="text" class="iInput" required
+							placeholder="인증번호 입력">
 					</div>
-				</form>
-			</div>
-		</div>
-		<div id="api" class="menuSection">
-			<h2>
-				<a href="#api">등록된 휴대폰으로 찾기</a>
-			</h2>
-			<div id="move">
-				<form name="findIdByPhonefrm" id="findIdByPhone"
-					action="findIdByPhone.do" method="post">
-					<div class="inputEnter" style="display: block;">
-						<div class="inputBox">
-							<div class="styleInput">
-								<input id="memNm3" name="memNm" type="text" class="iInput" required
-									placeholder="이름">
-							</div>
-							<div class="styleInput">
-								<input id="inputHp" name="inputHp" type="text" class="iInput" required
-									placeholder="휴대폰번호 (-없이 입력)">
-							</div>
-						</div>
-						<div class="btnArea">
-							<button type="submit" class="btn8f">확인</button>
-						</div>
-					</div>
-				</form>
-			</div>
+				</div>
+				<div class="btnArea">
+					<button type="button" class="btn8f" onclick="newPwd();">비밀번호 찾기</button>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

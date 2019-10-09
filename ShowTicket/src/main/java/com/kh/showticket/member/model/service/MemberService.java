@@ -46,5 +46,9 @@ public interface MemberService {
 
 	int deleteFollow(Map<String, String> follow);
 
+	String findIdByEmail(Map<String, String> memInfo);
+
+	String findIdByPhone(Map<String, String> memInfo);
+
 
 }

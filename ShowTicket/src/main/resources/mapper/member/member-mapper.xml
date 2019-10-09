@@ -117,4 +117,16 @@
 		delete from follow
 		where member_id = #{memberId} and follow_showid = #{playId}
 	</delete>
+	
+	<select id="findIdByEmail" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and email=#{memEmail}
+	</select>
+	
+	<select id="findIdByPhone" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and phone=#{inputHp}
+	</select>
 </mapper>

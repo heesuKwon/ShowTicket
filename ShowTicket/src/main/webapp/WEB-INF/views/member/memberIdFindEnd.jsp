@@ -26,6 +26,7 @@
 
 
 <script language="JavaScript" type="text/JavaScript">
+
 	//마우스 우클릭 방지
 	document.oncontextmenu = function() {
 		return false;
@@ -61,58 +62,18 @@
 					찾기</a></li>
 		</ul>
 		<hr />
-	
-		<div id="css3" class="menuSection">
-			<h2>
-				<a href="#css3">등록된 이메일로 찾기</a>
-			</h2>
-			<div id="move">
-				<form name="findIdByEmailfrm" id="findIdByEmail"
-					action="findIdByEmail.do" method="post">
-					<div class="inputEnter" style="display: block;">
-						<div class="inputBox">
-							<div class="styleInput">
-								<input name="memNm" id="memNm2" type="text" class="iInput" required
-									placeholder="이름">
-							</div>
-							<div class="emailInput">
-								<div class="styleInput">
-									<input name="memEmail" id="memEmail" type="email" class="iInput" required
-										placeholder="이메일">
-								</div>
-							</div>
-						</div>
-						<div class="btnArea">
-							<button type="submit" class="btn8f">확인</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<div id="api" class="menuSection">
-			<h2>
-				<a href="#api">등록된 휴대폰으로 찾기</a>
-			</h2>
-			<div id="move">
-				<form name="findIdByPhonefrm" id="findIdByPhone"
-					action="findIdByPhone.do" method="post">
-					<div class="inputEnter" style="display: block;">
-						<div class="inputBox">
-							<div class="styleInput">
-								<input id="memNm3" name="memNm" type="text" class="iInput" required
-									placeholder="이름">
-							</div>
-							<div class="styleInput">
-								<input id="inputHp" name="inputHp" type="text" class="iInput" required
-									placeholder="휴대폰번호 (-없이 입력)">
-							</div>
-						</div>
-						<div class="btnArea">
-							<button type="submit" class="btn8f">확인</button>
-						</div>
-					</div>
-				</form>
-			</div>
+		<div class="resultBox">
+			<h4>아이디 찾기 결과</h4>
+			<c:if test="${memberId ne null }">
+				<div class="id">
+					<span>ID : ${memberId} 입니다.</span>
+				</div>
+			</c:if>
+			<c:if test="${memberId eq null }">
+				<div class="id">
+					<span>입력된 회원정보가 존재하지 않습니다. <br/>비회원일 경우 회원가입 후 이용해주세요.</span>
+				</div>
+			</c:if>
 		</div>
 	</div>
 </body>

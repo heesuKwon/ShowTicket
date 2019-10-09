@@ -105,7 +105,15 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.delete("member.deleteFollow", follow);
 	}
 
+	@Override
+	public String findIdByEmail(Map<String, String> memInfo) {
+		return sqlSession.selectOne("member.findIdByEmail", memInfo);
+	}
 
-	
+	@Override
+	public String findIdByPhone(Map<String, String> memInfo) {
+		return sqlSession.selectOne("member.findIdByPhone", memInfo);
+	}
+
 
 }
