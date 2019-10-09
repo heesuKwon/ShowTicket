@@ -13,6 +13,6 @@ public interface MusicalDAO {
 
 	List<Coupon> selectCoupon(String musicalId);
 
-	int selectDiscount(String musicalId);
+	String selectDiscount(String musicalId);
 
 }
