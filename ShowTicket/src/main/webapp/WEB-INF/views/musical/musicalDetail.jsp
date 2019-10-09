@@ -966,6 +966,8 @@ function insertReview(){
 	};
 
 	days = ["일","월","화","수","목","금","토"];
+	
+	var times;
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
@@ -1027,7 +1029,7 @@ function insertReview(){
 			
 			$("#watchTime").children().remove();
 			
-			var times = timeList.split(",")
+			times = timeList.split(",")
 			for(var i=0;i<times.length;i++){
 				var time = times[i].split(":");
 				var html = "<option value='"+times[i]+"'>"+time[0]+"시 "+time[1]+"분</option>";
@@ -1056,9 +1058,13 @@ function insertReview(){
 				return;
 			}
 			
-			console.log(${"#watchTime"}.children.attr("selected",selected));
-			
-			/* var year = selectDate.getFullYear();
+			var selectNum;
+			for(var i=0;i<times.length;i++){
+				if(times[i]== selectTime){
+					selectNum = i+1;
+				}
+			}
+			var year = selectDate.getFullYear();
 			var month = selectDate.getMonth()+1;
 			var date = selectDate.getDate();
 			var sDate = year+"."+month+"."+date;
@@ -1086,6 +1092,12 @@ function insertReview(){
 			hiddenField.setAttribute("name", "selectTime");
 			hiddenField.setAttribute("value", selectTime);
 			form.appendChild(hiddenField);
+			
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectNum");
+			hiddenField.setAttribute("value", selectNum);
+			form.appendChild(hiddenField);
 		
 			var url = "${pageContext.request.contextPath}/ticketing/ticketingSeat.do";
 		    var name = "bookTicket";
@@ -1094,7 +1106,7 @@ function insertReview(){
 		    
 		    form.target = name;
 		    document.body.appendChild(form);
-		    form.submit(); */
+		    form.submit(); 
 		});
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/

@@ -60,12 +60,14 @@ public class TicketingController {
 	}
 
 	@RequestMapping(value="/ticketingSeat.do", method=RequestMethod.POST)
-	public ModelAndView ticketingSeat(ModelAndView mav, @RequestParam String playId, @RequestParam String selectDate, @RequestParam String selectTime) {
+	public ModelAndView ticketingSeat(ModelAndView mav, @RequestParam String playId, 
+			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String selectNum) {
 		logger.debug("좌석 페이지");
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
+		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
 	}
