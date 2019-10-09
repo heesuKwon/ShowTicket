@@ -63,6 +63,7 @@ public class TicketingController {
 	public ModelAndView ticketingSeat(ModelAndView mav, @RequestParam String playId, 
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String selectNum) {
 		logger.debug("좌석 페이지");
+		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);

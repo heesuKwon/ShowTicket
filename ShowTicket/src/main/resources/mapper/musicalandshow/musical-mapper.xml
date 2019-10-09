@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="musical">
-	<select id="selectReviewStar" resultType="double">
+	<select id="selectReviewStar" resultType="String">
 		select avg(review_star)
 		from review
 		where review_showId = #{musicalId} and review_star is not null
@@ -25,7 +25,7 @@
 		<result column="coupon_time" property="couponTime" />
 	</resultMap>
 	
-	<select id="selectDiscount" resultType="int">
+	<select id="selectDiscount" resultType="String">
 		<![CDATA[
 		select discount_rate
 		from discount
