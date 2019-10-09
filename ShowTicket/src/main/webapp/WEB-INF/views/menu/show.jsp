@@ -159,106 +159,7 @@ function getList(cpage){
 };
 
 </script>
-<script language='javascript'>
-	var _AceGID = (function () {
-		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
-		var _CI = (!_AceGID) ? [] : _AceGID.val;
-		var _N = 0;
-		var _T = new Image(0, 0);
-		if (_CI.join('.').indexOf(Inf[3]) < 0) {
-			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
-			_CI.push(Inf);
-			_N = _CI.length;
-		}
-		return {o: _N, val: _CI};
-	})();
-	var _AceCounter = (function () {
-		var G = _AceGID;
-		var _sc = document.createElement('script');
-		var _sm = document.getElementsByTagName('script')[0];
-		if (G.o != 0) {
-			var _A = G.val[G.o - 1];
-			var _G = (_A[0]).substr(0, _A[0].indexOf('.'));
-			var _C = (_A[7] != '0') ? (_A[2]) : _A[3];
-			var _U = (_A[5]).replace(/\,/g, '_');
-			_sc.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/Web/AceCounter_' + _C + '.js?gc=' + _A[2] + '&py=' + _A[4] + '&gd=' + _G + '&gp=' + _A[1] + '&up=' + _U + '&rd=' + (new Date().getTime());
-			_sm.parentNode.insertBefore(_sc, _sm);
-			return _sc.src;
-		}
-	})();
-</script>
-<!-- *) AceClick ê³µíµ ë¶ìì¤í¬ë¦½í¸ -->
-<script language='javascript' type='text/javascript'>
-	if (document.cookie.indexOf('VIEW_TKLINK_ID') > 0) {
-		var mr_id = 'member';	// ë¡ê·¸ì¸ íìíë¨( 'member' ê³ ì ê°)
-	}
-</script>
-<!-- AceClick WebSite Gathering Script V0.91.20190304-->
-<script type="text/Javascript">
-	if (typeof (AMRS_GC) == 'undefined') {
-		var AMRS_O = [];
-		var AMRS_CK = new Image();
-		var AMRS_GC = 'AG5A4302491053';
-		var AMRS_GD = 'mrsg.aceclick.co.kr';
-		var AMRS_GP = '8080';
-		var AMRS_TI = (new Date()).getTime();
-		var AMRS_PR = location.protocol == "https:" ? "https://" + AMRS_GD + ":843" : "http://" + AMRS_GD + ":" + AMRS_GP;
-		AMRS_CK.src = AMRS_PR + '/?cookie';
-		if (typeof (Array.prototype.push) != 'undefined') {
-			AMRS_O.push(AMRS_CK);
-		}
-		var _AMSC = document.createElement('script');
-		var _AMSM = document.getElementsByTagName('script')[0];
-		_AMSC.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/aceclick.js?rt=' + AMRS_TI;
-		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
-	}
-</script>
 
-<noscript>
-	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
-		border='0' width='0' height='0' alt=''>
-</noscript>
-
-
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-<script>
-	var _croID = '5d148869e4b0adaa9beaa9d1';
-
-	function getMoreRecommend (e, n) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
-			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
-	}
-
-	function createMoreRCView (e) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
-			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
-	}
-
-	function mcroPushEvent (n) {
-		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
-			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
-	}
-
-	function _cro_initialize () {
-		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
-	}
-</script>
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-
-
-
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<!-- End NHN AD MORE Script -->
 <script type="text/javascript">
 var index=0;
 window.onload = function(){
@@ -507,8 +408,6 @@ ul.lst_thumb li.on::before {
 		</div>
 	</div>
 </div>
-<script type="text/javascript"
-	src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
 <script type="text/javascript">
 
 		if ($("#noticeList").find("ul> li").length > 4) {
@@ -560,7 +459,6 @@ ul.lst_thumb li.on::before {
 
     </script>
 
-<script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript">
 	var page = 1;
 	var categoryNum = 10;

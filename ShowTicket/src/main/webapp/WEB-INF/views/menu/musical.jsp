@@ -160,51 +160,7 @@ function getList(cpage){
 
 </script>
 
-<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
-<noscript>
-	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
-		border='0' width='0' height='0' alt=''>
-</noscript>
 
-<!-- AceCounter Log Gathering Script End -->
-
-
-<!-- Facebook Pixel Code -->
-
-<noscript>
-	<img height="1" width="1" style="display: none"
-		src="https://www.facebook.com/tr?id=1028038810619064&ev=PageView&noscript=1" />
-</noscript>
-<!-- End Facebook Pixel Code -->
-
-<!-- NHN AD MORE Script -->
-
-<script async type="text/javascript" src="//cro.myshp.us/resources/common/js/more-common.js"></script>
-
-<script>
-	var _croID = '5d148869e4b0adaa9beaa9d1';
-
-	function getMoreRecommend (e, n) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendData(e, n) :
-			("undefined" == typeof gCroRCData && (window.gCroRCData = new Array), gCroRCData.push({config: e, callback: n}))
-	}
-
-	function createMoreRCView (e) {
-		"undefined" != typeof globalCRO ? new globalCRO.MoreRecommendView(e) :
-			("undefined" == typeof gCroRCV && (window.gCroRCV = new Array), gCroRCV.push({config: e}))
-	}
-
-	function mcroPushEvent (n) {
-		"undefined" != typeof globalCRO ? globalCRO.sendEvent(n) :
-			("undefined" == typeof gCro && (window.gCro = new Array), gCro.push(n))
-	}
-
-	function _cro_initialize () {
-		window.globalCRO = new MCro, globalCRO.jsInit(_croID)
-	}
-</script>
-<script async type="text/javascript"
-	src="//cro.myshp.us/resources/common/js/more-common.js"></script>
 
 <script type="text/javascript">
 var index=0;
@@ -308,7 +264,7 @@ function getRankList(){
         	html += "<p><img src='http://www.kopis.or.kr/"+data[i].poster+"' </p>";
         	html += "<div class='list_info'>";
 			html += "<strong class='elp'>"+data[i].prfnm+"</strong>";
-			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd"</dd>";
+			html += "<dl><dt>기간</dt><dd>"+data[i].prfpd+"</dd>";
         	html += "<dt>장소</dt><dd>"+data[i].prfplcnm+"</dd>";	
         	html += "</dl></div></a></li>";
         	}
@@ -323,7 +279,8 @@ function getRankList(){
 	});
 }
 </script>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/newMS.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/newMS.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style type="text/css">
@@ -354,7 +311,7 @@ ul.lst_thumb li.on::before {
 				style="padding-bottom: 0px; margin-bottom: 39px;">
 				<h2 class="title" style="margin-top: 39px; display: inline-block">베스트
 					뮤지컬</h2>
-				
+
 				<div class="top_area">
 					<div class="submain_topban">
 						<div class="submain_goods" style="width: 990px; margin: auto;">
@@ -387,26 +344,25 @@ ul.lst_thumb li.on::before {
 				<div class="header" style="margin-bottom: 4px;">
 					<h2 class="small-title"
 						style="margin-top: 0px; display: inline-block">최신 뮤지컬</h2>
-					
+
 				</div>
 				<div class="attention">
 					<ul style="width: 1880px">
 						<!-- [D] li 1개 가로 사이즈 178+여백10=188 x li 갯수(10) = 1880px 인라인으로 박아줍니다. -->
-							<c:forEach items="${recentMusicalList }" var="rList">
-								<li class="newMusical_first">
-									<a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${rList.mt20id }">
-										<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
-										<div class="list_info" style="height: 50px; margin-left: 4px;">
-											<!--제목-->
-											<strong class="elp">${rList.prfnm }</strong>
-											<!--기간-->
-											<small>${rList.prfpdfrom } ~ ${rList.prfpdto }</small><br />
-											<!--장소-->
-											<small>${rList.fcltynm }</small>
-										</div>
-									</a>
-								</li>
-							</c:forEach>
+						<c:forEach items="${recentMusicalList }" var="rList">
+							<li class="newMusical_first"><a
+								href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${rList.mt20id }">
+									<img src="${rList.poster }" alt="최신뮤지컬 포스터" />
+									<div class="list_info" style="height: 50px; margin-left: 4px;">
+										<!--제목-->
+										<strong class="elp">${rList.prfnm }</strong>
+										<!--기간-->
+										<small>${rList.prfpdfrom } ~ ${rList.prfpdto }</small><br />
+										<!--장소-->
+										<small>${rList.fcltynm }</small>
+									</div>
+							</a></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -436,33 +392,36 @@ ul.lst_thumb li.on::before {
 					</div>
 				</div>
 
-	       	<div class="searchContainer">
-		        <ul id="musicalListAll" class="goods_list" style="clear:both;">
-		                  <c:forEach items="${musicalList}" var="map">
-			                <li><a href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
-			                    <p><img src="${map.poster }" alt="" /></p>
-			                    <div class="list_info">
-			                        <strong class="elp">${map.prfnm }</strong>
-			                        <dl>
-			                            <dt>기간</dt>
-			                            <dd>${map.prfpdfrom } ~ ${map.prfpdto }</dd>
-			                            <dt>장소</dt>
-			                            <dd>${map.fcltynm }</dd>
-			                        </dl>
-			                    </div>
-			                </a></li>
+				<div class="searchContainer">
+					<ul id="musicalListAll" class="goods_list" style="clear: both;">
+						<c:forEach items="${musicalList}" var="map">
+							<li><a
+								href="${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${map.mt20id}">
+									<p>
+										<img src="${map.poster }" alt="" />
+									</p>
+									<div class="list_info">
+										<strong class="elp">${map.prfnm }</strong>
+										<dl>
+											<dt>기간</dt>
+											<dd>${map.prfpdfrom }~ ${map.prfpdto }</dd>
+											<dt>장소</dt>
+											<dd>${map.fcltynm }</dd>
+										</dl>
+									</div>
+							</a></li>
 						</c:forEach>
 					</ul>
-        
-        			<div id="srchEmpty">검색결과가 없습니다.<div>
-        		</div>
-   			 </div>
-    	</div>
+
+					<div id="srchEmpty">
+						검색결과가 없습니다.
+						<div></div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
-</div>
-</div>
-<script type="text/javascript" src="/resources/js/rollingBigBanner-58d236f0d65bde4d59ea071b32b5c0ca.js"></script>
 <script type="text/javascript">
 
 		if ($("#noticeList").find("ul> li").length > 4) {

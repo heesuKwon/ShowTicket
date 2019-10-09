@@ -146,5 +146,4 @@ function faqList(type, searchType){
 		</div>
 	</div>
 </div>
-<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

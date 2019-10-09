@@ -39,7 +39,6 @@
 	::i-block-chrome,.submain_front .top_area .submain_goods li.last img{border-radius:0 0 2px 0}
 }
 
-.submain_front .goods_list li{background-image:url(../img/shadow234_2.png)}
 .submain_front .top_area .submain_ad{margin-top:20px;overflow:hidden;border:1px solid #d4d4d4;border-radius:2px}
 .submain_front .top_area .submain_ad li{float:left;border-left:1px solid #d4d4d4;height:108px;}
 .submain_front .top_area .submain_ad li:first-child{border:0;width:670px;overflow:hidden;position:relative;border-radius:2px 0 0 2px;}

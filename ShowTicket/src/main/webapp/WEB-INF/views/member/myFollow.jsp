@@ -65,8 +65,14 @@ $(()=>{
 						<tr>
 							<td>뮤지컬&lt;${mas.name }&gt;</td>
 							<td>${mas.startDate }</td>
+							<c:if test="${mas.state eq '공연예정'}">
 							<td><button type="button" class="btn"
 									onclick="deleteFollow('${mas.id}')">삭제</button></td>
+							</c:if>
+							<c:if test="${mas.state eq '공연중'}">
+							<td><button type="button" class="btn"
+									onclick="location.href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${mas.id}'">예매하기</button></td>
+							</c:if>
 						</tr>
 					</c:if>
 				</c:forEach>
@@ -85,8 +91,14 @@ $(()=>{
 						<tr>
 							<td>연극&lt;${mas.name }&gt;</td>
 							<td>${mas.startDate }</td>
+							<c:if test="${mas.state eq '공연예정'}">
 							<td><button type="button" class="btn"
 									onclick="location.href='${pageContext.request.contextPath}'">삭제</button></td>
+							</c:if>
+							<c:if test="${mas.state eq '공연중'}">
+							<td><button type="button" class="btn"
+									onclick="location.href='${pageContext.request.contextPath}/show/showDetail.do?showId=${mas.id}'">예매하기</button></td>
+							</c:if>
 						</tr>
 					</c:if>
 				</c:forEach>

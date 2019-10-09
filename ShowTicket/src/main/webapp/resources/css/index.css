@@ -19,7 +19,7 @@ div.section_week {height: 500px;}
 
 div.section_week>div.inner { margin: 0 auto; position: relative;}
 div.section_best ul.best_list li{height: 387px; width: 233px; box-shadow:1px 1px 2px 1px #d3d3d3;}
-div.section_best{height: 600px;margin-bottom: 50px;} 
+div.section_best{height: 500px;float: left; padding:0px;} 
 /*슬릭 스타일 */
 #slide {
 	height: 300px;

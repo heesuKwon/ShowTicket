@@ -10,16 +10,12 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta property="og:image"
-	content="https://tketlink.dn.toastoven.net/static/ticketlink.png" />
 <title>ShowTicket</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/common.css">
-
 <link rel="stylesheet" type="text/css"
-	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
-</head>
+	href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 
@@ -135,7 +131,6 @@ function onClose(evt) {
 	}
 
 </script>
-
 
 	<div id="wrap">
 		<div id="header">

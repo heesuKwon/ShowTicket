@@ -166,12 +166,6 @@ function search(){
 	</div>
 </div>
 
-
-
-
-
-<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
-
 <script type="text/javascript">
 	//<![CDATA[
 	$(document).ready(function () {

@@ -7,13 +7,10 @@ ul:after{display:block;clear:both;content:''}
 h3{margin-bottom:19px;}
 #container{background:none;margin:0;}
 #container .inner{padding:0}
-/* h3,.main_banner .controller span,.main_banner .controller a,.sport_ban li .sports,.sport_ban li .today,.big_movie .movie_close,.reserve_sports{overflow:hidden;font-size:0;text-indent:-9999px;}
-h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.btn_open span,.big_movie .movie_close,.tab_venue button span,.venue_list li.on:after{background:url(../img/sp_main.png) no-repeat;} */
 .main_banner .visual_ban a,.section_top a,.week_list li a,.section_best .best_list li a{display:block;}
 .section_top .band_ban img,.week_list li img{display:block;}
-/* .wingright .today_view button,.wingright strong,.open_spot .maintop_right .movie_tit button span{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp.png) no-repeat} */
 .main_banner{height:470px;position:relative;}
-.section_top{position:relative;padding:50px 0;}
+.section_top{position:relative;}
 .section_week{position:relative;padding:60px 0 0;}
 .section_best{padding:42px 0 0;}
 .main_banner .visual_ban{overflow:hidden;position:relative;width:100%;height:470px}
@@ -42,7 +39,6 @@ h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.b
 .sport_ban li .emblem{font-size:11px;letter-spacing:-1px;color:#adadad;}
 .sport_ban li .emblem a{font-size:11px;letter-spacing:-1px;color:#000;}
 .sport_ban li .emblem img{display:block;margin:0 auto 5px;}
-.sport_ban li .sports{display:block;background:url(../img/sp_sports.png) no-repeat;width:100px;height:105px;}
 .sport_ban li .sports.team1{background-position:0 0;}
 .sport_ban li .sports.team2{background-position:-110px 0;}
 .sport_ban li .sports.team3{background-position:-220px 0;}
@@ -85,7 +81,6 @@ h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.b
 .plan_ban li{padding-left:1px;}
 .plan_ban li:first-child{padding:0;}
 .plan_ban li.ticketspot{width:298px;padding-left:20px}
-.plan_ban li.ticketspot .imgtxt{overflow:hidden;font-size:1px;line-height:999px !important;background:url(../img/main_spot.gif) no-repeat}
 .plan_ban li.ticketspot .title{float:left;width:90px;height:12px;background-position:0 0}
 .plan_ban li.ticketspot .go_reserve{float:right;width:49px;height:12px;background-position:-92px 0}
 .plan_ban li.ticketspot .movie_hereiam{clear:both;padding-top:10px}
@@ -98,7 +93,6 @@ h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.b
 .week_list li{position:relative;overflow:hidden;margin:0 0 18px 18px;}
 .week_list li .list_img{position:relative;display:block;}
 .week_list li .list_img:after{position:absolute;top:0;left:0;width:100%;height:100%;border:1px solid #d4d4d4;box-sizing:border-box;content:'';}
-.week_list li .bg_gradation{position:absolute;top:0;left:0;background:url(../img/bg_gradation.png) no-repeat 0 0;width:200px;height:190px;}
 .week_list .ban_type1{float:none;clear:both;width:318px;}
 .week_list .ban_type2{margin-top:-318px !important;}
 .section_week .wing_ban2{top:94px;}
@@ -116,10 +110,8 @@ h3,.main_banner .controller span,.main_banner .controller a,.btn_reserve span,.b
 .section_best .best_list li dd{height:18px;line-height:18px;color:#767676;}
 
 /* 리뉴얼 */
-span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) no-repeat -368px -15px;width:3px;height:3px}
-
 .section_top h3{background-position:0 -338px;width:207px;height:24px;margin-bottom:20px}
-.section_top{position:relative;padding:50px 0 0;}
+.section_top{position:relative;}
 
 .controller .pagination{position:absolute;top:418px;left:0;}
 .controller .control{position:absolute;top:410px;left:579px;}
@@ -134,7 +126,6 @@ span.ico_dot{display:inline-block;overflow:hidden;background:url(../img/sp.png) 
 .open_spot .maintop_right .header strong{background-position:-84px -366px;width:136px;height:23px;*display:block}
 
 .maintop_cont .movie{position:relative} 
-.movie .btn_play{overflow:hidden;position:absolute;top:50%;left:50%;width:58px;height:58px;margin:-28px 0 0 -28px;background:url(../img/btn_play.png) no-repeat;line-height:999px}
 
 .open_spot .maintop_right .movie{height:180px;width: 318px}
 .open_spot .maintop_right .movie{height:180px;width: 318px}
@@ -179,7 +170,6 @@ max-width:100%;max-height:100%;vertical-align:middle}
 .section_venue{padding:24px 0 60px;}
 .section_venue h3{background-position:0 -310px;width:63px;height:23px;}
 .venue_bx{border:1px solid #ebebeb;}
-.tab_venue{position:relative;height:56px;background:url(../img/bg_venue.gif) repeat-x 0 48px;}
 .tab_venue button{position:absolute;top:0;width:50px;height:48px;background:#fff;cursor:pointer;box-sizing:border-box;}
 .tab_venue .prev{left:0;border-right:1px solid #ebebeb;}
 .tab_venue .next{right:0;border-left:1px solid #ebebeb;}
@@ -200,7 +190,6 @@ max-width:100%;max-height:100%;vertical-align:middle}
 .venue_list.num3 li{width:33.33%}
 .venue_list.num4 li{width:25%}
 .venue_list.num5 li{width:20%}
-.venue_list_wrap{overflow:hidden;width:890px;margin:0 auto;background:url(../img/bg_venue.png) no-repeat 0 0;}
 .venue_list li{position:relative;height:56px;}
 .venue_list li a{display:inline-block;overflow:hidden;width:178px;height:48px;padding:0 15px;box-sizing:border-box;font-size:16px;color:#999;line-height:48px;text-overflow:ellipsis;text-align:center;white-space:nowrap}
 .venue_list li.on a{color:#000;font-weight:bold;}
@@ -219,24 +208,3 @@ max-width:100%;max-height:100%;vertical-align:middle}
 .lst_venue_item .item_info .dsc{padding-top:8px}
 .lst_venue_item .item_info .dsc{font-size:11px;color:#999;line-height:16px}
 .lst_venue_item .item_tit{font-size:13px;color:#000;}
-
-.wingban{position:absolute;top:548px;border:1px solid #e6e6e6;border-radius:3px;width:98px;overflow:hidden}
-.wingban a{display:block}
-.wingban li{width:100%}
-
-.wingleft{left:50%;margin-left:-613px;border:0;border-radius:0}
-.wingleft li{height:170px;padding-top:5px}
-.wingleft li:first-child{padding-top:0}
-
-.wingright{left:50%;margin-left:513px;background:#fff;text-align:center}
-.wingright strong{width:86px;height:20px;background-position:-210px -202px;margin:10px 0 12px}
-.wingright .today_view{background: url(../img/bg_dotline_ce.png) repeat-x 0 100%;text-align:center}
-.wingright .today_view .today_cont{width:72px;height:88px;overflow:hidden;margin:0 auto}
-.wingright .today_view button{width:25px;height:20px;margin:6px -1px 12px}
-.wingright .today_view button.prev{background-position:-287px -167px}
-.wingright .today_view button.next{background-position:-314px -167px}
-
-.wingban.moving{position:fixed;top:50%;left:50%;z-index:1000}
-.wingban.wingleft.moving,.wingban.wingright.moving{margin-top:-220px}
-
-#smallButton a{display:inline-block;overflow:hidden;font-size:1px;line-height:999px;background:url(../img/sp_main.png) no-repeat -165px -161px;width:60px;height:60px}
