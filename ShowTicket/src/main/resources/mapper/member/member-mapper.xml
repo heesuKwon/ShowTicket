@@ -139,4 +139,16 @@
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
 		from ticket where ticket_buyer=#{memberLoggedIn} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate order by ticket_enrolldate desc
 	</select>
+	
+	<select id="findIdByEmail" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and email=#{memEmail}
+	</select>
+	
+	<select id="findIdByPhone" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and phone=#{inputHp}
+	</select>
 </mapper>

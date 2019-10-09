@@ -50,13 +50,13 @@ public class MemberController {
 
 	@Autowired
 	MemberService memberService;
-	
+
 	@Autowired
 	CouponService couponService;
 
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	JavaMailSender mailSender;
 
@@ -72,12 +72,12 @@ public class MemberController {
 		System.out.println("서버 구동 후 자바 코드 수정!!");
 
 	}
-	
+
 	@RequestMapping("/reservation.do")
 	public String reservation(Model model, HttpSession session, HttpServletRequest request) {
 
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-		
+
 		// 페이징바 변수
 		int startContent = 0;
 		int endContent = 0;
@@ -150,6 +150,7 @@ public class MemberController {
 		int barEnd = 0;
 		int barNo = 0;
 		
+
 		Map<String,Object> paging = new HashMap<>();
 		
 		try {
@@ -170,6 +171,7 @@ public class MemberController {
 		List<Ticket> countList = new ArrayList<>();
 				
 		logger.debug("ajax용 memberLoggedIn :" + memberLoggedIn);
+
 		logger.debug("ajax용 num:" + minusNum);
 		logger.debug("ajax용 s:" + startContent);
 		logger.debug("ajax용 e:" + endContent);
@@ -193,6 +195,7 @@ public class MemberController {
 		totalPage = (int)Math.ceil((double)totalContent/showContent);
 		
 		barStart = ((cPage -1)/pageBarSize) * pageBarSize +1;
+
 		barEnd = barStart + pageBarSize -1;
 		barNo = barStart;
 		
@@ -206,7 +209,7 @@ public class MemberController {
 		return paging;
 	 }
 	
-	
+
 	@RequestMapping("/memberView.do")
 	public void memberView() {
 		/*
@@ -221,49 +224,49 @@ public class MemberController {
 		//@SessionAttribute...
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		//String memberLoggedIn = "honggd";
-		
+
 		mav.setViewName("member/myCoupon");
-		
+
 		return mav;
 	}
 
 	@RequestMapping("/myPoint.do")
 	public ModelAndView myPoint(ModelAndView mav, HttpSession session) {
-		
+
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-		
+
 		int totalPoint = 0;
-		
+
 		List<MyPoint> myPointList = memberService.selectMyPointList(memberLoggedIn);
 
 		//멤버에서끌어오기
 		totalPoint = memberService.selectOneMember(memberLoggedIn).getPoint();
-		
+
 		mav.addObject("myPointList", myPointList);
 		mav.addObject("totalPoint", totalPoint);
 		mav.setViewName("member/myPoint");
-		
+
 		return mav;
 	}
 
 	@RequestMapping("/myStandBy.do")
 	public ModelAndView myStandBy(ModelAndView mav, HttpSession session) {
-		
+
 		//임시
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-		
+
 		List<String> standByList = memberService.selectMyStandByList(memberLoggedIn);
 		List<Map<String, String>> myStandByList = null;
 		List<Map<String, String>> myStandByMList = new ArrayList<>();
 		List<Map<String, String>> myStandBySList = new ArrayList<>();
-		
+
 		if(standByList.size()>0) {
 			for(String showId : standByList) {
 				String url = "http://kopis.or.kr/openApi/restful/pblprfr/"+showId+"?service=3127d89913494563a0e9684779988063";
 				myStandByList = getList(url);	
 			}	
 		}
-		
+
 		if(myStandByList != null) {
 			for(Map<String, String> map : myStandByList) {
 				if(map.get("genrenm").equals("뮤지컬")) {
@@ -278,31 +281,31 @@ public class MemberController {
 
 		mav.addObject("myStandByMList", myStandByMList);
 		mav.addObject("myStandBySList", myStandBySList);
-		
+
 		mav.setViewName("member/myStandBy");
 		return mav;
 	}
-	
+
 	@RequestMapping("/deleteStandBy.do")
 	public ModelAndView deleteMyStandBy(ModelAndView mav,
-										@RequestParam String showId, HttpSession session) {
+			@RequestParam String showId, HttpSession session) {
 		logger.debug("showId={}", showId);
-		
+
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-		
+
 		memberService.deleteMyStandBy(memberLoggedIn, showId);
-		
+
 		String msg = "대기가 취소되었습니다.";
 		String loc = "/member/myStandBy.do";
-		
+
 		mav.addObject("msg", msg);
 		mav.addObject("loc", loc);
 		mav.setViewName("common/msg");
-		
+
 		return mav;
 	}
-	
-	
+
+
 	@RequestMapping("/myFollow.do")
 	public ModelAndView myFollow(HttpSession session, ModelAndView mav) {
 		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
@@ -317,7 +320,7 @@ public class MemberController {
 		mav.setViewName("/member/myFollow");
 		return mav;
 	}
-	
+
 	@RequestMapping("/deleteFollow.do")
 	public ModelAndView deleteFollow(HttpSession session, ModelAndView mav, @RequestParam String playId) {
 		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();
@@ -325,25 +328,25 @@ public class MemberController {
 		follow.put("memberId", memberId);
 		follow.put("playId",playId);
 		memberService.deleteFollow(follow);
-		
+
 		String msg = "관심공연이 취소되었습니다.";
 		String loc = "/member/myFollow.do";
-		
+
 		mav.addObject("msg", msg);
 		mav.addObject("loc", loc);
 		mav.setViewName("common/msg");
-		
+
 		return mav;
 	}
-	
+
 	@RequestMapping(value="/memberUpdate.do")
 	public String updateMember(Member member, Model model) {
-//		logger.debug("memberId="+member.getMemberId());
+		//		logger.debug("memberId="+member.getMemberId());
 		logger.debug("member="+member);
 
 		int result = memberService.updateMember(member);
-		
-	
+
+
 		model.addAttribute("memberLoggedIn", member);
 
 		// 2. view단 처리
@@ -354,8 +357,8 @@ public class MemberController {
 	}
 	@RequestMapping(value="/deleteMember.do")
 	public String deleteMember(@RequestParam String memberId,
-								Model model,
-								SessionStatus sessionStatus) {
+			Model model,
+			SessionStatus sessionStatus) {
 		logger.info("memeberId="+memberId);
 		logger.debug("memeberId="+memberId);
 		int result = memberService.deleteMember(memberId);
@@ -364,7 +367,7 @@ public class MemberController {
 		// 2. view단 처리
 		model.addAttribute("msg", result>0?"회원 삭제 성공!":"회원 삭제 실패!");
 		model.addAttribute("loc", "/");
-		
+
 		return "common/msg";
 
 	}
@@ -388,31 +391,19 @@ public class MemberController {
 
 		return "common/msg";
 	}
-	
+
 	/* 이메일 인증 관련 코드 */
 	@RequestMapping("/sendMail.do")
 	@ResponseBody
 	public String joinPost(@RequestParam String email, Model model) throws Exception {
 		logger.info("member email: " + email);
 		String authKey = memberService.createMail(email);
-		
-		
+
+
 		return authKey;
 	}
-	
-//	@RequestMapping(value="joinConfirm", method=RequestMethod.GET)
-//	public String emailConfirm(Member member, Model model) throws Exception {
-//		logger.info(member.getEmail() + ": auth confirmed");
-//		member.setEmailAuthstatus(1);	// authstatus를 1로,, 권한 업데이트
-////		memberService.updateMailAuthstatus(member);
-//		
-//		model.addAttribute("email_auth_check", 1);
-//		
-//		return "/user/joinPost";
-//	}
-	
 	/*이메일 인증 관련 코드 끝*/
-	
+
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
 	public String memberLogin(@RequestParam String memberId,
 			@RequestParam String password,
@@ -449,7 +440,7 @@ public class MemberController {
 
 		return "common/msg";		
 	}
-	
+
 	/**
 	 * 세션 무효화하기
 	 * session.setAttribute("memberLoggedIn", member)
@@ -468,7 +459,7 @@ public class MemberController {
 		// 로그아웃시 메인 페이지로 보내기
 		return "redirect:/";
 	}
-	
+
 	/**
 	 * 
 	 * 웹서비스(html문서)  + data(xml, json) 
@@ -494,127 +485,127 @@ public class MemberController {
 
 	}
 
-	
-/*아이디 비번 찾기 팝업 이동 */
+
+	/*아이디 비번 찾기 팝업 이동 */
 	@RequestMapping("/memberIdFind.do")
 	public String memberIdFinder() {
-		
-		
-		
+
+
+
 		return "/member/memberIdFind";
 	}
 
 	@RequestMapping("/memberPwdFind.do")
 	public String memberPwdFinder() {
-		
-		
-		
+
+
+
 		return "/member/memberPwdFind";
 	}
-	
-/*-----------------*/	
+
+	/*-----------------*/	
 
 
-//	/*관리자페이지로 이동???*/
-//    @ResponseBody
-//    @RequestMapping("/adminpage.do")
-//    public ModelAndView adminPage(ModelAndView mav) {
-//        mav.setViewName("member/adminreport");
-//        return mav;
-//    }
-//    
-//    @ResponseBody
-//    @RequestMapping("/adminmList.do")
-//    public ModelAndView adminmemberList(ModelAndView mav) {
-//        mav.setViewName("member/adminmList");
-//        return mav;
-//    }
-  
-   
-    
-    @RequestMapping(value="/updatePwd.do",method=RequestMethod.GET)
+	//	/*관리자페이지로 이동???*/
+	//    @ResponseBody
+	//    @RequestMapping("/adminpage.do")
+	//    public ModelAndView adminPage(ModelAndView mav) {
+	//        mav.setViewName("member/adminreport");
+	//        return mav;
+	//    }
+	//    
+	//    @ResponseBody
+	//    @RequestMapping("/adminmList.do")
+	//    public ModelAndView adminmemberList(ModelAndView mav) {
+	//        mav.setViewName("member/adminmList");
+	//        return mav;
+	//    }
+
+
+
+	@RequestMapping(value="/updatePwd.do",method=RequestMethod.GET)
 	public String changePasswd(@RequestParam String memberId, Model model) {
 
 		model.addAttribute("Member",memberService.selectOneMember(memberId));
 		return "member/updatePwd";
 	}
 
-    
-    @RequestMapping(value="/updatePasswordEnd.do",method=RequestMethod.POST)
-	public String changePassword(@RequestParam String memberId,
-								 @RequestParam String password,
-								 @RequestParam String password_new, Model model) {
-    				// 1.업무로직 : 회원 정보 가져오기
-    				Member member = memberService.selectOneMember(memberId);
-    				String pwd =member.getPassword();
 
-    				System.out.println("받아온 비번:"+password);
-    				
-    				String newpassword = passwordEncoder.encode(password_new); //변경비번
-    				int result =0;
-    				
-    				String msg = "";
-    				String loc="";
-	    			if(passwordEncoder.matches(password,pwd)==true) {
-	    				//비밀번호가 맞으면 
-	    				member.setPassword(newpassword);
-	    				
-	    				result =memberService.updatePwd(member); 
-	
-	    				if(result>0) {
-	    					msg="비밀번호 변경성공";
-	    					String script="self.close();";
-	    					model.addAttribute("script",script);
-	    					
-	    				}else {
-	    					msg="변경실패";
-	    				}
-	    			}
-	    			// 3. 비밀번호가 틀린 경우
-	    			else {
-	    				msg = "비밀번호가 일치하지 않습니다.";
-	    				loc="/member/updatePwd.do?memberId="+memberId;
-	    			}
-	    				
-	
-	    			
-	    			model.addAttribute("msg", msg);
-	    			model.addAttribute("loc", loc); 
-	    			
-	    			return "common/msg";
-	
-				}
-    @RequestMapping("/chkEmailUsable.do")
-    @ResponseBody
-    public String chkEmailUsable(@RequestParam String email){
-    
-    	
-    	int cnt = 0;
-    	String authCode = null;
-   
-    	cnt = memberService.chkEmailUsable(email);
-    	logger.debug("cnt={}", cnt);
-    	
-    	//이메일 중복확인
-    	if(cnt==0) {
-    		String key = new TempKey().getKey(6, false); //6자리 랜덤 코드
-    	
-    		MailHandler sendMail;
-			
-    		try {
+	@RequestMapping(value="/updatePasswordEnd.do",method=RequestMethod.POST)
+	public String changePassword(@RequestParam String memberId,
+			@RequestParam String password,
+			@RequestParam String password_new, Model model) {
+		// 1.업무로직 : 회원 정보 가져오기
+		Member member = memberService.selectOneMember(memberId);
+		String pwd =member.getPassword();
+
+		System.out.println("받아온 비번:"+password);
+
+		String newpassword = passwordEncoder.encode(password_new); //변경비번
+		int result =0;
+
+		String msg = "";
+		String loc="";
+		if(passwordEncoder.matches(password,pwd)==true) {
+			//비밀번호가 맞으면 
+			member.setPassword(newpassword);
+
+			result =memberService.updatePwd(member); 
+
+			if(result>0) {
+				msg="비밀번호 변경성공";
+				String script="self.close();";
+				model.addAttribute("script",script);
+
+			}else {
+				msg="변경실패";
+			}
+		}
+		// 3. 비밀번호가 틀린 경우
+		else {
+			msg = "비밀번호가 일치하지 않습니다.";
+			loc="/member/updatePwd.do?memberId="+memberId;
+		}
+
+
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc); 
+
+		return "common/msg";
+
+	}
+	@RequestMapping("/chkEmailUsable.do")
+	@ResponseBody
+	public String chkEmailUsable(@RequestParam String email){
+
+
+		int cnt = 0;
+		String authCode = null;
+
+		cnt = memberService.chkEmailUsable(email);
+		logger.debug("cnt={}", cnt);
+
+		//이메일 중복확인
+		if(cnt==0) {
+			String key = new TempKey().getKey(6, false); //6자리 랜덤 코드
+
+			MailHandler sendMail;
+
+			try {
 				sendMail = new MailHandler(mailSender);
-				
+
 				sendMail.setSubject("[ShowTicket] 이메일 인증코드입니다.");
-	            sendMail.setText(new StringBuffer().append("<h1>이메일인증</h1>")
-	            		.append("인증코드는 ")
-	                    .append("<strong>"+key+"</strong>")
-	                    .append("입니다.")
-	                    .toString());
-	            
-	            sendMail.setFrom("showticket77@gmail.com", "(주)쇼티켓");
-	            sendMail.setTo(email);
-	            sendMail.send();
-	           
+				sendMail.setText(new StringBuffer().append("<h1>이메일인증</h1>")
+						.append("인증코드는 ")
+						.append("<strong>"+key+"</strong>")
+						.append("입니다.")
+						.toString());
+
+				sendMail.setFrom("showticket77@gmail.com", "(주)쇼티켓");
+				sendMail.setTo(email);
+				sendMail.send();
+
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			} catch (UnsupportedEncodingException e) {
@@ -649,6 +640,7 @@ public class MemberController {
  		model.addAttribute("msg", result>0?"예매 취소 완료":"예매 취소 실패!");
     	model.addAttribute("loc", "/member/reservation.do?cPage="+1);
 
+
     	return "common/msg";
     }
     
@@ -665,6 +657,91 @@ public class MemberController {
 		return authPhone;
 	}
 	
+
+	@RequestMapping(value="/findIdByEmail.do", method=RequestMethod.POST)
+	public ModelAndView findIdByEmail(ModelAndView mav, @RequestParam String memNm, @RequestParam String memEmail) {   
+		Map<String, String> memInfo = new HashMap<>();
+		memInfo.put("memNm", memNm);
+		memInfo.put("memEmail", memEmail);
+
+		String memberId = memberService.findIdByEmail(memInfo);
+
+		mav.addObject("memberId", memberId);
+		mav.setViewName("member/memberIdFindEnd");
+		return mav;
+	}
+
+	@RequestMapping(value="/findIdByPhone.do", method=RequestMethod.POST)
+	public ModelAndView findIdByPhone(ModelAndView mav, @RequestParam String memNm, @RequestParam String inputHp) {
+		Map<String, String> memInfo = new HashMap<>();
+		memInfo.put("memNm", memNm);
+		memInfo.put("inputHp", inputHp);
+
+		String memberId = memberService.findIdByPhone(memInfo);
+
+		mav.addObject("memberId", memberId);
+		mav.setViewName("member/memberIdFindEnd");
+		return mav;
+	}
+
+	@RequestMapping(value="/findPwdByEmail.do", method=RequestMethod.POST)
+	public ModelAndView findPwdByEmail(ModelAndView mav, @RequestParam String memNm, @RequestParam String memId, @RequestParam String memEmail) throws Exception {   
+		Map<String, String> memInfo = new HashMap<>();
+		memInfo.put("memNm", memNm);
+		memInfo.put("memEmail", memEmail);
+
+		String memberId = memberService.findIdByEmail(memInfo);
+
+		String authKey = "";
+		if(memberId.equals(memId)) {
+			authKey = memberService.createMail(memEmail);
+		}
+		mav.addObject("memberId", memberId);
+		mav.addObject("authKey", authKey);
+		mav.setViewName("member/memberPwdFindEnd");
+		return mav;
+	}
+
+	@RequestMapping(value="/findPwdByPhone.do", method=RequestMethod.POST)
+	public ModelAndView findPwdByPhone(ModelAndView mav, @RequestParam String memNm, @RequestParam String memId, @RequestParam String inputHp) {
+		Map<String, String> memInfo = new HashMap<>();
+		memInfo.put("memNm", memNm);
+		memInfo.put("inputHp", inputHp);
+
+		String memberId = memberService.findIdByPhone(memInfo);
+
+		mav.addObject("memberId", memberId);
+		mav.setViewName("member/memberPwdFindEnd");
+		return mav;
+	}
+
+	@RequestMapping(value="/updatePwdByFind.do",method=RequestMethod.POST)
+	public String updatePwdByFind(@RequestParam String memberId, @RequestParam String password_new, Model model) {
+		// 1.업무로직 : 회원 정보 가져오기
+		Member member = memberService.selectOneMember(memberId);
+
+		String newpassword = passwordEncoder.encode(password_new); //변경비번
+
+		String msg = "";
+		String loc="";
+		member.setPassword(newpassword);
+
+		int	result =memberService.updatePwd(member); 
+
+		if(result>0) {
+			msg="비밀번호 변경성공";
+			String script="self.close();";
+			model.addAttribute("script",script);
+
+		}else {
+			msg="변경실패";
+		}
+
+		model.addAttribute("msg", msg);
+		model.addAttribute("loc", loc); 
+
+		return "common/msg";
+
+	}
 }
 
-	

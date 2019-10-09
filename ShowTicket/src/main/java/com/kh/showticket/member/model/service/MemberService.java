@@ -53,6 +53,9 @@ public interface MemberService {
 	List<Ticket> selectTotalCountT(Map<String,Object> paging);
 
 	List<Ticket> selectTotalCount15(Map<String,Object> paging);
+	
+	String findIdByEmail(Map<String, String> memInfo);
 
+	String findIdByPhone(Map<String, String> memInfo);
 
 }

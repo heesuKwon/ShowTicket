@@ -52,6 +52,8 @@ public interface MemberDAO {
 
 	List<Ticket> selectTotalCount15(Map<String,Object> paging);
 
+	String findIdByEmail(Map<String, String> memInfo);
 
+	String findIdByPhone(Map<String, String> memInfo);
 
 }

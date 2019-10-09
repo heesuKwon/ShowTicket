@@ -158,5 +158,15 @@ public class MemberServiceImpl implements MemberService {
 	public List<Ticket> selectTotalCount15(Map<String,Object> paging) {
 		return memberDAO.selectTotalCount15(paging);
 	}
+	
+	@Override
+	public String findIdByEmail(Map<String, String> memInfo) {
+		return memberDAO.findIdByEmail(memInfo);
+	}
+
+	@Override
+	public String findIdByPhone(Map<String, String> memInfo) {
+		return memberDAO.findIdByPhone(memInfo);
+	}
 
 }
