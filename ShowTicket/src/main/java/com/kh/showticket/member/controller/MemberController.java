@@ -36,6 +36,9 @@ import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.MyPoint;
 import com.kh.showticket.member.model.vo.Ticket;
+import com.kh.showticket.phone.UtilSms;
+import com.kh.showticket.phone.controller.AuthPhoneNumber;
+import com.kh.showticket.phone.model.request.Message;
 
 
 @RequestMapping("/member")
@@ -636,6 +639,19 @@ public class MemberController {
 
     	return "common/msg";
     }
+    
+    @RequestMapping(value="/phone.do", method=RequestMethod.POST)
+    @ResponseBody
+	public String phone(Model model, @RequestParam String phone) {
+		
+    	AuthPhoneNumber ap = new AuthPhoneNumber();
+    	String authPhone = ap.excuteGenerate();
+    	
+		Message message = new Message(phone, "01099377714", "[" + authPhone + "] 핸드폰 인증번호를 입력해주세요.");
+		UtilSms.sendMessage(message);
+				
+		return authPhone;
+	}
 	
 }
 

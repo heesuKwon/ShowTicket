@@ -58,37 +58,47 @@
 			<tr>
 				<th>이메일</th>
 				<td>
-				
-						<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">			
-						<span class="btn btn-gray btn-sm" id="emailAuthSubmit">이메일 인증</span>
-						<div style="clear:both; margin-top:5px;">
+					<input type="email" class="form-control" placeholder="abc@naver.com" name="email" id="email">			
+					<span class="btn btn-gray btn-sm" id="emailAuthSubmit">이메일 인증</span>
+					<div style="clear:both; margin-top:5px;">
 							<input type="checkbox" id="chk-email"/><label for="chk-email">정보수신동의</label>
-						</div>
-						<div class="authContainer" id="emailAuthContainer">
+					</div>
+					<div class="authContainer" id="emailAuthContainer">
 							<span>인증번호 : </span>
 							<input type="text" class="form-control" id="emailAuthCode" />
 							<button type="button" class="btn btn-primary" id="btn-emailAuth">확인</button>
 							<p class="ok" id="emailAuthstatus">이메일 인증이 완료되었습니다.</p>						
-						</div>
+					</div>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>휴대폰<span class="star">*</span></th>
-				<td>	
+				<td>
 					<input type="tel" class="form-control" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required>
-					<button class="btn btn-gray btn-sm">휴대폰 인증</button>
+					<span class="btn btn-gray btn-sm" id="phoneAuthSubmit">휴대폰 인증</span>
+					<div style="clear:both; margin-top:5px;">
+							<input type="checkbox" id="chk-phone"/><label for="phone">정보수신동의</label>
+					</div>
+					<div class="authContainer" id="phoneAuthContainer">
+							<span>인증번호 : </span>
+							<input type="text" class="form-control" id="phoneAuthCode"/>
+							<button type="button" class="btn btn-primary" id="btn-phoneAuth">확인</button>
+							<p class="ok" id="phoneAuthstatus">휴대폰 인증이 완료되었습니다.</p>						
+					</div>
 				</td>
 			</tr>
-			
+						
 		</table>
-		<input class="btn btn-color" type="submit" value="회원가입" >
+		<input class="btn btn-color" type="submit" id="enroll" value="회원가입" onclick="validate();">
 		<input class="btn btn-gray" type="reset" value="취소">
 	</form>
 </div>
 
 <script>
 var emailAuthstatus = 0;
+var phoneAuthstatus = 0;
+
 $(function(){
 
  	// 비밀번호 검사
@@ -195,10 +205,64 @@ $(function(){
 			alert("이메일 인증에 실패했습니다. 인증번호를 확인하세요.");
 		}		
 	});
+		
 	
+	/* 휴대폰 인증 */
+	var authPhone;
 	
+	$("#phoneAuthSubmit").on("click",function(e){
+		var phone = $("#phone").val().trim();
+		
+		if(phone.length==0){
+			alert("핸드폰 번호를 입력해주세요.");
+			return;
+		}
+		
+		if($("input:checkbox[id='chk-phone']").is(":checked") == false){
+			alert("정보수신에 동의해주세요.");
+			return;
+		};
+		
+		$("#testPhone").append("<input type='hidden' name='phone' value='"+phone+"'/>").submit();
+		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/member/phone.do",
+			type: "POST",
+			data: {phone: phone},
+			success: data =>{
+				authPhone = data;
+			},
+			error: (jqxhr, textStatus, errorThrown)=>{
+				console.log("ajax처리실패!", jqxhr, textStatus, errorThrown);
+			}
+		});
+		
+		alert("인증번호가 발송되었습니다. 수신까지 몇분정도 소요됩니다.")
+		
+		$("#phoneAuthContainer").show();
+		
+	});
+	
+	$("#phone").on("keyup",function(){
+		phoneAuthstatus = 0;
+		authPhone = "";
+		$("#phoneAuthstatus").hide();
+	});
+	
+	<!-- 인증코드 확인 -->
+	$("#btn-phoneAuth").on("click",()=>{
+		if(authPhone == $("#phoneAuthCode").val()){
+			alert("휴대폰 인증에 성공했습니다.");	
+			phoneAuthstatus = 1;
+			$("#phoneAuthstatus").show();
+		}
+		else{
+			alert("휴대폰 인증에 실패했습니다. 인증번호를 확인하세요.");
+		}		
+	});//휴대폰 인증 끝
 		
 });
+
 
 function validate(){
 	var memberId = $("#memberId_");
@@ -210,6 +274,11 @@ function validate(){
 	var email = $("#email").val();
 	if(email.length!=0&&emailAuthstatus==0){
 		alert("이메일 인증을 하시거나 이메일 정보를 지워주세요.");
+		return false;
+	}
+
+	if(phoneAuthstatus == 0){
+		alert("휴대폰 인증을 진행해주세요");
 		return false;
 	}
 	
