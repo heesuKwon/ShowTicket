@@ -26,7 +26,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
-<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+<!-- <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script> -->
 <!--지도api  -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
@@ -939,17 +939,17 @@ function insertReview(){
 <input type="hidden" id="isValidProduct" value="true">
 <input type="hidden" id="reviewExposureYn" value="Y">
 
-<script type="text/javascript" src="/resources/js/number.js?20170831"></script>
-<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
+<!-- <script type="text/javascript" src="/resources/js/number.js?20170831"></script>
+<script type="text/javascript" src="/resources/js/pagingJs.js"></script> -->
 <!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
-<script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
-
+<!-- <script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script> -->
+<%-- 
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/coupon/couponTemplate.js"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script> --%>
 
 <script type="text/javascript">
 	//<![CDATA[

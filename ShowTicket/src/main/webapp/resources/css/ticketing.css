@@ -40,7 +40,7 @@
 /* 오른쪽 미니 정보 부분 */
 .t_dimg{width: 195px;height: 250px;}
 .t_ddiv2{margin: 8 0 0 0px;display: inline-block;position: absolute;}
-.t_dname{margin: 10 0 0 -2px;;font-size: 21px;}
+.t_dname{width: 220px; margin: 10 0 0 -2px; font-size: 18px;}
 .t_dtable2{font-size: 14px;margin: 15 0 0 0px;}
 .t_dtable2 tr td:nth-child(1){width: 65px;border-bottom:solid 0.5px #d3d3d3; padding-bottom: 7px; padding-top: 7px;}
 .t_dtable2 tr td:nth-child(2){width: 125px;border-bottom:solid 0.5px #d3d3d3;text-align: right;color: #8f01a3;}
