@@ -53,7 +53,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public int deleteLikes(Likes likes) {
 		return sqlSession.delete("review.deleteLikes", likes);
 	}
-
+	
 	@Override
 	public int insertLikes(Likes likes) {
 		return sqlSession.insert("review.insertLikes", likes);
