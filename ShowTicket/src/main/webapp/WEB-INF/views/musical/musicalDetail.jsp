@@ -24,8 +24,6 @@
 
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
-<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
 <!--지도api  -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
 <!--  <link rel="stylesheet" type="text/css"
@@ -113,6 +111,42 @@ $(()=>{
 	 $(".tabs-Num").css("display","none");
 	
 	$("#tabs-3").css("display","block");
+	
+	$(document.body).delegate('#reportReview', 'click', function(e) {
+		MemberCommonCheck();
+		var reviewNo = $(e.target).parents("li").children("input[id='reviewNo']").val();
+		var receiveId = $(e.target).parents("li").children("input[id='reviewWriter']").val();
+		alert(reviewNo);	
+		insertReport(reviewNo, receiveId);
+	});
+	
+	$(document.body).delegate('#dReview', 'click', function(e) {
+		if(!confirm("정말 삭제하시겠습니까?")){
+			return false;
+		}
+		var review = {};
+		
+		var reviewNo = $(e.target).parents("li").children("input[id='reviewNo']").val();
+		review.reviewNo = reviewNo;
+		alert(reviewNo);
+		$.ajax({
+			url: '${pageContext.request.contextPath}/review/deleteReview.do',
+			data: JSON.stringify(review),
+			contentType: 'application/json; charset=utf-8',
+			dataType: "json",
+			type: "DELETE",
+			success: (data)=>{
+				alert("삭제되었습니다.");
+				reviewList();
+			},
+			error: (xhr, txtStatus, err)=>{
+				console.log("ajax처리실패!",xhr, txtStatus, err);
+			}
+			
+		});
+		
+	});
+	
 })
 
 
@@ -660,7 +694,8 @@ $(()=>{
 						function reviewList(){
 							
 						var reviewShowId = "${musical.id}";
-						
+						/* var reviewNo = 0;
+                        var receiveId = ""; */
 						
 						    $.ajax({
 						        url : "${pageContext.request.contextPath}/review/reviewList.do",
@@ -676,32 +711,36 @@ $(()=>{
 						   
 						                if(data.length>0){
 						                    for(var i in data){
+						                        /* reviewNo = data[i].reviewNo;
+						                        receiveId = data[i].reviewWriter; */
+						                    	
 						               			html += "<li class='reviewOne'>"
 						                        /* html += "<span class='my-rating-7'></span>"; */
-						                        html += "<input type='hidden' value='"+data[i].reviewNo+"'>"
+						                        html += "<input type='hidden' id='reviewNo' value='"+data[i].reviewNo+"'>"
+						                        html += "<input type='hidden' id='reviewWriter' value='"+data[i].reviewWriter+"'>"
 						                        html += "<span class='review-rating-"+i+"'></span>"; 
 						                        html += "<span class='reviewId color_purple'>"+data[i].reviewWriter+"&nbsp;";
 						                        if("" == "${memberLoggedIn.memberId}"){
 							                        html += "<a href='javascript:MemberCommonCheck();'>";
 						                        }
+						                        else{
+							                        /*신고하는 부분  */
 						                        	
-						                        if("" != "${memberLoggedIn.memberId}"){
+						                        	html += "<a href='javascript:void(0);' id='reportReview'>";
+						                        }  
 							                        /* html += "<a href='${pageContext.request.contextPath}/main.do?reviewNo="+data[i].reviewNo+"&reportMemberId2="+data[i].reviewWriter+"&reportMemberId="+${memberLoggedIn.memberId}+"'>"; */
-						                        }
 
 						                        html += "<img src='${pageContext.request.contextPath }/resources/images/alert.png' style='padding-bottom:2px; width:18px; height:18px;'></a>";
 						                        html += "</span>";
+						                        	/* 삭제하는 부분 */
+						                        if(data[i].reviewWriter == "${memberLoggedIn.memberId}" || "admin" == "'"+data[i].reviewWriter+"'"){
 						                        html += "<div class='btns'><button class='btn-sm btn-primary' id='dReview'>삭제</button></div>"
+						                        }
 						                        html += "<div class='reviewContent'>"+data[i].reviewContent+"</div>";
 						                        html += "<span class='reviewDate small-font'>"+data[i].reviewDate+"</span>";
-						                        html += "<button id='likes'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
+						                        /*좋아요하는 부분  */
+						                        html += "<button id='likes' onclick='likesUp("+data[i].reviewNo+");'><i class='far fa-thumbs-up'></i>  "+data[i].reviewLike+"</button>";
 						                        html += "</li>"; 
-						                       /*  $(".review-rating-"+i).starRating({
-						                    	    initialRating: data[i].reviewStar,
-						                    	    readOnly: true,
-						                    	    starSize: 25,
-						                    	  }); */
-						                    	  
 
 						                    } /* for문끝 */
 						                }  /* if문끝 */
@@ -771,11 +810,9 @@ $(function colorRating() {
 	    strokeColor: '#8f01a3',
 	  
 	    onHover: function(currentIndex, currentRating, $el){
-	      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
 	      $('.live-rating').text(currentIndex);
 	    },
 	    onLeave: function(currentIndex, currentRating, $el){
-	      console.log('index: ', currentIndex, 'currentRating: ', currentRating, ' DOM element ', $el);
 	      $('.live-rating').text(currentRating);
 	    }
 	  });
@@ -787,7 +824,7 @@ $(function colorRating() {
 
 function MemberCommonCheck(){
 	var memberId = "";	
-	if(memberId == "${memberLoggedIn}"){
+	if(memberId == "${memberLoggedIn.memberId}"){
 		alert("로그인 해주세요");
 		$("#goLogin").click();				
 	}
@@ -796,8 +833,62 @@ function MemberCommonCheck(){
 	/* if(MemberLoggedIn == "null"){
 		$(.login).attr("onclick", "");
 	} */
-
+/*신고하기  */
+function insertReport(reviewNo, receiveId){
 	
+		if(!confirm("신고하시겠습니까?")){
+			return false;
+		}
+		
+	 var report = {};
+	report.reviewNo = reviewNo;
+	report.reportMemberId = "${memberLoggedIn.memberId}";
+	report.receiveMemberId = receiveId; 
+	
+	 $.ajax({
+		url: "${pageContext.request.contextPath}/admin/insertReport.do",
+		data: JSON.stringify(report),
+		contentType: 'application/json; charset=utf-8',
+		dataType: "json",
+		type: "POST",
+		success: (data)=>{
+			console.log(data.msg);
+		
+		},
+		error: (xhr, txtStatus, err)=>{
+			console.log("ajax처리실패!",xhr, txtStatus, err);
+		}
+		
+	}); 
+	
+	
+}
+	
+/*좋아요  */
+function likesUp(reviewNo){
+	if("" == "${memberLoggedIn.memberId}"){
+		alert("로그인해주세요");
+		return false;
+	}
+	var likes = {};
+	likes.reviewNo = no;
+	
+	/* $.ajax({
+		url: "${pageContext.request.contextPath}/review/likes",
+		data: JSON.stringify(likes),
+		contentType: 'application/json; charset=utf-8',
+		dataType: "json",
+		type: "POST",
+		success: (data)=>{
+			alert(data);
+		},
+		error: (xhr, txtStatus, err)=>{
+			console.log("ajax처리실패!",xhr, txtStatus, err);
+		}
+		
+	}); */
+	
+}	
 function isValidReview() {
 	var rating = $.trim($("#rating").text());
 	var reviewContent = $.trim($("#reviewContent").val());
@@ -886,7 +977,7 @@ function insertReview(){
 								</c:if>
 								<c:if test="${not empty musical.urls }">
 									<c:forEach items="${musical.urls}" var="f">
-												<img src="${f }" alt="" style="max-width: 900px; margin-left:110px;"/>	
+												<img src="${f }" alt="" style="max-width: 900px;"/>	
 									</c:forEach>
 								</c:if> 
 							</div>
@@ -925,7 +1016,7 @@ function insertReview(){
 
 				<div class="tabs-Num" id="tabs-4">
 
-					<div class="detail_cont">
+					<div class="detail_cont" style="padding: 30px 70px;">
 
 						<strong>[티켓 수령 안내]</strong>
 						<div class="contents">
@@ -1304,23 +1395,7 @@ function insertReview(){
 
 
 
-<input type="hidden" id="errorMsg" value="">
-<input type="hidden" id="productClassCode" value="CONCERT">
-<input type="hidden" id="productTypeCode" value="">
-<input type="hidden" id="productServiceType" value="TKL">
-<input type="hidden" id="isValidProduct" value="true">
-<input type="hidden" id="reviewExposureYn" value="Y">
 
-<script type="text/javascript" src="/resources/js/number.js?20170831"></script>
-<script type="text/javascript" src="/resources/js/pagingJs.js"></script>
-<!-- <script type="text/javascript" src="/resources/js/seatingchart-old/userTicketing/userDetail-0.0.0.min.js"></script> -->
-<script type="text/javascript" src="/resources/js/userDetail-0.0.3.js"></script>
-
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/coupon/couponCodeType.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/coupon/couponTemplate.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/coupon/coupon.js"></script> 
 
 <script type="text/javascript">
 	//<![CDATA[

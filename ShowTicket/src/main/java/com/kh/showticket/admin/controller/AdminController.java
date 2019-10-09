@@ -11,19 +11,22 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.showticket.admin.model.service.AdminService;
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.admin.model.vo.Review;
+import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
 
 
 @RequestMapping("/admin")
-@Controller
+@RestController
 @SessionAttributes("memberLoggedIn")
 public class AdminController {
 	
@@ -161,18 +164,22 @@ public class AdminController {
     	
     	return "common/msg";
     }
-//    @RequestMapping("/reportInsert.do")
-//    public String reportInsert(Model model, @RequestParam int reviewNo) {
-//    	
-//    	logger.debug("글 번호: ",reviewNo);
-//    	
-//    	int result = adminService.deleteReport(reviewNo);
-//    	
-//    	model.addAttribute("msg", result>0?"삭제 완료":"삭제 실패");
-//    	model.addAttribute("loc", "/admin/adminReport.do");
-//    	
-//    	return "common/msg";
-//    }
+    @PostMapping("/insertReport.do")
+    public Map<String, String> reportInsert(@RequestBody Report report) {
+    	logger.info("report={}", report);
+    	int check = adminService.checkReport(report);
+    	logger.info("check={}", check);
+    	Map<String, String> map = new HashMap<>();
+    	int result = 0;
+    	if(check < 0) {
+    		result = adminService.insertReport(report);
+    	}
+    	if(result> 0) {
+    		map.put("msg", "신고되었습니다. 항상 노력하는 쇼티켓이 되겠습니다.");
+    	}
+    	else map.put("msg", "이미 신고하신 댓글입니다.");
+    	return map;
+    }
     
     @RequestMapping("/adminMemberDelete.do")
     public String adminMemberDelete(Model model, @RequestParam String memberId) {
