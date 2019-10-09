@@ -54,4 +54,9 @@ public class MusicalServiceImpl implements MusicalService {
 		return musicalDAO.selectCoupon(musicalId);
 	}
 
+	@Override
+	public int selectDiscount(String musicalId) {
+		return musicalDAO.selectDiscount(musicalId);
+	}
+
 }

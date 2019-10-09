@@ -302,19 +302,13 @@
 		    <artifactId>selenium-chrome-driver</artifactId> 
 		    <version>4.0.0-alpha-2</version> 
 	    </dependency> 
+
 		<!-- 휴대폰 인증 -->
        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
        <dependency>
            <groupId>com.squareup.retrofit2</groupId>
            <artifactId>retrofit</artifactId>
            <version>2.5.0</version>
-       </dependency>
-       <!-- 휴대폰 인증 -->
-       <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-       <dependency>
-           <groupId>com.google.code.gson</groupId>
-           <artifactId>gson</artifactId>
-           <version>2.8.5</version>
        </dependency>
    		<!-- 휴대폰 인증 -->
        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-scalars -->
@@ -330,6 +324,15 @@
            <artifactId>converter-gson</artifactId>
            <version>2.3.0</version>
        </dependency>
+
+     <!-- Test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+
 	</dependencies>
     <build>
         <plugins>

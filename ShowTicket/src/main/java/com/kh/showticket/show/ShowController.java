@@ -114,6 +114,7 @@ public class ShowController {
 		
 	}
 	
+
 	@RequestMapping("/showNewAjax.do")
 	public List<Map<String, String>> showNewAjax(@RequestParam String url1) {
 		
@@ -121,5 +122,6 @@ public class ShowController {
 		
 		return dayList;
 	}
+	
 	
 }

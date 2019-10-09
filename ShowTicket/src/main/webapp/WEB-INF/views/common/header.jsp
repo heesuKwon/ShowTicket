@@ -22,6 +22,13 @@
 </head>
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
+
+<!-- WebSocket:sock.js CDN -->	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.3.0/sockjs.js"></script>	
+
+<!-- WebSocket: stomp.js CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
 <!-- bootstrap -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -185,11 +192,6 @@ function onClose(evt) {
 				</div>
 			</div>
 
-			<input type="hidden" name="code" id="code" value=""> <input
-				type="hidden" name="domainMenu" id="domainMenu"
-				value="http://www.ticketlink.co.kr"> <input type="hidden"
-				name="domainSportsMenu" id="domainSportsMenu"
-				value="http://www.ticketlink.co.kr/sports">
 
 			<div class="search_area">
 				<a href="${pageContext.request.contextPath }/"> 

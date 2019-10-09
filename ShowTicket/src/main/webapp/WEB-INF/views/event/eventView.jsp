@@ -18,8 +18,7 @@
 	href="${pageContext.request.contextPath}/resources/css/eventView.css">
 
 
-<body>
-
+<body>	
 	<ul class="nav nav-pills nav-justified">
 		<li class="nav-item"><a class="nav-link nav-font select"
 			href="${pageContext.request.contextPath}/event/eventList.do">진행중인
@@ -115,7 +114,6 @@
 				<div id="btnbox" style="width: 65%;">
 					<button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button>
 				</div>
-			
 			<c:if test="<%=memberLoggedIn != null %>">				
 				<div id="comment-container" name="comment-container">
 					<div class="comment-editor">
@@ -129,13 +127,17 @@
 						</form>
 					</div>
 				</div>
+			</c:if>	
+
+<script>
 
 
+</script>
 
 				<div class="container" style="margin-left: 20%;">
 					<div class="commentList"></div>
 				</div>
-		</c:if>	
+
 
 <style>
 .comment-btn{background:#8f01a3; border-radius: 3px; font-family: 'Gothic A1', sans-serif; }
@@ -154,7 +156,6 @@ console.log(eventNo);
 
 //댓글 목록 
 function commentList(){
-	console.log("클릭 클릭 commentList");
   $.ajax({
       url : "${pageContext.request.contextPath}/event/list",
       type : 'get',
@@ -199,7 +200,11 @@ $("#rebtn").on("click", e => {
 	event.memberId='<%=memberLoggedIn.getMemberId()%>';
 	
 	event.commentContent= $("[name=commentContent]").val();
-
+	if(event.commentContent.length==0){
+		alert("댓글을 입력해주세요!!"); 
+		return;
+	}
+	
 	
 	//댓글 등록
 	    $.ajax({

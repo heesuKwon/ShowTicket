@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/bookticket.css">
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -12,11 +11,17 @@
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/bookticket.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/ticketing.css" />
 <style>
 nav-pills .nav-link {
 	border-radius: 0;
 }
 </style>
+<script>
+function next(){
+	$("#next").submit();
+}
+</script>
 <body>
 
 	<div id="seatgdimg">
@@ -44,11 +49,16 @@ nav-pills .nav-link {
 
 
 		</div>
-
-
+	
+		
+		<form name="nextFrm" action="${pageContext.request.contextPath}/ticketing/ticketingPoint.do" id="next" method="post">
+			<input type="hidden" name="playId" value="${mas.id}" />
+			<input type="hidden" name="selectDate" value="${selectDate}" />
+			<input type="hidden" name="selectTime" value="${selectTime}" />
+		</form>
 		<div class="t_btndiv">
-			<input type="button" value="이전단계" class="t_button1" /> <input
-				type="button" value="결제하기" class="t_button2" />
+			<input type="button" value="이전단계" class="t_button1" /> 
+			<input type="button" value="다음단계" class="t_button2" onclick="next();"/>
 		</div>
 
 

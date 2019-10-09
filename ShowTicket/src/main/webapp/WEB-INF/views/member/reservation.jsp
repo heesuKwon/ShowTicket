@@ -186,12 +186,11 @@ function aClick(barNo) {
 function sendAlarm(ticketNo) {
 	sock.send(ticketNo);
 }
-
 </script>	
 
 
 
-<form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancle.do" method="post">
+<form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancel.do" method="post">
 	<input type="hidden" name="memberId" value="${memberId }"/>
 </form>
 <script>

@@ -56,6 +56,7 @@ public class getApi {
 		//logger.debug("�젙�젹寃곌낵 : {}", list);
 		return list;
 	}
+
 	public static List<Map<String, String>> getOrderedListByDate2(List<Map<String,String>> list){
 		Collections.sort(list, new DescendingByprfpdto());
 		logger.debug("�젙�젹寃곌낵 : {}", list);

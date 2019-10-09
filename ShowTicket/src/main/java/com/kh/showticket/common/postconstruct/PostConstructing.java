@@ -43,7 +43,7 @@ public class PostConstructing {
 	public static List<Map<String,String>> dayRankList1;
 	public static List<Map<String,String>> dayRankList2;
 
-	//�뿰洹� 由ъ뒪�듃
+	//연극 리스트
 	public static List<Map<String,String>> showList;
 	
 	
@@ -77,9 +77,9 @@ public class PostConstructing {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd"); // �궇吏� �룷留� 
 		c1.add(Calendar.DATE, -1); // �삤�뒛�궇吏쒕줈遺��꽣 -1
 		String yesterday = sdf.format(c1.getTime());
-		c1.add(Calendar.DATE, 1); // �삤�뒛�궇吏쒕줈遺��꽣 -1
+		c1.add(Calendar.DATE, 1); // 오늘날짜로부터 -1
 		String today = sdf.format(c1.getTime());
-		c1.add(Calendar.DATE, 30); // �삤�뒛�궇吏쒕줈遺��꽣 30
+		c1.add(Calendar.DATE, 30); // 오늘날짜로부터 30
 		String nextMonth = sdf.format(c1.getTime());
 		String url1 = "http://kopis.or.kr/openApi/restful/boxoffice?service=9f6a9651f5e648ac95d2cc7a210a4587&ststype=month&date="+yesterday+"&catecode=AAAB";
 		
@@ -103,7 +103,7 @@ public class PostConstructing {
 		dayRankList1 = getBoxList(url1);
 		dayRankList2 = getBoxList(url2);
 		
-		//�뿰洹� 由ъ뒪�듃
+		//연극 리스트
 
 		c1.add(Calendar.DATE,-30);
 		String monthBefore = sdf.format(c1.getTime());
