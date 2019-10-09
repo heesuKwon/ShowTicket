@@ -1367,13 +1367,13 @@ function insertReview(){
 		SELECTED_ROUND: "",
 		SELECTED_SCHEDULE: ""
 	};
-
 	var URL_DATA = {
 		SELECTED_DATE: document.URL.split("productDate=")[1] != null ? document.URL.split("productDate=")[1].split("&")[0] : "",
 		SELECTED_ROUND: document.URL.split("productRound=")[1] != null ? document.URL.split("productRound=")[1].split("&")[0] : ""
 	};
-
-	var days = ["일", "월", "화", "수", "목", "금", "토", "일"];
+	days = ["일","월","화","수","목","금","토"];
+	
+	var times;
 	<!-- 달력 -->
 	$.fn.datepicker.dates['kr'] = {
 			days: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일", "일요일"],
@@ -1388,12 +1388,12 @@ function insertReview(){
 	};
 	
 	
-	var selectDay;
-	
+	var selectDate;
 	
 	$(document).ready(function () {
 		/*-------------------------------희수 코딩 영역--------------------------------*/
 		//달력
+		
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
 			startDate: '${musical.getStartDate()}',
@@ -1403,74 +1403,119 @@ function insertReview(){
             daysOfWeekDisabled : <%=list%>,
 			language: 'kr'
 		}).on('changeDate',function(e){
-			var date = new Date(e.format());
-			var day = date.getDay();
-			console.log(day);
-			console.log(days[day]);
-			selectDay = days[day];
-			//$("#watchTime").attr("day", days[day]);
+			var today = new Date();	//오늘 날짜
+			selectDate = new Date(e.format());
+			if(today>selectDate){
+				alert("지난 날짜입니다. 다시 선택해주세요.");
+				return;
+			}
+			var day = selectDate.getDay();
+			var timeList;
+			if(day==0){
+				timeList = '<%=dayTime.get("일")%>';
+			}
+			else if(day==1){
+				timeList = '<%=dayTime.get("월")%>';
+			}
+			else if(day==2){
+				timeList = '<%=dayTime.get("화")%>';
+			}
+			else if(day==3){
+				timeList = '<%=dayTime.get("수")%>';		
+			}
+			else if(day==4){
+				timeList = '<%=dayTime.get("목")%>';
+			}
+			else if(day==5){
+				timeList = '<%=dayTime.get("금")%>';
+			}
+			else if(day==6){
+				timeList = '<%=dayTime.get("토")%>';
+			}
 			
-			<%-- var timeList = <%=dayTime.get(%>days[day]<%)%>; --%> 
+			$("#watchTime").children().remove();
 			
+			times = timeList.split(",")
+			for(var i=0;i<times.length;i++){
+				var time = times[i].split(":");
+				var html = "<option value='"+times[i]+"'>"+time[0]+"시 "+time[1]+"분</option>";
+				$("#watchTime").append(html);				
+			}		
 		});
 		
+		$("#wait").on("click",()=>{
+			if(${memberLoggedIn!=null}){
+				location.href = "${pageContext.request.contextPath}/musical/insertWait.do?musicalId=${musical.getId()}";
+			}
+			else{
+				alert("로그인이 필요합니다.");
+			}
+		});
 	
+		$("#book").on("click",()=>{
+			if(${memberLoggedIn==null}){
+				alert("로그인이 필요합니다.");
+				return;
+			}
+			var selectTime = $("#watchTime").val();
+			
+			if(selectDate==null||selectTime==''){//날짜나 회차가 선택되지 않은 경우 
+				alert("날짜와 회차를 선택해주세요");
+				return;
+			}
+			
+			var selectNum;
+			for(var i=0;i<times.length;i++){
+				if(times[i]== selectTime){
+					selectNum = i+1;
+				}
+			}
+			var year = selectDate.getFullYear();
+			var month = selectDate.getMonth()+1;
+			var date = selectDate.getDate();
+			var sDate = year+"."+month+"."+date;
+			
+			var form = document.createElement("form");
+			form.setAttribute("charset", "UTF-8");
+			form.setAttribute("method", "Post"); // Get 또는 Post 입력
+			form.setAttribute("action", "${pageContext.request.contextPath}/ticketing/ticketingSeat.do");
+			 
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "playId");
+			hiddenField.setAttribute("value", "${musical.id}");
+			form.appendChild(hiddenField);
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectDate");
+			hiddenField.setAttribute("value", sDate);
+			form.appendChild(hiddenField);
+			
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectTime");
+			hiddenField.setAttribute("value", selectTime);
+			form.appendChild(hiddenField);
+			
+			hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", "selectNum");
+			hiddenField.setAttribute("value", selectNum);
+			form.appendChild(hiddenField);
+		
+			var url = "${pageContext.request.contextPath}/ticketing/ticketingSeat.do";
+		    var name = "bookTicket";
+		    var option = "width = 900, height = 630, top = 0, left = 100, location = no";
+		    window.open(url, name, option);
+		    
+		    form.target = name;
+		    document.body.appendChild(form);
+		    form.submit(); 
+		});
 		
 		/*-------------------------------희수 코딩 영역--------------------------------*/
-		//기능 설정
-		setDialog();
-		onCloseIfOutOfSelect();
-		makeTap();
-		//searchReviewUsingEnter();
-		//searchInquiryUsingEnter();
-		//setTextareaMax(document.getElementById("reviewContent"));
-		//setTextareaMax(document.getElementById("inquiryContent"));
-		$('input, textarea').placeholder();
-		if ($("#productServiceType").val() != "CLP" && $("#productTypeCode").val() != "SEASON") {
-			getProductDatesByProductId();
-		}
-		//ui설정
-		setTopTitleTag();
-		setPhoneNumber();
-
-		var anchorString = window.location.hash.substring(1);
-		if (anchorString == "tabs-2") {
-			getProductReviewList(1);
-
-			$("ul.detail_tab li").removeClass("on");
-			$("#ui-id-5").parent().addClass("on");
-		}
-
-		/* getProductReviewList(1);
-         getProductInquiryList(1); */
-		setProductTap();
-		if ($("#reviewExposureYn").val() == "Y") {
-			searchReviewUsingEnter();
-			setTextareaMax(document.getElementById("reviewContent"));
-		}
-		$(window).scroll(function () {
-			if ($(window).scrollTop() > 420) {
-				$("#wingright").addClass("moving");
-
-			} else if ($(window).scrollTop() <= 420) {
-				$("#wingright").removeClass("moving");
-			}
-		});
-
-		$("body").click(function(e){
-			if($("#popup_payco").css("display") == "block" && !$(e.target).hasClass('paycoImg')) {
-				closePaycoCouponPopup();
-			}
-        });
-
-
-		initCleanReserveInfo();
-		setLongTitle();
-		
-		
-		
+	
 	});
-
 	function initCleanReserveInfo () {
 		var contentDiv = $("div.ly_clean_reserve");
 		$(".tag_clean").click(function () {
@@ -1480,16 +1525,13 @@ function insertReview(){
 			contentDiv.addClass("blind");
 		});
 	}
-
 	function setLongTitle () {
 		var titleWidth = $("div.title")[0].offsetWidth;
 		var titleBoxWidth = $("div.bx_title")[0].offsetWidth;
 		var popupWidth = $("div.ly_clean_reserve")[0].offsetWidth;
 		var groupTagWidth = $("div.group_tag")[0].offsetWidth;
-
 		var isLongTitle = titleWidth === titleBoxWidth;     // 제목 2줄 이상
 		var isShortTitle = titleWidth < (popupWidth + 5);   // 짧은제목
-
 		if (isLongTitle) {
 			$("div.title").addClass("long_case");
 			$("div.ly_clean_reserve").css("display", "block").css("left", "5px");
@@ -1499,8 +1541,6 @@ function insertReview(){
 			$("div.ly_clean_reserve").css("left", pxLeft).css("right", "");
 		}
 	}
-
-
 	function getProductDatesByProductId () {
 		var postData = $("#productId").val();
 		$.ajax({
@@ -1522,7 +1562,6 @@ function insertReview(){
 			}
 		});
 	}
-
 	function setMonthButton (dateList) {
 		if (dateList.length > 0) {
 			if (dateList[0].productDate.split('.')[1] == dateList[dateList.length - 1].productDate.split('.')[1]) {
@@ -1534,10 +1573,8 @@ function insertReview(){
 			ne.tkl.selectSchedule.disablePrev();
 		}
 	}
-
 	function getProductRound (productDate) {
 		var jsonObject = {productId: $("#productId").val(), productDate: productDate};
-
 		$.ajax({
 			method: "POST",
 			url: "/api/product/round",
@@ -1558,7 +1595,6 @@ function insertReview(){
 						$("#product_round_select_list").find("li").eq(URL_DATA.SELECTED_ROUND).find("a").click();
 						URL_DATA.SELECTED_ROUND = "";
 					}
-
 					selectDefaultRounds(result);
 				} else {
 					//alert("오류가 발생하였습니다. 관리자에게 문의하세요");
@@ -1566,7 +1602,6 @@ function insertReview(){
 			}
 		});
 	}
-
 	function selectDefaultRounds (data) {
 		if (data.length === 1) {          // 예매 가능한 회차가 1개일 때
 			$("#product_round_select_list li a").eq(1).click();
@@ -1574,14 +1609,11 @@ function insertReview(){
 			$("#selectboxDefaultOption").click();
 		}
 	}
-
 	function selectScheduleItem (obj, productDate, productRound, scheduleId) {
 		$('#selectboxDefaultOption').text($(obj).html());
-
 		//회차, 스케쥴 아이디 전역 변수값 설정
 		RESERVE_DATA.SELECTED_ROUND = productRound;
 		RESERVE_DATA.SELECTED_SCHEDULE = scheduleId;
-
 		$("#product_round_select_list").css("display", "none");
 		if (isSeatProduct($("#productClassCode").val())) {
 			getGradeConcert(scheduleId);
@@ -1589,7 +1621,6 @@ function insertReview(){
 			getGradeExhibition(scheduleId);
 		}
 	}
-
 	function isSeatProduct (productClassCode) {
 		if (productClassCode === 'EXHIBITION') {
 			return false;
@@ -1599,9 +1630,7 @@ function insertReview(){
 		}
 		return productClassCode !== 'SPORTS_ZONE';
 	}
-
 	function getGradeConcert (scheduleId) {
-
 		$.ajax({
 			url: "/api/product/schedules/" + scheduleId + "/grades",
 			method: "get",
@@ -1615,7 +1644,6 @@ function insertReview(){
 			}
 		});
 	}
-
 	function getGradeExhibition (scheduleId) {
 		var productId = $("#productId").val();
 		$.ajax({
@@ -1632,10 +1660,8 @@ function insertReview(){
 			}
 		});
 	}
-
 	function makeGradeList (scheduleGrades) {
 		var gradeList = $('#seatingInfoPerRound').html('');
-
 		var totalCnt = 0;
 		if (scheduleGrades.length > 0) {
 			for (var i = 0; i < scheduleGrades.length; i++) {
@@ -1647,9 +1673,7 @@ function insertReview(){
 			} else {
 				var contents = "<li> 전체 <span class='num'>" + totalCnt + "</span>석</li>";
 			}
-
 			gradeList.append(contents);
-
 			for (var i = 0; i < scheduleGrades.length; i++) {
 				if (scheduleGrades[i].remainCnt <= 0) {
 					contents = "<li>" + scheduleGrades[i].name + " <span class='num'>매진</span></li>";
@@ -1664,7 +1688,6 @@ function insertReview(){
 			gradeList.append(contents);
 		}
 	}
-
 	function makeReserveBtnToSoldOutBtn () {
 		var reserveButton = $("#reserve_btn");
 		reserveButton.removeClass("s_after");
@@ -1674,7 +1697,6 @@ function insertReview(){
 			alert("매진된 상품입니다.");
 		});
 	}
-
 	function makeSoldOutBtnToReserveBtn () {
 		var reserveButton = $("#reserve_btn");
 		reserveButton.addClass("s_after");
@@ -1684,7 +1706,6 @@ function insertReview(){
 			popReserveDialog();
 		});
 	}
-
 	function parseRoundTime (data) {
 		var date = new Date(data.startDatetime),
 			parsedData = {},
@@ -1697,27 +1718,6 @@ function insertReview(){
 		parsedData.logicalPlanId = data.logicalPlanId;
 		return parsedData;
 	}
-
-
-	function setPhoneNumber () {
-		$("#phoneNumber").text(makePhoneFormat("0317838000"));
-	}
-
-	function showPaycoCouponPopup (obj) {
-		$('#popup_payco_dimmed').show();
-		$('#popup_payco').show();
-	}
-
-	function closePaycoCouponPopup(){
-		$('#popup_payco_dimmed').hide();
-		$('#popup_payco').hide();
-	}
-
-	function goPaycoApp () {
-		window.open('https://bill.payco.com/ad/downloadsms', '', 'width=490,height=570');
-	}
-
-
 	function selectTap (obj) {
 		
 		$(".tabs-Num").css("display","none");
@@ -1734,80 +1734,21 @@ function insertReview(){
 		}
 		
 		
-
-
 		$("ul.detail_tab li").removeClass("on");
 		$(obj).parent().addClass("on");
-
 	}
-
 	function makeTap () {
 		$("#tabs").tabs();
 	}
-
-	function setTopTitleTag () {
-		var solelySaleCode = "HIDE";
-		var tagButton = $("span.ico_tag");
-		if (solelySaleCode == "SOLELY") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_monopoly");
-			tagButton.innerText = "단독판매";
-		} else if (solelySaleCode == "ABSOLUTE") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_advantage");
-			tagButton.innerText = "절대우위";
-		} else if (solelySaleCode == "RELATIVE") {
-			tagButton.removeClass("blind");
-			tagButton.addClass("tag_dominant");
-			tagButton.innerText = "상대우위";
-		} else if (solelySaleCode == "HIDE" || solelySaleCode == "") {
-			tagButton.css("display", "none");
-		}
-	}
-
-	function onCloseIfOutOfSelect () {
-		$(document).on("click", function (e) {
-			if ($(e.target).parents("#roundSelect").size() == 0) {
-				$("#product_round_select_list").css("display", "none");
-			}
-
-			if ($(e.target).parents(".ui-dialog").size() == 0) {
-				$("#dialog1").dialog("close");
-				$("#dialog2").dialog("close");
-			}
-
-
-			if ($(e.target).parents(".price-dialog").size() == 0) {
-				$("#dialog4").dialog("close");
-				$("#dialog5").dialog("close");
-				$("#dialog7").dialog("close");
-			}
-
-			if ($(e.target).parents(".coupon-dialog").size() == 0 && $(e.target).parents(".l_coupon").size() == 0) {
-				$("#dialog6").dialog("close");
-			}
-
-			if ($(e.target).parents("#review_search_div").size() == 0) {
-				$("#review_select_list").css("display", "none");
-			}
-
-			if ($(e.target).parents("#inquiry_search_div").size() == 0) {
-				$("#inquiry_select_list").css("display", "none");
-			}
-		});
-	}
-
+	
 	function authorizedFanclubCallback () {
 		window.open('/member/fanclub/auth?productId=' + 29652, '', 'width=500, height=500');
 	}
-
 	function authorizeFanclub () {
-
 		if (!memberCommonCheck(location.href, 'authorizedFanclubCallback')) {
 			return;
 		}
 	}
-
 	function onClickSelect (obj) {
 		if ($("#product_round_select_list li").length > 0) {
 			$("#product_round_select_list").css("display", "block");
@@ -1815,87 +1756,63 @@ function insertReview(){
 			alert("날짜를 먼저 선택해주세요");
 		}
 	}
-
-	function  goGlobalWeb () {
-		window.open('/global/en/product/' + 29652, '');
-	}
-
 	function popReserveDialog () {
-
 		if (false) {
 			alert('팬클럽/멤버십 인증 후 예매가 가능합니다.');
 			return;
 		}
-
 		var now = new Date();
 		var year = now.getFullYear();
 		var mon = (now.getMonth() + 1) > 9 ? '' + (now.getMonth() + 1) : '0' + (now.getMonth() + 1);
 		var day = now.getDate() > 9 ? '' + now.getDate() : '0' + now.getDate();
-
 		var today = year + '.' + mon + '.' + day;
 		if (RESERVE_DATA.SELECTED_DATE == today) {
 			alert('당일공연은 예매취소/환불/변경이 불가합니다.');
 		}
-
 		var url = "http://" + location.hostname + "/product/" + $('#productId').val() + "?productDate=" + RESERVE_DATA.SELECTED_DATE + "&scheduleId=" + RESERVE_DATA.SELECTED_SCHEDULE;
-
 		if (!memberCommonCheck(url, 'callBackPopReserveDialog')	) {
 			return;
 		}
-
 		AEC_F_D('29652', 'i', 1);
 	}
-
 	function callBackPopReserveDialog (url) {
-
 		if ($("#isValidProduct").val() == 'true') {
-
 			if ("false" == "true") {
 				if (!isAdultMember()) {
 					return;
 				}
 			}
 		}
-
 		if (/.*\/product\/\d*.*/.test(url)) {
 			url = "/reserve/product/" + $('#productId').val() + "?productDate=" + RESERVE_DATA.SELECTED_DATE + "&scheduleId=" + RESERVE_DATA.SELECTED_SCHEDULE;
 		}
-
 		var hight = 980;
 		var scrollbarFlag = false;
-
 		if (hight > screen.height) {
 			scrollbarFlag = true;
 		}
-
 		alertBeforeReserve();
 		if ("true" != "true") {
 			return;
 		}
 		popupwindow(url, '티켓링크', 990, 890, scrollbarFlag ? 'yes' : 'no');
 	}
-
 	function isAdultMember () {
-
 		var isAdult = false;
-
 		$.ajax({
 			cache: false,
 			async: false,
 			dataType: "json",
 			url: "/adult/isAdultMember",
 			success: function (resultData) {
-
 				if (resultData.code == '1') {
 					alert('오류가 발생했습니다');
 					return;
 				}
-
 				if (resultData.result == null) {
 					alert('로그인이 필요한 상품입니다');
 					return;
 				}
-
 				if (resultData.result == 'Y') {
 					isAdult = true;
 					return;
@@ -1907,170 +1824,58 @@ function insertReview(){
 				alert("오류가 발생하였습니다");
 			}
 		});
-
 		return isAdult;
 	}
-
 	function adultConfirmControll (nextPage) {
 		if (confirm("성인인증이 필요한 상품입니다. 성인인증 페이지로 이동하시겠습니까?")) {
 			document.location.href = "/adult/confirm?nextPage=" + nextPage;
 		}
 	}
-
-	function setDialog () {
-		$("#dialog1").dialog({
-			autoOpen: false,
-			position: {my: "right top", at: "right bottom", of: '#buttonForDialog1'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog1").on("click", function () {
-			$("#dialog2").dialog("close");
-			$("#dialog1").dialog("open");
-			$("#dialog6").dialog("close");
-		});
-		$("#dialog2").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog2'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog2").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("open");
-			$("#dialog6").dialog("close");
-		});
-
-		$("#buttonForDialog3").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog6").dialog("close");
-		});
-		$("#dialog4").dialog({
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog4'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog4").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("open");
-			$("#dialog5").dialog("close");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("close");
-		});
-		$("#dialog5").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog5'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-
-		$("#dialog7").dialog({
-			closeText: false,
-			autoOpen: false,
-			position: {my: "left top", at: "left bottom", of: '#buttonForDialog7'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-
-		$("#buttonForDialog5").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("close");
-			$("#dialog5").dialog("open");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("close");
-		});
-		$("#buttonForDialog7").on("click", function () {
-			$("#dialog1").dialog("close");
-			$("#dialog2").dialog("close");
-			$("#dialog4").dialog("close");
-			$("#dialog5").dialog("close");
-			$("#dialog6").dialog("close");
-			$("#dialog7").dialog("open");
-		});
-
-		$("#dialog6").dialog({
-			closeText: false,
-			autoOpen: false,
-			width: 620,
-			position: {my: "right top", at: "right bottom", of: '#buttonForDialog6'}
-		}).dialog("widget").find(".ui-dialog-titlebar").hide();
-		$("#buttonForDialog6").on("click", function () {
-			$.ajax({
-				url: "/product/29652/coupons",
-				dataType: "json",
-				success: function (result) {
-					var couponList = result.result;
-					var template = createCouponLayerTemplate(couponList);
-
-					$("#dialog6 > table > tbody").html(template);
-				},
-				error: function (response, status, error) {
-					alert("에러가 발생했습니다.");
-				},
-				complete: function () {
-					$("#dialog1").dialog("close");
-					$("#dialog2").dialog("close");
-					$("#dialog4").dialog("close");
-					$("#dialog5").dialog("close");
-					$("#dialog6").dialog("open");
-				}
-			});
-		});
-	}
-
 	function createCouponLayerTemplate (couponList) {
 		var template = "";
 		couponList.forEach(function (coupon) {
 			var discountObj = couponTemplate.getCouponDiscountInfoObj(coupon.couponDiscountAmount, coupon.couponDiscountAmountCode);
-
 			template += "<tr><td class='tl'>" + coupon.couponName + "</td>";
 			template += "<td>" + discountObj.text + "</td>";
 			template += "<td class='tl'><ul>";
 			template += couponTemplate.couponDetailInfoinLiTag(coupon);
 			template += "</ul></td>";
-
 			if (coupon.possibleIssue) {
 				template += "<td><a href='javascript:;' onclick='couponIssue(" + coupon.couponId + ", this)' class='link_green fbold'>쿠폰받기</a></td>";
 			} else {
 				template += "<td>발급완료</td>";
 			}
-
 			template += "</tr>";
 		});
-
 		return template;
 	}
-
 	function popupClipReserveCallback () {
-
 		$.ajax({
 			url: '/product/validation/member-info',
 			method: 'POST',
 			contentType: 'application/json',
 			success: function (resultData) {
 				memberInfo = resultData.result;
-
 				if (memberInfo == null) {
 					alert('로그인 후 이용가능합니다.');
 					return;
 				}
-
 				var query = '?';
 				query += 'memberId=' + memberInfo.memberId;
 				query += '&memberTypeCode=' + memberInfo.memberTypeCode;
 				query += '&memberName=' + memberInfo.memberName;
 				query += '&memberNo=' + memberInfo.memberNo;
 				query += '&productId=' + $('#productId').val();
-
 				var hight = 980;
 				var scrollbarFlag = false;
-
 				if (hight > screen.height) {
 					scrollbarFlag = true;
 				}
-
 				var url = 'http://alpha.napi.ticketlink.co.kr/clipservice/gw/reserve.nhn' + query;
 				
 				url = 'http://napi.ticketlink.co.kr/clipservice/gw/reserve.nhn' + query;
 				
 				
-
 				callBackPopReserveDialog(url);
 				AEC_F_D('29652', 'i', 1);
 			},
@@ -2080,26 +1885,21 @@ function insertReview(){
 			}
 		});
 	}
-
 	function popupClipReserve () {
-
 		if (!memberCommonCheck(location.href, "popupClipReserveCallback")) {
 			return;
 		}
 	}
-
 	function popupwindow (url, title, w, h, sc) {
 		var left = (screen.width / 2) - (w / 2);
 		var top = (screen.height / 2) - (h / 2);
 		return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=' + sc + ', resizable=no, copyhistory=no, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
 	}
-
 	function popupBoardRule () {
 		var url = "/rule/board/popup";
 		var title = "티켓링크";
 		popupwindow(url, title, 500, 642, 'no');
 	}
-
 	function setProductTap () {
 		var tab = document.URL.split("#")[1];
 		if (tab == "review") {
@@ -2110,15 +1910,12 @@ function insertReview(){
 			$("#placeTap").click();
 		}
 	}
-
-
 	function checkTextLength (obj) {
 		var maxLength = 100;
 		if (obj.value.length > maxLength) {
 			obj.value = obj.obj.substring(0, maxLength);
 		}
 	}
-
 	function setTextareaMax (e) {
 		if (!document.createElement('textarea').maxLength) {
 			var m = e.attributes.maxLength.value;
@@ -2150,28 +1947,23 @@ function insertReview(){
 			};
 		}
 	}
-
 	function alertBeforeReserve () {
 		if ("false" == "true") {
 			alert("");
 		}
 	}
-
 	function couponIssue (couponId, domObj) {
 		if (!memberCommonCheck("/product/" + "29652")) {
 			return;
 		}
-
 		realCouponIssue(couponId, function () {
 			alert("쿠폰이 발급되었습니다.");
-
 			$(domObj).parents("td").html("발급완료");
 		});
 	}
 		//]]>
 	
 	
-
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

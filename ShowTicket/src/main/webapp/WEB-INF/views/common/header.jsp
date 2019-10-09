@@ -192,11 +192,6 @@ function onClose(evt) {
 				</div>
 			</div>
 
-			<input type="hidden" name="code" id="code" value=""> <input
-				type="hidden" name="domainMenu" id="domainMenu"
-				value="http://www.ticketlink.co.kr"> <input type="hidden"
-				name="domainSportsMenu" id="domainSportsMenu"
-				value="http://www.ticketlink.co.kr/sports">
 
 			<div class="search_area">
 				<a href="${pageContext.request.contextPath }/"> 
