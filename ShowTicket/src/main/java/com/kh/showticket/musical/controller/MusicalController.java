@@ -78,7 +78,7 @@ public class MusicalController {
 
 		MusicalAndShow musical = musicalService.selectOne(musicalId);
 		List<Coupon> coupon = musicalService.selectCoupon(musicalId);
-		String discount = musicalService.selectDiscount(musicalId); 
+		int discount = musicalService.selectDiscount(musicalId); 
 
 		//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
 		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+musical.getHallId()+"?service=3127d89913494563a0e9684779988063";

@@ -199,7 +199,7 @@ $(()=>{
 										할인
 									</li>
 								</c:forEach>
-								<c:if test="${discount ne null}">
+								<c:if test="${discount != 0}">
 									<li>${discount }%할인중</li>
 								</c:if>
 							</ul>

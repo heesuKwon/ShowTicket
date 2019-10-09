@@ -33,8 +33,8 @@ public class MusicalDAOImpl implements MusicalDAO {
 	}
 
 	@Override
-	public String selectDiscount(String musicalId) {
-		return sqlSession.selectOne("musical.selectDiscount", musicalId);
+	public int selectDiscount(String musicalId) {
+		return sqlSession.selectOne("musical.selectDiscount", musicalId)!=null?sqlSession.selectOne("musical.selectDiscount", musicalId):0;
 	}
 	
 	
