@@ -116,7 +116,6 @@ $(()=>{
 		MemberCommonCheck();
 		var reviewNo = $(e.target).parents("li").children("input[id='reviewNo']").val();
 		var receiveId = $(e.target).parents("li").children("input[id='reviewWriter']").val();
-		alert(reviewNo);	
 		insertReport(reviewNo, receiveId);
 	});
 	
@@ -128,7 +127,6 @@ $(()=>{
 		
 		var reviewNo = $(e.target).parents("li").children("input[id='reviewNo']").val();
 		review.reviewNo = reviewNo;
-		alert(reviewNo);
 		$.ajax({
 			url: '${pageContext.request.contextPath}/review/deleteReview.do',
 			data: JSON.stringify(review),
@@ -456,21 +454,21 @@ $(()=>{
 
 
 
-					<div class="bx_dummy include_layer border_type">
-						<em class="info_tit">할인</em>
-						<div class="txt ui-dialog  price-dialog">
-							<ul class="lst_dsc">
 
-								<li>쿠폰할인 - <span class="color_purple fbold ">30</span>% 할인
-								</li>
-
-								<li><사랑했어요>기대평 이벤트 - <span
-										class="color_purple fbold">40</span>% 할인 </li>
-
-							</ul>
-
-
-
+						<div class="bx_dummy include_layer border_type">
+							<em class="info_tit">할인</em>
+							<div class="txt ui-dialog  price-dialog">
+								<ul class="lst_dsc">
+									<c:forEach items="${coupon}" var="c">
+										<li>${c.couponTitle }- <span class="color_purple fbold ">${c.couponPrice }</span>원
+											할인
+										</li>
+									</c:forEach>
+									<c:if test="${discount != 0}">
+										<li><span class="color_purple fbold ">${discount }</span>%할인중</li>
+									</c:if>
+								</ul>
+							</div>
 						</div>
 					</div>
 
