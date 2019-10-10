@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,12 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.selenium.Crawling;
+import com.kh.showticket.common.selenium.CrawlingShow;
 import com.kh.showticket.coupon.model.service.CouponService;
+import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
-
-import lombok.Setter;
 import lombok.extern.java.Log;
 @Log
 @Controller
@@ -38,6 +36,9 @@ public class TicketingController {
 
 	@Autowired
 	CouponService couponService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@Autowired
 	TicketingService ticketingService;
@@ -58,12 +59,15 @@ public class TicketingController {
 	}
 
 	@RequestMapping("/ticketingPoint.do")
-	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate, @RequestParam String selectTime) {
+	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
+									@RequestParam String selectTime, @RequestParam String[] seat) {
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 
 		List<Map<String, String>> cList = couponService.selectMyCouponList(memberId);
-
-		logger.debug("예매확인 페이지");
+		for (int i=0 ; i<seat.length ; i++) {
+			System.out.println("seat"+i+":"+seat[i]);
+		}
+		logger.debug("예매확인: 페이지");
 		logger.debug("clISt>>>>>"+cList);
 		
 		int myPoint = ticketingService.selectMyPoint(memberId);
@@ -87,8 +91,15 @@ public class TicketingController {
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		logger.debug("ModelAndView={}", mas);
 		String html= "";
+//		List<Ticket> ticket = memberService.getTicketList();
 		try {
-			html = new Crawling().getImg(mas, selectDate, selectNum);
+			if("옥탑방 고양이 [대학로]".equals(mas.getId())) {
+				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
+			}
+			else {
+				
+				html = new Crawling().getImg(mas, selectDate, selectNum);
+			}
 		} catch (NullPointerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,7 +107,7 @@ public class TicketingController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String main = html.substring(html.indexOf("<img id="), html.indexOf("<img src"));
+		String main = html.substring(html.indexOf("http"), html.indexOf(" border")-1);
 		logger.debug(main);
 		mav.addObject("html", html);
 		mav.addObject("main", main);
