@@ -54,7 +54,7 @@ public class CrawlingShow {
 
 //		WebDriver driver = new ChromeDriver();
 		ChromeOptions options = new ChromeOptions();
-		options.addArguments("--headless");
+//		options.addArguments("--headless");
 		options.addArguments("lang=ko_KR");
 		options.addArguments("disable-gpu");
 		options.addArguments("window-size=1920x1080");
@@ -149,7 +149,7 @@ public class CrawlingShow {
 //	    driver.findElement(By.id("CellPlayDate10")).click();
 	    driver.switchTo().defaultContent();
 	    driver.findElement(By.cssSelector(".myValue")).click();
-	    int selectClick = 2;
+	    int selectClick = 1;
 	    if(selectClick == 1) {
 	    	driver.findElement(By.cssSelector("li:nth-child(2) > label")).click();
 	    	

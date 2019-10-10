@@ -99,7 +99,7 @@ public class TicketingController {
 
 //		List<Ticket> list = memberService.getTicketList();
 		try {
-			if("옥탑방 고양이 [대학로]".equals(mas.getId())) {
+			if(mas.getName().contains("옥탑방")) {
 				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
 			}
 			else {
