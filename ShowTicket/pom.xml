@@ -297,11 +297,6 @@
 	    <dependency> <groupId>org.seleniumhq.selenium</groupId> 
 	    <artifactId>selenium-server</artifactId> 
 	    <version>3.141.59</version> </dependency> 
-	    <dependency> 
-		    <groupId>org.seleniumhq.selenium</groupId> 
-		    <artifactId>selenium-chrome-driver</artifactId> 
-		    <version>4.0.0-alpha-2</version> 
-	    </dependency> 
 
 		<!-- 휴대폰 인증 -->
        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
@@ -325,13 +320,7 @@
            <version>2.3.0</version>
        </dependency>
 
-     <!-- Test -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
-        </dependency>
+
 
 	</dependencies>
     <build>

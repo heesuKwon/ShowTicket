@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.admin.model.vo.Review;
+import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
 
 public interface AdminDAO {
@@ -34,6 +34,10 @@ public interface AdminDAO {
 	List<Member> FinderSelectTotalContentId(String searchKeyword);
 
 	List<Member> FinderSelectTotalContentName(String searchKeyword);
+
+	int insertReport(Report report);
+
+	int checkReport(Report report);
 
 
 }

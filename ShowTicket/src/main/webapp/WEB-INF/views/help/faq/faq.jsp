@@ -183,7 +183,9 @@ function faqList(type, searchType){
 
 					<!-- // 검색창 덮는 배너 추가 -->
 				</div>
+					<c:if test="${'admin' eq memberLoggedIn.memberId}">
 					<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
+					</c:if>
 				
 				<ul id="genreNav" class="nav nav-pills nav-justified">
 					<li class="nav-item"><a class="nav-link select nav-font"

@@ -84,6 +84,8 @@ public class TicketingController {
 		logger.debug("좌석 페이지");
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
+		logger.debug("ModelAndView={}", mas);
+
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
@@ -91,9 +93,6 @@ public class TicketingController {
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
 	}
-	
-	
-	
 	
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 
@@ -103,6 +102,11 @@ public class TicketingController {
 		return "/ticketing/pay";
 	}
 	
+	@RequestMapping(value="/interpark.do")
+	public ModelAndView interpark(ModelAndView mav) {
+		mav.setViewName("ticketing/interpark");
+		return mav;
+	}
 
 }
 

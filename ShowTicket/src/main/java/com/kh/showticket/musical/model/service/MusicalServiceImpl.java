@@ -59,4 +59,9 @@ public class MusicalServiceImpl implements MusicalService {
 		return musicalDAO.selectDiscount(musicalId);
 	}
 
+	@Override
+	public int totalReview(String musicalId) {
+		return reviewDAO.totalReview(musicalId);
+	}
+
 }

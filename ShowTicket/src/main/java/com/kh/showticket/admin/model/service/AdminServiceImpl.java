@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.showticket.admin.model.dao.AdminDAO;
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.admin.model.vo.Review;
+import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
 
 @Service
@@ -80,6 +80,16 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public List<Member> FinderSelectTotalContentName(String searchKeyword) {
 		return adminDAO.FinderSelectTotalContentName(searchKeyword);
+	}
+
+	@Override
+	public int insertReport(Report report) {
+		return adminDAO.insertReport(report);
+	}
+
+	@Override
+	public int checkReport(Report report) {
+		return adminDAO.checkReport(report);
 	}
 
 
