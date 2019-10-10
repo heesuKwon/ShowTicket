@@ -182,6 +182,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertTicket(Ticket ticket) {
 		return memberDAO.insertTicket(ticket);
+
 	}
 		
 }

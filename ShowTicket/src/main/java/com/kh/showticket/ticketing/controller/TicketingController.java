@@ -14,10 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-<<<<<<< HEAD
-=======
 import org.springframework.ui.Model;
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,11 +31,6 @@ import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
-<<<<<<< HEAD
-=======
-import lombok.extern.java.Log;
-@Log
->>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 @Controller
 @SessionAttributes("memberLoggedIn")
 @RequestMapping("/ticketing")
@@ -62,7 +54,7 @@ public class TicketingController {
 	@RequestMapping("/ticketConfirm.do")
 	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
-			@RequestParam String totalPointPrice) {
+			@RequestParam String totalPointPrice, @RequestParam String selectNum,@RequestParam String Rnum,@RequestParam String Snum) {
 		logger.debug("예매확인 페이지");
 		logger.debug("totalCouponPrice"+totalCouponPrice);
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
@@ -71,10 +63,14 @@ public class TicketingController {
 	    
 		ticket.setTicketBuyer(memberId);
 		ticket.setTicketShowId(mas.getId());
-		String realPrice = mas.getPrice();
-		realPrice = realPrice.replaceAll("[^0-9]", "");
-		int price = Integer.parseInt("110000");
-		ticket.setTicketPrice(price);
+		//String realPrice = mas.getPrice();
+		//System.out.println("가격"+mas.getPrice());
+		String priice = mas.getPrice().substring(4,10);
+		int RealPrice = Integer.parseInt(priice);
+		//realPrice = realPrice.replaceAll("[^0-9]", "");
+		//int price = Integer.parseInt("110000");
+		ticket.setTicketPrice(RealPrice);
+		System.out.println("RealPrice"+RealPrice);
 		ticket.setTicketGrade("R");
 		String date_s = selectDate;
 		Date date = null;
@@ -129,22 +125,28 @@ public class TicketingController {
 	}
 
 	@RequestMapping("/ticketingPoint.do")
-
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
 									@RequestParam String selectTime, @RequestParam String[] seat) {
 
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-
-
 		Map<String, String> memAndPlay = new HashMap<>();
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
-		System.out.println("Clist"+cList);	
+		System.out.println("Clist"+cList);
+		
 		int myPoint = ticketingService.selectMyPoint(memberId);
+
+		int Rnum =0;
+		int Snum = 0;
+		if(seat[0].substring(1,2)=="R")++Rnum;else ++Snum;
+		
+		
 
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
+		mav.addObject("Rnum", Rnum);
+		mav.addObject("Snum", Snum);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("cList", cList);
@@ -160,7 +162,6 @@ public class TicketingController {
 		logger.debug("좌석 페이지");
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
-
 		logger.debug("ModelAndView={}", mas);
 		String html= "";
 //		List<Ticket> ticket = memberService.getTicketList();
@@ -183,14 +184,16 @@ public class TicketingController {
 		logger.debug(main);
 		mav.addObject("html", html);
 		mav.addObject("main", main);
-
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
+	
+
 	}
+	
 
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 
