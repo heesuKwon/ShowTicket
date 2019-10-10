@@ -754,5 +754,17 @@ public class MemberController {
 		return "common/msg";
 
 	}
+
+	  @RequestMapping("/updatePt.do") 
+	  public String updatePoint (Model model ,@RequestParam String memberId ) {
+		  
+		  int result = memberService.updatePoint(memberId);
+		  
+		  model.addAttribute("msg",result>0?"포인트가 적립되었습니다.":"포인트 적립이 취소되었습니다.");
+		  model.addAttribute("loc","/member/reservation.do?memberId="+memberId+"&cPage="+1);
+		  return "common/msg"; 
+	  }
+	 
+
 }
 

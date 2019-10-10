@@ -58,4 +58,7 @@ public interface MemberService {
 
 	String findIdByPhone(Map<String, String> memInfo);
 
+	int updatePoint(String memberId);
+
+
 }

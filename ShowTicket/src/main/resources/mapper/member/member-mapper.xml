@@ -151,4 +151,9 @@
 		from member
 		where member_name=#{memNm} and phone=#{inputHp}
 	</select>
+	
+	<update id="updatePoint">
+		 update member set point=point*1.5 where member_id=#{memberId}
+	</update>
+
 </mapper>
