@@ -17,13 +17,13 @@
             
             <ul class="nav nav-pills nav-justified">
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/eventList.do">진행중인 이벤트</a></li>
-				<li class="nav-item"><a class="nav-link nav-font select" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
+				<li class="nav-item"><a class="nav-link nav-font select" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 특가 이벤트</a></li>
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
 				<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a></li>
 			</ul>
 		
             <!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
-            <h2 class="title">종료된 이벤트</h2>
+            <h2 class="title">종료된 특가 이벤트</h2>
             <div class="event_cont_box">
                 <div class="event_list_inner">
                 	<c:if test="${empty EdcList }"> <h2>종료된 이벤트가 없습니다.</h2> <br /></c:if>
@@ -45,7 +45,7 @@
 									<dl>
 										<dt>제목</dt>
 										<dd class="event_title">
-											<span>[특가]  ${EdcList.showGenre} </span> <br />
+											<span style="color: #8f01a3;">[특가]  ${EdcList.showGenre} </span> <br />
 											
 											&lt; ${EdcList.showName} &gt;
 										</dd>

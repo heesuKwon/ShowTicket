@@ -61,7 +61,7 @@ $(()=>{
 		contain+="<tr><th>이벤트 상세날짜:</th><td><input type='date' class='form-control eventDate' name='eventDetailDate'/></td></tr>";
 		contain+="<tr><th>상세 시간 및 인원:</th><td><input type='text' palceholder='상세 시간 및 인원을 입력 해주세요' class='form-control' name='eventTimeMen'/></td></tr>"; 
 		contain+="</tbody></table>";
-		contain+="<input type='hidden' name='showId'  value='"+id+"'/>";
+		contain+="<input type='hidden' name='eventShowId'  value='"+id+"'/>";
 		contain+="<input type='hidden' name='eventStatus' value='"+detail+"'/>";
 		contain+="<input type='hidden' name='eventImg' value='"+ing+"'/>";
 		contain+="<input type='submit' value='등록'  class='pull-right'/>";
@@ -92,7 +92,7 @@ $(()=>{
 			<li class="nav-item"><a class="nav-link select nav-font"
 				href="#">진행중인 이벤트</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default"
-				href="${pageContext.request.contextPath}/event/endEventList.do">종료된
+				href="${pageContext.request.contextPath}/event/endEventList.do">종료된 특가
 					이벤트</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default"
 				href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자

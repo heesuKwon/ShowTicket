@@ -33,7 +33,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 		<ul class="nav nav-pills nav-justified">
 			<li class="nav-item"><a class="nav-link select nav-font" href="#">진행중인 이벤트</a>
 			</li>
-			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 이벤트</a></li>
+			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/endEventList.do">종료된 특가 이벤트</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자 발표</a></li>
 			<li class="nav-item"><a class="nav-link nav-font default" href="${pageContext.request.contextPath}/coupon/coupon.do">쿠폰</a>
 			</li>
@@ -60,7 +60,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 							<dl>
 								<dt>제목</dt>
 								<dd class="event_title">
-									<span>[특가]  ${dcList.showGenre} </span> <br />
+									<span style="color: #8f01a3;">[특가]  ${dcList.showGenre} </span> <br />
 									
 									&lt; ${dcList.showName} &gt;
 								</dd>
@@ -102,7 +102,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 									</dd>
 									<dt>제목</dt>
 									<dd class="event_title">
-										<span>
+										<span style="color: #8f01a3;">
 											<c:if test="${evt.EVENT_KIND eq 'I' }">[초대]</c:if>
 											<c:if test="${evt.EVENT_KIND eq 'E' }">[응모]</c:if>
 										</span> &lt;${evt.eventTitle}&gt; 이벤트

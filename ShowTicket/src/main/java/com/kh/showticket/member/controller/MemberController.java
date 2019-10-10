@@ -760,7 +760,18 @@ public class MemberController {
 		  
 		  int result = memberService.updatePoint(memberId);
 		  
-		  model.addAttribute("msg",result>0?"포인트가 적립되었습니다.":"포인트 적립이 취소되었습니다.");
+		  String msg ="";
+		  
+		  if(result>0) {
+			  msg = "포인트가 적립되었습니다."; 
+			  String script = "self.close();";
+			  model.addAttribute("script",script);
+		  }else {
+			  msg="변경실패";
+		  }
+		  
+	  
+		  model.addAttribute("msg",msg);
 		  model.addAttribute("loc","/member/reservation.do?memberId="+memberId+"&cPage="+1);
 		  return "common/msg"; 
 	  }

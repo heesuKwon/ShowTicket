@@ -20,6 +20,7 @@
 		<result column="renamed_file_name" property="renamedFileName" />
 		<result column="announcement_date" property="announcementDate" />
 		<result column="event_status" property="statusDate" />
+		<result column="event_showid" property="eventShowId" />
 		<result column="event_img" property="eventImg" />
 	</resultMap>
 
@@ -27,7 +28,7 @@
 		insert into event values
 		(seq_event_no.nextval,#{eventTitle},#{eventContent},
 			#{eventStartDate},#{eventEndDate},#{announcementDate},
-			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{showId},#{eventKind},#{eventImg})
+			#{eventStatus},#{eventDetailDate},#{eventTimeMen},#{eventShowId},#{eventKind},#{eventImg})
 	
 		<selectKey keyProperty="eventNo" resultType="_int" order="AFTER">
 			select seq_event_no.currval from dual
