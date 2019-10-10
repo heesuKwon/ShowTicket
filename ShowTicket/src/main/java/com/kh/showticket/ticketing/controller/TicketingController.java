@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
+import com.kh.showticket.common.selenium.Crawling;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.ticketing.model.service.TicketingService;
@@ -85,7 +86,20 @@ public class TicketingController {
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		logger.debug("ModelAndView={}", mas);
-
+		String html= "";
+		try {
+			html = new Crawling().getImg(mas, selectDate, selectNum);
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String main = html.substring(html.indexOf("<img id="), html.indexOf("<img src"));
+		logger.debug(main);
+		mav.addObject("html", html);
+		mav.addObject("main", main);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
@@ -102,12 +116,6 @@ public class TicketingController {
 		return "/ticketing/pay";
 	}
 	
-	@RequestMapping(value="/interpark.do")
-	public ModelAndView interpark(ModelAndView mav) {
-		mav.setViewName("ticketing/interpark");
-		return mav;
-	}
-
 }
 
 
