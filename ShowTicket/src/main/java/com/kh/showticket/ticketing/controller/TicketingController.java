@@ -112,8 +112,6 @@ public class TicketingController {
 
 		return mav;
 	}
-
-
 		
 	@RequestMapping("/ticketingPoint.do")
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
@@ -126,6 +124,7 @@ public class TicketingController {
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
 		System.out.println("Clist"+cList);
 		
+
 		int myPoint = ticketingService.selectMyPoint(memberId);
 
 		int Rnum =0;
@@ -187,8 +186,6 @@ public class TicketingController {
 		return mav;
 	}
 	
-
-
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 
 		

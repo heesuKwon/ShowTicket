@@ -64,8 +64,6 @@ public interface MemberService {
 
 	int insertTicket(Ticket ticket);
 
-	List<Ticket> getTicketList();
-
 
 
 }
