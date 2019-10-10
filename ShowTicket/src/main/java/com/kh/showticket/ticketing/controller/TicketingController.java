@@ -23,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
+import com.kh.showticket.common.selenium.Crawling;
+import com.kh.showticket.common.selenium.CrawlingShow;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
@@ -52,7 +54,7 @@ public class TicketingController {
 	@RequestMapping("/ticketConfirm.do")
 	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
-			@RequestParam String totalPointPrice) {
+			@RequestParam String totalPointPrice, @RequestParam String selectNum,@RequestParam String Rnum,@RequestParam String Snum) {
 		logger.debug("예매확인 페이지");
 		logger.debug("totalCouponPrice"+totalCouponPrice);
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
@@ -61,10 +63,14 @@ public class TicketingController {
 	    
 		ticket.setTicketBuyer(memberId);
 		ticket.setTicketShowId(mas.getId());
-		String realPrice = mas.getPrice();
-		realPrice = realPrice.replaceAll("[^0-9]", "");
-		int price = Integer.parseInt("110000");
-		ticket.setTicketPrice(price);
+		//String realPrice = mas.getPrice();
+		//System.out.println("가격"+mas.getPrice());
+		String priice = mas.getPrice().substring(4,10);
+		int RealPrice = Integer.parseInt(priice);
+		//realPrice = realPrice.replaceAll("[^0-9]", "");
+		//int price = Integer.parseInt("110000");
+		ticket.setTicketPrice(RealPrice);
+		System.out.println("RealPrice"+RealPrice);
 		ticket.setTicketGrade("R");
 		String date_s = selectDate;
 		Date date = null;
@@ -119,10 +125,10 @@ public class TicketingController {
 	}
 
 	@RequestMapping("/ticketingPoint.do")
-	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate, @RequestParam String selectTime) {
-		logger.debug("예매확인 페이지");
-		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
+									@RequestParam String selectTime, @RequestParam String[] seat) {
 
+		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		Map<String, String> memAndPlay = new HashMap<>();
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
@@ -131,8 +137,16 @@ public class TicketingController {
 		
 		int myPoint = ticketingService.selectMyPoint(memberId);
 
+		int Rnum =0;
+		int Snum = 0;
+		if(seat[0].substring(1,2)=="R")++Rnum;else ++Snum;
+		
+		
+
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
+		mav.addObject("Rnum", Rnum);
+		mav.addObject("Snum", Snum);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("cList", cList);
@@ -148,15 +162,39 @@ public class TicketingController {
 		logger.debug("좌석 페이지");
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
-
+		logger.debug("ModelAndView={}", mas);
+		String html= "";
+//		List<Ticket> ticket = memberService.getTicketList();
+		try {
+			if("옥탑방 고양이 [대학로]".equals(mas.getId())) {
+				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
+			}
+			else {
+				
+				html = new Crawling().getImg(mas, selectDate, selectNum);
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String main = html.substring(html.indexOf("http"), html.indexOf(" border")-1);
+		logger.debug(main);
+		mav.addObject("html", html);
+		mav.addObject("main", main);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
+	
+
 	}
 	
+
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 
 		
@@ -164,6 +202,7 @@ public class TicketingController {
 		
 		return "/ticketing/pay";
 	}
+
 }
 
 
