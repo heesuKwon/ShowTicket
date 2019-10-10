@@ -476,7 +476,7 @@ $(()=>{
 										</li>
 									</c:forEach>
 									<c:if test="${discount != 0}">
-										<li><span class="color_purple fbold ">${discount }</span>%할인중</li>
+										<li><span class="color_purple fbold ">${discount }</span>% 할인중</li>
 									</c:if>
 								</ul>
 							</div>
