@@ -43,11 +43,11 @@
 <%
 
 	/*-------------------------------희수 코딩 영역--------------------------------*/
-	MusicalAndShow musical = (MusicalAndShow) request.getAttribute("musical");
-			System.out.println("urls:"+musical.getUrls());
-			System.out.println("musical"+musical);
+	MusicalAndShow show = (MusicalAndShow) request.getAttribute("show");
+			System.out.println("urls:"+show.getUrls());
+			System.out.println("show"+show);
 
-	String[] times = musical.getTime().split(", ");
+	String[] times = show.getTime().split(", ");
 	Map<String, List<String>> dayTime = new HashMap<>();
 	Map<String, Integer> days = new HashMap<>();
 	days.put("월", 0);
@@ -116,7 +116,7 @@
 
 $(()=>{
 	$("#review-star").starRating({
-	    initialRating: ${musical.getReviewStar()},
+	    initialRating: ${show.getReviewStar()},
 	    readOnly: true,
 	    starSize: 15,
 	  });
@@ -268,6 +268,142 @@ $(()=>{
 </script>
 <!-- Function and Variables Definition Block End-->
 
+<!-- Data Allocation (Product_Detail) -->
+<script language='javascript'>
+    _pd = _RP("뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ");
+    _ct = _RP("창작뮤지컬");
+    _amt = _RP("0", 1); // _RP(1)-> price
+
+    _A_amt = Array('0');
+    _A_nl = Array('1');
+    _A_pl = Array('29652');
+    _A_pn = Array('뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) ');
+    _A_ct = Array('99');
+</script>
+
+
+
+<script type="text/javascript">
+	// ë¤ì´ë² íë¦¬ë¯¸ì ë¡ê·¸ (201704 ì¶ê°)
+	if (!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "s_765d50fa49a";
+	if (!_nasa) var _nasa = {};
+	wcs.inflow();
+	wcs_do(_nasa);
+
+	// ë¤ì´ë² ë¡ê·¸ (ê¸°ì¡´ë¶í° ì¡´ì¬)
+	if (!wcs_add) var wcs_add = {};
+	wcs_add["wa"] = "3ce26ce585ae64";
+	wcs_do();
+</script>
+
+<!-- AceCounter Log Gathering Script V.7.5.2013010701 -->
+<script language='javascript'>
+	var _AceGID = (function () {
+		var Inf = ['gtc9.acecounter.com', '8080', 'BS2A39876863068', 'AW', '0', 'NaPm,Ncisy', 'ALL', '0'];
+		var _CI = (!_AceGID) ? [] : _AceGID.val;
+		var _N = 0;
+		var _T = new Image(0, 0);
+		if (_CI.join('.').indexOf(Inf[3]) < 0) {
+			_T.src = (location.protocol == "https:" ? "https://" + Inf[0] : "http://" + Inf[0] + ":" + Inf[1]) + '/?cookie';
+			_CI.push(Inf);
+			_N = _CI.length;
+		}
+		return {o: _N, val: _CI};
+	})();
+	var _AceCounter = (function () {
+		var G = _AceGID;
+		var _sc = document.createElement('script');
+		var _sm = document.getElementsByTagName('script')[0];
+		if (G.o != 0) {
+			var _A = G.val[G.o - 1];
+			var _G = (_A[0]).substr(0, _A[0].indexOf('.'));
+			var _C = (_A[7] != '0') ? (_A[2]) : _A[3];
+			var _U = (_A[5]).replace(/\,/g, '_');
+			_sc.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/Web/AceCounter_' + _C + '.js?gc=' + _A[2] + '&py=' + _A[4] + '&gd=' + _G + '&gp=' + _A[1] + '&up=' + _U + '&rd=' + (new Date().getTime());
+			_sm.parentNode.insertBefore(_sc, _sm);
+			return _sc.src;
+		}
+	})();
+</script>
+<!-- AceClick WebSite Gathering Script V0.91.20190304-->
+<script type="text/Javascript">
+	if (typeof (AMRS_GC) == 'undefined') {
+		var AMRS_O = [];
+		var AMRS_CK = new Image();
+		var AMRS_GC = 'AG5A4302491053';
+		var AMRS_GD = 'mrsg.aceclick.co.kr';
+		var AMRS_GP = '8080';
+		var AMRS_TI = (new Date()).getTime();
+		var AMRS_PR = location.protocol == "https:" ? "https://" + AMRS_GD + ":843" : "http://" + AMRS_GD + ":" + AMRS_GP;
+		AMRS_CK.src = AMRS_PR + '/?cookie';
+		if (typeof (Array.prototype.push) != 'undefined') {
+			AMRS_O.push(AMRS_CK);
+		}
+		var _AMSC = document.createElement('script');
+		var _AMSM = document.getElementsByTagName('script')[0];
+		_AMSC.src = (location.protocol.indexOf('http') == 0 ? location.protocol : 'http:') + '//cr.acecounter.com/aceclick.js?rt=' + AMRS_TI;
+		_AMSM.parentNode.insertBefore(_AMSC, _AMSM);
+	}
+</script>
+<!-- AceClick WebSite Gathering Script End V0.91.20190304 -->
+<noscript>
+	<img src='http://gtc9.acecounter.com:8080/?uid=BS2A39876863068&je=n&'
+		border='0' width='0' height='0' alt=''>
+</noscript>
+
+<!-- AceCounter Log Gathering Script End -->
+
+<script>
+	
+	
+
+	try {
+		var evt_data = {};
+		evt_data.evt = "view"; // 고정
+		evt_data.p_no = "29652"; // 상품코드
+		evt_data.p_name = "뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) "; // 상품명
+		evt_data.thumb = "http://image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg"; // 상품이미지 url
+		evt_data.p_url = "http://www.ticketlink.co.kr/product/29652"; // 해당 상품페이지 url
+		evt_data.p_url_m = "http://m.ticketlink.co.kr/product/29652"; // 해당 상품페이지 모바일 url
+		evt_data.startdate = "20190920"; // 공연시작일
+		evt_data.enddate = "20191027"; // 공연종료일
+		evt_data.sale_startdate = "20190807"; // 예매오픈일
+		evt_data.place = "성남아트센터 오페라하우스"; // 공연장소
+		evt_data.view_grade = "만7세이상"; // 관람등급
+		evt_data.city = "경기"; // 공연지역
+		evt_data.price = "60000"; // 상품판매가격(숫자만 포함한 문자열)
+		evt_data.price_table = "A석:60000|S석:90000|R석:120000|VIP석:140000"; // 좌석별 가격표 (가격오름차순, 가격은 숫자만 포함한 문자열)
+		evt_data.soldout = "0"; // 품절여부. (품절이 아닐경우 '0', 품절일 경우 '1')
+		evt_data.cate1 = '공연'; // 카테고리 대분류. 존재하지 않으면 ''
+		evt_data.cate2 = '뮤지컬'; // 카테고리 중분류. 존재하지 않으면 ''
+		evt_data.cate3 = ''; // 카테고리 소분류. 존재하지 않으면 ''
+
+		mcroPushEvent(evt_data);
+	} catch
+		(e) {
+	}
+</script>
+
+
+<meta property="og:type" content="website" />
+<meta property="og:title" content="[티켓링크]뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
+<meta property="og:url"
+	content="http://www.ticketlink.co.kr/product/29652" />
+<meta property="og:description" content="뮤지컬 <사랑했어요> (사랑의 가객 故김현식 뮤지컬) " />
+<meta property="og:image"
+	content="//image.toast.com/aaaaab/ticketlink/TKL_6/SPST_0905.jpg" />
+
+</head>
+
+
+
+<script>
+	var meta = document.createElement('meta');
+	meta.setAttribute('name', 'more_page_type');
+	meta.setAttribute('content', 'detail');
+	document.getElementsByTagName('head')[0].appendChild(meta);
+</script>
 
 
 <div id="detailContainer">
@@ -277,19 +413,18 @@ $(()=>{
 		<!-- [D]  1 depth의 값을 h2로 뿌려줍니다 -->
 		<h3 class="blind">뮤지컬</h3>
 		<!-- [D]  2 depth의 값을 h3로 뿌려줍니다 -->
-		<h4 class="blind">창작뮤지컬</h4>
 		<p class="location_path"></p>
 
 		<div class="detail_box_top ">
 			<form name="ticketingFrm" method="post" enctype="multipart/form-data">
 				<div class="bx_title">
 					<!-- [D] 제목이 길어져서 태그가 아래로 떨어질 경우 : .title에 long_case 클래스 추가 -->
-					<div class="title">뮤지컬 &lt;${musical.getName()}&gt;</div>
+					<div class="title">연극&lt;${show.getName()}&gt;</div>
 				</div>
 				<div class="detail_info">
 					<div class="bx_thumb">
 						<span class="bx_img"> <!-- 뮤지컬포스터 --> <img
-							src="${musical.getPoster()}" alt="대표이미지" width="314" height="382">
+							src="${show.getPoster()}" alt="대표이미지" width="314" height="382">
 						</span>
 					</div>
 					<div class="etc_info">
@@ -298,17 +433,17 @@ $(()=>{
 								id="review-star"></span></span>
 						</div>
 						<div class="bx_dummy">
-							<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
+							<em class="info_tit">장소</em> <span class="txt">${show.getHallName()}</span>
 						</div>
 						<div class="bx_dummy">
-							<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
-								~ ${musical.getEndDate()}</span>
+							<em class="info_tit">기간</em> <span class="txt">${show.getStartDate()}
+								~ ${show.getEndDate()}</span>
 						</div>
 						<div class="bx_dummy">
-							<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+							<em class="info_tit">관람시간</em> <span class="txt">${show.getRuntime() }</span>
 						</div>
 						<div class="bx_dummy border_type">
-							<em class="info_tit">관람등급</em> <span class="txt">${musical.getAge() }</span>
+							<em class="info_tit">관람등급</em> <span class="txt">${show.getAge() }</span>
 						</div>
 						<!-- [D] 레이어 들어간 유형 : include_layer 클래스 추가 -->
 						<div class="bx_dummy include_layer">
@@ -316,7 +451,7 @@ $(()=>{
 							<div class="txt ui-dialog  price-dialog">
 								<ul class="lst_dsc">
 									<%
-									String[] prices = musical.getPrice().split(", ");
+									String[] prices = show.getPrice().split(", ");
 								%>
 									<c:forEach items="<%=prices%>" var="m">
 										<li>${fn:substring(m,0,fn:indexOf(m,"석")+1)}-<span
@@ -356,7 +491,7 @@ $(()=>{
 					</div>
 				</div>
 				<!-- FE 지원 form 시작 -->
-				<c:if test="${musical.getState() eq '공연중'}">
+				<c:if test="${show.getState() eq '공연중'}">
 					<div class="detail_info_right">
 						<div id="calendar"></div>
 
@@ -376,7 +511,7 @@ $(()=>{
 						</button>
 					</div>
 				</c:if>
-				<c:if test="${musical.getState() eq '공연예정'}">
+				<c:if test="${show.getState() eq '공연예정'}">
 					<div class="detail_info_right">
 						<div class="noinfo_txt">티켓 오픈일은 공지사항을 참고해주세요.</div>
 
@@ -386,7 +521,7 @@ $(()=>{
 						</button>
 					</div>
 				</c:if>
-				<c:if test="${musical.getState() eq '공연완료'}">
+				<c:if test="${show.getState() eq '공연완료'}">
 					<div class="detail_info_right">
 						<div class="noinfo_txt">공연이 종료되었습니다.</div>
 
@@ -433,7 +568,7 @@ $(()=>{
 					<div class="detail_cont">
 						
 							<strong>[공연장 정보]</strong><br />
-							장소 : ${musical.hallName }<br> 주소 : ${address.adres }<br>
+							장소 : ${show.hallName }<br> 주소 : ${address.adres }<br>
 								대표번호 : <span id="phoneNumber">${address.telno }</span><br> <br /> <br /> <br />							
  								<div id="map" style="clear:both; width:800px;height:400px;position: relative;
     												overflow: visible;margin-left:66px;"></div>
@@ -473,7 +608,7 @@ $(()=>{
 
 								<dl class="star_average">
 									<dt>현재 평균 별점</dt>
-									<dd class="grade color_purple" id="ratingAverage">${musical.reviewStar }점</dd>
+									<dd class="grade color_purple" id="ratingAverage">${show.reviewStar }점</dd>
 									<dd class="grade_star">
 										<span class="star_gauge" id="ratingAverageStar"
 											style="width: 0%"></span>
@@ -516,7 +651,7 @@ $(()=>{
 						
 						function reviewList(){
 							
-						var reviewShowId = "${musical.id}";
+						var reviewShowId = "${show.id}";
 						/* var reviewNo = 0;
                         var receiveId = ""; */
 						
@@ -708,7 +843,7 @@ function insertReview(){
 	}
 	
 	var review = {};
-	review.reviewShowId = "${musical.id}";
+	review.reviewShowId = "${show.id}";
 	review.reviewWriter = "${memberLoggedIn.memberId}";
 	review.reviewStar = $("#rating").text();
 	review.reviewContent = $("#reviewContent").val();
@@ -748,33 +883,33 @@ function insertReview(){
 						<div class="detail_cont" style="clear:both;">
 							<strong>[공연시간 정보]</strong>
 							<div class="bx_dummy">
-								<em class="info_tit">장소</em> <span class="txt">${musical.getHallName()}</span>
+								<em class="info_tit">장소</em> <span class="txt">${show.getHallName()}</span>
 							</div>
 							<div class="bx_dummy">
-								<em class="info_tit">기간</em> <span class="txt">${musical.getStartDate()}
-									~ ${musical.getEndDate()}</span>
+								<em class="info_tit">기간</em> <span class="txt">${show.getStartDate()}
+									~ ${show.getEndDate()}</span>
 							</div>
 		
 		
 		
 							<div class="bx_dummy">
-								<em class="info_tit">관람시간</em> <span class="txt">${musical.getRuntime() }</span>
+								<em class="info_tit">관람시간</em> <span class="txt">${show.getRuntime() }</span>
 							</div>
-							<c:if test="${not empty musical.time }">
+							<c:if test="${not empty show.time }">
 							<div class="bx_dummy">
 								<em class="info_tit">정기 공연일정</em> <br /> 
 									<span class="txt">
-										${musical.time }
-										<%-- <c:forTokens var="item" items="${musical.time}" delims=",">${item}<br /></c:forTokens> --%>
+										${show.time }
+										<%-- <c:forTokens var="item" items="${show.time}" delims=",">${item}<br /></c:forTokens> --%>
 	
 									</span>
 							</div>
 							</c:if>
 							<div class="bx_dummy">
-								<c:if test="${empty musical.urls }">
+								<c:if test="${empty show.urls }">
 								</c:if>
-								<c:if test="${not empty musical.urls }">
-									<c:forEach items="${musical.urls}" var="f">
+								<c:if test="${not empty show.urls }">
+									<c:forEach items="${show.urls}" var="f">
 												<img src="${f }" alt="" style="max-width: 900px;"/>	
 									</c:forEach>
 								</c:if> 
@@ -1231,8 +1366,8 @@ function insertReview(){
 		
 		$('#calendar').datepicker({
 			format: "yyyy.mm.dd",
-			startDate: '${musical.getStartDate()}',
-			endDate: '${musical.getEndDate()}',
+			startDate: '${show.getStartDate()}',
+			endDate: '${show.getEndDate()}',
 			calendarWeeks: false,
             todayHighlight: true,
             daysOfWeekDisabled : <%=list%>,
@@ -1283,7 +1418,7 @@ function insertReview(){
 		
 		$("#wait").on("click",()=>{
 			if(${memberLoggedIn!=null}){
-				location.href = "${pageContext.request.contextPath}/musical/insertWait.do?musicalId=${musical.getId()}";
+				location.href = "${pageContext.request.contextPath}/show/insertWait.do?showId=${show.getId()}";
 			}
 			else{
 				alert("로그인이 필요합니다.");
@@ -1321,7 +1456,7 @@ function insertReview(){
 			var hiddenField = document.createElement("input");
 			hiddenField.setAttribute("type", "hidden");
 			hiddenField.setAttribute("name", "playId");
-			hiddenField.setAttribute("value", "${musical.id}");
+			hiddenField.setAttribute("value", "${show.id}");
 			form.appendChild(hiddenField);
 			hiddenField = document.createElement("input");
 			hiddenField.setAttribute("type", "hidden");

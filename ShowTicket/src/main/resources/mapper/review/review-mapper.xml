@@ -21,7 +21,7 @@
 	<select id="selectReviewStar" resultType="String">
 		select avg(review_star)
 		from review
-		where review_showId = #{musicalId} and review_star is not null
+		where review_showId = #{playId} and review_star is not null
 	</select> 
 	
 	<delete id="deleteReview">

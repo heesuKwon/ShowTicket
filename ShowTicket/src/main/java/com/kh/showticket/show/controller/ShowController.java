@@ -1,4 +1,4 @@
-package com.kh.showticket.show;
+package com.kh.showticket.show.controller;
 
 import static com.kh.showticket.common.getApi.getApi.getList;
 import static com.kh.showticket.common.getApi.getApi.getBoxList;
@@ -6,24 +6,35 @@ import static com.kh.showticket.common.getApi.getApi.getBoxList;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.common.postconstruct.PostConstructing;
+import com.kh.showticket.coupon.model.vo.Coupon;
+import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.musical.model.service.MusicalService;
 
 @RestController
 @RequestMapping("/show")
 public class ShowController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
+	@Autowired
+	MusicalService musicalService;
+	
 	List<Map<String, String>> showList = PostConstructing.showList;
 	List<Map<String, String>> showDetailList = PostConstructing.showDetailList;
 
@@ -56,9 +67,32 @@ public class ShowController {
 		return getList(url);
 
 	}
+	
+	@RequestMapping("/showDetail.do")
+	public ModelAndView showDetail(ModelAndView mav, @RequestParam String showId) {
+	
+		MusicalAndShow show = musicalService.selectOne(showId);
+		
+//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
+		List<Coupon> coupon = musicalService.selectCoupon(showId);
+		int discount = musicalService.selectDiscount(showId); 
+		int total = musicalService.totalReview(showId);
+		//		String url = "http://www.kopis.or.kr/openApi/restful/prfplc?service=3127d89913494563a0e9684779988063";
+		String url = "http://www.kopis.or.kr/openApi/restful/prfplc/"+show.getHallId()+"?service=3127d89913494563a0e9684779988063";
+		Map<String, String> address = musicalService.selectPlace(url);
+		logger.debug("showAll"+ show);
+		logger.info("showAddress"+ address);
+		mav.addObject("total", total);
+		mav.addObject("show", show);
+		mav.addObject("coupon", coupon);
+		mav.addObject("discount", discount);
+		mav.addObject("address", address);
+		mav.setViewName("show/showDetail");
+		return mav;
+	}
 
 	@RequestMapping("/showSearch.do")
-	public List<Map<String, String>> musicalSearch(ModelAndView mav, @RequestParam String cate,
+	public List<Map<String, String>> showSearch(ModelAndView mav, @RequestParam String cate,
 			@RequestParam String srchKeyword, @RequestParam int cpage) {
 		// cate : searchAll / searchTitle / searchActor
 		// srchKeyword : String
@@ -123,5 +157,28 @@ public class ShowController {
 		return dayList;
 	}
 	
-	
+	@RequestMapping("/insertWait.do")		
+	public ModelAndView insertWait(@RequestParam String showId, ModelAndView mav, HttpSession session) {		
+		Map<String, String> userAndShow = new HashMap<>();	
+		String memberId = ((Member)session.getAttribute("memberLoggedIn")).getMemberId();	
+		userAndShow.put("memberId", memberId);	
+		userAndShow.put("showId",showId);	
+		int result = musicalService.insertWait(userAndShow);	
+
+
+		String msg = "";			
+		String loc = "/show/showDetail.do?showId="+showId;	
+		if(result>0) {	
+			msg="대기공연에 추가되었습니다.";	
+		}	
+		else {	
+			msg="대기공연 추가에 실패했습니다.";	
+		}	
+
+
+		mav.addObject("msg", msg);	
+		mav.addObject("loc", loc);	
+		mav.setViewName("common/msg");	
+		return mav;	
+	}
 }
