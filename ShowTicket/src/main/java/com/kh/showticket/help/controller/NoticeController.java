@@ -42,8 +42,9 @@ public class NoticeController {
 	public ModelAndView notice(@RequestParam(value="cPage",defaultValue="1",required=false) int cPage) {
 		logger.debug("notice페이지 요청");
 		ModelAndView mav = new ModelAndView();
+		Notice notice = new Notice();
 
-		List<Notice> list = noticeService.selectNoticeTicketOpenList(cPage);
+		List<Notice> list = noticeService.noticeList(notice);
 
 		mav.addObject("list",list);
 		mav.addObject("cPage",cPage);

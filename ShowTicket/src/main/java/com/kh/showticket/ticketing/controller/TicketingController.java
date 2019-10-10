@@ -31,12 +31,13 @@ import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
+import lombok.extern.java.Log;
+@Log
 @Controller
 @SessionAttributes("memberLoggedIn")
 @RequestMapping("/ticketing")
 public class TicketingController {
-	java.util.Date utilDate = new java.util.Date();
-	java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
+
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -48,9 +49,6 @@ public class TicketingController {
 	@Autowired
 	TicketingService ticketingService;
 
-	@Autowired
-	MemberService memberservice;
-	
 	@RequestMapping("/ticketConfirm.do")
 	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
@@ -105,25 +103,18 @@ public class TicketingController {
 		ticket.setTicketStatus("N");
 		ticket.setTicketShowName(mas.getName());
 
-		int tPrice = ticket.getTicketPrice()-Integer.parseInt(totalCouponPrice)-Integer.parseInt(totalPointPrice)+1000;
-		ticket.setTicketPrice(tPrice);
-		
-		
-		logger.debug("ticket"+ticket);
-		mav.addObject("ticket",ticket);
-		mav.addObject("tPrice",tPrice);
+		logger.debug("예매확인 페이지");
+
 		mav.addObject("mas", mas);
-		mav.addObject("totalCouponPrice",totalCouponPrice);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.setViewName("ticketing/ticketConfirm");
 
-		int result = memberservice.insertTicket(ticket);
-		
-		System.out.println("result"+result);
 		return mav;
 	}
 
+
+		
 	@RequestMapping("/ticketingPoint.do")
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
 									@RequestParam String selectTime, @RequestParam String[] seat) {
@@ -149,7 +140,7 @@ public class TicketingController {
 		mav.addObject("Snum", Snum);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
-		mav.addObject("cList", cList);
+		mav.addObject("cLlist", cList);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("ticketing/ticketingPoint");
 
@@ -164,9 +155,12 @@ public class TicketingController {
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		logger.debug("ModelAndView={}", mas);
 		String html= "";
-//		List<Ticket> ticket = memberService.getTicketList();
+//		Ticket ticket = new Ticket();
+//		ticket.setTicketTime(selectTime.substring(1,3));
+
+//		List<Ticket> list = memberService.getTicketList();
 		try {
-			if("옥탑방 고양이 [대학로]".equals(mas.getId())) {
+			if(mas.getName().contains("옥탑방")) {
 				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
 			}
 			else {
@@ -180,6 +174,7 @@ public class TicketingController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		String main = html.substring(html.indexOf("http"), html.indexOf(" border")-1);
 		logger.debug(main);
 		mav.addObject("html", html);
@@ -190,10 +185,9 @@ public class TicketingController {
 		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
-	
-
 	}
 	
+
 
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 

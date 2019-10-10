@@ -69,22 +69,7 @@ nav-pills .nav-link {
 </style>
 <script>
 
-$(()=>{
-	/* $("img").empty("[title=[R석] 1층-B열-31]");
-	$("img").empty("[title=[R석] 1층-B열-32]");
-	$("img").empty("[title=[R석] 1층-B열-33]");
-	$("img").empty("[title=[R석] 1층-B열-34]"); */
-	/* $("img[title='[R석] 1층-B열-31']").empty();
-	$("img[title='[R석] 1층-B열-32']").empty();
-	$("img[title='[R석] 1층-B열-33']").empty();
-	$("img[title='[R석] 1층-B열-34']").empty(); */
-	/* title="[R석] 1층-B열-31"
-		[R석] 1층-B열-32
-		[R석] 1층-B열-33
-		[R석] 1층-B열-33
-		[R석] 1층-B열-34 */
-	
-});
+
 function SelectSeat(me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatGradeName){
 	 if (typeof me == "string") {
 		me = document.getElementById(me);
@@ -99,7 +84,7 @@ function SelectSeat(me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatGradeName){
 	var seatCnt = 0;
 	var seatTotal = document.getElementById("ImgSeatCount").value;
 	var html = "<h5>선택좌석</h5><br>";
-	for(i = 1; i < seatTotal ; i++){
+	for(i = 0; i < seatTotal ; i++){
 	  	var sid = "SID"+i;
 	  	sid = document.getElementById(sid);
 	  	if(sid.style.display == 'block'){
@@ -118,7 +103,7 @@ function SelectSeat(me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatGradeName){
 function next(){
 	var cnt = 1;
 	var seatTotal = document.getElementById("ImgSeatCount").value;
-	for(i = 1; i < seatTotal ; i++){
+	for(i = 0; i < seatTotal ; i++){
 	  	var sid = "SID"+i;
 	  	sid = document.getElementById(sid);
 	  	if(sid.style.display == 'block'){
@@ -162,6 +147,13 @@ function next(){
 				position:absolute;
 				display:none2;
 			} 
+			
+			.color_purple {
+    		color: #8f01a3 !important;
+			}
+			ul, ol {
+    		list-style: none;
+			}
 		</style> 
 		
 		
@@ -227,5 +219,34 @@ function next(){
 	</div>
 
 </body>
+<script>
+$(()=>{
+	
+	var seatTotal = document.getElementById("ImgSeatCount").value;
+	for(i = 30; i < seatTotal ; i++){
+	  	var sid = "SID"+i;
+	  	sid = document.getElementById(sid);
+	  	var title = sid.previousElementSibling.getAttribute("title");
+	/* 	if(title.indexOf("1층-B열-33") != -1){
+			
+	  		sid.previousElementSibling.style.display = "none";
+		}
+		if(title.indexOf("1층-B열-32") != -1){
+			
+		}
+		if(title.indexOf("1층-B열-34") != -1){
+			
+		} */
 
+	} 
+});
+	
+	/* $("img").empty("[title=[R석] 1층-B열-31]");
+	$("img").empty("[title=[R석] 1층-B열-32]");
+	$("img").empty("[title=[R석] 1층-B열-33]");
+	$("img").empty("[title=[R석] 1층-B열-34]"); */
+
+	
+
+</script>
 
