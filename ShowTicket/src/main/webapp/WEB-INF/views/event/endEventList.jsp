@@ -33,14 +33,12 @@
 						<c:forEach items="${EdcList }" var="EdcList">
 							
 						<li id="innerLi">
-							<div id="saleC"> <h4>${EdcList.discountRate }%</h4></div>
+							<div id="saleC"> <span class="percent">${EdcList.discountRate }%</span></div>
 							<a href="${pageContext.request.contextPath }/event/eventView.do?showId=${EdcList.showId }"> 
 								
-								<img
-								src="${EdcList.discountImg}"
-								alt="poster" width="285" height="386">
+								<img src="${EdcList.discountImg}" alt="poster" style="width: 218px; height: 280px;">
 								
-								<div class="event_top_info">
+								<div class="event_top_info" style="width: 218px;">
 									<input type="hidden" name="evtID" value="${EdcList.showId }" />
 									<dl>
 										<dt>제목</dt>
@@ -72,9 +70,16 @@
     </div>
     
 <style>
-div#saleC {position: absolute;margin-top: 2%;margin-right: 2%;margin-left: 231px; border-radius:23px; background: #8f01a3;color: white;width: 44px;}
-#saleC>h4{text-align: center;}
-#innerLi{  float: left; margin: 0 0 30px 20px; padding-left: 130px; position: relative; min-height: 134px;}
+div#saleC{width: 44px; height: 44px; border-radius: 55px; background: #8f01a3; color: white; position: absolute; margin-top: 2%; margin-left: 160px;z-index: 1; border: 2px solid white;}
+.percent{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+    left: 15%;
+    top: 20%;
+    position: absolute;
+}
+#innerLi{  float: left; margin: 0 0 30px 20px; padding-left: 90px; position: relative; min-height: 134px; width: 250px;}
 
 
 </style>

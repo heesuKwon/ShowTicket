@@ -174,4 +174,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.updatePoint(memberId);
 	}
 
+	@Override
+	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
+		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
+	}
+
 }

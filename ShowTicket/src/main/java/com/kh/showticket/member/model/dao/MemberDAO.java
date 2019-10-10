@@ -58,4 +58,6 @@ public interface MemberDAO {
 
 	String findIdByPhone(Map<String, String> memInfo);
 
+	List<String> selectWaitingIdListByShowId(String ticketShowId);
+
 }

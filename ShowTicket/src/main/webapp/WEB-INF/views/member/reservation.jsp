@@ -202,8 +202,7 @@ $(()=>{
 function sendAlarm(ticketNo) {
 	sock.send(ticketNo);
 }
-</script>	
-
+</script>
 
 <form class="cancel" action="${pageContext.request.contextPath }/member/reservationCancel.do" method="post"></form>
 <script>
@@ -212,8 +211,8 @@ function goCancel(ticketNo) {
 	//console.log("취소할 예매번호",cancelTNo);
 	
 	if(confirm("예매를 취소하시겠습니까?")){
+		sendAlarm(ticketNo);	
 		$(".cancel").append("<input type='hidden' name='cancelTNo' value='"+cancelTNo+"'/>").submit();
-		sendAlarm(ticketNo);
 	}
 	else{
 		return;
