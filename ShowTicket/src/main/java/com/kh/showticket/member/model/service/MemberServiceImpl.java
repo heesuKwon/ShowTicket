@@ -180,9 +180,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<Ticket> getTicketList() {
-		// TODO Auto-generated method stub
-		return null;
+	public int insertTicket(Ticket ticket) {
+		return memberDAO.insertTicket(ticket);
 	}
 		
 }

@@ -59,6 +59,11 @@ public class CouponDAOImpl implements CouponDAO {
 		return session.delete("coupon.deleteCoupon", couponNo);
 	}
 
+	@Override
+	public List<Map<String, String>> selectCouponListbyPlayId(Map<String, String> memAndPlay) {
+		return session.selectList("coupon.couponListbyPlayId",memAndPlay);
+	}
+
 	
 
 }

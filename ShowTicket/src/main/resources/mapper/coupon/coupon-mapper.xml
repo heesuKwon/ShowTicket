@@ -42,4 +42,11 @@
 	<delete id="deleteCoupon">
 		delete coupon where coupon_no = #{couponNo}
 	</delete>
+	<select id="couponListbyPlayId"
+			resultMap="myCoupon">
+		select *
+		from my_coupon m left join coupon c on m.coupon_no = c.coupon_no
+		where  showid = #{playId} or showid is null and member_id=#{memberId}
+		order by coupon_end_date
+	</select>
 </mapper>

@@ -62,7 +62,7 @@ public interface MemberService {
 
 	List<String> selectWaitingIdListByShowId(String ticketShowId);
 
-	List<Ticket> getTicketList();
+	int insertTicket(Ticket ticket);
 
 
 }
