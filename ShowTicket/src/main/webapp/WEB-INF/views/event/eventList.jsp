@@ -75,6 +75,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 						</div>
 					</a>
 					<div id="saleC"> <span class="percent">${dcList.disCountRate }%</span></div>
+
 				</li>
 				</c:forEach>
 	

@@ -112,7 +112,8 @@
 					<button type="button" class="btn btn-secondary btn-lg btn-block">공연 상세보기</button>
 				</div>
 
-			<c:if test="${!empty memberLoggedIn }">	
+			<c:if test="${!empty memberLoggedIn }">				
+
 				<div id="comment-container" name="comment-container">
 					<div class="comment-editor">
 

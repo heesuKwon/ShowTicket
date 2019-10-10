@@ -99,7 +99,7 @@ function pre(){
 		</form>
 		<div class="t_cbtndiv">
 			<input type="button" value="이전단계" class="t_button1" onclick="pre();" />
-			<input type="button" value="결제하기" class="t_button3" />
+			<input type="button" value="결제하기" class="t_button3" onclick="location.href='${pageContext.request.contextPath}/ticketing/pay.do'" />
 
 		</div>
 	</div>

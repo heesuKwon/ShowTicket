@@ -164,4 +164,5 @@
 	<update id="updatePoint">
 		 update member set point=point*1.5 where member_id=#{memberId}
 	</update>
+
 </mapper>

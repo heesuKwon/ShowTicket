@@ -643,12 +643,12 @@ public class MemberController {
 		model.addAttribute("msg", result>0?"예매 취소 완료":"예매 취소 실패!");
 		model.addAttribute("loc", "/member/reservation.do?cPage="+1);
 
-
 		return "common/msg";
 	}
 
 	@RequestMapping(value="/phone.do", method=RequestMethod.POST)
 	@ResponseBody
+
 	public String phone(Model model, @RequestParam String phone) {
 
 		AuthPhoneNumber ap = new AuthPhoneNumber();
@@ -758,7 +758,6 @@ public class MemberController {
 
 	}
 
-
 	@RequestMapping("/updatePt.do") 
 	public String updatePoint (Model model ,@RequestParam String memberId ) {
 
@@ -768,7 +767,6 @@ public class MemberController {
 		model.addAttribute("loc","/member/reservation.do?memberId="+memberId+"&cPage="+1);
 		return "common/msg"; 
 	}
-
 
 }
 
