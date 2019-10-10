@@ -105,6 +105,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.delete("member.deleteFollow", follow);
 	}
 
+	@Override
+	public int updatePoint(String memberId) {
+		return sqlSession.update("member.updatePoint", memberId);
+	}
+
 
 	
 

@@ -12,7 +12,9 @@
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style>
 
-div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  left: 28%; color: white; position: relative; top: 51px;z-index: 1;margin-left: 54%;}
+div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; top: -383px; left: 25%; color: white; position: relative; margin-top: 6px;padding-top: 7px; z-index: 1;margin-left: 54%; padding-top: 1px;text-align: center;
+}
+    }
 
 </style>
 <div id="container" class="event_cont">
@@ -37,16 +39,16 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 		<c:if test="${empty dcList }"> <br /> <h2>진행중인 이벤트가 없습니다.</h2><br /></c:if>
 		<c:if test="${!empty dcList }"> 
 		
-			<ul class="event_top_list" >
+			<ul class="event_top_list" style="position: relative;">
 				<c:forEach items="${dcList }" var="dcList">
-				<li showId="${dcList.showId }">
 					
+				<li showId="${dcList.showId }" style="position: relative;">
 					<a href="${pageContext.request.contextPath }/event/addSaleView.do?showId=${dcList.showId }"> 
 						
 						<img
 						src="${dcList.disCountImg}"
 						alt="poster" width="285" height="386">
-						
+						<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
 						<div class="event_top_info">
 							<input type="hidden" name="evtID" value="${dcList.showId }" />
 							<dl>
@@ -62,10 +64,10 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 								</dd>
 								<dt>기간</dt>
 								<dd class="event_date"> <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountStartDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${dcList.disCountEndDate}"/></dd>
+								
 							</dl>
 						</div>
 					</a>
-					<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
 				</li>
 				</c:forEach>
 	

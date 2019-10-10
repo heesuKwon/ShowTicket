@@ -117,4 +117,8 @@
 		delete from follow
 		where member_id = #{memberId} and follow_showid = #{playId}
 	</delete>
+	
+	<update id="updatePoint">
+		 update member set point=point*1.5 where member_id=#{memberId}
+	</update>
 </mapper>

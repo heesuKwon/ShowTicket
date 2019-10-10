@@ -139,4 +139,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.deleteFollow(follow);
 	}
 
+	@Override
+	public int updatePoint(String memberId) {
+		return memberDAO.updatePoint(memberId);
+	}
+
 }
