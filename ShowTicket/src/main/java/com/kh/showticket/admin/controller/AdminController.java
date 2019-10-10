@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.showticket.admin.model.service.AdminService;
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.admin.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.review.model.vo.Review;
 
 
 @RequestMapping("/admin")
@@ -119,36 +119,30 @@ public class AdminController {
     	return "/admin/adminMList";
     }
     
-    @RequestMapping("/adminReportDetail.do")
-    public String adminReportDetail(Model model, @RequestParam int reviewNo) {
+    @RequestMapping(value="/adminReportDetail.do", method=RequestMethod.POST)
+    public String adminReportDetail(Model model, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo, @RequestParam int reportNo) {
     	
-    	List<Report> reportList = adminService.selectOneAdminReportList(reviewNo);
+    	
+    	List<Report> reportList = adminService.selectOneAdminReportList(reportNo);
     	List<Review> reviewList = adminService.selectOneAdminReviewList(reviewNo);
     	
     	model.addAttribute("reportList", reportList);
     	model.addAttribute("reviewList", reviewList);
     	
-    	return "/admin/adminReportDetail";
-    }
-    
-    @RequestMapping(value="/reportPlus.do", method=RequestMethod.POST)
-    public String reportPlus(Model model, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo) {
-    	
     	logger.debug("신고수: ",cnt);
     	logger.debug("신고대상: ",memberId);
     	
-    	Map<String, Object> info = new HashMap<>();
-    	info.put("cnt",cnt);
-    	info.put("memberId",memberId);
-    	
-    	int result = adminService.updateReport(info);
-    	
-    	model.addAttribute("msg", result>0?"신고 누적 완료":"신고 누적 실패");
-    	model.addAttribute("loc", "/admin/adminReportDetail.do?reviewNo="+reviewNo);
-    	
-    	return "common/msg";
+    	if(cnt != 0 && memberId != null) {
+	    	Map<String, Object> info = new HashMap<>();
+	    	info.put("cnt",cnt);
+	    	info.put("memberId",memberId);
+	    	
+	    	int result = adminService.updateReport(info);
+    	}
+
+    	return "/admin/adminReportDetail";
     }
-    
+        
     @RequestMapping("/adminReportDelete.do")
     public String adminReportDelete(Model model, @RequestParam int reviewNo) {
     	

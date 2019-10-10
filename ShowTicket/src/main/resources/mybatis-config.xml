@@ -36,7 +36,7 @@
 	<typeAlias type="com.kh.showticket.admin.model.vo.Report"
   			   alias="report"/>
   			   
-  	<typeAlias type="com.kh.showticket.admin.model.vo.Review"
+  	<typeAlias type="com.kh.showticket.review.model.vo.Review"
   			   alias="review"/>
 
   	<typeAlias type="com.kh.showticket.common.typehandler.StringArrayTypeHandler"

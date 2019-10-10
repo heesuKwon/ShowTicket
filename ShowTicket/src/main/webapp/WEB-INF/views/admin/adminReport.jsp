@@ -8,10 +8,22 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin.css"/>
 
+<form method="post" id="rInfo" action="${pageContext.request.contextPath}/admin/adminReportDetail.do"></form>
 <script>
 $(".nav").click(function(){
     $(this).css("color","#8f01a3");
 });
+
+function goDetail(num,Id,rp,rv) {
+	var cnt = num;
+	var memberId = Id;
+	var reportNo = rp;
+	var reviewNo = rv;
+	$("#rInfo").append("<input type='hidden' name='cnt' value='"+cnt+"'/>")
+			   .append("<input type='hidden' name='memberId' value='null'/>")
+		       .append("<input type='hidden' name='reportNo' value='"+reportNo+"'/>")
+			   .append("<input type='hidden' name='reviewNo' value='"+reviewNo+"'/>").submit();
+}
 
 </script>
 
@@ -39,7 +51,7 @@ $(".nav").click(function(){
 		<table class="table" id="reporttbl">
 			<thead>
 				<tr>
-			      <th scope="col">No</th>
+			      <th scope="col">신고된 리뷰 번호</th>
 			      <th scope="col">신고사유</th>
 			      <th scope="col">신고한 회원</th>
 			      <th scope="col">신고 받은 회원</th>
@@ -47,8 +59,9 @@ $(".nav").click(function(){
 			 </thead>
 			 <tbody>
 			 	<c:forEach items="${reportList }" var="list">
-			 	<c:set var="num" value="${list.reviewNo }"/>
-				    <tr class="cursor" onclick="location.href='${pageContext.request.contextPath}/admin/adminReportDetail.do?reviewNo='+${num}">
+			 	<c:set var="report" value="${list.reportNo }"/>
+			 	<c:set var="review" value="${list.reviewNo }"/>
+				    <tr class="cursor" onclick="goDetail('0','null','${report}','${review }');">
 				      <th scope="row">${list.reviewNo }</th>
 				      <td>${list.reportReason }</td>
 				      <td>${list.reportMemberId }</td>
