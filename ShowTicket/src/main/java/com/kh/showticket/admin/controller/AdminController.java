@@ -88,7 +88,7 @@ public class AdminController {
     }
     
     @RequestMapping("/adminMemberList.do")
-    public String adminMemberList(Model model, HttpServletRequest request) {
+    public ModelAndView adminMemberList(ModelAndView mav, HttpServletRequest request) {
 
     	try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -117,21 +117,22 @@ public class AdminController {
 		paging.put("totalPage",totalPage);
 		paging.put("cPage",cPage);
 		
-		model.addAttribute("memberList", memberList);
-    	model.addAttribute("paging", paging);
-    	    	
-    	return "/admin/adminMList";
+		mav.addObject("memberList", memberList);
+		mav.addObject("paging", paging);
+		mav.setViewName("admin/adminMList");
+		
+    	return mav;
     }
     
     @RequestMapping(value="/adminReportDetail.do", method=RequestMethod.POST)
-    public String adminReportDetail(Model model, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo, @RequestParam int reportNo) {
+    public ModelAndView adminReportDetail(ModelAndView mav, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo, @RequestParam int reportNo) {
     	
     	
     	List<Report> reportList = adminService.selectOneAdminReportList(reportNo);
     	List<Review> reviewList = adminService.selectOneAdminReviewList(reviewNo);
     	
-    	model.addAttribute("reportList", reportList);
-    	model.addAttribute("reviewList", reviewList);
+    	mav.addObject("reportList", reportList);
+    	mav.addObject("reviewList", reviewList);
     	
     	logger.debug("신고수: ",cnt);
     	logger.debug("신고대상: ",memberId);
@@ -143,21 +144,25 @@ public class AdminController {
 	    	
 	    	int result = adminService.updateReport(info);
     	}
-
-    	return "/admin/adminReportDetail";
+    	
+    	mav.setViewName("admin/adminReportDetail");
+    	
+    	return mav;
     }
         
     @RequestMapping("/adminReportDelete.do")
-    public String adminReportDelete(Model model, @RequestParam int reviewNo) {
+    public ModelAndView adminReportDelete(ModelAndView mav, @RequestParam int reviewNo) {
     	
     	logger.debug("글 번호: ",reviewNo);
     	
     	int result = adminService.deleteReport(reviewNo);
     	
-    	model.addAttribute("msg", result>0?"삭제 완료":"삭제 실패");
-    	model.addAttribute("loc", "/admin/adminReport.do");
+    	mav.addObject("msg", result>0?"삭제 완료":"삭제 실패");
+    	mav.addObject("loc", "/admin/adminReport.do");
     	
-    	return "common/msg";
+    	mav.setViewName("common/msg");
+    	
+    	return mav;
     }
     @PostMapping("/insertReport.do")
     public Map<String, String> reportInsert(@RequestBody Report report) {
@@ -177,20 +182,22 @@ public class AdminController {
     }
     
     @RequestMapping("/adminMemberDelete.do")
-    public String adminMemberDelete(Model model, @RequestParam String memberId) {
+    public ModelAndView adminMemberDelete(ModelAndView mav, @RequestParam String memberId) {
 
     	logger.debug("탈퇴자 아이디: ",memberId);
     	
     	int result = adminService.deleteMember(memberId);
     	
-    	model.addAttribute("msg", result>0?"탈퇴 완료":"탈퇴 실패");
-    	model.addAttribute("loc", "/admin/adminMemberList.do");
+    	mav.addObject("msg", result>0?"탈퇴 완료":"탈퇴 실패");
+    	mav.addObject("loc", "/admin/adminMemberList.do");
     	
-    	return "common/msg";
+    	mav.setViewName("common/msg");
+    	
+    	return mav;
     }
     
     @RequestMapping("/adminMemberSearch.do")
-    public String adminMemberSearch(Model model, HttpServletRequest request) {
+    public ModelAndView adminMemberSearch(ModelAndView mav, HttpServletRequest request) {
     	
     	String searchType = request.getParameter("searchType");
     	String searchKeyword = request.getParameter("searchKeyword");
@@ -234,9 +241,10 @@ public class AdminController {
 		paging.put("cPage",cPage);
 		paging.put("barStart",barStart);
 		
-		model.addAttribute("list", list);
-    	model.addAttribute("paging", paging);
+		mav.addObject("list", list);
+		mav.addObject("paging", paging);
+		mav.setViewName("admin/adminMFinder");
 		
-    	return "/admin/adminMFinder";
+    	return mav;
     }
 }
