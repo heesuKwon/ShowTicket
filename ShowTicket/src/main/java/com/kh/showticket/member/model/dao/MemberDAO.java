@@ -44,6 +44,8 @@ public interface MemberDAO {
 
 	int deleteFollow(Map<String, String> follow);
 
+	int updatePoint(String memberId);
+
 	List<Ticket> selectRTotalCount();
 
 	List<Ticket> selectTotalCountA(Map<String,Object> paging);
@@ -55,5 +57,7 @@ public interface MemberDAO {
 	String findIdByEmail(Map<String, String> memInfo);
 
 	String findIdByPhone(Map<String, String> memInfo);
+
+	List<String> selectWaitingIdListByShowId(String ticketShowId);
 
 }

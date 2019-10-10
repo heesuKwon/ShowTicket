@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +25,10 @@ import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
+
+import lombok.Setter;
+import lombok.extern.java.Log;
+@Log
 @Controller
 @SessionAttributes("memberLoggedIn")
 @RequestMapping("/ticketing")
@@ -101,11 +108,15 @@ public class TicketingController {
 		return mav;
 	}
 	
-//	@RequestMapping(value="/interpark.do")
-//	public ModelAndView interpark(ModelAndView mav) {
-//		mav.setViewName("ticketing/interpark");
-//		return mav;
-//	}
+
+	@RequestMapping("/pay.do")
+	public String ticketPay(Model model) {  // 포인트 , 아이디 
+		
+		logger.debug("예매결제페이지");
+		
+		return "/ticketing/pay";
+	}
+	
 
 }
 

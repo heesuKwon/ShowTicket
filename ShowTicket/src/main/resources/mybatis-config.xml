@@ -58,6 +58,9 @@
   			   
   	<typeAlias type="com.kh.showticket.event.model.vo.EventVO"
   			   alias="eventvoo"/>
+  			   
+  	<typeAlias type="com.kh.showticket.event.model.vo.Prizewinner"
+  			   alias="prizewinner"/>
 
   	<!-- <typeAlias type="com.kh.spring.demo.model.vo.Dev" 
   			   alias="dev"/>

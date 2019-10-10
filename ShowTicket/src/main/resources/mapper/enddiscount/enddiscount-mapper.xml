@@ -5,7 +5,9 @@
 <mapper namespace="enddiscount">
 	
 	<select id="selectEdcList" resultMap="enddiscountMap">
-		select * from discount_delete order by discount_start_date asc
+		select * from discount_delete where discount_end_date <![CDATA[
+<
+]]> sysdate order by discount_start_date asc
 	</select>
 	
 	
