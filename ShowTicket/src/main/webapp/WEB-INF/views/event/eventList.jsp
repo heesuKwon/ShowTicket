@@ -12,8 +12,16 @@
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <style>
 
-div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  left: 28%; color: white; position: relative; top: 51px;z-index: 1;margin-left: 54%;}
+div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; color: white; position: absolute; top: 20px; right: 10px;z-index: 1; border: 2px solid white;}
 
+.percent{
+    font-size: 16px;
+    font-weight: bold;
+    font-family: "Segoe UI",Arial,sans-serif;
+    left: 15%;
+    top: 20%;
+    position: absolute;
+}
 </style>
 <div id="container" class="event_cont">
 	<div class="inner">
@@ -63,7 +71,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: black;  le
 							</dl>
 						</div>
 					</a>
-					<div id="saleC"> <h4>${dcList.disCountRate }%</h4></div>
+					<div id="saleC"> <span class="percent">${dcList.disCountRate }%</span></div>
 				</li>
 				</c:forEach>
 	

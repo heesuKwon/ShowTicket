@@ -48,7 +48,7 @@
     </update>
     
     <select id="selectReservationList" resultType="ticket">
-    	select * from ticket where ticket_buyer=#{memberId}
+    	select * from(select rownum rnum, r.* from(select * from ticket order by ticket_enrolldate desc)r)r where rnum between #{startContent} and #{endContent} and ticket_buyer=#{memberLoggedIn}
     </select>
 	
 	<select id="chkEmailUsable"
@@ -62,26 +62,26 @@
 	</select>
 
 	<select id="selectReservationTerm" resultType="ticket">
-		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
 		from(select rownum rnum, t.*
-		from(select * from ticket where ticket_buyer=#{memberId} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate order by ticket_enrolldate desc)t)t
+		from(select * from ticket where ticket_buyer=#{memberLoggedIn} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate order by ticket_enrolldate desc)t)t
 		where rnum between #{startContent} and #{endContent}
 	</select>
 	
 	<select id="selectReservationTerm15" resultType="ticket">
-		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
 		from(select rownum rnum, t.*
-		from(select * from ticket where ticket_buyer=#{memberId} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate order by ticket_enrolldate desc)t)t
+		from(select * from ticket where ticket_buyer=#{memberLoggedIn} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate order by ticket_enrolldate desc)t)t
 		where rnum between #{startContent} and #{endContent}
 	</select>
 	
-	<select id="selectReservationPage" resultType="ticket">
-		select ticket_no as ticketNo, ticket_showid as ticketShowId, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+	<select id="selectReservationAll" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
 			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
 		from(select rownum rnum, t.*
-		from(select * from ticket where ticket_buyer=#{memberId} order by ticket_enrolldate desc)t)t
+		from(select * from ticket where ticket_buyer=#{memberLoggedIn} order by ticket_enrolldate desc)t)t
 		where rnum between #{startContent} and #{endContent}
 	</select>
 
@@ -94,7 +94,7 @@
 	</delete>
 
 	<update id="updateReservation">
-		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberId}
+		update ticket set ticket_status='N' where ticket_no=#{cancelTNo} and ticket_buyer=#{memberLoggedIn}
 	</update>
 
 	<select id="selectOneTicketByNo"
@@ -117,4 +117,38 @@
 		delete from follow
 		where member_id = #{memberId} and follow_showid = #{playId}
 	</delete>
+	
+	<select id="selectRTotalCount" resultType="ticket">
+		select * from ticket
+	</select>
+	
+	<select id="selectTotalCountA" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from ticket where ticket_buyer=#{memberLoggedIn} order by ticket_enrolldate desc
+	</select>
+	
+	<select id="selectTotalCountT" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from ticket where ticket_buyer=#{memberLoggedIn} and ticket_enrolldate between add_months(sysdate, #{num}) and sysdate order by ticket_enrolldate desc
+	</select>
+	
+	<select id="selectTotalCount15" resultType="ticket">
+		select ticket_no as ticketNo, ticket_showname as ticketShowName, ticket_enrolldate as ticketEnrollDate, ticket_date as ticketDate,
+			   ticket_count as ticketCount, ticket_cancel as ticketCancel, ticket_status as ticketStatus
+		from ticket where ticket_buyer=#{memberLoggedIn} and ticket_enrolldate between trunc(sysdate + #{num}) and sysdate order by ticket_enrolldate desc
+	</select>
+	
+	<select id="findIdByEmail" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and email=#{memEmail}
+	</select>
+	
+	<select id="findIdByPhone" resultType="string">
+		select member_id
+		from member
+		where member_name=#{memNm} and phone=#{inputHp}
+	</select>
 </mapper>

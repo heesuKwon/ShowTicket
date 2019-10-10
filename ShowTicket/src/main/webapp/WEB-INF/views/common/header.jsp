@@ -10,16 +10,12 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
-<meta property="og:image"
-	content="https://tketlink.dn.toastoven.net/static/ticketlink.png" />
 <title>ShowTicket</title>
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/common.css">
-
 <link rel="stylesheet" type="text/css"
-	href="//tketlink.dn.toastoven.net/markup_resources/2019090301/web/css/main.css">
-</head>
+	href="${pageContext.request.contextPath}/resources/css/main.css">
 
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 
@@ -124,18 +120,17 @@ function onClose(evt) {
 	function popId(){
 	    var url = "${pageContext.request.contextPath}/member/memberIdFind.do";
 	    var name = "popup test";
-	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    var option = "width = 430, height = 550, top = 80, left = 600, location = no"
 	    window.open(url, name, option);
 	}
 	function popPwd(){
 	    var url = "${pageContext.request.contextPath}/member/memberPwdFind.do";
 	    var name = "popup test";
-	    var option = "width = 430, height = 550, top = 120, left = 600, location = no"
+	    var option = "width = 430, height = 550, top = 80, left = 600, location = no"
 	    window.open(url, name, option);
 	}
 
 </script>
-
 
 	<div id="wrap">
 		<div id="header">
@@ -166,10 +161,10 @@ function onClose(evt) {
 									<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 								</c:if>
 								<c:if test="${memberLoggedIn.memberId != 'admin' }">
-									<span class="black"><a href="${pageContext.request.contextPath }/member/reservation.do?memberId=${memberLoggedIn.memberId}&cPage=1">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
+									<span class="black"><a href="${pageContext.request.contextPath }/member/reservation.do?cPage=1">${memberLoggedIn.memberId }</a> 님, 환영합니다</span>
 									&nbsp;
 									<button class="logout" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button><span>|</span> 
-									<a href="${pageContext.request.contextPath}/member/reservation.do?memberId=${memberLoggedIn.memberId}&cPage=1" id="reserveLogin">예매확인/취소</a><span>|</span>
+									<a href="${pageContext.request.contextPath}/member/reservation.do?cPage=1" id="reserveLogin">예매확인/취소</a><span>|</span>
 									<a href="${pageContext.request.contextPath}/help/main.do">고객센터</a>
 								</c:if>
 							</c:if>

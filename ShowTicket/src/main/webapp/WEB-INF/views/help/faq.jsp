@@ -27,7 +27,6 @@ $(()=>{
 		 	$(".nav-pills .nav-link.select").attr('class','nav-link nav-font default');
 			$(e.target).attr('class','nav-link select nav-font'); 
 			
-			$(".help_rcont .search input[type=text] ").val("");
 			faqList(type, searchType);
 		});
 		//테이블의 열을 클릭시 해당 게시물로 이동
@@ -183,6 +182,7 @@ function faqList(type, searchType){
 
 					<!-- // 검색창 덮는 배너 추가 -->
 				</div>
+					
 					<c:if test="${'admin' eq memberLoggedIn.memberId}">
 					<button class="btn btn-primary btn-color btn-sm" id="write">글쓰기</button>
 					</c:if>

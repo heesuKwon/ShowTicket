@@ -24,43 +24,22 @@ $(()=>{
 	$("#couponDetail").keyup(function() {
 		$(".couponDetail").html($("#couponDetail").val());
 	});
-	
+
 });
 
-var select = "";
-function goAdd(id,num) {
-	var showId = id;
-	var sId = num;
-	console.log(showId);
-	console.log(sId);
-	
-	//$("#couponDetail").attr(readonly);
-	//$(".pselectBtn").removeClass("cDefault").addClass("cSelected");
-/* 	if($(".add").children("#showId").val() == null){
-		select = null;
-	}
-	else if($(".add").children("#showId").val() != null){
-		select = $(".add").children("#showId").val();		
-	} */
-	console.log("select값은?"+select);
-	
-	if($(".add").children("#showId").val() == null){
-		$("#"+sId).removeClass("cDefault").addClass("cSelected");
-		$("#nShowId").remove();
-		$(".add").append("<input type='hidden' id='showId' name='showId' value='"+showId+"'/>");
-	}
-	else {
-		$("#"+sId).removeClass("cSelected").addClass("cDefault");
-		$("#showId").remove();
-		$(".add").append("<p id='nShowId'><input type='hidden' name='showId' value='null'/></p>");
-	}
-	
-	$(".couponDetail").text("해당 공연 대상");
+function goAdd(id) {
+	   var showId = id;
+	   console.log(showId);
+	   
+	   $(".couponDetail").text("해당 공연 대상");
+	   $("#showId").remove();
+	   $(".add").append("<input type='hidden' name='showId' value='"+showId+"'/>");
 }
 
 function submit() {
 	$(".add").submit();
 }
+
 
 </script>
 
@@ -96,8 +75,8 @@ function submit() {
 									<td>${sList.prfpdto }</td>
 									<td>${sList.prfstate }</td>
 									<td>
-										<c:set var="sCnt" value="sList${vs.count }"/>
- 										<button type="button" id="${sCnt }" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}','${sCnt }');">선택</button>
+										<c:set var="sId" value="sList${vs.count }"/>
+ 										<button type="button" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}')">선택</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -128,7 +107,7 @@ function submit() {
 									<td>${mList.prfpdto }</td>
 									<td>${mList.prfstate }</td>
 									<td>
-										<button type="button" id="mList${vs.count }" class="pselectBtn cDefault" onclick="goAdd('${mList.mt20id}')">선택</button>
+										<button type="button" class="pselectBtn cDefault" onclick="goAdd('${mList.mt20id}')">선택</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -143,7 +122,7 @@ function submit() {
 					<p class="cAddP">할인 가격 : &nbsp;&nbsp; <input type="text" id="couponPrice" name="couponPrice" class="cAddInput" placeholder="ex)2000"/></p>
 					<p class="cAddP">쿠폰 기간 : &nbsp;&nbsp; <input type="text" id="couponTime" name="couponTime" class="cAddInput" placeholder="ex)7"/></p>
 					<p class="cAddP">쿠폰 개수 : &nbsp;&nbsp; <input type="text" id="couponCount" name="couponCount" class="cAddInput" placeholder="ex)50"/></p>
-					<p id="nShowId"><input type="hidden" name="showId" value="null"/></p>
+					<p id="showId"><input type="hidden" name="showId" value="null"/></p>
 				</form>
 					<p class="cAddP">제한 조건 : &nbsp;&nbsp; <input type="text" id="couponDetail" class="cAddInput" /></p>
 					<p class="cNotice"> ※ 특정 공연을 선택했을 경우, 제한 조건은 작성하지 않아도 됩니다.</p>

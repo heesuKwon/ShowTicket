@@ -26,7 +26,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker3.min.css">
 <script type="text/javascript"
 	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.min.js"></script>
-<script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script>
+<!-- <script src="/js/bootstrap-datepicker.kr.js" charset="UTF-8"></script> -->
 <!--지도api  -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=90fa5b9d28b260d5191bb13ef4764b06"></script>
@@ -1320,7 +1320,6 @@ function insertReview(){
 	}
 
 </style>
-
 
 
 

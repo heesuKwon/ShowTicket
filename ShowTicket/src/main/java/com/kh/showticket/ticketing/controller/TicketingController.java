@@ -19,6 +19,7 @@ import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.ticketing.model.service.TicketingService;
 
 @Controller
 @SessionAttributes("memberLoggedIn")
@@ -29,12 +30,20 @@ public class TicketingController {
 
 	@Autowired
 	CouponService couponService;
+	
+	@Autowired
+	TicketingService ticketingService;
 
 	@RequestMapping("/ticketConfirm.do")
-	public ModelAndView ticketCheck(ModelAndView mav) {
+	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId, 
+			@RequestParam String selectDate, @RequestParam String selectTime) {
 
 		logger.debug("예매확인 페이지");
 
+		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
+		mav.addObject("mas", mas);
+		mav.addObject("selectDate", selectDate);
+		mav.addObject("selectTime", selectTime);
 		mav.setViewName("ticketing/ticketConfirm");
 
 		return mav;
@@ -48,12 +57,15 @@ public class TicketingController {
 
 		logger.debug("예매확인 페이지");
 		logger.debug("clISt>>>>>"+cList);
+		
+		int myPoint = ticketingService.selectMyPoint(memberId);
 
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("cLlist", cList);
+		mav.addObject("myPoint", myPoint);
 		mav.setViewName("ticketing/ticketingPoint");
 
 		return mav;

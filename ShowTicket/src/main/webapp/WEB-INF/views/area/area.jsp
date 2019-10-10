@@ -9,8 +9,6 @@
 	<jsp:param value="" name="pageTitle" />
 </jsp:include>
 
-<script type="text/javascript" src="http://ticketlink.dn.toastoven.net/web/pcweb/markup_resources/201606211000/js/login.js"></script>
-<script type="text/javascript" src="/resources/js/header-f81b5672707a96b1c497e15293ee07f3.js"></script>
 <script>
 var cpage = 2;
 var area = '';
@@ -181,15 +179,6 @@ function getList(cpage){
     </div>
     <!-- container 끝 -->
 
-	<a href="javascript:window.scrollTo(0,0);" id="back_to_top">위로</a>
-
-<script type="text/javascript">
-	/* <![CDATA[ */
-	var google_conversion_id = 950223509;
-	var google_custom_params = window.google_tag_params;
-	var google_remarketing_only = true;
-		/* ]]> */
-</script>
 <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
 <noscript>
       <div style="display:inline;">
@@ -201,7 +190,6 @@ function getList(cpage){
 		$("iframe[name='google_conversion_frame']").css("display", "none");
 </script>
 
-<script type="text/javascript" src="/resources/js/date.js"></script>
 <script type="text/javascript">
 	//<![CDATA[
 

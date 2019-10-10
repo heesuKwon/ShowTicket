@@ -24,7 +24,7 @@ $(()=>{
 			$(e.target).attr('class','nav-link select nav-font')
 					   .attr('id','select');
 			type = $(e.target).html();
-			day = $("")
+			day = $("");
 			getList();
 			
 	});
@@ -46,7 +46,7 @@ function getList(){
 		
 	}
 	
-	var param = {url1 : url1}
+	var param = {url1 : url1};
 	
     $.ajax({
         url : '${pageContext.request.contextPath}/ranking/rankAjax.do',
