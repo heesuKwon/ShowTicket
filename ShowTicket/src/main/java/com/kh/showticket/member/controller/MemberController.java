@@ -224,7 +224,10 @@ public class MemberController {
 		//@SessionAttribute...
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		//String memberLoggedIn = "honggd";
-
+		
+		List<Map<String, String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
+		
+		mav.addObject("myCouponList", myCouponList);
 		mav.setViewName("member/myCoupon");
 
 		return mav;

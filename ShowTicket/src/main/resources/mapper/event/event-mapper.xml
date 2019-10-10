@@ -8,7 +8,6 @@
 		select *
 		from event
 		where (event_title like '%' || #{queryKeyword} || '%' or event_content like '%' || #{queryKeyword} || '%')
-				and event_status = 'Y'
 	</select>
 	<resultMap type="map" id="eventMap">
 		<id column="event_no" property="eventNo" />

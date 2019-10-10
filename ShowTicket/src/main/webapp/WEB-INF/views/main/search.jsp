@@ -122,7 +122,7 @@ $(()=>{
    				<div class="resultInfo">
    					<div class="cont-poster">
    						<!-- 차후 수정 바람 -->
-   						<img src="${e.renamedFileName }" alt="" />
+   						<img src="${e.eventImg }" alt="" />
    					</div>
    					<div class="eventInfo">
    						<span class="eventTitle">${e.eventTitle}</span>
