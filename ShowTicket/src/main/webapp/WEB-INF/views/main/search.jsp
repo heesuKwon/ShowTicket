@@ -66,7 +66,7 @@ $(()=>{
    						
    					</div>
    					<div>
-   					<button type="button" class="btn btn-primary reserve">예매하기</button>
+   					<button type="button" class="btn btn-color reserve" onclick="location.href='${pageContext.request.contextPath}/musical/musicalDetail.do?musicalId=${m.mt20id}'">예매하기</button>
    					</div>
    				</div>
    			</td>
@@ -97,7 +97,7 @@ $(()=>{
    						
    					</div>
    					<div>
-   					<button type="button" class="btn btn-primary reserve">예매하기</button>
+   					<button type="button" class="btn btn-color reserve" onclick="location.href='${pageContext.request.contextPath}/show/showDetail.do?showId=${s.mt20id}'">예매하기</button>
    					</div>
    				</div>
    			</td>
@@ -134,7 +134,7 @@ $(()=>{
    						</span>
    					</div>
    					<div>
-   					<button type="button" class="btn btn-primary reserve">예매하기</button>
+   					<button type="button" class="btn btn-color reserve" onclick="location.href='${pageContext.request.contextPath}/event/eventView.do?eventNo=${e.eventNo}'">상세보기</button>
    					</div>
    				</div>
    			</td>
