@@ -10,10 +10,10 @@
 </head>
 <body>
     <script>
-  /*   console.log("지금아이디는>>"+'${memberLoggedIn.memberId}'); */
     
-    $(function(){
-    	var IMP = window.IMP;
+ $(function(){ 
+
+	 	var IMP = window.IMP;
 		IMP.init('imp68757717');
 
 		IMP.request_pay({
@@ -21,17 +21,16 @@
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '주문명: Showticket 예매',
-		    amount : 100,
+		    amount : 100, //가격 입력  
 	
-		    /* buyer_addr : '', */
-		    /* buyer_postcode : '123-456', */
-		    /* m_redirect_url : 'https://www.yourdomain.com/payments/complete' */
-		}, function(rsp) {
+		},function(rsp) {
 			
 			if ( rsp.success ) {
 				alert("결제되었습니다!");
 				location.href="${pageContext.request.contextPath}/member/updatePt.do?memberId=${memberLoggedIn.memberId}";
 		    } else {
+		    	alert("결제가 취소됩니다.");
+		    	self.close();
 		        return;
 		    }
 			

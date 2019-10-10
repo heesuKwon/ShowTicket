@@ -13,7 +13,7 @@ public class Event {
 	private String eventStatus;
 	private Date eventDetailDate; 
 	private String eventTimeMen; 
-	private String showId; 
+	private String eventShowId; 
 	private String eventKind;
 	private String eventImg;
 	
@@ -25,7 +25,7 @@ public class Event {
 
 
 	public Event(int eventNo, String eventTitle, String eventContent, Date eventStartDate, Date eventEndDate,
-			Date announcementDate, String eventStatus, Date eventDetailDate, String eventTimeMen, String showId,
+			Date announcementDate, String eventStatus, Date eventDetailDate, String eventTimeMen, String eventShowId,
 			String eventKind, String eventImg) {
 		super();
 		this.eventNo = eventNo;
@@ -37,7 +37,7 @@ public class Event {
 		this.eventStatus = eventStatus;
 		this.eventDetailDate = eventDetailDate;
 		this.eventTimeMen = eventTimeMen;
-		this.showId = showId;
+		this.eventShowId = eventShowId;
 		this.eventKind = eventKind;
 		this.eventImg = eventImg;
 	}
@@ -133,13 +133,13 @@ public class Event {
 	}
 
 
-	public String getShowId() {
-		return showId;
+	public String getEventShowId() {
+		return eventShowId;
 	}
 
 
-	public void setShowId(String showId) {
-		this.showId = showId;
+	public void setEventShowId(String eventShowId) {
+		this.eventShowId = eventShowId;
 	}
 
 
@@ -168,8 +168,11 @@ public class Event {
 		return "Event [eventNo=" + eventNo + ", eventTitle=" + eventTitle + ", eventContent=" + eventContent
 				+ ", eventStartDate=" + eventStartDate + ", eventEndDate=" + eventEndDate + ", announcementDate="
 				+ announcementDate + ", eventStatus=" + eventStatus + ", eventDetailDate=" + eventDetailDate
-				+ ", eventTimeMen=" + eventTimeMen + ", showId=" + showId + ", eventKind=" + eventKind + ", eventImg="
-				+ eventImg + "]";
+				+ ", eventTimeMen=" + eventTimeMen + ", eventShowId=" + eventShowId + ", eventKind=" + eventKind
+				+ ", eventImg=" + eventImg + "]";
 	}
+
+
+	
 	
 }

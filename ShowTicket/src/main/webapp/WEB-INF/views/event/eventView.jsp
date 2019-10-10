@@ -22,7 +22,7 @@
 			href="${pageContext.request.contextPath}/event/eventList.do">진행중인
 				이벤트</a></li>
 		<li class="nav-item"><a class="nav-link nav-font default"
-			href="${pageContext.request.contextPath}/event/endEventList.do">종료된
+			href="${pageContext.request.contextPath}/event/endEventList.do">종료된 특가
 				이벤트</a></li>
 		<li class="nav-item"><a class="nav-link nav-font default"
 			href="${pageContext.request.contextPath}/event/prizewinner.do">당첨자
@@ -41,7 +41,7 @@
 							<c:if test="${eventList.eventKind eq 'I' }">[초대]</c:if>
 							<c:if test="${eventList.eventKind eq 'E' }">[응모]</c:if>
 						</span>
-						<span>&lt;${eventList.eventTitle } &gt;</span>이벤트
+						<span>&lt;${eventList.eventTitle }&gt;</span>이벤트
 					</h2>
 				</dd>
 			</div>
@@ -59,7 +59,7 @@
 			<div class="container-t">
 				<h2 style="text-align: center; left: 30%;">
 					<span>Showticket</span>과 <span>&lt;${eventList.eventTitle }&gt;</span>가
-					<br /> 함께하는
+			 		 함께하는
 					<c:if test="${eventList.eventKind eq 'I' }">[초대]</c:if>
 					<c:if test="${eventList.eventKind eq 'E' }">[응모]</c:if>
 					이벤트
@@ -109,7 +109,7 @@
 
 				</div>
 				<div id="btnbox" style="width: 65%;">
-					<button type="button" class="btn btn-secondary btn-lg btn-block">공연 상세보기</button>
+					<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${eventList.eventShowId}'" >공연 상세보기</button> 
 				</div>
 
 			<c:if test="${!empty memberLoggedIn }">				
@@ -128,10 +128,6 @@
 				</div>
 			</c:if>	
 
-<script>
-
-
-</script>
 
 				<div class="container" style="margin-left: 20%;">
 					<div class="commentList"></div>
@@ -231,7 +227,6 @@ $("#rebtn").on("click", e => {
 	    $(".form-control").val("");
 	    commentList(); //댓글 작성 후 댓글 목록 reload
 });
-
 
 
 

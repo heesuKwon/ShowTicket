@@ -57,7 +57,8 @@ public class EventController {
 	
 	@Autowired 
 	PrizeWinnerService prizeWinnerService;
-
+	
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/eventList.do")
@@ -148,7 +149,7 @@ public class EventController {
 		int rst = 0;
 		int cnt = discountService.checkCnt();
 
-		if (cnt < 4) {
+		if (cnt < 3) {
 			result = discountService.insertAddSale(discount);
 
 		} else {
@@ -242,6 +243,7 @@ public class EventController {
 	@RequestMapping("/eventView.do")
 	public String eventView(Model model, @RequestParam int eventNo) {
 		logger.debug("전체이벤트 상세보기페이지 요청");
+		System.out.println("mdddDD>>>>>>"+eventService.selectOneEvent(eventNo));
 
 		model.addAttribute("eventList", eventService.selectOneEvent(eventNo));
 		return "event/eventView";
@@ -271,11 +273,10 @@ public class EventController {
 		  
 		  System.out.println("prizew>>>>"+prize);
 		  int result=prizeWinnerService.winnerPrize(prize) ;
-		  
 		  model.addAttribute("msg",result > 0 ? "당첨자 등록성공" : "당첨자 등록 실패");
 		  model.addAttribute("loc", "/event/prizewinner.do");
-
-			return "common/msg";
+ 
+		  return "common/msg";
 	  }
 	  
 
