@@ -109,6 +109,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Ticket> selectRTotalCount() {
 		return sqlSession.selectList("member.selectRTotalCount");
 	}
+	
+	@Override
+	public int updatePoint(String memberId) {
+		return sqlSession.update("member.updatePoint", memberId);
+	}
+
 
 	@Override
 	public List<Ticket> selectTotalCountA(Map<String,Object> paging) {

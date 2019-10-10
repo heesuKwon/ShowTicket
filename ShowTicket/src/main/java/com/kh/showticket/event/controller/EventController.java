@@ -30,12 +30,14 @@ import com.kh.showticket.event.model.service.DiscountService;
 import com.kh.showticket.event.model.service.EndDiscountService;
 import com.kh.showticket.event.model.service.EventCommentService;
 import com.kh.showticket.event.model.service.EventService;
+import com.kh.showticket.event.model.service.PrizeWinnerService;
 import com.kh.showticket.event.model.vo.Discount;
 import com.kh.showticket.event.model.vo.EndDiscount;
 import com.kh.showticket.event.model.vo.Event;
 import com.kh.showticket.event.model.vo.EventAttachment;
 import com.kh.showticket.event.model.vo.EventComment;
 import com.kh.showticket.event.model.vo.EventVO;
+import com.kh.showticket.event.model.vo.Prizewinner;
 
 @Controller
 @RequestMapping("/event")
@@ -52,6 +54,9 @@ public class EventController {
 
 	@Autowired
 	EventCommentService eventCommentService;
+	
+	@Autowired 
+	PrizeWinnerService prizeWinnerService;
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -107,8 +112,9 @@ public class EventController {
 	public String writeprizewinner(Model model , @RequestParam int eventNo ) {
 
 		List<EventVO>wList = eventCommentService.selectOneEventJoin(eventNo) ;
+
+		model.addAttribute("prize", eventService.selectOneEvent(eventNo));
 		model.addAttribute("wList",wList);
-		
 		
 		return "/event/writeprizewinner";
 	}
@@ -131,7 +137,7 @@ public class EventController {
 
 		model.addAttribute("dcList", discountService.selectOneDc(showId));
 
-		return "event/eventList";
+		return "event/addSaleView";
 	}
 
 	@RequestMapping("/insertAddSale.do")
@@ -155,7 +161,7 @@ public class EventController {
 
 		// 2. view단 처리
 		model.addAttribute("msg", result > 0 ? "할인 등록성공" : "할인 등록 실패");
-		model.addAttribute("loc", "/event/addSaleEvent.do");
+		model.addAttribute("loc", "/event/eventList.do");
 
 		return "common/msg";
 	}
@@ -215,9 +221,9 @@ public class EventController {
 
 	@RequestMapping("/prizewinnerView.do")
 	public String prizewinnerView(Model model, @RequestParam int eventNo) {
-
 		model.addAttribute("prize", eventService.selectOneEvent(eventNo));
-
+		model.addAttribute("winner",prizeWinnerService.selectWinner(eventNo));
+		System.out.println("프라이즈위너"+prizeWinnerService.selectWinner(eventNo));
 		return "event/prizewinnerView";
 	}
 
@@ -257,6 +263,19 @@ public class EventController {
 	  private int eCommentDelete (@PathVariable int commentNo) throws Exception{
 		
 		 return eventCommentService.eCommentDelete(commentNo); 
+	  }
+	  
+	  @RequestMapping("/winnerprize.do")
+	  public String winnerPrize(Prizewinner prize,Model model) {
+		  
+		  
+		  System.out.println("prizew>>>>"+prize);
+		  int result=prizeWinnerService.winnerPrize(prize) ;
+		  
+		  model.addAttribute("msg",result > 0 ? "당첨자 등록성공" : "당첨자 등록 실패");
+		  model.addAttribute("loc", "/event/prizewinner.do");
+
+			return "common/msg";
 	  }
 	  
 

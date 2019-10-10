@@ -8,9 +8,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="안녕 스프링	" name="pageTitle" />
 </jsp:include>
-<%
- Member memberLoggedIn= (Member)session.getAttribute("memberLoggedIn");
-%>
+
 
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
@@ -56,8 +54,7 @@
 							pattern="yyyy-MM-dd" value="${eventList.eventStartDate}" /> ~ <fmt:formatDate
 							pattern="yyyy-MM-dd" value="${eventList.eventEndDate}" /></span>
 				</h6>
-				<button type="button" id="detailView" class="btn btn-secondary ">공연
-					정보 상세보기</button>
+				
 			</dd>
 			<div class="container-t">
 				<h2 style="text-align: center; left: 30%;">
@@ -112,15 +109,16 @@
 
 				</div>
 				<div id="btnbox" style="width: 65%;">
-					<button type="button" class="btn btn-secondary btn-lg btn-block">응모하기</button>
+					<button type="button" class="btn btn-secondary btn-lg btn-block">공연 상세보기</button>
 				</div>
-			<c:if test="<%=memberLoggedIn != null %>">				
+
+			<c:if test="${!empty memberLoggedIn }">	
 				<div id="comment-container" name="comment-container">
 					<div class="comment-editor">
 
 						<form name="commentInsertForm" id="commentInsertForm">
 							<input type="hidden" name="eventNo" value="${eventList.eventNo}" />
-							<input type="hidden" name="memberId" value="<%=memberLoggedIn.getMemberId()%>" /> 
+							<input type="hidden" name="memberId" value="${memberLoggedIn.memberId }" /> 
 							<input type="text" class="form-control" id="commentContent"
 								name="commentContent" placeholder="내용을 입력하세요."> 
 							<input type="button" id="rebtn" class="btn btn-primary btn-send" name="commentInsertBtn" value="댓글입력"  style="background-color: #8f01a3; border-color: white;" />
@@ -139,11 +137,7 @@
 				</div>
 
 
-<style>
-.comment-btn{background:#8f01a3; border-radius: 3px; font-family: 'Gothic A1', sans-serif; }
-div.commentArea{font-family: 'Gothic A1', sans-serif; font-size: 13px;}
-h7{margin-right: 100px;}
-</style>
+
 
 <script>
 $(document).ready(function(){
@@ -153,6 +147,8 @@ $(document).ready(function(){
 });
 var eventNo = '${eventList.eventNo}'; //게시글 번호
 console.log(eventNo);
+var memberLoggedId = '${memberLoggedIn.memberId}'; 
+console.log(memberLoggedId);
 
 //댓글 목록 
 function commentList(){
@@ -166,11 +162,19 @@ function commentList(){
          
           	var s = new Date(value.commentDate).toLocaleDateString("ko-KR") ;
           	console.log(s);
+          	if(memberLoggedId == value.memberId){
+          		
               a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
               a += '<div class="commentInfo'+value.commentNo+'"><h7> 작성일:'+s+' / 작성자 : '+value.memberId+'</h7>';
               a += '<button class="comment-btn btn-primary" onclick="commentDelete('+value.commentNo+');"> 삭제 </button> </div>';
-              a += '<div class="commentContent'+value.commentNo+'"> <h6> 내용 : '+value.commentContent +'</h6>';
+              a += '<div class="commentContent'+value.commentNo+'"> <h6> <span id="reple">▶</span>  '+value.commentContent +'</h6>';
               a += '</div></div>';
+          	}else{
+          		 a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                 a += '<div class="commentInfo'+value.commentNo+'"><h7> 작성일:'+s+' / 작성자 : '+value.memberId+'</h7> </div>';
+                 a += '<div class="commentContent'+value.commentNo+'"> <h6> <span id="reple">▶</span>  '+value.commentContent +'</h6>';
+                 a += '</div></div>';
+          	}
           });
           
           $(".commentList").html(a);
@@ -180,6 +184,8 @@ function commentList(){
 
 //댓글 삭제
 function commentDelete(commentNo){
+	
+	
     $.ajax({
         url : "${pageContext.request.contextPath}/event/delete/"+commentNo,
         type : 'post',
@@ -197,7 +203,7 @@ $("#rebtn").on("click", e => {
 	var event = {}; 
 	
 	event.eventNo=${eventList.eventNo}; //게시글 번호
-	event.memberId='<%=memberLoggedIn.getMemberId()%>';
+	event.memberId='${memberLoggedIn.memberId}';
 	
 	event.commentContent= $("[name=commentContent]").val();
 	if(event.commentContent.length==0){
@@ -321,5 +327,10 @@ input {
 body {
 	font-family: 'Gothic A1', sans-serif;
 }
+
+.comment-btn{background:#8f01a3; border-radius: 3px; font-family: 'Gothic A1', sans-serif; }
+div.commentArea{font-family: 'Gothic A1', sans-serif; font-size: 13px;}
+h7{margin-right: 100px;}
+h6>span#reple{color:#8f01a3;}
 </style>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

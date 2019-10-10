@@ -168,5 +168,10 @@ public class MemberServiceImpl implements MemberService {
 	public String findIdByPhone(Map<String, String> memInfo) {
 		return memberDAO.findIdByPhone(memInfo);
 	}
+		
+	@Override
+	public int updatePoint(String memberId) {
+		return memberDAO.updatePoint(memberId);
+	}
 
 }

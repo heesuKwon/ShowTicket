@@ -63,7 +63,7 @@ public class MemberController {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private final int showContent = 10;
-	
+
 	@RequestMapping("/memberEnroll.do")
 	public void memberEnroll() {
 
@@ -88,35 +88,35 @@ public class MemberController {
 		int barStart = 0;
 		int barEnd = 0;
 		int barNo = 0;
-		
+
 		Map<String,Object> paging = new HashMap<>();
-		
+
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		
+
 		startContent = (cPage-1)*showContent + 1;
 		endContent = cPage*showContent;
-		
+
 		paging.put("memberLoggedIn",memberLoggedIn);
 		paging.put("startContent",startContent);
 		paging.put("endContent",endContent);
-		
+
 		// 1.업무 로직
 		List<Ticket> list = memberService.selectReservationList(paging);
 		logger.debug("마이페이지 예매자 확인 :" + memberLoggedIn);
-		
+
 		// 해당 회원의 전체 예매수 및 전체 페이지수
 		List<Ticket> countList = memberService.selectRTotalCount();
 		totalContent = countList.size();
 		totalPage = (int)Math.ceil((double)totalContent/showContent);
-		
+
 		barStart = ((cPage -1)/pageBarSize) * pageBarSize +1;
 		barEnd = barStart + pageBarSize -1;
 		barNo = barStart;
-				
+
 		paging.put("barNo",barNo);
 		paging.put("barEnd",barEnd);
 		paging.put("totalPage",totalPage);
@@ -125,18 +125,18 @@ public class MemberController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("paging", paging);
-				
+
 		return "/member/reservation";
 	}
 
-	 @ResponseBody
-	 @RequestMapping(value="/reservationTermAjax.do", method=RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value="/reservationTermAjax.do", method=RequestMethod.POST)
 	public Map<String,Object> reservationTermAjax(HttpSession session, @RequestParam int num, HttpServletRequest request) {
 
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-			 
-//		int startContent = s;
-//		int endContent = e;
+
+		//		int startContent = s;
+		//		int endContent = e;
 		int minusNum = num * -1;
 
 		// 페이징바 변수
@@ -149,27 +149,27 @@ public class MemberController {
 		int barStart = 0;
 		int barEnd = 0;
 		int barNo = 0;
-		
+
 
 		Map<String,Object> paging = new HashMap<>();
-		
+
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) {
 			cPage = 1;
 		}
-		
+
 		startContent = (cPage-1)*showContent + 1;
 		endContent = cPage*showContent;
-		
+
 		paging.put("memberLoggedIn", memberLoggedIn);
 		paging.put("num", minusNum);
 		paging.put("startContent",startContent);
 		paging.put("endContent",endContent);
-		
+
 		List<Ticket> list = new ArrayList<>();
 		List<Ticket> countList = new ArrayList<>();
-				
+
 		logger.debug("ajax용 memberLoggedIn :" + memberLoggedIn);
 
 		logger.debug("ajax용 num:" + minusNum);
@@ -191,24 +191,24 @@ public class MemberController {
 			countList = memberService.selectTotalCount15(paging);
 			totalContent = countList.size();
 		}
-		
+
 		totalPage = (int)Math.ceil((double)totalContent/showContent);
-		
+
 		barStart = ((cPage -1)/pageBarSize) * pageBarSize +1;
 
 		barEnd = barStart + pageBarSize -1;
 		barNo = barStart;
-		
+
 		paging.put("reservationList",list);
 		paging.put("barNo",barNo);
 		paging.put("barEnd",barEnd);
 		paging.put("totalPage",totalPage);
 		paging.put("cPage",cPage);
 		paging.put("barStart",barStart);
-				
+
 		return paging;
-	 }
-	
+	}
+
 
 	@RequestMapping("/memberView.do")
 	public void memberView() {
@@ -224,9 +224,9 @@ public class MemberController {
 		//@SessionAttribute...
 		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		//String memberLoggedIn = "honggd";
-		
+
 		List<Map<String, String>> myCouponList = couponService.selectMyCouponList(memberLoggedIn);
-		
+
 		mav.addObject("myCouponList", myCouponList);
 		mav.setViewName("member/myCoupon");
 
@@ -614,52 +614,52 @@ public class MemberController {
 			} catch (UnsupportedEncodingException e) {
 				e.printStackTrace();
 			}
-    		
-    		authCode = key;
-           
-    	}
-    	
-    	//result.put("cnt", Integer.toString(cnt));
-    	//result.put("authCode", authCode);
-    	
-    	
-    	return authCode;
-    }
-    
-    @RequestMapping(value="/reservationCancel.do",method=RequestMethod.POST)
-    public String reservationCancle(Model model, @RequestParam int cancelTNo, HttpSession session) {
-    	
-    	String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
-    	
-    	logger.debug("취소할 예매번호: "+cancelTNo);
-    	logger.debug("취소할 예매자: "+memberLoggedIn);
 
-    	Map<String, Object> cancel = new HashMap<>();
-    	cancel.put("cancelTNo",cancelTNo);
-    	cancel.put("memberLoggedIn",memberLoggedIn);
-    	
-    	int result = memberService.updateReservation(cancel);
-    	
- 		model.addAttribute("msg", result>0?"예매 취소 완료":"예매 취소 실패!");
-    	model.addAttribute("loc", "/member/reservation.do?cPage="+1);
+			authCode = key;
+
+		}
+
+		//result.put("cnt", Integer.toString(cnt));
+		//result.put("authCode", authCode);
 
 
-    	return "common/msg";
-    }
-    
-    @RequestMapping(value="/phone.do", method=RequestMethod.POST)
-    @ResponseBody
+		return authCode;
+	}
+
+	@RequestMapping(value="/reservationCancel.do",method=RequestMethod.POST)
+	public String reservationCancle(Model model, @RequestParam int cancelTNo, HttpSession session) {
+
+		String memberLoggedIn = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+
+		logger.debug("취소할 예매번호: "+cancelTNo);
+		logger.debug("취소할 예매자: "+memberLoggedIn);
+
+		Map<String, Object> cancel = new HashMap<>();
+		cancel.put("cancelTNo",cancelTNo);
+		cancel.put("memberLoggedIn",memberLoggedIn);
+
+		int result = memberService.updateReservation(cancel);
+
+		model.addAttribute("msg", result>0?"예매 취소 완료":"예매 취소 실패!");
+		model.addAttribute("loc", "/member/reservation.do?cPage="+1);
+
+
+		return "common/msg";
+	}
+
+	@RequestMapping(value="/phone.do", method=RequestMethod.POST)
+	@ResponseBody
 	public String phone(Model model, @RequestParam String phone) {
-		
-    	AuthPhoneNumber ap = new AuthPhoneNumber();
-    	String authPhone = ap.excuteGenerate();
-    	
+
+		AuthPhoneNumber ap = new AuthPhoneNumber();
+		String authPhone = ap.excuteGenerate();
+
 		Message message = new Message(phone, "01099377714", "[" + authPhone + "] 핸드폰 인증번호를 입력해주세요.");
 		UtilSms.sendMessage(message);
-				
+
 		return authPhone;
 	}
-	
+
 
 	@RequestMapping(value="/findIdByEmail.do", method=RequestMethod.POST)
 	public ModelAndView findIdByEmail(ModelAndView mav, @RequestParam String memNm, @RequestParam String memEmail) {   
@@ -716,8 +716,8 @@ public class MemberController {
 		String authKey = "";
 		if(memberId.equals(memId)) {
 			AuthPhoneNumber ap = new AuthPhoneNumber();
-	    	authKey = ap.excuteGenerate();
-	    	
+			authKey = ap.excuteGenerate();
+
 			Message message = new Message(inputHp, "01099377714", "[" + authKey + "] 핸드폰 인증번호를 입력해주세요.");
 			UtilSms.sendMessage(message);
 		}
@@ -731,10 +731,10 @@ public class MemberController {
 	public String updatePwdByFind(@RequestParam String memberId, @RequestParam String password_new, Model model) {
 		// 1.업무로직 : 회원 정보 가져오기
 		Member member = memberService.selectOneMember(memberId);
-		
+
 
 		String newpassword = passwordEncoder.encode(password_new); //변경비번
-		
+
 		System.out.println("변경할 비번:"+newpassword);
 		String msg = "";
 		String loc= "member/memberPwdFindEnd";
@@ -757,5 +757,18 @@ public class MemberController {
 		return "common/msg";
 
 	}
+
+
+	@RequestMapping("/updatePt.do") 
+	public String updatePoint (Model model ,@RequestParam String memberId ) {
+
+		int result = memberService.updatePoint(memberId);
+
+		model.addAttribute("msg",result>0?"포인트가 적립되었습니다.":"포인트 적립이 취소되었습니다.");
+		model.addAttribute("loc","/member/reservation.do?memberId="+memberId+"&cPage="+1);
+		return "common/msg"; 
+	}
+
+
 }
 

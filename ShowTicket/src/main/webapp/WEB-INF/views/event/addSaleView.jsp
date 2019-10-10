@@ -51,7 +51,7 @@
 										
 										기대평을 남겨주신 분 중, 추첨을 통해 총 10명의 회원님께 <br />
 										
-										뮤지컬&lt;뮤지컬명&gt;공연 관람권을 드립니다. <br /><br />
+										${dcList.showGenre }&lt;${dcList.showName }&gt;공연 관람권을 드립니다. <br /><br />
 										
 										*본 이벤트는 당사의 운영 정책에 따라 진행되며 <br /> 
 										
@@ -63,18 +63,12 @@
 				                
 				                <div class="evt_content">
 				                 <table>
+				                   
 				                   <tr>
-								     <th>장소</th>
-								     <td>장소입력</td>
-								  </tr>
-				                   <tr>
-								     <th>이벤트 기간</th>
+								     <th>특가 할인 기간</th>
 								     <td>${dcList.disCountStartDate } ~${dcList.disCountEndDate }</td>
 								  </tr>
-				                   <tr>
-								     <th>당첨자 발표</th>
-								     <td>당첨자 발표 입력</td>
-								  </tr>
+				                  
 				                	
 				                 </table>
 				                	
@@ -85,10 +79,23 @@
 				                
 				  			</div>
 				  			<div id="btnbox" style="width:65%;" >
-			                <button type="button" class="btn btn-secondary btn-lg btn-block">공연 정보 상세보기</button> 
+				  			<c:if test="${dcList.showGenre eq '뮤지컬' }">
+			                <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="goDetailM();">공연 정보 상세보기</button> 
+			                </c:if>
+				  			<c:if test="${dcList.showGenre eq '연극' }">
+			                <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="goDetailP();">공연 정보 상세보기</button> 
+			                </c:if>
 				  			</div>
-				
-	
+								<script>
+								 function goDetailM(){
+									 
+									 location.href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${dcList.showId}";
+								 }
+								 function goDetailP(){
+									 //연극상세보기 
+									 location.href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${dcList.showId}";
+								 }
+								</script>
 				
 					</div>
 			

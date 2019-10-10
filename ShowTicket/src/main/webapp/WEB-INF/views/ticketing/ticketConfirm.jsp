@@ -100,6 +100,7 @@ function pre(){
 		<div class="t_cbtndiv">
 			<input type="button" value="이전단계" class="t_button1" onclick="pre();" />
 			<input type="button" value="결제하기" class="t_button3" />
+
 		</div>
 	</div>
 </div>
