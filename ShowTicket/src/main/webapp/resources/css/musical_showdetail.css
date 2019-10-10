@@ -161,6 +161,7 @@ button.btn_reply{
 
 .detail_box_bot .detailbox_bot_left .detail_cont {
     clear: both;
+    text-align: center;
     padding: 41px 30px 100px;
     border-width: 0 1px 1px;
     border-style: solid;
@@ -181,7 +182,7 @@ button.btn_reply{
 .fa-thumbs-up{color:#8f0ac3;font-size: 12px;}
 
 
-#likes {
+#checkLikes {
 	height: 20px;
 	min-width: 45px;
 	font-size: 12px;

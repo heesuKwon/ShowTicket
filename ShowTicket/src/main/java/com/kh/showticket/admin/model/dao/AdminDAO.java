@@ -35,5 +35,9 @@ public interface AdminDAO {
 
 	List<Member> FinderSelectTotalContentName(String searchKeyword);
 
+	int insertReport(Report report);
+
+	int checkReport(Report report);
+
 
 }

@@ -14,8 +14,8 @@ import com.kh.showticket.common.email.MailUtils;
 import com.kh.showticket.common.email.TempKey;
 import com.kh.showticket.member.model.dao.MemberDAO;
 import com.kh.showticket.member.model.vo.Member;
-import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.member.model.vo.MyPoint;
+import com.kh.showticket.member.model.vo.Ticket;
 
 
 @Service
@@ -168,5 +168,15 @@ public class MemberServiceImpl implements MemberService {
 	public String findIdByPhone(Map<String, String> memInfo) {
 		return memberDAO.findIdByPhone(memInfo);
 	}
+		
+	@Override
+	public int updatePoint(String memberId) {
+		return memberDAO.updatePoint(memberId);
+	}
 
+	@Override
+	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
+		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
+	}
+		
 }

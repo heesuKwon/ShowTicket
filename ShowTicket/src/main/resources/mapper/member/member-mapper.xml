@@ -99,7 +99,10 @@
 
 	<select id="selectOneTicketByNo"
 			resultMap="wAlarmMap">
-		select * from ticket where ticket_no = #{ticketNo}
+		select ticket_showid, ticket_showname,
+				TO_CHAR(ticket_date, 'YYYY-MM-DD') ticket_date,
+				ticket_time
+		 from ticket where ticket_no = #{ticketNo}
 	</select>
 	<resultMap id="wAlarmMap" type="map">
 		<result column="ticket_showId" property="ticketShowId" />
@@ -151,4 +154,15 @@
 		from member
 		where member_name=#{memNm} and phone=#{inputHp}
 	</select>
+	
+	<select id="selectWaitingIdListByShowId" resultType="string">
+		select member_id
+		from waiting
+		where waiting_showid = #{ticketShowId}
+	</select>
+	
+	<update id="updatePoint">
+		 update member set point=point*1.5 where member_id=#{memberId}
+	</update>
+
 </mapper>

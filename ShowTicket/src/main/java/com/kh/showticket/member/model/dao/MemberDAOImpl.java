@@ -1,5 +1,7 @@
 package com.kh.showticket.member.model.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,6 +111,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public List<Ticket> selectRTotalCount() {
 		return sqlSession.selectList("member.selectRTotalCount");
 	}
+	
+	@Override
+	public int updatePoint(String memberId) {
+		return sqlSession.update("member.updatePoint", memberId);
+	}
+
 
 	@Override
 	public List<Ticket> selectTotalCountA(Map<String,Object> paging) {
@@ -133,6 +141,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public String findIdByPhone(Map<String, String> memInfo) {
 		return sqlSession.selectOne("member.findIdByPhone", memInfo);
+	}
+
+	@Override
+	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
+		return sqlSession.selectList("member.selectWaitingIdListByShowId", ticketShowId);
 	}
 
 

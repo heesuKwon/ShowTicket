@@ -35,6 +35,10 @@ public interface AdminService {
 
 	List<Member> FinderSelectTotalContentName(String searchKeyword);
 
+	int insertReport(Report report);
+
+	int checkReport(Report report);
+
 
 
 }

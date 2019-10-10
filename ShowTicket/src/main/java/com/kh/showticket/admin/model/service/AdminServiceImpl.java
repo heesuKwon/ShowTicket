@@ -82,6 +82,16 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.FinderSelectTotalContentName(searchKeyword);
 	}
 
+	@Override
+	public int insertReport(Report report) {
+		return adminDAO.insertReport(report);
+	}
+
+	@Override
+	public int checkReport(Report report) {
+		return adminDAO.checkReport(report);
+	}
+
 
 
 }

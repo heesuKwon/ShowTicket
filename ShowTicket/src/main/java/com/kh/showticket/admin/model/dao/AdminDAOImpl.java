@@ -82,5 +82,15 @@ public class AdminDAOImpl implements AdminDAO {
 		return sqlSession.selectList("admin.FinderSelectTotalContentName", searchKeyword);
 	}
 
+	@Override
+	public int insertReport(Report report) {
+		return sqlSession.insert("admin.insertReport", report);
+	}
+
+	@Override
+	public int checkReport(Report report) {
+		return sqlSession.selectOne("admin.checkReport", report);
+	}
+
 
 }
