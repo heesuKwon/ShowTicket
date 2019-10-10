@@ -1,12 +1,10 @@
 package com.kh.showticket.common.selenium;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +13,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class selenium  {
+import com.kh.showticket.common.MusicalAndShow;
+
+public class Crawling {
 	
 	
 	  private static WebDriver driver;
@@ -24,12 +26,12 @@ public class selenium  {
 	  JavascriptExecutor js;
 	  private static WebDriverWait wait;
 	  
-	 
-		
-	  public static void main(String[] args) throws InterruptedException, NullPointerException{
+		private Logger logger = LoggerFactory.getLogger(getClass());
 
 		
+	  public String  getImg(MusicalAndShow mas,String selectDate, String selectNum)  throws InterruptedException, NullPointerException{
 
+	
 		//SSl certificates 보안쪽 방지용
 // 헤드리스 크롬용
 //		Desired capabilities=
@@ -102,6 +104,7 @@ public class selenium  {
 		  driver.get("https://ticket.interpark.com/Gate/TPLogin.asp?CPage=B&MN=Y&tid1=main_gnb&tid2=right_top&tid3=login&tid4=login");
 			driver.switchTo().defaultContent();
 		    driver.switchTo().frame(0);
+		    logger.debug("로그인시작");
 			
 			//아이디에 접근
 			// 9 | click | id=userId |  | 
@@ -124,10 +127,11 @@ public class selenium  {
 			guru99seleniumlink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Nav_SearchWord")));
 			guru99seleniumlink.click();
 			
+		logger.debug("검색시작");
 //	    driver.findElement(By.id("Nav_SearchWord")).click();
-		String name = "옥탑방 고양이";
-	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(name);
+	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(mas.getName());
 	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(Keys.ENTER);
+	    logger.debug("검색성공");
 	    WebElement dateCheck;
 	    dateCheck = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".Poster:nth-child(1) img")));
 	    dateCheck.click();
@@ -136,21 +140,25 @@ public class selenium  {
 	    Thread.sleep(3000);
 	    driver.switchTo().frame(7);
 	    WebElement guru99;
+	    logger.debug("날짜시작");
 	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("Sun")));
 //	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("20")));
 //	    guru99.click();
 //	    Thread.sleep(3000);
-	    driver.findElement(By.linkText("20")).click();
+	    
+	    driver.findElement(By.linkText(selectDate.substring(selectDate.lastIndexOf(".")+1))).click();
 //	    driver.findElement(By.xpath("html/body/div/div[2]/table/tbody/tr[5]/td[1]/a")).click();
 //	    driver.findElement(By.id("CellPlayDate10")).click();
 	    driver.switchTo().defaultContent();
 	    driver.findElement(By.cssSelector(".myValue")).click();
-	    int selectClick = 2;
-	    if(selectClick == 1) {
+	    
+	    logger.debug("시간시작");
+	    int i = 1;
+	    if(selectNum == "1") {
 	    	driver.findElement(By.cssSelector("li:nth-child(2) > label")).click();
 	    	
 	    }
-	    if(selectClick == 2) {
+	    if(selectNum == "2") {
 	    	driver.findElement(By.cssSelector("li:nth-child(3) > label")).click();
 	    	
 	    }
@@ -159,9 +167,10 @@ public class selenium  {
 	      Actions builder = new Actions(driver);
 	      builder.moveToElement(element, 0, 0).perform();
 	    }
+	    logger.debug("예매하기");
 	    WebElement win = driver.findElement(By.cssSelector(".tk_dt_btn_TArea a"));//예매하기 버튼 
         win.click();
-	    driver.switchTo().defaultContent();
+//	    driver.switchTo().defaultContent();
         // Loop through all handles
 //	    String parentWinHandle = driver.getWindowHandle();
 //	    Set<String> winHandles = driver.getWindowHandles();
@@ -171,6 +180,7 @@ public class selenium  {
 //            driver.switchTo().window(handle);
 //            }
 //        }
+	    logger.debug("화면이동");
 	    Thread.sleep(500);
         driver.switchTo().window("wndBooking");
 //		driver.switchTo().defaultContent();
@@ -182,10 +192,11 @@ public class selenium  {
 //	   	wait.until(ExpectedConditions.visibilityOf(closeWin));
 //        Thread.sleep(5000);
 //        driver.findElement(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a"));
-	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"divBookNoticeLayer\"]/div[2]/div[1]/a")));
+//	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"divBookNoticeLayer\"]/div[2]/div[1]/a")));
 //	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a"));
-//	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a")));
-	    exit.click();
+//	    exit.click();
+	    logger.debug("좌석페이지이동");
+
 	    WebElement next = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("LargeNextBtnImage")));
 	    next.click();
 //	    driver.findElement(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a")).click();
@@ -200,10 +211,11 @@ public class selenium  {
 //	    String innerText = driver.findElement(By.id("TmgsTable")).getText();
 	    String str = driver.getPageSource();
 	    String html = str.substring(str.indexOf("<img id="), str.indexOf("</td"));
-	    System.out.println(html);
-		driver.quit();    
-	}
-	  
+	    
+	    
+		driver.quit(); 	
+		return html;
+	  }
 	  
 	
 }

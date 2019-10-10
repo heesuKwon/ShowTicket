@@ -178,5 +178,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
 		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
 	}
+
+	@Override
+	public List<Ticket> getTicketList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 		
 }

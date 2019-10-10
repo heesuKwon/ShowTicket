@@ -406,7 +406,7 @@ $(()=>{
 
 		<div class="detail_box_bot">
 			<div class="detailbox_bot_left" id="tabs">
-				<ul class="detail_tab">
+				<ul class="detail_tab" style="cursor: pointer;">
 					<li class="on">
 						<div onclick="selectTap(this);" id="detailTop" class="btn_menu">
 							상세정보</div>
@@ -674,10 +674,7 @@ function insertReport(reviewNo, receiveId){
 		dataType: "json",
 		type: "POST",
 		success: (data)=>{
-			var msg = JSON.parse(data);
-			alert(msg);
-			console.log(data.msg);
-		
+			alert(data.msg);			
 		},
 		error: (xhr, txtStatus, err)=>{
 			console.log("ajax처리실패!",xhr, txtStatus, err);
