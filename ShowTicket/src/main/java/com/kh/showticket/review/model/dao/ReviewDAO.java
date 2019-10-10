@@ -11,7 +11,7 @@ public interface ReviewDAO {
 
 	int insertReview(Review review);
 
-	double selectReviewStar(String musicalId);
+	double selectReviewStar(String playId);
 
 	int deleteReview(int reviewNo);
 

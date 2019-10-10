@@ -472,3 +472,4 @@ ul.lst_thumb li.on::before {
 		});
     </script>
 
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
