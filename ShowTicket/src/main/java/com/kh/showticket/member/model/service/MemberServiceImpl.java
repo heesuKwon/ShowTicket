@@ -169,4 +169,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.findIdByPhone(memInfo);
 	}
 
+	@Override
+	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
+		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
+	}
+
 }
