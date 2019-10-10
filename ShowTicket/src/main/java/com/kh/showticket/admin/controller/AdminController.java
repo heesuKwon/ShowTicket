@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.admin.model.service.AdminService;
 import com.kh.showticket.admin.model.vo.Report;
@@ -50,7 +50,7 @@ public class AdminController {
 	Map<String,Object> paging = new HashMap<>();
 	
 	@RequestMapping("/adminReport.do")
-    public String adminReport(Model model, HttpServletRequest request) {
+    public ModelAndView adminReport(ModelAndView mav, HttpServletRequest request) {
     	
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -80,10 +80,11 @@ public class AdminController {
 		paging.put("cPage",cPage);
 		paging.put("barStart",barStart);
 		
-		model.addAttribute("reportList", reportList);
-    	model.addAttribute("paging", paging);
+		mav.addObject("reportList", reportList);
+    	mav.addObject("paging", paging);
+    	mav.setViewName("admin/adminReport");
 		
-    	return "/admin/adminReport";
+    	return mav;
     }
     
     @RequestMapping("/adminMemberList.do")
