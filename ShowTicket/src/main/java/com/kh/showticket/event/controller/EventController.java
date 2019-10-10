@@ -57,7 +57,8 @@ public class EventController {
 	
 	@Autowired 
 	PrizeWinnerService prizeWinnerService;
-
+	
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/eventList.do")
@@ -272,11 +273,10 @@ public class EventController {
 		  
 		  System.out.println("prizew>>>>"+prize);
 		  int result=prizeWinnerService.winnerPrize(prize) ;
-		  
 		  model.addAttribute("msg",result > 0 ? "당첨자 등록성공" : "당첨자 등록 실패");
 		  model.addAttribute("loc", "/event/prizewinner.do");
-
-			return "common/msg";
+ 
+		  return "common/msg";
 	  }
 	  
 

@@ -1,7 +1,8 @@
 package com.kh.showticket.review.model.vo;
 
-import java.sql.Date;
 
+
+import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,7 +13,7 @@ public class Review {
 	private String reviewContent;
 	private int reviewLike;
 	private double reviewStar;
-	@JsonFormat(pattern = "YYYY-MM-DD")
+	 @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MMM-dd HH:mm:ss")
 	private Date reviewDate;
 	
 	public Review() {}

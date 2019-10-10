@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.admin.model.vo.Review;
+import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
 
 @Repository
@@ -80,6 +80,16 @@ public class AdminDAOImpl implements AdminDAO {
 	@Override
 	public List<Member> FinderSelectTotalContentName(String searchKeyword) {
 		return sqlSession.selectList("admin.FinderSelectTotalContentName", searchKeyword);
+	}
+
+	@Override
+	public int insertReport(Report report) {
+		return sqlSession.insert("admin.insertReport", report);
+	}
+
+	@Override
+	public int checkReport(Report report) {
+		return sqlSession.selectOne("admin.checkReport", report);
 	}
 
 

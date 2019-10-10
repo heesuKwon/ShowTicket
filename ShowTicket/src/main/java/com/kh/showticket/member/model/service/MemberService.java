@@ -57,8 +57,10 @@ public interface MemberService {
 	String findIdByEmail(Map<String, String> memInfo);
 
 	String findIdByPhone(Map<String, String> memInfo);
-
+	
 	int updatePoint(String memberId);
+
+	List<String> selectWaitingIdListByShowId(String ticketShowId);
 
 
 }

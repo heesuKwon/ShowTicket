@@ -172,7 +172,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updatePoint(String memberId) {
 		return memberDAO.updatePoint(memberId);
-
 	}
 
+	@Override
+	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
+		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
+	}
+		
 }

@@ -23,8 +23,7 @@
 		    name : '주문명: Showticket 예매',
 		    amount : 100, //가격 입력  
 	
-		 
-		}, function(rsp) {
+		},function(rsp) {
 			
 			if ( rsp.success ) {
 				alert("결제되었습니다!");

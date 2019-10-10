@@ -10,36 +10,6 @@
 	href="${pageContext.request.contextPath}/resources/css/index.css">
 
 
-
-
-<!-- <script>
-const all = ele => document.querySelectorAll(ele)
-const one = ele => document.querySelector(ele)
-const slide = _ => {
-  const wrap = one('.slide')
-  const target = wrap.children[0]
-  const len = target.children.length
-  const liStyle = `
-    position:absolute;	
-    left:0;right:0;top:0;bottom:0;transition:1s;opacity:0
-  `
-  target.style.cssText = `position:relative;`
-  Array.from(target.children)
-  .forEach(ele => ele.style.cssText = liStyle)
-  target.children[0].style.opacity = 1
-  let pos = 0
-  setInterval(_ => {
-    target.children[pos].style.opacity = 0
-    pos = (pos + 1) % len 
-    target.children[pos].style.opacity = 1
-  }, 3500)
-}
-window.onload = function () {
-  slide()
-}
-</script>
-  -->
-
 <script type="text/javascript">
 	$(function() {
 
@@ -227,69 +197,69 @@ window.onload = function () {
 					</div>
 				</div>
 			</div>
-			<!-- <div class="inner"> -->
-			<div class="maintop_new real_ranking">
-				<div class="maintop_left">
-					<div class="header">
-						<a href="${pageContext.request.contextPath }/ranking/ranking.do">
-							<h2 class="title">일간 랭킹</h2>
-						</a>
+			<div class="inner">
+				<div class="maintop_new real_ranking">
+					<div class="maintop_left">
+						<div class="header">
+							<a href="${pageContext.request.contextPath }/ranking/ranking.do">
+								<h2 class="title">일간 랭킹</h2>
+							</a>
+						</div>
+						<div class="maintop_cont">
+							<ul id="concertRankingListUl">
+								<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
+									<li class="first"><a class="rangkingImgLink"
+										href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}">
+											<img class="rangkingImg" id="rangkingImg"
+											src="http://www.kopis.or.kr/${map.poster }" width="180"
+											height="218" alt="">
+									</a></li>
+								</c:forEach>
+								<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
+									<li class='rankingItem on' data-productid="28807" id="rank1"
+										data-url="http://www.kopis.or.kr/${map.poster }"><a
+										href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
+										style="color: #585858; width: 500px;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+								</c:forEach>
+								<c:forEach items="${BoxlistT2}" var="map" begin="0" end="0">
+									<li class='rankingItem on' data-productid="28807" id="rank2"
+										data-url="http://www.kopis.or.kr/${map.poster }"><a
+										href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+								</c:forEach>
+								<c:forEach items="${BoxlistT1}" var="map" begin="1" end="1">
+									<li class='rankingItem on' data-productid="28807" id="rank3"
+										data-url="http://www.kopis.or.kr/${map.poster }"><a
+										href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
+										style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+								</c:forEach>
+								<c:forEach items="${BoxlistT2}" var="map" begin="1" end="1">
+									<li class='rankingItem on' data-productid="28807" id="rank4"
+										data-url="http://www.kopis.or.kr/${map.poster }"><a
+										href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+								</c:forEach>
+								<c:forEach items="${BoxlistT1}" var="map" begin="2" end="2">
+									<li class='rankingItem on' data-productid="28807" id="rank5"
+										data-url="http://www.kopis.or.kr/${map.poster }"><a
+										href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
+										style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
+								</c:forEach>
+							</ul>
+						</div>
 					</div>
-					<div class="maintop_cont">
-						<ul id="concertRankingListUl">
-							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
-								<li class="first"><a class="rangkingImgLink"
-									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}">
-										<img class="rangkingImg" id="rangkingImg"
-										src="http://www.kopis.or.kr/${map.poster }" width="180"
-										height="218" alt="">
-								</a></li>
-							</c:forEach>
-							<c:forEach items="${BoxlistT1}" var="map" begin="0" end="0">
-								<li class='rankingItem on' data-productid="28807" id="rank1"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
-									style="color: #585858; width: 500px;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
-							</c:forEach>
-							<c:forEach items="${BoxlistT2}" var="map" begin="0" end="0">
-								<li class='rankingItem on' data-productid="28807" id="rank2"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
-							</c:forEach>
-							<c:forEach items="${BoxlistT1}" var="map" begin="1" end="1">
-								<li class='rankingItem on' data-productid="28807" id="rank3"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
-									style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
-							</c:forEach>
-							<c:forEach items="${BoxlistT2}" var="map" begin="1" end="1">
-								<li class='rankingItem on' data-productid="28807" id="rank4"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="/product/28807" style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
-							</c:forEach>
-							<c:forEach items="${BoxlistT1}" var="map" begin="2" end="2">
-								<li class='rankingItem on' data-productid="28807" id="rank5"
-									data-url="http://www.kopis.or.kr/${map.poster }"><a
-									href="${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${map.mt20id}"
-									style="color: #585858;"> ${map.prfnm }&nbsp;&nbsp;-&nbsp;&nbsp;${map.prfpd }</a></li>
-							</c:forEach>
-						</ul>
-					</div>
-				</div>
-				<div class="maintop_right slide_wrap">
+					<div class="maintop_right slide_wrap">
 
-					<div class="slide_ctrl" style="display: none;">
-						<!-- [D] 이전페이지 없을 경우 off 클래스, disabled="disabled" 추가 -->
-						<button type="button" id="prev_btn" class="prev">이전</button>
-						<!-- [D] 다음페이지 없을 경우 off 클래스 추가 -->
-						<button type="button" id="next_btn" class="next off">다음</button>
+						<div class="slide_ctrl" style="display: none;">
+							<!-- [D] 이전페이지 없을 경우 off 클래스, disabled="disabled" 추가 -->
+							<button type="button" id="prev_btn" class="prev">이전</button>
+							<!-- [D] 다음페이지 없을 경우 off 클래스 추가 -->
+							<button type="button" id="next_btn" class="next off">다음</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			<!-- </div> -->
 		</div>
-		<div class="section_best">
-			<div class="inner">
+		<div class="inner">
+			<div class="section_best">
 				<a href="${pageContext.request.contextPath }/musical/musical.do">
 					<h2 class="title">베스트뮤지컬</h2>
 				</a>
@@ -317,8 +287,8 @@ window.onload = function () {
 			</div>
 		</div>
 
-		<div class="section_best">
-			<div class="inner">
+		<div class="inner">
+			<div class="section_best">
 				<a href="${pageContext.request.contextPath }/show/show.do">
 					<h2 class="title">베스트 연극</h2>
 				</a>

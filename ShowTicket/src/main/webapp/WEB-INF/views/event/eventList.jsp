@@ -40,7 +40,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 		</ul>
 		<h2 class="title">특가 진행</h2>
 		<c:if test="${memberLoggedIn.memberId =='admin' }">
-			<button type="button" class="btn btn-info" id="saleWritebtn" style="background-color: #8f01a3; border-color: none; font-family: 'Gothic A1', sans-serif;"
+			<button type="button" class="btn btn-color" id="saleWritebtn" style="background-color: #8f01a3; border-color: none; font-family: 'Gothic A1', sans-serif;"
 				 onclick="location.href='${pageContext.request.contextPath}/event/addSaleEvent.do'">글쓰기</button>
 		</c:if>
 		<c:if test="${empty dcList }"> <br /> <h2>진행중인 이벤트가 없습니다.</h2><br /></c:if>
@@ -84,7 +84,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 		<h2 class="small-title">전체 이벤트</h2>
 		<c:if test="${memberLoggedIn.memberId =='admin' }">
 		<!-- 이벤트 글쓰기 페이지  -->
-		<button class="btn btn-outline-success my-2 my-sm-0" type="button" style="background-color: #8f01a3; font-family: 'Gothic A1', sans-serif; color:white;margin-left: 920px;"
+		<button class="btn btn-color" type="button" style="background-color: #8f01a3; font-family: 'Gothic A1', sans-serif; color:white;margin-left: 920px;"
 				onclick="location.href='${pageContext.request.contextPath}/event/eventWrite.do'">글쓰기</button>
 		</c:if>
 		<div class="event_cont_box">
@@ -110,7 +110,7 @@ div#saleC{width: 50px; height: 50px; border-radius: 55px; background: #8f01a3; c
 									<dt>이벤트내용</dt>
 									<dd>&lt;${evt.eventTitle}&gt; 이벤트</dd>
 									<dt>기간</dt>
-									<dd class="event_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate}"/>~<fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate}"/>까지</dd>
+									<dd class="event_date"><fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate}"/> ~ <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate}"/>까지</dd>
 									
 								</dl>
 							</a>

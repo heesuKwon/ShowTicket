@@ -30,21 +30,15 @@
                 <div class="basic_tbl mgt10">
                     <table>
                         <caption>당첨자 리스트</caption>
-                        <colgroup>
-                            <col style="width: 80px">
-                            <col style="width: 80px">
-                            <col style="width:100px">
-                            <col style="width: 100px">
-                            <col style="width: 80px">
-                        </colgroup>
+                       
                         <thead>
                         <tr>
-                            <th scope="col">번호</th>
-                            <th scope="col">카테고리</th>
+                            <th scope="col" style="width: 80px">번호</th>
+                            <th scope="col" style="width: 120px">카테고리</th>
                             <th scope="col">이벤트명</th>
-                            <th scope="col">기간</th>
+                            <th scope="col" style="width: 200px">기간</th>
                             <c:if test="${memberLoggedIn.memberId =='admin' }">
-                            <th scope="col">작성</th>
+                            <th scope="col" style="width: 100px">작성</th>
                             </c:if>
                         </tr>
                         </thead>
@@ -62,12 +56,12 @@
 								 <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventStartDate }"/>~
 								 <fmt:formatDate pattern="yyyy-MM-dd" value="${evt.eventEndDate }"/>
 							    </td>
-								<td style="text-align: center;"> 
 								<c:if test="${memberLoggedIn.memberId =='admin' }">
+								<td style="text-align: center;"> 
 								 	<button class="btn btn-primary btn-sm btn-color" style="margin:10px; width:50px; height:30px;"
             						onclick = "location.href = '${pageContext.request.contextPath}/event/prizewinnerWrite.do?eventNo=${evt.eventNo }' ">작성</button>
-							    </c:if>
 							    </td>
+							    </c:if>
 							</tr>
 						</c:forEach>	
 					</tbody>

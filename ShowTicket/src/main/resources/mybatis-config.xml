@@ -6,7 +6,9 @@
   <settings>
   	<setting name="jdbcTypeForNull" value="NULL"/>
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
+	<setting name="returnInstanceForEmptyRow" value="true"/>
   </settings>
+  
   
   <typeAliases>
   	<typeAlias type="com.kh.showticket.member.model.vo.Member"
@@ -36,7 +38,7 @@
 	<typeAlias type="com.kh.showticket.admin.model.vo.Report"
   			   alias="report"/>
   			   
-  	<typeAlias type="com.kh.showticket.admin.model.vo.Review"
+  	<typeAlias type="com.kh.showticket.review.model.vo.Review"
   			   alias="review"/>
 
   	<typeAlias type="com.kh.showticket.common.typehandler.StringArrayTypeHandler"
@@ -48,6 +50,9 @@
   	<typeAlias type="com.kh.showticket.event.model.vo.Event"
   			   alias="event"/>
   			   
+
+  	<typeAlias type="com.kh.showticket.review.model.vo.Likes"
+  			   alias="likes"/>
   	<typeAlias type="com.kh.showticket.event.model.vo.EventComment"
   			   alias="eventComment"/>
   			   

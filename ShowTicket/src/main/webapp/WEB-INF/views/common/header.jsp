@@ -50,7 +50,7 @@
 	rel="stylesheet">
 
 <script type="text/javascript">
-let sock = new SockJS("${pageContext.request.contextPath}/wAlarm");
+let sock = new SockJS("${pageContext.request.contextPath}/echo");
 
 sock.onopen = onOpen;
 sock.onmessage = onMessage;

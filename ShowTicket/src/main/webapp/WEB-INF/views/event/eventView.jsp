@@ -111,7 +111,7 @@
 				<div id="btnbox" style="width: 65%;">
 					<button type="button" class="btn btn-secondary btn-lg btn-block" onclick="location.href='${pageContext.request.contextPath }/musical/musicalDetail.do?musicalId=${eventList.eventShowId}'" >공연 상세보기</button> 
 				</div>
-	
+
 			<c:if test="${!empty memberLoggedIn }">				
 
 				<div id="comment-container" name="comment-container">

@@ -175,7 +175,9 @@ public class TalkController {
 	@SendTo("/chat/supporter")
 	public Msg lastCheck(@RequestBody Msg fromMessage) {
 		logger.info("fromMessage={}", fromMessage);
+		
 		talkService.updateLastCheck(fromMessage);
+
 		
 		return fromMessage;
 	}

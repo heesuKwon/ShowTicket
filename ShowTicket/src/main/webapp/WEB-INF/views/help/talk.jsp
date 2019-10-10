@@ -161,6 +161,7 @@ function sendMessage(){
  * 안읽은 메세지 읽음 처리
  */ 
 function lastCheck(){
+
 	let data = {
 			chatId : "${chatId}",
 			memberId : "${memberId}",
