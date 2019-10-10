@@ -54,7 +54,7 @@ public class CrawlingShow {
 
 //		WebDriver driver = new ChromeDriver();
 		ChromeOptions options = new ChromeOptions();
-//		options.addArguments("--headless");
+		options.addArguments("--headless");
 		options.addArguments("lang=ko_KR");
 		options.addArguments("disable-gpu");
 		options.addArguments("window-size=1920x1080");

@@ -1,7 +1,10 @@
 package com.kh.showticket.ticketing.controller;
 
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,12 +50,61 @@ public class TicketingController {
 	TicketingService ticketingService;
 
 	@RequestMapping("/ticketConfirm.do")
-	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId, 
-			@RequestParam String selectDate, @RequestParam String selectTime) {
+	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
+			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
+			@RequestParam String totalPointPrice, @RequestParam String selectNum,@RequestParam String Rnum,@RequestParam String Snum) {
+		logger.debug("예매확인 페이지");
+		logger.debug("totalCouponPrice"+totalCouponPrice);
+		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
+		Ticket ticket = new Ticket();
+	    
+		ticket.setTicketBuyer(memberId);
+		ticket.setTicketShowId(mas.getId());
+		//String realPrice = mas.getPrice();
+		//System.out.println("가격"+mas.getPrice());
+		String priice = mas.getPrice().substring(4,10);
+		int RealPrice = Integer.parseInt(priice);
+		//realPrice = realPrice.replaceAll("[^0-9]", "");
+		//int price = Integer.parseInt("110000");
+		ticket.setTicketPrice(RealPrice);
+		System.out.println("RealPrice"+RealPrice);
+		ticket.setTicketGrade("R");
+		String date_s = selectDate;
+		Date date = null;
+	
+		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy.mm.dd");        
+        // Date로 변경하기 위해서는 날짜 형식을 yyyy-mm-dd로 변경해야 한다.
+        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
+        
+        java.util.Date tempDate = null;
+        
+        try {
+            // 현재 yyyymmdd로된 날짜 형식으로 java.util.Date객체를 만든다.
+            tempDate = beforeFormat.parse(date_s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }        
+        // java.util.Date를 yyyy-mm-dd 형식으로 변경하여 String로 반환한다.
+        String transDate = afterFormat.format(tempDate);
+        // 반환된 String 값을 Date로 변경한다.
+        date = Date.valueOf(transDate);
+        
+		ticket.setTicketDate(date);
+		ticket.setTicketPlace(mas.getHallName());
+		ticket.setTicketCount(1);
+		ticket.setTicketSeat("2층 R석");
+		ticket.setTicketTime(mas.getTime());
+		Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.DATE, 2);
+        Date d = new Date(cal.getTimeInMillis());
+		ticket.setTicketCancel(d);
+		ticket.setTicketStatus("N");
+		ticket.setTicketShowName(mas.getName());
 
 		logger.debug("예매확인 페이지");
 
-		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
@@ -61,22 +113,31 @@ public class TicketingController {
 		return mav;
 	}
 
+
+		
 	@RequestMapping("/ticketingPoint.do")
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
 									@RequestParam String selectTime, @RequestParam String[] seat) {
-		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 
-		List<Map<String, String>> cList = couponService.selectMyCouponList(memberId);
-		for (int i=0 ; i<seat.length ; i++) {
-			System.out.println("seat"+i+":"+seat[i]);
-		}
-		logger.debug("예매확인: 페이지");
-		logger.debug("clISt>>>>>"+cList);
+		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+		Map<String, String> memAndPlay = new HashMap<>();
+		memAndPlay.put("memberId", memberId);
+		memAndPlay.put("playId", playId);
+		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
+		System.out.println("Clist"+cList);
 		
 		int myPoint = ticketingService.selectMyPoint(memberId);
 
+		int Rnum =0;
+		int Snum = 0;
+		if(seat[0].substring(1,2)=="R")++Rnum;else ++Snum;
+		
+		
+
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
+		mav.addObject("Rnum", Rnum);
+		mav.addObject("Snum", Snum);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("cLlist", cList);
@@ -127,6 +188,7 @@ public class TicketingController {
 	}
 	
 
+
 	@RequestMapping("/pay.do")
 	public String ticketPay(Model model) {  // 포인트 , 아이디 
 		
@@ -134,7 +196,6 @@ public class TicketingController {
 		
 		return "/ticketing/pay";
 	}
-	
 
 }
 
