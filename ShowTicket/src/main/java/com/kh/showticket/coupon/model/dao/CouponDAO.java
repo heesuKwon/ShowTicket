@@ -21,4 +21,6 @@ public interface CouponDAO {
 
 	int deleteCoupon(int couponNo);
 
+	List<Map<String, String>> selectCouponListbyPlayId(Map<String, String> memAndPlay);
+
 }

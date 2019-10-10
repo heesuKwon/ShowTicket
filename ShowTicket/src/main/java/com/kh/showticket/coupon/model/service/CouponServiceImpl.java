@@ -42,11 +42,6 @@ public class CouponServiceImpl implements CouponService {
 	}
 
 	@Override
-	public List<Map<String, String>> selectMyCouponList(String memberLoggedIn) {
-		return couponDAO.selectMyCouponList(memberLoggedIn);
-	}
-
-	@Override
 	public int insertCouponAdd(Map<String, Object> addMap) {
 		return couponDAO.insertCouponAdd(addMap);
 	}
@@ -59,6 +54,16 @@ public class CouponServiceImpl implements CouponService {
 	@Override
 	public int deleteCoupon(int couponNo) {
 		return couponDAO.deleteCoupon(couponNo);
+	}
+
+	@Override
+	public List<Map<String, String>> selectMyCouponList(String memberId) {
+		return couponDAO.selectMyCouponList(memberId);
+	}
+
+	@Override
+	public List<Map<String, String>> selectCouponListbyPlayId(Map<String, String> memAndPlay) {
+		return couponDAO.selectCouponListbyPlayId(memAndPlay);
 	}
 
 	

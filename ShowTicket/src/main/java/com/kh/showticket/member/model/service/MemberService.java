@@ -62,5 +62,7 @@ public interface MemberService {
 
 	List<String> selectWaitingIdListByShowId(String ticketShowId);
 
+	int insertTicket(Ticket ticket);
+
 
 }

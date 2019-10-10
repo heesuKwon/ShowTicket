@@ -60,4 +60,6 @@ public interface MemberDAO {
 
 	List<String> selectWaitingIdListByShowId(String ticketShowId);
 
+	int insertTicket(Ticket ticket);
+
 }

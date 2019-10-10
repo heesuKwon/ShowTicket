@@ -178,5 +178,10 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> selectWaitingIdListByShowId(String ticketShowId) {
 		return memberDAO.selectWaitingIdListByShowId(ticketShowId);
 	}
+
+	@Override
+	public int insertTicket(Ticket ticket) {
+		return memberDAO.insertTicket(ticket);
+	}
 		
 }

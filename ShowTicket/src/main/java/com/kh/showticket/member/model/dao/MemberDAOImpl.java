@@ -148,5 +148,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectList("member.selectWaitingIdListByShowId", ticketShowId);
 	}
 
+	@Override
+	public int insertTicket(Ticket ticket) {
+		return sqlSession.insert("member.insertTicket",ticket);
+	}
+
 
 }
