@@ -58,6 +58,11 @@
 		( seq_likes_no.nextval, #{likesId}, #{reviewNo})
 	</insert>
 	
+	<select id="totalReview" resultType="_int">
+		select count(*) from review
+		where review_showid = #{musicalId}
+	</select>
+			
 	<select id="selectOne" resultType="_int">
 		select review_like from review
 		where review_no = #{reviewNo}

@@ -75,4 +75,9 @@ public class ReviewDAOImpl implements ReviewDAO{
 	public List<Likes> likesList(Likes likes) {
 		return sqlSession.selectList("review.likesList", likes);
 	}
+
+	@Override
+	public int totalReview(String musicalId) {
+		return sqlSession.selectOne("review.totalReview", musicalId);
+	}
 }

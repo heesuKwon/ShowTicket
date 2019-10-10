@@ -29,4 +29,6 @@ public interface ReviewDAO {
 
 	List<Likes> likesList(Likes likes);
 
+	int totalReview(String musicalId);
+
 }

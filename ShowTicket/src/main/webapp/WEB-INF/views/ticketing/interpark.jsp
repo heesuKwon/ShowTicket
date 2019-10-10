@@ -1,21 +1,385 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/bookticket.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/ticketing.css" />
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<fmt:requestEncoding value="utf-8"/>
+<html>
+<head>
+<title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<link rel="stylesheet" type="text/css" href="//ticketimage.interpark.com/TicketImage/2015/20150807_common/common.css">
+<script type="text/javascript" src="/Book/Inc/Js/common.js"></script>
+<script type="text/javascript">
+	var OFFSETLEFT = 0;
+	var OFFSETTOP = 0;
+	var tempRow = 0;
+	var tempCol = 0;
+
+
+
+	function fnInit()
+	{
+
+		//락 풀어주기
+		parent.ifrmSeatView.fnReleaseLock();
+
+		//중앙정렬
+		//660 * 600
+		var WIDTH = 660;
+		var HEIGHT = 632;	
+		myWidth = document.body.scrollWidth;
+		myHeight = document.body.scrollHeight;
+		
+		if(myWidth > WIDTH)
+			document.body.scrollLeft = (myWidth - WIDTH) / 2;
+		
+		if(myHeight > HEIGHT)
+			document.body.scrollTop = (myHeight - HEIGHT) / 2;
+
+	}
+
+
+
+	//일반 좌석선택
+	var FCCHZArr = [];
+	var FCCHZCnt = 0;
+	var FCCHZSelCnt = 0;
+	var FCSeatCnt = 0;
+	var FCSeatConfirm = false;
+	var TableArr=[];
+
+	function SelectSeat(me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatGradeName){
+		if (typeof me == "string") {
+			me = document.getElementById(me);
+		}
+		alert("hi");
+
+//		for(i=0; i < parent.SeatBuffer.index; i++)
+//		{
+//			o = parent.SeatBuffer.Data[i];
+//
+//			if(o.SeatGrade != SeatGrade)
+//			{
+//				alert(o.SeatGradeName + "과 " + SeatGradeName + "을 동시에 선택하실 수 없습니다. 동일한 좌석등급으로 좌석을 선택해주세요");
+//				return;
+//			}
+//		}
+
+		
+		var SeatInfo = me.getAttribute("SeatInfo");
+		var RowIdx = me.getAttribute("RowIdx");
+		var ColIdx = me.getAttribute("ColIdx");
+
+		// 선택을 취소 하면 
+		if ("Y" == me.value){	
+
+			parent.fnSelectSeat("D", me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatInfo);
+		}else{
+
+			parent.fnSelectSeat("A", me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatInfo);
+		}
+	}
+
+	//티켓링크 좌석
+	function SelectSeatTKLink(me, SeatGrade, Block){
+
+		if (typeof me == "string") {
+			me = document.getElementById(me);
+		}
+		
+		var SeatInfo = me.getAttribute("SeatInfo");
+		var selRowIdx = me.getAttribute("RowIdx");
+		var selColIdx = me.getAttribute("ColIdx");
+		var LimitCnt = me.getAttribute("LimitCnt");
+
+		if ("Y" == me.value){	
+		}else{
+			if (parseInt(LimitCnt) > parseInt(parent.TicketCnt_Max)){
+				alert("선택이 불가능한 죄석입니다.");
+				return;
+			}else if (parseInt(parent.SeatBuffer.index) >= parseInt(parent.TicketCnt_Max) || (parseInt(parent.SeatBuffer.index) + parseInt(LimitCnt))  > parseInt(parent.TicketCnt_Max)){
+				alert("해당 좌석등급은 " + parent.TicketCnt_Max + "매까지 선택 가능합니다.");
+				return;
+			}
+		}
+
+		if (LimitCnt > 0){
+			var objSeats = $N("Seats");
+			var SeatsCnt = objSeats.length;
+			var selSeatsCnt = 0;
+
+			for (var i = 0; i < LimitCnt; i++){
+				if (selSeatsCnt <= LimitCnt){
+					var ret = SelectSeatTKLinkSeat(objSeats, SeatGrade, Block, selRowIdx, parseInt(selColIdx) + i);
+					if (ret == 1){
+						selSeatsCnt++;
+					}else{
+						break;
+					}
+				}
+			}
+			var remainSeatCnt = LimitCnt - selSeatsCnt;
+
+			for (var i = 1; i <= remainSeatCnt; i++){
+				if (selSeatsCnt <= LimitCnt){
+					var ret = SelectSeatTKLinkSeat(objSeats, SeatGrade, Block, selRowIdx, parseInt(selColIdx) - i);
+					if (ret == 1){
+						selSeatsCnt++;
+					}else{
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	function SelectSeatTKLinkSeat(objSeats, SeatGrade, Block, RowIdx, ColIdx){
+		var SeatsCnt = objSeats.length;
+		var SelectedCnt = 0;
+		for (var i = 0; i < SeatsCnt; i++){
+			var nowRowIdx = objSeats[i].getAttribute("RowIdx");
+			var nowColIdx = objSeats[i].getAttribute("ColIdx");
+			if (RowIdx == nowRowIdx && ColIdx == nowColIdx){
+				SelectSeat(objSeats[i], SeatGrade, objSeats[i].getAttribute("Floor"), objSeats[i].getAttribute("RowNo"), objSeats[i].getAttribute("SeatNo"), Block);
+				SelectedCnt = 1;
+				break;
+			}
+		}
+
+		return SelectedCnt;
+	}
+
+	//파크콘서트 좌석선택
+	function SelectSeat_ParkConcert(me, SeatGrade, Floor, RowNo, SeatNo, Block){
+
+		if (typeof me == "string") {
+			me = document.getElementById(me);
+		}
+		
+		var nSeatID = Floor + RowNo;
+		var selRowNo = RowNo;
+		var selSeatNo = SeatNo;
+		var LimitCnt = parent.TicketCnt_Max;
+
+		
+		/*
+		if (SeatGrade == "3"){	
+			LimitCnt = 4;
+		}else if (SeatGrade == "4"){
+			LimitCnt = 2;
+		}
+		*/
+
+		if ("Y" == me.value){	
+		}else{
+			if (parseInt(LimitCnt) > parseInt(parent.TicketCnt_Max)){
+				alert("선택이 불가능한 죄석입니다.");
+				return;
+			}else if (parseInt(parent.SeatBuffer.index) >= parseInt(parent.TicketCnt_Max) || (parseInt(parent.SeatBuffer.index) + parseInt(LimitCnt)) > parseInt(parent.TicketCnt_Max)){
+				alert("해당 좌석등급은 " + parent.TicketCnt_Max + "매까지 선택 가능합니다.");
+				return;
+			}else if (parseInt(parent.SeatBuffer.index) >= parseInt(LimitCnt)){
+				alert("해당 좌석등급은 " + LimitCnt + "매까지 선택 가능합니다.");
+				return;
+			}else{
+				for(i=0; i < parent.SeatBuffer.index; i++){
+					o = parent.SeatBuffer.Data[i];
+					if(o.SeatGrade != SeatGrade){
+						alert("패밀리석 또는 커플석은 다른 좌석등급과 혼합하여 구매하실 수 없습니다. 다시 선택해주세요..");
+						return;
+					}
+				}
+			}
+		}
+
+		if (LimitCnt > 0){
+			var objSeats = $N(nSeatID);
+			var SeatsCnt = objSeats.length;
+			var selSeatsCnt = 0;
+
+			for (var i = 0; i < LimitCnt; i++){
+				if (selSeatsCnt <= LimitCnt){
+					var ret = SelectSeat_ParkConcertAttached(objSeats, SeatGrade, Block, selRowNo, parseInt(selSeatNo) + i);
+					if (ret == 1){
+						selSeatsCnt++;
+					}else{
+						break;
+					}
+				}
+			}
+			var remainSeatCnt = LimitCnt - selSeatsCnt;
+
+			for (var i = 1; i <= remainSeatCnt; i++){
+				if (selSeatsCnt <= LimitCnt){
+					var ret = SelectSeat_ParkConcertAttached(objSeats, SeatGrade, Block, selRowNo, parseInt(selSeatNo) - i);
+					if (ret == 1){
+						selSeatsCnt++;
+					}else{
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	//파크콘서트 연석찾기
+	function SelectSeat_ParkConcertAttached(objSeats, SeatGrade, Block, RowNo, SeatNo){
+		var SeatsCnt = objSeats.length;
+		var SelectedCnt = 0;
+
+		for (var i = 0; i < SeatsCnt; i++){
+			var nowRowNo = objSeats[i].getAttribute("RowNo");
+			var nowSeatNo = objSeats[i].getAttribute("SeatNo");
+
+			if (fnTrim(RowNo) == fnTrim(nowRowNo) && SeatNo == nowSeatNo){
+				SelectSeat(objSeats[i], SeatGrade, objSeats[i].getAttribute("Floor"), nowRowNo, nowSeatNo, Block);
+				SelectedCnt = 1;
+				break;
+			}
+		}
+
+		return SelectedCnt;
+	}
+
+	//블럭선택	
+	function GetBlockSeatList(SeatGrade, SeatGradeName, Block){
+		if ("082" == ""){
+			alert("관람시간을 먼저 선택해주세요");
+		}else{
+			parent.fnBlockSeatUpdate(SeatGrade, SeatGradeName, Block);
+		}
+	}
+
+	function EventBlockOver(me, Block){
+		fnBlockMarkUp(Block);
+		str = parent.fnGetBlockInfo(Block);
+		me.alt = str;
+		me.title = str;
+	}
+
+	//블럭 마우스 아웃 이벤트
+	function EventBlockOut(me, Block)
+	{}
+
+	//선택된 블럭 표시
+	function fnBlockMarkUp(Block){
+
+	}
+
+	function  fnPsyChangeGoods(){
+		var frmTicketBooking;
+		frmTicketBooking = document.createElement("form");
+		frmTicketBooking.name = "frmBooking";
+		frmTicketBooking.action = "/Book/BookMain.asp"
+		frmTicketBooking.method = "post";
+		frmTicketBooking.target = "_top";
+		document.body.appendChild(frmTicketBooking);
+		
+		var o;
+		o = document.createElement("input");
+		o.name = "SessionId";
+		o.type = "hidden";
+		o.value = "AABAB923B0724351B2226891D6A086F2";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "BizCode";
+		o.type = "hidden";
+		o.value = "WEBBR";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "SIDBizCode";
+		o.type = "hidden";
+		o.value = "WEBBR";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "GroupCode";
+		o.type = "hidden";
+		o.value = 13002138;
+		frmTicketBooking.appendChild(o);
+
+		o = document.createElement("input");
+		o.name = "GoodsCode";
+		o.type = "hidden";
+		o.value = 13002138;
+		frmTicketBooking.appendChild(o);
+
+		o = document.createElement("input");
+		o.name = "PlaceCode";
+		o.type = "hidden";
+		o.value = "19001014";
+		frmTicketBooking.appendChild(o);
+		
+		o = document.createElement("input");
+		o.name = "PlaySeq";
+		o.type = "hidden";
+		o.value = "082";
+		frmTicketBooking.appendChild(o);
+		
+		frmTicketBooking.submit();
+	}
+
+	function  fnPsyChangeGoodsReserved(){
+		var frmTicketBooking;
+		frmTicketBooking = document.createElement("form");
+		frmTicketBooking.name = "frmBooking";
+		frmTicketBooking.action = "/Book/BookMain.asp"
+		frmTicketBooking.method = "post";
+		frmTicketBooking.target = "_top";
+		document.body.appendChild(frmTicketBooking);
+		
+		var o;
+		o = document.createElement("input");
+		o.name = "SessionId";
+		o.type = "hidden";
+		o.value = "AABAB923B0724351B2226891D6A086F2";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "BizCode";
+		o.type = "hidden";
+		o.value = "WEBBR";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "SIDBizCode";
+		o.type = "hidden";
+		o.value = "";
+		frmTicketBooking.appendChild(o);
+			
+		o = document.createElement("input");
+		o.name = "GroupCode";
+		o.type = "hidden";
+		o.value = 13002138;
+		frmTicketBooking.appendChild(o);
+
+		o = document.createElement("input");
+		o.name = "GoodsCode";
+		o.type = "hidden";
+		o.value = 13002138;
+		frmTicketBooking.appendChild(o);
+
+		o = document.createElement("input");
+		o.name = "PlaceCode";
+		o.type = "hidden";
+		o.value = "19001014";
+		frmTicketBooking.appendChild(o);
+		
+		o = document.createElement("input");
+		o.name = "PlaySeq";
+		o.type = "hidden";
+		o.value = "082";
+		frmTicketBooking.appendChild(o);
+		
+		frmTicketBooking.submit();
+	}
+
+</script>
+<script type="text/javascript" src="/Book/Inc/js/block.js"></script>
 <style type="text/css">
-nav-pills .nav-link {
-	border-radius: 0;
-}
 
 .SeatT {
 	background-color:white;
@@ -62,66 +426,11 @@ nav-pills .nav-link {
 
 
 </style>
-<script>
-function SelectSeat(me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatGradeName){
-	 if (typeof me == "string") {
-		me = document.getElementById(me);
-	} 
-	
-	if(me.style.display == 'none'){
-	me.style.display = 'block';	
-	}
-	else{
-	me.style.display = 'none';	
-	}
-	var seatCnt = 0;
-	var seatTotal = document.getElementById("ImgSeatCount").value;
-	var html = "<h5>선택좌석</h5><br>";
-	for(i = 1; i < seatTotal ; i++){
-	  	var sid = "SID"+i;
-	  	sid = document.getElementById(sid);
-	  	if(sid.style.display == 'block'){
-			html += sid.previousElementSibling.getAttribute("title");
-	  		html += "<br/>";
-
-			seatCnt++;
-	  	}
-	}
-	html += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;총"+seatCnt+"좌석";	
-	$("#r_seat").html(html);
-//	for(i=0; i < parent.SeatBuffer.index; i++)
-//	{
-//		o = parent.SeatBuffer.Data[i];
-//
-//		if(o.SeatGrade != SeatGrade)
-//		{
-//			alert(o.SeatGradeName + "과 " + SeatGradeName + "을 동시에 선택하실 수 없습니다. 동일한 좌석등급으로 좌석을 선택해주세요");
-//			return;
-//		}
-//	}
-
-	
-	var SeatInfo = me.getAttribute("SeatInfo");
-	var RowIdx = me.getAttribute("RowIdx");
-	var ColIdx = me.getAttribute("ColIdx");
-
-	// 선택을 취소 하면 
-	if ("Y" == me.value){	
-
-		parent.fnSelectSeat("D", me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatInfo);
-	}else{
-
-		parent.fnSelectSeat("A", me, SeatGrade, Floor, RowNo, SeatNo, Block, SeatInfo);
-	}
-}
-
-function next(){
-	$("#next").submit();
-}
-</script>
-<body>
-	<table width="100%" height="100%" cellpadding="0" cellspacing="0" id="TmgsTable" name="TmgsTable">
+<script src="chrome-extension://mooikfkahbdckldjjndioackbalphokd/assets/prompt.js"></script></head>
+<body leftmargin="0" topmargin="0" onload="fnInit()">
+<table width="100%" height="100%" cellpadding="0" cellspacing="0" id="TmgsTable" name="TmgsTable">
 <tr>
+
 	<td align="center" valign="middle">
 
 		<style> 
@@ -890,44 +1199,6 @@ function next(){
 </td>
 </tr>
 </table>
-	<div id="seatgdimg">
-		<img id="seatSimg"
-			src="${pageContext.request.contextPath }/resources/images/예비좌석.jfif"
-			alt="" />
-	</div>
-	<div id="seatgd">
-		<h6>좌석 등급</h6>
-		<div id="seatinner">
-			<label for="vip" id="vip">VIP석</label> <label for="price"
-				style="margin-left: 25px;">80,000원</label> <label for="seat"><span>10</span>석</label>
-			<br /> <label for="r" id="r" style="padding-right: 16px;">R석</label>
-			<label for="price" style="margin-left: 26px;">80,000원</label> <label
-				for="seat"><span>10</span>석</label> <br /> <label for="s" id="s">S석</label>
-			<label for="price" style="margin-left: 44px;">80,000원</label> <label
-				for="seat"><span>10</span>석</label> <br /> <label for="e" id="e"
-				style="padding-right: 18px;">일반석</label> <label for="price">50,000원</label>
-			<label for="seat"><span>10</span>석</label> <br />
-
-		</div>
-
-		<div id="r_seat">
-
-		</div>
-	
-		
-		<form name="nextFrm" action="${pageContext.request.contextPath}/ticketing/ticketingPoint.do" id="next" method="post">
-			<input type="hidden" name="playId" value="${mas.id}" />
-			<input type="hidden" name="selectDate" value="${selectDate}" />
-			<input type="hidden" name="selectTime" value="${selectTime}" />
-		</form>
-		<div class="t_btndiv">
-			<input type="button" value="이전단계" class="t_button1" /> 
-			<input type="button" value="다음단계" class="t_button2" onclick="next();"/>
-		</div>
-
-
-	</div>
 
 </body>
-
-
+</html>

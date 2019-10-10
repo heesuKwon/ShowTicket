@@ -18,4 +18,6 @@ public interface MusicalService {
 
 	int selectDiscount(String musicalId);
 
+	int totalReview(String musicalId);
+
 }

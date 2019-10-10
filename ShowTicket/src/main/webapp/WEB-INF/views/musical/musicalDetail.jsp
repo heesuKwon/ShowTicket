@@ -609,7 +609,12 @@ $(()=>{
 											style="width: 0%"></span>
 									</dd>
 									<dd class="bar">|</dd>
-									<dt>참여인원</dt>
+									<c:if test="${empty total }">
+									<dt>참여인원 0명</dt>
+									</c:if>
+									<c:if test="${not empty total }">
+									<dt>참여인원 ${total }명</dt>
+									</c:if>
 									<dd class="person" id="countReviewe"></dd>
 								</dl>
 								<div class="write_review">
@@ -635,45 +640,6 @@ $(()=>{
 						
 						<div id="review_list" class="review_list">
 
-							<%-- <ul id="reviewUl" style="word-break: break-all;">
-								<li class="reviewOne">
-									<span class="my-rating-7"></span>
-									<span class="reviewId color_purple">honggd
-									<a href="#">
-										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style=" padding-bottom: 2px;width:18px; height:18px;">
-									</a>
-									</span>
-									
-									<div class="btns">
-										<button class="btn-sm btn-primary" id="dReview">삭제</button>
-									</div>
-									<br />
-									<div class="reviewContent">뮤지컬 </div>
-										<span class="reviewDate small-font">2019.09.20 17:10</span>
-										<button id="likes"><i class='far fa-thumbs-up'></i>  0</button>
-										
-								</li>
-								<li class="reviewOne">
-										<span class="my-rating-7"></span>
-										<span class="reviewId color_purple">honggd
-										<a href="#">
-										<img src="${pageContext.request.contextPath }/resources/images/alert.png" style="padding-bottom: 2px;width:18px; height:18px;">
-										</a>
-										</span>
-									
-										<div class="btns">
-										<button class="btn-sm btn-primary" id="dReview">삭제</button>
-										</div>
-										<br />
-										<div class="reviewContent">뮤지컬 시티오브엔젤 속 매력 넘치는 배우님들의 무대가
-										가장 인상적이었어요. 이름만 들어도 입이 떠억 벌어질 정도로 대단한 분들이라.. 한분만으로도 무대가 가득찬
-										느낌인데.. 최고의 배우들이 함께하는 환상의 무대가 정말 꿈같은 일이었어요~ 작품성은 물론 재미까지 있어서
-										인상적이었어요!!! 특유의 끼와 열정으로 별처럼 반짝반짝 빛나게 연기하는 멋진 배우들 한사람 한사람이 제게는
-										인상적으로 느껴졌어요. 덕분에 상상 그 이상의 환상적인 감동과 재미를 받을 수 있었어요.</div>
-										<span class="reviewDate small-font">2019.09.20 17:10</span>
-										<button id="likes"><i class='far fa-thumbs-up'></i>  0</button>
-								</li>
-							</ul> --%>
 						</div>
 <!--<button id="likes"><i class='fas fa-thumbs-up'></i>좋아요</button>-->										
 						<script>
@@ -1504,7 +1470,8 @@ function insertReview(){
 			form.appendChild(hiddenField);
 		
 			var url = "${pageContext.request.contextPath}/ticketing/ticketingSeat.do";
-		    var name = "bookTicket";
+			/* var url = "${pageContext.request.contextPath}/ticketing/interpark.do"; */
+			var name = "bookTicket";
 		    var option = "width = 900, height = 630, top = 0, left = 100, location = no";
 		    window.open(url, name, option);
 		    

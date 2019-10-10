@@ -65,11 +65,19 @@ public class TicketingController {
 		logger.debug("좌석 페이지");
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
+		logger.debug("ModelAndView={}", mas);
+
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
+		return mav;
+	}
+	
+	@RequestMapping(value="/interpark.do")
+	public ModelAndView interpark(ModelAndView mav) {
+		mav.setViewName("ticketing/interpark");
 		return mav;
 	}
 
