@@ -27,13 +27,15 @@ $(()=>{
 
 });
 
-function goAdd(id) {
+function goAdd(id,sId) {
 	   var showId = id;
+	   var btnId = sId;
 	   console.log(showId);
 	   
 	   $(".couponDetail").text("해당 공연 대상");
 	   $("#showId").remove();
 	   $(".add").append("<input type='hidden' name='showId' value='"+showId+"'/>");
+	   $("#"+btnId).removeClass("cDefault").addClass("cSelected");
 }
 
 function submit() {
@@ -76,7 +78,7 @@ function submit() {
 									<td>${sList.prfstate }</td>
 									<td>
 										<c:set var="sId" value="sList${vs.count }"/>
- 										<button type="button" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}')">선택</button>
+ 										<button type="button" id="${sId }" class="pselectBtn cDefault" onclick="goAdd('${sList.mt20id}','${sId }')">선택</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -98,7 +100,7 @@ function submit() {
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${musicalList}" var="mList">
+							<c:forEach items="${musicalList}" var="mList" varStatus="ms">
 								<tr>
 									<td>${mList.mt20id }</td>
 									<td>${mList.genrenm }</td>
@@ -107,7 +109,8 @@ function submit() {
 									<td>${mList.prfpdto }</td>
 									<td>${mList.prfstate }</td>
 									<td>
-										<button type="button" class="pselectBtn cDefault" onclick="goAdd('${mList.mt20id}')">선택</button>
+										<c:set var="mId" value="mList${ms.count }"/>
+										<button type="button" id="${mId }" class="pselectBtn cDefault" onclick="goAdd('${mList.mt20id}','${mId }')">선택</button>
 									</td>
 								</tr>
 							</c:forEach>
