@@ -221,25 +221,24 @@ function next(){
 </body>
 <script>
 $(()=>{
-			alert("hibest");
-		
+	
 	var seatTotal = document.getElementById("ImgSeatCount").value;
-	for(i = 0; i < seatTotal ; i++){
+	for(i = 30; i < seatTotal ; i++){
 	  	var sid = "SID"+i;
 	  	sid = document.getElementById(sid);
-			/* sid.previousElementSibling.remove();
-			sid.remove(); */
-		/*  if("[R석] 1층-B열-33".contains(sid.previousElementSibling.getAttribute("title"))){
-			sid.previousElementSibling.remove();
-			sid.remove();
+	  	var title = sid.previousElementSibling.getAttribute("title");
+	/* 	if(title.indexOf("1층-B열-33") != -1){
+			
+	  		sid.previousElementSibling.style.display = "none";
 		}
-		 if("[R석] 1층-B열-32".contains(sid.previousElementSibling.getAttribute("title"))){
-			sid.previousElementSibling.remove();
-			sid.remove();
+		if(title.indexOf("1층-B열-32") != -1){
+			
+		}
+		if(title.indexOf("1층-B열-34") != -1){
+			
 		} */
-	  	
 
-	}
+	} 
 });
 	
 	/* $("img").empty("[title=[R석] 1층-B열-31]");
