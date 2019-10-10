@@ -1,12 +1,10 @@
 package com.kh.showticket.common.selenium;
 
 import java.util.Map;
-import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -15,8 +13,12 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class selenium  {
+import com.kh.showticket.common.MusicalAndShow;
+
+public class CrawlingShow {
 	
 	
 	  private static WebDriver driver;
@@ -24,12 +26,12 @@ public class selenium  {
 	  JavascriptExecutor js;
 	  private static WebDriverWait wait;
 	  
-	 
-		
-	  public static void main(String[] args) throws InterruptedException, NullPointerException{
+		private Logger logger = LoggerFactory.getLogger(getClass());
 
 		
+	  public String  getImg(MusicalAndShow mas,String selectDate, String selectNum)  throws InterruptedException, NullPointerException{
 
+	
 		//SSl certificates 보안쪽 방지용
 // 헤드리스 크롬용
 //		Desired capabilities=
@@ -102,6 +104,7 @@ public class selenium  {
 		  driver.get("https://ticket.interpark.com/Gate/TPLogin.asp?CPage=B&MN=Y&tid1=main_gnb&tid2=right_top&tid3=login&tid4=login");
 			driver.switchTo().defaultContent();
 		    driver.switchTo().frame(0);
+		    logger.debug("로그인시작");
 			
 			//아이디에 접근
 			// 9 | click | id=userId |  | 
@@ -124,6 +127,7 @@ public class selenium  {
 			guru99seleniumlink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Nav_SearchWord")));
 			guru99seleniumlink.click();
 			
+		logger.debug("검색시작");
 //	    driver.findElement(By.id("Nav_SearchWord")).click();
 		String name = "옥탑방 고양이";
 	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(name);
@@ -201,9 +205,11 @@ public class selenium  {
 	    String str = driver.getPageSource();
 	    String html = str.substring(str.indexOf("<img id="), str.indexOf("</td"));
 	    System.out.println(html);
-		driver.quit();    
-	}
-	  
+	    
+	    
+		driver.quit(); 	
+		return html;
+	  }
 	  
 	
 }

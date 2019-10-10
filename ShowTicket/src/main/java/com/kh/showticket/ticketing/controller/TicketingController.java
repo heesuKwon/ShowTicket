@@ -14,6 +14,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
+=======
+import org.springframework.ui.Model;
+>>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,12 +26,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.common.MusicalAndShow;
 import com.kh.showticket.common.getApi.getApi;
+import com.kh.showticket.common.selenium.Crawling;
+import com.kh.showticket.common.selenium.CrawlingShow;
 import com.kh.showticket.coupon.model.service.CouponService;
 import com.kh.showticket.member.model.service.MemberService;
 import com.kh.showticket.member.model.vo.Member;
 import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
+<<<<<<< HEAD
+=======
+import lombok.extern.java.Log;
+@Log
+>>>>>>> branch 'master' of https://github.com/heesuKwon/ShowTicket.git
 @Controller
 @SessionAttributes("memberLoggedIn")
 @RequestMapping("/ticketing")
@@ -38,6 +49,9 @@ public class TicketingController {
 
 	@Autowired
 	CouponService couponService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@Autowired
 	TicketingService ticketingService;
@@ -115,16 +129,18 @@ public class TicketingController {
 	}
 
 	@RequestMapping("/ticketingPoint.do")
-	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate, @RequestParam String selectTime) {
-		logger.debug("예매확인 페이지");
+
+	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
+									@RequestParam String selectTime, @RequestParam String[] seat) {
+
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
+
 
 		Map<String, String> memAndPlay = new HashMap<>();
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
-		System.out.println("Clist"+cList);
-		
+		System.out.println("Clist"+cList);	
 		int myPoint = ticketingService.selectMyPoint(memberId);
 
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
@@ -144,12 +160,44 @@ public class TicketingController {
 		logger.debug("좌석 페이지");
 		logger.debug("selectNum={}", selectNum);
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
+
+		logger.debug("ModelAndView={}", mas);
+		String html= "";
+//		List<Ticket> ticket = memberService.getTicketList();
+		try {
+			if("옥탑방 고양이 [대학로]".equals(mas.getId())) {
+				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
+			}
+			else {
+				
+				html = new Crawling().getImg(mas, selectDate, selectNum);
+			}
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String main = html.substring(html.indexOf("http"), html.indexOf(" border")-1);
+		logger.debug(main);
+		mav.addObject("html", html);
+		mav.addObject("main", main);
+
 		mav.addObject("mas", mas);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
 		mav.addObject("selectNum", selectNum);
 		mav.setViewName("ticketing/ticketingSeat");
 		return mav;
+	}
+
+	@RequestMapping("/pay.do")
+	public String ticketPay(Model model) {  // 포인트 , 아이디 
+		
+		logger.debug("예매결제페이지");
+		
+		return "/ticketing/pay";
 	}
 
 }

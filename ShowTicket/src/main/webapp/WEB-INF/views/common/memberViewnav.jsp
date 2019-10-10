@@ -9,7 +9,7 @@
 	width: 100px;
 	text-align:center;
 	left:0;
-	margin-left : 10%;
+	margin-left : 3.5%;
 	
 }
 #myPage{

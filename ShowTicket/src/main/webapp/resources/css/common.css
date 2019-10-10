@@ -338,7 +338,7 @@ td .input_block .hyphen{color:#999}
 .paging a.first,
 .paging a.prev,
 .paging a.next,
-.paging a.end{width:28px;height:27px;padding:0;border:0}
+.paging a.end{width:28px;height:27px;padding:6px 0;border:0}
 .paging a.first:hover,
 .paging a.prev:hover,
 .paging a.next:hover,

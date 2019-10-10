@@ -142,7 +142,7 @@ public class MemberController {
 		// 페이징바 변수
 		int startContent = 0;
 		int endContent = 0;
-		int cPage = 0;
+		int cPage = 1;
 		int pageBarSize = 4;
 		int totalContent = 0;
 		int totalPage = 0;
@@ -153,11 +153,11 @@ public class MemberController {
 
 		Map<String,Object> paging = new HashMap<>();
 
-		try {
-			cPage = Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) {
-			cPage = 1;
-		}
+//		try {
+//			cPage = Integer.parseInt(request.getParameter("cPage"));
+//		}catch(NumberFormatException e) {
+//			cPage = 1;
+//		}
 
 		startContent = (cPage-1)*showContent + 1;
 		endContent = cPage*showContent;
