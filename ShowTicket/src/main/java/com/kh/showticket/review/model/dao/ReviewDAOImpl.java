@@ -25,8 +25,8 @@ public class ReviewDAOImpl implements ReviewDAO{
 	}
 
 	@Override
-	public double selectReviewStar(String musicalId) {
-		String ans = sqlSession.selectOne("review.selectReviewStar", musicalId);
+	public double selectReviewStar(String playId) {
+		String ans = sqlSession.selectOne("review.selectReviewStar", playId);
 		if(ans==null) {
 			return -1.0;
 		}

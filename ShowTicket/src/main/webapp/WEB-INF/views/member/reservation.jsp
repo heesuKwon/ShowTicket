@@ -53,7 +53,7 @@ $(()=>{
 			cache: false,
 			data: {
 				num: num,
-				cPage: cPage
+				cPage: barNo
 			},
 			success: function(data) {
 								

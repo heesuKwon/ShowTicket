@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.review.model.vo.Review;
 
 public interface AdminDAO {
 
 	List<Report> selectAdminReportList(Map<String,Object> paging);
 
-	List<Report> selectOneAdminReportList(int reviewNo);
+	List<Report> selectOneAdminReportList(int reportNo);
 
 	List<Review> selectOneAdminReviewList(int reviewNo);
 

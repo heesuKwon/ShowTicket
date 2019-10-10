@@ -27,7 +27,7 @@
 	</select>
 	
 	<select id="selectOneAdminReportList" resultType="report">
-		select * from report where review_no = #{reviewNo}
+		select * from report where report_no = #{reportNo}
 	</select>
 	
 	<select id="selectOneAdminReviewList" resultType="review">

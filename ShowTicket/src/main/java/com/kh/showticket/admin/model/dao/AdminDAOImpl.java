@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.review.model.vo.Review;
 
 @Repository
 public class AdminDAOImpl implements AdminDAO {
@@ -23,8 +23,8 @@ public class AdminDAOImpl implements AdminDAO {
 	}
 
 	@Override
-	public List<Report> selectOneAdminReportList(int reviewNo) {
-		return sqlSession.selectList("admin.selectOneAdminReportList",reviewNo);
+	public List<Report> selectOneAdminReportList(int reportNo) {
+		return sqlSession.selectList("admin.selectOneAdminReportList",reportNo);
 	}
 
 	@Override

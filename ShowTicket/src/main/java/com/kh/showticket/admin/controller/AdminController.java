@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,11 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.showticket.admin.model.service.AdminService;
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.review.model.vo.Review;
 
 
 @RequestMapping("/admin")
@@ -50,7 +50,7 @@ public class AdminController {
 	Map<String,Object> paging = new HashMap<>();
 	
 	@RequestMapping("/adminReport.do")
-    public String adminReport(Model model, HttpServletRequest request) {
+    public ModelAndView adminReport(ModelAndView mav, HttpServletRequest request) {
     	
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -80,14 +80,15 @@ public class AdminController {
 		paging.put("cPage",cPage);
 		paging.put("barStart",barStart);
 		
-		model.addAttribute("reportList", reportList);
-    	model.addAttribute("paging", paging);
+		mav.addObject("reportList", reportList);
+    	mav.addObject("paging", paging);
+    	mav.setViewName("admin/adminReport");
 		
-    	return "/admin/adminReport";
+    	return mav;
     }
     
     @RequestMapping("/adminMemberList.do")
-    public String adminMemberList(Model model, HttpServletRequest request) {
+    public ModelAndView adminMemberList(ModelAndView mav, HttpServletRequest request) {
 
     	try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
@@ -116,53 +117,52 @@ public class AdminController {
 		paging.put("totalPage",totalPage);
 		paging.put("cPage",cPage);
 		
-		model.addAttribute("memberList", memberList);
-    	model.addAttribute("paging", paging);
-    	    	
-    	return "/admin/adminMList";
+		mav.addObject("memberList", memberList);
+		mav.addObject("paging", paging);
+		mav.setViewName("admin/adminMList");
+		
+    	return mav;
     }
     
-    @RequestMapping("/adminReportDetail.do")
-    public String adminReportDetail(Model model, @RequestParam int reviewNo) {
+    @RequestMapping(value="/adminReportDetail.do", method=RequestMethod.POST)
+    public ModelAndView adminReportDetail(ModelAndView mav, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo, @RequestParam int reportNo) {
     	
-    	List<Report> reportList = adminService.selectOneAdminReportList(reviewNo);
+    	
+    	List<Report> reportList = adminService.selectOneAdminReportList(reportNo);
     	List<Review> reviewList = adminService.selectOneAdminReviewList(reviewNo);
     	
-    	model.addAttribute("reportList", reportList);
-    	model.addAttribute("reviewList", reviewList);
-    	
-    	return "/admin/adminReportDetail";
-    }
-    
-    @RequestMapping(value="/reportPlus.do", method=RequestMethod.POST)
-    public String reportPlus(Model model, @RequestParam int cnt, @RequestParam String memberId, @RequestParam int reviewNo) {
+    	mav.addObject("reportList", reportList);
+    	mav.addObject("reviewList", reviewList);
     	
     	logger.debug("신고수: ",cnt);
     	logger.debug("신고대상: ",memberId);
     	
-    	Map<String, Object> info = new HashMap<>();
-    	info.put("cnt",cnt);
-    	info.put("memberId",memberId);
+    	if(cnt != 0 && memberId != null) {
+	    	Map<String, Object> info = new HashMap<>();
+	    	info.put("cnt",cnt);
+	    	info.put("memberId",memberId);
+	    	
+	    	int result = adminService.updateReport(info);
+    	}
     	
-    	int result = adminService.updateReport(info);
+    	mav.setViewName("admin/adminReportDetail");
     	
-    	model.addAttribute("msg", result>0?"신고 누적 완료":"신고 누적 실패");
-    	model.addAttribute("loc", "/admin/adminReportDetail.do?reviewNo="+reviewNo);
-    	
-    	return "common/msg";
+    	return mav;
     }
-    
+        
     @RequestMapping("/adminReportDelete.do")
-    public String adminReportDelete(Model model, @RequestParam int reviewNo) {
+    public ModelAndView adminReportDelete(ModelAndView mav, @RequestParam int reviewNo) {
     	
     	logger.debug("글 번호: ",reviewNo);
     	
     	int result = adminService.deleteReport(reviewNo);
     	
-    	model.addAttribute("msg", result>0?"삭제 완료":"삭제 실패");
-    	model.addAttribute("loc", "/admin/adminReport.do");
+    	mav.addObject("msg", result>0?"삭제 완료":"삭제 실패");
+    	mav.addObject("loc", "/admin/adminReport.do");
     	
-    	return "common/msg";
+    	mav.setViewName("common/msg");
+    	
+    	return mav;
     }
     @PostMapping("/insertReport.do")
     public Map<String, String> reportInsert(@RequestBody Report report) {
@@ -182,20 +182,22 @@ public class AdminController {
     }
     
     @RequestMapping("/adminMemberDelete.do")
-    public String adminMemberDelete(Model model, @RequestParam String memberId) {
+    public ModelAndView adminMemberDelete(ModelAndView mav, @RequestParam String memberId) {
 
     	logger.debug("탈퇴자 아이디: ",memberId);
     	
     	int result = adminService.deleteMember(memberId);
     	
-    	model.addAttribute("msg", result>0?"탈퇴 완료":"탈퇴 실패");
-    	model.addAttribute("loc", "/admin/adminMemberList.do");
+    	mav.addObject("msg", result>0?"탈퇴 완료":"탈퇴 실패");
+    	mav.addObject("loc", "/admin/adminMemberList.do");
     	
-    	return "common/msg";
+    	mav.setViewName("common/msg");
+    	
+    	return mav;
     }
     
     @RequestMapping("/adminMemberSearch.do")
-    public String adminMemberSearch(Model model, HttpServletRequest request) {
+    public ModelAndView adminMemberSearch(ModelAndView mav, HttpServletRequest request) {
     	
     	String searchType = request.getParameter("searchType");
     	String searchKeyword = request.getParameter("searchKeyword");
@@ -239,9 +241,10 @@ public class AdminController {
 		paging.put("cPage",cPage);
 		paging.put("barStart",barStart);
 		
-		model.addAttribute("list", list);
-    	model.addAttribute("paging", paging);
+		mav.addObject("list", list);
+		mav.addObject("paging", paging);
+		mav.setViewName("admin/adminMFinder");
 		
-    	return "/admin/adminMFinder";
+    	return mav;
     }
 }

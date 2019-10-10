@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.kh.showticket.admin.model.dao.AdminDAO;
 import com.kh.showticket.admin.model.vo.Report;
-import com.kh.showticket.review.model.vo.Review;
 import com.kh.showticket.member.model.vo.Member;
+import com.kh.showticket.review.model.vo.Review;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -23,8 +23,8 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public List<Report> selectOneAdminReportList(int reviewNo) {
-		return adminDAO.selectOneAdminReportList(reviewNo);
+	public List<Report> selectOneAdminReportList(int reportNo) {
+		return adminDAO.selectOneAdminReportList(reportNo);
 	}
 
 	@Override

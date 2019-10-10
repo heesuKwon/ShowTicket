@@ -8,7 +8,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/admin.css"/>
 
-<form class="cnt" action="${pageContext.request.contextPath}/admin/reportPlus.do" method="post"></form>
+<form class="cnt" action="${pageContext.request.contextPath}/admin/adminReportDetail.do" method="post"></form>
 <form class="delete" action="${pageContext.request.contextPath}/admin/adminReportDelete.do" method="post"></form>
 
 <script>
@@ -17,15 +17,17 @@ $(".nav").click(function(){
     $(this).css("color","#8f01a3");
 });
 
-function goReport(num,user,rNo) {
+function goReport(num,user,rNo,rpNo) {
 	var cnt = num;
 	var memberId = user;
 	var reviewNo = rNo;
+	var reportNo = rpNo;
 	
 	if(confirm("신고수를 누적하시겠습니까?")){
 		$(".cnt").append("<input type='hidden' name='cnt' value='"+num+"'/>")
 				 .append("<input type='hidden' name='memberId' value='"+memberId+"'/>")
-				 .append("<input type='hidden' name='reviewNo' value='"+reviewNo+"'/>").submit();
+				 .append("<input type='hidden' name='reviewNo' value='"+reviewNo+"'/>")
+				 .append("<input type='hidden' name='reportNo' value='"+reportNo+"'/>").submit();
 	}
 	else{
 		return;		
@@ -79,16 +81,17 @@ function goDelete(num) {
 					<c:set var="user1" value="${list.reportMemberId }"/>
 					<c:set var="user2" value="${list.receiveMemberId }"/>
 					<c:set var="reviewNo" value="${list.reviewNo }"/>
+					<c:set var="reportNo" value="${list.reportNo }"/>
 					<tr class="parent cursor">
 				      <td class="border">${list.reviewNo }</td>
 				      <td class="border">${list.reportReason }</td>
 				      <td class="user border">${list.reportMemberId }</td>
 				      <td class="border">
-				      	<button type="button" class="rbtn" onclick="goReport(1,'${user1 }','${reviewNo }');">신고+</button>			      
+				      	<button type="button" class="rbtn" onclick="goReport(1,'${user1 }','${reviewNo }','${reportNo }');">신고+</button>			      
 				      </td>
 				      <td class="user border">${list.receiveMemberId }</td>
 				      <td class="border">
-				      	<button type="button" class="rbtn" onclick="goReport(1,'${user2}','${reviewNo }');">신고+</button>			      
+				      	<button type="button" class="rbtn" onclick="goReport(1,'${user2}','${reviewNo }','${reportNo }');">신고+</button>			      
 				      </td>
 				    </tr>
 				 </tbody>

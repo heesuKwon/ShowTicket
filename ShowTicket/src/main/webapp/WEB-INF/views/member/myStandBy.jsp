@@ -4,13 +4,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8" />
+<jsp:include page="/WEB-INF/views/common/header.jsp">
+	<jsp:param value="" name="pageTitle" />
+</jsp:include>
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/contents.css">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/member.css">
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="" name="pageTitle" />
-</jsp:include>
 
 <script>
 function deleteStandBy(showId){
@@ -47,9 +47,11 @@ $(()=>{
 	<div class="div-memberFrm">
 		<h2 class="small-title">대기공연</h2>
 
-		 <ul id="wNav" class="nav nav-pills nav-justified">
-			<li class="nav-item"><div class="nav-link select nav-font" id="musical-nav">뮤지컬</div></li>
-			<li class="nav-item"><div class="nav-link nav-font default" id="show-nav">연극</div></li>
+		<ul id="wnav" class="nav nav-pills nav-justified nav-member">
+			<li class="nav-item"><div class="nav-link select nav-font"
+					id="musical-nav">뮤지컬</div></li>
+			<li class="nav-item"><div class="nav-link nav-font default"
+					id="show-nav">연극</div></li>
 		</ul>
 
 			<div class="wList" id="musicalWList" style="margin-top: 20px;">
