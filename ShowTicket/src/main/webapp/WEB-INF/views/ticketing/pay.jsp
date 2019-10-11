@@ -21,7 +21,7 @@
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '주문명: Showticket 예매',
-		    amount : 100, //가격 입력  
+		    amount : '${resultPrice}',
 	
 		},function(rsp) {
 			
@@ -33,11 +33,8 @@
 		    	self.close();
 		        return;
 		    }
-			
-			
-		    
-		});
-		
+	    
+		});		
      });
 
 

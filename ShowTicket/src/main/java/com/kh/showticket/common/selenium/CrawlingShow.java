@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.kh.showticket.common.MusicalAndShow;
 
-public class Crawling {
+public class CrawlingShow {
 	
 	
 	  private static WebDriver driver;
@@ -129,9 +129,9 @@ public class Crawling {
 			
 		logger.debug("검색시작");
 //	    driver.findElement(By.id("Nav_SearchWord")).click();
-	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(mas.getName());
+		String name = "옥탑방 고양이";
+	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(name);
 	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(Keys.ENTER);
-	    logger.debug("검색성공");
 	    WebElement dateCheck;
 	    dateCheck = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".Poster:nth-child(1) img")));
 	    dateCheck.click();
@@ -142,23 +142,20 @@ public class Crawling {
 	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'달력\')]")));
 //	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("20")));
 	    guru99.click();
-	    
 	    driver.switchTo().frame(7);
-	    
-	    
-	    driver.findElement(By.linkText(selectDate.substring(selectDate.lastIndexOf(".")+1))).click();
+//	    guru99.click();
+//	    Thread.sleep(3000);
+	    driver.findElement(By.linkText("20")).click();
 //	    driver.findElement(By.xpath("html/body/div/div[2]/table/tbody/tr[5]/td[1]/a")).click();
 //	    driver.findElement(By.id("CellPlayDate10")).click();
 	    driver.switchTo().defaultContent();
 	    driver.findElement(By.cssSelector(".myValue")).click();
-	    
-	    logger.debug("시간시작");
-	    int i = 1;
-	    if(selectNum == "1") {
+	    int selectClick = 1;
+	    if(selectClick == 1) {
 	    	driver.findElement(By.cssSelector("li:nth-child(2) > label")).click();
 	    	
 	    }
-	    if(selectNum == "2") {
+	    if(selectClick == 2) {
 	    	driver.findElement(By.cssSelector("li:nth-child(3) > label")).click();
 	    	
 	    }
@@ -167,10 +164,9 @@ public class Crawling {
 	      Actions builder = new Actions(driver);
 	      builder.moveToElement(element, 0, 0).perform();
 	    }
-	    logger.debug("예매하기");
 	    WebElement win = driver.findElement(By.cssSelector(".tk_dt_btn_TArea a"));//예매하기 버튼 
         win.click();
-//	    driver.switchTo().defaultContent();
+	    driver.switchTo().defaultContent();
         // Loop through all handles
 //	    String parentWinHandle = driver.getWindowHandle();
 //	    Set<String> winHandles = driver.getWindowHandles();
@@ -180,7 +176,6 @@ public class Crawling {
 //            driver.switchTo().window(handle);
 //            }
 //        }
-	    logger.debug("화면이동");
 	    Thread.sleep(500);
         driver.switchTo().window("wndBooking");
 //		driver.switchTo().defaultContent();
@@ -192,11 +187,10 @@ public class Crawling {
 //	   	wait.until(ExpectedConditions.visibilityOf(closeWin));
 //        Thread.sleep(5000);
 //        driver.findElement(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a"));
-//	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"divBookNoticeLayer\"]/div[2]/div[1]/a")));
+	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"divBookNoticeLayer\"]/div[2]/div[1]/a")));
 //	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a"));
-//	    exit.click();
-	    logger.debug("좌석페이지이동");
-
+//	    WebElement exit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a")));
+	    exit.click();
 	    WebElement next = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("LargeNextBtnImage")));
 	    next.click();
 //	    driver.findElement(By.cssSelector("#divBookNoticeLayer > div.layerWrap > div.titleArea > a")).click();
@@ -211,6 +205,7 @@ public class Crawling {
 //	    String innerText = driver.findElement(By.id("TmgsTable")).getText();
 	    String str = driver.getPageSource();
 	    String html = str.substring(str.indexOf("<img id="), str.indexOf("</td"));
+	    System.out.println(html);
 	    
 	    
 		driver.quit(); 	

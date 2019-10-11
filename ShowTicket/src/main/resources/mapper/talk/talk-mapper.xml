@@ -45,7 +45,7 @@ from (
         rank() over(partition by A.chatid order by time desc) rank
     from chatlog A left join chatroom B
         on A.chatid = B.chatid and A.memberid = B.memberid
-    where time > (select lastcheck from chatroom C where C.chatid = A.chatid)
+    where time > (select lastcheck from chatroom C where C.chatid = A.chatid and memberid = 'ticket77')
     order by time desc) A
 where rank = 1
 union all
@@ -61,6 +61,6 @@ from (
     from chatlog A left join chatroom B
         on A.chatid = B.chatid and A.memberid = B.memberid
     order by time desc) A
-where rank = 1 and time <![CDATA[<=]]> (select lastcheck from chatroom C where C.chatid = A.chatid)
+where rank = 1 and time <![CDATA[<=]]> (select lastcheck from chatroom C where C.chatid = A.chatid and memberid='ticket77')
 </select>
 </mapper>

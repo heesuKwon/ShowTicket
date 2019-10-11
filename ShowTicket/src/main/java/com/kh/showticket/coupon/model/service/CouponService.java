@@ -13,12 +13,15 @@ public interface CouponService {
 
 	void couponDownload(int couponNo, String memberLoggedIn);
 
-	List<Map<String, String>> selectMyCouponList(String memberLoggedIn);
 
 	int insertCouponAdd(Map<String, Object> addMap);
 
 	int updateEditCoupon(Map<String, Object> addMap);
 
 	int deleteCoupon(int couponNo);
+
+	List<Map<String, String>> selectMyCouponList(String memberId);
+
+	List<Map<String, String>> selectCouponListbyPlayId(Map<String, String> memAndPlay);
 
 }

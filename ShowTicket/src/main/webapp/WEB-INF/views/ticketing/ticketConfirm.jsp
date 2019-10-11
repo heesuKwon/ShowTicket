@@ -26,6 +26,9 @@
 	href="https://fonts.googleapis.com/css?family=Gothic+A1&display=swap"
 	rel="stylesheet">
 <script>
+function next(){
+	$("#next").submit();
+}
 function pre(){
 	$("#pre").submit();
 }
@@ -63,7 +66,7 @@ function pre(){
 			</tr>
 			<tr>
 				<td>티켓금액</td>
-				<td>120,000</td>
+				<td>${ticket.ticketPrice }</td>
 			</tr>
 			<tr>
 				<td>예매수수료</td>
@@ -71,27 +74,34 @@ function pre(){
 			</tr>
 			<tr>
 				<td>쿠폰할인</td>
-				<td>0</td>
+				<td>${totalCouponPrice}</td>
 			</tr>
 			<tr>
 				<td class="t_hr">사용 포인트</td>
-				<td class="t_hr"><%=memberLoggedIn.getPoint() %></td>
+				<td class="t_hr">${totalPointPrice }</td>
 			</tr>
 			<tr>
 				<td class="t_hr">총 결제</td>
-				<td class="t_hr t_total">121,000</td>
+				<td class="t_hr t_total">${resultPrice }</td>
 			</tr>
 		</table>
 
 		<span class="t_cspan">
 			<p class="t_cancel1">취소 기한 :</p>
-			<p class="t_cancel2">2019.09.24 17:00</p>
+			<p class="t_cancel2">${ticket.ticketCancel}&nbsp;18:00까지</p>
 		</span> <span class="t_cspan">
 			<p class="t_cancel1">취소 수수료 :</p>
 			<p class="t_cancel2">티켓 금액의 0~30%</p>
 		</span> <input type="checkbox" class="t_checkbox" />
 		<p class="t_checkboxtext">취소 기한 및 취소 수수료 동의</p>
-
+		<form name="nextFrm"
+		action="${pageContext.request.contextPath}/ticketing/pay.do"
+		id="next" method="post">
+		<input
+			type="hidden" name="resultPrice" value="${resultPrice }" />
+			
+			
+	</form>
 		<form name="preFrm" action="${pageContext.request.contextPath}/ticketing/ticketingPoint.do" id="pre" method="post">
 			<input type="hidden" name="playId" value="${mas.id}" /> 
 			<input type="hidden" name="selectDate" value="${selectDate}" /> 
@@ -99,8 +109,7 @@ function pre(){
 		</form>
 		<div class="t_cbtndiv">
 			<input type="button" value="이전단계" class="t_button1" onclick="pre();" />
-			<input type="button" value="결제하기" class="t_button3" onclick="location.href='${pageContext.request.contextPath}/ticketing/pay.do'" />
-
+			<input type="button" value="결제하기" class="t_button3" onclick="next();"/>
 		</div>
 	</div>
 </div>

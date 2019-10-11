@@ -125,7 +125,7 @@ public class selenium  {
 			guru99seleniumlink.click();
 			
 //	    driver.findElement(By.id("Nav_SearchWord")).click();
-		String name = "옥탑방고양이";
+		String name = "옥탑방 고양이";
 	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(name);
 	    driver.findElement(By.id("Nav_SearchWord")).sendKeys(Keys.ENTER);
 	    WebElement dateCheck;

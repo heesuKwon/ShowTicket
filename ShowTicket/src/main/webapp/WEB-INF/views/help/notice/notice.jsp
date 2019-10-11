@@ -234,8 +234,8 @@ function noticeList(category, searchTitle){
 
 
 				<div id="pagination" class="paging">
-					<a href="javascript:goPage('1')" class="first">맨앞</a><a
-						href="javascript:goPage('1')" class="prev">이전</a><strong>1</strong><a
+					<a href="javascript:goPage('1')" class="first">&lt;&lt;</a><a
+						href="javascript:goPage('1')" class="prev">&lt;</a><strong>1</strong><a
 						href="javascript:goPage('2')"> 2</a><a
 						href="javascript:goPage('3')"> 3</a><a
 						href="javascript:goPage('4')"> 4</a><a
@@ -245,8 +245,8 @@ function noticeList(category, searchTitle){
 						href="javascript:goPage('8')"> 8</a><a
 						href="javascript:goPage('9')"> 9</a><a
 						href="javascript:goPage('10')"> 10</a><a
-						href="javascript:goPage('11')" class="next">다음</a><a
-						href="javascript:goPage('452')" class="end">맨뒤</a>
+						href="javascript:goPage('11')" class="next">&gt;</a><a
+						href="javascript:goPage('452')" class="end">&gt;&gt;</a>
 				</div>
 
 			</div>
