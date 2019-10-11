@@ -50,6 +50,8 @@ public class TicketingController {
 	@Autowired
 	TicketingService ticketingService;
 
+	Map<String,Object> ticket = new HashMap<>();
+	
 	@RequestMapping("/ticketConfirm.do")
 	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
@@ -60,7 +62,7 @@ public class TicketingController {
 		logger.debug("totalCouponPrice"+totalCouponPrice);
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
-		Map<String,Object> ticket = new HashMap<>();
+		
 		//Ticket ticket = new Ticket();
 	    
 		
@@ -114,6 +116,7 @@ public class TicketingController {
 		ticket.put("ticketCancel", d);
 		ticket.put("ticketStatus", "N");
 		ticket.put("ticketShowName", mas.getName());
+		ticket.put("ticketShowId", mas.getId());
 
 		System.out.println("ticket"+ticket);
 		logger.debug("예매확인 페이지");
@@ -122,16 +125,16 @@ public class TicketingController {
 		int resultPrice = realPrice - Integer.parseInt(totalCouponPrice) - Integer.parseInt(totalPointPrice) + 1000;
 		ticket.put("resultPrice", resultPrice);
 		
-		ticketingService.insertTicket(ticket);
 		
-		/*mav.addObject("mas", mas);
+		
+		mav.addObject("mas", mas);
 		mav.addObject("ticket", ticket);
 		mav.addObject("totalCouponPrice",totalCouponPrice);
 		mav.addObject("totalPointPrice",totalPointPrice);
 		mav.addObject("resultPrice",resultPrice);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
-		mav.setViewName("ticketing/ticketConfirm");*/
+		mav.setViewName("ticketing/ticketConfirm");
 
 
 		return mav;
@@ -253,7 +256,7 @@ public class TicketingController {
 	public String ticketPay(Model model, @RequestParam String resultPrice) {  // 포인트 , 아이디 
 		
 		logger.debug("예매결제페이지");
-		
+		ticketingService.insertTicket(ticket);
 		model.addAttribute("resultPrice", resultPrice);
 		
 		return "/ticketing/pay";
