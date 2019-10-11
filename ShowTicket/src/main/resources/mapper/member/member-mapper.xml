@@ -202,4 +202,17 @@
 		values(seq_ticket_no.nextval,#{ticketBuyer},#{ticketShowId},#{ticketPrice},#{ticketGrade},to_date(#{ticketDate}),#{ticketPlace},1,to_date(#{ticketEnrollDate}),#{ticketSeat},#{ticketTime},sysdate,'N',
 		seq_pay_no.nextval,#{ticketShowName});
 	</insert>
+	
+	<select id="countResult" resultType="_int">
+		select count(*) from ticket
+		where ticket_showid = #{ticketShowId} and
+		      ticket_date = #{ticketDate} and
+		      ticket_time like '%'||#{ticketTime}||'%'
+	</select>
+	<select id="getTicketList" resultType="ticket">
+		select * from ticket
+		where ticket_showid = #{ticketShowId} and
+		      ticket_date = #{ticketDate} and
+		      ticket_time like '%'||#{ticketTime}||'%'
+	</select>
 </mapper>

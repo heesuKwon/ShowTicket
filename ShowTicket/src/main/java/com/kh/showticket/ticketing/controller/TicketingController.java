@@ -170,10 +170,38 @@ public class TicketingController {
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		logger.debug("ModelAndView={}", mas);
 		String html= "";
-//		Ticket ticket = new Ticket();
-//		ticket.setTicketTime(selectTime.substring(1,3));
-
-//		List<Ticket> list = memberService.getTicketList();
+		Ticket ticket = new Ticket();
+		String date_s = selectDate;
+		Date date = null;
+	
+		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy.mm.dd");        
+        // Date로 변경하기 위해서는 날짜 형식을 yyyy-mm-dd로 변경해야 한다.
+        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
+        
+        java.util.Date tempDate = null;
+        
+        try {
+            // 현재 yyyymmdd로된 날짜 형식으로 java.util.Date객체를 만든다.
+            tempDate = beforeFormat.parse(date_s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }        
+        // java.util.Date를 yyyy-mm-dd 형식으로 변경하여 String로 반환한다.
+        String transDate = afterFormat.format(tempDate);
+        // 반환된 String 값을 Date로 변경한다.
+        date = Date.valueOf(transDate);
+        
+		ticket.setTicketDate(date);
+		ticket.setTicketTime(selectTime.substring(0,2));
+		ticket.setTicketShowId(playId);
+		List<Ticket> list;
+//		list.
+//		int result = memberService.countResult(ticket);
+//		if(result > 0)
+		logger.debug("ticket={}", ticket);
+		
+		list = memberService.getTicketList(ticket);
+		logger.debug("list={}", list);
 		try {
 			if(mas.getName().contains("옥탑방")) {
 				html = new CrawlingShow().getImg(mas, selectDate, selectNum);
@@ -192,6 +220,7 @@ public class TicketingController {
 		
 		String main = html.substring(html.indexOf("http"), html.indexOf(" border")-1);
 		logger.debug(main);
+		mav.addObject("list", list);
 		mav.addObject("html", html);
 		mav.addObject("main", main);
 		mav.addObject("mas", mas);
