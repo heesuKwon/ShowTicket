@@ -77,6 +77,30 @@ $('#point1').on('keyup', function() {
       
   }
 	});
+	
+	$(".t_button2").on("click", function(){
+		console.log("EHLSL?");
+		var couponPrice = parseInt($("#couponP").html());
+		var couponCount = parseInt($("#coupon").val());
+		var totalCouponPrice = couponPrice*couponCount;
+		var myTotalPoint = $(".t_dinput").val();
+		$('input[name=totalCouponPrice]').attr('value',totalCouponPrice);
+		$('input[name=totalPointPrice]').attr('value',myTotalPoint);
+
+			console.log("couponPrice="+couponPrice);
+			console.log("couponCount="+couponCount);
+			console.log("playId="+$("input[name=playId]").val());
+			console.log("selectDate="+$("input[name=selectDate]").val());
+			console.log("selectTime="+$("input[name=selectTime]").val());
+			console.log("totalCouponPrice="+$("input[name=totalCouponPrice]").val());
+			console.log("totalPointPrice="+$("input[name=totalPointPrice]").val());
+			console.log("Rnum="+$("input[name=Rnum]").val());
+			console.log("Snum="+$("input[name=Snum]").val());
+			console.log("s1="+$("input[name=s1]").val());
+			console.log("s2="+$("input[name=s2]").val());
+		
+		$("#next").submit();
+	});
 });
 </script>
 
@@ -103,7 +127,7 @@ $('#point1').on('keyup', function() {
 			<tr>
 				<td colspan="4">
 					<p class="t_dsize">
-						<span class="t_purple">R석 {Rnum}개</span>를 선택하셨습니다.
+						<span class="t_purple">R석 ${Rnum}개</span>를 선택하셨습니다.
 					</p>
 				</td>
 			</tr>
@@ -130,17 +154,7 @@ $('#point1').on('keyup', function() {
 					</select></td>
 			</tr>
 				</c:forEach>
-			<!-- <tr>
-					<td class="text_left">생일쿠폰</td>
-					<td class="t_dtable_price">
-						<span class="t_purple">10,000</span><span>원</span>
-					</td>
-					<td>
-						<select class="selectcss" name="coupon">
-							<option value="">1매</option>
-						</select>
-					</td>
-				</tr> -->
+			
 		</table>
 		<table class="t_ptable">
 			<tr>
@@ -169,23 +183,26 @@ $('#point1').on('keyup', function() {
 			</tr>
 			<tr>
 				<td>좌석정보</td>
-				<td class="">${selectNum }</td>
+				<td class="">${s1 }</td>
 			</tr>
 		</table>
 	</div>
 	<form name="nextFrm"
 		action="${pageContext.request.contextPath}/ticketing/ticketConfirm.do"
-		id="next" method="post">
+		id="next">
 		<input type="hidden" name="playId" value="${mas.id}" /> <input
 			type="hidden" name="selectDate" value="${selectDate}" /> <input
 			type="hidden" name="selectTime" value="${selectTime}" />  <input
 			type="hidden" name="totalCouponPrice" value="" />
 			<input
-			type="hidden" name="totalPointPrice" value=" " /><input
+			type="hidden" name="totalPointPrice" value="" /><input
 			type="hidden" name="Rnum" value="${Rnum}" /><input
-			type="hidden" name="Snum" value="${Snum}" />
+			type="hidden" name="Snum" value="${Snum}" /><input
+			type="hidden" name="s1" value="${s1}" /><input
+			type="hidden" name="s2" value="${s2}" />
 			
 	</form>
+	
 	<form name="preFrm"
 		action="${pageContext.request.contextPath}/ticketing/ticketingSeat.do"
 		id="pre" method="post">
@@ -195,6 +212,6 @@ $('#point1').on('keyup', function() {
 	</form>
 	<div class="t_dbtndiv">
 		<input type="button" value="이전단계" class="t_button1" onclick="pre();" />
-		<input type="button" value="다음단계" class="t_button2" onclick="next();" />
+		<input type="button" value="다음단계" class="t_button2"/>
 	</div>
 </div>
