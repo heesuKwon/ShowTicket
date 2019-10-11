@@ -66,7 +66,7 @@ function pre(){
 			</tr>
 			<tr>
 				<td>티켓금액</td>
-				<td>${ticket.getTicketPrice() }</td>
+				<td>${ticket.ticketPrice }</td>
 			</tr>
 			<tr>
 				<td>예매수수료</td>
@@ -78,17 +78,17 @@ function pre(){
 			</tr>
 			<tr>
 				<td class="t_hr">사용 포인트</td>
-				<td class="t_hr"><%=memberLoggedIn.getPoint() %></td>
+				<td class="t_hr">${totalPointPrice }</td>
 			</tr>
 			<tr>
 				<td class="t_hr">총 결제</td>
-				<td class="t_hr t_total">${tPrice }</td>
+				<td class="t_hr t_total">${resultPrice }</td>
 			</tr>
 		</table>
 
 		<span class="t_cspan">
 			<p class="t_cancel1">취소 기한 :</p>
-			<p class="t_cancel2">${ticket.getTicketCancel()}&nbsp;18:00까지</p>
+			<p class="t_cancel2">${ticket.ticketCancel}&nbsp;18:00까지</p>
 		</span> <span class="t_cspan">
 			<p class="t_cancel1">취소 수수료 :</p>
 			<p class="t_cancel2">티켓 금액의 0~30%</p>
@@ -97,10 +97,8 @@ function pre(){
 		<form name="nextFrm"
 		action="${pageContext.request.contextPath}/ticketing/pay.do"
 		id="next" method="post">
-		<input type="hidden" name="playId" value="${mas.id}" /> <input
-			type="hidden" name="selectDate" value="${selectDate}" /> <input
-			type="hidden" name="selectTime" value="${selectTime}" />  <input
-			type="hidden" name="ticket" value="${ticket }" />
+		<input
+			type="hidden" name="resultPrice" value="${resultPrice }" />
 			
 			
 	</form>

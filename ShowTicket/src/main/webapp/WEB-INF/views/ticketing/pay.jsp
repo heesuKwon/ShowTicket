@@ -21,7 +21,7 @@
 		    pay_method : 'card',
 		    merchant_uid : 'merchant_' + new Date().getTime(),
 		    name : '주문명: Showticket 예매',
-		    amount : 100,
+		    amount : '${resultPrice}',
 	
 		    /* buyer_addr : '', */
 		    /* buyer_postcode : '123-456', */
