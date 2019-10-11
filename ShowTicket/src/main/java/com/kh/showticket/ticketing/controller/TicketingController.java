@@ -32,6 +32,7 @@ import com.kh.showticket.member.model.vo.Ticket;
 import com.kh.showticket.ticketing.model.service.TicketingService;
 
 import lombok.extern.java.Log;
+
 @Log
 @Controller
 @SessionAttributes("memberLoggedIn")
@@ -85,7 +86,7 @@ public class TicketingController {
 	
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy.mm.dd");        
         // Date로 변경하기 위해서는 날짜 형식을 yyyy-mm-dd로 변경해야 한다.
-        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy/mm/dd");
+        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
         
         java.util.Date tempDate = null;
         
@@ -113,15 +114,22 @@ public class TicketingController {
 		ticket.put("ticketCancel", d);
 		ticket.put("ticketStatus", "N");
 		ticket.put("ticketShowName", mas.getName());
-​
+
 		System.out.println("ticket"+ticket);
 		logger.debug("예매확인 페이지");
-​
-		//mav.addObject("mas", mas);
-		//mav.addObject("selectDate", selectDate);
-		//mav.addObject("selectTime", selectTime);
-		//mav.setViewName("ticketing/ticketConfirm");
-​
+
+		
+		int resultPrice = realPrice - Integer.parseInt(totalCouponPrice) - Integer.parseInt(totalPointPrice) + 1000;
+		
+		mav.addObject("mas", mas);
+		mav.addObject("ticket", ticket);
+		mav.addObject("totalCouponPrice",totalCouponPrice);
+		mav.addObject("totalPointPrice",totalPointPrice);
+		mav.addObject("resultPrice",resultPrice);
+		mav.addObject("selectDate", selectDate);
+		mav.addObject("selectTime", selectTime);
+		mav.setViewName("ticketing/ticketConfirm");
+
 		return mav;
 	}
 		
@@ -129,11 +137,11 @@ public class TicketingController {
 		// TODO Auto-generated method stub
 		
 	}
-​
+
 	@RequestMapping("/ticketingPoint.do")
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
 									@RequestParam String selectTime, @RequestParam String[] seat) {
-​
+
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		Map<String, String> memAndPlay = new HashMap<>();
 		memAndPlay.put("memberId", memberId);
@@ -143,7 +151,7 @@ public class TicketingController {
 		
 		String s1 = seat[0];
 		String s2 = seat[1];
-​
+
 		int myPoint = ticketingService.selectMyPoint(memberId);
 ​
 		int Rnum =0;
@@ -241,13 +249,14 @@ public class TicketingController {
 	}
 	
 	@RequestMapping("/pay.do")
-	public String ticketPay(Model model) {  // 포인트 , 아이디 
+	public String ticketPay(Model model, @RequestParam String resultPrice) {  // 포인트 , 아이디 
 		
 		logger.debug("예매결제페이지");
+		
+		model.addAttribute("resultPrice", resultPrice);
 		
 		return "/ticketing/pay";
 	}
 
 }
-
 
