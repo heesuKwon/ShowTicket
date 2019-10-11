@@ -114,8 +114,10 @@ public class TicketingController {
 		ticket.put("ticketCancel", d);
 		ticket.put("ticketStatus", "N");
 		ticket.put("ticketShowName", mas.getName());
+
 		System.out.println("ticket"+ticket);
 		logger.debug("예매확인 페이지");
+
 		
 		int resultPrice = realPrice - Integer.parseInt(totalCouponPrice) - Integer.parseInt(totalPointPrice) + 1000;
 		ticket.put("resultPrice", resultPrice);
@@ -131,6 +133,7 @@ public class TicketingController {
 		mav.addObject("selectTime", selectTime);
 		mav.setViewName("ticketing/ticketConfirm");*/
 
+
 		return mav;
 	}
 		
@@ -142,18 +145,19 @@ public class TicketingController {
 	@RequestMapping("/ticketingPoint.do")
 	public ModelAndView ticketCheck2(ModelAndView mav, HttpSession session, @RequestParam String playId, @RequestParam String selectDate,
 									@RequestParam String selectTime, @RequestParam String[] seat) {
+
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
 		Map<String, String> memAndPlay = new HashMap<>();
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
-
+​
 		
 		String s1 = seat[0];
 		String s2 = seat[1];
 
 		int myPoint = ticketingService.selectMyPoint(memberId);
-
+​
 		int Rnum =0;
 		int Snum = 0;
 		for(int i=0; i<2;i++) {
@@ -175,7 +179,7 @@ public class TicketingController {
 		mav.addObject("cList", cList);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("ticketing/ticketingPoint");
-
+​
 		return mav;
 	}
 
