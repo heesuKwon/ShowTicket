@@ -151,13 +151,11 @@ public class TicketingController {
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
-​
 		
 		String s1 = seat[0];
 		String s2 = seat[1];
 
 		int myPoint = ticketingService.selectMyPoint(memberId);
-​
 		int Rnum =0;
 		int Snum = 0;
 		for(int i=0; i<2;i++) {
@@ -179,7 +177,6 @@ public class TicketingController {
 		mav.addObject("cList", cList);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("ticketing/ticketingPoint");
-​
 		return mav;
 	}
 
