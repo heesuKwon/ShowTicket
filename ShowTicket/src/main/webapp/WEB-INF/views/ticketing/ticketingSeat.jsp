@@ -223,7 +223,7 @@ function next(){
 $(()=>{
 	
 	var seatTotal = document.getElementById("ImgSeatCount").value;
-	for(i = 30; i < seatTotal ; i++){
+	for(i = 0; i < seatTotal ; i++){
 	  	var sid = "SID"+i;
 	  	sid = document.getElementById(sid);
 	  	var title = sid.previousElementSibling.getAttribute("title");
@@ -237,7 +237,15 @@ $(()=>{
 		if(title.indexOf("1층-B열-34") != -1){
 			
 		} */
-
+		var list1 = new Array();
+	  	<c:forEach items="${list}" var="m" >
+		list1.push("${m.ticketSeat}");
+		</c:forEach>
+		for(var j = 0; j < list1.length; j++){
+	 		if(title.indexOf(list1[j]) != -1){
+	  		sid.previousElementSibling.style.display = "none";
+	 		}
+		}
 	} 
 });
 	

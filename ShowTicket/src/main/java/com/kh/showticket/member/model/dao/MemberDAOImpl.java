@@ -153,5 +153,16 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.insert("member.insertTicket",ticket);
 	}
 
+	@Override
+	public int countResult(Ticket ticket) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("member.countResult", ticket);
+	}
+
+	@Override
+	public List<Ticket> getTicketList(Ticket ticket) {
+		return sqlSession.selectList("member.getTicketList", ticket);
+	}
+
 
 }

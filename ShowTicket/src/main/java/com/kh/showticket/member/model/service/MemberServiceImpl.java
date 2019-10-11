@@ -185,5 +185,15 @@ public class MemberServiceImpl implements MemberService {
 
 	}
 
+	@Override
+	public int countResult(Ticket ticket) {
+		return memberDAO.countResult(ticket);
+	}
+
+	@Override
+	public List<Ticket> getTicketList(Ticket ticket) {
+		return memberDAO.getTicketList(ticket);
+	}
+
 		
 }
