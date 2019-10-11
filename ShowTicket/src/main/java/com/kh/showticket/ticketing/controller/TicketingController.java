@@ -114,20 +114,22 @@ public class TicketingController {
 		ticket.put("ticketCancel", d);
 		ticket.put("ticketStatus", "N");
 		ticket.put("ticketShowName", mas.getName());
-
 		System.out.println("ticket"+ticket);
 		logger.debug("예매확인 페이지");
 		
 		int resultPrice = realPrice - Integer.parseInt(totalCouponPrice) - Integer.parseInt(totalPointPrice) + 1000;
+		ticket.put("resultPrice", resultPrice);
 		
-		mav.addObject("mas", mas);
+		ticketingService.insertTicket(ticket);
+		
+		/*mav.addObject("mas", mas);
 		mav.addObject("ticket", ticket);
 		mav.addObject("totalCouponPrice",totalCouponPrice);
 		mav.addObject("totalPointPrice",totalPointPrice);
 		mav.addObject("resultPrice",resultPrice);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
-		mav.setViewName("ticketing/ticketConfirm");
+		mav.setViewName("ticketing/ticketConfirm");*/
 
 		return mav;
 	}
