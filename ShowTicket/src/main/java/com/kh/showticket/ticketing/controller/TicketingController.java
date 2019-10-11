@@ -52,7 +52,9 @@ public class TicketingController {
 	@RequestMapping("/ticketConfirm.do")
 	public ModelAndView ticketCheck(ModelAndView mav, @RequestParam String playId,HttpSession session,
 			@RequestParam String selectDate, @RequestParam String selectTime, @RequestParam String totalCouponPrice,
-			@RequestParam String totalPointPrice, @RequestParam String selectNum,@RequestParam String Rnum,@RequestParam String Snum) {
+			@RequestParam String totalPointPrice, @RequestParam String Rnum,@RequestParam String Snum,
+			@RequestParam String s1,@RequestParam String s2) {
+	
 		logger.debug("예매확인 페이지");
 		logger.debug("totalCouponPrice"+totalCouponPrice);
 		String memberId  = ((Member) session.getAttribute("memberLoggedIn")).getMemberId();
@@ -63,8 +65,12 @@ public class TicketingController {
 		ticket.setTicketShowId(mas.getId());
 		//String realPrice = mas.getPrice();
 		//System.out.println("가격"+mas.getPrice());
-		String priice = mas.getPrice().substring(4,10);
-		int RealPrice = Integer.parseInt(priice);
+		String priice = mas.getPrice().substring(3,10);
+		String priiice = priice.replaceAll(",", "");
+//		String priiice = priice.substring(0, priice.lastIndexOf(".")) + priice.substring(priice.lastIndexOf(".")+1);
+		logger.debug("priiice={}", priiice);
+		//110,000
+		int RealPrice = Integer.parseInt(priiice);
 		//realPrice = realPrice.replaceAll("[^0-9]", "");
 		//int price = Integer.parseInt("110000");
 		ticket.setTicketPrice(RealPrice);
@@ -75,7 +81,7 @@ public class TicketingController {
 	
 		SimpleDateFormat beforeFormat = new SimpleDateFormat("yyyy.mm.dd");        
         // Date로 변경하기 위해서는 날짜 형식을 yyyy-mm-dd로 변경해야 한다.
-        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy-mm-dd");
+        SimpleDateFormat afterFormat = new SimpleDateFormat("yyyy/mm/dd");
         
         java.util.Date tempDate = null;
         
@@ -87,13 +93,14 @@ public class TicketingController {
         }        
         // java.util.Date를 yyyy-mm-dd 형식으로 변경하여 String로 반환한다.
         String transDate = afterFormat.format(tempDate);
+        logger.debug("transDate={}", transDate);
         // 반환된 String 값을 Date로 변경한다.
         date = Date.valueOf(transDate);
         
 		ticket.setTicketDate(date);
 		ticket.setTicketPlace(mas.getHallName());
 		ticket.setTicketCount(1);
-		ticket.setTicketSeat("2층 R석");
+		ticket.setTicketSeat(s1);
 		ticket.setTicketTime(mas.getTime());
 		Calendar cal = Calendar.getInstance();
         cal.setTime(date);
@@ -103,6 +110,7 @@ public class TicketingController {
 		ticket.setTicketStatus("N");
 		ticket.setTicketShowName(mas.getName());
 
+		System.out.println("ticket"+ticket);
 		logger.debug("예매확인 페이지");
 
 		mav.addObject("mas", mas);
@@ -122,24 +130,32 @@ public class TicketingController {
 		memAndPlay.put("memberId", memberId);
 		memAndPlay.put("playId", playId);
 		List<Map<String, String>> cList = couponService.selectCouponListbyPlayId(memAndPlay);
-		System.out.println("Clist"+cList);
+
 		
+		String s1 = seat[0];
+		String s2 = seat[1];
 
 		int myPoint = ticketingService.selectMyPoint(memberId);
 
 		int Rnum =0;
 		int Snum = 0;
-		if(seat[0].substring(1,2)=="R")++Rnum;else ++Snum;
+		for(int i=0; i<2;i++) {
+			if("R석".equals(seat[i].substring(1,3))) {
+				++Rnum;
+			}else {
+				++Snum;
+			}
+		}
 		
-		
-
 		MusicalAndShow mas = new getApi().getMusicalAndShow(playId);
 		mav.addObject("mas", mas);
 		mav.addObject("Rnum", Rnum);
 		mav.addObject("Snum", Snum);
 		mav.addObject("selectDate", selectDate);
 		mav.addObject("selectTime", selectTime);
-		mav.addObject("cLlist", cList);
+		mav.addObject("s1", s1);
+		mav.addObject("s2", s2);
+		mav.addObject("cList", cList);
 		mav.addObject("myPoint", myPoint);
 		mav.setViewName("ticketing/ticketingPoint");
 
