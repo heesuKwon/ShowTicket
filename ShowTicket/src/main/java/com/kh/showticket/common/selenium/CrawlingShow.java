@@ -138,10 +138,11 @@ public class CrawlingShow {
 //	    driver.switchTo().frame(0);
 //	    driver.findElement(By.cssSelector(".Poster:nth-child(1) img")).click();
 	    Thread.sleep(3000);
-	    driver.switchTo().frame(7);
 	    WebElement guru99;
-	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("Sun")));
+	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),\'달력\')]")));
 //	    guru99 = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("20")));
+	    guru99.click();
+	    driver.switchTo().frame(7);
 //	    guru99.click();
 //	    Thread.sleep(3000);
 	    driver.findElement(By.linkText("20")).click();
